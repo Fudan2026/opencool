@@ -1,29 +1,19 @@
 name: Daily Brief
 
-# Generate a fresh daily report and publish to GitHub Pages.
+# OpenCool triple brief (06 / 13 / 19 Asia/Shanghai) — LLM_MODE forced off.
 #
-# OpenCool fork of leiting-eric/DailyBrief — finance-first, LLM optional.
+# One-time setup:
+#   1. Settings → Actions → General → Workflow permissions: Read and write
+#   2. Settings → Pages → Deploy from branch → gh-pages / root
+#   3. Variables (recommended):
+#        REPORT_TZ=Asia/Shanghai
+#        REPORT_HOUR=6,13,19
+#        REPORT_LOCALE=zh
+#        LLM_MODE=off   (forced in this workflow regardless)
+#   4. Do NOT add DeepSeek / other LLM secrets for this fork's default path.
+#   5. Actions → Daily Brief → Run workflow once to seed.
 #
-# One-time setup (see README):
-#   1. Settings → Actions → General → enable workflows (forked repos start disabled)
-#   2. Settings → Pages → Build & deployment → Source: "Deploy from a branch" → gh-pages / root
-#   3. Settings → Secrets and variables → Actions:
-#        - Secrets (OPTIONAL): DEEPSEEK_API_KEY (or ANTHROPIC / OPENAI / …)
-#          Without any key the pipeline runs with LLM_MODE=off (heuristic digest).
-#        - Variables (all optional):
-#            LLM_MODE        off | on                               (auto: off if no key)
-#            LLM_BACKEND     deepseek | anthropic | openai | …     (default: deepseek)
-#            LLM_MODEL       e.g. deepseek-v4-flash
-#            REPORT_LOCALE   zh | en                                (default: zh)
-#            REPORT_TZ       IANA tz                                (default: Asia/Shanghai)
-#            REPORT_HOUR     trigger hour(s) in REPORT_TZ           (default: 7)
-#            REPORT_DAYS     day-of-week filter                     (default: *)
-#            DISABLE_SOURCE_IDS  comma-separated source ids         (default: linuxdo)
-#            DAILYHOT_API_BASE   override DailyHot API base URL
-#   4. Trigger once manually from Actions tab to seed gh-pages.
-#
-# After first successful run your report is live at:
-#   https://<your-username>.github.io/<repo-name>/
+# Live: https://<user>.github.io/<repo>/
 
 on:
   schedule:
@@ -44,44 +34,52 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       should-run: ${{ steps.check.outputs.should-run }}
+      edition-hour: ${{ steps.check.outputs.edition-hour }}
     steps:
       - name: Check schedule
         id: check
         env:
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
-          REPORT_HOUR: ${{ vars.REPORT_HOUR || '7' }}
+          REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,13,19' }}
           REPORT_DAYS: ${{ vars.REPORT_DAYS }}
           EVENT_NAME: ${{ github.event_name }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
 
-          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            echo "Manual trigger — bypassing time gate"
-            echo "should-run=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
           TZ_VAL="${REPORT_TZ:-Asia/Shanghai}"
-          HOURS_VAL="${REPORT_HOUR:-7}"
+          HOURS_VAL="${REPORT_HOUR:-6,13,19}"
           DAYS_VAL="${REPORT_DAYS:-*}"
 
           NOW_HOUR=$(TZ="$TZ_VAL" date +%-H)
           NOW_DOW=$(TZ="$TZ_VAL" date +%w)
+          TODAY=$(TZ="$TZ_VAL" date +%Y-%m-%d)
           NOW_PRINT=$(TZ="$TZ_VAL" date '+%Y-%m-%d %H:%M %Z')
 
           echo "Now in $TZ_VAL: $NOW_PRINT (hour=$NOW_HOUR, dow=$NOW_DOW)"
           echo "Configured REPORT_HOUR='$HOURS_VAL', REPORT_DAYS='$DAYS_VAL'"
 
-          hour_match=false
           IFS=',' read -ra HLIST <<< "$HOURS_VAL"
-          for h in "${HLIST[@]}"; do
-            h_trim="${h// /}"
-            if [ "$NOW_HOUR" = "$h_trim" ]; then
-              hour_match=true
-              break
-            fi
-          done
+
+          pad2() {
+            printf '%02d' "$1"
+          }
+
+          # Manual: pick latest due slot (or first if before all)
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            chosen="${HLIST[0]// /}"
+            for h in "${HLIST[@]}"; do
+              h_trim="${h// /}"
+              if [ "$NOW_HOUR" -ge "$h_trim" ]; then
+                chosen="$h_trim"
+              fi
+            done
+            SLOT=$(pad2 "$chosen")
+            echo "Manual trigger — edition slot $SLOT"
+            echo "should-run=true" >> "$GITHUB_OUTPUT"
+            echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
 
           day_match=false
           if [ "$DAYS_VAL" = "*" ]; then
@@ -106,46 +104,50 @@ jobs:
             done
           fi
 
-          catchup_match=false
-          if [ "$day_match" = "true" ] && [ "$hour_match" = "false" ]; then
-            earliest_hour=99
-            for h in "${HLIST[@]}"; do
-              h_trim="${h// /}"
-              if [ "$h_trim" -lt "$earliest_hour" ]; then
-                earliest_hour=$h_trim
-              fi
-            done
-            catchup_threshold=$earliest_hour
-            if [ "$earliest_hour" -gt 0 ]; then
-              catchup_threshold=$((earliest_hour - 1))
-            fi
-            if [ "$NOW_HOUR" -ge "$catchup_threshold" ]; then
-              TODAY=$(TZ="$TZ_VAL" date +%Y-%m-%d)
-              CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/${TODAY}/${TODAY}.html?ref=gh-pages"
-              HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
-                -H "Authorization: Bearer ${GH_TOKEN}" \
-                -H "Accept: application/vnd.github+json" \
-                -H "X-GitHub-Api-Version: 2022-11-28" \
-                "$CHECK_URL" || echo "000")
-              if [ "$HTTP_CODE" = "404" ]; then
-                echo "↻ Catchup: today's report ($TODAY) missing from gh-pages — recovering"
-                catchup_match=true
-              else
-                echo "Catchup check: today's report exists (HTTP $HTTP_CODE) — no action"
-              fi
-            fi
+          if [ "$day_match" != "true" ]; then
+            echo "✗ Day filter miss"
+            echo "should-run=false" >> "$GITHUB_OUTPUT"
+            echo "edition-hour=" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
-          if [ "$hour_match" = "true" ] && [ "$day_match" = "true" ]; then
-            echo "✓ Match — proceeding to build"
-            echo "should-run=true" >> "$GITHUB_OUTPUT"
-          elif [ "$catchup_match" = "true" ]; then
-            echo "✓ Catchup — proceeding to build"
-            echo "should-run=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "✗ No match — skipping (hour=$hour_match day=$day_match catchup=$catchup_match)"
-            echo "should-run=false" >> "$GITHUB_OUTPUT"
-          fi
+          # Exact hour match → that slot
+          for h in "${HLIST[@]}"; do
+            h_trim="${h// /}"
+            if [ "$NOW_HOUR" = "$h_trim" ]; then
+              SLOT=$(pad2 "$h_trim")
+              echo "✓ Exact hour match — slot $SLOT"
+              echo "should-run=true" >> "$GITHUB_OUTPUT"
+              echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          done
+
+          # Catchup: earliest due slot whose file is still missing on gh-pages
+          for h in "${HLIST[@]}"; do
+            h_trim="${h// /}"
+            if [ "$NOW_HOUR" -lt "$h_trim" ]; then
+              continue
+            fi
+            SLOT=$(pad2 "$h_trim")
+            CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/${TODAY}/${SLOT}.html?ref=gh-pages"
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "$CHECK_URL" || echo "000")
+            if [ "$HTTP_CODE" = "404" ]; then
+              echo "↻ Catchup: missing ${TODAY}/${SLOT}.html — recovering"
+              echo "should-run=true" >> "$GITHUB_OUTPUT"
+              echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Slot $SLOT present (HTTP $HTTP_CODE)"
+          done
+
+          echo "✗ No match / nothing to catch up"
+          echo "should-run=false" >> "$GITHUB_OUTPUT"
+          echo "edition-hour=" >> "$GITHUB_OUTPUT"
 
   build:
     name: Build & publish
@@ -178,47 +180,14 @@ jobs:
             echo "gh-pages doesn't exist yet — first run"
           fi
 
-      - name: Resolve LLM mode
-        id: llm
+      - name: Generate edition report
         env:
-          LLM_MODE_VAR: ${{ vars.LLM_MODE }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
-          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
-          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-        run: |
-          set -euo pipefail
-          if [ -n "${LLM_MODE_VAR:-}" ]; then
-            MODE="$LLM_MODE_VAR"
-          elif [ -n "${DEEPSEEK_API_KEY}${OPENAI_API_KEY}${ANTHROPIC_API_KEY}${MINIMAX_API_KEY}${ZHIPU_API_KEY}${LLM_API_KEY}" ]; then
-            MODE=on
-          else
-            MODE=off
-          fi
-          echo "Resolved LLM_MODE=$MODE"
-          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
-
-      - name: Generate today's report
-        env:
-          LLM_MODE: ${{ steps.llm.outputs.mode }}
-          LLM_BACKEND: ${{ vars.LLM_BACKEND || 'deepseek' }}
-          LLM_MODEL: ${{ vars.LLM_MODEL }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
-          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
-          ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
-          OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
-          DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
-          MINIMAX_BASE_URL: ${{ vars.MINIMAX_BASE_URL }}
-          ZHIPU_BASE_URL: ${{ vars.ZHIPU_BASE_URL }}
-          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-          LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+          # OpenCool: always off — no DeepSeek / paid LLM this round
+          LLM_MODE: 'off'
           REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,13,19' }}
+          EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
           DISABLE_SOURCE_IDS: ${{ vars.DISABLE_SOURCE_IDS || 'linuxdo' }}
           DAILYHOT_API_BASE: ${{ vars.DAILYHOT_API_BASE }}
           WEB_MODE: 'true'
@@ -234,4 +203,4 @@ jobs:
           publish_dir: ./daily_reports
           publish_branch: gh-pages
           keep_files: false
-          commit_message: 'daily: report for ${{ github.run_id }}'
+          commit_message: 'brief: ${{ needs.gate.outputs.edition-hour }} for ${{ github.run_id }}'

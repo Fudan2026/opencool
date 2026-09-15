@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 /**
- * Open the latest (or specified-date) daily report HTML in a browser.
- * Cross-platform: prefers Chrome on Windows (file association often hijacked
- * by Edge), uses `open` on macOS, `xdg-open` on Linux.
+ * Open the latest edition HTML in a browser.
  *
  * Usage:
  *   node scripts/open-report.mjs
- *   node scripts/open-report.mjs 2026-05-17
+ *   node scripts/open-report.mjs 2026-09-15
+ *   node scripts/open-report.mjs 2026-09-15 13
  */
 
 import fs from "node:fs";
@@ -17,28 +16,50 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 const reportsDir = path.join(projectRoot, "daily_reports");
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-function pickReport(dateArg) {
+function listEditionsInDir(dateDir, date) {
+  if (!fs.existsSync(dateDir)) return [];
+  const out = [];
+  for (const f of fs.readdirSync(dateDir)) {
+    if (!f.endsWith(".html")) continue;
+    const base = f.slice(0, -5);
+    if (/^\d{2}$/.test(base)) {
+      out.push({ hour: base, file: path.join(dateDir, f) });
+    } else if (base === date) {
+      out.push({ hour: "legacy", file: path.join(dateDir, f) });
+    }
+  }
+  return out.sort((a, b) => b.hour.localeCompare(a.hour));
+}
+
+function pickReport(dateArg, hourArg) {
   if (!fs.existsSync(reportsDir)) {
     throw new Error(`No daily_reports directory at ${reportsDir}`);
   }
   if (dateArg) {
-    const target = path.join(reportsDir, dateArg, `${dateArg}.html`);
-    if (!fs.existsSync(target)) {
-      throw new Error(`No report for ${dateArg}: ${target}`);
+    const dateDir = path.join(reportsDir, dateArg);
+    const eds = listEditionsInDir(dateDir, dateArg);
+    if (eds.length === 0) {
+      throw new Error(`No report for ${dateArg}`);
     }
-    return target;
+    if (hourArg) {
+      const slot = String(hourArg).padStart(2, "0");
+      const hit = eds.find((e) => e.hour === slot);
+      if (!hit) throw new Error(`No ${slot} edition for ${dateArg}`);
+      return hit.file;
+    }
+    return eds[0].file;
   }
-  const dirs = fs
+  const dates = fs
     .readdirSync(reportsDir)
-    .filter((f) => /^\d{4}-\d{2}-\d{2}$/.test(f))
-    .map((d) => ({ d, file: path.join(reportsDir, d, `${d}.html`) }))
-    .filter((x) => fs.existsSync(x.file))
-    .sort((a, b) => b.d.localeCompare(a.d));
-  if (dirs.length === 0) {
-    throw new Error(`No HTML reports in ${reportsDir}. Run \`npm run daily\` first.`);
+    .filter((f) => DATE_RE.test(f))
+    .sort((a, b) => b.localeCompare(a));
+  for (const d of dates) {
+    const eds = listEditionsInDir(path.join(reportsDir, d), d);
+    if (eds.length > 0) return eds[0].file;
   }
-  return dirs[0].file;
+  throw new Error(`No HTML reports in ${reportsDir}. Run \`npm run daily\` first.`);
 }
 
 function findChromeWindows() {
@@ -62,27 +83,23 @@ function openInBrowser(file) {
       console.log(`Opened in Chrome: ${file}`);
       return;
     }
-    // Fall back to default association via cmd start
     console.warn("Chrome not found, using default file association.");
     spawn("cmd", ["/c", "start", "", file], { detached: true, stdio: "ignore" }).unref();
   } else if (process.platform === "darwin") {
-    // -a "Google Chrome" prefers Chrome but falls through to default if unavailable
     spawn("open", ["-a", "Google Chrome", file], { detached: true, stdio: "ignore" })
       .on("error", () => {
-        // -a Chrome failed → use default open
         spawn("open", [file], { detached: true, stdio: "ignore" }).unref();
       })
       .unref();
     console.log(`Opened: ${file}`);
   } else {
-    // Linux (and any other Unix)
     spawn("xdg-open", [file], { detached: true, stdio: "ignore" }).unref();
     console.log(`Opened: ${file}`);
   }
 }
 
 try {
-  const target = pickReport(process.argv[2]);
+  const target = pickReport(process.argv[2], process.argv[3]);
   openInBrowser(target);
 } catch (e) {
   console.error(e instanceof Error ? e.message : e);

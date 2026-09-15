@@ -48,8 +48,22 @@ const todayLocal = new Intl.DateTimeFormat("en-CA", {
   day: "2-digit",
 }).format(new Date());
 
+function latestEditionFile(dateDir, date) {
+  if (!fs.existsSync(dateDir)) return null;
+  const slots = [];
+  for (const f of fs.readdirSync(dateDir)) {
+    if (!f.endsWith(".html")) continue;
+    const base = f.slice(0, -5);
+    if (/^\d{2}$/.test(base)) slots.push({ hour: base, file: path.join(dateDir, f) });
+    else if (base === date) slots.push({ hour: "00", file: path.join(dateDir, f) });
+  }
+  if (slots.length === 0) return null;
+  slots.sort((a, b) => b.hour.localeCompare(a.hour));
+  return slots[0].file;
+}
+
 function reportPath(d) {
-  return path.join("daily_reports", d, `${d}.html`);
+  return latestEditionFile(path.join("daily_reports", d), d);
 }
 
 let date;
@@ -57,26 +71,29 @@ let localFile;
 if (dateArg) {
   date = dateArg;
   localFile = reportPath(date);
-  if (!fs.existsSync(localFile)) {
-    console.error(`[deploy] local file missing: ${localFile}`);
+  if (!localFile || !fs.existsSync(localFile)) {
+    console.error(`[deploy] local edition missing for ${date}`);
     process.exit(1);
   }
-} else if (fs.existsSync(reportPath(todayLocal))) {
-  date = todayLocal;
-  localFile = reportPath(todayLocal);
 } else {
-  const dirs = fs
-    .readdirSync("daily_reports")
-    .filter((f) => /^\d{4}-\d{2}-\d{2}$/.test(f))
-    .filter((f) => fs.existsSync(reportPath(f)))
-    .sort();
-  if (dirs.length === 0) {
-    console.error("[deploy] no <YYYY-MM-DD>/<YYYY-MM-DD>.html files in daily_reports/");
-    process.exit(1);
+  const todayFile = reportPath(todayLocal);
+  if (todayFile && fs.existsSync(todayFile)) {
+    date = todayLocal;
+    localFile = todayFile;
+  } else {
+    const dirs = fs
+      .readdirSync("daily_reports")
+      .filter((f) => /^\d{4}-\d{2}-\d{2}$/.test(f))
+      .filter((f) => reportPath(f))
+      .sort();
+    if (dirs.length === 0) {
+      console.error("[deploy] no edition HTML files in daily_reports/");
+      process.exit(1);
+    }
+    date = dirs[dirs.length - 1];
+    localFile = reportPath(date);
+    console.log(`[deploy] today (${todayLocal}) not generated yet, deploying latest: ${date}`);
   }
-  date = dirs[dirs.length - 1];
-  localFile = reportPath(date);
-  console.log(`[deploy] today (${todayLocal}) not generated yet, deploying latest: ${date}`);
 }
 
 const sizeKb = (fs.statSync(localFile).size / 1024).toFixed(1);

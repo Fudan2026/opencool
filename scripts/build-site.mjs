@@ -1,116 +1,215 @@
 #!/usr/bin/env node
 /**
- * Build the static site that gets published to GitHub Pages (or any static
- * host). Run AFTER `npm run daily` has produced today's report.
+ * Build the static site for GitHub Pages.
+ * Run AFTER `npm run daily` has produced at least one edition.
  *
- * Writes into daily_reports/ (already the publish dir):
- *   - index.html      copy of the latest <date>/<date>.html
- *   - archive.html    table of every <date>/<date>.html, newest first
+ * Discovers:
+ *   - New: daily_reports/<YYYY-MM-DD>/(06|13|19).html  (triple brief)
+ *   - Legacy: daily_reports/<YYYY-MM-DD>/<YYYY-MM-DD>.html
  *
- * Existing per-date subdirs are left untouched. Idempotent — safe to re-run.
- *
- * Usage:
- *   node scripts/build-site.mjs
+ * Writes:
+ *   - index.html   = latest edition
+ *   - archive.html = grouped list (早报/午报/晚报)
  */
 
 import fs from "node:fs";
 import path from "node:path";
 
 const ROOT = "daily_reports";
+const SLOT_RE = /^(0[6]|13|19|\d{2})$/;
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+const LABEL = {
+  "06": "早报",
+  13: "午报",
+  19: "晚报",
+};
+
+function labelFor(hour) {
+  return LABEL[hour] || `${hour}:00`;
+}
 
 if (!fs.existsSync(ROOT)) {
   console.error(`[build-site] ${ROOT}/ doesn't exist — run \`npm run daily\` first.`);
   process.exit(1);
 }
 
-// Pick up every <YYYY-MM-DD>/<YYYY-MM-DD>.html, newest first.
-const dates = fs
-  .readdirSync(ROOT)
-  .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d))
-  .filter((d) => fs.existsSync(path.join(ROOT, d, `${d}.html`)))
-  .sort((a, b) => b.localeCompare(a));
+/** @type {{ date: string, hour: string, rel: string, mtime: number }[]} */
+const editions = [];
 
-if (dates.length === 0) {
-  console.error(`[build-site] no <YYYY-MM-DD>/<YYYY-MM-DD>.html found in ${ROOT}/`);
+for (const d of fs.readdirSync(ROOT)) {
+  if (!DATE_RE.test(d)) continue;
+  const dir = path.join(ROOT, d);
+  if (!fs.statSync(dir).isDirectory()) continue;
+
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith(".html")) continue;
+    const base = f.slice(0, -5);
+    // slot file: 06.html / 13.html / 19.html
+    if (/^\d{2}$/.test(base) && base !== d) {
+      const full = path.join(dir, f);
+      editions.push({
+        date: d,
+        hour: base,
+        rel: `${d}/${f}`,
+        mtime: fs.statSync(full).mtimeMs,
+      });
+      continue;
+    }
+    // legacy single-day file
+    if (base === d) {
+      const full = path.join(dir, f);
+      editions.push({
+        date: d,
+        hour: "legacy",
+        rel: `${d}/${f}`,
+        mtime: fs.statSync(full).mtimeMs,
+      });
+    }
+  }
+}
+
+editions.sort((a, b) => {
+  const c = b.date.localeCompare(a.date);
+  if (c !== 0) return c;
+  if (a.hour === "legacy") return 1;
+  if (b.hour === "legacy") return -1;
+  return b.hour.localeCompare(a.hour);
+});
+
+if (editions.length === 0) {
+  console.error(`[build-site] no edition HTML found in ${ROOT}/`);
   process.exit(1);
 }
 
-// --- index.html = latest report ---
-const latest = dates[0];
-const latestPath = path.join(ROOT, latest, `${latest}.html`);
-const latestHtml = fs
-  .readFileSync(latestPath, "utf8")
-  .replace(/href="\.\.\/archive\.html"/g, 'href="./archive.html"');
+const latest = editions[0];
+const latestPath = path.join(ROOT, latest.rel);
+let latestHtml = fs.readFileSync(latestPath, "utf8");
+// When copied to site root, fix archive + sibling links that assume ../
+latestHtml = latestHtml
+  .replace(/href="\.\.\/archive\.html"/g, 'href="./archive.html"')
+  .replace(/href="\.\/(\d{2})\.html"/g, `href="./${latest.date}/$1.html"`);
 fs.writeFileSync(path.join(ROOT, "index.html"), latestHtml, "utf8");
-console.log(`[build-site] index.html  ← ${latest}/${latest}.html`);
+console.log(`[build-site] index.html  ← ${latest.rel}`);
 
-// --- archive.html = list of all reports ---
-const rows = dates
+// Group by date for archive
+const byDate = new Map();
+for (const e of editions) {
+  if (!byDate.has(e.date)) byDate.set(e.date, []);
+  byDate.get(e.date).push(e);
+}
+const dates = [...byDate.keys()].sort((a, b) => b.localeCompare(a));
+
+const dayBlocks = dates
   .map((d) => {
-    const size = (fs.statSync(path.join(ROOT, d, `${d}.html`)).size / 1024).toFixed(0);
-    return `      <li><a href="./${d}/${d}.html">${d}</a> <span class="size">${size} KB</span></li>`;
+    const items = byDate
+      .get(d)
+      .slice()
+      .sort((a, b) => {
+        if (a.hour === "legacy") return 1;
+        if (b.hour === "legacy") return -1;
+        return a.hour.localeCompare(b.hour);
+      });
+    const links = items
+      .map((e) => {
+        const size = (fs.statSync(path.join(ROOT, e.rel)).size / 1024).toFixed(0);
+        const name =
+          e.hour === "legacy" ? "全日" : labelFor(e.hour);
+        return `<a class="ed" href="./${e.rel}"><span class="ed-label">${name}</span><span class="ed-meta">${e.hour === "legacy" ? d : e.hour + ":00"} · ${size} KB</span></a>`;
+      })
+      .join("\n        ");
+    return `    <section class="day">
+      <h2>${d}</h2>
+      <div class="eds">
+        ${links}
+      </div>
+    </section>`;
   })
   .join("\n");
 
 const archiveHtml = `<!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>daily-brief — archive</title>
+<title>OpenCool 归档</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light dark; }
+  :root {
+    --bg: #fff8f0;
+    --fg: #1a1510;
+    --muted: #7a6a5a;
+    --accent: #e85d04;
+    --card: #ffffff;
+    --rule: #f0e0d0;
+  }
+  * { box-sizing: border-box; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    max-width: 720px;
-    margin: 3rem auto;
-    padding: 0 1.5rem;
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Noto Sans SC", "DM Sans", system-ui, sans-serif;
+    background:
+      radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%),
+      var(--bg);
+    color: var(--fg);
     line-height: 1.5;
   }
-  h1 { margin-bottom: 0.2rem; font-size: 1.5rem; }
-  .meta { color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; }
-  ul { list-style: none; padding: 0; }
-  li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
+  main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .brand {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 { font-size: 2rem; margin: 0.4rem 0 0.3rem; letter-spacing: -0.03em; }
+  .meta { color: var(--muted); margin-bottom: 2rem; }
+  .day { margin-bottom: 1.75rem; }
+  .day h2 {
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin: 0 0 0.6rem;
+  }
+  .eds { display: flex; flex-direction: column; gap: 0.45rem; }
+  a.ed {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.85rem 1.1rem;
+    background: var(--card);
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--rule);
+    box-shadow: 0 1px 0 rgba(232, 93, 4, 0.06);
+    transition: transform 0.15s ease, border-color 0.15s ease;
   }
-  @media (prefers-color-scheme: dark) {
-    li { border-bottom-color: #2a2a2a; }
-  }
-  li a { text-decoration: none; }
-  li a:hover { text-decoration: underline; }
-  .size { color: #999; font-size: 0.85rem; }
-  .top {
-    margin-bottom: 2rem;
-    padding: 0.75rem 1rem;
-    background: #f6f6f6;
-    border-radius: 6px;
-  }
-  @media (prefers-color-scheme: dark) {
-    .top { background: #1e1e1e; }
-  }
+  a.ed:hover { transform: translateY(-1px); border-color: var(--accent); }
+  .ed-label { font-weight: 700; font-size: 1.05rem; }
+  .ed-meta { font-size: 0.8rem; color: var(--muted); }
+  .home { color: var(--accent); text-decoration: none; font-weight: 600; }
 </style>
 </head>
 <body>
-  <h1>daily-brief — archive</h1>
-  <p class="meta">${dates.length} report${dates.length === 1 ? "" : "s"} · newest first · generated ${new Date().toISOString().slice(0, 10)}</p>
-  <div class="top">
-    <a href="./index.html">→ Latest report (${latest})</a>
-  </div>
-  <ul>
-${rows}
-  </ul>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>归档</h1>
+  <p class="meta">${editions.length} 期 · 早报 06:00 · 午报 13:00 · 晚报 19:00（上海时区）</p>
+  <p><a class="home" href="./index.html">← 回到最新一期</a></p>
+${dayBlocks}
+</main>
 </body>
 </html>
 `;
-fs.writeFileSync(path.join(ROOT, "archive.html"), archiveHtml, "utf8");
-console.log(`[build-site] archive.html (${dates.length} dates)`);
 
-// .nojekyll prevents GitHub Pages from running Jekyll, which would otherwise
-// strip directories whose names start with "_". We don't have any today but
-// it's cheap insurance and standard practice for static-site GH Pages.
+fs.writeFileSync(path.join(ROOT, "archive.html"), archiveHtml, "utf8");
+console.log(`[build-site] archive.html (${dates.length} days, ${editions.length} editions)`);
+
 fs.writeFileSync(path.join(ROOT, ".nojekyll"), "", "utf8");
 console.log(`[build-site] .nojekyll`);

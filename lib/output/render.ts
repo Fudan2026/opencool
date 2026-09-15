@@ -6,7 +6,7 @@ import type {
 } from "../ai/pipeline";
 import type { WatchlistPick } from "../ai/trading-commentary";
 import { REPORT_LOCALE } from "../sources/registry";
-import { getReportTz } from "../utils";
+import { getReportTz, editionKind } from "../utils";
 import type { Category, SourceDef } from "../sources/types";
 import { V2EX_OFF_TOPIC_RE } from "../sources/v2ex";
 import type { TickerAnalysis } from "../trading/signals";
@@ -24,7 +24,12 @@ import {
  * this object so adding a third locale = adding one more table.
  */
 const TEXTS_ZH = {
-  siteTitle: "OpenCool 财经早报",
+  siteTitle: "OpenCool",
+  siteTagline: "财经早报 · 非个性化推荐",
+  editionMorning: "早报",
+  editionNoon: "午报",
+  editionEvening: "晚报",
+  editionGeneric: "简报",
   catTech: "技术动态",
   catFinance: "财经要点",
   catPolitics: "时政观察",
@@ -39,15 +44,15 @@ const TEXTS_ZH = {
   subFinanceNews: "财经新闻",
   subFinanceCommunity: "社区讨论",
   subWorld: "国际要闻",
-  subSocialHot: "社交热榜",
+  subSocialHot: "财经热榜",
   subOverseasNews: "海外科技",
   subOverseas: "海外",
   emptySource: "该源今日无内容。",
   emptyCategory: "该分类今日无内容。",
   emptyGroup: "该组今日无数据。",
-  footer: "内容均来自原媒体，本站仅作摘要整理与回链。热榜≠事实核查。",
-  summaryLabelNews: "中文摘要",
-  summaryLabelIntro: "中文介绍",
+  footer: "内容均来自原媒体，本站仅作整理与回链。热榜≠事实核查 · 启发式摘要 · 零 LLM。",
+  summaryLabelNews: "摘要",
+  summaryLabelIntro: "介绍",
   tradingMarketOverview: "市场总览",
   tradingTodayFocus: "今日关注",
   tradingAllAssets: "全部资产",
@@ -70,11 +75,17 @@ const TEXTS_ZH = {
   mdEditorNote: "编辑短评",
   mdTodayKeywords: "今日关键词",
   mdImportance: "重要度",
-  archiveLink: "← 历史归档",
+  archiveLink: "历史归档",
+  heroOverview: "本期速览",
 };
 
 const TEXTS_EN: typeof TEXTS_ZH = {
-  siteTitle: "OpenCool Brief",
+  siteTitle: "OpenCool",
+  siteTagline: "Finance brief · not personalized",
+  editionMorning: "Morning",
+  editionNoon: "Noon",
+  editionEvening: "Evening",
+  editionGeneric: "Brief",
   catTech: "Tech",
   catFinance: "Finance",
   catPolitics: "World",
@@ -89,14 +100,14 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   subFinanceNews: "Finance News",
   subFinanceCommunity: "Community",
   subWorld: "World News",
-  subSocialHot: "Social Hot",
+  subSocialHot: "Finance Hot",
   subOverseasNews: "Overseas Tech",
   subOverseas: "Overseas",
   emptySource: "No content from this source today.",
   emptyCategory: "No content in this category today.",
   emptyGroup: "No data for this group today.",
   footer:
-    "Content sourced from original publishers; this site provides summary and backlinks only. Hot ranks ≠ verified facts.",
+    "Sourced from original publishers. Hot ranks ≠ verified facts. Heuristic digest · no LLM.",
   summaryLabelNews: "Summary",
   summaryLabelIntro: "Summary",
   tradingMarketOverview: "Market Overview",
@@ -121,7 +132,8 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   mdEditorNote: "Editor's Note",
   mdTodayKeywords: "Keywords",
   mdImportance: "Importance",
-  archiveLink: "← Archive",
+  archiveLink: "Archive",
+  heroOverview: "This edition",
 };
 
 const STR = REPORT_LOCALE === "en" ? TEXTS_EN : TEXTS_ZH;
@@ -535,17 +547,31 @@ function renderRawCategoryPanel(
 
 // ----- top-level renderer -----
 
+export type RenderHtmlOptions = {
+  editionHour?: string;
+  siblingHours?: string[];
+};
+
+function editionLabelFor(hour?: string): string {
+  if (!hour) return STR.editionGeneric;
+  const kind = editionKind(hour);
+  if (kind === "morning") return STR.editionMorning;
+  if (kind === "noon") return STR.editionNoon;
+  if (kind === "evening") return STR.editionEvening;
+  return STR.editionGeneric;
+}
+
 export function renderHtml(
   report: DailyReport,
   raw: RawByCategory,
   date: string,
+  opts: RenderHtmlOptions = {},
 ): string {
   const trading = report.trading;
+  const editionHour = opts.editionHour;
+  const editionLabel = editionLabelFor(editionHour);
+  const siblingHours = (opts.siblingHours ?? []).filter(Boolean);
 
-  // Split tech raw subgroups: "tech" L1 panel (github-trending + ai-news)
-  // vs. "community" L1 panel (cn-community). Keeps the registry simple
-  // (V2EX/LinuxDo still live under category=tech) while exposing the
-  // forums as their own top-level tab per UX preference.
   const techMainSubs = raw.tech.filter((s) => TECH_MAIN_SUBS.has(s.id));
   const techCommunitySubs = raw.tech.filter((s) => TECH_COMMUNITY_SUBS.has(s.id));
 
@@ -561,633 +587,311 @@ export function renderHtml(
     community: sumItems(techCommunitySubs),
   };
 
+  const tz = getReportTz() || "local";
+  const siblingNav =
+    siblingHours.length > 0 && editionHour
+      ? `<nav class="edition-switch" aria-label="editions">${siblingHours
+          .map((h) => {
+            const lab = editionLabelFor(h);
+            const active = h === editionHour ? " active" : "";
+            const href =
+              process.env.WEB_MODE === "true"
+                ? `./${h}.html`
+                : `./${h}.html`;
+            return `<a class="ed-chip${active}" href="${href}">${lab}<span>${h}:00</span></a>`;
+          })
+          .join("")}</nav>`
+      : "";
+
+  const heroBlock = `
+  <section class="hero">
+    <div class="hero-brand">
+      <div class="brand-mark">${STR.siteTitle}</div>
+      <p class="brand-tag">${STR.siteTagline}</p>
+    </div>
+    <div class="hero-meta">
+      <span class="ed-badge">${editionLabel}</span>
+      <span class="hero-date">${date}${editionHour ? ` · ${editionHour}:00` : ""} · ${tz}</span>
+    </div>
+    ${
+      report.hero_headline
+        ? `<h1 class="hero-headline">${escapeHtml(report.hero_headline)}</h1>`
+        : `<h1 class="hero-headline">${editionLabel} · ${date}</h1>`
+    }
+    ${
+      report.daily_overview
+        ? `<p class="hero-overview"><span class="ov-label">${STR.heroOverview}</span>${escapeHtml(report.daily_overview)}</p>`
+        : ""
+    }
+    ${siblingNav}
+    ${
+      process.env.WEB_MODE === "true"
+        ? `<a class="archive-link" href="../archive.html">${STR.archiveLink}</a>`
+        : ""
+    }
+  </section>`;
+
   return `<!doctype html>
 <html lang="${REPORT_LOCALE === "en" ? "en" : "zh-CN"}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${STR.siteTitle} · ${date}</title>
+<title>${STR.siteTitle} · ${editionLabel} · ${date}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;0,9..40,700;1,9..40,500&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fafaf9;
+    --bg: #fff7ef;
     --bg-elevated: #ffffff;
-    --fg: #18181b;
-    --fg-soft: #3f3f46;
-    --muted: #71717a;
-    --rule: #e4e4e7;
-    --card: #f4f4f5;
-    --link: #1d4ed8;
-    --accent: #18181b;
-    --accent-fg: #fafaf9;
-    --rank-high-bg: #fee2e2;
-    --rank-high-fg: #991b1b;
+    --fg: #1c1410;
+    --fg-soft: #4a3b32;
+    --muted: #8a7364;
+    --rule: #f0ddd0;
+    --card: #ffffff;
+    --link: #c2410c;
+    --accent: #ea580c;
+    --accent-fg: #fff7ef;
+    --splash: #fb923c;
+    --mint: #0d9488;
+    --rank-high-bg: #ffedd5;
+    --rank-high-fg: #9a3412;
     --rank-mid-bg: #fef3c7;
     --rank-mid-fg: #92400e;
-    --rank-low-bg: #e0e7ff;
-    --rank-low-fg: #3730a3;
-    --hero-grad-from: #fafaf9;
-    --hero-grad-to: #f4f4f5;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0a0a0a;
-      --bg-elevated: #18181b;
-      --fg: #fafafa;
-      --fg-soft: #d4d4d8;
-      --muted: #a1a1aa;
-      --rule: #27272a;
-      --card: #18181b;
-      --link: #93c5fd;
-      --accent: #fafafa;
-      --accent-fg: #0a0a0a;
-      --rank-high-bg: rgba(239,68,68,0.18);
-      --rank-high-fg: #fca5a5;
-      --rank-mid-bg: rgba(245,158,11,0.18);
-      --rank-mid-fg: #fcd34d;
-      --rank-low-bg: rgba(99,102,241,0.18);
-      --rank-low-fg: #a5b4fc;
-      --hero-grad-from: #18181b;
-      --hero-grad-to: #0a0a0a;
-    }
+    --rank-low-bg: #ccfbf1;
+    --rank-low-fg: #0f766e;
+    --hero-grad-from: #fff1e0;
+    --hero-grad-to: #ffe4ec;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--bg);
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 90% 55% at 0% -5%, #ffd8a8 0%, transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 0%, #ffc9de 0%, transparent 50%),
+      radial-gradient(ellipse 50% 35% at 50% 100%, #cffafe 0%, transparent 55%),
+      var(--bg);
     color: var(--fg);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-      "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-family: "Noto Sans SC", "DM Sans", system-ui, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  main { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  main { max-width: 980px; margin: 0 auto; padding: 2rem 1.35rem 4rem; }
 
-  /* ===== header ===== */
-  header.report-header { margin-bottom: 1.25rem; }
-  .eyebrow {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    font-weight: 500;
+  .hero {
+    margin-bottom: 1.75rem;
+    padding: 1.6rem 1.5rem 1.4rem;
+    border-radius: 1.25rem;
+    background: linear-gradient(145deg, var(--hero-grad-from), var(--hero-grad-to));
+    border: 1px solid rgba(234, 88, 12, 0.12);
+    box-shadow: 0 12px 40px rgba(234, 88, 12, 0.08);
   }
-  h1.report-title {
-    font-size: 2.2rem;
+  .brand-mark {
+    font-family: "Fraunces", "Noto Sans SC", serif;
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
     font-weight: 700;
-    margin: 0.4rem 0 1.2rem;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--fg);
+  }
+  .brand-tag {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 1.1rem 0 0.75rem;
+  }
+  .ed-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--accent-fg);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .hero-date { color: var(--muted); font-size: 0.86rem; }
+  .hero-headline {
+    font-family: "Fraunces", "Noto Sans SC", serif;
+    font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.35;
     letter-spacing: -0.02em;
-    line-height: 1.1;
+  }
+  .hero-overview {
+    margin: 0.9rem 0 0;
+    padding: 0.85rem 1rem;
+    background: rgba(255,255,255,0.72);
+    border-radius: 0.75rem;
+    border-left: 3px solid var(--mint);
+    color: var(--fg-soft);
+    font-size: 0.95rem;
+  }
+  .ov-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 0.25rem;
+  }
+  .edition-switch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+  .ed-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.8);
+    border: 1px solid var(--rule);
+    color: var(--fg-soft);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .ed-chip span { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
+  .ed-chip.active, .ed-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
   .archive-link {
     display: inline-block;
-    margin-bottom: 1rem;
+    margin-top: 0.9rem;
     font-size: 0.85rem;
-    color: var(--muted);
+    color: var(--accent);
     text-decoration: none;
-    border-bottom: 1px dashed var(--rule);
-    padding-bottom: 1px;
-  }
-  .archive-link:hover { color: var(--accent); border-bottom-style: solid; }
-  .hero-card {
-    background: linear-gradient(135deg, var(--hero-grad-from) 0%, var(--hero-grad-to) 100%);
-    border: 1px solid var(--rule);
-    border-left: 4px solid var(--accent);
-    padding: 1rem 1.4rem;
-    border-radius: 0.6rem;
-  }
-  .hero-eyebrow {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 500;
-  }
-  .hero-headline {
-    font-size: 1.25rem;
     font-weight: 600;
-    margin: 0.35rem 0 0;
-    line-height: 1.45;
-    color: var(--fg);
   }
-  .overview-card {
-    margin: 0.7rem 0 0;
-    padding: 0.7rem 1.1rem;
-    background: var(--card);
-    border-radius: 0.5rem;
-    border-left: 3px solid var(--muted);
-  }
-  .overview-card .eyebrow { display: block; margin-bottom: 0.3rem; }
-  .overview-text {
-    margin: 0;
-    font-size: 0.88rem;
-    line-height: 1.65;
-    color: var(--fg-soft);
-  }
+  .archive-link:hover { text-decoration: underline; }
 
-  /* ===== primary tabs ===== */
+  .eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  h1.report-title { display: none; }
+
   .tabs {
     display: flex;
-    gap: 0.25rem;
-    margin: 1.25rem 0 0.75rem;
-    border-bottom: 1px solid var(--rule);
     flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0 0 1rem;
+    padding: 0.35rem;
+    background: rgba(255,255,255,0.65);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
   }
   .tab {
-    background: none;
     border: none;
-    padding: 0.7rem 1.1rem;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--muted);
+    background: transparent;
+    color: var(--fg-soft);
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    font-family: inherit;
-    transition: color 0.15s;
-  }
-  .tab:hover { color: var(--fg); }
-  .tab.active {
-    color: var(--fg);
-    border-bottom-color: var(--accent);
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
   }
   .tab .count {
-    font-size: 0.72rem;
+    margin-left: 0.35rem;
+    font-size: 0.75rem;
     color: var(--muted);
-    margin-left: 0.4rem;
-    font-weight: 400;
-  }
-  .panel { display: none; }
-  .panel.active { display: block; }
-
-  /* ===== digest (AI 简报) — compact ===== */
-  .digest-category { margin-bottom: 1.1rem; }
-  .category-header {
-    display: flex;
-    align-items: baseline;
-    gap: 0.55rem;
-    margin: 0 0 0.55rem;
-    padding-bottom: 0.35rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .category-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--fg);
-    margin: 0;
-    letter-spacing: 0.05em;
-  }
-  .category-count {
-    font-size: 0.7rem;
-    color: var(--muted);
-    background: var(--card);
-    padding: 0.12rem 0.45rem;
-    border-radius: 999px;
-  }
-  .brief-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-  @media (min-width: 720px) {
-    .brief-list { grid-template-columns: 1fr 1fr; }
-  }
-  .brief {
-    background: var(--bg-elevated);
-    border: 1px solid var(--rule);
-    border-radius: 0.5rem;
-    padding: 0.7rem 0.95rem;
-    transition: border-color 0.15s, transform 0.15s;
-  }
-  .brief:hover {
-    border-color: var(--muted);
-    transform: translateY(-1px);
-  }
-  .brief-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-    margin-bottom: 0.3rem;
-  }
-  .brief-source {
-    font-size: 0.72rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
     font-weight: 500;
   }
-  .brief-rank {
-    font-size: 0.7rem;
-    padding: 0.12rem 0.5rem;
+  .tab.active {
+    background: var(--fg);
+    color: #fff7ef;
+  }
+  .tab.active .count { color: rgba(255,247,239,0.7); }
+
+  .panel { display: none; }
+  .panel.active { display: block; animation: rise 0.35s ease; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .sub-tabs, .source-tabs, .trading-group-tabs {
+    display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.85rem;
+  }
+  .sub-tab, .source-tab, .trading-group-tab {
+    border: 1px solid var(--rule);
+    background: var(--card);
+    color: var(--fg-soft);
+    padding: 0.35rem 0.7rem;
     border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.82rem;
+  }
+  .sub-tab.active, .source-tab.active, .trading-group-tab.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #fff7ed;
+  }
+  .sub-content, .source-content, .trading-group-content { display: none; }
+  .sub-content.active, .source-content.active, .trading-group-content.active { display: block; }
+
+  .article {
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .article:last-child { border-bottom: none; }
+  .article a.title {
+    color: var(--fg);
+    text-decoration: none;
     font-weight: 600;
-    flex-shrink: 0;
+    font-size: 1.02rem;
+  }
+  .article a.title:hover { color: var(--accent); }
+  .article .meta-line {
+    margin-top: 0.25rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .article .excerpt {
+    margin: 0.35rem 0 0;
+    color: var(--fg-soft);
+    font-size: 0.9rem;
+  }
+  .empty { color: var(--muted); padding: 1rem 0; }
+
+  .brief-list { list-style: none; padding: 0; margin: 0; }
+  .brief-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .brief-rank {
+    width: 1.6rem; height: 1.6rem;
+    border-radius: 0.45rem;
+    display: grid; place-items: center;
+    font-size: 0.75rem; font-weight: 700;
   }
   .brief-rank.high { background: var(--rank-high-bg); color: var(--rank-high-fg); }
   .brief-rank.mid  { background: var(--rank-mid-bg);  color: var(--rank-mid-fg); }
   .brief-rank.low  { background: var(--rank-low-bg);  color: var(--rank-low-fg); }
-  .brief-title {
-    font-size: 0.98rem;
-    font-weight: 600;
-    margin: 0 0 0.3rem;
-    line-height: 1.35;
-  }
-  .brief-title a { color: var(--fg); text-decoration: none; }
-  .brief-title a:hover { color: var(--link); text-decoration: underline; }
-  .brief-summary {
-    margin: 0;
-    color: var(--fg-soft);
-    font-size: 0.86rem;
-    line-height: 1.55;
-  }
 
-  .editor-card {
-    background: var(--card);
-    border-left: 3px solid var(--muted);
-    border-radius: 0.5rem;
-    padding: 1rem 1.3rem;
-    margin: 1.5rem 0 1.2rem;
-  }
-  .editor-card .eyebrow { display: block; margin-bottom: 0.4rem; }
-  .editor-text {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--fg);
-  }
-  .keywords { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; }
-  .keyword {
-    background: var(--card);
-    color: var(--fg-soft);
-    padding: 0.25rem 0.7rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-  }
-
-  /* ===== L2 sub-tabs ===== */
-  .sub-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin: 1rem 0;
-  }
-  .sub-tab {
-    background: var(--card);
-    border: 1px solid transparent;
-    padding: 0.5rem 1.05rem;
-    border-radius: 0.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--fg-soft);
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.15s;
-  }
-  .sub-tab:hover { border-color: var(--muted); color: var(--fg); }
-  .sub-tab.active {
-    background: var(--accent);
-    color: var(--accent-fg);
-  }
-  .sub-tab .count {
-    font-size: 0.7rem;
-    opacity: 0.75;
-    margin-left: 0.4rem;
-    font-weight: 400;
-  }
-  .sub-content { display: none; }
-  .sub-content.active { display: block; }
-
-  /* ===== L3 source-tabs ===== */
-  .source-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    margin: 0.9rem 0 1.3rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .source-tab {
-    background: none;
-    border: 1px solid var(--rule);
-    padding: 0.35rem 0.85rem;
-    border-radius: 999px;
-    font-size: 0.83rem;
-    color: var(--fg-soft);
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.15s;
-  }
-  .source-tab:hover { border-color: var(--muted); color: var(--fg); }
-  .source-tab.active {
-    background: var(--fg);
-    color: var(--bg);
-    border-color: var(--fg);
-  }
-  .source-tab .count {
-    font-size: 0.7rem;
-    opacity: 0.75;
-    margin-left: 0.3rem;
-  }
-  .source-content { display: none; }
-  .source-content.active { display: block; }
-
-  /* ===== article cards in raw panels ===== */
-  .article {
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .article:first-child { padding-top: 0; }
-  .article:last-child { border-bottom: none; }
-  .article-title {
-    font-size: 1rem;
-    margin: 0 0 0.3rem;
-    font-weight: 500;
-    line-height: 1.45;
-  }
-  .article-title a { color: var(--fg); text-decoration: none; }
-  .article-title a:hover { color: var(--link); text-decoration: underline; }
-  .article-meta { color: var(--muted); font-size: 0.76rem; margin: 0 0 0.35rem; }
-  .article-stats {
-    color: var(--muted);
-    font-size: 0.8rem;
-    margin: 0 0 0.4rem;
-    font-feature-settings: "tnum";
-  }
-  .article-excerpt {
-    margin: 0;
-    color: var(--fg-soft);
-    font-size: 0.9rem;
-    line-height: 1.6;
-  }
-  .article-summary {
-    margin: 0.55rem 0 0;
-    padding: 0.6rem 0.85rem;
-    background: var(--card);
-    border-left: 2px solid var(--link);
-    border-radius: 0.3rem;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--fg);
-  }
-  .summary-label {
-    display: inline-block;
-    font-size: 0.68rem;
-    color: var(--link);
-    margin-right: 0.4rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .empty {
-    color: var(--muted);
-    text-align: center;
-    padding: 2rem 0;
-    font-size: 0.9rem;
-  }
-
-  /* ===== trading panel ===== */
-  .crypto-widgets {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.55rem;
-    margin: 0.4rem 0 1.2rem;
-  }
-  @media (min-width: 720px) {
-    .crypto-widgets { grid-template-columns: repeat(4, 1fr); }
-  }
-  .crypto-widget {
-    background: var(--bg-elevated);
-    border: 1px solid var(--rule);
-    border-radius: 0.5rem;
-    padding: 0.7rem 0.85rem;
-    text-align: center;
-  }
-  .widget-label {
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.3rem;
-  }
-  .widget-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    color: var(--fg);
-    line-height: 1.1;
-  }
-  .widget-sub {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-top: 0.25rem;
-  }
-  .widget-sub.positive { color: #16a34a; }
-  .widget-sub.negative { color: #dc2626; }
-  @media (prefers-color-scheme: dark) {
-    .widget-sub.positive { color: #4ade80; }
-    .widget-sub.negative { color: #fca5a5; }
-  }
-  .crypto-widget.fg-fear-extreme { border-left: 4px solid #b91c1c; }
-  .crypto-widget.fg-fear-extreme .widget-value { color: #b91c1c; }
-  .crypto-widget.fg-fear { border-left: 4px solid #d97706; }
-  .crypto-widget.fg-fear .widget-value { color: #d97706; }
-  .crypto-widget.fg-neutral { border-left: 4px solid var(--muted); }
-  .crypto-widget.fg-greed { border-left: 4px solid #65a30d; }
-  .crypto-widget.fg-greed .widget-value { color: #65a30d; }
-  .crypto-widget.fg-greed-extreme { border-left: 4px solid #16a34a; }
-  .crypto-widget.fg-greed-extreme .widget-value { color: #16a34a; }
-  @media (prefers-color-scheme: dark) {
-    .crypto-widget.fg-fear-extreme .widget-value,
-    .crypto-widget.fg-fear .widget-value { color: #fca5a5; }
-    .crypto-widget.fg-greed .widget-value,
-    .crypto-widget.fg-greed-extreme .widget-value { color: #4ade80; }
-  }
-
-  .trading-overview-card {
-    margin: 0 0 1.5rem;
-    padding: 1rem 1.3rem;
-    background: var(--card);
-    border-radius: 0.5rem;
-    border-left: 3px solid var(--accent);
-  }
-  .trading-overview-card .eyebrow { display: block; margin-bottom: 0.4rem; }
-  .trading-overview-text { font-size: 0.92rem; line-height: 1.75; color: var(--fg-soft); margin: 0; }
-
-  .trading-section-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin: 1.5rem 0 0.8rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid var(--rule);
-    color: var(--fg);
-    letter-spacing: 0.05em;
-  }
-
-  /* picks (Sonnet's watchlist) */
-  .trading-picks {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-  }
-  @media (min-width: 720px) {
-    .trading-picks { grid-template-columns: 1fr 1fr; }
-  }
-  .trading-pick {
-    background: var(--bg-elevated);
-    border: 1px solid var(--rule);
-    border-left: 4px solid var(--muted);
-    border-radius: 0.5rem;
-    padding: 0.8rem 1rem;
-  }
-  .trading-pick.stance-bull { border-left-color: #16a34a; }
-  .trading-pick.stance-bear { border-left-color: #dc2626; }
-  .trading-pick.stance-neutral { border-left-color: var(--muted); }
-  .pick-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-    margin-bottom: 0.45rem;
-  }
-  .pick-symbol-block {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-  .pick-symbol { font-weight: 700; font-size: 1rem; color: var(--fg); }
-  .pick-name { color: var(--muted); font-size: 0.82rem; }
-  .pick-stance {
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .pick-stance-bull { background: rgba(22,163,74,0.12); color: #16a34a; }
-  .pick-stance-bear { background: rgba(220,38,38,0.12); color: #dc2626; }
-  .pick-stance-neutral { background: var(--card); color: var(--muted); }
-  .pick-rationale { margin: 0; font-size: 0.88rem; line-height: 1.65; color: var(--fg-soft); }
-
-  /* asset-group tabs */
-  .trading-group-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin: 0.6rem 0 1.2rem;
-  }
-  .trading-group-tab {
-    background: var(--card);
-    border: 1px solid transparent;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--fg-soft);
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.15s;
-  }
-  .trading-group-tab:hover { border-color: var(--muted); color: var(--fg); }
-  .trading-group-tab.active {
-    background: var(--accent);
-    color: var(--accent-fg);
-  }
-  .trading-group-tab .count {
-    font-size: 0.7rem;
-    opacity: 0.75;
-    margin-left: 0.4rem;
-    font-weight: 400;
-  }
-  .trading-group-content { display: none; }
-  .trading-group-content.active { display: block; }
-
-  /* ticker cards */
-  .ticker-card {
-    background: var(--bg-elevated);
-    border: 1px solid var(--rule);
-    border-radius: 0.55rem;
-    padding: 0.85rem 1.1rem;
-    margin-bottom: 0.7rem;
-  }
-  .ticker-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 0.65rem;
-  }
-  .ticker-id { min-width: 0; }
-  .ticker-symbol { margin: 0; font-size: 1rem; font-weight: 700; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; }
-  .ticker-name { margin: 0.15rem 0 0; font-size: 0.82rem; color: var(--muted); }
-  .ticker-price-block { text-align: right; flex-shrink: 0; }
-  .ticker-price { display: block; font-size: 1.05rem; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .ticker-pct { display: inline-block; font-size: 0.82rem; font-weight: 500; margin-top: 0.15rem; font-variant-numeric: tabular-nums; }
-  .ticker-pct.positive, .positive { color: #16a34a; }
-  .ticker-pct.negative, .negative { color: #dc2626; }
-
-  .ticker-indicators {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.35rem 0.9rem;
-    margin: 0;
-    font-size: 0.82rem;
-    color: var(--fg-soft);
-  }
-  @media (min-width: 720px) {
-    .ticker-indicators { grid-template-columns: repeat(3, 1fr); }
-  }
-  .ticker-indicators > div { display: flex; gap: 0.4rem; align-items: baseline; min-width: 0; }
-  .ticker-indicators dt { color: var(--muted); font-size: 0.74rem; margin: 0; white-space: nowrap; }
-  .ticker-indicators dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 500; color: var(--fg); }
-  .trend-bullish { color: #16a34a; }
-  .trend-bearish { color: #dc2626; }
-  .trend-neutral { color: var(--muted); }
-  .rsi-overbought { color: #d97706; }
-  .rsi-oversold { color: #2563eb; }
-
-  .ticker-signals {
-    margin-top: 0.65rem;
-    padding-top: 0.55rem;
-    border-top: 1px dashed var(--rule);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-  }
-  .signal-pill {
-    font-size: 0.72rem;
-    padding: 0.18rem 0.55rem;
-    border-radius: 999px;
-    font-weight: 500;
-  }
-  .signal-pill.tone-bull { background: rgba(22,163,74,0.13); color: #166534; }
-  .signal-pill.tone-bear { background: rgba(220,38,38,0.13); color: #991b1b; }
-  .signal-pill.tone-caution { background: rgba(217,119,6,0.15); color: #92400e; }
-  @media (prefers-color-scheme: dark) {
-    .signal-pill.tone-bull { color: #4ade80; }
-    .signal-pill.tone-bear { color: #fca5a5; }
-    .signal-pill.tone-caution { color: #fcd34d; }
-    .trend-bullish, .positive, .ticker-pct.positive { color: #4ade80; }
-    .trend-bearish, .negative, .ticker-pct.negative { color: #fca5a5; }
-    .rsi-overbought { color: #fcd34d; }
-    .rsi-oversold { color: #93c5fd; }
-    .trading-pick.stance-bull { border-left-color: #4ade80; }
-    .trading-pick.stance-bear { border-left-color: #fca5a5; }
-    .pick-stance-bull { background: rgba(74,222,128,0.15); color: #4ade80; }
-    .pick-stance-bear { background: rgba(252,165,165,0.15); color: #fca5a5; }
-  }
-  .signal-age { opacity: 0.7; font-weight: 400; }
-
-  .trading-risk {
-    margin: 1.5rem 0 0;
-    padding: 0.9rem 1.2rem;
-    background: var(--card);
-    border-radius: 0.45rem;
-    border-left: 3px solid #d97706;
-  }
-  .trading-risk .eyebrow { display: block; margin-bottom: 0.35rem; }
-  .trading-risk p { margin: 0; font-size: 0.82rem; line-height: 1.65; color: var(--fg-soft); }
+  .overview-card, .hero-card { display: none; }
 
   footer {
     margin-top: 2.5rem;
@@ -1196,33 +900,52 @@ export function renderHtml(
     color: var(--muted);
     font-size: 0.82rem;
   }
+
+  /* trading / tickers (kept lean) */
+  .trading-overview, .trading-picks, .ticker-card, .crypto-widgets {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 0.9rem;
+    padding: 1rem 1.1rem; margin-bottom: 0.85rem;
+  }
+  .ticker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.65rem; }
+  .ticker-card h3 { margin: 0 0 0.35rem; font-size: 0.95rem; }
+  .ticker-pct.positive, .trend-bullish, .positive { color: #15803d; }
+  .ticker-pct.negative, .trend-bearish, .negative { color: #b91c1c; }
+  .signal-pill { font-size: 0.72rem; padding: 0.18rem 0.55rem; border-radius: 999px; font-weight: 500; display: inline-block; margin: 0.15rem; }
+  .signal-pill.tone-bull { background: rgba(22,163,74,0.13); color: #166534; }
+  .signal-pill.tone-bear { background: rgba(220,38,38,0.13); color: #991b1b; }
+  .signal-pill.tone-caution { background: rgba(217,119,6,0.15); color: #92400e; }
+  .trading-risk {
+    margin: 1.5rem 0 0; padding: 0.9rem 1.2rem; background: var(--card);
+    border-radius: 0.75rem; border-left: 3px solid #d97706;
+  }
+  .pick-stance-bull { background: rgba(22,163,74,0.12); color: #16a34a; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
+  .pick-stance-bear { background: rgba(220,38,38,0.12); color: #dc2626; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
+  .pick-stance-neutral { background: var(--card); color: var(--muted); padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
+  .merged-source { font-size: 0.75rem; color: var(--muted); }
+
 </style>
 </head>
 <body>
 <main>
-  <header class="report-header">
-    <span class="eyebrow">${STR.siteTitle}</span>
-    <h1 class="report-title">${date}</h1>
-    ${process.env.WEB_MODE === "true" ? `<a class="archive-link" href="../archive.html">${STR.archiveLink}</a>` : ""}
-  </header>
+  ${heroBlock}
 
   <nav class="tabs" role="tablist">
-    <button class="tab active" data-tab="tech">${CATEGORY_LABELS.tech}<span class="count">${counts.tech}</span></button>
+    <button class="tab active" data-tab="finance">${CATEGORY_LABELS.finance}<span class="count">${counts.finance}</span></button>
     ${trading ? `<button class="tab" data-tab="trading">${STR.catTrading}<span class="count">${trading.tickers.length}</span></button>` : ""}
     <button class="tab" data-tab="politics">${CATEGORY_LABELS.politics}<span class="count">${counts.politics}</span></button>
-    <button class="tab" data-tab="finance">${CATEGORY_LABELS.finance}<span class="count">${counts.finance}</span></button>
+    <button class="tab" data-tab="tech">${CATEGORY_LABELS.tech}<span class="count">${counts.tech}</span></button>
     ${techCommunitySubs.length > 0 ? `<button class="tab" data-tab="community">${STR.catCommunity}<span class="count">${counts.community}</span></button>` : ""}
   </nav>
 
-  <section class="panel active" data-panel="tech">
-    ${renderRawCategoryPanel("tech", techMainSubs)}
+  <section class="panel active" data-panel="finance">
+    ${renderRawCategoryPanel("finance", raw.finance)}
   </section>
   ${trading ? `<section class="panel" data-panel="trading">${renderTradingPanel(trading)}</section>` : ""}
   <section class="panel" data-panel="politics">
     ${renderRawCategoryPanel("politics", raw.politics)}
   </section>
-  <section class="panel" data-panel="finance">
-    ${renderRawCategoryPanel("finance", raw.finance)}
+  <section class="panel" data-panel="tech">
+    ${renderRawCategoryPanel("tech", techMainSubs)}
   </section>
   ${techCommunitySubs.length > 0 ? `<section class="panel" data-panel="community">
     ${renderRawCategoryPanel("tech", techCommunitySubs)}

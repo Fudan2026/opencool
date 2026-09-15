@@ -30,7 +30,7 @@ import { fetchCryptoFearGreed } from "../lib/trading/fear-greed";
 import { fetchCryptoGlobal } from "../lib/trading/coingecko";
 import { generateTradingCommentary } from "../lib/ai/trading-commentary";
 import type { TradingSection } from "../lib/ai/pipeline";
-import { todayKey } from "../lib/utils";
+import { todayKey, editionHourKey, parseReportHours } from "../lib/utils";
 
 const OUTPUT_DIR = "daily_reports";
 
@@ -271,7 +271,9 @@ async function main() {
   }
 
   const date = todayKey();
-  console.log(`[daily] ${date} — fetching sources…\n`);
+  const hour = editionHourKey();
+  const siblingHours = parseReportHours().map((h) => String(h).padStart(2, "0"));
+  console.log(`[daily] ${date} edition ${hour} — fetching sources…\n`);
   const articles = await fetchAll();
   console.log(`\n[daily] total articles: ${articles.length}`);
   if (articles.length === 0) {
@@ -314,18 +316,19 @@ async function main() {
 
   const dateDir = path.join(OUTPUT_DIR, date);
   fs.mkdirSync(dateDir, { recursive: true });
-  const base = path.join(dateDir, date);
+  const base = path.join(dateDir, hour);
   const raw = groupRaw(articles, sources);
   fs.writeFileSync(`${base}.json`, JSON.stringify(report, null, 2), "utf8");
-  // Sidecar with all fetched articles + LLM-attached summary, so
-  // scripts/render.ts can rebuild HTML/MD for UI iteration without
-  // re-fetching or re-calling the LLM.
   fs.writeFileSync(
     `${base}-articles.json`,
-    JSON.stringify({ date, articles }, null, 2),
+    JSON.stringify({ date, hour, articles }, null, 2),
     "utf8",
   );
-  fs.writeFileSync(`${base}.html`, renderHtml(report, raw, date), "utf8");
+  fs.writeFileSync(
+    `${base}.html`,
+    renderHtml(report, raw, date, { editionHour: hour, siblingHours }),
+    "utf8",
+  );
   if (process.env.OUTPUT_MARKDOWN === "true") {
     fs.writeFileSync(`${base}.md`, renderMarkdown(report, date), "utf8");
     console.log(`[daily] wrote ${base}.{json,html,md,articles.json}`);

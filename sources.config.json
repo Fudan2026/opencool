@@ -448,11 +448,12 @@
     "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
     "category": "finance",
     "subcategory": "news",
-    "enabled": false,
+    "enabled": true,
     "locales": [
       "zh",
       "en"
-    ]
+    ],
+    "notes": " [OpenCool: finance-first enable]"
   },
   {
     "id": "bbc-business",
@@ -748,7 +749,7 @@
     "locales": [
       "zh"
     ],
-    "notes": "DailyHotApi public JSON — titles only, not body scrape"
+    "notes": "DailyHotApi; OpenCool finance whitelist filter applied in fetcher"
   },
   {
     "id": "weibo-hot",
@@ -762,7 +763,7 @@
     "locales": [
       "zh"
     ],
-    "notes": "DailyHotApi public JSON"
+    "notes": "DailyHotApi; OpenCool finance whitelist filter applied in fetcher"
   },
   {
     "id": "zhihu-hot",
@@ -776,7 +777,7 @@
     "locales": [
       "zh"
     ],
-    "notes": "DailyHotApi public JSON"
+    "notes": "DailyHotApi; OpenCool finance whitelist filter applied in fetcher"
   },
   {
     "id": "baidu-hot",
@@ -790,6 +791,48 @@
     "locales": [
       "zh"
     ],
-    "notes": "DailyHotApi public JSON"
+    "notes": "DailyHotApi; OpenCool finance whitelist filter applied in fetcher"
+  },
+  {
+    "id": "reuters-business",
+    "name": "Reuters Business",
+    "type": "rss",
+    "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
+    "category": "finance",
+    "subcategory": "news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "notes": "Placeholder — Reuters agency feed often flaky; keep disabled until verified"
+  },
+  {
+    "id": "caixin",
+    "name": "财新",
+    "type": "rss",
+    "url": "https://www.caixin.com/rss/latest.xml",
+    "category": "finance",
+    "subcategory": "news",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "OpenCool distilled CN finance — may 403 from some networks"
+  },
+  {
+    "id": "yicai",
+    "name": "第一财经",
+    "type": "rss",
+    "url": "https://www.yicai.com/rss/news.xml",
+    "category": "finance",
+    "subcategory": "news",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "OpenCool distilled"
   }
 ]
