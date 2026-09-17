@@ -9,6 +9,7 @@ import { REPORT_LOCALE } from "../sources/registry";
 import { getReportTz, editionKind } from "../utils";
 import type { Category, SourceDef } from "../sources/types";
 import { V2EX_OFF_TOPIC_RE } from "../sources/v2ex";
+import { isEntertainmentTitle } from "../sources/title-filters";
 import type { TickerAnalysis } from "../trading/signals";
 import {
   getAssetGroupLabels,
@@ -25,23 +26,26 @@ import {
  */
 const TEXTS_ZH = {
   siteTitle: "OpenCool",
-  siteTagline: "财经早报 · 非个性化推荐",
+  siteTagline: "中文财经两报 · 零 AI · 非个性化",
   editionMorning: "早报",
   editionNoon: "午报",
   editionEvening: "晚报",
   editionGeneric: "简报",
   catTech: "技术动态",
-  catFinance: "财经要点",
+  catFinance: "中文财经",
   catPolitics: "时政观察",
   catTrading: "市场行情",
   catCommunity: "社区讨论",
   subAiNews: "AI 媒体",
   subTrendingPapers: "热门论文",
-  subXViral: "X 推文",
+  subXViral: "X 市场声音",
   subBlogWeekly: "博客周刊",
   subCnCommunity: "中文社区",
   subOverseasCommunity: "海外社区",
-  subFinanceNews: "财经新闻",
+  subFinanceNews: "中文财经",
+  subCnFinance: "中文财经",
+  subWire: "外电原文",
+  subXMirror: "X 市场声音（站内镜像，免翻墙）",
   subFinanceCommunity: "社区讨论",
   subWorld: "国际要闻",
   subSocialHot: "财经热榜",
@@ -50,7 +54,7 @@ const TEXTS_ZH = {
   emptySource: "该源今日无内容。",
   emptyCategory: "该分类今日无内容。",
   emptyGroup: "该组今日无数据。",
-  footer: "内容均来自原媒体，本站仅作整理与回链。热榜≠事实核查 · 启发式摘要 · 零 LLM。",
+  footer: "内容均来自原媒体，本站仅作整理与回链。热榜≠事实核查 · 启发式摘要 · 零 AI / 零 API Token。",
   summaryLabelNews: "摘要",
   summaryLabelIntro: "介绍",
   tradingMarketOverview: "市场总览",
@@ -81,23 +85,26 @@ const TEXTS_ZH = {
 
 const TEXTS_EN: typeof TEXTS_ZH = {
   siteTitle: "OpenCool",
-  siteTagline: "Finance brief · not personalized",
+  siteTagline: "CN finance dual brief · zero AI · not personalized",
   editionMorning: "Morning",
   editionNoon: "Noon",
   editionEvening: "Evening",
   editionGeneric: "Brief",
   catTech: "Tech",
-  catFinance: "Finance",
+  catFinance: "CN Finance",
   catPolitics: "World",
   catTrading: "Markets",
   catCommunity: "Community",
   subAiNews: "AI Media",
   subTrendingPapers: "Trending Papers",
-  subXViral: "X Viral",
+  subXViral: "X Markets Mirror",
   subBlogWeekly: "Blog Weekly",
   subCnCommunity: "Chinese Community",
   subOverseasCommunity: "Overseas Community",
-  subFinanceNews: "Finance News",
+  subFinanceNews: "CN Finance",
+  subCnFinance: "CN Finance",
+  subWire: "Wire (EN originals)",
+  subXMirror: "X markets (on-site mirror)",
   subFinanceCommunity: "Community",
   subWorld: "World News",
   subSocialHot: "Finance Hot",
@@ -107,7 +114,7 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   emptyCategory: "No content in this category today.",
   emptyGroup: "No data for this group today.",
   footer:
-    "Sourced from original publishers. Hot ranks ≠ verified facts. Heuristic digest · no LLM.",
+    "Sourced from original publishers. Hot ranks ≠ verified facts. Heuristic digest · zero AI / zero API tokens.",
   summaryLabelNews: "Summary",
   summaryLabelIntro: "Summary",
   tradingMarketOverview: "Market Overview",
@@ -186,7 +193,8 @@ const SUBCATEGORY_ORDER: Partial<Record<Category, string[]>> = {
   // zh mode keeps cn-community (V2EX / LinuxDo); en mode keeps
   // overseas-community (Hacker News / r/stocks).
   tech: ["github-trending", "trending-papers", "x-viral", "ai-news", "cn-community", "overseas-community"],
-  finance: ["news"],
+  // CN-first: Chinese finance feed → on-site X mirror → English wires
+  finance: ["cn-news", "x-mirror", "wire"],
   politics: ["world", "hot"],
 };
 
@@ -202,6 +210,9 @@ const SUBCATEGORY_LABELS: Record<string, string> = {
   "x-viral": STR.subXViral,
   "blog-weekly": STR.subBlogWeekly,
   news: STR.subFinanceNews,
+  "cn-news": STR.subCnFinance,
+  wire: STR.subWire,
+  "x-mirror": STR.subXMirror,
   world: STR.subWorld,
   hot: STR.subSocialHot,
 };
@@ -219,6 +230,7 @@ const SOURCE_DISPLAY_LIMITS: Record<string, number> = {
   "tech:cn-community": 10,
   "tech:x-viral": 20,
   "tech:trending-papers": 20,
+  "finance:x-mirror": 30,
   "politics:hot": 15,
 };
 
@@ -261,6 +273,8 @@ function displayLimitFor(
 export const MERGED_SUBGROUP_LIMITS: Record<string, number> = {
   "tech:ai-news": 15,
   "finance:news": 18,
+  "finance:cn-news": 24,
+  "finance:wire": 14,
   "politics:world": 15,
 };
 
@@ -322,6 +336,7 @@ export function groupRaw(
   for (const a of articles) {
     if (!enabledIds.has(a.sourceId)) continue;
     if (a.category === "politics" && isSportsArticle(a.title)) continue;
+    if (isEntertainmentTitle(a.title)) continue;
     if (
       (a.sourceId === "v2ex-hot" || a.sourceId === "linuxdo") &&
       V2EX_OFF_TOPIC_RE.test(a.title)
@@ -556,8 +571,9 @@ function editionLabelFor(hour?: string): string {
   if (!hour) return STR.editionGeneric;
   const kind = editionKind(hour);
   if (kind === "morning") return STR.editionMorning;
-  if (kind === "noon") return STR.editionNoon;
   if (kind === "evening") return STR.editionEvening;
+  // Legacy noon slot (13) if an old file is re-rendered
+  if (parseInt(hour, 10) === 13) return STR.editionNoon;
   return STR.editionGeneric;
 }
 

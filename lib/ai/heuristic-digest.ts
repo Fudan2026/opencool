@@ -2,10 +2,13 @@
  * Zero-LLM daily digest: Jaccard near-dedupe + cross-source corroboration
  * scoring (distilled from nosey-agent / Daily-Intelligence-System patterns).
  * Produces the same DailyReport shape the HTML renderer expects.
+ *
+ * OpenCool: CN-first hero — prefer Chinese-title / CN-source clusters.
  */
 
 import { REPORT_LOCALE } from "../sources/registry";
 import type { Category } from "../sources/types";
+import { hasCjk } from "../sources/title-filters";
 import type { ArticleInput, BriefItem, DailyReport } from "./pipeline";
 
 const BRIEF_LIMITS: Record<Category, number> = {
@@ -13,6 +16,28 @@ const BRIEF_LIMITS: Record<Category, number> = {
   politics: 3,
   tech: 4,
 };
+
+/** Source IDs treated as Chinese-primary for hero preference. */
+const CN_SOURCE_IDS = new Set([
+  "people-finance",
+  "wallstreetcn",
+  "wallstreetcn-live",
+  "ftchinese-news",
+  "jin10-flash",
+  "cls-telegraph",
+  "cls-depth",
+  "eastmoney-kuaixun",
+  "caixin",
+  "yicai",
+  "gelonghui",
+  "xueqiu-hot",
+  "kr36-news",
+  "dw-chinese",
+  "douyin-hot",
+  "weibo-hot",
+  "zhihu-hot",
+  "baidu-hot",
+]);
 
 function normalizeTitle(title: string): string {
   return title
@@ -93,10 +118,17 @@ function freshnessBoost(publishedAt?: Date): number {
   return 0.15;
 }
 
+function isCnCluster(c: Cluster): boolean {
+  if (hasCjk(c.canonical.title)) return true;
+  if (CN_SOURCE_IDS.has(c.canonical.sourceId)) return true;
+  return c.members.some((m) => CN_SOURCE_IDS.has(m.sourceId) || hasCjk(m.title));
+}
+
 function scoreCluster(c: Cluster): number {
   // Cross-source corroboration is the anti-filter-bubble signal.
   const sourceScore = Math.min(c.sources.size, 5);
-  return sourceScore * 2 + freshnessBoost(c.canonical.publishedAt);
+  const cnBoost = REPORT_LOCALE !== "en" && isCnCluster(c) ? 1.5 : 0;
+  return sourceScore * 2 + freshnessBoost(c.canonical.publishedAt) + cnBoost;
 }
 
 function toBrief(c: Cluster): BriefItem {
@@ -131,6 +163,28 @@ function pickBriefs(items: ArticleInput[], limit: number): BriefItem[] {
     .map((c) => ({ c, score: scoreCluster(c) }))
     .sort((a, b) => b.score - a.score);
   return clusters.slice(0, limit).map(({ c }) => toBrief(c));
+}
+
+/**
+ * Hero: prefer a Chinese-lead brief; fall back to EN wire with language note.
+ */
+function pickLead(
+  finance: BriefItem[],
+  politics: BriefItem[],
+  tech: BriefItem[],
+): { lead: BriefItem | null; langNote: string } {
+  const pools = [finance, politics, tech];
+  for (const pool of pools) {
+    const cn = pool.find((b) => hasCjk(b.title));
+    if (cn) return { lead: cn, langNote: "" };
+  }
+  const any = finance[0] || politics[0] || tech[0] || null;
+  if (!any) return { lead: null, langNote: "" };
+  const note =
+    REPORT_LOCALE === "en"
+      ? " (EN wire — no CN headline today)"
+      : "（外电原文 · 本日暂无中文头条命中）";
+  return { lead: any, langNote: note };
 }
 
 function topKeywords(briefs: BriefItem[], n = 6): string[] {
@@ -187,50 +241,50 @@ export function generateHeuristicReport(articles: ArticleInput[]): DailyReport {
   const politics_briefs = pickBriefs(byCat.politics, BRIEF_LIMITS.politics);
   const tech_briefs = pickBriefs(byCat.tech, BRIEF_LIMITS.tech);
 
-  const lead =
-    finance_briefs[0] || politics_briefs[0] || tech_briefs[0] || null;
+  const { lead, langNote } = pickLead(
+    finance_briefs,
+    politics_briefs,
+    tech_briefs,
+  );
 
   const hero_headline = lead
-    ? lead.title.slice(0, 40)
+    ? lead.title.slice(0, 48) + (langNote ? "" : "")
     : REPORT_LOCALE === "en"
       ? "OpenCool daily finance brief"
-      : "OpenCool 财经早报";
+      : "OpenCool 中文财经两报";
 
   const overviewParts: string[] = [];
   if (REPORT_LOCALE === "en") {
     overviewParts.push(
-      "Heuristic digest (no LLM): ranked by cross-source corroboration and recency — not personalized.",
+      "Heuristic digest (no LLM / no API tokens): ranked by cross-source corroboration and recency — CN sources preferred when available.",
     );
     if (finance_briefs[0])
       overviewParts.push(`Finance lead: ${finance_briefs[0].title}.`);
     if (politics_briefs[0])
       overviewParts.push(`World lead: ${politics_briefs[0].title}.`);
-    if (tech_briefs[0])
-      overviewParts.push(`Tech lead: ${tech_briefs[0].title}.`);
   } else {
     overviewParts.push(
-      "启发式早报（未调用大模型）：按「多源交叉出现 × 时效」排序，不做个性化推荐。",
+      "启发式两报（零 AI / 零 API Token）：中文财经源优先，外电原文次栏；按「多源交叉 × 时效」排序，不做个性化推荐。",
     );
     if (finance_briefs[0])
       overviewParts.push(`财经头条：${finance_briefs[0].title}。`);
     if (politics_briefs[0])
       overviewParts.push(`时政头条：${politics_briefs[0].title}。`);
-    if (tech_briefs[0])
-      overviewParts.push(`科技头条：${tech_briefs[0].title}。`);
+    if (langNote) overviewParts.push(langNote.trim());
   }
 
   const allBriefs = [...finance_briefs, ...politics_briefs, ...tech_briefs];
 
   return {
-    hero_headline,
+    hero_headline: lead ? `${lead.title.slice(0, 48)}${langNote}` : hero_headline,
     daily_overview: overviewParts.join(" "),
     tech_briefs,
     finance_briefs,
     politics_briefs,
     editor_note:
       REPORT_LOCALE === "en"
-        ? "LLM_MODE=off — titles and excerpts from sources; add a DeepSeek (or other) API key to enable AI summaries."
-        : "当前为 LLM_MODE=off：标题与摘要来自信源原文；配置 DeepSeek 等 API Key 后可升级为 AI 摘要。",
+        ? "LLM_MODE=off — titles and excerpts from sources; no paid API keys."
+        : "当前 LLM_MODE=off：标题与摘要来自信源原文；不接 DeepSeek / 任何付费 LLM。",
     keywords: topKeywords(allBriefs),
   };
 }

@@ -4,20 +4,22 @@
  * Run AFTER `npm run daily` has produced at least one edition.
  *
  * Discovers:
- *   - New: daily_reports/<YYYY-MM-DD>/(06|13|19).html  (triple brief)
+ *   - New: daily_reports/<YYYY-MM-DD>/(06|19).html  (dual brief)
+ *   - Legacy slots (13) still listed if present
  *   - Legacy: daily_reports/<YYYY-MM-DD>/<YYYY-MM-DD>.html
  *
  * Writes:
  *   - index.html   = latest edition
- *   - archive.html = grouped list (早报/午报/晚报)
+ *   - archive.html = grouped list (早报/晚报); norm from 2026-09-16
  */
 
 import fs from "node:fs";
 import path from "node:path";
 
 const ROOT = "daily_reports";
-const SLOT_RE = /^(0[6]|13|19|\d{2})$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+/** Archive listing starts highlighting dual-brief days from this date. */
+const ARCHIVE_NORM_FROM = "2026-09-16";
 
 const LABEL = {
   "06": "早报",
@@ -200,7 +202,7 @@ const archiveHtml = `<!doctype html>
 <main>
   <div class="brand">OpenCool</div>
   <h1>归档</h1>
-  <p class="meta">${editions.length} 期 · 早报 06:00 · 午报 13:00 · 晚报 19:00（上海时区）</p>
+  <p class="meta">${editions.length} 期 · 自 ${ARCHIVE_NORM_FROM} 起每日两报：早报 06:00 · 晚报 19:00（上海时区）· 零 AI</p>
   <p><a class="home" href="./index.html">← 回到最新一期</a></p>
 ${dayBlocks}
 </main>

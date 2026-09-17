@@ -210,17 +210,17 @@
   },
   {
     "id": "attentionvc-ai",
-    "name": "X 推文 (AttentionVC)",
+    "name": "X 市场声音（站内镜像）",
     "type": "api",
-    "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30",
-    "category": "tech",
-    "subcategory": "x-viral",
-    "enabled": false,
+    "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=crypto&lang=en&limit=50",
+    "category": "finance",
+    "subcategory": "x-mirror",
+    "enabled": true,
     "locales": [
       "zh",
       "en"
     ],
-    "notes": " [OpenCool: disabled for finance-first]"
+    "notes": "OpenCool: free AttentionVC Cloud Run; crypto bucket (finance/markets 500). On-site mirror for CN readers. Failures non-fatal."
   },
   {
     "id": "solidot",
@@ -369,7 +369,7 @@
     "type": "rss",
     "url": "https://feeds.bloomberg.com/markets/news.rss",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "wire",
     "enabled": true,
     "locales": [
       "zh",
@@ -382,7 +382,7 @@
     "type": "rss",
     "url": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "wire",
     "enabled": true,
     "locales": [
       "zh",
@@ -395,7 +395,7 @@
     "type": "rss",
     "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "wire",
     "enabled": true,
     "locales": [
       "zh",
@@ -408,7 +408,7 @@
     "type": "rss",
     "url": "https://www.ft.com/companies?format=rss",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "wire",
     "enabled": true,
     "locales": [
       "zh",
@@ -421,7 +421,7 @@
     "type": "rss",
     "url": "https://www.ftchinese.com/rss/news",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "cn-news",
     "enabled": true,
     "locales": [
       "zh"
@@ -434,7 +434,7 @@
     "type": "rss",
     "url": "https://finance.yahoo.com/news/rssindex",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "wire",
     "enabled": true,
     "locales": [
       "zh",
@@ -447,7 +447,7 @@
     "type": "rss",
     "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "wire",
     "enabled": true,
     "locales": [
       "zh",
@@ -461,7 +461,7 @@
     "type": "rss",
     "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "wire",
     "enabled": true,
     "locales": [
       "zh",
@@ -474,7 +474,7 @@
     "type": "rss",
     "url": "https://www.economist.com/finance-and-economics/rss.xml",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "wire",
     "enabled": true,
     "locales": [
       "zh",
@@ -540,7 +540,7 @@
     "type": "rss",
     "url": "http://www.people.com.cn/rss/finance.xml",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "cn-news",
     "enabled": true,
     "locales": [
       "zh"
@@ -553,7 +553,7 @@
     "type": "rss",
     "url": "https://rsshub.app/wallstreetcn/news/global",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "cn-news",
     "enabled": true,
     "locales": [
       "zh"
@@ -701,7 +701,7 @@
     "type": "rss",
     "url": "https://rsshub.app/jin10",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "cn-news",
     "lang": "zh",
     "enabled": true,
     "locales": [
@@ -715,7 +715,7 @@
     "type": "rss",
     "url": "https://rsshub.app/cls/telegraph",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "cn-news",
     "lang": "zh",
     "enabled": true,
     "locales": [
@@ -729,7 +729,7 @@
     "type": "rss",
     "url": "https://rsshub.app/eastmoney/kuaixun",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "cn-news",
     "lang": "zh",
     "enabled": true,
     "locales": [
@@ -799,7 +799,7 @@
     "type": "rss",
     "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "wire",
     "enabled": false,
     "locales": [
       "zh",
@@ -813,7 +813,7 @@
     "type": "rss",
     "url": "https://www.caixin.com/rss/latest.xml",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "cn-news",
     "lang": "zh",
     "enabled": true,
     "locales": [
@@ -827,12 +827,96 @@
     "type": "rss",
     "url": "https://www.yicai.com/rss/news.xml",
     "category": "finance",
-    "subcategory": "news",
+    "subcategory": "cn-news",
     "lang": "zh",
     "enabled": true,
     "locales": [
       "zh"
     ],
     "notes": "OpenCool distilled"
+  },
+  {
+    "id": "wallstreetcn-live",
+    "name": "华尔街见闻快讯",
+    "type": "rss",
+    "url": "https://rsshub.app/wallstreetcn/live",
+    "category": "finance",
+    "subcategory": "cn-news",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "Distilled TrendRadar/NewsHub wallstreetcn-quick via RSSHub — may flake"
+  },
+  {
+    "id": "cls-depth",
+    "name": "财联社深度",
+    "type": "rss",
+    "url": "https://rsshub.app/cls/depth",
+    "category": "finance",
+    "subcategory": "cn-news",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "Distilled NewsHub cls-depth via RSSHub"
+  },
+  {
+    "id": "gelonghui",
+    "name": "格隆汇",
+    "type": "rss",
+    "url": "https://rsshub.app/gelonghui/hot",
+    "category": "finance",
+    "subcategory": "cn-news",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "Distilled TrendRadar/NewsHub gelonghui via RSSHub"
+  },
+  {
+    "id": "xueqiu-hot",
+    "name": "雪球热帖",
+    "type": "rss",
+    "url": "https://rsshub.app/xueqiu/hots",
+    "category": "finance",
+    "subcategory": "cn-news",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "Distilled TrendRadar/NewsHub xueqiu via RSSHub"
+  },
+  {
+    "id": "kr36-news",
+    "name": "36氪",
+    "type": "rss",
+    "url": "https://rsshub.app/36kr/news/latest",
+    "category": "finance",
+    "subcategory": "cn-news",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "Distilled NewsNow 36kr — finance/startup adjacent"
+  },
+  {
+    "id": "fastbull-express",
+    "name": "法布财经快讯",
+    "type": "rss",
+    "url": "https://rsshub.app/fastbull/express-news",
+    "category": "finance",
+    "subcategory": "cn-news",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "Distilled NewsHub fastbull-express via RSSHub"
   }
 ]

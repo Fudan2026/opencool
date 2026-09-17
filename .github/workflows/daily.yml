@@ -1,19 +1,20 @@
 name: Daily Brief
 
-# OpenCool triple brief (06 / 13 / 19 Asia/Shanghai) — LLM_MODE forced off.
+# OpenCool dual brief (06 / 19 Asia/Shanghai) — LLM_MODE forced off.
 #
 # One-time setup:
 #   1. Settings → Actions → General → Workflow permissions: Read and write
 #   2. Settings → Pages → Deploy from branch → gh-pages / root
 #   3. Variables (recommended):
 #        REPORT_TZ=Asia/Shanghai
-#        REPORT_HOUR=6,13,19
+#        REPORT_HOUR=6,19
 #        REPORT_LOCALE=zh
 #        LLM_MODE=off   (forced in this workflow regardless)
 #   4. Do NOT add DeepSeek / other LLM secrets for this fork's default path.
 #   5. Actions → Daily Brief → Run workflow once to seed.
 #
 # Live: https://<user>.github.io/<repo>/
+# Archive listing norm starts 2026-09-16 (06 + 19).
 
 on:
   schedule:
@@ -40,7 +41,7 @@ jobs:
         id: check
         env:
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
-          REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,13,19' }}
+          REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,19' }}
           REPORT_DAYS: ${{ vars.REPORT_DAYS }}
           EVENT_NAME: ${{ github.event_name }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -48,7 +49,7 @@ jobs:
           set -euo pipefail
 
           TZ_VAL="${REPORT_TZ:-Asia/Shanghai}"
-          HOURS_VAL="${REPORT_HOUR:-6,13,19}"
+          HOURS_VAL="${REPORT_HOUR:-6,19}"
           DAYS_VAL="${REPORT_DAYS:-*}"
 
           NOW_HOUR=$(TZ="$TZ_VAL" date +%-H)
@@ -186,7 +187,7 @@ jobs:
           LLM_MODE: 'off'
           REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
-          REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,13,19' }}
+          REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,19' }}
           EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
           DISABLE_SOURCE_IDS: ${{ vars.DISABLE_SOURCE_IDS || 'linuxdo' }}
           DAILYHOT_API_BASE: ${{ vars.DAILYHOT_API_BASE }}
