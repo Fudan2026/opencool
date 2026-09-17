@@ -39,16 +39,29 @@ const OUTPUT_DIR = "daily_reports";
 async function fetchAll(): Promise<ArticleInput[]> {
   const articles: ArticleInput[] = [];
   const enabled = sources.filter((s) => s.enabled !== false);
-  for (const source of enabled) {
-    try {
-      const items = await fetchSource(source);
-      console.log(`  ${source.id.padEnd(20)} ${items.length}`);
-      articles.push(...items.map((it) => ({ ...it, source: source.name })));
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e);
-      console.error(`  ${source.id.padEnd(20)} FAILED — ${msg}`);
+  const CONCURRENCY = 6;
+  let cursor = 0;
+
+  async function worker() {
+    while (cursor < enabled.length) {
+      const idx = cursor++;
+      const source = enabled[idx];
+      try {
+        const items = await fetchSource(source);
+        console.log(`  ${source.id.padEnd(20)} ${items.length}`);
+        articles.push(...items.map((it) => ({ ...it, source: source.name })));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        console.error(`  ${source.id.padEnd(20)} FAILED — ${msg}`);
+      }
     }
   }
+
+  await Promise.all(
+    Array.from({ length: Math.min(CONCURRENCY, enabled.length) }, () =>
+      worker(),
+    ),
+  );
   return articles;
 }
 
