@@ -31,6 +31,8 @@ import { fetchCryptoGlobal } from "../lib/trading/coingecko";
 import { generateTradingCommentary } from "../lib/ai/trading-commentary";
 import type { TradingSection } from "../lib/ai/pipeline";
 import { todayKey, editionHourKey, parseReportHours } from "../lib/utils";
+import { buildQuantSection } from "../lib/invest/quant";
+import type { QuantSection } from "../lib/invest/types";
 
 const OUTPUT_DIR = "daily_reports";
 
@@ -302,6 +304,18 @@ async function main() {
     console.warn(`[daily] trading section failed: ${msg}`);
   }
 
+  let quant: QuantSection | null = null;
+  try {
+    console.log(`[daily] building retail quant extras…`);
+    quant = await buildQuantSection(trading?.tickers ?? [], articles);
+    console.log(
+      `[daily] quant: indices=${quant.market?.indices.length ?? 0} events=${quant.events.length} personaScores=${quant.personas.length}`,
+    );
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    console.warn(`[daily] quant section failed: ${msg}`);
+  }
+
   console.log(
     llmOff
       ? `[daily] generating heuristic digest…`
@@ -312,6 +326,7 @@ async function main() {
     ? { report: generateHeuristicReport(articles) }
     : await generateDailyReport(articles);
   if (trading) report.trading = trading;
+  if (quant) report.quant = quant;
   console.log(`[daily] digest ready in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 
   const dateDir = path.join(OUTPUT_DIR, date);

@@ -16,6 +16,19 @@ export interface BriefItem {
   importance: number;
 }
 
+import type { TickerAnalysis } from "../trading/signals";
+import type { CryptoGlobalStats } from "../trading/coingecko";
+import type { FearGreedSnapshot } from "../trading/fear-greed";
+import type { TradingCommentary } from "./trading-commentary";
+import type { QuantSection } from "../invest/types";
+
+export interface TradingSection extends TradingCommentary {
+  generated_at: string;
+  tickers: TickerAnalysis[];
+  crypto_fear_greed?: FearGreedSnapshot;
+  crypto_global?: CryptoGlobalStats;
+}
+
 export interface DailyReport {
   hero_headline: string;
   daily_overview: string;
@@ -26,18 +39,8 @@ export interface DailyReport {
   keywords: string[];
   /** Optional trading-signals section, present when scripts/daily.ts ran successfully. */
   trading?: TradingSection;
-}
-
-import type { TickerAnalysis } from "../trading/signals";
-import type { CryptoGlobalStats } from "../trading/coingecko";
-import type { FearGreedSnapshot } from "../trading/fear-greed";
-import type { TradingCommentary } from "./trading-commentary";
-
-export interface TradingSection extends TradingCommentary {
-  generated_at: string;
-  tickers: TickerAnalysis[];
-  crypto_fear_greed?: FearGreedSnapshot;
-  crypto_global?: CryptoGlobalStats;
+  /** Retail quant extras: A-share overview, events, personas. */
+  quant?: QuantSection;
 }
 
 export interface ArticleInput extends RawArticle {

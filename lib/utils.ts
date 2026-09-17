@@ -22,16 +22,16 @@ export function todayKey(d: Date = new Date()): string {
   return fmt.format(d);
 }
 
-/** Default OpenCool dual-brief slots (local hours in REPORT_TZ). */
-export const DEFAULT_REPORT_HOURS = [6, 19];
+/** Default OpenCool triple-brief slots (local hours in REPORT_TZ). */
+export const DEFAULT_REPORT_HOURS = [6, 13, 19];
 
 /**
  * Parse REPORT_HOUR env (comma-separated) into sorted unique hour ints.
- * Defaults to 6,19 (morning + evening).
+ * Defaults to 6,13,19 (morning / noon / evening).
  */
 export function parseReportHours(): number[] {
   const raw = process.env.REPORT_HOUR?.trim();
-  const parts = (raw || "6,19")
+  const parts = (raw || "6,13,19")
     .split(",")
     .map((s) => parseInt(s.trim(), 10))
     .filter((n) => Number.isFinite(n) && n >= 0 && n <= 23);
@@ -76,11 +76,12 @@ export function editionHourKey(d: Date = new Date()): string {
 }
 
 /** zh/en-agnostic short codes; UI maps them via render strings. */
-export type EditionKind = "morning" | "evening" | "edition";
+export type EditionKind = "morning" | "noon" | "evening" | "edition";
 
 export function editionKind(hourKey: string): EditionKind {
   const h = parseInt(hourKey, 10);
-  if (h <= 11) return "morning";
+  if (h <= 9) return "morning";
+  if (h <= 15) return "noon";
   if (h <= 22) return "evening";
   return "edition";
 }

@@ -1,0 +1,13 @@
+{
+  "name": "opencool-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local MCP tools for OpenCool (Yahoo + Eastmoney free delayed data)",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

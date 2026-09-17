@@ -49,6 +49,8 @@ export interface TickerAnalysis {
   trend: "bullish" | "bearish" | "neutral";
   rsiState: "overbought" | "oversold" | "normal";
   signals: Signal[];
+  /** Last N closes for sparkline (no-lookahead: historical closes only). */
+  closesSpark?: number[];
 }
 
 const SIGNAL_LABELS: Record<SignalType, string> = {
@@ -207,5 +209,6 @@ export function analyzeTicker(
     trend,
     rsiState,
     signals,
+    closesSpark: closes.slice(-60),
   };
 }

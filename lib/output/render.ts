@@ -16,6 +16,17 @@ import {
   ASSET_GROUP_ORDER,
   type AssetGroup,
 } from "../trading/watchlist";
+import { guideBullets, isLikelyEnglishTitle } from "../invest/guide";
+import {
+  renderReviewPanel,
+  renderTechReadPanel,
+  renderPersonasPanel,
+  renderRiskPanel,
+  renderSchoolPanel,
+  renderKnowledgePanel,
+  renderMcpHelpPanel,
+  sparklineForTicker,
+} from "./quant-panels";
 
 // ----- i18n -----
 
@@ -26,7 +37,7 @@ import {
  */
 const TEXTS_ZH = {
   siteTitle: "OpenCool",
-  siteTagline: "中文财经两报 · 零 AI · 非个性化",
+  siteTagline: "中文财经三报 · 散户投研 · 零 AI",
   editionMorning: "早报",
   editionNoon: "午报",
   editionEvening: "晚报",
@@ -34,8 +45,19 @@ const TEXTS_ZH = {
   catTech: "技术动态",
   catFinance: "中文财经",
   catPolitics: "时政观察",
-  catTrading: "市场行情",
+  catTrading: "行情·A股/基金",
   catCommunity: "社区讨论",
+  catReview: "今日复盘",
+  catTechRead: "技术面读线",
+  catPersonas: "大师视角",
+  catRisk: "风控纪律",
+  catSchool: "散户学堂",
+  catKnowledge: "知识库",
+  catMcp: "开放 MCP",
+  guideToggleOff: "原文",
+  guideToggleOn: "中文导读",
+  guideWireNote: "外电原文 · 无机器翻译",
+  guidePoints: "导读要点",
   subAiNews: "AI 媒体",
   subTrendingPapers: "热门论文",
   subXViral: "X 市场声音",
@@ -85,7 +107,7 @@ const TEXTS_ZH = {
 
 const TEXTS_EN: typeof TEXTS_ZH = {
   siteTitle: "OpenCool",
-  siteTagline: "CN finance dual brief · zero AI · not personalized",
+  siteTagline: "CN finance triple brief · retail quant · zero AI",
   editionMorning: "Morning",
   editionNoon: "Noon",
   editionEvening: "Evening",
@@ -93,8 +115,19 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   catTech: "Tech",
   catFinance: "CN Finance",
   catPolitics: "World",
-  catTrading: "Markets",
+  catTrading: "Markets · A-share/ETF",
   catCommunity: "Community",
+  catReview: "Daily Review",
+  catTechRead: "Technical Read",
+  catPersonas: "Master Lenses",
+  catRisk: "Risk Discipline",
+  catSchool: "Retail School",
+  catKnowledge: "Knowledge",
+  catMcp: "Open MCP",
+  guideToggleOff: "Original",
+  guideToggleOn: "CN guide",
+  guideWireNote: "EN original · no machine translation",
+  guidePoints: "Guide points",
   subAiNews: "AI Media",
   subTrendingPapers: "Trending Papers",
   subXViral: "X Markets Mirror",
@@ -480,23 +513,43 @@ function formatDate(d: Date | undefined): string {
 function renderArticleHtml(a: ArticleInput, showSource = false): string {
   const title = escapeHtml(a.title);
   const url = escapeHtml(a.url);
-  const excerpt = a.excerpt ? escapeHtml(a.excerpt) : "";
-  // Backwards-compat: old sidecar JSON files may carry `cnSummary` instead.
+  const excerptRaw = (a.excerpt || "").trim();
   const summaryText = a.summary ?? (a as unknown as { cnSummary?: string }).cnSummary;
-  const summary = summaryText ? escapeHtml(summaryText) : "";
+  const excerptShort = excerptRaw ? escapeHtml(excerptRaw.slice(0, 160)) : "";
+  const excerptLong = excerptRaw
+    ? escapeHtml(excerptRaw.slice(0, 420))
+    : summaryText
+      ? escapeHtml(String(summaryText).slice(0, 420))
+      : "";
+  const summary = summaryText ? escapeHtml(String(summaryText).slice(0, 360)) : "";
   const meta = a.meta ? escapeHtml(a.meta) : "";
   const time = formatDate(a.publishedAt);
   const sourceLabel = showSource && a.source ? escapeHtml(a.source) : "";
   const metaLine = [sourceLabel, time].filter(Boolean).join(" · ");
-  // News-style summary label for finance/politics, project-intro style for GH/tech.
   const newsy = a.category === "finance" || a.category === "politics";
   const summaryLabel = newsy ? STR.summaryLabelNews : STR.summaryLabelIntro;
+  const bullets = guideBullets(a.title, a.excerpt, summaryText);
+  const wire = isLikelyEnglishTitle(a.title);
+  const guideHtml = `<div class="guide-block" hidden>
+    ${wire ? `<p class="guide-wire">${STR.guideWireNote}</p>` : ""}
+    ${excerptLong ? `<p class="article-excerpt guide-excerpt">${excerptLong}</p>` : ""}
+    ${summary ? `<p class="article-summary"><span class="summary-label">${summaryLabel}</span> ${summary}</p>` : ""}
+    ${
+      bullets.length
+        ? `<ul class="guide-bullets"><li class="guide-label">${STR.guidePoints}</li>${bullets
+            .map((b) => `<li>${escapeHtml(b)}</li>`)
+            .join("")}</ul>`
+        : ""
+    }
+  </div>`;
   return `<article class="article">
   <h3 class="article-title"><a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a></h3>
   ${meta ? `<p class="article-stats">${meta}</p>` : ""}
   ${metaLine ? `<p class="article-meta">${metaLine}</p>` : ""}
-  ${excerpt ? `<p class="article-excerpt">${excerpt}</p>` : ""}
-  ${summary ? `<p class="article-summary"><span class="summary-label">${summaryLabel}</span> ${summary}</p>` : ""}
+  <div class="orig-block">
+    ${excerptShort ? `<p class="article-excerpt">${excerptShort}</p>` : ""}
+  </div>
+  ${guideHtml}
 </article>`;
 }
 
@@ -571,9 +624,8 @@ function editionLabelFor(hour?: string): string {
   if (!hour) return STR.editionGeneric;
   const kind = editionKind(hour);
   if (kind === "morning") return STR.editionMorning;
+  if (kind === "noon") return STR.editionNoon;
   if (kind === "evening") return STR.editionEvening;
-  // Legacy noon slot (13) if an old file is re-rendered
-  if (parseInt(hour, 10) === 13) return STR.editionNoon;
   return STR.editionGeneric;
 }
 
@@ -584,6 +636,7 @@ export function renderHtml(
   opts: RenderHtmlOptions = {},
 ): string {
   const trading = report.trading;
+  const quant = report.quant;
   const editionHour = opts.editionHour;
   const editionLabel = editionLabelFor(editionHour);
   const siblingHours = (opts.siblingHours ?? []).filter(Boolean);
@@ -640,6 +693,10 @@ export function renderHtml(
         : ""
     }
     ${siblingNav}
+    <div class="guide-switch" role="group" aria-label="reading mode">
+      <button type="button" class="guide-btn active" data-guide="off">${STR.guideToggleOff}</button>
+      <button type="button" class="guide-btn" data-guide="on">${STR.guideToggleOn}</button>
+    </div>
     ${
       process.env.WEB_MODE === "true"
         ? `<a class="archive-link" href="../archive.html">${STR.archiveLink}</a>`
@@ -938,6 +995,37 @@ export function renderHtml(
   .pick-stance-bear { background: rgba(220,38,38,0.12); color: #dc2626; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
   .pick-stance-neutral { background: var(--card); color: var(--muted); padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
   .merged-source { font-size: 0.75rem; color: var(--muted); }
+  .guide-switch { display:inline-flex; gap:0.25rem; margin:0.75rem 0 0; padding:0.2rem;
+    background:rgba(255,255,255,0.55); border-radius:999px; border:1px solid var(--rule); }
+  .guide-btn { border:0; background:transparent; padding:0.35rem 0.85rem; border-radius:999px;
+    font:inherit; font-size:0.82rem; font-weight:600; cursor:pointer; color:var(--muted); }
+  .guide-btn.active { background:var(--accent); color:#fff; }
+  body.guide-on .orig-block { display:none; }
+  body.guide-on .guide-block { display:block; }
+  .guide-block[hidden] { display:none !important; }
+  body.guide-on .guide-block[hidden] { display:block !important; }
+  .guide-bullets { margin:0.4rem 0 0; padding-left:1.1rem; font-size:0.9rem; }
+  .guide-label { list-style:none; margin-left:-1.1rem; font-weight:700; color:var(--accent); font-size:0.78rem; }
+  .guide-wire { font-size:0.78rem; color:var(--muted); margin:0.25rem 0; }
+  .panel-h { font-size:1.05rem; margin:1.2rem 0 0.5rem; }
+  .lede { color:var(--muted); margin:0 0 0.85rem; }
+  .muted { color:var(--muted); }
+  .tiny { font-size:0.75rem; }
+  .idx-grid, .risk-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:0.55rem; margin-bottom:0.75rem; }
+  .idx-card, .risk-card, .lesson, .persona-block { background:var(--card); border:1px solid var(--rule); border-radius:0.75rem; padding:0.85rem 1rem; margin-bottom:0.65rem; }
+  .event-list { padding-left:1.1rem; }
+  .event-list li { margin:0.35rem 0; }
+  .ev-sym { font-weight:700; margin-right:0.35rem; }
+  .verdict { display:inline-block; font-size:0.72rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:0.35rem; }
+  .v-绿 { background:rgba(22,163,74,0.15); color:#166534; }
+  .v-黄 { background:rgba(217,119,6,0.15); color:#92400e; }
+  .v-红 { background:rgba(220,38,38,0.13); color:#991b1b; }
+  #kb-q { width:100%; max-width:420px; padding:0.55rem 0.75rem; border:1px solid var(--rule); border-radius:0.55rem; font:inherit; margin-bottom:0.75rem; }
+  .kb-results article { background:var(--card); border:1px solid var(--rule); border-radius:0.65rem; padding:0.7rem 0.9rem; margin-bottom:0.45rem; }
+  .lvl { font-size:0.72rem; font-weight:700; color:var(--accent); }
+  pre.code { background:#1a1510; color:#fff8f0; padding:0.85rem 1rem; border-radius:0.55rem; overflow:auto; font-size:0.85rem; }
+  .spark { display:block; margin:0.35rem 0; }
+  .tabs { flex-wrap: wrap; }
 
 </style>
 </head>
@@ -948,6 +1036,13 @@ export function renderHtml(
   <nav class="tabs" role="tablist">
     <button class="tab active" data-tab="finance">${CATEGORY_LABELS.finance}<span class="count">${counts.finance}</span></button>
     ${trading ? `<button class="tab" data-tab="trading">${STR.catTrading}<span class="count">${trading.tickers.length}</span></button>` : ""}
+    <button class="tab" data-tab="review">${STR.catReview}</button>
+    <button class="tab" data-tab="techread">${STR.catTechRead}</button>
+    <button class="tab" data-tab="personas">${STR.catPersonas}</button>
+    <button class="tab" data-tab="risk">${STR.catRisk}</button>
+    <button class="tab" data-tab="school">${STR.catSchool}</button>
+    <button class="tab" data-tab="knowledge">${STR.catKnowledge}</button>
+    <button class="tab" data-tab="mcp">${STR.catMcp}</button>
     <button class="tab" data-tab="politics">${CATEGORY_LABELS.politics}<span class="count">${counts.politics}</span></button>
     <button class="tab" data-tab="tech">${CATEGORY_LABELS.tech}<span class="count">${counts.tech}</span></button>
     ${techCommunitySubs.length > 0 ? `<button class="tab" data-tab="community">${STR.catCommunity}<span class="count">${counts.community}</span></button>` : ""}
@@ -957,6 +1052,13 @@ export function renderHtml(
     ${renderRawCategoryPanel("finance", raw.finance)}
   </section>
   ${trading ? `<section class="panel" data-panel="trading">${renderTradingPanel(trading)}</section>` : ""}
+  <section class="panel" data-panel="review">${renderReviewPanel(quant)}</section>
+  <section class="panel" data-panel="techread">${renderTechReadPanel(trading)}</section>
+  <section class="panel" data-panel="personas">${renderPersonasPanel(quant)}</section>
+  <section class="panel" data-panel="risk">${renderRiskPanel()}</section>
+  <section class="panel" data-panel="school">${renderSchoolPanel()}</section>
+  <section class="panel" data-panel="knowledge">${renderKnowledgePanel()}</section>
+  <section class="panel" data-panel="mcp">${renderMcpHelpPanel()}</section>
   <section class="panel" data-panel="politics">
     ${renderRawCategoryPanel("politics", raw.politics)}
   </section>
@@ -1024,6 +1126,46 @@ export function renderHtml(
       });
     });
   });
+  // 中文导读 toggle (zero LLM) — persist in localStorage
+  (function () {
+    var KEY = 'opencool-guide';
+    function apply(on) {
+      document.body.classList.toggle('guide-on', on);
+      document.querySelectorAll('.guide-btn').forEach(function (b) {
+        b.classList.toggle('active', (b.dataset.guide === 'on') === on);
+      });
+    }
+    apply(localStorage.getItem(KEY) === '1');
+    document.querySelectorAll('.guide-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var on = btn.dataset.guide === 'on';
+        localStorage.setItem(KEY, on ? '1' : '0');
+        apply(on);
+      });
+    });
+  })();
+  // Knowledge client search
+  (function () {
+    var el = document.getElementById('kb-data');
+    var box = document.getElementById('kb-results');
+    var input = document.getElementById('kb-q');
+    if (!el || !box || !input) return;
+    var data = [];
+    try { data = JSON.parse(el.textContent || '[]'); } catch (e) { data = []; }
+    function render(q) {
+      var s = (q || '').trim().toLowerCase();
+      var rows = data.filter(function (k) {
+        if (!s) return true;
+        var bag = (k.term + ' ' + (k.aliases || []).join(' ') + ' ' + k.body + ' ' + (k.tags || []).join(' ')).toLowerCase();
+        return bag.indexOf(s) !== -1;
+      }).slice(0, 16);
+      box.innerHTML = rows.map(function (k) {
+        return '<article><strong>' + k.term + '</strong> <span class="muted">' + (k.tags || []).join(' · ') + '</span><p>' + k.body + '</p></article>';
+      }).join('') || '<p class="empty">无匹配词条</p>';
+    }
+    render('');
+    input.addEventListener('input', function () { render(input.value); });
+  })();
 </script>
 </body>
 </html>`;
@@ -1105,6 +1247,7 @@ function renderTickerCard(t: TickerAnalysis): string {
     })
     .join("");
   const currencyPrefix = t.currency === "USD" ? "$" : t.currency === "HKD" ? "HK$" : t.currency === "CNY" ? "¥" : "";
+  const spark = sparklineForTicker(t);
   return `<article class="ticker-card">
     <header class="ticker-head">
       <div class="ticker-id">
@@ -1116,6 +1259,7 @@ function renderTickerCard(t: TickerAnalysis): string {
         <span class="ticker-pct ${priceCls}">${fmtPct(t.pct1Day)}</span>
       </div>
     </header>
+    ${spark}
     <dl class="ticker-indicators">
       <div><dt>${STR.ticker5d}</dt><dd class="${pct5Cls}">${fmtPct(t.pct5Day)}</dd></div>
       <div><dt>${STR.tickerVs52wHigh}</dt><dd>${fmtPct(t.pct52WeekHigh, 1)}</dd></div>
