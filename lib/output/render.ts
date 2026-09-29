@@ -14,7 +14,6 @@ import type { TickerAnalysis } from "../trading/signals";
 import {
   getAssetGroupLabels,
   ASSET_GROUP_ORDER,
-  type AssetGroup,
 } from "../trading/watchlist";
 import { guideBullets, isLikelyEnglishTitle } from "../invest/guide";
 import {
@@ -1026,6 +1025,20 @@ export function renderHtml(
   pre.code { background:#1a1510; color:#fff8f0; padding:0.85rem 1rem; border-radius:0.55rem; overflow:auto; font-size:0.85rem; }
   .spark { display:block; margin:0.35rem 0; }
   .tabs { flex-wrap: wrap; }
+  .data-note { font-size:0.78rem; color:#92400e; background:rgba(217,119,6,0.12); padding:0.35rem 0.55rem; border-radius:0.4rem; margin:0.35rem 0; }
+  .ticker-card.degraded { opacity:0.92; border-style:dashed; }
+  .ticker-card.fav-hit { box-shadow: inset 0 0 0 2px rgba(180,83,9,0.35); }
+  .fav-star { border:0; background:transparent; cursor:pointer; font-size:1.1rem; line-height:1; color:var(--muted); padding:0.15rem; }
+  .fav-star.on { color:#b45309; }
+  .fav-pin { margin:0 0 1rem; padding:0.85rem 1rem; background:var(--card); border:1px dashed var(--rule); border-radius:0.75rem; }
+  .fav-pin h2 { margin:0 0 0.55rem; font-size:1rem; }
+  .fav-pin-empty { color:var(--muted); font-size:0.85rem; margin:0; }
+  .flow-table { width:100%; border-collapse:collapse; font-size:0.88rem; margin:0.4rem 0 0.75rem; }
+  .flow-table th, .flow-table td { text-align:left; padding:0.4rem 0.5rem; border-bottom:1px solid var(--rule); }
+  .event-counts { font-size:0.85rem; margin:0 0 0.55rem; }
+  .ev-count { display:inline-block; margin:0.15rem 0.25rem 0.15rem 0; }
+  .ev-count.fav-hit, .event-list li.fav-hit .ev-sym { color:#b45309; }
+  .toy-backtest { margin-top:1rem; }
 
 </style>
 </head>
@@ -1055,7 +1068,7 @@ export function renderHtml(
   <section class="panel" data-panel="review">${renderReviewPanel(quant)}</section>
   <section class="panel" data-panel="techread">${renderTechReadPanel(trading)}</section>
   <section class="panel" data-panel="personas">${renderPersonasPanel(quant)}</section>
-  <section class="panel" data-panel="risk">${renderRiskPanel()}</section>
+  <section class="panel" data-panel="risk">${renderRiskPanel(quant)}</section>
   <section class="panel" data-panel="school">${renderSchoolPanel()}</section>
   <section class="panel" data-panel="knowledge">${renderKnowledgePanel()}</section>
   <section class="panel" data-panel="mcp">${renderMcpHelpPanel()}</section>
@@ -1144,6 +1157,68 @@ export function renderHtml(
       });
     });
   })();
+  // Local-only favorites (star) — no cloud sync
+  (function () {
+    var KEY = 'opencool-favorites';
+    function load() {
+      try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
+      catch (e) { return []; }
+    }
+    function save(arr) {
+      localStorage.setItem(KEY, JSON.stringify(arr));
+    }
+    function apply() {
+      var favs = load();
+      var set = {};
+      favs.forEach(function (s) { set[s] = true; });
+      document.querySelectorAll('.ticker-card[data-symbol]').forEach(function (card) {
+        var sym = card.getAttribute('data-symbol');
+        var on = !!set[sym];
+        card.classList.toggle('is-fav', on);
+        var btn = card.querySelector('.fav-star');
+        if (btn) {
+          btn.classList.toggle('on', on);
+          btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+          btn.title = on ? '取消自选' : '加入自选';
+        }
+      });
+      document.querySelectorAll('.event-list li[data-symbol], .ev-count[data-symbol]').forEach(function (el) {
+        el.classList.toggle('fav-hit', !!set[el.getAttribute('data-symbol')]);
+      });
+      var pin = document.getElementById('fav-pin-body');
+      if (!pin) return;
+      pin.innerHTML = '';
+      if (!favs.length) {
+        pin.innerHTML = '<p class="fav-pin-empty">点击行情卡片星标，自选保存在本机浏览器（非云同步）。</p>';
+        return;
+      }
+      favs.forEach(function (sym) {
+        var src = document.querySelector('.trading-group-contents .ticker-card[data-symbol="' + sym + '"]');
+        if (!src) return;
+        var clone = src.cloneNode(true);
+        clone.classList.add('fav-hit');
+        pin.appendChild(clone);
+      });
+      pin.querySelectorAll('.fav-star').forEach(function (btn) {
+        btn.addEventListener('click', onStarClick);
+      });
+    }
+    function onStarClick(ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      var card = ev.currentTarget.closest('.ticker-card');
+      if (!card) return;
+      var sym = card.getAttribute('data-symbol');
+      var favs = load().filter(function (s) { return s !== sym; });
+      if (!ev.currentTarget.classList.contains('on')) favs.unshift(sym);
+      save(favs);
+      apply();
+    }
+    document.querySelectorAll('.fav-star').forEach(function (btn) {
+      btn.addEventListener('click', onStarClick);
+    });
+    apply();
+  })();
   // Knowledge client search
   (function () {
     var el = document.getElementById('kb-data');
@@ -1178,12 +1253,17 @@ const SIGNAL_TONE: Record<string, "bull" | "bear" | "caution"> = {
   "macd-bull-cross": "bull",
   "above-sma50-sma200": "bull",
   "near-52w-high": "bull",
+  "bb-lower-touch": "bull",
+  "kdj-oversold": "bull",
   "death-cross": "bear",
   "macd-bear-cross": "bear",
   "below-sma50-sma200": "bear",
   "near-52w-low": "bear",
+  "bb-upper-touch": "bear",
+  "kdj-overbought": "bear",
   "rsi-overbought": "caution",
   "rsi-oversold": "caution",
+  "volume-spike": "caution",
 };
 
 const TREND_LABEL: Record<TickerAnalysis["trend"], string> = {
@@ -1248,9 +1328,28 @@ function renderTickerCard(t: TickerAnalysis): string {
     .join("");
   const currencyPrefix = t.currency === "USD" ? "$" : t.currency === "HKD" ? "HK$" : t.currency === "CNY" ? "¥" : "";
   const spark = sparklineForTicker(t);
-  return `<article class="ticker-card">
+  const degraded = t.dataStatus && t.dataStatus !== "live";
+  const dataNote =
+    degraded || t.dataStatus === "missing"
+      ? `<p class="data-note">${escapeHtml(t.dataNote ?? "数据暂缺")}</p>`
+      : "";
+  // Show at most 3 extra indicator fields to avoid clutter
+  const extraRows: string[] = [];
+  if (t.bbMid != null) {
+    extraRows.push(
+      `<div><dt>布林(中)</dt><dd>${fmtNum(t.bbMid)}</dd></div>`,
+    );
+  }
+  if (t.atr14 != null) {
+    extraRows.push(`<div><dt>ATR(14)</dt><dd>${fmtNum(t.atr14, 2)}</dd></div>`);
+  }
+  if (t.kdjJ != null) {
+    extraRows.push(`<div><dt>KDJ-J</dt><dd>${fmtNum(t.kdjJ, 1)}</dd></div>`);
+  }
+  return `<article class="ticker-card${degraded ? " degraded" : ""}" data-symbol="${escapeHtml(t.symbol)}">
     <header class="ticker-head">
       <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
         <h3 class="ticker-symbol">${escapeHtml(t.symbol)}</h3>
         <p class="ticker-name">${escapeHtml(t.displayName)}</p>
       </div>
@@ -1259,6 +1358,7 @@ function renderTickerCard(t: TickerAnalysis): string {
         <span class="ticker-pct ${priceCls}">${fmtPct(t.pct1Day)}</span>
       </div>
     </header>
+    ${dataNote}
     ${spark}
     <dl class="ticker-indicators">
       <div><dt>${STR.ticker5d}</dt><dd class="${pct5Cls}">${fmtPct(t.pct5Day)}</dd></div>
@@ -1267,6 +1367,7 @@ function renderTickerCard(t: TickerAnalysis): string {
       <div><dt>${STR.tickerTrend}</dt><dd class="trend-${trendCls}">${TREND_LABEL[t.trend]}</dd></div>
       <div><dt>SMA 20 / 50 / 200</dt><dd>${fmtNum(t.sma20)} / ${fmtNum(t.sma50)} / ${fmtNum(t.sma200)}</dd></div>
       <div><dt>${STR.tickerMacd}</dt><dd>${fmtNum(t.macd, 3)} / ${fmtNum(t.macdSignal, 3)}</dd></div>
+      ${extraRows.join("")}
     </dl>
     ${signals ? `<div class="ticker-signals">${signals}</div>` : ""}
   </article>`;
@@ -1323,14 +1424,9 @@ function renderCryptoWidgets(t: TradingSection): string {
 
 function renderTradingPanel(trading: TradingSection): string {
   const tickers = trading.tickers;
-  const groupCounts: Record<AssetGroup, number> = {
-    "us-equity": 0,
-    crypto: 0,
-    "china-equity": 0,
-    "commodity-fx": 0,
-    macro: 0,
-  };
-  for (const t of tickers) groupCounts[t.group as AssetGroup] = (groupCounts[t.group as AssetGroup] ?? 0) + 1;
+  const groupCounts: Record<string, number> = {};
+  for (const g of ASSET_GROUP_ORDER) groupCounts[g] = 0;
+  for (const t of tickers) groupCounts[t.group] = (groupCounts[t.group] ?? 0) + 1;
 
   const groupTabs = ASSET_GROUP_ORDER.map(
     (g, i) =>
@@ -1366,6 +1462,11 @@ function renderTradingPanel(trading: TradingSection): string {
   </section>`
       : ""
   }
+
+  <section class="fav-pin" id="fav-pin">
+    <h2>我的自选</h2>
+    <div id="fav-pin-body"><p class="fav-pin-empty">点击行情卡片星标，自选保存在本机浏览器（非云同步）。</p></div>
+  </section>
 
   <section class="trading-tickers">
     <h2 class="category-title trading-section-title">${STR.tradingAllAssets}</h2>
