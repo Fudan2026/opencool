@@ -2,6 +2,10 @@
 
 Operational knowledge for any AI coding agent working on this repo (Claude Code, Codex, Cursor, Continue.dev, Aider, etc.). Claude Code users get a richer SKILL.md auto-loaded; this file is the universal subset everyone reads.
 
+## Shared skills catalog
+
+**`Skills.md`** (repo root) lists installable Iwencai SkillHub skills and how to invoke them. When the user asks about **financial announcements**, A-share/HK disclosure search, or SkillHub skills, read **`Skills.md`** first and follow the matching section (e.g. `announcement-search`).
+
 ## What this project is
 
 `daily-brief` is a local-first pipeline that fetches 23 RSS / API news sources daily (22 in en mode after locale filtering), runs LLM enrichment, and renders a single self-contained HTML report. It runs on the user's machine via the OS scheduler, OR in GitHub Actions publishing to GitHub Pages. No web framework, no DB, no servers.
@@ -96,5 +100,6 @@ sources.config.json   # SINGLE SOURCE OF TRUTH for the source registry
 
 - `README.md` — user-facing intro, install, configuration
 - `FORKING.md` — common customizations (LLM provider, sources, layout, styling)
+- `Skills.md` — Iwencai / shared agent skills (announcement search, SkillHub install)
 - `.claude/skills/daily-brief/SKILL.md` — fuller operational reference (Claude Code auto-loads it; other agents can read it directly)
 - `sources.config.json` — see what sources look like in practice
