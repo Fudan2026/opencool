@@ -1,21 +1,25 @@
 /**
- * Source-config CLI. Two jobs:
+ * Source-config CLI. Jobs:
  *
- *   npm run sources           - list all sources, grouped by status, with
- *                               per-locale filtering info; also validates
- *                               sources.config.json shape
+ *   npm run sources           - list sources + source-health suggest-disable
  *   npm run sources:check     - validation only, exit 1 on schema errors
- *                               (suitable for CI / pre-commit hook)
+ *   npm run sources -- health - health report only (also runs as part of list)
  *
- * Adding / removing / disabling sources is done by editing
- * sources.config.json directly — JSON is the canonical store.
+ * Adding / removing / disabling sources: edit sources.config.json directly.
+ * This CLI NEVER mutates the registry.
  */
 import "./_env";
+
+import fs from "node:fs";
+import path from "node:path";
 
 import { loadAllSources, REPORT_LOCALE } from "../lib/sources/registry";
 import type { SourceDef } from "../lib/sources/types";
 
 const arg = process.argv[2];
+const STREAK_N = Number(process.env.SOURCE_FAIL_STREAK || 3) || 3;
+const LOG_DIR = "logs";
+const HEALTH_PATH = path.join(LOG_DIR, "source-health.json");
 
 function pad(s: string | undefined, n: number): string {
   const v = s ?? "";
@@ -77,6 +81,124 @@ function list(all: SourceDef[]): void {
   console.log("");
 }
 
+interface SourceHealthEntry {
+  id: string;
+  /** Chronological outcomes from newest log last: "ok" | "fail" */
+  recent: ("ok" | "fail")[];
+  failStreak: number;
+  suggestDisable: boolean;
+}
+
+interface SourceHealthReport {
+  generatedAt: string;
+  streakThreshold: number;
+  logsScanned: string[];
+  sources: SourceHealthEntry[];
+}
+
+/**
+ * Parse daily-*.log lines like:
+ *   `  source-id             12`  → ok
+ *   `  source-id             FAILED — ...` → fail
+ */
+function parseDailyLogs(allIds: Set<string>): {
+  bySource: Map<string, ("ok" | "fail")[]>;
+  logsScanned: string[];
+} {
+  const bySource = new Map<string, ("ok" | "fail")[]>();
+  const logsScanned: string[] = [];
+  if (!fs.existsSync(LOG_DIR)) {
+    return { bySource, logsScanned };
+  }
+  const files = fs
+    .readdirSync(LOG_DIR)
+    .filter((f) => /^daily-\d{4}-\d{2}-\d{2}\.log$/.test(f))
+    .sort();
+  // Keep last 14 logs
+  const recent = files.slice(-14);
+  for (const f of recent) {
+    logsScanned.push(f);
+    const text = fs.readFileSync(path.join(LOG_DIR, f), "utf8");
+    const seen = new Set<string>();
+    for (const line of text.split("\n")) {
+      // Match "  id...<spaces>N" or "  id...<spaces>FAILED"
+      const m = line.match(/^\s{2}([a-z0-9][a-z0-9_-]+)\s+(FAILED|\d+)/i);
+      if (!m) continue;
+      const id = m[1];
+      if (!allIds.has(id)) continue;
+      if (seen.has(id)) continue;
+      seen.add(id);
+      const outcome: "ok" | "fail" = /FAILED/i.test(m[2]) ? "fail" : "ok";
+      const arr = bySource.get(id) ?? [];
+      arr.push(outcome);
+      bySource.set(id, arr);
+    }
+  }
+  return { bySource, logsScanned };
+}
+
+function buildHealth(all: SourceDef[]): SourceHealthReport {
+  const ids = new Set(all.map((s) => s.id));
+  const { bySource, logsScanned } = parseDailyLogs(ids);
+  const sources: SourceHealthEntry[] = [];
+  for (const s of all) {
+    const recent = bySource.get(s.id) ?? [];
+    let failStreak = 0;
+    for (let i = recent.length - 1; i >= 0; i--) {
+      if (recent[i] === "fail") failStreak++;
+      else break;
+    }
+    sources.push({
+      id: s.id,
+      recent,
+      failStreak,
+      suggestDisable: failStreak >= STREAK_N && s.enabled !== false,
+    });
+  }
+  sources.sort((a, b) => b.failStreak - a.failStreak || a.id.localeCompare(b.id));
+  return {
+    generatedAt: new Date().toISOString(),
+    streakThreshold: STREAK_N,
+    logsScanned,
+    sources,
+  };
+}
+
+function printHealth(report: SourceHealthReport): void {
+  console.log("");
+  console.log(
+    `Source health  (streak≥${report.streakThreshold} → suggest-disable; never auto-edits config)`,
+  );
+  console.log(
+    `  logs scanned: ${report.logsScanned.length ? report.logsScanned.join(", ") : "(none)"}`,
+  );
+  console.log("");
+  const suggest = report.sources.filter((s) => s.suggestDisable);
+  if (suggest.length === 0) {
+    console.log("  (no suggest-disable candidates)");
+  } else {
+    for (const s of suggest) {
+      console.log(
+        `  suggest-disable  ${pad(s.id, 24)} failStreak=${s.failStreak}  recent=[${s.recent.slice(-5).join(",")}]`,
+      );
+    }
+  }
+  console.log("");
+  console.log(`  sidecar: ${HEALTH_PATH}`);
+  console.log("");
+}
+
+function writeHealth(report: SourceHealthReport): void {
+  try {
+    fs.mkdirSync(LOG_DIR, { recursive: true });
+    fs.writeFileSync(HEALTH_PATH, JSON.stringify(report, null, 2), "utf8");
+  } catch (e) {
+    console.warn(
+      `[sources] could not write ${HEALTH_PATH}: ${e instanceof Error ? e.message : e}`,
+    );
+  }
+}
+
 async function main(): Promise<void> {
   let all: SourceDef[];
   try {
@@ -92,7 +214,13 @@ async function main(): Promise<void> {
     return;
   }
 
-  list(all);
+  if (arg !== "health") {
+    list(all);
+  }
+
+  const report = buildHealth(all);
+  writeHealth(report);
+  printHealth(report);
 }
 
 main();

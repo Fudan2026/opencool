@@ -37,6 +37,26 @@ export function sparklineSvg(closes: number[] | undefined): string {
   return `<svg class="spark" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true"><polyline fill="none" stroke="${stroke}" stroke-width="1.5" points="${pts}"/></svg>`;
 }
 
+function renderFundFlowPanel(quant?: QuantSection): string {
+  const ff = quant?.fundFlows;
+  if (!ff?.sectors?.length) return "";
+  const rows = ff.sectors
+    .map((s) => {
+      const cls = s.netInflowYi >= 0 ? "positive" : "negative";
+      const pctCls = s.changePct >= 0 ? "positive" : "negative";
+      return `<tr>
+        <td>${esc(s.name)}</td>
+        <td class="${pctCls}">${s.changePct >= 0 ? "+" : ""}${s.changePct.toFixed(2)}%</td>
+        <td class="${cls}">${s.netInflowYi >= 0 ? "+" : ""}${s.netInflowYi.toFixed(2)} 亿</td>
+      </tr>`;
+    })
+    .join("");
+  return `<h2 class="panel-h">板块资金流</h2>
+    <table class="flow-table"><thead><tr><th>板块</th><th>涨跌</th><th>主力净流入</th></tr></thead>
+    <tbody>${rows}</tbody></table>
+    <p class="muted tiny">${esc(ff.note)}</p>`;
+}
+
 export function renderReviewPanel(quant?: QuantSection): string {
   if (!quant) {
     return `<p class="empty">今日复盘数据尚未生成。</p>`;
@@ -55,12 +75,25 @@ export function renderReviewPanel(quant?: QuantSection): string {
         <p class="muted">${esc(quant.market?.note ?? "")}</p>`
     : `<p class="empty">指数快照暂不可用（免费接口失败时跳过）。</p>`;
 
+  const flowHtml = renderFundFlowPanel(quant);
+
+  const counts = quant.eventCounts ?? [];
+  const countHtml = counts.length
+    ? `<p class="event-counts">观察池命中统计：${counts
+        .slice(0, 12)
+        .map(
+          (c) =>
+            `<span class="ev-count" data-symbol="${esc(c.symbol)}">${esc(c.displayName)} <b>${c.count}</b></span>`,
+        )
+        .join(" · ")}</p>`
+    : "";
+
   const ev = quant.events;
   const evHtml = ev.length
     ? `<ul class="event-list">${ev
         .map(
           (e) =>
-            `<li><span class="ev-sym">${esc(e.displayName)}</span>
+            `<li data-symbol="${esc(e.symbol)}"><span class="ev-sym">${esc(e.displayName)}</span>
             <a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a>
             <span class="muted">· ${esc(e.source)} · 命中「${esc(e.matched)}」</span></li>`,
         )
@@ -69,7 +102,8 @@ export function renderReviewPanel(quant?: QuantSection): string {
 
   return `<div class="quant-block">
     <h2 class="panel-h">大盘快照</h2>${idxHtml}
-    <h2 class="panel-h">事件驱动（标题命中观察池）</h2>${evHtml}
+    ${flowHtml}
+    <h2 class="panel-h">事件驱动（标题命中观察池）</h2>${countHtml}${evHtml}
   </div>`;
 }
 
@@ -91,10 +125,25 @@ export function renderTechReadPanel(trading?: TradingSection): string {
         .slice(0, 4)
         .map((s) => `<span class="signal-pill">${esc(s.label)}</span>`)
         .join("");
-      return `<article class="ticker-card">
+      const status =
+        t.dataStatus && t.dataStatus !== "live"
+          ? `<p class="data-note">${esc(t.dataNote ?? "数据暂缺")}</p>`
+          : "";
+      const extras = [
+        t.bbUpper != null
+          ? `BB ${t.bbLower?.toFixed(1) ?? "—"}–${t.bbUpper.toFixed(1)}`
+          : null,
+        t.atr14 != null ? `ATR ${t.atr14.toFixed(2)}` : null,
+        t.kdjJ != null ? `KDJ-J ${t.kdjJ.toFixed(1)}` : null,
+      ]
+        .filter(Boolean)
+        .join(" · ");
+      return `<article class="ticker-card" data-symbol="${esc(t.symbol)}">
         <h3>${esc(t.displayName)} <span class="muted">${esc(t.symbol)}</span></h3>
+        ${status}
         ${spark}
         <p>收盘 ${t.currentPrice.toFixed(2)} · RSI ${t.rsi14?.toFixed(1) ?? "—"} · 趋势 ${esc(t.trend)}</p>
+        ${extras ? `<p class="muted tiny">${esc(extras)}</p>` : ""}
         <div>${sig}</div>
         <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
       </article>`;
@@ -135,7 +184,39 @@ export function renderPersonasPanel(quant?: QuantSection): string {
   return `<div class="quant-block">${intro}${blocks}</div>`;
 }
 
-export function renderRiskPanel(): string {
+function renderToyBacktests(quant?: QuantSection): string {
+  const rows = quant?.toyBacktests ?? [];
+  if (!rows.length) return "";
+  const body = rows
+    .map((r) => {
+      const ann =
+        r.annualizedPct == null
+          ? "—"
+          : `${r.annualizedPct >= 0 ? "+" : ""}${r.annualizedPct.toFixed(1)}%`;
+      const dd =
+        r.maxDrawdownPct == null ? "—" : `${r.maxDrawdownPct.toFixed(1)}%`;
+      const wr = r.winRate == null ? "—" : `${r.winRate.toFixed(0)}%`;
+      return `<tr>
+        <td>${esc(r.displayName)}</td>
+        <td>${esc(r.ruleLabel)}</td>
+        <td>${r.trades}</td>
+        <td>${wr}</td>
+        <td>${ann}</td>
+        <td>${dd}</td>
+      </tr>`;
+    })
+    .join("");
+  return `<div class="toy-backtest">
+    <h3>教学回测（玩具规则）</h3>
+    <p class="muted tiny">教学示例 · 非投资建议 · 非正式回测引擎</p>
+    <table class="flow-table">
+      <thead><tr><th>标的</th><th>规则</th><th>笔数</th><th>胜率</th><th>年化≈</th><th>最大回撤</th></tr></thead>
+      <tbody>${body}</tbody>
+    </table>
+  </div>`;
+}
+
+export function renderRiskPanel(quant?: QuantSection): string {
   const gates = RISK_GATES.map(
     (g) =>
       `<article class="risk-card v-${g.level}">
@@ -148,7 +229,7 @@ export function renderRiskPanel(): string {
     <ul>${BACKTEST_VERDICT_TEMPLATE.fields.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>
     <p class="muted">${esc(BACKTEST_VERDICT_TEMPLATE.note)}</p></div>`;
   return `<div class="quant-block"><p class="lede">蒸馏自量化风控 Skill · 教学向 · 本站不代下单。</p>
-    <div class="risk-grid">${gates}</div>${tmpl}</div>`;
+    <div class="risk-grid">${gates}</div>${tmpl}${renderToyBacktests(quant)}</div>`;
 }
 
 export function renderSchoolPanel(): string {
@@ -173,7 +254,7 @@ export function renderKnowledgePanel(): string {
   ).replace(/</g, "\\u003c");
   return `<div class="quant-block knowledge">
     <p class="lede">内置投研词条 · 客户端检索 · 无付费实时流。</p>
-    <input type="search" id="kb-q" placeholder="搜索：PE、北向、未来函数…" autocomplete="off"/>
+    <input type="search" id="kb-q" placeholder="搜索：PE、北向、未来函数、龙虎榜…" autocomplete="off"/>
     <div id="kb-results" class="kb-results"></div>
     <script type="application/json" id="kb-data">${data}</script>
   </div>`;

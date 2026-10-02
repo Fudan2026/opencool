@@ -11,7 +11,9 @@ name: Daily Brief
 #        REPORT_LOCALE=zh
 #        LLM_MODE=off   (forced in this workflow regardless)
 #   4. Do NOT add DeepSeek / other LLM secrets for this fork's default path.
-#   5. Actions → Daily Brief → Run workflow once to seed.
+#   5. Optional: secret/var ALERT_WEBHOOK_URL for missing-edition / failure pings
+#      (scripts/notify-failure.mjs no-ops when unset).
+#   6. Actions → Daily Brief → Run workflow once to seed.
 #
 # Live: https://<user>.github.io/<repo>/
 # Archive listing norm starts 2026-09-16 (06 + 13 + 19).
@@ -197,6 +199,14 @@ jobs:
       - name: Build static site (index + archive)
         run: npm run build-site
 
+      - name: Alert if edition HTML missing or empty
+        if: always()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
+        run: node scripts/notify-failure.mjs --missing-html
+
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -205,3 +215,11 @@ jobs:
           publish_branch: gh-pages
           keep_files: false
           commit_message: 'brief: ${{ needs.gate.outputs.edition-hour }} for ${{ github.run_id }}'
+
+      - name: Alert on job failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
+        run: node scripts/notify-failure.mjs --failure --reason "build job failed"

@@ -101,6 +101,148 @@ export function macd(
 }
 
 /**
+ * Bollinger Bands (SMA ± k * stdev). Arrays align to sma length.
+ */
+export function bollinger(
+  closes: number[],
+  period = 20,
+  mult = 2,
+): { mid: number[]; upper: number[]; lower: number[] } {
+  if (period <= 0 || closes.length < period) {
+    return { mid: [], upper: [], lower: [] };
+  }
+  const mid = sma(closes, period);
+  const upper: number[] = [];
+  const lower: number[] = [];
+  for (let i = 0; i < mid.length; i++) {
+    const slice = closes.slice(i, i + period);
+    const mean = mid[i];
+    let varSum = 0;
+    for (const v of slice) varSum += (v - mean) ** 2;
+    const std = Math.sqrt(varSum / period);
+    upper.push(mean + mult * std);
+    lower.push(mean - mult * std);
+  }
+  return { mid, upper, lower };
+}
+
+/**
+ * Average True Range (Wilder). Output length = highs.length - period.
+ */
+export function atr(
+  highs: number[],
+  lows: number[],
+  closes: number[],
+  period = 14,
+): number[] {
+  const n = Math.min(highs.length, lows.length, closes.length);
+  if (n <= period) return [];
+  const tr: number[] = [];
+  for (let i = 0; i < n; i++) {
+    if (i === 0) {
+      tr.push(highs[i] - lows[i]);
+      continue;
+    }
+    const hl = highs[i] - lows[i];
+    const hc = Math.abs(highs[i] - closes[i - 1]);
+    const lc = Math.abs(lows[i] - closes[i - 1]);
+    tr.push(Math.max(hl, hc, lc));
+  }
+  let avg = 0;
+  for (let i = 0; i < period; i++) avg += tr[i];
+  avg /= period;
+  const out: number[] = [avg];
+  for (let i = period; i < tr.length; i++) {
+    avg = (avg * (period - 1) + tr[i]) / period;
+    out.push(avg);
+  }
+  return out;
+}
+
+export interface KdjResult {
+  k: number[];
+  d: number[];
+  j: number[];
+}
+
+/**
+ * Classic KDJ (RSV → K/D/J). Arrays share the same length after warmup.
+ */
+export function kdj(
+  highs: number[],
+  lows: number[],
+  closes: number[],
+  period = 9,
+  kSmooth = 3,
+  dSmooth = 3,
+): KdjResult {
+  const n = Math.min(highs.length, lows.length, closes.length);
+  if (n < period) return { k: [], d: [], j: [] };
+  const rsv: number[] = [];
+  for (let i = period - 1; i < n; i++) {
+    let hh = -Infinity;
+    let ll = Infinity;
+    for (let j = i - period + 1; j <= i; j++) {
+      if (highs[j] > hh) hh = highs[j];
+      if (lows[j] < ll) ll = lows[j];
+    }
+    const denom = hh - ll || 1e-10;
+    rsv.push(((closes[i] - ll) / denom) * 100);
+  }
+  const k: number[] = [];
+  const d: number[] = [];
+  const j: number[] = [];
+  let prevK = 50;
+  let prevD = 50;
+  for (let i = 0; i < rsv.length; i++) {
+    const curK = (prevK * (kSmooth - 1) + rsv[i]) / kSmooth;
+    const curD = (prevD * (dSmooth - 1) + curK) / dSmooth;
+    k.push(curK);
+    d.push(curD);
+    j.push(3 * curK - 2 * curD);
+    prevK = curK;
+    prevD = curD;
+  }
+  return { k, d, j };
+}
+
+/** Volume SMA for spike detection. */
+export function volumeMa(volumes: number[], period = 20): number[] {
+  return sma(volumes, period);
+}
+
+/**
+ * True when latest volume >= mult × volume MA (aligned to MA length).
+ */
+export function volumeSpike(
+  volumes: number[],
+  period = 20,
+  mult = 2,
+): boolean {
+  const ma = volumeMa(volumes, period);
+  if (!ma.length) return false;
+  const lastVol = volumes[volumes.length - 1];
+  const lastMa = ma[ma.length - 1];
+  if (!lastMa) return false;
+  return lastVol >= mult * lastMa;
+}
+
+export type MaAlignment = "bull" | "bear" | "mixed" | "unknown";
+
+/** Price vs SMA20/50/200 classic alignment helper. */
+export function maAlignment(
+  price: number,
+  sma20: number | null,
+  sma50: number | null,
+  sma200: number | null,
+): MaAlignment {
+  if (sma20 == null || sma50 == null || sma200 == null) return "unknown";
+  if (price > sma20 && sma20 > sma50 && sma50 > sma200) return "bull";
+  if (price < sma20 && sma20 < sma50 && sma50 < sma200) return "bear";
+  return "mixed";
+}
+
+/**
  * Detect a most-recent crossover of `fast` over `slow` within `lookback`
  * data points. Returns null if no crossover happened in that window.
  *

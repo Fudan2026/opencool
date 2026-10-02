@@ -221,7 +221,7 @@ async function enrichMergedSubgroup(
  * picks-to-watch list. Returns null if no ticker came back.
  */
 async function runTrading(llmOff: boolean): Promise<TradingSection | null> {
-  console.log(`[daily] analyzing watchlist + crypto context (Yahoo / alt.me / CoinGecko)…`);
+  console.log(`[daily] analyzing watchlist + crypto context (EM/Yahoo / alt.me / CoinGecko)…`);
   const t0 = Date.now();
   const [tickers, cryptoFearGreed, cryptoGlobal] = await Promise.all([
     analyzeWatchlist(),
@@ -322,7 +322,7 @@ async function main() {
     console.log(`[daily] building retail quant extras…`);
     quant = await buildQuantSection(trading?.tickers ?? [], articles);
     console.log(
-      `[daily] quant: indices=${quant.market?.indices.length ?? 0} events=${quant.events.length} personaScores=${quant.personas.length}`,
+      `[daily] quant: indices=${quant.market?.indices.length ?? 0} events=${quant.events.length} flows=${quant.fundFlows?.sectors.length ?? 0} toyBT=${quant.toyBacktests.length} personaScores=${quant.personas.length}`,
     );
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);

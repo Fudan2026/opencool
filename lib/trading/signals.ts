@@ -1,10 +1,15 @@
 import {
+  atr as atrFn,
+  bollinger as bollingerFn,
   detectRecentCross,
-  ema,
+  kdj as kdjFn,
   last,
+  maAlignment,
   macd as macdFn,
   rsi as rsiFn,
   sma,
+  volumeSpike,
+  type MaAlignment,
 } from "./indicators";
 import type { TickerRawData } from "./yahoo";
 import { getDisplayName, type TickerDef } from "./watchlist";
@@ -20,12 +25,24 @@ export type SignalType =
   | "near-52w-high" // within 3% of 52-week high
   | "near-52w-low" // within 3% of 52-week low
   | "above-sma50-sma200" // price > both SMAs, classic uptrend
-  | "below-sma50-sma200"; // price < both SMAs, classic downtrend
+  | "below-sma50-sma200" // price < both SMAs, classic downtrend
+  | "bb-upper-touch" // close near/above upper Bollinger
+  | "bb-lower-touch" // close near/below lower Bollinger
+  | "volume-spike" // volume ≥ 2× 20d MA
+  | "kdj-overbought"
+  | "kdj-oversold";
 
 export interface Signal {
   type: SignalType;
-  label: string; // human-friendly Chinese
-  daysAgo?: number; // for cross signals
+  label: string;
+  daysAgo?: number;
+}
+
+export type DataStatus = "live" | "stale" | "missing";
+
+export interface AnalyzeOpts {
+  dataStatus?: DataStatus;
+  dataNote?: string;
 }
 
 export interface TickerAnalysis {
@@ -37,8 +54,8 @@ export interface TickerAnalysis {
   currentPrice: number;
   pct1Day: number;
   pct5Day: number;
-  pct52WeekHigh: number; // negative = below high, e.g. -2.3 means 2.3% below 52w high
-  pct52WeekLow: number; // positive = above low
+  pct52WeekHigh: number;
+  pct52WeekLow: number;
   sma20: number | null;
   sma50: number | null;
   sma200: number | null;
@@ -46,11 +63,24 @@ export interface TickerAnalysis {
   macd: number | null;
   macdSignal: number | null;
   macdHistogram: number | null;
+  /** Bollinger mid / upper / lower (latest). */
+  bbMid: number | null;
+  bbUpper: number | null;
+  bbLower: number | null;
+  /** ATR(14) latest. */
+  atr14: number | null;
+  /** KDJ J latest (compact single field for UI). */
+  kdjJ: number | null;
+  volumeSpike: boolean;
+  maAlign: MaAlignment;
   trend: "bullish" | "bearish" | "neutral";
   rsiState: "overbought" | "oversold" | "normal";
   signals: Signal[];
-  /** Last N closes for sparkline (no-lookahead: historical closes only). */
   closesSpark?: number[];
+  /** Full close series for teaching backtests (when available). */
+  closesFull?: number[];
+  dataStatus?: DataStatus;
+  dataNote?: string;
 }
 
 const SIGNAL_LABELS: Record<SignalType, string> = {
@@ -64,16 +94,68 @@ const SIGNAL_LABELS: Record<SignalType, string> = {
   "near-52w-low": "接近 52 周低",
   "above-sma50-sma200": "多头排列",
   "below-sma50-sma200": "空头排列",
+  "bb-upper-touch": "触及布林上轨",
+  "bb-lower-touch": "触及布林下轨",
+  "volume-spike": "放量",
+  "kdj-overbought": "KDJ 超买",
+  "kdj-oversold": "KDJ 超卖",
 };
+
+function emptyAnalysis(
+  def: TickerDef,
+  opts?: AnalyzeOpts,
+): TickerAnalysis {
+  return {
+    symbol: def.symbol,
+    displayName: getDisplayName(def, REPORT_LOCALE),
+    group: def.group,
+    currency: "",
+    exchangeName: "",
+    currentPrice: 0,
+    pct1Day: 0,
+    pct5Day: 0,
+    pct52WeekHigh: 0,
+    pct52WeekLow: 0,
+    sma20: null,
+    sma50: null,
+    sma200: null,
+    rsi14: null,
+    macd: null,
+    macdSignal: null,
+    macdHistogram: null,
+    bbMid: null,
+    bbUpper: null,
+    bbLower: null,
+    atr14: null,
+    kdjJ: null,
+    volumeSpike: false,
+    maAlign: "unknown",
+    trend: "neutral",
+    rsiState: "normal",
+    signals: [],
+    closesSpark: [],
+    closesFull: [],
+    dataStatus: opts?.dataStatus ?? "missing",
+    dataNote: opts?.dataNote ?? "数据暂缺",
+  };
+}
 
 export function analyzeTicker(
   def: TickerDef,
   raw: TickerRawData,
+  opts?: AnalyzeOpts,
 ): TickerAnalysis {
   const closes = raw.candles.map((c) => c.close);
+  const highs = raw.candles.map((c) => c.high);
+  const lows = raw.candles.map((c) => c.low);
+  const volumes = raw.candles.map((c) => c.volume);
   const n = closes.length;
 
-  const currentPrice = raw.regularMarketPrice;
+  if (n < 2) {
+    return emptyAnalysis(def, opts);
+  }
+
+  const currentPrice = raw.regularMarketPrice || closes[n - 1];
   const prev1 = closes[n - 2];
   const prev5 = closes[n - 6];
   const pct1Day = prev1 ? ((currentPrice - prev1) / prev1) * 100 : 0;
@@ -90,6 +172,10 @@ export function analyzeTicker(
   const sma200arr = sma(closes, 200);
   const rsiArr = rsiFn(closes, 14);
   const m = macdFn(closes);
+  const bb = bollingerFn(closes, 20, 2);
+  const atrArr = atrFn(highs, lows, closes, 14);
+  const kdjArr = kdjFn(highs, lows, closes);
+  const spike = volumeSpike(volumes, 20, 2);
 
   const sma20Val = last(sma20arr) ?? null;
   const sma50Val = last(sma50arr) ?? null;
@@ -98,6 +184,12 @@ export function analyzeTicker(
   const macdVal = last(m.macd) ?? null;
   const macdSignal = last(m.signal) ?? null;
   const macdHistogram = last(m.histogram) ?? null;
+  const bbMid = last(bb.mid) ?? null;
+  const bbUpper = last(bb.upper) ?? null;
+  const bbLower = last(bb.lower) ?? null;
+  const atr14 = last(atrArr) ?? null;
+  const kdjJ = last(kdjArr.j) ?? null;
+  const align = maAlignment(currentPrice, sma20Val, sma50Val, sma200Val);
 
   const trend: TickerAnalysis["trend"] =
     sma50Val && sma200Val
@@ -119,7 +211,6 @@ export function analyzeTicker(
 
   const signals: Signal[] = [];
 
-  // SMA50 / SMA200 cross (golden / death)
   if (sma50arr.length && sma200arr.length) {
     const aligned50 = sma50arr.slice(sma50arr.length - sma200arr.length);
     const cross = detectRecentCross(aligned50, sma200arr, 10);
@@ -134,7 +225,6 @@ export function analyzeTicker(
     }
   }
 
-  // MACD cross
   if (m.macd.length && m.signal.length) {
     const alignedMacd = m.macd.slice(m.macd.length - m.signal.length);
     const cross = detectRecentCross(alignedMacd, m.signal, 5);
@@ -149,7 +239,6 @@ export function analyzeTicker(
     }
   }
 
-  // RSI extremes
   if (rsiState === "overbought") {
     signals.push({
       type: "rsi-overbought",
@@ -162,7 +251,6 @@ export function analyzeTicker(
     });
   }
 
-  // 52-week extremes
   if (pct52WeekHigh >= -3) {
     signals.push({
       type: "near-52w-high",
@@ -175,7 +263,6 @@ export function analyzeTicker(
     });
   }
 
-  // Trend alignment
   if (trend === "bullish") {
     signals.push({
       type: "above-sma50-sma200",
@@ -185,6 +272,38 @@ export function analyzeTicker(
     signals.push({
       type: "below-sma50-sma200",
       label: SIGNAL_LABELS["below-sma50-sma200"],
+    });
+  }
+
+  // Bollinger touch (within 0.5% of band)
+  if (bbUpper != null && currentPrice >= bbUpper * 0.995) {
+    signals.push({
+      type: "bb-upper-touch",
+      label: SIGNAL_LABELS["bb-upper-touch"],
+    });
+  } else if (bbLower != null && currentPrice <= bbLower * 1.005) {
+    signals.push({
+      type: "bb-lower-touch",
+      label: SIGNAL_LABELS["bb-lower-touch"],
+    });
+  }
+
+  if (spike) {
+    signals.push({
+      type: "volume-spike",
+      label: SIGNAL_LABELS["volume-spike"],
+    });
+  }
+
+  if (kdjJ != null && kdjJ >= 100) {
+    signals.push({
+      type: "kdj-overbought",
+      label: SIGNAL_LABELS["kdj-overbought"],
+    });
+  } else if (kdjJ != null && kdjJ <= 0) {
+    signals.push({
+      type: "kdj-oversold",
+      label: SIGNAL_LABELS["kdj-oversold"],
     });
   }
 
@@ -206,9 +325,19 @@ export function analyzeTicker(
     macd: macdVal,
     macdSignal,
     macdHistogram,
+    bbMid,
+    bbUpper,
+    bbLower,
+    atr14,
+    kdjJ,
+    volumeSpike: spike,
+    maAlign: align,
     trend,
     rsiState,
     signals,
     closesSpark: closes.slice(-60),
+    closesFull: closes,
+    dataStatus: opts?.dataStatus ?? "live",
+    dataNote: opts?.dataNote,
   };
 }
