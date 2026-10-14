@@ -10008,8 +10008,8 @@
         "bbMid": 742.5475036621094,
         "bbUpper": 763.8036204606705,
         "bbLower": 721.2913868635484,
-        "atr14": 9.430910892432653,
-        "kdjJ": -3.5672324149160346,
+        "atr14": 9.43376646581435,
+        "kdjJ": -3.4878709202194074,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "bullish",
@@ -10709,23 +10709,23 @@
         "group": "crypto",
         "currency": "USD",
         "exchangeName": "CCC",
-        "currentPrice": 81652.75,
-        "pct1Day": -1.7358118180819875,
-        "pct5Day": -1.0825077473074067,
-        "pct52WeekHigh": -29.775156482601204,
-        "pct52WeekLow": 41.39551303162099,
-        "sma20": 83805.87109375,
-        "sma50": 81166.51828125,
-        "sma200": 72205.4183984375,
-        "rsi14": 46.8433192384071,
-        "macd": 448.1270568117907,
-        "macdSignal": 1010.8864176877378,
-        "macdHistogram": -562.7593608759471,
-        "bbMid": 83805.87109375,
-        "bbUpper": 86421.08846048194,
-        "bbLower": 81190.65372701806,
+        "currentPrice": 81477.61,
+        "pct1Day": -1.946582305520329,
+        "pct5Day": -1.2946795307823848,
+        "pct52WeekHigh": -29.92578434380168,
+        "pct52WeekLow": 41.09222857209748,
+        "sma20": 83797.1140625,
+        "sma50": 81163.01546875,
+        "sma200": 72204.5426953125,
+        "rsi14": 46.29871904841091,
+        "macd": 434.15572490295745,
+        "macdSignal": 1008.0921513059711,
+        "macdHistogram": -573.9364264030137,
+        "bbMid": 83797.1140625,
+        "bbUpper": 86442.11492643184,
+        "bbLower": 81152.11319856816,
         "atr14": 2180.575238778178,
-        "kdjJ": 22.30304105865237,
+        "kdjJ": 20.150253592192357,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "bullish",
@@ -10734,6 +10734,10 @@
           {
             "type": "above-sma50-sma200",
             "label": "多头排列"
+          },
+          {
+            "type": "bb-lower-touch",
+            "label": "触及布林下轨"
           }
         ],
         "closesSpark": [
@@ -10796,7 +10800,7 @@
           83679.46875,
           81762.5625,
           83095.125,
-          81652.75
+          81477.609375
         ],
         "closesFull": [
           113118.6640625,
@@ -11164,7 +11168,7 @@
           83679.46875,
           81762.5625,
           83095.125,
-          81652.75
+          81477.609375
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -11175,23 +11179,23 @@
         "group": "crypto",
         "currency": "USD",
         "exchangeName": "CCC",
-        "currentPrice": 2413.29,
-        "pct1Day": -3.3379250781670353,
-        "pct5Day": -2.906757310795672,
-        "pct52WeekHigh": -43.22565619067112,
-        "pct52WeekLow": 60.19122927978302,
-        "sma20": 2612.0832397460936,
-        "sma50": 2555.4755322265623,
-        "sma200": 2140.4226989746094,
-        "rsi14": 37.39699224701502,
-        "macd": -27.96944342905772,
-        "macdSignal": 5.954312557792509,
-        "macdHistogram": -33.923755986850225,
-        "bbMid": 2612.0832397460936,
-        "bbUpper": 2820.5688779066622,
-        "bbLower": 2403.597601585525,
-        "atr14": 90.22697683100624,
-        "kdjJ": 3.669273380639403,
+        "currentPrice": 2412.25,
+        "pct1Day": -3.3795813059385433,
+        "pct5Day": -2.948599349007727,
+        "pct52WeekHigh": -43.25012292179821,
+        "pct52WeekLow": 60.122195355782594,
+        "sma20": 2612.0312377929686,
+        "sma50": 2555.4547314453125,
+        "sma200": 2140.4174987792967,
+        "rsi14": 37.33529730353098,
+        "macd": -28.052409508117307,
+        "macdSignal": 5.937719341980593,
+        "macdHistogram": -33.9901288500979,
+        "bbMid": 2612.0312377929686,
+        "bbUpper": 2820.7156117079444,
+        "bbLower": 2403.3468638779927,
+        "atr14": 90.40192102743481,
+        "kdjJ": 3.4145632287486265,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "neutral",
@@ -11262,7 +11266,7 @@
           2534.69921875,
           2444.357421875,
           2496.62548828125,
-          2413.2900390625
+          2412.25
         ],
         "closesFull": [
           4125.412109375,
@@ -11630,7 +11634,7 @@
           2534.69921875,
           2444.357421875,
           2496.62548828125,
-          2413.2900390625
+          2412.25
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -11641,23 +11645,23 @@
         "group": "commodity-fx",
         "currency": "USD",
         "exchangeName": "CMX",
-        "currentPrice": 4124.6,
-        "pct1Day": -1.2615758301178974,
-        "pct5Day": -0.3888278443999868,
-        "pct52WeekHigh": -26.164476746267578,
-        "pct52WeekLow": 5.723733114602829,
-        "sma20": 4238.614990234375,
-        "sma50": 4379.819990234375,
-        "sma200": 4542.674500732422,
-        "rsi14": 36.1273092845506,
-        "macd": -61.42643860339649,
-        "macdSignal": -59.362777748298114,
-        "macdHistogram": -2.0636608550983766,
-        "bbMid": 4238.614990234375,
-        "bbUpper": 4428.800506253884,
-        "bbLower": 4048.4294742148663,
-        "atr14": 82.60033978921491,
-        "kdjJ": 39.78110414107181,
+        "currentPrice": 4128,
+        "pct1Day": -1.1801835394284819,
+        "pct5Day": -0.3067161280325805,
+        "pct52WeekHigh": -26.103612473595643,
+        "pct52WeekLow": 5.810883551636628,
+        "sma20": 4238.784985351563,
+        "sma50": 4379.88798828125,
+        "sma200": 4542.691500244141,
+        "rsi14": 36.368184518405926,
+        "macd": -61.15522132241313,
+        "macdSignal": -59.30853429210144,
+        "macdHistogram": -1.846687030311685,
+        "bbMid": 4238.784985351563,
+        "bbUpper": 4428.568206362371,
+        "bbLower": 4049.0017643407546,
+        "atr14": 82.70748264635778,
+        "kdjJ": 41.35700862265627,
         "volumeSpike": false,
         "maAlign": "bear",
         "trend": "bearish",
@@ -11728,7 +11732,7 @@
           4216.2998046875,
           4190.60009765625,
           4177.2998046875,
-          4124.60009765625
+          4128
         ],
         "closesFull": [
           4163.39990234375,
@@ -11982,7 +11986,7 @@
           4216.2998046875,
           4190.60009765625,
           4177.2998046875,
-          4124.60009765625
+          4128
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -12377,36 +12381,108 @@
       "timestamp": "2026-10-14T00:00:00.000Z"
     },
     "crypto_global": {
-      "totalMarketCapUsd": 2759404681460.733,
-      "total24hVolumeUsd": 88800942685655.8,
-      "marketCapChangePct24h": -4.910417429131901,
-      "btcDominance": 59.29750418889359,
-      "ethDominance": 10.663044237784392,
+      "totalMarketCapUsd": 2759432967926.0654,
+      "total24hVolumeUsd": 86681288894512.8,
+      "marketCapChangePct24h": -5.008325113402911,
+      "btcDominance": 59.28307582429828,
+      "ethDominance": 10.657922245931301,
       "activeCryptocurrencies": 22258
     },
-    "generated_at": "2026-10-14T22:14:23.702Z"
+    "generated_at": "2026-10-14T22:36:03.543Z"
   },
   "quant": {
-    "generated_at": "2026-10-14T22:14:28.230Z",
-    "market": null,
-    "fundFlows": null,
+    "generated_at": "2026-10-14T22:36:06.887Z",
+    "market": {
+      "indices": [
+        {
+          "code": "000001",
+          "name": "上证指数",
+          "price": 3767.23,
+          "changePct": -0.88
+        },
+        {
+          "code": "399001",
+          "name": "深证成指",
+          "price": 12110.59,
+          "changePct": -1.97
+        },
+        {
+          "code": "399006",
+          "name": "创业板指",
+          "price": 2866.76,
+          "changePct": -3.1
+        }
+      ],
+      "fetchedAt": "2026-10-14T22:36:06.356Z",
+      "note": "东方财富公开延时接口 · 非实时 · 仅供参考"
+    },
+    "fundFlows": {
+      "sectors": [
+        {
+          "name": "传媒",
+          "changePct": 1.65,
+          "netInflowYi": 23.46116608
+        },
+        {
+          "name": "印制电路板",
+          "changePct": 0.63,
+          "netInflowYi": 17.2348928
+        },
+        {
+          "name": "元件",
+          "changePct": 0.07,
+          "netInflowYi": 12.76923904
+        },
+        {
+          "name": "石油石化",
+          "changePct": 0.33,
+          "netInflowYi": 10.59033536
+        },
+        {
+          "name": "公用事业",
+          "changePct": 0.38,
+          "netInflowYi": 8.31853248
+        },
+        {
+          "name": "煤炭",
+          "changePct": 1.23,
+          "netInflowYi": 7.7015424
+        },
+        {
+          "name": "煤炭开采",
+          "changePct": 0.96,
+          "netInflowYi": 7.30033552
+        },
+        {
+          "name": "动力煤",
+          "changePct": 1.69,
+          "netInflowYi": 7.28447152
+        },
+        {
+          "name": "数字媒体",
+          "changePct": 1.62,
+          "netInflowYi": 7.17498416
+        },
+        {
+          "name": "电力",
+          "changePct": 0.19,
+          "netInflowYi": 6.95691552
+        },
+        {
+          "name": "炼化及贸易",
+          "changePct": -1.01,
+          "netInflowYi": 6.17726992
+        },
+        {
+          "name": "游戏Ⅲ",
+          "changePct": 2.66,
+          "netInflowYi": 6.06874576
+        }
+      ],
+      "fetchedAt": "2026-10-14T22:36:06.879Z",
+      "note": "东方财富公开延时板块资金流 · 非官方 · 非实时 · 仅供参考 · 不构成投资建议"
+    },
     "events": [
-      {
-        "symbol": "BTC-USD",
-        "displayName": "Bitcoin",
-        "title": "Bitcoin Slides as Wall Street Risk Pullback Tests Bullish Turn",
-        "url": "https://www.bloomberg.com/news/articles/2026-10-14/bitcoin-hits-lower-end-of-trading-range-as-risk-appetite-wanes",
-        "source": "Bloomberg Markets",
-        "matched": "Bitcoin"
-      },
-      {
-        "symbol": "GC=F",
-        "displayName": "黄金期货",
-        "title": "Gold Slumps as Faster US Inflation Stokes Fed Rate Hike Wagers",
-        "url": "https://www.bloomberg.com/news/articles/2026-10-14/gold-steady-as-fed-official-s-remarks-temper-rate-hike-bets",
-        "source": "Bloomberg Markets",
-        "matched": "Gold"
-      },
       {
         "symbol": "GC=F",
         "displayName": "黄金期货",
@@ -12421,6 +12497,22 @@
         "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
         "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
         "source": "WSJ Markets",
+        "matched": "Gold"
+      },
+      {
+        "symbol": "BTC-USD",
+        "displayName": "Bitcoin",
+        "title": "Bitcoin Slides as Wall Street Risk Pullback Tests Bullish Turn",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-14/bitcoin-hits-lower-end-of-trading-range-as-risk-appetite-wanes",
+        "source": "Bloomberg Markets",
+        "matched": "Bitcoin"
+      },
+      {
+        "symbol": "GC=F",
+        "displayName": "黄金期货",
+        "title": "Gold Slumps as Faster US Inflation Stokes Fed Rate Hike Wagers",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-14/gold-steady-as-fed-official-s-remarks-temper-rate-hike-bets",
+        "source": "Bloomberg Markets",
         "matched": "Gold"
       },
       {
