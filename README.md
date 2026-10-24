@@ -38,6 +38,7 @@ Workflow **强制** `LLM_MODE=off`。
 - **今日复盘**：东方财富延时指数 + 新闻标题命中观察池
 - **技术面读线 / 大师视角 / 风控纪律**：教学向规则面板
 - **散户学堂 / 知识库**：静态教程 + 客户端检索
+- **徒步路线收藏**：`trails.html` 星标收藏（本机 localStorage，无账号）
 - **开放 MCP**：见 [`mcp/README.md`](mcp/README.md)（仅本地 Agent，Pages 不跑服务）
 
 ---
