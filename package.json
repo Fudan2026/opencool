@@ -14,6 +14,7 @@
     "test": "tsx --test lib/**/*.test.ts",
     "deploy": "node scripts/deploy.mjs",
     "build-site": "node scripts/build-site.mjs",
+    "build-trails": "tsx scripts/build-trails.ts",
     "open": "node scripts/open-report.mjs"
   },
   "dependencies": {

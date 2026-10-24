@@ -196,6 +196,9 @@ jobs:
           WEB_MODE: 'true'
         run: npm run daily
 
+      - name: Build trails page (favorites)
+        run: npm run build-trails
+
       - name: Build static site (index + archive)
         run: npm run build-site
 
