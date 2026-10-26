@@ -512,6 +512,69 @@ const historyPayload = {
   count: historyItems.length,
   items: historyItems,
 };
+// ---------------------------------------------------------------------------
+// feed.xml (RSS 2.0, real editions only) + llms.txt (agent discovery)
+// ---------------------------------------------------------------------------
+
+const SITE_URL = "https://fudan2026.github.io/opencool";
+const realForFeed = editions
+  .filter((e) => !e.placeholder && e.hour !== "legacy")
+  .slice(0, 30);
+function rfc822(d, hour) {
+  return new Date(`${d}T${hour}:00:00+08:00`).toUTCString();
+}
+const feedItems = realForFeed
+  .map(
+    (e) => `    <item>
+      <title>OpenCool ${labelFor(e.hour)} · ${e.date} ${e.hour}:00</title>
+      <link>${SITE_URL}/${e.rel}</link>
+      <guid isPermaLink="true">${SITE_URL}/${e.rel}</guid>
+      <pubDate>${rfc822(e.date, e.hour)}</pubDate>
+    </item>`,
+  )
+  .join("\n");
+const feedXml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>OpenCool 中文财经三报</title>
+    <link>${SITE_URL}/</link>
+    <description>零 AI · 零 API Token 的中文财经早/午/晚报（上海时区 06/13/19），含词典市场情绪计。</description>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <language>zh-CN</language>
+${feedItems}
+  </channel>
+</rss>
+`;
+fs.writeFileSync(path.join(ROOT, "feed.xml"), feedXml, "utf8");
+console.log(`[build-site] feed.xml (${realForFeed.length} real editions)`);
+
+const llmsTxt = `# OpenCool
+
+Zero-AI, zero-token CN finance triple brief (Shanghai 06:00/13:00/19:00),
+statically published on GitHub Pages. Dictionary sentiment gauge included.
+No LLM behind any endpoint.
+
+## Data products (JSON)
+
+- Latest edition: /<YYYY-MM-DD>/<HH>.json — DailyReport (hero_headline,
+  daily_overview, finance/politics/tech_briefs, sentiment{score,label,
+  sectors,percentile}, quant{market,fundFlows,events}, trading, fetch_health)
+- Sentiment history: /sentiment-history.json — rolling newest-60 editions,
+  chronological items {date,hour,score,label,posHits,negHits,scanned,percentile}
+- Status dashboard: /status.html — publish matrix (14d) + fetch health
+- RSS: /feed.xml — newest 30 real editions (placeholders never included)
+- Archive: /archive.html · Home: /index.html
+
+## Conventions
+
+- Placeholder pages contain 尚未更新 and have NO <HH>.json sidecar —
+  check the sidecar to distinguish real editions.
+- REPORT_TZ=Asia/Shanghai. All times Shanghai.
+- License MIT. Repo: https://github.com/Fudan2026/opencool
+`;
+fs.writeFileSync(path.join(ROOT, "llms.txt"), llmsTxt, "utf8");
+console.log(`[build-site] llms.txt`);
+
 fs.writeFileSync(
   path.join(ROOT, "sentiment-history.json"),
   JSON.stringify(historyPayload, null, 2) + "\n",

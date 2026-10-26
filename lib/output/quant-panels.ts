@@ -268,6 +268,7 @@ export function renderMcpHelpPanel(): string {
     <p>GitHub Pages 只托管静态简报。若要让 Cursor / Claude 调 A 股工具，在仓库根目录启动：</p>
     <pre class="code">cd mcp && npm install && npm start</pre>
     <p>工具：<code>list_watchlist</code> · <code>get_quote</code> · <code>get_kline</code> · <code>market_overview</code></p>
+    sentiment_query / sentiment_trend — 零 AI 词典情绪与滚动历史（本地数据产品）
     <p class="muted">蒸馏东方财富/公开行情思路 · 免费延时 · 需本机网络 · 不构成投资建议。</p>
   </div>`;
 }

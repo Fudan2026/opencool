@@ -1,11 +1,22 @@
 #!/usr/bin/env node
 /**
  * Minimal OpenCool MCP server (stdio) — local agents only.
- * Tools wrap Yahoo chart + Eastmoney index snapshot. Zero paid API keys.
+ * Tools wrap Yahoo chart + Eastmoney index snapshot + sentiment data
+ * products (daily_reports sidecars). Zero paid API keys.
  *
  * Usage:
  *   cd mcp && npm start
  */
+import fs from "node:fs";
+import path from "node:path";
+
+/** Resolve daily_reports whether cwd is mcp/ or the repo root. */
+function reportsDir() {
+  for (const cand of ["../daily_reports", "daily_reports"]) {
+    if (fs.existsSync(cand)) return cand;
+  }
+  return "../daily_reports";
+}
 const WATCHLIST = [
   "600519.SS", "300750.SZ", "601318.SS", "600036.SS", "510300.SS", "159915.SZ",
   "000001.SS", "BABA", "0700.HK", "SPY", "BTC-USD",
@@ -58,6 +69,57 @@ async function marketOverview() {
   return { indices: out, note: "delayed free snapshot" };
 }
 
+function sentimentQuery(args) {
+  const dir = reportsDir();
+  if (args?.date && args?.hour) {
+    const fp = path.join(dir, args.date, `${args.hour}.json`);
+    const r = JSON.parse(fs.readFileSync(fp, "utf8"));
+    if (!r?.sentiment) throw new Error(`no sentiment in ${args.date}/${args.hour}`);
+    return { date: args.date, hour: args.hour, sentiment: r.sentiment };
+  }
+  // newest edition with sentiment
+  const days = fs
+    .readdirSync(dir)
+    .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d))
+    .sort()
+    .reverse();
+  for (const d of days) {
+    const files = fs
+      .readdirSync(path.join(dir, d))
+      .filter((f) => /^\d{2}\.json$/.test(f))
+      .sort()
+      .reverse();
+    for (const f of files) {
+      try {
+        const r = JSON.parse(fs.readFileSync(path.join(dir, d, f), "utf8"));
+        if (r?.sentiment?.score != null) {
+          return { date: d, hour: f.replace(/\.json$/, ""), sentiment: r.sentiment };
+        }
+      } catch {
+        /* skip */
+      }
+    }
+  }
+  throw new Error("no sentiment sidecar found — run npm run daily first");
+}
+
+function sentimentTrend(args) {
+  const fp = path.join(reportsDir(), "sentiment-history.json");
+  if (!fs.existsSync(fp)) {
+    throw new Error(
+      "sentiment-history.json not found — run npm run build-site (after daily)",
+    );
+  }
+  const hist = JSON.parse(fs.readFileSync(fp, "utf8"));
+  const limit = Math.max(1, Math.min(Number(args?.limit) || 30, 60));
+  return {
+    count: hist.count,
+    cap: hist.cap,
+    items: (hist.items ?? []).slice(-limit),
+    note: "chronological, newest last; percentile null until 20 samples",
+  };
+}
+
 /** Extremely small JSON-RPC MCP-ish loop over stdin/stdout (tools/list + tools/call). */
 const tools = [
   {
@@ -88,6 +150,24 @@ const tools = [
     description: "Eastmoney delayed A-share major indices",
     inputSchema: { type: "object", properties: {} },
   },
+  {
+    name: "sentiment_query",
+    description:
+      "Zero-AI dictionary sentiment of the newest (or a given date+hour) edition: score/label/sectors/percentile",
+    inputSchema: {
+      type: "object",
+      properties: { date: { type: "string" }, hour: { type: "string" } },
+    },
+  },
+  {
+    name: "sentiment_trend",
+    description:
+      "Rolling sentiment history (sentiment-history.json, newest last); optional limit <= 60",
+    inputSchema: {
+      type: "object",
+      properties: { limit: { type: "number" } },
+    },
+  },
 ];
 
 async function handleTool(name, args) {
@@ -96,6 +176,8 @@ async function handleTool(name, args) {
     return yahooChart(args.symbol || "600519.SS");
   }
   if (name === "market_overview") return marketOverview();
+  if (name === "sentiment_query") return sentimentQuery(args);
+  if (name === "sentiment_trend") return sentimentTrend(args);
   throw new Error(`unknown tool ${name}`);
 }
 
