@@ -22,6 +22,7 @@ export async function fetchGithubTrending(
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
       Accept: "text/html,application/xhtml+xml",
     },
+    signal: AbortSignal.timeout(10_000),
   }).then((r) => r.text());
 
   const $ = cheerio.load(html);

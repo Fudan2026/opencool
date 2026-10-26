@@ -41,6 +41,21 @@ export interface DailyReport {
   trading?: TradingSection;
   /** Retail quant extras: A-share overview, events, personas. */
   quant?: QuantSection;
+  /** Per-source fetch telemetry attached by scripts/daily.ts. */
+  fetch_health?: FetchHealth;
+}
+
+export interface FetchHealthEntry {
+  id: string;
+  ms: number;
+  ok: boolean;
+  count: number;
+  error?: string;
+}
+
+export interface FetchHealth {
+  generated_at: string;
+  entries: FetchHealthEntry[];
 }
 
 export interface ArticleInput extends RawArticle {
