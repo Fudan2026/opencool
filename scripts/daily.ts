@@ -33,7 +33,7 @@ import { generateTradingCommentary } from "../lib/ai/trading-commentary";
 import type { TradingSection } from "../lib/ai/pipeline";
 import { todayKey, editionHourKey, parseReportHours } from "../lib/utils";
 import { buildQuantSection } from "../lib/invest/quant";
-import { scoreSentiment } from "../lib/nlp/sentiment";
+import { scoreSentiment, MIN_HISTORY_SAMPLES } from "../lib/nlp/sentiment";
 import type { QuantSection } from "../lib/invest/types";
 
 const OUTPUT_DIR = "daily_reports";
@@ -336,6 +336,45 @@ async function runTrading(llmOff: boolean): Promise<TradingSection | null> {
   };
 }
 
+/**
+ * Recent sentiment scores from restored sidecars (newest last). The
+ * gh-pages restore step runs before `npm run daily` in CI, so yesterday's
+ * editions are on disk; locally this simply reads what exists. Bounded
+ * reads: newest 30 editions only.
+ */
+function loadSentimentHistory(): number[] {
+  const out: number[] = [];
+  try {
+    const days = fs
+      .readdirSync(OUTPUT_DIR)
+      .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d))
+      .sort();
+    for (let i = days.length - 1; i >= 0 && out.length < 40; i--) {
+      const dir = path.join(OUTPUT_DIR, days[i]);
+      const files = fs
+        .readdirSync(dir)
+        .filter((f) => /^\d{2}\.json$/.test(f))
+        .sort()
+        .reverse();
+      for (const f of files) {
+        if (out.length >= 40) break;
+        try {
+          const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
+          if (typeof r?.sentiment?.score === "number") {
+            out.push(r.sentiment.score);
+          }
+        } catch {
+          // unreadable sidecar — skip, never fail the run for telemetry
+        }
+      }
+    }
+  } catch {
+    // no daily_reports yet — empty history
+  }
+  // newest-first collection → chronological order for percentile
+  return out.reverse().slice(-30);
+}
+
 async function main() {
   const llmOff = isLlmOff();
   if (llmOff) {
@@ -408,9 +447,14 @@ async function main() {
     : await generateDailyReport(articles);
   if (trading) report.trading = trading;
   if (quant) report.quant = quant;
-  report.sentiment = scoreSentiment(articles);
+  const sentimentHistory = loadSentimentHistory();
+  report.sentiment = scoreSentiment(articles, sentimentHistory);
   console.log(
-    `[daily] sentiment: ${report.sentiment.label} (${report.sentiment.score}, +${report.sentiment.posHits}/−${report.sentiment.negHits} over ${report.sentiment.scanned} finance items)`,
+    `[daily] sentiment: ${report.sentiment.label} (${report.sentiment.score}, +${report.sentiment.posHits}/−${report.sentiment.negHits} over ${report.sentiment.scanned} finance items` +
+      (report.sentiment.percentile !== null
+        ? `, percentile ${report.sentiment.percentile}`
+        : `, history ${sentimentHistory.length}/${MIN_HISTORY_SAMPLES}`) +
+      `)`,
   );
   report.fetch_health = health;
   console.log(`[daily] digest ready in ${((Date.now() - t0) / 1000).toFixed(1)}s`);

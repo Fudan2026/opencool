@@ -64,6 +64,50 @@ test("sentiment gauge", async (t) => {
     assert.ok(Math.abs(negated.score) < 18);
   });
 
+  await t.test("sector buckets: watchlist hits land in groups", () => {
+    const s = scoreSentiment([
+      art("贵州茅台获大单增持", "白酒龙头利好"),
+      art("茅台批价回暖"),
+      art("宁德时代中标储能项目"),
+      art("外盘：market selloff on default risk"),
+      art("上证指数走弱，大盘下跌"),
+      art(" totally unrelated general news without any tickers "),
+    ]);
+    const keys = s.sectors.map((x) => x.key);
+    assert.ok(keys.includes("china-ashare"), `got ${keys}`);
+    const ashare = s.sectors.find((x) => x.key === "china-ashare")!;
+    assert.ok(ashare.articles >= 3);
+    assert.ok(ashare.topDrivers.length > 0);
+    // overall fields unchanged (backward compatible shape)
+    assert.equal(typeof s.score, "number");
+    assert.ok(Array.isArray(s.drivers));
+  });
+
+  await t.test("general bucket catches articles with no watchlist hit", () => {
+    const s = scoreSentiment([
+      art("央行发布新规利好债市"),
+      art("外资加仓中国资产，市场回暖"),
+      art("政策超预期，市场大涨"),
+      art("某行业订单获批复苏"),
+      art("关注产业链提价"),
+    ]);
+    const general = s.sectors.find((x) => x.key === "general");
+    assert.ok(general);
+    assert.equal(general.articles, 5);
+    assert.ok(general.score > 0);
+  });
+
+  await t.test("percentile is null without history floor", () => {
+    assert.equal(scoreSentiment([art("大涨")]).percentile, null);
+    const history = Array.from({ length: 19 }, (_, i) => i - 9);
+    const s19 = scoreSentiment([art("市场回暖"), art("反弹持续"), art("利好落地"), art("普涨"), art("走强")], history);
+    assert.equal(s19.percentile, null);
+    const history20 = [...history, 0];
+    const s20 = scoreSentiment([art("市场回暖"), art("反弹持续"), art("利好落地"), art("普涨"), art("走强")], history20);
+    assert.ok(s20.percentile !== null);
+    assert.equal(s20.percentile, 100); // above every sample
+  });
+
   await t.test("longest term wins: 创历史新高 over 新高", () => {
     const s = scoreSentiment([
       art("沪指创历史新高"),

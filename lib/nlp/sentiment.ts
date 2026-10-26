@@ -15,11 +15,24 @@
 
 import { REPORT_LOCALE } from "../sources/registry";
 import type { ArticleInput } from "../ai/pipeline";
+import { WATCHLIST, type AssetGroup } from "../trading/watchlist";
+import { matchKeysForTicker } from "../invest/events";
 
 export interface SentimentDriver {
   term: string;
   hits: number;
   polarity: 1 | -1;
+}
+
+export interface SectorSentiment {
+  /** AssetGroup key or "general" for articles outside the watchlist. */
+  key: AssetGroup | "general";
+  /** -100..100 within the bucket. */
+  score: number;
+  posHits: number;
+  negHits: number;
+  articles: number;
+  topDrivers: SentimentDriver[];
 }
 
 export interface MarketSentiment {
@@ -32,8 +45,19 @@ export interface MarketSentiment {
   /** Finance articles scanned. */
   scanned: number;
   drivers: SentimentDriver[];
+  /** Per-asset-group breakdown; "general" holds unmatched articles. */
+  sectors: SectorSentiment[];
+  /**
+   * Percentile of this score against recent history (0..100), null when
+   * fewer than MIN_HISTORY_SAMPLES scores exist. Absolute score is kept
+   * unchanged for backward compatibility.
+   */
+  percentile: number | null;
   note: string;
 }
+
+/** Minimum history samples before percentile is trusted. */
+export const MIN_HISTORY_SAMPLES = 20;
 
 /**
  * Signed weights: +2 strong bullish … +1 bullish, -1 bearish … -2 strong
@@ -126,6 +150,34 @@ const TERMS: Readonly<{ term: string; weight: number }[]> = [
   { term: "warning", weight: -1 },
 ];
 
+/** Watchlist group → match keys, built once (teaching-grade bucketing). */
+const SECTOR_KEYS: ReadonlyArray<{ group: AssetGroup; keys: string[] }> =
+  WATCHLIST.map((t) => ({ group: t.group, keys: matchKeysForTicker(t) }));
+
+function groupsForArticle(title: string, excerpt: string): Set<AssetGroup> {
+  const hay = `${title}\n${excerpt}`;
+  const groups = new Set<AssetGroup>();
+  for (const { group, keys } of SECTOR_KEYS) {
+    for (const k of keys) {
+      if (hay.includes(k)) {
+        groups.add(group);
+        break;
+      }
+    }
+  }
+  return groups;
+}
+
+/** Percentile of score within history (0..100); null below sample floor. */
+export function percentileFor(
+  score: number,
+  history: number[] | undefined,
+): number | null {
+  if (!history || history.length < MIN_HISTORY_SAMPLES) return null;
+  const below = history.filter((h) => h < score).length;
+  return Math.round((below / history.length) * 100);
+}
+
 /** Longest first so 创历史新高 wins over 新高 in the same headline. */
 const SORTED_TERMS = [...TERMS].sort((a, b) => b.term.length - a.term.length);
 /** Single-char negators directly before a bearish term. */
@@ -186,27 +238,50 @@ function labelFor(score: number, scanned: number): string {
   return REPORT_LOCALE === "en" ? "Bearish" : "偏空";
 }
 
-export function scoreSentiment(articles: ArticleInput[]): MarketSentiment {
+export function scoreSentiment(
+  articles: ArticleInput[],
+  history?: number[],
+): MarketSentiment {
   const finance = articles.filter((a) => a.category === "finance");
   let raw = 0;
   let posHits = 0;
   let negHits = 0;
   const driverMap = new Map<string, SentimentDriver>();
 
+  // Per-asset-group buckets ("general" collects watchlist-miss articles).
+  const sectorRaw = new Map<AssetGroup | "general", number>();
+  const sectorHits = new Map<AssetGroup | "general", { pos: number; neg: number }>();
+  const sectorArticles = new Map<AssetGroup | "general", number>();
+  const sectorDrivers = new Map<AssetGroup | "general", Map<string, SentimentDriver>>();
+  for (const g of [
+    "china-ashare", "china-etf", "china-equity", "us-equity",
+    "crypto", "commodity-fx", "macro", "general",
+  ] as const) {
+    sectorRaw.set(g, 0);
+    sectorHits.set(g, { pos: 0, neg: 0 });
+    sectorArticles.set(g, 0);
+    sectorDrivers.set(g, new Map());
+  }
+
   for (const a of finance) {
     const title = a.title ?? "";
     const excerpt = (a.summary || a.excerpt || "").slice(0, 500);
-    const surfaces: [string, number][] = [
+    const groups = groupsForArticle(title, excerpt);
+    const buckets: (AssetGroup | "general")[] = groups.size
+      ? [...groups]
+      : ["general"];
+    for (const b of buckets) {
+      sectorArticles.set(b, (sectorArticles.get(b) ?? 0) + 1);
+    }
+    // Match each surface separately; title counts double vs excerpt.
+    for (const surface of [
       [title, 2],
       [excerpt, 1],
-    ];
-    // Match each surface separately but merge overlapping terms across
-    // surfaces (a term found in the title usually also appears in the
-    // excerpt — count the surface hits, weight title double).
-    for (const [text, surfaceWeight] of surfaces) {
-      const hay = text.toLowerCase();
+    ] as [string, number][]) {
+      const hay = surface[0].toLowerCase();
       for (const { term, weight, hits } of matchText(hay)) {
-        raw += weight * hits * surfaceWeight;
+        const contribution = weight * hits * surface[1];
+        raw += contribution;
         if (weight > 0) posHits += hits;
         else negHits += hits;
         const d =
@@ -214,9 +289,34 @@ export function scoreSentiment(articles: ArticleInput[]): MarketSentiment {
           { term, hits: 0, polarity: (weight > 0 ? 1 : -1) as 1 | -1 };
         d.hits += hits;
         driverMap.set(term, d);
+        for (const b of buckets) {
+          sectorRaw.set(b, (sectorRaw.get(b) ?? 0) + contribution);
+          const sh = sectorHits.get(b)!;
+          if (weight > 0) sh.pos += hits;
+          else sh.neg += hits;
+          const sd =
+            sectorDrivers.get(b)!.get(term) ??
+            { term, hits: 0, polarity: (weight > 0 ? 1 : -1) as 1 | -1 };
+          sd.hits += hits;
+          sectorDrivers.get(b)!.set(term, sd);
+        }
       }
     }
   }
+
+  const sectors: SectorSentiment[] = [...sectorRaw.entries()]
+    .filter(([b]) => (sectorHits.get(b)?.pos ?? 0) + (sectorHits.get(b)?.neg ?? 0) > 0)
+    .map(([b, r]) => ({
+      key: b,
+      score: Math.max(-100, Math.min(100, Math.round(100 * Math.tanh(r / 10)))),
+      posHits: sectorHits.get(b)?.pos ?? 0,
+      negHits: sectorHits.get(b)?.neg ?? 0,
+      articles: sectorArticles.get(b) ?? 0,
+      topDrivers: [...(sectorDrivers.get(b)?.values() ?? [])]
+        .sort((x, y) => y.hits - x.hits)
+        .slice(0, 4),
+    }))
+    .sort((x, y) => Math.abs(y.score) - Math.abs(x.score));
 
   const score = Math.max(
     -100,
@@ -244,6 +344,8 @@ export function scoreSentiment(articles: ArticleInput[]): MarketSentiment {
     negHits,
     scanned: finance.length,
     drivers,
+    sectors,
+    percentile: percentileFor(score, history),
     note,
   };
 }
