@@ -272,7 +272,8 @@ const archiveHtml = `<!doctype html>
   <h1>归档</h1>
   <p class="meta">${editions.length} 期 · 自 ${ARCHIVE_NORM_FROM} 起每日三报：早报 06:00 · 午报 13:00 · 晚报 19:00（上海时区）· 零 AI</p>
   <p><a class="home" href="./index.html">← 回到最新一期</a>
-   · <a class="home" href="./trails.html">徒步路线收藏</a></p>
+   · <a class="home" href="./trails.html">徒步路线收藏</a>
+   · <a class="home" href="./status.html">运行状态</a></p>
 ${dayBlocks}
 </main>
 </body>
@@ -292,5 +293,141 @@ if (!fs.existsSync(trailsPath)) {
   );
 }
 
+// ---------------------------------------------------------------------------
+// status.html — self-diagnostics dashboard (zero backend: reads the same
+// daily_reports tree). Per-slot state = json sidecar (real edition) vs
+// placeholder HTML vs missing; plus fetch_health telemetry from the latest
+// real edition.
+// ---------------------------------------------------------------------------
+
+const STATE_META = {
+  ok: { label: "已发布", color: "#15803d" },
+  placeholder: { label: "占位/缺刊", color: "#d97706" },
+  partial: { label: "HTML 无数据", color: "#b91c1c" },
+  missing: { label: "未生成", color: "#9ca3af" },
+};
+
+function slotState(dir, hour) {
+  if (fs.existsSync(path.join(ROOT, dir, `${hour}.json`))) return "ok";
+  const htmlPath = path.join(ROOT, dir, `${hour}.html`);
+  if (!fs.existsSync(htmlPath)) return "missing";
+  return fs.readFileSync(htmlPath, "utf8").includes("尚未更新")
+    ? "placeholder"
+    : "partial";
+}
+
+function buildStatusHtml() {
+  const dayDirs = dates.slice(0, 14);
+  const matrixRows = dayDirs
+    .map((d) => {
+      const cells = slotHours
+        .map((h) => {
+          const st = slotState(d, h);
+          const m = STATE_META[st];
+          return `<td title="${d} ${h}:00 · ${m.label}" style="background:${m.color}"></td>`;
+        })
+        .join("");
+      return `<tr><td class="s-date">${d}</td>${cells}</tr>`;
+    })
+    .join("\n");
+
+  let healthBlock = `<p class="meta">暂无抓取遥测（今日尚未生成真实档）。</p>`;
+  const healthPath = path.join(ROOT, latest.rel.replace(/\.html$/, ".json"));
+  if (fs.existsSync(healthPath)) {
+    try {
+      const report = JSON.parse(fs.readFileSync(healthPath, "utf8"));
+      const fh = report.fetch_health;
+      if (fh?.entries?.length) {
+        const okN = fh.entries.filter((e) => e.ok).length;
+        const rows = [...fh.entries]
+          .sort((a, b) => b.ms - a.ms)
+          .map(
+            (e) => `<tr>
+              <td>${e.id}</td>
+              <td class="${e.ok ? "" : "s-bad"}">${e.ok ? "✓" : "✗"}</td>
+              <td>${(e.ms / 1000).toFixed(1)}s</td>
+              <td>${e.count}</td>
+              <td class="s-err">${e.error ? e.error.slice(0, 60) : ""}</td>
+            </tr>`,
+          )
+          .join("\n");
+        healthBlock = `
+        <p class="meta">抓取遥测（最新一期 ${latest.date}/${latest.hour}）：${okN}/${fh.entries.length} 源成功。</p>
+        <table class="s-table">
+          <thead><tr><th>源</th><th>状态</th><th>耗时</th><th>条数</th><th>错误</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+      }
+    } catch {
+      // health JSON unreadable — status page still renders the matrix
+    }
+  }
+
+  const legend = Object.values(STATE_META)
+    .map((m) => `<span class="s-leg"><i style="background:${m.color}"></i>${m.label}</span>`)
+    .join("");
+  const headCells = slotHours.map((h) => `<th>${h}:00</th>`).join("");
+
+  return `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · 运行状态</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.5; }
+  main { max-width:760px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 .3rem; letter-spacing:-.03em; }
+  h2 { font-size:1.05rem; margin:2rem 0 .7rem; }
+  .meta { color:var(--muted); }
+  .s-leg { display:inline-flex; align-items:center; gap:.35rem; margin-right:1rem; font-size:.85rem; color:var(--muted); }
+  .s-leg i { width:.8rem; height:.8rem; border-radius:3px; display:inline-block; }
+  .s-table { border-collapse:collapse; width:100%; background:var(--card); border-radius:.75rem; overflow:hidden; }
+  .s-table th, .s-table td { text-align:left; padding:.5rem .8rem; border-bottom:1px solid var(--rule); font-size:.85rem; }
+  .s-table th { color:var(--muted); font-weight:600; }
+  .s-bad { color:#b91c1c; font-weight:700; }
+  .s-err { color:var(--muted); max-width:14rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .m-table { border-collapse:collapse; background:var(--card); border-radius:.75rem; overflow:hidden; }
+  .m-table th { color:var(--muted); font-weight:600; font-size:.8rem; padding:.4rem .7rem; }
+  .m-table td { padding:0; }
+  .m-table td[style] { width:3.2rem; height:1.5rem; }
+  .s-date { font-size:.8rem; color:var(--muted); padding-right:.8rem !important; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>运行状态</h1>
+  <p class="meta">发布矩阵（近 ${dayDirs.length} 天 × ${slotHours.length} 档）· 数据侧车判定，占位页不冒充真档</p>
+  <p>${legend}</p>
+  <table class="m-table">
+    <thead><tr><th></th>${headCells}</tr></thead>
+    <tbody>${matrixRows}</tbody>
+  </table>
+  <h2>抓取健康</h2>
+  ${healthBlock}
+  <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
+   · <a class="home" href="./archive.html">历史归档</a>
+   · <a class="home" href="./trails.html">徒步路线收藏</a></p>
+  <p class="meta tiny">本页由 build-site 自动生成 · ${new Date().toISOString()}</p>
+</main>
+</body>
+</html>
+`;
+}
+
+fs.writeFileSync(path.join(ROOT, "status.html"), buildStatusHtml(), "utf8");
+console.log(`[build-site] status.html (${dates.slice(0, 14).length}-day matrix)`);
 fs.writeFileSync(path.join(ROOT, ".nojekyll"), "", "utf8");
 console.log(`[build-site] .nojekyll`);
