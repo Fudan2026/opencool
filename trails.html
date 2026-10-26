@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · 徒步路线收藏</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fff7ef;
+    --fg: #1c1410;
+    --muted: #8a7364;
+    --rule: #f0ddd0;
+    --card: #ffffff;
+    --accent: #ea580c;
+    --mint: #0d9488;
+    --fav: #b45309;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--fg);
+    font-family: "Noto Sans SC", "DM Sans", system-ui, sans-serif;
+    line-height: 1.55;
+    background:
+      radial-gradient(ellipse 90% 55% at 0% -5%, #ffd8a8 0%, transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 0%, #ffc9de 0%, transparent 50%),
+      radial-gradient(ellipse 50% 35% at 50% 100%, #cffafe 0%, transparent 55%),
+      var(--bg);
+  }
+  main { max-width: 880px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  .brand {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+  h1 {
+    font-family: "Fraunces", "Noto Sans SC", serif;
+    font-size: clamp(1.75rem, 4vw, 2.35rem);
+    margin: 0.35rem 0 0.4rem;
+    letter-spacing: -0.02em;
+  }
+  .lede { color: var(--muted); margin: 0 0 1.25rem; max-width: 36rem; }
+  .nav-links { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .nav-links a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .nav-links a:hover { text-decoration: underline; }
+
+  .toolbar {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
+    margin-bottom: 1.25rem;
+  }
+  .filter-btn, .scope-btn {
+    border: 1px solid var(--rule);
+    background: var(--card);
+    color: var(--fg);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .filter-btn.active, .scope-btn.active {
+    border-color: var(--accent);
+    background: #fff1e6;
+    color: #9a3412;
+    font-weight: 600;
+  }
+  .fav-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .fav-count strong { color: var(--fav); }
+
+  .fav-pin {
+    margin: 0 0 1.25rem;
+    padding: 0.95rem 1.05rem;
+    background: var(--card);
+    border: 1px dashed var(--rule);
+    border-radius: 0.85rem;
+  }
+  .fav-pin h2 { margin: 0 0 0.55rem; font-size: 1rem; }
+  .fav-pin-empty { margin: 0; color: var(--muted); font-size: 0.9rem; }
+  .fav-pin-list { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .fav-chip {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.35rem 0.7rem;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .fav-chip button {
+    border: 0; background: transparent; cursor: pointer;
+    color: var(--fav); font-size: 1rem; line-height: 1; padding: 0;
+  }
+
+  .trail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  @media (min-width: 720px) {
+    .trail-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .trail-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 0.9rem;
+    padding: 1rem 1.05rem 0.95rem;
+    box-shadow: 0 8px 28px rgba(234, 88, 12, 0.06);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .trail-card.is-fav {
+    border-color: rgba(180, 83, 9, 0.45);
+    box-shadow: inset 0 0 0 1px rgba(180, 83, 9, 0.2), 0 8px 28px rgba(234, 88, 12, 0.06);
+  }
+  .trail-card.hidden { display: none; }
+  .trail-top { display: flex; justify-content: space-between; gap: 0.75rem; align-items: flex-start; }
+  .trail-name { margin: 0; font-size: 1.1rem; }
+  .trail-region { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.85rem; }
+  .trail-summary { margin: 0.65rem 0 0.7rem; color: var(--fg); font-size: 0.92rem; }
+  .trail-meta {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 0.65rem 1rem;
+    font-size: 0.85rem; color: var(--muted);
+  }
+  .trail-meta .k { font-weight: 600; color: var(--fg); opacity: 0.7; }
+  .diff {
+    display: inline-block; padding: 0.1rem 0.45rem; border-radius: 999px;
+    font-weight: 600; font-size: 0.8rem;
+  }
+  .diff-easy { background: #ccfbf1; color: #0f766e; }
+  .diff-moderate { background: #fef3c7; color: #92400e; }
+  .diff-hard { background: #ffedd5; color: #9a3412; }
+
+  .fav-btn {
+    border: 0; background: transparent; cursor: pointer;
+    font-size: 1.45rem; line-height: 1; color: var(--muted);
+    padding: 0.1rem 0.2rem; border-radius: 0.35rem;
+  }
+  .fav-btn:hover { color: var(--fav); }
+  .fav-btn.on { color: var(--fav); }
+  .fav-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .empty-filter {
+    display: none; grid-column: 1 / -1;
+    padding: 1.25rem; text-align: center; color: var(--muted);
+    background: var(--card); border: 1px dashed var(--rule); border-radius: 0.85rem;
+  }
+  .empty-filter.show { display: block; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>徒步路线</h1>
+  <p class="lede">点星收藏喜欢的路线。收藏只保存在本机浏览器（localStorage），不做账号或云同步。</p>
+  <div class="nav-links">
+    <a href="./index.html">← 最新简报</a>
+    <a href="./archive.html">历史归档</a>
+  </div>
+
+  <section class="fav-pin" id="fav-pin" aria-live="polite">
+    <h2>我的收藏 <span id="fav-count-label" class="fav-count">（0）</span></h2>
+    <p class="fav-pin-empty" id="fav-pin-empty">还没有收藏。点击路线卡片右上角的星标即可加入。</p>
+    <div class="fav-pin-list" id="fav-pin-list" hidden></div>
+  </section>
+
+  <div class="toolbar" role="toolbar" aria-label="筛选">
+    <button type="button" class="scope-btn active" data-scope="all">全部路线</button>
+    <button type="button" class="scope-btn" data-scope="favorites" id="scope-favorites">只看收藏</button>
+    <button type="button" class="filter-btn active" data-diff="all">全部难度</button>
+    <button type="button" class="filter-btn" data-diff="easy">轻松</button>
+    <button type="button" class="filter-btn" data-diff="moderate">中等</button>
+    <button type="button" class="filter-btn" data-diff="hard">挑战</button>
+    <span class="fav-count">已收藏 <strong id="fav-count-num">0</strong> 条</span>
+  </div>
+
+  <div class="trail-grid" id="trail-grid">
+<article class="trail-card" data-trail-id="huangshan-west" data-difficulty="hard">
+  <div class="trail-top">
+    <div>
+      <h2 class="trail-name">黄山西海大峡谷</h2>
+      <p class="trail-region">安徽 · 黄山</p>
+    </div>
+    <button type="button" class="fav-btn" aria-label="收藏路线" aria-pressed="false" title="加入收藏">☆</button>
+  </div>
+  <p class="trail-summary">云海与石林交错的经典线，台阶多、落差大，适合体力充沛的一日穿越。</p>
+  <ul class="trail-meta">
+    <li><span class="k">难度</span> <span class="diff diff-hard">挑战</span></li>
+    <li><span class="k">距离</span> 12.5 km</li>
+    <li><span class="k">爬升</span> 980 m</li>
+  </ul>
+</article>
+<article class="trail-card" data-trail-id="wuyi-nine-bend" data-difficulty="easy">
+  <div class="trail-top">
+    <div>
+      <h2 class="trail-name">武夷山九曲溪畔步道</h2>
+      <p class="trail-region">福建 · 南平</p>
+    </div>
+    <button type="button" class="fav-btn" aria-label="收藏路线" aria-pressed="false" title="加入收藏">☆</button>
+  </div>
+  <p class="trail-summary">沿溪缓行，丹霞岩壁近在眼前，适合轻松半日徒步与拍照。</p>
+  <ul class="trail-meta">
+    <li><span class="k">难度</span> <span class="diff diff-easy">轻松</span></li>
+    <li><span class="k">距离</span> 6.2 km</li>
+    <li><span class="k">爬升</span> 180 m</li>
+  </ul>
+</article>
+<article class="trail-card" data-trail-id="qingcheng-front" data-difficulty="moderate">
+  <div class="trail-top">
+    <div>
+      <h2 class="trail-name">青城前山循环</h2>
+      <p class="trail-region">四川 · 都江堰</p>
+    </div>
+    <button type="button" class="fav-btn" aria-label="收藏路线" aria-pressed="false" title="加入收藏">☆</button>
+  </div>
+  <p class="trail-summary">道教名山前山环线，林荫密、台阶稳，兼顾风景与可走性。</p>
+  <ul class="trail-meta">
+    <li><span class="k">难度</span> <span class="diff diff-moderate">中等</span></li>
+    <li><span class="k">距离</span> 8.4 km</li>
+    <li><span class="k">爬升</span> 520 m</li>
+  </ul>
+</article>
+<article class="trail-card" data-trail-id="langyashan-loop" data-difficulty="easy">
+  <div class="trail-top">
+    <div>
+      <h2 class="trail-name">琅琊山环城绿道</h2>
+      <p class="trail-region">安徽 · 滁州</p>
+    </div>
+    <button type="button" class="fav-btn" aria-label="收藏路线" aria-pressed="false" title="加入收藏">☆</button>
+  </div>
+  <p class="trail-summary">城郊短线，欧阳修醉翁亭一带，适合周末晨练与家庭出游。</p>
+  <ul class="trail-meta">
+    <li><span class="k">难度</span> <span class="diff diff-easy">轻松</span></li>
+    <li><span class="k">距离</span> 5.0 km</li>
+    <li><span class="k">爬升</span> 210 m</li>
+  </ul>
+</article>
+<article class="trail-card" data-trail-id="huashan-north" data-difficulty="hard">
+  <div class="trail-top">
+    <div>
+      <h2 class="trail-name">华山北峰索道衔接段</h2>
+      <p class="trail-region">陕西 · 华阴</p>
+    </div>
+    <button type="button" class="fav-btn" aria-label="收藏路线" aria-pressed="false" title="加入收藏">☆</button>
+  </div>
+  <p class="trail-summary">险峻花岗岩脊与长台阶，视野极佳，需防滑与充足补水。</p>
+  <ul class="trail-meta">
+    <li><span class="k">难度</span> <span class="diff diff-hard">挑战</span></li>
+    <li><span class="k">距离</span> 4.8 km</li>
+    <li><span class="k">爬升</span> 760 m</li>
+  </ul>
+</article>
+<article class="trail-card" data-trail-id="moganshan-bamboo" data-difficulty="moderate">
+  <div class="trail-top">
+    <div>
+      <h2 class="trail-name">莫干山竹海慢行</h2>
+      <p class="trail-region">浙江 · 德清</p>
+    </div>
+    <button type="button" class="fav-btn" aria-label="收藏路线" aria-pressed="false" title="加入收藏">☆</button>
+  </div>
+  <p class="trail-summary">竹海与民宿村落穿插，坡度温和，适合两天一夜轻松徒步。</p>
+  <ul class="trail-meta">
+    <li><span class="k">难度</span> <span class="diff diff-moderate">中等</span></li>
+    <li><span class="k">距离</span> 9.1 km</li>
+    <li><span class="k">爬升</span> 430 m</li>
+  </ul>
+</article>
+    <p class="empty-filter" id="empty-filter">当前筛选下没有路线。试试「全部路线」或换个难度。</p>
+  </div>
+</main>
+<script>
+(function () {
+  var KEY = 'opencool-trail-favorites';
+  var trailNames = {
+    "huangshan-west": "黄山西海大峡谷",
+    "wuyi-nine-bend": "武夷山九曲溪畔步道",
+    "qingcheng-front": "青城前山循环",
+    "langyashan-loop": "琅琊山环城绿道",
+    "huashan-north": "华山北峰索道衔接段",
+    "moganshan-bamboo": "莫干山竹海慢行"
+  };
+
+  function load() {
+    try {
+      var raw = JSON.parse(localStorage.getItem(KEY) || '[]');
+      return Array.isArray(raw) ? raw.filter(function (id) { return typeof id === 'string'; }) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+  function save(arr) {
+    localStorage.setItem(KEY, JSON.stringify(arr));
+  }
+
+  var scope = 'all';
+  var diff = 'all';
+
+  function apply() {
+    var favs = load();
+    var set = {};
+    favs.forEach(function (id) { set[id] = true; });
+
+    document.querySelectorAll('.trail-card').forEach(function (card) {
+      var id = card.getAttribute('data-trail-id');
+      var on = !!set[id];
+      card.classList.toggle('is-fav', on);
+      var btn = card.querySelector('.fav-btn');
+      if (btn) {
+        btn.classList.toggle('on', on);
+        btn.textContent = on ? '★' : '☆';
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btn.setAttribute('aria-label', on ? '取消收藏' : '收藏路线');
+        btn.title = on ? '取消收藏' : '加入收藏';
+      }
+      var diffOk = diff === 'all' || card.getAttribute('data-difficulty') === diff;
+      var scopeOk = scope === 'all' || on;
+      card.classList.toggle('hidden', !(diffOk && scopeOk));
+    });
+
+    var visible = document.querySelectorAll('.trail-card:not(.hidden)').length;
+    document.getElementById('empty-filter').classList.toggle('show', visible === 0);
+
+    var n = favs.length;
+    document.getElementById('fav-count-num').textContent = String(n);
+    document.getElementById('fav-count-label').textContent = '（' + n + '）';
+
+    var empty = document.getElementById('fav-pin-empty');
+    var list = document.getElementById('fav-pin-list');
+    list.innerHTML = '';
+    if (!n) {
+      empty.hidden = false;
+      list.hidden = true;
+      return;
+    }
+    empty.hidden = true;
+    list.hidden = false;
+    favs.forEach(function (id) {
+      var name = trailNames[id] || id;
+      var chip = document.createElement('span');
+      chip.className = 'fav-chip';
+      chip.setAttribute('data-trail-id', id);
+      chip.innerHTML = '<span></span><button type="button" aria-label="取消收藏" title="取消收藏">★</button>';
+      chip.querySelector('span').textContent = name;
+      chip.querySelector('button').addEventListener('click', function () {
+        toggleFav(id);
+      });
+      list.appendChild(chip);
+    });
+  }
+
+  function toggleFav(id) {
+    var current = load();
+    var next = current.filter(function (x) { return x !== id; });
+    if (current.indexOf(id) === -1) next.unshift(id);
+    save(next);
+    apply();
+  }
+
+  function onStarClick(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    var card = ev.currentTarget.closest('.trail-card');
+    if (!card) return;
+    toggleFav(card.getAttribute('data-trail-id'));
+  }
+
+  document.querySelectorAll('.fav-btn').forEach(function (btn) {
+    btn.addEventListener('click', onStarClick);
+  });
+
+  document.querySelectorAll('.scope-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      scope = btn.getAttribute('data-scope') || 'all';
+      document.querySelectorAll('.scope-btn').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      apply();
+    });
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      diff = btn.getAttribute('data-diff') || 'all';
+      document.querySelectorAll('.filter-btn').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      apply();
+    });
+  });
+
+  apply();
+})();
+</script>
+</body>
+</html>
