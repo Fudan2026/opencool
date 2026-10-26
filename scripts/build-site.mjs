@@ -363,6 +363,44 @@ function buildStatusHtml() {
     }
   }
 
+  // Sentiment trend block (from sentiment-history.json, if present)
+  let sentiBlock = "";
+  const historyPath = path.join(ROOT, "sentiment-history.json");
+  if (fs.existsSync(historyPath)) {
+    try {
+      const hist = JSON.parse(fs.readFileSync(historyPath, "utf8"));
+      const items = (hist.items ?? []).slice(-20);
+      if (items.length) {
+        const scores = items.map((i) => i.score);
+        const w = 640;
+        const hgt = 70;
+        const min = Math.min(...scores, -20);
+        const max = Math.max(...scores, 20);
+        const span = Math.max(1, max - min);
+        const pts = scores
+          .map((v, i) => {
+            const x = scores.length > 1 ? (i / (scores.length - 1)) * (w - 8) + 4 : w / 2;
+            const y = hgt - 6 - ((v - min) / span) * (hgt - 12);
+            return `${x.toFixed(1)},${y.toFixed(1)}`;
+          })
+          .join(" ");
+        const stroke = scores[scores.length - 1] >= scores[0] ? "#15803d" : "#b91c1c";
+        const recent = [...items]
+          .reverse()
+          .slice(0, 5)
+          .map((i) => `${i.date.slice(5)} ${i.hour}:00 <b>${i.score > 0 ? "+" : ""}${i.score}</b>`)
+          .join(" · ");
+        sentiBlock = `<h2>情绪趋势（近 ${items.length} 档）</h2>
+        <svg viewBox="0 0 ${w} ${hgt}" width="100%" height="${hgt}" role="img" aria-label="sentiment trend">
+          <polyline points="${pts}" fill="none" stroke="${stroke}" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <p class="meta">${recent}</p>`;
+      }
+    } catch {
+      // unreadable history — block omitted
+    }
+  }
+
   const legend = Object.values(STATE_META)
     .map((m) => `<span class="s-leg"><i style="background:${m.color}"></i>${m.label}</span>`)
     .join("");
@@ -415,6 +453,7 @@ function buildStatusHtml() {
     <thead><tr><th></th>${headCells}</tr></thead>
     <tbody>${matrixRows}</tbody>
   </table>
+  ${sentiBlock}
   <h2>抓取健康</h2>
   ${healthBlock}
   <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>

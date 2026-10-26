@@ -617,9 +617,30 @@ function renderRawCategoryPanel(
 
 // ----- top-level renderer -----
 
+export interface SentimentReviewContext {
+  yesterdayDate: string;
+  yesterdayHour: string;
+  yesterdayScore: number;
+  avgChangePct: number | null;
+  verdict: string;
+  samples: number;
+  accumulated: number;
+}
+
+export interface SentimentPanelContext {
+  /** Chronological recent scores (newest last), for the sparkline. */
+  trendScores: number[];
+  /** How many history samples exist / are needed for percentile+review. */
+  trendAccumulated: number;
+  trendNeeded: number;
+  /** Yesterday-sentiment vs today-market replay row (null while thin). */
+  review?: SentimentReviewContext | null;
+}
+
 export type RenderHtmlOptions = {
   editionHour?: string;
   siblingHours?: string[];
+  sentimentContext?: SentimentPanelContext;
 };
 
 function editionLabelFor(hour?: string): string {
@@ -640,6 +661,7 @@ export function renderHtml(
   const trading = report.trading;
   const quant = report.quant;
   const sentiment = report.sentiment;
+  const sentimentContext = opts.sentimentContext;
   const editionHour = opts.editionHour;
   const editionLabel = editionLabelFor(editionHour);
   const siblingHours = (opts.siblingHours ?? []).filter(Boolean);
@@ -1054,6 +1076,12 @@ export function renderHtml(
   .senti-drivers { display:flex; gap:.4rem; flex-wrap:wrap; }
   .senti-chip { padding:.3rem .7rem; border:1px solid var(--rule); border-radius:999px;
     font-size:.85rem; background:var(--card); }
+  .senti-trend { margin:.6rem 0 1rem; padding:.7rem .9rem; background:var(--card);
+    border:1px solid var(--rule); border-radius:.75rem; }
+  .senti-trend p { margin:.35rem 0 0; }
+  .senti-review { margin:0 0 1rem; padding:.7rem .9rem; background:var(--card);
+    border:1px solid var(--rule); border-radius:.75rem; }
+  .senti-review p { margin:.3rem 0; }
 
 </style>
 </head>
@@ -1082,7 +1110,7 @@ export function renderHtml(
   </section>
   ${trading ? `<section class="panel" data-panel="trading">${renderTradingPanel(trading)}</section>` : ""}
   <section class="panel" data-panel="review">${renderReviewPanel(quant)}</section>
-  <section class="panel" data-panel="sentiment">${renderSentimentPanel(sentiment)}</section>
+  <section class="panel" data-panel="sentiment">${renderSentimentPanel(sentiment, sentimentContext)}</section>
   <section class="panel" data-panel="techread">${renderTechReadPanel(trading)}</section>
   <section class="panel" data-panel="personas">${renderPersonasPanel(quant)}</section>
   <section class="panel" data-panel="risk">${renderRiskPanel(quant)}</section>

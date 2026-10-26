@@ -342,8 +342,14 @@ async function runTrading(llmOff: boolean): Promise<TradingSection | null> {
  * editions are on disk; locally this simply reads what exists. Bounded
  * reads: newest 30 editions only.
  */
-function loadSentimentHistory(): number[] {
-  const out: number[] = [];
+export interface SentimentTrendPoint {
+  date: string;
+  hour: string;
+  score: number;
+}
+
+function loadSentimentTrend(): SentimentTrendPoint[] {
+  const out: SentimentTrendPoint[] = [];
   try {
     const days = fs
       .readdirSync(OUTPUT_DIR)
@@ -361,7 +367,11 @@ function loadSentimentHistory(): number[] {
         try {
           const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
           if (typeof r?.sentiment?.score === "number") {
-            out.push(r.sentiment.score);
+            out.push({
+              date: days[i],
+              hour: f.replace(/\.json$/, ""),
+              score: r.sentiment.score,
+            });
           }
         } catch {
           // unreadable sidecar — skip, never fail the run for telemetry
@@ -371,8 +381,56 @@ function loadSentimentHistory(): number[] {
   } catch {
     // no daily_reports yet — empty history
   }
-  // newest-first collection → chronological order for percentile
+  // newest-first collection → chronological order
   return out.reverse().slice(-30);
+}
+
+const REVIEW_SAMPLE_FLOOR = 10;
+
+/**
+ * Teaching-grade replay: the most recent PRE-today sentiment score vs
+ * today's index moves (same report's quant.market). Pure arithmetic over
+ * already-published data — explicitly not investment advice.
+ */
+function buildSentimentReview(
+  trend: SentimentTrendPoint[],
+  indices: Array<{ name: string; changePct: number }> | undefined,
+  today: string,
+): {
+  yesterdayDate: string;
+  yesterdayHour: string;
+  yesterdayScore: number;
+  avgChangePct: number | null;
+  verdict: string;
+  samples: number;
+  accumulated: number;
+} | null {
+  const prev = trend.filter((t) => t.date < today).pop();
+  if (!prev || !indices || indices.length === 0) return null;
+  const avgChangePct =
+    indices.reduce((acc, i) => acc + i.changePct, 0) / indices.length;
+  const s = prev.score;
+  let verdict: string;
+  if (Math.abs(s) < 18) {
+    verdict = avgChangePct >= 0 ? "中性情绪 · 市场走平偏强" : "中性情绪 · 市场走弱";
+  } else if (s <= -18 && avgChangePct > 0) {
+    verdict = "偏空情绪 + 市场高开 → 反转观察样本";
+  } else if (s <= -18) {
+    verdict = "偏空情绪 + 市场走弱 → 顺势样本";
+  } else if (avgChangePct > 0) {
+    verdict = "偏多情绪 + 市场走强 → 顺势样本";
+  } else {
+    verdict = "偏多情绪 + 市场走弱 → 落空观察样本";
+  }
+  return {
+    yesterdayDate: prev.date,
+    yesterdayHour: prev.hour,
+    yesterdayScore: prev.score,
+    avgChangePct,
+    verdict,
+    samples: Math.max(0, trend.filter((t) => t.date < today).length - 1),
+    accumulated: REVIEW_SAMPLE_FLOOR,
+  };
 }
 
 async function main() {
@@ -447,7 +505,8 @@ async function main() {
     : await generateDailyReport(articles);
   if (trading) report.trading = trading;
   if (quant) report.quant = quant;
-  const sentimentHistory = loadSentimentHistory();
+  const sentimentTrend = loadSentimentTrend();
+  const sentimentHistory = sentimentTrend.map((t) => t.score);
   report.sentiment = scoreSentiment(articles, sentimentHistory);
   console.log(
     `[daily] sentiment: ${report.sentiment.label} (${report.sentiment.score}, +${report.sentiment.posHits}/−${report.sentiment.negHits} over ${report.sentiment.scanned} finance items` +
@@ -472,7 +531,20 @@ async function main() {
   );
   fs.writeFileSync(
     `${base}.html`,
-    renderHtml(report, raw, date, { editionHour: hour, siblingHours }),
+    renderHtml(report, raw, date, {
+      editionHour: hour,
+      siblingHours,
+      sentimentContext: {
+        trendScores: sentimentHistory.slice(-20),
+        trendAccumulated: sentimentHistory.length,
+        trendNeeded: MIN_HISTORY_SAMPLES,
+        review: buildSentimentReview(
+          sentimentTrend,
+          quant?.market?.indices,
+          date,
+        ),
+      },
+    }),
     "utf8",
   );
   if (process.env.OUTPUT_MARKDOWN === "true") {
