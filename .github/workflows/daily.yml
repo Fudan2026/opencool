@@ -1,6 +1,6 @@
 name: Daily Brief
 
-# OpenCool triple brief (06 / 13 / 19 Asia/Shanghai) — LLM_MODE forced off.
+# OpenCool triple brief (06 / 13 / 19 Asia/Shanghai) — LLM_MODE=auto.
 #
 # One-time setup:
 #   1. Settings → Actions → General → Workflow permissions: Read and write
@@ -9,8 +9,11 @@ name: Daily Brief
 #        REPORT_TZ=Asia/Shanghai
 #        REPORT_HOUR=6,13,19
 #        REPORT_LOCALE=zh
-#        LLM_MODE=off   (forced in this workflow regardless)
-#   4. Do NOT add DeepSeek / other LLM secrets for this fork's default path.
+#        LLM_MODE=auto  (zero-AI unless a free ZHIPU_API_KEY secret is set)
+#   4. Optional zero-cost enhancement: add secret ZHIPU_API_KEY (free
+#      GLM-4-Flash tier, https://open.bigmodel.cn) — auto turns enrichment
+#      on automatically. Unset = pure heuristic mode. Do NOT add DeepSeek /
+#      paid LLM secrets for this fork's default path.
 #   5. Optional: secret/var ALERT_WEBHOOK_URL for missing-edition / failure pings
 #      (scripts/notify-failure.mjs no-ops when unset).
 #   6. Actions → Daily Brief → Run workflow once to seed.
@@ -200,8 +203,13 @@ jobs:
 
       - name: Generate edition report
         env:
-          # OpenCool: always off — no DeepSeek / paid LLM this round
-          LLM_MODE: 'off'
+          # OpenCool: auto = stays zero-AI unless the FREE ZHIPU_API_KEY
+          # secret is configured — then GLM-4-Flash enrichment activates
+          # at no cost. No paid LLM ever (README 明确不做).
+          LLM_MODE: ${{ vars.LLM_MODE || 'auto' }}
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          ZHIPU_BASE_URL: ${{ vars.ZHIPU_BASE_URL }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
           REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
           REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,13,19' }}

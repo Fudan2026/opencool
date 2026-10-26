@@ -21,7 +21,9 @@ export const PRESETS: Record<AnthropicCompatConfig["backend"], AnthropicCompatCo
   zhipu: {
     backend: "zhipu",
     defaultBaseUrl: "https://open.bigmodel.cn/api/anthropic",
-    defaultModel: "claude-sonnet-4-6",
+    // GLM-4-Flash is Zhipu's free tier — the whole point of this backend
+    // is zero-cost enrichment, so it must NOT default to an Anthropic model.
+    defaultModel: "glm-4-flash",
     apiKeyEnv: "ZHIPU_API_KEY",
     baseUrlEnv: "ZHIPU_BASE_URL",
   },

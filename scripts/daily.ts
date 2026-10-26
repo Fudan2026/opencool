@@ -33,6 +33,7 @@ import { generateTradingCommentary } from "../lib/ai/trading-commentary";
 import type { TradingSection } from "../lib/ai/pipeline";
 import { todayKey, editionHourKey, parseReportHours } from "../lib/utils";
 import { buildQuantSection } from "../lib/invest/quant";
+import { scoreSentiment } from "../lib/nlp/sentiment";
 import type { QuantSection } from "../lib/invest/types";
 
 const OUTPUT_DIR = "daily_reports";
@@ -338,8 +339,9 @@ async function runTrading(llmOff: boolean): Promise<TradingSection | null> {
 async function main() {
   const llmOff = isLlmOff();
   if (llmOff) {
-    console.log(`[daily] LLM_MODE=off — heuristic digest, no API key required`);
+    console.log(`[daily] LLM off — heuristic digest, no API key required`);
   } else {
+    console.log(`[daily] LLM on — backend ${getModelTag()}`);
     // Fail fast on misconfigured backend before we spend 30s fetching
     // 500+ articles only to discover the LLM has no credentials.
     validateBackendCredentials();
@@ -406,6 +408,10 @@ async function main() {
     : await generateDailyReport(articles);
   if (trading) report.trading = trading;
   if (quant) report.quant = quant;
+  report.sentiment = scoreSentiment(articles);
+  console.log(
+    `[daily] sentiment: ${report.sentiment.label} (${report.sentiment.score}, +${report.sentiment.posHits}/−${report.sentiment.negHits} over ${report.sentiment.scanned} finance items)`,
+  );
   report.fetch_health = health;
   console.log(`[daily] digest ready in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 

@@ -21,6 +21,7 @@ import type { CryptoGlobalStats } from "../trading/coingecko";
 import type { FearGreedSnapshot } from "../trading/fear-greed";
 import type { TradingCommentary } from "./trading-commentary";
 import type { QuantSection } from "../invest/types";
+import type { MarketSentiment } from "../nlp/sentiment";
 
 export interface TradingSection extends TradingCommentary {
   generated_at: string;
@@ -41,6 +42,8 @@ export interface DailyReport {
   trading?: TradingSection;
   /** Retail quant extras: A-share overview, events, personas. */
   quant?: QuantSection;
+  /** Zero-token dictionary sentiment gauge over finance headlines. */
+  sentiment?: MarketSentiment;
   /** Per-source fetch telemetry attached by scripts/daily.ts. */
   fetch_health?: FetchHealth;
 }

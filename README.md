@@ -23,10 +23,10 @@
 REPORT_TZ=Asia/Shanghai
 REPORT_HOUR=6,13,19
 REPORT_LOCALE=zh
-LLM_MODE=off
+LLM_MODE=auto   # 无任何 key 时等同 off；配置免费 ZHIPU_API_KEY 后自动点亮 GLM-4-Flash 导读
 ```
 
-Workflow **强制** `LLM_MODE=off`。
+Workflow 默认 `LLM_MODE=auto`：**零 AI · 零 Token 是默认态**。只有显式配置免费的智谱 GLM-4-Flash key（https://open.bigmodel.cn ）才会激活 LLM 导读；任何付费 LLM 均不接入。
 
 ---
 
@@ -36,6 +36,7 @@ Workflow **强制** `LLM_MODE=off`。
 - **原文 ↔ 中文导读**开关（localStorage）：更长摘录 + 启发式要点，**无机器翻译 / 无 LLM**
 - **行情·A股/基金**：Yahoo 无 Key K 线指标 + 迷你走势
 - **今日复盘**：东方财富延时指数 + 新闻标题命中观察池
+- **市场情绪计**：财经标题词典规则打分（−100~+100 + 驱动词榜单），零 AI、规则全透明，不构成投资建议
 - **技术面读线 / 大师视角 / 风控纪律**：教学向规则面板
 - **散户学堂 / 知识库**：静态教程 + 客户端检索
 - **徒步路线收藏**：`trails.html` 星标收藏（本机 localStorage，无账号）
