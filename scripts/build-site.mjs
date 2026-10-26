@@ -194,6 +194,43 @@ for (const e of editions) {
 }
 const dates = [...byDate.keys()].sort((a, b) => b.localeCompare(a));
 
+// ---------------------------------------------------------------------------
+// Archive governance: prune superseded *-articles.json sidecars older than
+// PRUNE_ARTICLES_DAYS (default 30, 0 disables). gh-pages grows ~1.6MB/day
+// and these re-fetchable sidecars are ~two thirds of it. Report JSONs and
+// ALL HTML are never touched: gate catchup only checks today's sidecar,
+// status.html reads 14 days, archive sizes are computed live.
+// ---------------------------------------------------------------------------
+
+const PRUNE_DAYS = Math.max(0, Number(process.env.PRUNE_ARTICLES_DAYS ?? 30) || 0);
+const pruneStats = { removed: 0, bytes: 0, cutoff: "" };
+if (PRUNE_DAYS > 0) {
+  const cutoffMs = Date.now() - PRUNE_DAYS * 86_400_000;
+  pruneStats.cutoff = new Date(cutoffMs).toISOString().slice(0, 10);
+  for (const d of dates) {
+    const dayMs = Date.parse(`${d}T00:00:00+08:00`);
+    if (!(dayMs < cutoffMs)) continue;
+    const dir = path.join(ROOT, d);
+    for (const f of fs.readdirSync(dir)) {
+      if (!f.endsWith("-articles.json")) continue;
+      const fp = path.join(dir, f);
+      try {
+        pruneStats.bytes += fs.statSync(fp).size;
+        fs.unlinkSync(fp);
+        pruneStats.removed++;
+      } catch {
+        // never fail the bake for cleanup
+      }
+    }
+  }
+  if (pruneStats.removed) {
+    console.log(
+      `[build-site] pruned ${pruneStats.removed} articles sidecars (< ${pruneStats.cutoff}, ${(pruneStats.bytes / 1048576).toFixed(1)} MB freed)`,
+    );
+  }
+}
+
+
 const dayBlocks = dates
   .map((d) => {
     const items = byDate
@@ -401,6 +438,10 @@ function buildStatusHtml() {
     }
   }
 
+  const governanceLine = PRUNE_DAYS > 0
+    ? `<p class="meta">归档治理：articles 侧车保留 ${PRUNE_DAYS} 天（截止 ${pruneStats.cutoff}，本次烘焙清理 ${pruneStats.removed} 个 / ${(pruneStats.bytes / 1048576).toFixed(1)} MB）。</p>`
+    : `<p class="meta">归档治理：关闭（PRUNE_ARTICLES_DAYS=0）。</p>`;
+
   const legend = Object.values(STATE_META)
     .map((m) => `<span class="s-leg"><i style="background:${m.color}"></i>${m.label}</span>`)
     .join("");
@@ -448,6 +489,7 @@ function buildStatusHtml() {
   <div class="brand">OpenCool</div>
   <h1>运行状态</h1>
   <p class="meta">发布矩阵（近 ${dayDirs.length} 天 × ${slotHours.length} 档）· 数据侧车判定，占位页不冒充真档</p>
+  ${governanceLine}
   <p>${legend}</p>
   <table class="m-table">
     <thead><tr><th></th>${headCells}</tr></thead>
