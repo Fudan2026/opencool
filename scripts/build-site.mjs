@@ -429,5 +429,57 @@ function buildStatusHtml() {
 
 fs.writeFileSync(path.join(ROOT, "status.html"), buildStatusHtml(), "utf8");
 console.log(`[build-site] status.html (${dates.slice(0, 14).length}-day matrix)`);
+
+// ---------------------------------------------------------------------------
+// sentiment-history.json — rolling sentiment scores (newest 60 real
+// editions). The gh-pages restore step runs before `npm run daily`, so
+// build-site sees the full restored tree; this file is the ecosystem
+// data product (SuPro/agents read it directly).
+// ---------------------------------------------------------------------------
+
+const HISTORY_CAP = 60;
+const historyItems = [];
+for (const d of dates) {
+  if (historyItems.length >= HISTORY_CAP) break;
+  for (const h of slotHours) {
+    if (historyItems.length >= HISTORY_CAP) break;
+    const sidecar = path.join(ROOT, d, `${h}.json`);
+    if (!fs.existsSync(sidecar)) continue;
+    try {
+      const r = JSON.parse(fs.readFileSync(sidecar, "utf8"));
+      const sen = r?.sentiment;
+      if (sen && typeof sen.score === "number") {
+        historyItems.push({
+          date: d,
+          hour: h,
+          score: sen.score,
+          label: sen.label ?? null,
+          posHits: sen.posHits ?? null,
+          negHits: sen.negHits ?? null,
+          scanned: sen.scanned ?? null,
+          percentile: sen.percentile ?? null,
+        });
+      }
+    } catch {
+      // unreadable sidecar — skip
+    }
+  }
+}
+historyItems.reverse(); // newest last → chronological array
+const historyPayload = {
+  generatedAt: new Date().toISOString(),
+  source: "build-site",
+  cap: HISTORY_CAP,
+  count: historyItems.length,
+  items: historyItems,
+};
+fs.writeFileSync(
+  path.join(ROOT, "sentiment-history.json"),
+  JSON.stringify(historyPayload, null, 2) + "\n",
+  "utf8",
+);
+console.log(
+  `[build-site] sentiment-history.json (${historyItems.length} editions)`,
+);
 fs.writeFileSync(path.join(ROOT, ".nojekyll"), "", "utf8");
 console.log(`[build-site] .nojekyll`);
