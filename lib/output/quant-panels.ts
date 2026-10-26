@@ -10,6 +10,7 @@ import { PERSONAS } from "../invest/personas";
 import type { TickerAnalysis } from "../trading/signals";
 import type { TradingSection } from "../ai/pipeline";
 import type { MarketSentiment } from "../nlp/sentiment";
+import type { SentimentPanelContext } from "./render";
 
 function esc(s: string): string {
   return s
@@ -280,13 +281,83 @@ export function sparklineForTicker(t: TickerAnalysis): string {
  * Zero-token sentiment gauge panel (lib/nlp/sentiment.ts). Always rendered
  * when present — it is a transparent dictionary rule panel, not advice.
  */
-export function renderSentimentPanel(sentiment?: MarketSentiment): string {
+const SECTOR_LABELS: Record<string, string> = {
+  "china-ashare": "A 股蓝筹",
+  "china-etf": "ETF",
+  "china-equity": "中概港股",
+  "us-equity": "美股",
+  crypto: "加密",
+  "commodity-fx": "商品汇率",
+  macro: "宏观指数",
+  general: "大盘综合",
+};
+function sectorLabel(key: string): string {
+  return SECTOR_LABELS[key] ?? key;
+}
+
+export function renderSentimentPanel(
+  sentiment?: MarketSentiment,
+  context?: SentimentPanelContext,
+): string {
   if (!sentiment) {
     return `<p class="empty">市场情绪计尚未生成。</p>`;
   }
   const cls = sentiment.score >= 0 ? "positive" : "negative";
   const sign = sentiment.score > 0 ? "+" : "";
   const markerLeft = Math.round(50 + sentiment.score / 2);
+
+  // Trend sparkline over recent editions (sparklineSvg is 120x36, so a
+  // wide inline chart is drawn here instead).
+  let trendHtml = "";
+  if (context?.trendScores?.length) {
+    const scores = context.trendScores;
+    const w = 560;
+    const hgt = 64;
+    const min = Math.min(...scores, -20);
+    const max = Math.max(...scores, 20);
+    const span = Math.max(1, max - min);
+    const pts = scores
+      .map((v, i) => {
+        const x = scores.length > 1 ? (i / (scores.length - 1)) * (w - 8) + 4 : w / 2;
+        const y = hgt - 6 - ((v - min) / span) * (hgt - 12);
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      })
+      .join(" ");
+    const lastUp = scores[scores.length - 1] >= scores[0];
+    const stroke = lastUp ? "#15803d" : "#b91c1c";
+    const zeroY = hgt - 6 - ((0 - min) / span) * (hgt - 12);
+    trendHtml = `<div class="senti-trend">
+      <svg viewBox="0 0 ${w} ${hgt}" width="100%" height="${hgt}" role="img" aria-label="近期情绪走势">
+        <line x1="4" y1="${zeroY.toFixed(1)}" x2="${w - 4}" y2="${zeroY.toFixed(1)}" stroke="var(--rule)" stroke-dasharray="3 3"/>
+        <polyline points="${pts}" fill="none" stroke="${stroke}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <p class="muted tiny">近 ${scores.length} 档情绪走势${scores.length < (context.trendNeeded ?? 20) ? ` · 积累中 ${context.trendAccumulated}/${context.trendNeeded}（样本足后启用分位与复盘统计）` : ""}</p>
+    </div>`;
+  } else {
+    trendHtml = `<p class="muted tiny">情绪走势积累中 0/${context?.trendNeeded ?? 20} —— 历史从今日起逐档沉淀。</p>`;
+  }
+
+  // Yesterday-sentiment vs today-market replay (teaching, not advice).
+  let reviewHtml = "";
+  const rv = context?.review;
+  if (rv) {
+    const pct =
+      rv.avgChangePct === null ? "—" : `${rv.avgChangePct >= 0 ? "+" : ""}${rv.avgChangePct.toFixed(2)}%`;
+    const pctCls = rv.avgChangePct !== null && rv.avgChangePct >= 0 ? "positive" : "negative";
+    reviewHtml = `<div class="senti-review">
+      <h3 class="panel-h">信号复盘 · 昨档情绪 vs 今日行情</h3>
+      <p><span class="muted tiny">${esc(rv.yesterdayDate)} ${esc(rv.yesterdayHour)}:00</span>
+      情绪 <b class="${rv.yesterdayScore >= 0 ? "positive" : "negative"}">${rv.yesterdayScore > 0 ? "+" : ""}${rv.yesterdayScore}</b>
+      → 今日三指均值 <b class="${pctCls}">${pct}</b></p>
+      <p>${esc(rv.verdict)}</p>
+      <p class="muted tiny">样本 ${rv.samples}/${rv.accumulated}${rv.samples < rv.accumulated ? "（不足统计量，仅教学展示）" : "（已达教学统计量）"} · 规则透明、零 AI · 不构成投资建议</p>
+    </div>`;
+  } else {
+    reviewHtml = `<div class="senti-review">
+      <h3 class="panel-h">信号复盘 · 昨档情绪 vs 今日行情</h3>
+      <p class="muted tiny">积累中 —— 需要至少一个往日档期与今日行情配对（样本 ${context?.review?.samples ?? 0}/${context?.review?.accumulated ?? 10}）。</p>
+    </div>`;
+  }
   const drivers = sentiment.drivers.length
     ? `<div class="senti-drivers">${sentiment.drivers
         .map(
@@ -304,8 +375,22 @@ export function renderSentimentPanel(sentiment?: MarketSentiment): string {
     </div>
     <div class="senti-bar"><div class="senti-marker" style="left:${markerLeft}%"></div></div>
     <div class="senti-scale muted tiny"><span>−100 偏空</span><span>0</span><span>+100 偏多</span></div>
+    ${trendHtml}
+    ${reviewHtml}
+    ${sentiment.percentile !== null ? `<p class="muted tiny">当前分数位于近 30 档历史的第 <b>${sentiment.percentile}</b> 百分位。</p>` : ""}
     <h2 class="panel-h">情绪驱动词</h2>
     ${drivers}
+    ${
+      sentiment.sectors?.length
+        ? `<h2 class="panel-h">板块情绪</h2>
+    <div class="senti-drivers">${sentiment.sectors
+      .map(
+        (sec) =>
+          `<span class="senti-chip ${sec.score >= 0 ? "positive" : "negative"}">${esc(sectorLabel(sec.key))} ${sec.score > 0 ? "+" : ""}${sec.score} <b>${sec.articles}篇</b></span>`,
+      )
+      .join("")}</div>`
+        : ""
+    }
     <p class="muted tiny">${esc(sentiment.note)}</p>
   </div>`;
 }
