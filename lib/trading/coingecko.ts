@@ -16,6 +16,7 @@ export async function fetchCryptoGlobal(): Promise<CryptoGlobalStats | null> {
   try {
     const res = await fetch("https://api.coingecko.com/api/v3/global", {
       headers: { "User-Agent": "Mozilla/5.0 (DailyBriefBot)" },
+      signal: AbortSignal.timeout(10_000),
     });
     if (!res.ok) return null;
     const json = (await res.json()) as {

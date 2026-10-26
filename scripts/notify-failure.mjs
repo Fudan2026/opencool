@@ -26,10 +26,6 @@ function opt(name, fallback = "") {
 }
 
 const webhook = process.env.ALERT_WEBHOOK_URL || "";
-if (!webhook) {
-  console.log("[notify] ALERT_WEBHOOK_URL unset — skip");
-  process.exit(0);
-}
 
 const tz = process.env.REPORT_TZ || "Asia/Shanghai";
 const today =
@@ -51,6 +47,9 @@ const runUrl =
     : "(local)";
 
 let reason = opt("--reason", "");
+// fatal = the edition is genuinely missing → exit 1 and turn the run red,
+// webhook or not. Detection must not depend on ALERT_WEBHOOK_URL being set.
+let fatal = false;
 if (flag("--failure") && !reason) reason = "workflow step failure";
 if (flag("--missing-html") && !reason) {
   const htmlPath = path.join(
@@ -59,15 +58,21 @@ if (flag("--missing-html") && !reason) {
     hour ? `${hour}.html` : `${today}.html`,
   );
   const missing = !fs.existsSync(htmlPath);
-  const empty =
-    !missing && fs.statSync(htmlPath).size === 0;
-  if (!missing && !empty) {
+  // A placeholder page (written by build-site.mjs for future slots) means
+  // the edition was never generated — same as missing for alerting.
+  const placeholder =
+    !missing && fs.readFileSync(htmlPath, "utf8").includes("尚未更新");
+  const empty = !missing && !placeholder && fs.statSync(htmlPath).size === 0;
+  if (!missing && !placeholder && !empty) {
     console.log(`[notify] HTML ok: ${htmlPath}`);
     process.exit(0);
   }
   reason = missing
     ? `missing HTML ${htmlPath}`
-    : `empty HTML ${htmlPath}`;
+    : placeholder
+      ? `placeholder-only HTML — edition never generated: ${htmlPath}`
+      : `empty HTML ${htmlPath}`;
+  fatal = true;
 }
 
 if (!reason) {
@@ -82,6 +87,15 @@ const body = {
   run_url: runUrl,
 };
 
+if (!webhook) {
+  if (fatal) {
+    console.error(`[notify] ALERT (no webhook configured): ${editionId} — ${reason}`);
+    process.exit(1);
+  }
+  console.log("[notify] ALERT_WEBHOOK_URL unset — skip");
+  process.exit(0);
+}
+
 try {
   const res = await fetch(webhook, {
     method: "POST",
@@ -90,9 +104,9 @@ try {
     signal: AbortSignal.timeout(10_000),
   });
   console.log(`[notify] webhook HTTP ${res.status}`);
-  // Never fail the job solely because the webhook is down
-  process.exit(0);
 } catch (e) {
   console.warn(`[notify] webhook error: ${e instanceof Error ? e.message : e}`);
-  process.exit(0);
 }
+// Webhook delivery never changes the verdict: a detected missing/placeholder
+// edition fails the run so the gap is visible (and catchup retries it).
+process.exit(fatal ? 1 : 0);

@@ -8,6 +8,7 @@ import { fetchSource } from "../lib/sources/dispatch";
 import {
   generateDailyReport,
   type ArticleInput,
+  type FetchHealth,
 } from "../lib/ai/pipeline";
 import { generateHeuristicReport } from "../lib/ai/heuristic-digest";
 import { isLlmOff } from "../lib/ai/llm-mode";
@@ -36,8 +37,36 @@ import type { QuantSection } from "../lib/invest/types";
 
 const OUTPUT_DIR = "daily_reports";
 
-async function fetchAll(): Promise<ArticleInput[]> {
+// Hard deadline: a hung fetch (black-holed socket, slow-drip response)
+// must fail the run fast so the hourly gh-pages catchup can retry the
+// slot, instead of silently burning the whole CI job timeout.
+const deadlineRaw = Number(process.env.PIPELINE_DEADLINE_MIN || 20);
+const PIPELINE_DEADLINE_MIN =
+  Number.isFinite(deadlineRaw) && deadlineRaw > 0 ? deadlineRaw : 20;
+const pipelineT0 = Date.now();
+const stageMarks: string[] = [];
+let currentStage = "init";
+function stage(name: string) {
+  stageMarks.push(`${name}+${((Date.now() - pipelineT0) / 1000).toFixed(0)}s`);
+  currentStage = name;
+}
+const watchdog = setTimeout(() => {
+  console.error(
+    `\n[daily] PIPELINE DEADLINE of ${PIPELINE_DEADLINE_MIN}min exceeded at stage "${currentStage}" — aborting`,
+  );
+  console.error(`[daily] stages so far: ${stageMarks.join(" | ") || "(none)"}`);
+  process.exit(1);
+}, PIPELINE_DEADLINE_MIN * 60_000);
+
+async function fetchAll(): Promise<{
+  articles: ArticleInput[];
+  health: FetchHealth;
+}> {
   const articles: ArticleInput[] = [];
+  const health: FetchHealth = {
+    generated_at: new Date().toISOString(),
+    entries: [],
+  };
   const enabled = sources.filter((s) => s.enabled !== false);
   const CONCURRENCY = 6;
   let cursor = 0;
@@ -46,13 +75,27 @@ async function fetchAll(): Promise<ArticleInput[]> {
     while (cursor < enabled.length) {
       const idx = cursor++;
       const source = enabled[idx];
+      const t0 = Date.now();
       try {
         const items = await fetchSource(source);
         console.log(`  ${source.id.padEnd(20)} ${items.length}`);
         articles.push(...items.map((it) => ({ ...it, source: source.name })));
+        health.entries.push({
+          id: source.id,
+          ms: Date.now() - t0,
+          ok: true,
+          count: items.length,
+        });
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         console.error(`  ${source.id.padEnd(20)} FAILED — ${msg}`);
+        health.entries.push({
+          id: source.id,
+          ms: Date.now() - t0,
+          ok: false,
+          count: 0,
+          error: msg.slice(0, 200),
+        });
       }
     }
   }
@@ -62,7 +105,24 @@ async function fetchAll(): Promise<ArticleInput[]> {
       worker(),
     ),
   );
-  return articles;
+  return { articles, health };
+}
+
+function logFetchHealth(health: FetchHealth) {
+  const ok = health.entries.filter((e) => e.ok).length;
+  const failed = health.entries.filter((e) => !e.ok);
+  const slowest = [...health.entries]
+    .sort((a, b) => b.ms - a.ms)
+    .slice(0, 3)
+    .map((e) => `${e.id}(${(e.ms / 1000).toFixed(1)}s)`)
+    .join(", ");
+  console.log(
+    `[daily] fetch health: ok=${ok}/${health.entries.length}` +
+      (failed.length
+        ? ` failed=[${failed.map((e) => e.id).join(",")}]`
+        : "") +
+      ` slowest: ${slowest}`,
+  );
 }
 
 async function enrichGhTrending(articles: ArticleInput[]): Promise<void> {
@@ -289,14 +349,17 @@ async function main() {
   const hour = editionHourKey();
   const siblingHours = parseReportHours().map((h) => String(h).padStart(2, "0"));
   console.log(`[daily] ${date} edition ${hour} — fetching sources…\n`);
-  const articles = await fetchAll();
+  stage("sources");
+  const { articles, health } = await fetchAll();
   console.log(`\n[daily] total articles: ${articles.length}`);
+  logFetchHealth(health);
   if (articles.length === 0) {
     throw new Error("no articles fetched — aborting");
   }
 
   if (!llmOff) {
     // Enrich GH Trending, papers, finance news, and politics with summaries.
+    stage("enrichment");
     await enrichGhTrending(articles);
     await enrichTrendingPapers(articles);
     await enrichFinanceNews(articles);
@@ -311,6 +374,7 @@ async function main() {
   // if it errors, we still ship the news digest.
   let trading: TradingSection | null = null;
   try {
+    stage("trading");
     trading = await runTrading(llmOff);
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
@@ -319,6 +383,7 @@ async function main() {
 
   let quant: QuantSection | null = null;
   try {
+    stage("quant");
     console.log(`[daily] building retail quant extras…`);
     quant = await buildQuantSection(trading?.tickers ?? [], articles);
     console.log(
@@ -329,6 +394,7 @@ async function main() {
     console.warn(`[daily] quant section failed: ${msg}`);
   }
 
+  stage("digest");
   console.log(
     llmOff
       ? `[daily] generating heuristic digest…`
@@ -340,8 +406,10 @@ async function main() {
     : await generateDailyReport(articles);
   if (trading) report.trading = trading;
   if (quant) report.quant = quant;
+  report.fetch_health = health;
   console.log(`[daily] digest ready in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 
+  stage("write");
   const dateDir = path.join(OUTPUT_DIR, date);
   fs.mkdirSync(dateDir, { recursive: true });
   const base = path.join(dateDir, hour);
@@ -364,6 +432,7 @@ async function main() {
     console.log(`[daily] wrote ${base}.{json,html,articles.json}`);
   }
 
+  clearTimeout(watchdog);
   console.log(`[daily] done.`);
 }
 

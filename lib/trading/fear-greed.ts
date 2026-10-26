@@ -22,6 +22,7 @@ export async function fetchCryptoFearGreed(): Promise<FearGreedSnapshot | null> 
   try {
     const res = await fetch("https://api.alternative.me/fng/?limit=1", {
       headers: { "User-Agent": "Mozilla/5.0 (DailyBriefBot)" },
+      signal: AbortSignal.timeout(10_000),
     });
     if (!res.ok) return null;
     const data = (await res.json()) as {

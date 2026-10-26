@@ -27,9 +27,8 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: daily-brief
-  cancel-in-progress: false
+# NOTE: no workflow-level concurrency — a hung build must never queue-block
+# the 7s gate runs. The build job carries its own concurrency group below.
 
 jobs:
   gate:
@@ -126,26 +125,33 @@ jobs:
             fi
           done
 
-          # Catchup: earliest due slot whose file is still missing on gh-pages
+          # Catchup: earliest due slot still missing on gh-pages.
+          # Check the JSON sidecar, NOT the HTML: build-site publishes a
+          # friendly placeholder <slot>.html for future slots, so HTML
+          # existence can't distinguish a real edition from a placeholder.
+          # Real editions always write <slot>.json; placeholders never do.
           for h in "${HLIST[@]}"; do
             h_trim="${h// /}"
             if [ "$NOW_HOUR" -lt "$h_trim" ]; then
               continue
             fi
             SLOT=$(pad2 "$h_trim")
-            CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/${TODAY}/${SLOT}.html?ref=gh-pages"
+            CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/${TODAY}/${SLOT}.json?ref=gh-pages"
             HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
               -H "Authorization: Bearer ${GH_TOKEN}" \
               -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               "$CHECK_URL" || echo "000")
-            if [ "$HTTP_CODE" = "404" ]; then
-              echo "↻ Catchup: missing ${TODAY}/${SLOT}.html — recovering"
+            # Anything other than a clean 200 (404 missing, 403/429 rate
+            # limit, 000 network flake) → rebuild. A redundant build is
+            # bounded and harmless; a silently skipped edition is not.
+            if [ "$HTTP_CODE" != "200" ]; then
+              echo "↻ Catchup: ${TODAY}/${SLOT}.json not confirmed (HTTP $HTTP_CODE) — recovering"
               echo "should-run=true" >> "$GITHUB_OUTPUT"
               echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
               exit 0
             fi
-            echo "Slot $SLOT present (HTTP $HTTP_CODE)"
+            echo "Slot $SLOT published (HTTP $HTTP_CODE)"
           done
 
           echo "✗ No match / nothing to catch up"
@@ -157,7 +163,16 @@ jobs:
     needs: gate
     if: needs.gate.outputs.should-run == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # 25min hard stop pairs with the pipeline watchdog (PIPELINE_DEADLINE_MIN,
+    # default 20min in scripts/daily.ts): a hung build gets cut loose well
+    # before it can starve later editions.
+    timeout-minutes: 25
+    # Job-level group: overlapping builds queue/cancel here only — gates
+    # always run. A newer dispatch cancels a hung older build; the missing
+    # slot is then recovered by the next hourly catchup.
+    concurrency:
+      group: daily-brief-build
+      cancel-in-progress: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -217,7 +232,9 @@ jobs:
           commit_message: 'brief: ${{ needs.gate.outputs.edition-hour }} for ${{ github.run_id }}'
 
       - name: Alert on job failure
-        if: failure()
+        # cancelled() too: a timeout/hung build is cancelled, not failure —
+        # without this branch the alert step is silently skipped.
+        if: failure() || cancelled()
         env:
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
