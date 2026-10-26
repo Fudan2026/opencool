@@ -174,6 +174,16 @@ let latestHtml = fs.readFileSync(latestPath, "utf8");
 latestHtml = latestHtml
   .replace(/href="\.\.\/archive\.html"/g, 'href="./archive.html"')
   .replace(/href="\.\/(\d{2})\.html"/g, `href="./${latest.date}/$1.html"`);
+// Homepage-only entry to the trails favorites page (archive already links
+// it). Injected only when trails.html exists, so a local build-site run
+// without build-trails doesn't ship a dead link.
+if (fs.existsSync(path.join(ROOT, "trails.html"))) {
+  latestHtml = latestHtml.replace(
+    "</body>",
+    `  <a href="./trails.html" style="position:fixed;right:1rem;bottom:1rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#e85d04;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">🥾 徒步路线收藏</a>\n</body>`,
+  );
+  console.log(`[build-site] index.html += trails entry`);
+}
 fs.writeFileSync(path.join(ROOT, "index.html"), latestHtml, "utf8");
 console.log(`[build-site] index.html  ← ${latest.rel}`);
 
