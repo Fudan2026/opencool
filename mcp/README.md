@@ -10,6 +10,8 @@
 | `get_quote` | Yahoo 行情 + 近期收盘 |
 | `get_kline` | 日线收盘序列（约 3 个月） |
 | `market_overview` | 东方财富延时指数快照 |
+| `sentiment_query` | 最新（或指定 date+hour）档的零 AI 词典情绪：score/label/sectors/percentile |
+| `sentiment_trend` | 滚动情绪历史（sentiment-history.json，时间正序，limit≤60） |
 
 零付费 API Key。数据有延迟，仅供研究，不构成投资建议。
 
