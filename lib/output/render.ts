@@ -24,6 +24,7 @@ import {
   renderSchoolPanel,
   renderKnowledgePanel,
   renderMcpHelpPanel,
+  renderSentimentPanel,
   sparklineForTicker,
 } from "./quant-panels";
 
@@ -53,6 +54,7 @@ const TEXTS_ZH = {
   catSchool: "散户学堂",
   catKnowledge: "知识库",
   catMcp: "开放 MCP",
+  catSentiment: "市场情绪计",
   guideToggleOff: "原文",
   guideToggleOn: "中文导读",
   guideWireNote: "外电原文 · 无机器翻译",
@@ -123,6 +125,7 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   catSchool: "Retail School",
   catKnowledge: "Knowledge",
   catMcp: "Open MCP",
+  catSentiment: "Sentiment",
   guideToggleOff: "Original",
   guideToggleOn: "CN guide",
   guideWireNote: "EN original · no machine translation",
@@ -636,6 +639,7 @@ export function renderHtml(
 ): string {
   const trading = report.trading;
   const quant = report.quant;
+  const sentiment = report.sentiment;
   const editionHour = opts.editionHour;
   const editionLabel = editionLabelFor(editionHour);
   const siblingHours = (opts.siblingHours ?? []).filter(Boolean);
@@ -1039,6 +1043,17 @@ export function renderHtml(
   .ev-count { display:inline-block; margin:0.15rem 0.25rem 0.15rem 0; }
   .ev-count.fav-hit, .event-list li.fav-hit .ev-sym { color:#b45309; }
   .toy-backtest { margin-top:1rem; }
+  .senti-head { display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap; }
+  .senti-score { font-size:2.1rem; font-weight:700; font-family:"DM Sans",sans-serif; }
+  .senti-label { padding:.2rem .65rem; border:1px solid currentColor; border-radius:999px; font-size:.85rem; font-weight:600; }
+  .senti-bar { position:relative; height:.55rem; border-radius:999px; margin:.9rem 0 .3rem;
+    background:linear-gradient(90deg,#b91c1c,#d4a017 50%,#15803d); }
+  .senti-marker { position:absolute; top:-.3rem; width:.35rem; height:1.15rem; border-radius:2px;
+    background:#1a1510; transform:translateX(-50%); box-shadow:0 0 0 2px rgba(255,255,255,.7); }
+  .senti-scale { display:flex; justify-content:space-between; margin-bottom:1.1rem; }
+  .senti-drivers { display:flex; gap:.4rem; flex-wrap:wrap; }
+  .senti-chip { padding:.3rem .7rem; border:1px solid var(--rule); border-radius:999px;
+    font-size:.85rem; background:var(--card); }
 
 </style>
 </head>
@@ -1050,6 +1065,7 @@ export function renderHtml(
     <button class="tab active" data-tab="finance">${CATEGORY_LABELS.finance}<span class="count">${counts.finance}</span></button>
     ${trading ? `<button class="tab" data-tab="trading">${STR.catTrading}<span class="count">${trading.tickers.length}</span></button>` : ""}
     <button class="tab" data-tab="review">${STR.catReview}</button>
+    <button class="tab" data-tab="sentiment">${STR.catSentiment}</button>
     <button class="tab" data-tab="techread">${STR.catTechRead}</button>
     <button class="tab" data-tab="personas">${STR.catPersonas}</button>
     <button class="tab" data-tab="risk">${STR.catRisk}</button>
@@ -1066,6 +1082,7 @@ export function renderHtml(
   </section>
   ${trading ? `<section class="panel" data-panel="trading">${renderTradingPanel(trading)}</section>` : ""}
   <section class="panel" data-panel="review">${renderReviewPanel(quant)}</section>
+  <section class="panel" data-panel="sentiment">${renderSentimentPanel(sentiment)}</section>
   <section class="panel" data-panel="techread">${renderTechReadPanel(trading)}</section>
   <section class="panel" data-panel="personas">${renderPersonasPanel(quant)}</section>
   <section class="panel" data-panel="risk">${renderRiskPanel(quant)}</section>

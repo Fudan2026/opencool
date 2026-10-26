@@ -9,6 +9,7 @@ import { RISK_GATES, BACKTEST_VERDICT_TEMPLATE } from "../invest/risk-gates";
 import { PERSONAS } from "../invest/personas";
 import type { TickerAnalysis } from "../trading/signals";
 import type { TradingSection } from "../ai/pipeline";
+import type { MarketSentiment } from "../nlp/sentiment";
 
 function esc(s: string): string {
   return s
@@ -273,4 +274,38 @@ export function renderMcpHelpPanel(): string {
 /** Attach sparkline markup helper for trading ticker cards. */
 export function sparklineForTicker(t: TickerAnalysis): string {
   return sparklineSvg(t.closesSpark);
+}
+
+/**
+ * Zero-token sentiment gauge panel (lib/nlp/sentiment.ts). Always rendered
+ * when present — it is a transparent dictionary rule panel, not advice.
+ */
+export function renderSentimentPanel(sentiment?: MarketSentiment): string {
+  if (!sentiment) {
+    return `<p class="empty">市场情绪计尚未生成。</p>`;
+  }
+  const cls = sentiment.score >= 0 ? "positive" : "negative";
+  const sign = sentiment.score > 0 ? "+" : "";
+  const markerLeft = Math.round(50 + sentiment.score / 2);
+  const drivers = sentiment.drivers.length
+    ? `<div class="senti-drivers">${sentiment.drivers
+        .map(
+          (d) =>
+            `<span class="senti-chip ${d.polarity > 0 ? "positive" : "negative"}">${esc(d.term)} <b>${d.polarity > 0 ? "+" : "−"}${d.hits}</b></span>`,
+        )
+        .join("")}</div>`
+    : `<p class="muted tiny">本档无命中 ≥2 次的情绪驱动词。</p>`;
+  return `<div class="quant-block">
+    <h2 class="panel-h">市场情绪计</h2>
+    <div class="senti-head">
+      <span class="senti-score ${cls}">${sign}${sentiment.score}</span>
+      <span class="senti-label ${cls}">${esc(sentiment.label)}</span>
+      <span class="muted tiny">多 ${sentiment.posHits} / 空 ${sentiment.negHits} · 样本 ${sentiment.scanned} 条财经标题</span>
+    </div>
+    <div class="senti-bar"><div class="senti-marker" style="left:${markerLeft}%"></div></div>
+    <div class="senti-scale muted tiny"><span>−100 偏空</span><span>0</span><span>+100 偏多</span></div>
+    <h2 class="panel-h">情绪驱动词</h2>
+    ${drivers}
+    <p class="muted tiny">${esc(sentiment.note)}</p>
+  </div>`;
 }

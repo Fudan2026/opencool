@@ -90,7 +90,25 @@ function filterByLocale(all: SourceDef[]): SourceDef[] {
   });
 }
 
-export const sources: SourceDef[] = filterByLocale(loadAndValidate());
+/**
+ * Runtime disable switch: DISABLE_SOURCE_IDS="a,b" drops those ids without
+ * editing sources.config.json — used by CI to turn off sources that are
+ * flaky from Actions runners. Config remains the source of truth; this is
+ * a per-run overlay.
+ */
+function applyDisabledIds(all: SourceDef[]): SourceDef[] {
+  const raw = process.env.DISABLE_SOURCE_IDS?.trim() || "";
+  if (!raw) return all;
+  const disabled = new Set(
+    raw.split(",").map((s) => s.trim()).filter(Boolean),
+  );
+  if (disabled.size === 0) return all;
+  return all.filter((s) => !disabled.has(s.id));
+}
+
+export const sources: SourceDef[] = filterByLocale(
+  applyDisabledIds(loadAndValidate()),
+);
 
 /**
  * The full unfiltered list — used by `npm run sources` so the CLI can
