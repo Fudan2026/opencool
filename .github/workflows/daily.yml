@@ -222,6 +222,9 @@ jobs:
       - name: Build trails page (favorites)
         run: npm run build-trails
 
+      - name: Bake keyword heat (7d)
+        run: npm run keywords:bake
+
       - name: Build static site (index + archive)
         run: npm run build-site
 

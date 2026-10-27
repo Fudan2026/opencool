@@ -442,6 +442,28 @@ function buildStatusHtml() {
     ? `<p class="meta">归档治理：articles 侧车保留 ${PRUNE_DAYS} 天（截止 ${pruneStats.cutoff}，本次烘焙清理 ${pruneStats.removed} 个 / ${(pruneStats.bytes / 1048576).toFixed(1)} MB）。</p>`
     : `<p class="meta">归档治理：关闭（PRUNE_ARTICLES_DAYS=0）。</p>`;
 
+  // Hot keywords block (reads keywords.json produced by npm run keywords:bake)
+  let kwBlock = "";
+  const kwPath = path.join(ROOT, "keywords.json");
+  if (fs.existsSync(kwPath)) {
+    try {
+      const kw = JSON.parse(fs.readFileSync(kwPath, "utf8"));
+      if (kw.items?.length) {
+        const chips = kw.items
+          .slice(0, 12)
+          .map(
+            (i) =>
+              `<span class="senti-chip">${i.term} <b>${i.count}</b></span>`,
+          )
+          .join("");
+        kwBlock = `<h2>近 ${kw.windowDays} 天热词（${kw.editions} 档）</h2>
+        <div class="senti-drivers">${chips}</div>`;
+      }
+    } catch {
+      // unreadable keywords.json — block omitted
+    }
+  }
+
   const legend = Object.values(STATE_META)
     .map((m) => `<span class="s-leg"><i style="background:${m.color}"></i>${m.label}</span>`)
     .join("");
@@ -496,6 +518,7 @@ function buildStatusHtml() {
     <tbody>${matrixRows}</tbody>
   </table>
   ${sentiBlock}
+  ${kwBlock}
   <h2>抓取健康</h2>
   ${healthBlock}
   <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
@@ -603,6 +626,8 @@ No LLM behind any endpoint.
   sectors,percentile}, quant{market,fundFlows,events}, trading, fetch_health)
 - Sentiment history: /sentiment-history.json — rolling newest-60 editions,
   chronological items {date,hour,score,label,posHits,negHits,scanned,percentile}
+- Keyword heat: /keywords.json — 7-day keyword frequency
+  {term,count,firstSeen,lastSeen}, stopword-cleaned
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html

@@ -9,6 +9,7 @@
 import { REPORT_LOCALE } from "../sources/registry";
 import type { Category } from "../sources/types";
 import { hasCjk } from "../sources/title-filters";
+import { cleanKeyword } from "../nlp/keywords";
 import type { ArticleInput, BriefItem, DailyReport } from "./pipeline";
 
 const BRIEF_LIMITS: Record<Category, number> = {
@@ -188,34 +189,12 @@ function pickLead(
 }
 
 function topKeywords(briefs: BriefItem[], n = 6): string[] {
-  const stop = new Set([
-    "the",
-    "and",
-    "for",
-    "with",
-    "from",
-    "that",
-    "this",
-    "are",
-    "was",
-    "will",
-    "have",
-    "after",
-    "over",
-    "into",
-    "says",
-    "said",
-    "中国",
-    "美国",
-    "市场",
-    "今日",
-    "报道",
-  ]);
   const counts = new Map<string, number>();
   for (const b of briefs) {
     for (const t of tokenize(b.title)) {
-      if (t.length < 2 || stop.has(t)) continue;
-      counts.set(t, (counts.get(t) ?? 0) + 1);
+      const c = cleanKeyword(t);
+      if (!c) continue;
+      counts.set(c, (counts.get(c) ?? 0) + 1);
     }
   }
   return [...counts.entries()]
