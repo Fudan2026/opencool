@@ -11,7 +11,7 @@
     "quota-report": "tsx scripts/quota-report.ts",
     "sources": "tsx scripts/sources.ts",
     "sources:check": "tsx scripts/sources.ts check",
-    "test": "tsx --test lib/**/*.test.ts",
+    "test": "tsx --test lib/**/*.test.ts tests/**/*.test.ts",
     "deploy": "node scripts/deploy.mjs",
     "build-site": "node scripts/build-site.mjs",
     "build-trails": "tsx scripts/build-trails.ts",

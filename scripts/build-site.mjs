@@ -633,7 +633,10 @@ console.log(`[build-site] status.html (${dates.slice(0, 14).length}-day matrix)`
 
 const HISTORY_CAP = 60;
 const historyItems = [];
-for (const d of dates) {
+// dates is newest-first; iterate oldest-first with in-day slot order so
+// the array is truly chronological (golden test caught this ordering bug).
+const ascDates = [...dates].reverse();
+for (const d of ascDates) {
   if (historyItems.length >= HISTORY_CAP) break;
   for (const h of slotHours) {
     if (historyItems.length >= HISTORY_CAP) break;
@@ -659,7 +662,6 @@ for (const d of dates) {
     }
   }
 }
-historyItems.reverse(); // newest last → chronological array
 const historyPayload = {
   generatedAt: new Date().toISOString(),
   source: "build-site",
