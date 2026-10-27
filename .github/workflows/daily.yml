@@ -189,6 +189,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Quality gate: tests + source-config validation block the publish.
+      # A regression must never reach gh-pages (fifth-wave mandate).
+      - name: Test suite (quality gate)
+        run: npm test
+
+      - name: Validate source config
+        run: npm run sources:check
+
       - name: Restore existing reports from gh-pages
         run: |
           mkdir -p daily_reports
