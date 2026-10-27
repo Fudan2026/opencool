@@ -1,5 +1,5 @@
 {
-  "hero_headline": "联合国气候变化研究机构预算被卡",
+  "hero_headline": "Meta拟发股筹集950亿美元AI投资资金",
   "daily_overview": "启发式两报（零 AI / 零 API Token）：中文财经源优先，外电原文次栏；按「多源交叉 × 时效」排序，不做个性化推荐。 财经头条：Meta plans $95bn stock offering to bankroll AI expansion。 时政头条：US court rules daughter of Trump critic James Comey was illegally fired。",
   "tech_briefs": [],
   "finance_briefs": [
@@ -11,6 +11,13 @@
       "importance": 8
     },
     {
+      "title": "Meta拟发股筹集950亿美元AI投资资金",
+      "url": "https://www.ftchinese.com/story/001111205",
+      "source": "FT中文网",
+      "summary": "这是大型科技公司借助股市为其AI雄心提供资金的最新事例。芯片制造商英伟达、AMD和博通将作为基石投资者支持这笔交易。",
+      "importance": 8
+    },
+    {
       "title": "联合国气候变化研究机构预算被卡",
       "url": "https://www.ftchinese.com/story/001111204",
       "source": "FT中文网",
@@ -18,24 +25,17 @@
       "importance": 8
     },
     {
+      "title": "Polymarket 量化交易全过程：从公开成交到无人值守",
+      "url": "https://x.com/chenke20266/status/2114382637884379179",
+      "source": "X 市场声音（站内镜像）",
+      "summary": "这篇写给想用数据和 AI",
+      "importance": 7
+    },
+    {
       "title": "中国风电制造商为欧洲业务架设“防火墙”",
       "url": "https://www.ftchinese.com/story/001111199",
       "source": "FT中文网",
       "summary": "明阳智能表示，与英国章鱼能源组建合资公司并在欧洲成立独立法律实体，有助于让客户相信，从中国无法访问欧洲数据。",
-      "importance": 7
-    },
-    {
-      "title": "乌克兰证实星链限制已被解除",
-      "url": "https://www.ftchinese.com/story/001111191",
-      "source": "FT中文网",
-      "summary": "对乌克兰军事行动至关重要的星链系统在经历近11天限制后，已恢复正常速度运行。此前特朗普称其不知道谁下令对该系统实施限速。",
-      "importance": 7
-    },
-    {
-      "title": "穆迪未下调评级 法国政府获意外喘息机会",
-      "url": "https://www.ftchinese.com/story/001111190",
-      "source": "FT中文网",
-      "summary": "这家评级机构决定维持法国的Aa3主权信用评级和负面展望，但警告该国当前状况比其几个月前的预期更为严峻。",
       "importance": 7
     }
   ],
@@ -64,12 +64,12 @@
   ],
   "editor_note": "当前 LLM_MODE=off：标题与摘要来自信源原文；不接 DeepSeek / 任何付费 LLM。",
   "keywords": [
-    "to",
     "prison",
     "meta",
     "plans",
     "95bn",
-    "stock"
+    "stock",
+    "offering"
   ],
   "trading": {
     "market_overview": "行情面板仅展示技术指标（LLM_MODE=off，未生成文字点评）。",
@@ -8492,31 +8492,35 @@
         "currency": "USD",
         "exchangeName": "NYQ",
         "currentPrice": 100.25,
-        "pct1Day": 0.612204550469854,
-        "pct5Day": -7.663258467542257,
+        "pct1Day": -1.5419364560300879,
+        "pct5Day": -8.120246137649632,
         "pct52WeekHigh": -45.06849315068493,
         "pct52WeekLow": 8.979236873573221,
-        "sma20": 107.45249977111817,
-        "sma50": 111.93779937744141,
-        "sma200": 127.51439975738525,
-        "rsi14": 31.767202964855855,
-        "macd": -2.519726216454373,
-        "macdSignal": -1.6705598579996708,
-        "macdHistogram": -0.8491663584547022,
-        "bbMid": 107.45249977111817,
-        "bbUpper": 114.45167086983022,
-        "bbLower": 100.45332867240612,
-        "atr14": 3.032658050453641,
-        "kdjJ": -14.31269400171356,
+        "sma20": 107.87799987792968,
+        "sma50": 112.40899932861328,
+        "sma200": 127.78549976348877,
+        "rsi14": 29.928650738899307,
+        "macd": -2.1905757218759447,
+        "macdSignal": -1.4582682683859953,
+        "macdHistogram": -0.7323074534899494,
+        "bbMid": 107.87799987792968,
+        "bbUpper": 114.06111451392204,
+        "bbLower": 101.69488524193733,
+        "atr14": 3.1633240825047624,
+        "kdjJ": -14.483060808243195,
         "volumeSpike": false,
         "maAlign": "bear",
         "trend": "bearish",
-        "rsiState": "normal",
+        "rsiState": "oversold",
         "signals": [
           {
             "type": "macd-bear-cross",
             "label": "MACD 死叉",
-            "daysAgo": 3
+            "daysAgo": 2
+          },
+          {
+            "type": "rsi-oversold",
+            "label": "RSI 超卖"
           },
           {
             "type": "below-sma50-sma200",
@@ -8532,6 +8536,7 @@
           }
         ],
         "closesSpark": [
+          122.25,
           127.30000305175781,
           128.99000549316406,
           128.52999877929688,
@@ -8590,8 +8595,7 @@
           108.61000061035156,
           104.41000366210938,
           101.81999969482422,
-          99.63999938964844,
-          100.25
+          99.63999938964844
         ],
         "closesFull": [
           179.4499969482422,
@@ -8843,8 +8847,7 @@
           108.61000061035156,
           104.41000366210938,
           101.81999969482422,
-          99.63999938964844,
-          100.25
+          99.63999938964844
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -8856,38 +8859,34 @@
         "currency": "USD",
         "exchangeName": "NMS",
         "currentPrice": 78.13,
-        "pct1Day": -1.15131693444677,
-        "pct5Day": -4.005405349668874,
+        "pct1Day": -1.3136266174037372,
+        "pct5Day": -3.507473357894643,
         "pct52WeekHigh": -43.9566745570619,
         "pct52WeekLow": 8.604392549346676,
-        "sma20": 79.37649955749512,
-        "sma50": 81.10019943237305,
-        "sma200": 91.78909984588623,
-        "rsi14": 42.77697087949577,
-        "macd": -0.24031435744608132,
-        "macdSignal": -0.17674544281369825,
-        "macdHistogram": -0.06356891463238307,
-        "bbMid": 79.37649955749512,
-        "bbUpper": 83.2573657472633,
-        "bbLower": 75.49563336772695,
-        "atr14": 1.9897264237913852,
-        "kdjJ": 3.390210685428471,
+        "sma20": 79.39449958801269,
+        "sma50": 81.23339950561524,
+        "sma200": 92.00644985198974,
+        "rsi14": 45.81305163373634,
+        "macd": -0.09999787476779431,
+        "macdSignal": -0.16085321415560247,
+        "macdHistogram": 0.060855339387808155,
+        "bbMid": 79.39449958801269,
+        "bbUpper": 83.25536086890234,
+        "bbLower": 75.53363830712304,
+        "atr14": 1.9981665423282224,
+        "kdjJ": 11.323849791953805,
         "volumeSpike": false,
         "maAlign": "bear",
         "trend": "bearish",
         "rsiState": "normal",
         "signals": [
           {
-            "type": "macd-bear-cross",
-            "label": "MACD 死叉",
-            "daysAgo": 0
-          },
-          {
             "type": "below-sma50-sma200",
             "label": "空头排列"
           }
         ],
         "closesSpark": [
+          88.55999755859375,
           90.1500015258789,
           91.02999877929688,
           90.94000244140625,
@@ -8946,8 +8945,7 @@
           81.62999725341797,
           78.72000122070312,
           79.16999816894531,
-          79.04000091552734,
-          78.12999725341797
+          79.04000091552734
         ],
         "closesFull": [
           137.75999450683594,
@@ -9199,8 +9197,7 @@
           81.62999725341797,
           78.72000122070312,
           79.16999816894531,
-          79.04000091552734,
-          78.12999725341797
+          79.04000091552734
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -9561,22 +9558,22 @@
         "currency": "USD",
         "exchangeName": "PCX",
         "currentPrice": 765.37,
-        "pct1Day": 0.7105582463842475,
-        "pct5Day": -0.1448153242138397,
+        "pct1Day": 0.18456175543099565,
+        "pct5Day": 0.2777595807402561,
         "pct52WeekHigh": -2.0790153783168295,
         "pct52WeekLow": 21.626303076531915,
-        "sma20": 770.1384979248047,
-        "sma50": 767.5889953613281,
-        "sma200": 727.3856494140625,
-        "rsi14": 47.324849828700515,
-        "macd": -0.5553194813959408,
-        "macdSignal": 0.8164887587300835,
-        "macdHistogram": -1.3718082401260243,
-        "bbMid": 770.1384979248047,
-        "bbUpper": 782.2286249212801,
-        "bbLower": 758.0483709283293,
-        "atr14": 7.258285303416315,
-        "kdjJ": 20.675800748427122,
+        "sma20": 770.1504974365234,
+        "sma50": 767.8083959960937,
+        "sma200": 727.0063494873046,
+        "rsi14": 42.09364018728296,
+        "macd": -0.3490768348231086,
+        "macdSignal": 1.1594408187615897,
+        "macdHistogram": -1.5085176535846982,
+        "bbMid": 770.1504974365234,
+        "bbUpper": 782.2221318021647,
+        "bbLower": 758.0788630708822,
+        "atr14": 7.219691114015647,
+        "kdjJ": 5.314304383399119,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "neutral",
@@ -9588,6 +9585,7 @@
           }
         ],
         "closesSpark": [
+          747.030029296875,
           757.6699829101562,
           771.3300170898438,
           769.7899780273438,
@@ -9646,8 +9644,7 @@
           769.0499877929688,
           773.0900268554688,
           763.9600219726562,
-          759.969970703125,
-          765.3699951171875
+          759.969970703125
         ],
         "closesFull": [
           685.239990234375,
@@ -9899,8 +9896,7 @@
           769.0499877929688,
           773.0900268554688,
           763.9600219726562,
-          759.969970703125,
-          765.3699951171875
+          759.969970703125
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -9912,28 +9908,29 @@
         "currency": "USD",
         "exchangeName": "NGM",
         "currentPrice": 712.2,
-        "pct1Day": 1.107321878988542,
-        "pct5Day": -0.8575067483119598,
+        "pct1Day": 1.0972830096873787,
+        "pct5Day": 0.33812514064614496,
         "pct52WeekHigh": -6.640799098130715,
         "pct52WeekLow": 28.185745140388775,
-        "sma20": 734.0185028076172,
-        "sma50": 725.4347998046875,
-        "sma200": 677.7539001464844,
-        "rsi14": 41.729750662816535,
-        "macd": -5.51544300376338,
-        "macdSignal": -1.0230453150025094,
-        "macdHistogram": -4.492397688760871,
-        "bbMid": 734.0185028076172,
-        "bbUpper": 769.3742460870558,
-        "bbLower": 698.6627595281786,
-        "atr14": 11.484154663567514,
-        "kdjJ": 16.606235133046262,
+        "sma20": 735.2350036621094,
+        "sma50": 725.8121997070313,
+        "sma200": 677.2952499389648,
+        "rsi14": 36.50995750162261,
+        "macd": -5.041021268079589,
+        "macdSignal": 0.10005410718770835,
+        "macdHistogram": -5.141075375267298,
+        "bbMid": 735.2350036621094,
+        "bbUpper": 769.1490322073785,
+        "bbLower": 701.3209751168404,
+        "atr14": 11.532937669539054,
+        "kdjJ": 2.861896752697831,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "neutral",
         "rsiState": "normal",
         "signals": [],
         "closesSpark": [
+          687.989990234375,
           700.0700073242188,
           723.8499755859375,
           717.2999877929688,
@@ -9992,8 +9989,7 @@
           717.6300048828125,
           725.2000122070312,
           704.469970703125,
-          704.4000244140625,
-          712.2000122070312
+          704.4000244140625
         ],
         "closesFull": [
           628.0900268554688,
@@ -10245,8 +10241,7 @@
           717.6300048828125,
           725.2000122070312,
           704.469970703125,
-          704.4000244140625,
-          712.2000122070312
+          704.4000244140625
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -10258,28 +10253,29 @@
         "currency": "USD",
         "exchangeName": "NMS",
         "currentPrice": 216,
-        "pct1Day": 2.389075239729557,
-        "pct5Day": -0.502094226485727,
+        "pct1Day": 1.7859635107796967,
+        "pct5Day": 0.8732989653696115,
         "pct52WeekHigh": -11.246250564983361,
         "pct52WeekLow": 31.490838254093863,
-        "sma20": 224.89850158691405,
-        "sma50": 222.29940063476562,
-        "sma200": 203.82020011901855,
-        "rsi14": 44.117796336325796,
-        "macd": -2.7251706621576375,
-        "macdSignal": -0.9430100206121279,
-        "macdHistogram": -1.7821606415455096,
-        "bbMid": 224.89850158691405,
-        "bbUpper": 242.3510068117135,
-        "bbLower": 207.4459963621146,
-        "atr14": 6.1140516060245185,
-        "kdjJ": 25.559133540794612,
+        "sma20": 225.54150161743163,
+        "sma50": 222.48260070800782,
+        "sma200": 203.66540008544922,
+        "rsi14": 38.08914849792131,
+        "macd": -2.649259058671163,
+        "macdSignal": -0.49746986022575057,
+        "macdHistogram": -2.151789198445412,
+        "bbMid": 225.54150161743163,
+        "bbUpper": 242.5778794973903,
+        "bbLower": 208.50512373747296,
+        "atr14": 6.062056092170034,
+        "kdjJ": 4.443017893452421,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "neutral",
         "rsiState": "normal",
         "signals": [],
         "closesSpark": [
+          200.75,
           206.63999938964844,
           211.94000244140625,
           219.22000122070312,
@@ -10338,8 +10334,7 @@
           216.47000122070312,
           221.97000122070312,
           212.2100067138672,
-          210.9600067138672,
-          216
+          210.9600067138672
         ],
         "closesFull": [
           191.49000549316406,
@@ -10591,8 +10586,7 @@
           216.47000122070312,
           221.97000122070312,
           212.2100067138672,
-          210.9600067138672,
-          216
+          210.9600067138672
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -10603,23 +10597,23 @@
         "group": "crypto",
         "currency": "USD",
         "exchangeName": "CCC",
-        "currentPrice": 79999.99,
-        "pct1Day": -0.030013258716396235,
-        "pct5Day": -4.775484743059297,
-        "pct52WeekHigh": -31.196600492408784,
-        "pct52WeekLow": 38.533480238871924,
-        "sma20": 81977.994921875,
-        "sma50": 81797.72203125,
-        "sma200": 72986.5041015625,
-        "rsi14": 41.46467600817651,
-        "macd": -438.6905681814387,
-        "macdSignal": -71.01252178410995,
-        "macdHistogram": -367.6780463973288,
-        "bbMid": 81977.994921875,
-        "bbUpper": 84142.47557060292,
-        "bbLower": 79813.51427314707,
-        "atr14": 1989.0391734351683,
-        "kdjJ": 5.918240547617884,
+        "currentPrice": 80203.87,
+        "pct1Day": 0.22476028434044554,
+        "pct5Day": -4.532805035592032,
+        "pct52WeekHigh": -31.02125500684551,
+        "pct52WeekLow": 38.886532857392254,
+        "sma20": 81988.188671875,
+        "sma50": 81801.79953125,
+        "sma200": 72987.5234765625,
+        "rsi14": 42.42519252464597,
+        "macd": -422.427035418732,
+        "macdSignal": -67.7598152326194,
+        "macdHistogram": -354.66722018611256,
+        "bbMid": 81988.188671875,
+        "bbUpper": 84116.93659229633,
+        "bbLower": 79859.44075145367,
+        "atr14": 1909.4487716494325,
+        "kdjJ": 8.702843706759552,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "neutral",
@@ -10690,10 +10684,9 @@
           81074.1875,
           80790.8359375,
           80024.0078125,
-          79999.9921875
+          80203.8671875
         ],
         "closesFull": [
-          114472.4453125,
           114119.328125,
           112956.1640625,
           110055.3046875,
@@ -11058,7 +11051,7 @@
           81074.1875,
           80790.8359375,
           80024.0078125,
-          79999.9921875
+          80203.8671875
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -11069,23 +11062,23 @@
         "group": "crypto",
         "currency": "USD",
         "exchangeName": "CCC",
-        "currentPrice": 2318.75,
-        "pct1Day": -0.3511150118061308,
-        "pct5Day": -6.152590181001314,
-        "pct52WeekHigh": -45.44977615293589,
-        "pct52WeekLow": 53.9157800730525,
-        "sma20": 2434.594287109375,
-        "sma50": 2539.426103515625,
-        "sma200": 2157.94647277832,
-        "rsi14": 33.5985131835627,
-        "macd": -58.89550358940687,
-        "macdSignal": -47.010025506321256,
-        "macdHistogram": -11.885478083085616,
-        "bbMid": 2434.594287109375,
-        "bbUpper": 2563.3678401837587,
-        "bbLower": 2305.820734034991,
-        "atr14": 86.96690865344526,
-        "kdjJ": 12.334347849580652,
+        "currentPrice": 2326.63,
+        "pct1Day": -0.01246996007266295,
+        "pct5Day": -5.8336607624034835,
+        "pct52WeekHigh": -45.26439361324215,
+        "pct52WeekLow": 54.43884480490184,
+        "sma20": 2434.98828125,
+        "sma50": 2539.583701171875,
+        "sma200": 2157.985872192383,
+        "rsi14": 34.182420427473275,
+        "macd": -58.26690894909234,
+        "macdSignal": -46.88430657825714,
+        "macdHistogram": -11.382602370835201,
+        "bbMid": 2434.98828125,
+        "bbUpper": 2562.3825110790226,
+        "bbLower": 2307.5940514209774,
+        "atr14": 84.47302960767722,
+        "kdjJ": 14.863882335609276,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "neutral",
@@ -11151,10 +11144,9 @@
           2384.077392578125,
           2355.95361328125,
           2326.920166015625,
-          2318.75
+          2326.6298828125
         ],
         "closesFull": [
-          4157.9892578125,
           4120.1220703125,
           3982.262451171875,
           3903.35302734375,
@@ -11519,7 +11511,7 @@
           2384.077392578125,
           2355.95361328125,
           2326.920166015625,
-          2318.75
+          2326.6298828125
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -11530,23 +11522,23 @@
         "group": "commodity-fx",
         "currency": "USD",
         "exchangeName": "CMX",
-        "currentPrice": 4025.8,
-        "pct1Day": 0.4466203770653683,
-        "pct5Day": -3.2282900532108076,
-        "pct52WeekHigh": -27.933120905087534,
-        "pct52WeekLow": 3.1912439443262506,
-        "sma20": 4148.134997558594,
-        "sma50": 4333.635981445313,
-        "sma200": 4530.7239990234375,
-        "rsi14": 33.12855851353852,
-        "macd": -67.40429073625,
-        "macdSignal": -59.32690036164594,
-        "macdHistogram": -8.077390374604065,
-        "bbMid": 4148.134997558594,
-        "bbUpper": 4257.989547050736,
-        "bbLower": 4038.280448066451,
-        "atr14": 75.3681422698866,
-        "kdjJ": 4.189208543051187,
+        "currentPrice": 4025.4,
+        "pct1Day": 0.4366400878928223,
+        "pct5Day": -3.2379052064669867,
+        "pct52WeekHigh": -27.940281407754817,
+        "pct52WeekLow": 3.1809909517340347,
+        "sma20": 4148.114990234375,
+        "sma50": 4333.627978515625,
+        "sma200": 4530.721998291016,
+        "rsi14": 33.07649807122182,
+        "macd": -67.43621125352183,
+        "macdSignal": -59.333284465100306,
+        "macdHistogram": -8.102926788421527,
+        "bbMid": 4148.114990234375,
+        "bbUpper": 4258.0587632560955,
+        "bbLower": 4038.1712172126545,
+        "atr14": 75.41100638819019,
+        "kdjJ": 4.0546537197891155,
         "volumeSpike": false,
         "maAlign": "bear",
         "trend": "bearish",
@@ -11626,7 +11618,7 @@
           4150,
           4060.39990234375,
           4007.89990234375,
-          4025.800048828125
+          4025.39990234375
         ],
         "closesFull": [
           4019.699951171875,
@@ -11879,7 +11871,7 @@
           4150,
           4060.39990234375,
           4007.89990234375,
-          4025.800048828125
+          4025.39990234375
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -11895,17 +11887,17 @@
         "pct5Day": -0.47228100332429823,
         "pct52WeekHigh": -7.39267685547011,
         "pct52WeekLow": 0,
-        "sma20": 6.693834972381592,
-        "sma50": 6.706929988861084,
-        "sma200": 6.801747479438782,
-        "rsi14": 11.426730706509062,
-        "macd": -0.010271121499680902,
-        "macdSignal": -0.007806914621373821,
-        "macdHistogram": -0.0024642068783070807,
-        "bbMid": 6.693834972381592,
-        "bbUpper": 6.718726006362085,
-        "bbLower": 6.668943938401099,
-        "atr14": 0.004278356121605439,
+        "sma20": 6.694764971733093,
+        "sma50": 6.707301988601684,
+        "sma200": 6.801840479373932,
+        "rsi14": 18.21406287397565,
+        "macd": -0.008787361850561837,
+        "macdSignal": -0.007510162691550008,
+        "macdHistogram": -0.0012771991590118286,
+        "bbMid": 6.694764971733093,
+        "bbUpper": 6.715461704640639,
+        "bbLower": 6.674068238825548,
+        "atr14": 0.0029497856194604893,
         "kdjJ": -2.851375046965966,
         "volumeSpike": false,
         "maAlign": "bear",
@@ -11993,7 +11985,7 @@
           6.6778998374938965,
           6.6778998374938965,
           6.6778998374938965,
-          6.659299850463867
+          6.6778998374938965
         ],
         "closesFull": [
           7.121099948883057,
@@ -12254,30 +12246,30 @@
           6.6778998374938965,
           6.6778998374938965,
           6.6778998374938965,
-          6.659299850463867
+          6.6778998374938965
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
       }
     ],
     "crypto_fear_greed": {
-      "value": 50,
+      "value": 48,
       "classification": "Neutral",
       "classificationCn": "中性",
-      "timestamp": "2026-10-26T00:00:00.000Z"
+      "timestamp": "2026-10-27T00:00:00.000Z"
     },
     "crypto_global": {
-      "totalMarketCapUsd": 2702997522280.969,
-      "total24hVolumeUsd": 72117086794.80412,
-      "marketCapChangePct24h": -2.097813034871406,
-      "btcDominance": 59.44370115142361,
-      "ethDominance": 10.464367608053697,
+      "totalMarketCapUsd": 2707269175903.726,
+      "total24hVolumeUsd": 71466666126.51105,
+      "marketCapChangePct24h": -1.546580470948134,
+      "btcDominance": 59.426327492354844,
+      "ethDominance": 10.478621791561862,
       "activeCryptocurrencies": 22507
     },
-    "generated_at": "2026-10-26T23:43:36.358Z"
+    "generated_at": "2026-10-27T00:35:53.769Z"
   },
   "quant": {
-    "generated_at": "2026-10-26T23:43:40.102Z",
+    "generated_at": "2026-10-27T00:35:57.589Z",
     "market": {
       "indices": [
         {
@@ -12285,9 +12277,21 @@
           "name": "上证指数",
           "price": 3697.52,
           "changePct": 0.19
+        },
+        {
+          "code": "399001",
+          "name": "深证成指",
+          "price": 11534.38,
+          "changePct": -1.19
+        },
+        {
+          "code": "399006",
+          "name": "创业板指",
+          "price": 2638.23,
+          "changePct": -1.71
         }
       ],
-      "fetchedAt": "2026-10-26T23:43:39.551Z",
+      "fetchedAt": "2026-10-27T00:35:56.972Z",
       "note": "东方财富公开延时接口 · 非实时 · 仅供参考"
     },
     "fundFlows": {
@@ -12353,7 +12357,7 @@
           "netInflowYi": 4.5607552
         }
       ],
-      "fetchedAt": "2026-10-26T23:43:40.096Z",
+      "fetchedAt": "2026-10-27T00:35:57.582Z",
       "note": "东方财富公开延时板块资金流 · 非官方 · 非实时 · 仅供参考 · 不构成投资建议"
     },
     "events": [
@@ -12374,6 +12378,14 @@
         "matched": "Gold"
       },
       {
+        "symbol": "BTC-USD",
+        "displayName": "Bitcoin",
+        "title": "Why Now Is the Time to Add and Hold BTC",
+        "url": "https://x.com/intangiblecoins/status/2114730275242426648",
+        "source": "X 市场声音（站内镜像）",
+        "matched": "BTC"
+      },
+      {
         "symbol": "NVDA",
         "displayName": "Nvidia",
         "title": "Nvidia, AMD and Broadcom could buy Meta shares as part of $35 billion stock offering",
@@ -12382,20 +12394,20 @@
         "matched": "Nvidia"
       },
       {
+        "symbol": "USDCNY=X",
+        "displayName": "美元 / 人民币",
+        "title": "Meta拟发股筹集950亿美元AI投资资金",
+        "url": "https://www.ftchinese.com/story/001111205",
+        "source": "FT中文网",
+        "matched": "美元"
+      },
+      {
         "symbol": "GC=F",
         "displayName": "黄金期货",
-        "title": "Gold Steadies Above $4,000 With Fed Rate Decision in Focus",
+        "title": "Gold Steadies Near $4,000 as Traders Prepare for Fed Rate Call",
         "url": "https://www.bloomberg.com/news/articles/2026-10-26/gold-steadies-above-4-000-with-fed-rate-decision-in-focus",
         "source": "Bloomberg Markets",
         "matched": "Gold"
-      },
-      {
-        "symbol": "BTC-USD",
-        "displayName": "Bitcoin",
-        "title": "Why Now Is the Time to Add and Hold BTC",
-        "url": "https://x.com/intangiblecoins/status/2114730275242426648",
-        "source": "X 市场声音（站内镜像）",
-        "matched": "BTC"
       },
       {
         "symbol": "USDCNY=X",
@@ -12413,9 +12425,9 @@
         "count": 3
       },
       {
-        "symbol": "NVDA",
-        "displayName": "Nvidia",
-        "count": 1
+        "symbol": "USDCNY=X",
+        "displayName": "美元 / 人民币",
+        "count": 2
       },
       {
         "symbol": "BTC-USD",
@@ -12423,8 +12435,8 @@
         "count": 1
       },
       {
-        "symbol": "USDCNY=X",
-        "displayName": "美元 / 人民币",
+        "symbol": "NVDA",
+        "displayName": "Nvidia",
         "count": 1
       }
     ],
@@ -13264,12 +13276,12 @@
     ]
   },
   "sentiment": {
-    "generated_at": "2026-10-26T23:43:40.231Z",
-    "score": -98,
+    "generated_at": "2026-10-27T00:35:57.692Z",
+    "score": -96,
     "label": "强偏空",
     "posHits": 17,
-    "negHits": 33,
-    "scanned": 230,
+    "negHits": 32,
+    "scanned": 229,
     "drivers": [
       {
         "term": "风险",
@@ -13297,11 +13309,6 @@
         "polarity": 1
       },
       {
-        "term": "plunge",
-        "hits": 3,
-        "polarity": -1
-      },
-      {
         "term": "lawsuit",
         "hits": 2,
         "polarity": -1
@@ -13310,15 +13317,20 @@
         "term": "warning",
         "hits": 2,
         "polarity": -1
+      },
+      {
+        "term": "surge",
+        "hits": 2,
+        "polarity": 1
       }
     ],
     "sectors": [
       {
         "key": "general",
-        "score": -96,
+        "score": -91,
         "posHits": 15,
-        "negHits": 29,
-        "articles": 218,
+        "negHits": 28,
+        "articles": 216,
         "topDrivers": [
           {
             "term": "关税",
@@ -13347,7 +13359,7 @@
         "score": -20,
         "posHits": 2,
         "negHits": 3,
-        "articles": 1,
+        "articles": 2,
         "topDrivers": [
           {
             "term": "风险",
@@ -13366,7 +13378,7 @@
         "score": -20,
         "posHits": 0,
         "negHits": 1,
-        "articles": 5,
+        "articles": 6,
         "topDrivers": [
           {
             "term": "selloff",
@@ -13380,183 +13392,255 @@
     "note": "基于财经标题的词典规则面板（标题 ×2、摘要 ×1）。零 AI。不构成投资建议。"
   },
   "fetch_health": {
-    "generated_at": "2026-10-26T23:43:29.422Z",
+    "generated_at": "2026-10-27T00:35:47.804Z",
     "entries": [
       {
         "id": "wsj-markets",
-        "ms": 79,
-        "ok": true,
-        "count": 20
-      },
-      {
-        "id": "cnbc-topnews",
-        "ms": 86,
-        "ok": true,
-        "count": 30
-      },
-      {
-        "id": "marketwatch-top",
-        "ms": 35,
-        "ok": true,
-        "count": 10
-      },
-      {
-        "id": "yahoo-finance",
-        "ms": 58,
-        "ok": false,
-        "count": 0,
-        "error": "Status code 404"
-      },
-      {
-        "id": "bbc-business",
-        "ms": 54,
-        "ok": true,
-        "count": 30
-      },
-      {
-        "id": "economist-finance",
-        "ms": 107,
-        "ok": true,
-        "count": 30
-      },
-      {
-        "id": "ftchinese-news",
         "ms": 248,
         "ok": true,
         "count": 20
       },
       {
+        "id": "cnbc-topnews",
+        "ms": 359,
+        "ok": true,
+        "count": 30
+      },
+      {
+        "id": "attentionvc-ai",
+        "ms": 447,
+        "ok": true,
+        "count": 14
+      },
+      {
+        "id": "marketwatch-top",
+        "ms": 99,
+        "ok": true,
+        "count": 10
+      },
+      {
+        "id": "ftchinese-news",
+        "ms": 476,
+        "ok": true,
+        "count": 20
+      },
+      {
+        "id": "yahoo-finance",
+        "ms": 235,
+        "ok": false,
+        "count": 0,
+        "error": "Status code 404"
+      },
+      {
+        "id": "bloomberg-markets",
+        "ms": 510,
+        "ok": true,
+        "count": 20
+      },
+      {
+        "id": "ft-companies",
+        "ms": 514,
+        "ok": true,
+        "count": 25
+      },
+      {
+        "id": "economist-finance",
+        "ms": 143,
+        "ok": true,
+        "count": 30
+      },
+      {
+        "id": "bbc-business",
+        "ms": 210,
+        "ok": true,
+        "count": 30
+      },
+      {
         "id": "bbc-world",
-        "ms": 13,
+        "ms": 163,
         "ok": true,
         "count": 28
       },
       {
         "id": "wallstreetcn",
-        "ms": 74,
+        "ms": 193,
         "ok": false,
         "count": 0,
         "error": "Status code 403"
       },
       {
-        "id": "bloomberg-markets",
-        "ms": 339,
+        "id": "guardian-world",
+        "ms": 249,
         "ok": true,
-        "count": 20
-      },
-      {
-        "id": "attentionvc-ai",
-        "ms": 387,
-        "ok": true,
-        "count": 15
+        "count": 30
       },
       {
         "id": "nyt-world",
-        "ms": 62,
+        "ms": 217,
         "ok": true,
         "count": 30
-      },
-      {
-        "id": "guardian-world",
-        "ms": 156,
-        "ok": true,
-        "count": 30
-      },
-      {
-        "id": "ft-companies",
-        "ms": 420,
-        "ok": true,
-        "count": 25
       },
       {
         "id": "npr-world",
-        "ms": 298,
+        "ms": 450,
         "ok": true,
         "count": 10
       },
       {
         "id": "dw-chinese",
-        "ms": 645,
+        "ms": 769,
         "ok": true,
         "count": 30
       },
       {
-        "id": "cls-telegraph",
-        "ms": 390,
-        "ok": false,
-        "count": 0,
-        "error": "Status code 403"
-      },
-      {
         "id": "aljazeera",
-        "ms": 650,
+        "ms": 832,
         "ok": true,
         "count": 25
       },
       {
         "id": "eastmoney-kuaixun",
-        "ms": 39,
+        "ms": 155,
         "ok": false,
         "count": 0,
         "error": "Status code 403"
       },
       {
         "id": "jin10-flash",
-        "ms": 610,
+        "ms": 784,
         "ok": false,
         "count": 0,
         "error": "Status code 403"
       },
       {
         "id": "the-diplomat",
-        "ms": 625,
+        "ms": 872,
         "ok": true,
         "count": 30
       },
       {
+        "id": "cls-telegraph",
+        "ms": 588,
+        "ok": false,
+        "count": 0,
+        "error": "Status code 403"
+      },
+      {
         "id": "people-finance",
-        "ms": 1111,
+        "ms": 1554,
         "ok": true,
         "count": 30
       },
       {
         "id": "zhihu-hot",
-        "ms": 748,
+        "ms": 1025,
+        "ok": true,
+        "count": 0
+      },
+      {
+        "id": "yicai",
+        "ms": 652,
+        "ok": false,
+        "count": 0,
+        "error": "Status code 404"
+      },
+      {
+        "id": "weibo-hot",
+        "ms": 1394,
         "ok": true,
         "count": 0
       },
       {
         "id": "douyin-hot",
-        "ms": 973,
-        "ok": true,
-        "count": 0
-      },
-      {
-        "id": "weibo-hot",
-        "ms": 1033,
-        "ok": true,
-        "count": 0
-      },
-      {
-        "id": "baidu-hot",
-        "ms": 1452,
+        "ms": 1939,
         "ok": true,
         "count": 0
       },
       {
         "id": "caixin",
-        "ms": 2346,
+        "ms": 1850,
         "ok": false,
         "count": 0,
         "error": "Unexpected close tag\nLine: 13\nColumn: 7\nChar: >"
       },
       {
-        "id": "yicai",
-        "ms": 3626,
-        "ok": false,
-        "count": 0,
-        "error": "Status code 404"
+        "id": "baidu-hot",
+        "ms": 1891,
+        "ok": true,
+        "count": 0
       }
     ]
+  },
+  "morning_brief": {
+    "generated_at": "2026-10-27T00:35:57.695Z",
+    "base_edition": "2026-10-26/19",
+    "sentimentDelta": null,
+    "baseSentiment": null,
+    "overnight": [
+      {
+        "symbol": "NVDA",
+        "displayName": "Nvidia",
+        "group": "us-equity",
+        "pct1Day": 1.7859635107796967
+      },
+      {
+        "symbol": "BABA",
+        "displayName": "阿里巴巴 (BABA)",
+        "group": "china-equity",
+        "pct1Day": -1.5419364560300879
+      },
+      {
+        "symbol": "PDD",
+        "displayName": "拼多多 (PDD)",
+        "group": "china-equity",
+        "pct1Day": -1.3136266174037372
+      },
+      {
+        "symbol": "QQQ",
+        "displayName": "Nasdaq 100 ETF",
+        "group": "us-equity",
+        "pct1Day": 1.0972830096873787
+      },
+      {
+        "symbol": "GC=F",
+        "displayName": "黄金期货",
+        "group": "commodity-fx",
+        "pct1Day": 0.4366400878928223
+      },
+      {
+        "symbol": "USDCNY=X",
+        "displayName": "美元 / 人民币",
+        "group": "commodity-fx",
+        "pct1Day": -0.2785282490980981
+      }
+    ],
+    "newKeywords": [
+      "prison",
+      "plans",
+      "95bn",
+      "stock",
+      "offering"
+    ],
+    "newEvents": [
+      {
+        "symbol": "BTC-USD",
+        "displayName": "Bitcoin",
+        "title": "Why Now Is the Time to Add and Hold BTC",
+        "url": "https://x.com/intangiblecoins/status/2114730275242426648"
+      },
+      {
+        "symbol": "USDCNY=X",
+        "displayName": "美元 / 人民币",
+        "title": "Meta拟发股筹集950亿美元AI投资资金",
+        "url": "https://www.ftchinese.com/story/001111205"
+      },
+      {
+        "symbol": "GC=F",
+        "displayName": "黄金期货",
+        "title": "Gold Steadies Near $4,000 as Traders Prepare for Fed Rate Call",
+        "url": "https://www.bloomberg.com/news/articles/2026-10-26/gold-steadies-above-4-000-with-fed-rate-decision-in-focus"
+      }
+    ],
+    "note": "对比 2026-10-26/19 档的隔夜速览——纯算术、零 AI。不构成投资建议。"
   }
 }
