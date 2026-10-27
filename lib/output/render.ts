@@ -2,6 +2,7 @@ import type {
   ArticleInput,
   BriefItem,
   DailyReport,
+  MorningBrief,
   TradingSection,
 } from "../ai/pipeline";
 import type { WatchlistPick } from "../ai/trading-commentary";
@@ -55,6 +56,11 @@ const TEXTS_ZH = {
   catKnowledge: "知识库",
   catMcp: "开放 MCP",
   catSentiment: "市场情绪计",
+  morningTitle: "晨会速览",
+  morningSentiment: "情绪",
+  morningOvernight: "隔夜",
+  morningNewKw: "新词",
+  morningNewEvents: "新事件",
   guideToggleOff: "原文",
   guideToggleOn: "中文导读",
   guideWireNote: "外电原文 · 无机器翻译",
@@ -126,6 +132,11 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   catKnowledge: "Knowledge",
   catMcp: "Open MCP",
   catSentiment: "Sentiment",
+  morningTitle: "Morning brief",
+  morningSentiment: "sentiment",
+  morningOvernight: "overnight",
+  morningNewKw: "new terms",
+  morningNewEvents: "new events",
   guideToggleOff: "Original",
   guideToggleOn: "CN guide",
   guideWireNote: "EN original · no machine translation",
@@ -697,6 +708,39 @@ export function renderHtml(
           .join("")}</nav>`
       : "";
 
+  function renderMorningBrief(mb?: MorningBrief): string {
+    if (!mb) return "";
+    const dCls =
+      mb.sentimentDelta == null ? "" : mb.sentimentDelta >= 0 ? "positive" : "negative";
+    const dTxt =
+      mb.sentimentDelta == null
+        ? "—"
+        : `${mb.sentimentDelta > 0 ? "+" : ""}${mb.sentimentDelta}`;
+    const overnight = mb.overnight
+      .map(
+        (o) =>
+          `<span class="mb-chip ${o.pct1Day >= 0 ? "positive" : "negative"}">${escapeHtml(o.displayName)} ${o.pct1Day >= 0 ? "+" : ""}${o.pct1Day.toFixed(2)}%</span>`,
+      )
+      .join("");
+    const kws = mb.newKeywords
+      .map((k) => `<span class="mb-chip">${escapeHtml(k)}</span>`)
+      .join("");
+    const evs = mb.newEvents
+      .map(
+        (e) =>
+          `<li><span class="mb-ev">${escapeHtml(e.displayName)}</span><a href="${escapeHtml(e.url)}" target="_blank" rel="noopener">${escapeHtml(e.title)}</a></li>`,
+      )
+      .join("");
+    return `<div class="hero-morning">
+      <p class="mb-title">${STR.morningTitle} <span class="muted tiny">vs ${escapeHtml(mb.base_edition)}</span></p>
+      <p class="mb-row">${STR.morningSentiment} <b class="${dCls}">${dTxt}</b>${mb.baseSentiment != null ? ` <span class="muted tiny">(base ${mb.baseSentiment})</span>` : ""}</p>
+      ${overnight ? `<p class="mb-row">${STR.morningOvernight} ${overnight}</p>` : ""}
+      ${kws ? `<p class="mb-row">${STR.morningNewKw} ${kws}</p>` : ""}
+      ${evs ? `<div class="mb-row">${STR.morningNewEvents}<ul class="mb-events">${evs}</ul></div>` : ""}
+      <p class="muted tiny">${escapeHtml(mb.note)}</p>
+    </div>`;
+  }
+
   const heroBlock = `
   <section class="hero">
     <div class="hero-brand">
@@ -717,6 +761,7 @@ export function renderHtml(
         ? `<p class="hero-overview"><span class="ov-label">${STR.heroOverview}</span>${escapeHtml(report.daily_overview)}</p>`
         : ""
     }
+    ${renderMorningBrief(report.morning_brief)}
     ${siblingNav}
     <div class="guide-switch" role="group" aria-label="reading mode">
       <button type="button" class="guide-btn active" data-guide="off">${STR.guideToggleOff}</button>
@@ -825,6 +870,14 @@ export function renderHtml(
     line-height: 1.35;
     letter-spacing: -0.02em;
   }
+  .hero-morning { margin:.9rem 0 .2rem; padding:.75rem 1rem; background:var(--card);
+    border:1px solid var(--rule); border-radius:.75rem; }
+  .hero-morning .mb-title { margin:0 0 .3rem; font-weight:700; }
+  .hero-morning .mb-row { margin:.3rem 0; display:flex; flex-wrap:wrap; gap:.35rem; align-items:baseline; }
+  .mb-chip { padding:.15rem .55rem; border:1px solid var(--rule); border-radius:999px; font-size:.8rem; background:var(--bg-elevated); }
+  .mb-events { margin:.2rem 0 0; padding-left:1.1rem; }
+  .mb-events li { font-size:.85rem; margin:.2rem 0; }
+  .mb-events .mb-ev { color:var(--accent); font-weight:600; margin-right:.35rem; }
   .hero-overview {
     margin: 0.9rem 0 0;
     padding: 0.85rem 1rem;

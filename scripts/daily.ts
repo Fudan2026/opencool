@@ -31,9 +31,11 @@ import { fetchCryptoFearGreed } from "../lib/trading/fear-greed";
 import { fetchCryptoGlobal } from "../lib/trading/coingecko";
 import { generateTradingCommentary } from "../lib/ai/trading-commentary";
 import type { TradingSection } from "../lib/ai/pipeline";
-import { todayKey, editionHourKey, parseReportHours } from "../lib/utils";
+import { todayKey, editionHourKey, parseReportHours, editionKind } from "../lib/utils";
 import { buildQuantSection } from "../lib/invest/quant";
 import { scoreSentiment, MIN_HISTORY_SAMPLES } from "../lib/nlp/sentiment";
+import { cleanKeywords } from "../lib/nlp/keywords";
+import type { MorningBrief } from "../lib/ai/pipeline";
 import type { QuantSection } from "../lib/invest/types";
 
 const OUTPUT_DIR = "daily_reports";
@@ -387,6 +389,104 @@ function loadSentimentTrend(): SentimentTrendPoint[] {
 
 const REVIEW_SAMPLE_FLOOR = 10;
 
+/** Full previous-day sidecar (last slot of the newest day < today). */
+function loadYesterdayEdition(today: string):
+  | { date: string; hour: string; report: Record<string, unknown> }
+  | null {
+  try {
+    const days = fs
+      .readdirSync(OUTPUT_DIR)
+      .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && d < today)
+      .sort();
+    for (let i = days.length - 1; i >= 0; i--) {
+      const dir = path.join(OUTPUT_DIR, days[i]);
+      const files = fs
+        .readdirSync(dir)
+        .filter((f) => /^\d{2}\.json$/.test(f))
+        .sort()
+        .reverse();
+      for (const f of files) {
+        try {
+          const report = JSON.parse(
+            fs.readFileSync(path.join(dir, f), "utf8"),
+          ) as Record<string, unknown>;
+          return { date: days[i], hour: f.replace(/\.json$/, ""), report };
+        } catch {
+          // unreadable — try the next slot
+        }
+      }
+    }
+  } catch {
+    // no daily_reports yet
+  }
+  return null;
+}
+
+/**
+ * Morning brief: pure-arithmetic overnight digest for the 06:00 edition.
+ * Deliberately avoids "A-share index change overnight" (both 19:00 and
+ * 06:00 snapshots are post-close, delta ≈ 0) — the real overnight action
+ * is US/crypto/commodity tickers captured right after the US close.
+ */
+function buildMorningBrief(
+  base: { date: string; hour: string; report: Record<string, unknown> },
+  today: { sentimentScore: number | null; keywords: string[]; eventUrls: Set<string>; events: Array<{ symbol: string; displayName: string; title: string; url: string }>; tickers: Array<{ symbol: string; displayName: string; group: string; pct1Day: number }> | undefined },
+  reportKeywords: string[],
+): MorningBrief {
+  const baseSent = (base.report as { sentiment?: { score?: number } }).sentiment;
+  const baseKeywords = cleanKeywords(
+    (base.report as { keywords?: string[] }).keywords,
+  );
+  const todayClean = cleanKeywords(reportKeywords);
+  const newKeywords = todayClean.filter((k) => !baseKeywords.includes(k));
+
+  const baseEventUrls = new Set(
+    (
+      (base.report as { quant?: { events?: Array<{ url?: string }> } }).quant
+        ?.events ?? []
+    )
+      .map((e) => e.url)
+      .filter((u): u is string => !!u),
+  );
+  const newEvents = today.events.filter(
+    (e) => e.url && !baseEventUrls.has(e.url),
+  );
+
+  const overnightGroups = new Set([
+    "us-equity",
+    "crypto",
+    "commodity-fx",
+    "china-equity",
+  ]);
+  const overnight = (today.tickers ?? [])
+    .filter((t) => overnightGroups.has(t.group))
+    .map((t) => ({
+      symbol: t.symbol,
+      displayName: t.displayName,
+      group: t.group,
+      pct1Day: t.pct1Day,
+    }))
+    .sort((a, b) => Math.abs(b.pct1Day) - Math.abs(a.pct1Day))
+    .slice(0, 6);
+
+  return {
+    generated_at: new Date().toISOString(),
+    base_edition: `${base.date}/${base.hour}`,
+    sentimentDelta:
+      baseSent?.score != null && today.sentimentScore != null
+        ? today.sentimentScore - baseSent.score
+        : null,
+    baseSentiment: baseSent?.score ?? null,
+    overnight,
+    newKeywords: newKeywords.slice(0, 6),
+    newEvents: newEvents.slice(0, 5),
+    note:
+      REPORT_LOCALE === "en"
+        ? "Overnight digest vs previous edition — arithmetic only, zero AI. Not investment advice."
+        : `对比 ${base.date}/${base.hour} 档的隔夜速览——纯算术、零 AI。不构成投资建议。`,
+  };
+}
+
 /**
  * Teaching-grade replay: the most recent PRE-today sentiment score vs
  * today's index moves (same report's quant.market). Pure arithmetic over
@@ -505,6 +605,7 @@ async function main() {
     : await generateDailyReport(articles);
   if (trading) report.trading = trading;
   if (quant) report.quant = quant;
+  const isMorning = editionKind(hour) === "morning";
   const sentimentTrend = loadSentimentTrend();
   const sentimentHistory = sentimentTrend.map((t) => t.score);
   report.sentiment = scoreSentiment(articles, sentimentHistory);
@@ -516,6 +617,35 @@ async function main() {
       `)`,
   );
   report.fetch_health = health;
+  if (isMorning) {
+    try {
+      const base = loadYesterdayEdition(date);
+      if (base) {
+        report.morning_brief = buildMorningBrief(
+          base,
+          {
+            sentimentScore: report.sentiment?.score ?? null,
+            keywords: report.keywords,
+            eventUrls: new Set((quant?.events ?? []).map((e) => e.url)),
+            events: (quant?.events ?? []).map((e) => ({
+              symbol: e.symbol,
+              displayName: e.displayName,
+              title: e.title,
+              url: e.url,
+            })),
+            tickers: trading?.tickers,
+          },
+          report.keywords,
+        );
+        console.log(
+          `[daily] morning brief: Δsentiment=${report.morning_brief.sentimentDelta ?? "—"} overnight=${report.morning_brief.overnight.length} newKw=${report.morning_brief.newKeywords.length} newEvents=${report.morning_brief.newEvents.length}`,
+        );
+      }
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`[daily] morning brief failed (non-fatal): ${msg}`);
+    }
+  }
   console.log(`[daily] digest ready in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 
   stage("write");
