@@ -16,6 +16,7 @@
     "build-site": "node scripts/build-site.mjs",
     "build-trails": "tsx scripts/build-trails.ts",
     "keywords:bake": "tsx scripts/bake-keywords.ts",
+    "weekly:bake": "tsx scripts/build-weekly.ts",
     "open": "node scripts/open-report.mjs"
   },
   "dependencies": {
