@@ -41,7 +41,7 @@ sources.config.json   # SINGLE SOURCE OF TRUTH for the source registry
 
 ## Core invariants
 
-1. **`sources.config.json` is the only place sources live.** `lib/sources/registry.ts` is just a JSON loader + locale filter. Never hardcode a source list in TS.
+1. **`sources.config.json` is the only place sources live.** `lib/sources/registry.ts` is just a JSON loader + locale filter. Never hardcode a source list in TS. Runtime exceptions (never edit the config from scripts): `DISABLE_SOURCE_IDS` env and the GENERATED `daily_reports/source-overlay.json` (build-site writes it when a source fails all editions for 3 straight days; `lib/sources/overlay.ts` reads it at module init; delete entries or the file to re-enable). The overlay only ever exists in the CI publish tree — a local build-site run may write one from local-network failures, which is harmless because it is gitignored and never committed.
 
 2. **LLM calls go through `lib/ai/llm.ts` `runLlm()`.** Five backends behind `LLM_BACKEND` env var: `claude-cli` (default), `anthropic`, `openai`, `deepseek`, `minimax`. Never import a specific backend directly — that defeats the switch.
 

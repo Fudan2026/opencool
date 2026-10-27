@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { SourceDef } from "./types";
+import { loadSourceOverlay } from "./overlay";
 
 /**
  * Source registry — loaded at module-init time from sources.config.json
@@ -98,10 +99,11 @@ function filterByLocale(all: SourceDef[]): SourceDef[] {
  */
 function applyDisabledIds(all: SourceDef[]): SourceDef[] {
   const raw = process.env.DISABLE_SOURCE_IDS?.trim() || "";
-  if (!raw) return all;
-  const disabled = new Set(
-    raw.split(",").map((s) => s.trim()).filter(Boolean),
-  );
+  const envDisabled = raw
+    ? raw.split(",").map((s) => s.trim()).filter(Boolean)
+    : [];
+  const overlay = loadSourceOverlay();
+  const disabled = new Set([...envDisabled, ...overlay.disabled]);
   if (disabled.size === 0) return all;
   return all.filter((s) => !disabled.has(s.id));
 }
