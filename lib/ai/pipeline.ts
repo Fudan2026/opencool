@@ -44,8 +44,30 @@ export interface DailyReport {
   quant?: QuantSection;
   /** Zero-token dictionary sentiment gauge over finance headlines. */
   sentiment?: MarketSentiment;
+  /** 06:00-only overnight digest vs the previous day's last edition. */
+  morning_brief?: MorningBrief;
   /** Per-source fetch telemetry attached by scripts/daily.ts. */
   fetch_health?: FetchHealth;
+}
+
+export interface MorningBrief {
+  generated_at: string;
+  base_edition: string;
+  /** Today's sentiment minus base edition's. */
+  sentimentDelta: number | null;
+  baseSentiment: number | null;
+  /** Overnight movers from trading.tickers (US/crypto/commodities at 06:00). */
+  overnight: Array<{
+    symbol: string;
+    displayName: string;
+    group: string;
+    pct1Day: number;
+  }>;
+  /** Keywords new vs the base edition. */
+  newKeywords: string[];
+  /** Watchlist events (quant.events) not present in the base edition. */
+  newEvents: Array<{ symbol: string; displayName: string; title: string; url: string }>;
+  note: string;
 }
 
 export interface FetchHealthEntry {
