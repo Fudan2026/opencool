@@ -225,6 +225,9 @@ jobs:
       - name: Bake keyword heat (7d)
         run: npm run keywords:bake
 
+      - name: Bake weekly review (7d)
+        run: npm run weekly:bake
+
       - name: Build static site (index + archive)
         run: npm run build-site
 

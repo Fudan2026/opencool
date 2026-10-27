@@ -184,6 +184,13 @@ if (fs.existsSync(path.join(ROOT, "trails.html"))) {
   );
   console.log(`[build-site] index.html += trails entry`);
 }
+if (fs.existsSync(path.join(ROOT, "weekly.html"))) {
+  latestHtml = latestHtml.replace(
+    "</body>",
+    `  <a href="./weekly.html" style="position:fixed;right:1rem;bottom:3.6rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#0d9488;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">📊 周报</a>\n</body>`,
+  );
+  console.log(`[build-site] index.html += weekly entry`);
+}
 fs.writeFileSync(path.join(ROOT, "index.html"), latestHtml, "utf8");
 console.log(`[build-site] index.html  ← ${latest.rel}`);
 
@@ -310,6 +317,7 @@ const archiveHtml = `<!doctype html>
   <p class="meta">${editions.length} 期 · 自 ${ARCHIVE_NORM_FROM} 起每日三报：早报 06:00 · 午报 13:00 · 晚报 19:00（上海时区）· 零 AI</p>
   <p><a class="home" href="./index.html">← 回到最新一期</a>
    · <a class="home" href="./trails.html">徒步路线收藏</a>
+   · <a class="home" href="./weekly.html">周报</a>
    · <a class="home" href="./status.html">运行状态</a></p>
 ${dayBlocks}
 </main>
@@ -628,6 +636,8 @@ No LLM behind any endpoint.
   chronological items {date,hour,score,label,posHits,negHits,scanned,percentile}
 - Keyword heat: /keywords.json — 7-day keyword frequency
   {term,count,firstSeen,lastSeen}, stopword-cleaned
+- Weekly review: /weekly.html + /weekly.json — 7-day sentiment curve,
+  sector averages, top events, index averages (baked when >= 5 days)
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html
