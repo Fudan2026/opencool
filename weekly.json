@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-27T10:31:25.461Z",
+  "generatedAt": "2026-10-27T23:12:30.704Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 16,
-  "avgSentiment": -97.5,
+  "daysCovered": 9,
+  "editions": 17,
+  "avgSentiment": -98,
   "sentimentCurve": [
     {
       "date": "2026-10-27",
@@ -15,32 +15,37 @@
       "date": "2026-10-27",
       "hour": "13",
       "score": -99
+    },
+    {
+      "date": "2026-10-28",
+      "hour": "06",
+      "score": -99
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -94.5,
-      "editions": 2
+      "avg": -96,
+      "editions": 3
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 2
-    },
-    {
-      "key": "us-equity",
-      "label": "美股",
-      "avg": -20,
-      "editions": 2
+      "editions": 3
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
       "avg": -20,
       "editions": 1
+    },
+    {
+      "key": "us-equity",
+      "label": "美股",
+      "avg": -13.3,
+      "editions": 3
     }
   ],
   "topEvents": [
@@ -49,14 +54,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 16
+      "count": 17
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 16
+      "count": 17
     },
     {
       "symbol": "512480.SS",
@@ -240,18 +245,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": 0.22,
-      "editions": 14
+      "avgChangePct": 0.12,
+      "editions": 15
     },
     {
       "name": "深证成指",
-      "avgChangePct": 0.28,
-      "editions": 13
+      "avgChangePct": 0.09,
+      "editions": 14
     },
     {
       "name": "创业板指",
-      "avgChangePct": -0.03,
-      "editions": 12
+      "avgChangePct": -0.29,
+      "editions": 13
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
