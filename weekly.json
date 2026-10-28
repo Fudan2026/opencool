@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-27T23:12:30.704Z",
+  "generatedAt": "2026-10-28T09:03:51.116Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 9,
-  "editions": 17,
+  "daysCovered": 8,
+  "editions": 15,
   "avgSentiment": -98,
   "sentimentCurve": [
     {
@@ -20,20 +20,25 @@
       "date": "2026-10-28",
       "hour": "06",
       "score": -99
+    },
+    {
+      "date": "2026-10-28",
+      "hour": "13",
+      "score": -98
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -96,
-      "editions": 3
+      "avg": -96.2,
+      "editions": 4
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 3
+      "editions": 4
     },
     {
       "key": "commodity-fx",
@@ -44,8 +49,8 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -13.3,
-      "editions": 3
+      "avg": -10,
+      "editions": 4
     }
   ],
   "topEvents": [
@@ -54,14 +59,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 17
+      "count": 15
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 17
+      "count": 15
     },
     {
       "symbol": "512480.SS",
@@ -96,7 +101,7 @@
       "displayName": "Nvidia",
       "title": "“投资德国峰会”柏林举行 德国将携手英伟达宣布AI合作协议",
       "url": "https://www.dw.com/zh/投资德国峰会-柏林举行-德国将携手英伟达宣布ai合作协议/a-79705567?maca=chi-rss-chi-all-1127-rdf",
-      "count": 9
+      "count": 6
     },
     {
       "symbol": "GC=F",
@@ -121,12 +126,6 @@
     }
   ],
   "keywords": [
-    {
-      "term": "德国",
-      "count": 4,
-      "firstSeen": "2026-10-20",
-      "lastSeen": "2026-10-24"
-    },
     {
       "term": "machado",
       "count": 3,
@@ -200,10 +199,10 @@
       "lastSeen": "2026-10-21"
     },
     {
-      "term": "举行",
+      "term": "德国",
       "count": 2,
-      "firstSeen": "2026-10-20",
-      "lastSeen": "2026-10-20"
+      "firstSeen": "2026-10-23",
+      "lastSeen": "2026-10-24"
     },
     {
       "term": "政部",
@@ -240,23 +239,29 @@
       "count": 1,
       "firstSeen": "2026-10-26",
       "lastSeen": "2026-10-26"
+    },
+    {
+      "term": "burnham",
+      "count": 1,
+      "firstSeen": "2026-10-22",
+      "lastSeen": "2026-10-22"
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": 0.12,
-      "editions": 15
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": 0.09,
+      "avgChangePct": 0.16,
       "editions": 14
     },
     {
-      "name": "创业板指",
-      "avgChangePct": -0.29,
+      "name": "深证成指",
+      "avgChangePct": 0.25,
       "editions": 13
+    },
+    {
+      "name": "创业板指",
+      "avgChangePct": 0.07,
+      "editions": 12
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
