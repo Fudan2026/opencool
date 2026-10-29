@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-28T09:03:51.116Z",
+  "generatedAt": "2026-10-29T07:02:34.072Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 15,
+  "editions": 14,
   "avgSentiment": -98,
   "sentimentCurve": [
     {
@@ -25,6 +25,11 @@
       "date": "2026-10-28",
       "hour": "13",
       "score": -98
+    },
+    {
+      "date": "2026-10-29",
+      "hour": "06",
+      "score": -98
     }
   ],
   "sectorAvg": [
@@ -32,13 +37,13 @@
       "key": "general",
       "label": "大盘综合",
       "avg": -96.2,
-      "editions": 4
+      "editions": 5
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 4
+      "editions": 5
     },
     {
       "key": "commodity-fx",
@@ -49,8 +54,8 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -10,
-      "editions": 4
+      "avg": -12,
+      "editions": 5
     }
   ],
   "topEvents": [
@@ -59,49 +64,42 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 15
+      "count": 14
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 15
+      "count": 14
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "字节阿里腾讯砸数百亿美金 抢购英伟达芯片",
       "url": "https://www.dw.com/zh/字节阿里腾讯砸数百亿美金-抢购英伟达芯片/a-79712724?maca=chi-rss-chi-all-1127-rdf",
-      "count": 11
+      "count": 9
     },
     {
       "symbol": "BABA",
       "displayName": "阿里巴巴 (BABA)",
       "title": "字节阿里腾讯砸数百亿美金 抢购英伟达芯片",
       "url": "https://www.dw.com/zh/字节阿里腾讯砸数百亿美金-抢购英伟达芯片/a-79712724?maca=chi-rss-chi-all-1127-rdf",
-      "count": 11
+      "count": 9
     },
     {
       "symbol": "0700.HK",
       "displayName": "腾讯控股",
       "title": "字节阿里腾讯砸数百亿美金 抢购英伟达芯片",
       "url": "https://www.dw.com/zh/字节阿里腾讯砸数百亿美金-抢购英伟达芯片/a-79712724?maca=chi-rss-chi-all-1127-rdf",
-      "count": 11
+      "count": 9
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "字节阿里腾讯砸数百亿美金 抢购英伟达芯片",
       "url": "https://www.dw.com/zh/字节阿里腾讯砸数百亿美金-抢购英伟达芯片/a-79712724?maca=chi-rss-chi-all-1127-rdf",
-      "count": 11
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "“投资德国峰会”柏林举行 德国将携手英伟达宣布AI合作协议",
-      "url": "https://www.dw.com/zh/投资德国峰会-柏林举行-德国将携手英伟达宣布ai合作协议/a-79705567?maca=chi-rss-chi-all-1127-rdf",
-      "count": 6
+      "count": 9
     },
     {
       "symbol": "GC=F",
@@ -122,6 +120,13 @@
       "displayName": "美元 / 人民币",
       "title": "特朗普宣布奥迪将斥资40亿美元在美建厂",
       "url": "https://www.dw.com/zh/特朗普宣布奥迪将斥资40亿美元在美建厂/a-79756218?maca=chi-rss-chi-all-1127-rdf",
+      "count": 5
+    },
+    {
+      "symbol": "BTC-USD",
+      "displayName": "Bitcoin",
+      "title": "Why Now Is the Time to Add and Hold BTC",
+      "url": "https://x.com/intangiblecoins/status/2114730275242426648",
       "count": 5
     }
   ],
@@ -163,12 +168,6 @@
       "lastSeen": "2026-10-25"
     },
     {
-      "term": "canadian",
-      "count": 2,
-      "firstSeen": "2026-10-21",
-      "lastSeen": "2026-10-21"
-    },
-    {
       "term": "fire",
       "count": 2,
       "firstSeen": "2026-10-25",
@@ -179,24 +178,6 @@
       "count": 2,
       "firstSeen": "2026-10-26",
       "lastSeen": "2026-10-26"
-    },
-    {
-      "term": "sued",
-      "count": 2,
-      "firstSeen": "2026-10-21",
-      "lastSeen": "2026-10-21"
-    },
-    {
-      "term": "tariffs",
-      "count": 2,
-      "firstSeen": "2026-10-21",
-      "lastSeen": "2026-10-21"
-    },
-    {
-      "term": "trump",
-      "count": 2,
-      "firstSeen": "2026-10-21",
-      "lastSeen": "2026-10-21"
     },
     {
       "term": "德国",
@@ -223,12 +204,6 @@
       "lastSeen": "2026-10-25"
     },
     {
-      "term": "面临",
-      "count": 2,
-      "firstSeen": "2026-10-21",
-      "lastSeen": "2026-10-22"
-    },
-    {
       "term": "95bn",
       "count": 1,
       "firstSeen": "2026-10-27",
@@ -245,23 +220,53 @@
       "count": 1,
       "firstSeen": "2026-10-22",
       "lastSeen": "2026-10-22"
+    },
+    {
+      "term": "charges",
+      "count": 1,
+      "firstSeen": "2026-10-22",
+      "lastSeen": "2026-10-22"
+    },
+    {
+      "term": "deal",
+      "count": 1,
+      "firstSeen": "2026-10-23",
+      "lastSeen": "2026-10-23"
+    },
+    {
+      "term": "leader",
+      "count": 1,
+      "firstSeen": "2026-10-26",
+      "lastSeen": "2026-10-26"
+    },
+    {
+      "term": "offering",
+      "count": 1,
+      "firstSeen": "2026-10-27",
+      "lastSeen": "2026-10-27"
+    },
+    {
+      "term": "opposition",
+      "count": 1,
+      "firstSeen": "2026-10-26",
+      "lastSeen": "2026-10-26"
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": 0.16,
-      "editions": 14
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": 0.25,
+      "avgChangePct": 0.12,
       "editions": 13
     },
     {
-      "name": "创业板指",
-      "avgChangePct": 0.07,
+      "name": "深证成指",
+      "avgChangePct": 0.09,
       "editions": 12
+    },
+    {
+      "name": "创业板指",
+      "avgChangePct": -0.18,
+      "editions": 11
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
