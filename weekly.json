@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-29T07:02:34.072Z",
+  "generatedAt": "2026-10-29T15:36:06.040Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 14,
-  "avgSentiment": -98,
+  "editions": 15,
+  "avgSentiment": -93.7,
   "sentimentCurve": [
     {
       "date": "2026-10-27",
@@ -30,20 +30,25 @@
       "date": "2026-10-29",
       "hour": "06",
       "score": -98
+    },
+    {
+      "date": "2026-10-29",
+      "hour": "13",
+      "score": -72
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -96.2,
-      "editions": 5
+      "avg": -90.2,
+      "editions": 6
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 5
+      "editions": 6
     },
     {
       "key": "commodity-fx",
@@ -52,10 +57,16 @@
       "editions": 1
     },
     {
+      "key": "china-ashare",
+      "label": "A 股蓝筹",
+      "avg": 20,
+      "editions": 1
+    },
+    {
       "key": "us-equity",
       "label": "美股",
-      "avg": -12,
-      "editions": 5
+      "avg": -13.3,
+      "editions": 6
     }
   ],
   "topEvents": [
@@ -64,14 +75,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 14
+      "count": 15
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 14
+      "count": 15
     },
     {
       "symbol": "512480.SS",
@@ -102,6 +113,13 @@
       "count": 9
     },
     {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "Meta拟发股筹集950亿美元AI投资资金",
+      "url": "https://www.ftchinese.com/story/001111205",
+      "count": 6
+    },
+    {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Full Guide on Legion [ The Republic ] and VP at $0 cost  to a possible Goldmine!",
@@ -120,13 +138,6 @@
       "displayName": "美元 / 人民币",
       "title": "特朗普宣布奥迪将斥资40亿美元在美建厂",
       "url": "https://www.dw.com/zh/特朗普宣布奥迪将斥资40亿美元在美建厂/a-79756218?maca=chi-rss-chi-all-1127-rdf",
-      "count": 5
-    },
-    {
-      "symbol": "BTC-USD",
-      "displayName": "Bitcoin",
-      "title": "Why Now Is the Time to Add and Hold BTC",
-      "url": "https://x.com/intangiblecoins/status/2114730275242426648",
       "count": 5
     }
   ],
@@ -180,6 +191,12 @@
       "lastSeen": "2026-10-26"
     },
     {
+      "term": "售额",
+      "count": 2,
+      "firstSeen": "2026-10-29",
+      "lastSeen": "2026-10-29"
+    },
+    {
       "term": "德国",
       "count": 2,
       "firstSeen": "2026-10-23",
@@ -204,16 +221,34 @@
       "lastSeen": "2026-10-25"
     },
     {
+      "term": "销售",
+      "count": 2,
+      "firstSeen": "2026-10-29",
+      "lastSeen": "2026-10-29"
+    },
+    {
       "term": "95bn",
       "count": 1,
       "firstSeen": "2026-10-27",
       "lastSeen": "2026-10-27"
     },
     {
+      "term": "acquire",
+      "count": 1,
+      "firstSeen": "2026-10-29",
+      "lastSeen": "2026-10-29"
+    },
+    {
       "term": "announces",
       "count": 1,
       "firstSeen": "2026-10-26",
       "lastSeen": "2026-10-26"
+    },
+    {
+      "term": "billion",
+      "count": 1,
+      "firstSeen": "2026-10-29",
+      "lastSeen": "2026-10-29"
     },
     {
       "term": "burnham",
@@ -226,47 +261,23 @@
       "count": 1,
       "firstSeen": "2026-10-22",
       "lastSeen": "2026-10-22"
-    },
-    {
-      "term": "deal",
-      "count": 1,
-      "firstSeen": "2026-10-23",
-      "lastSeen": "2026-10-23"
-    },
-    {
-      "term": "leader",
-      "count": 1,
-      "firstSeen": "2026-10-26",
-      "lastSeen": "2026-10-26"
-    },
-    {
-      "term": "offering",
-      "count": 1,
-      "firstSeen": "2026-10-27",
-      "lastSeen": "2026-10-27"
-    },
-    {
-      "term": "opposition",
-      "count": 1,
-      "firstSeen": "2026-10-26",
-      "lastSeen": "2026-10-26"
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": 0.12,
-      "editions": 13
+      "avgChangePct": 0.06,
+      "editions": 14
     },
     {
       "name": "深证成指",
-      "avgChangePct": 0.09,
-      "editions": 12
+      "avgChangePct": -0.14,
+      "editions": 13
     },
     {
       "name": "创业板指",
-      "avgChangePct": -0.18,
-      "editions": 11
+      "avgChangePct": -0.53,
+      "editions": 12
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
