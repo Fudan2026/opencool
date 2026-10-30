@@ -3,38 +3,2752 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OpenCool · 午报尚未更新 · 2026-10-30</title>
+<title>OpenCool · 午报 · 2026-10-30</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;0,9..40,700;1,9..40,500&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
-  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
-    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
-      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
-    color:var(--fg); display:flex; align-items:center; justify-content:center; }
-  .box { max-width:420px; margin:2rem; padding:2rem 1.75rem; background:var(--card);
-    border:1px solid var(--rule); border-radius:1rem; text-align:center; }
-  .brand { font-family:"DM Sans",sans-serif; font-weight:700; letter-spacing:0.12em;
-    text-transform:uppercase; color:var(--accent); font-size:0.8rem; }
-  h1 { font-size:1.45rem; margin:0.6rem 0 0.4rem; }
-  p { color:var(--muted); line-height:1.55; margin:0.5rem 0; }
-  a { color:var(--accent); font-weight:600; text-decoration:none; }
-  .chips { display:flex; gap:0.4rem; justify-content:center; flex-wrap:wrap; margin-top:1.2rem; }
-  .chips a { padding:0.4rem 0.75rem; border:1px solid var(--rule); border-radius:999px; font-size:0.85rem; }
+  :root {
+    --bg: #fff7ef;
+    --bg-elevated: #ffffff;
+    --fg: #1c1410;
+    --fg-soft: #4a3b32;
+    --muted: #8a7364;
+    --rule: #f0ddd0;
+    --card: #ffffff;
+    --link: #c2410c;
+    --accent: #ea580c;
+    --accent-fg: #fff7ef;
+    --splash: #fb923c;
+    --mint: #0d9488;
+    --rank-high-bg: #ffedd5;
+    --rank-high-fg: #9a3412;
+    --rank-mid-bg: #fef3c7;
+    --rank-mid-fg: #92400e;
+    --rank-low-bg: #ccfbf1;
+    --rank-low-fg: #0f766e;
+    --hero-grad-from: #fff1e0;
+    --hero-grad-to: #ffe4ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 90% 55% at 0% -5%, #ffd8a8 0%, transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 0%, #ffc9de 0%, transparent 50%),
+      radial-gradient(ellipse 50% 35% at 50% 100%, #cffafe 0%, transparent 55%),
+      var(--bg);
+    color: var(--fg);
+    font-family: "Noto Sans SC", "DM Sans", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 980px; margin: 0 auto; padding: 2rem 1.35rem 4rem; }
+
+  .hero {
+    margin-bottom: 1.75rem;
+    padding: 1.6rem 1.5rem 1.4rem;
+    border-radius: 1.25rem;
+    background: linear-gradient(145deg, var(--hero-grad-from), var(--hero-grad-to));
+    border: 1px solid rgba(234, 88, 12, 0.12);
+    box-shadow: 0 12px 40px rgba(234, 88, 12, 0.08);
+  }
+  .brand-mark {
+    font-family: "Fraunces", "Noto Sans SC", serif;
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--fg);
+  }
+  .brand-tag {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 1.1rem 0 0.75rem;
+  }
+  .ed-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--accent-fg);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .hero-date { color: var(--muted); font-size: 0.86rem; }
+  .hero-headline {
+    font-family: "Fraunces", "Noto Sans SC", serif;
+    font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+  .hero-morning { margin:.9rem 0 .2rem; padding:.75rem 1rem; background:var(--card);
+    border:1px solid var(--rule); border-radius:.75rem; }
+  .hero-morning .mb-title { margin:0 0 .3rem; font-weight:700; }
+  .hero-morning .mb-row { margin:.3rem 0; display:flex; flex-wrap:wrap; gap:.35rem; align-items:baseline; }
+  .mb-chip { padding:.15rem .55rem; border:1px solid var(--rule); border-radius:999px; font-size:.8rem; background:var(--bg-elevated); }
+  .mb-events { margin:.2rem 0 0; padding-left:1.1rem; }
+  .mb-events li { font-size:.85rem; margin:.2rem 0; }
+  .mb-events .mb-ev { color:var(--accent); font-weight:600; margin-right:.35rem; }
+  .hero-overview {
+    margin: 0.9rem 0 0;
+    padding: 0.85rem 1rem;
+    background: rgba(255,255,255,0.72);
+    border-radius: 0.75rem;
+    border-left: 3px solid var(--mint);
+    color: var(--fg-soft);
+    font-size: 0.95rem;
+  }
+  .ov-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 0.25rem;
+  }
+  .edition-switch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+  .ed-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.8);
+    border: 1px solid var(--rule);
+    color: var(--fg-soft);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .ed-chip span { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
+  .ed-chip.active, .ed-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .archive-link {
+    display: inline-block;
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .archive-link:hover { text-decoration: underline; }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  h1.report-title { display: none; }
+
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0 0 1rem;
+    padding: 0.35rem;
+    background: rgba(255,255,255,0.65);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+  }
+  .tab {
+    border: none;
+    background: transparent;
+    color: var(--fg-soft);
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .tab .count {
+    margin-left: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .tab.active {
+    background: var(--fg);
+    color: #fff7ef;
+  }
+  .tab.active .count { color: rgba(255,247,239,0.7); }
+
+  .panel { display: none; }
+  .panel.active { display: block; animation: rise 0.35s ease; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .sub-tabs, .source-tabs, .trading-group-tabs {
+    display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.85rem;
+  }
+  .sub-tab, .source-tab, .trading-group-tab {
+    border: 1px solid var(--rule);
+    background: var(--card);
+    color: var(--fg-soft);
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.82rem;
+  }
+  .sub-tab.active, .source-tab.active, .trading-group-tab.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #fff7ed;
+  }
+  .sub-content, .source-content, .trading-group-content { display: none; }
+  .sub-content.active, .source-content.active, .trading-group-content.active { display: block; }
+
+  .article {
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .article:last-child { border-bottom: none; }
+  .article a.title {
+    color: var(--fg);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.02rem;
+  }
+  .article a.title:hover { color: var(--accent); }
+  .article .meta-line {
+    margin-top: 0.25rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .article .excerpt {
+    margin: 0.35rem 0 0;
+    color: var(--fg-soft);
+    font-size: 0.9rem;
+  }
+  .empty { color: var(--muted); padding: 1rem 0; }
+
+  .brief-list { list-style: none; padding: 0; margin: 0; }
+  .brief-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .brief-rank {
+    width: 1.6rem; height: 1.6rem;
+    border-radius: 0.45rem;
+    display: grid; place-items: center;
+    font-size: 0.75rem; font-weight: 700;
+  }
+  .brief-rank.high { background: var(--rank-high-bg); color: var(--rank-high-fg); }
+  .brief-rank.mid  { background: var(--rank-mid-bg);  color: var(--rank-mid-fg); }
+  .brief-rank.low  { background: var(--rank-low-bg);  color: var(--rank-low-fg); }
+
+  .overview-card, .hero-card { display: none; }
+
+  footer {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.1rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  /* trading / tickers (kept lean) */
+  .trading-overview, .trading-picks, .ticker-card, .crypto-widgets {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 0.9rem;
+    padding: 1rem 1.1rem; margin-bottom: 0.85rem;
+  }
+  .ticker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.65rem; }
+  .ticker-card h3 { margin: 0 0 0.35rem; font-size: 0.95rem; }
+  .ticker-pct.positive, .trend-bullish, .positive { color: #15803d; }
+  .ticker-pct.negative, .trend-bearish, .negative { color: #b91c1c; }
+  .signal-pill { font-size: 0.72rem; padding: 0.18rem 0.55rem; border-radius: 999px; font-weight: 500; display: inline-block; margin: 0.15rem; }
+  .signal-pill.tone-bull { background: rgba(22,163,74,0.13); color: #166534; }
+  .signal-pill.tone-bear { background: rgba(220,38,38,0.13); color: #991b1b; }
+  .signal-pill.tone-caution { background: rgba(217,119,6,0.15); color: #92400e; }
+  .trading-risk {
+    margin: 1.5rem 0 0; padding: 0.9rem 1.2rem; background: var(--card);
+    border-radius: 0.75rem; border-left: 3px solid #d97706;
+  }
+  .pick-stance-bull { background: rgba(22,163,74,0.12); color: #16a34a; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
+  .pick-stance-bear { background: rgba(220,38,38,0.12); color: #dc2626; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
+  .pick-stance-neutral { background: var(--card); color: var(--muted); padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
+  .merged-source { font-size: 0.75rem; color: var(--muted); }
+  .guide-switch { display:inline-flex; gap:0.25rem; margin:0.75rem 0 0; padding:0.2rem;
+    background:rgba(255,255,255,0.55); border-radius:999px; border:1px solid var(--rule); }
+  .guide-btn { border:0; background:transparent; padding:0.35rem 0.85rem; border-radius:999px;
+    font:inherit; font-size:0.82rem; font-weight:600; cursor:pointer; color:var(--muted); }
+  .guide-btn.active { background:var(--accent); color:#fff; }
+  body.guide-on .orig-block { display:none; }
+  body.guide-on .guide-block { display:block; }
+  .guide-block[hidden] { display:none !important; }
+  body.guide-on .guide-block[hidden] { display:block !important; }
+  .guide-bullets { margin:0.4rem 0 0; padding-left:1.1rem; font-size:0.9rem; }
+  .guide-label { list-style:none; margin-left:-1.1rem; font-weight:700; color:var(--accent); font-size:0.78rem; }
+  .guide-wire { font-size:0.78rem; color:var(--muted); margin:0.25rem 0; }
+  .panel-h { font-size:1.05rem; margin:1.2rem 0 0.5rem; }
+  .lede { color:var(--muted); margin:0 0 0.85rem; }
+  .muted { color:var(--muted); }
+  .tiny { font-size:0.75rem; }
+  .idx-grid, .risk-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:0.55rem; margin-bottom:0.75rem; }
+  .idx-card, .risk-card, .lesson, .persona-block { background:var(--card); border:1px solid var(--rule); border-radius:0.75rem; padding:0.85rem 1rem; margin-bottom:0.65rem; }
+  .event-list { padding-left:1.1rem; }
+  .event-list li { margin:0.35rem 0; }
+  .ev-sym { font-weight:700; margin-right:0.35rem; }
+  .verdict { display:inline-block; font-size:0.72rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:0.35rem; }
+  .v-绿 { background:rgba(22,163,74,0.15); color:#166534; }
+  .v-黄 { background:rgba(217,119,6,0.15); color:#92400e; }
+  .v-红 { background:rgba(220,38,38,0.13); color:#991b1b; }
+  #kb-q { width:100%; max-width:420px; padding:0.55rem 0.75rem; border:1px solid var(--rule); border-radius:0.55rem; font:inherit; margin-bottom:0.75rem; }
+  .kb-results article { background:var(--card); border:1px solid var(--rule); border-radius:0.65rem; padding:0.7rem 0.9rem; margin-bottom:0.45rem; }
+  .lvl { font-size:0.72rem; font-weight:700; color:var(--accent); }
+  pre.code { background:#1a1510; color:#fff8f0; padding:0.85rem 1rem; border-radius:0.55rem; overflow:auto; font-size:0.85rem; }
+  .spark { display:block; margin:0.35rem 0; }
+  .tabs { flex-wrap: wrap; }
+  .data-note { font-size:0.78rem; color:#92400e; background:rgba(217,119,6,0.12); padding:0.35rem 0.55rem; border-radius:0.4rem; margin:0.35rem 0; }
+  .ticker-card.degraded { opacity:0.92; border-style:dashed; }
+  .ticker-card.fav-hit { box-shadow: inset 0 0 0 2px rgba(180,83,9,0.35); }
+  .fav-star { border:0; background:transparent; cursor:pointer; font-size:1.1rem; line-height:1; color:var(--muted); padding:0.15rem; }
+  .fav-star.on { color:#b45309; }
+  .fav-pin { margin:0 0 1rem; padding:0.85rem 1rem; background:var(--card); border:1px dashed var(--rule); border-radius:0.75rem; }
+  .fav-pin h2 { margin:0 0 0.55rem; font-size:1rem; }
+  .fav-pin-empty { color:var(--muted); font-size:0.85rem; margin:0; }
+  .flow-table { width:100%; border-collapse:collapse; font-size:0.88rem; margin:0.4rem 0 0.75rem; }
+  .flow-table th, .flow-table td { text-align:left; padding:0.4rem 0.5rem; border-bottom:1px solid var(--rule); }
+  .event-counts { font-size:0.85rem; margin:0 0 0.55rem; }
+  .ev-count { display:inline-block; margin:0.15rem 0.25rem 0.15rem 0; }
+  .ev-count.fav-hit, .event-list li.fav-hit .ev-sym { color:#b45309; }
+  .toy-backtest { margin-top:1rem; }
+  .senti-head { display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap; }
+  .senti-score { font-size:2.1rem; font-weight:700; font-family:"DM Sans",sans-serif; }
+  .senti-label { padding:.2rem .65rem; border:1px solid currentColor; border-radius:999px; font-size:.85rem; font-weight:600; }
+  .senti-bar { position:relative; height:.55rem; border-radius:999px; margin:.9rem 0 .3rem;
+    background:linear-gradient(90deg,#b91c1c,#d4a017 50%,#15803d); }
+  .senti-marker { position:absolute; top:-.3rem; width:.35rem; height:1.15rem; border-radius:2px;
+    background:#1a1510; transform:translateX(-50%); box-shadow:0 0 0 2px rgba(255,255,255,.7); }
+  .senti-scale { display:flex; justify-content:space-between; margin-bottom:1.1rem; }
+  .senti-drivers { display:flex; gap:.4rem; flex-wrap:wrap; }
+  .senti-chip { padding:.3rem .7rem; border:1px solid var(--rule); border-radius:999px;
+    font-size:.85rem; background:var(--card); }
+  .senti-trend { margin:.6rem 0 1rem; padding:.7rem .9rem; background:var(--card);
+    border:1px solid var(--rule); border-radius:.75rem; }
+  .senti-trend p { margin:.35rem 0 0; }
+  .senti-review { margin:0 0 1rem; padding:.7rem .9rem; background:var(--card);
+    border:1px solid var(--rule); border-radius:.75rem; }
+  .senti-review p { margin:.3rem 0; }
+
 </style>
 </head>
 <body>
-<div class="box">
-  <div class="brand">OpenCool</div>
-  <h1>午报尚未更新</h1>
-  <p>2026-10-30 · 13:00（上海时区）这一期还没生成。</p>
-  <p>流水线在整点附近自动抓取；到点后刷新本页即可。零 AI / 零 Token。</p>
-  <p><a href="../index.html">← 回到最新一期</a>
-   · <a href="../archive.html">历史归档</a></p>
-  <div class="chips">
-    <a href="./06.html">早报 06:00</a><a href="./13.html">午报 13:00</a><a href="./19.html">晚报 19:00</a>
+<main>
+  
+  <section class="hero">
+    <div class="hero-brand">
+      <div class="brand-mark">OpenCool</div>
+      <p class="brand-tag">中文财经三报 · 散户投研 · 零 AI</p>
+    </div>
+    <div class="hero-meta">
+      <span class="ed-badge">午报</span>
+      <span class="hero-date">2026-10-30 · 13:00 · Asia/Shanghai</span>
+    </div>
+    <h1 class="hero-headline">“联系成员国”争端给加欧峰会蒙上阴影</h1>
+    <p class="hero-overview"><span class="ov-label">本期速览</span>启发式两报（零 AI / 零 API Token）：中文财经源优先，外电原文次栏；按「多源交叉 × 时效」排序，不做个性化推荐。 财经头条：“联系成员国”争端给加欧峰会蒙上阴影。 时政头条：Flávio Bolsonaro calls himself &#39;leader of Brazil&#39; after election loss。</p>
+    
+    <nav class="edition-switch" aria-label="editions"><a class="ed-chip" href="./06.html">早报<span>06:00</span></a><a class="ed-chip active" href="./13.html">午报<span>13:00</span></a><a class="ed-chip" href="./19.html">晚报<span>19:00</span></a></nav>
+    <div class="guide-switch" role="group" aria-label="reading mode">
+      <button type="button" class="guide-btn active" data-guide="off">原文</button>
+      <button type="button" class="guide-btn" data-guide="on">中文导读</button>
+    </div>
+    <a class="archive-link" href="../archive.html">历史归档</a>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="finance">中文财经<span class="count">49</span></button>
+    <button class="tab" data-tab="trading">行情·A股/基金<span class="count">32</span></button>
+    <button class="tab" data-tab="review">今日复盘</button>
+    <button class="tab" data-tab="sentiment">市场情绪计</button>
+    <button class="tab" data-tab="techread">技术面读线</button>
+    <button class="tab" data-tab="personas">大师视角</button>
+    <button class="tab" data-tab="risk">风控纪律</button>
+    <button class="tab" data-tab="school">散户学堂</button>
+    <button class="tab" data-tab="knowledge">知识库</button>
+    <button class="tab" data-tab="mcp">开放 MCP</button>
+    <button class="tab" data-tab="politics">时政观察<span class="count">15</span></button>
+    <button class="tab" data-tab="tech">技术动态<span class="count">0</span></button>
+    
+  </nav>
+
+  <section class="panel active" data-panel="finance">
+    <nav class="sub-tabs"><button class="sub-tab active" data-sub="cn-news" data-cat="finance">中文财经<span class="count">24</span></button><button class="sub-tab" data-sub="x-mirror" data-cat="finance">X 市场声音（站内镜像，免翻墙）<span class="count">11</span></button><button class="sub-tab" data-sub="wire" data-cat="finance">外电原文<span class="count">14</span></button></nav>
+<div class="sub-contents"><div class="sub-content active" data-sub-content="cn-news" data-cat="finance">
+    
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="_merged" data-sub="cn-news" data-cat="finance">
+    <article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111236" target="_blank" rel="noopener noreferrer">“联系成员国”争端给加欧峰会蒙上阴影</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/30 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">欧盟-加拿大峰会在蒙特利尔开幕之际，欧盟委员会主席冯德莱恩给予加拿大“联系成员国”地位的雄心，使其与自己的祖国德国意见相左。</p>
   </div>
-</div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">欧盟-加拿大峰会在蒙特利尔开幕之际，欧盟委员会主席冯德莱恩给予加拿大“联系成员国”地位的雄心，使其与自己的祖国德国意见相左。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>欧盟-加拿大峰会在蒙特利尔开幕之际，欧盟委员会主席冯德莱恩给予加拿大“联系成员国”地位的雄心，使其与自己的祖国德国意见相左。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111235" target="_blank" rel="noopener noreferrer">内塔尼亚胡所属政党声称选举被“窃取”</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/30 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">利库德集团祭出这一说法之前，阿拉伯裔以色列公民在本周选举中踊跃投票支持该国阿拉伯政党，导致内塔尼亚胡阵营未能决定性胜出。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">利库德集团祭出这一说法之前，阿拉伯裔以色列公民在本周选举中踊跃投票支持该国阿拉伯政党，导致内塔尼亚胡阵营未能决定性胜出。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>利库德集团祭出这一说法之前，阿拉伯裔以色列公民在本周选举中踊跃投票支持该国阿拉伯政党，导致内塔尼亚胡阵营未能决定性胜出。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111234" target="_blank" rel="noopener noreferrer">3.4%：美国经济第三季度年化增速超预期</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/30 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">这一增速较第二季度的2.2%有所加快，并高于华尔街此前预测的3.2%。AI支出热潮继续推动经济增长，消费者也继续大笔消费。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">这一增速较第二季度的2.2%有所加快，并高于华尔街此前预测的3.2%。AI支出热潮继续推动经济增长，消费者也继续大笔消费。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>这一增速较第二季度的2.</li><li>2%有所加快，并高于华尔街此前预测的3.</li><li>AI支出热潮继续推动经济增长，消费者也继续大笔消费。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111231" target="_blank" rel="noopener noreferrer">香港特首就宏福苑大火致歉</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/29 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">去年的宏福苑火灾是香港数十年来最严重的住宅火灾，造成168人死亡。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">去年的宏福苑火灾是香港数十年来最严重的住宅火灾，造成168人死亡。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>去年的宏福苑火灾是香港数十年来最严重的住宅火灾，造成168人死亡。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111224" target="_blank" rel="noopener noreferrer">中国需求减弱影响GSK疫苗销售额</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/29 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">受中国市场对带状疱疹疫苗需求减弱拖累，葛兰素史克第三季度疫苗销售额同比下降4%，这家富时100指数成分股药企的股价随之下跌。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">受中国市场对带状疱疹疫苗需求减弱拖累，葛兰素史克第三季度疫苗销售额同比下降4%，这家富时100指数成分股药企的股价随之下跌。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>受中国市场对带状疱疹疫苗需求减弱拖累，葛兰素史克第三季度疫苗销售额同比下降4%，这家富时100指数成分股药企的股价随之下跌。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111218" target="_blank" rel="noopener noreferrer">泡泡玛特季度销售额下降50%，拉布布热度减退</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/28 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">随着曾经风靡一时的拉布布玩偶需求减弱，这家中国玩具公司报告第三季度销售额同比下降45%至50%，其中西方市场销售额降幅更大。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">随着曾经风靡一时的拉布布玩偶需求减弱，这家中国玩具公司报告第三季度销售额同比下降45%至50%，其中西方市场销售额降幅更大。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>随着曾经风靡一时的拉布布玩偶需求减弱，这家中国玩具公司报告第三季度销售额同比下降45%至50%，其中西方市场销售额降幅更大。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111211" target="_blank" rel="noopener noreferrer">英国对中国产挖掘机的关税遭到卡特彼勒挑战</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/27 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">这家美国建筑设备制造商力争推翻英国贸易救济局对其中国产挖掘机征收的18.81%反倾销关税。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">这家美国建筑设备制造商力争推翻英国贸易救济局对其中国产挖掘机征收的18.81%反倾销关税。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>这家美国建筑设备制造商力争推翻英国贸易救济局对其中国产挖掘机征收的18.</li><li>81%反倾销关税。</li><li>关键数字：18.81%</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111206" target="_blank" rel="noopener noreferrer">CERN总干事呼吁欧洲支持建造未来环形对撞机</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/27 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">欧洲核子研究中心总干事汤姆森称，造价160亿欧元的下一代粒子加速器有望推动工业发展。该项目将考验欧洲启动大型基础研究项目的意愿。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">欧洲核子研究中心总干事汤姆森称，造价160亿欧元的下一代粒子加速器有望推动工业发展。该项目将考验欧洲启动大型基础研究项目的意愿。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>欧洲核子研究中心总干事汤姆森称，造价160亿欧元的下一代粒子加速器有望推动工业发展。</li><li>该项目将考验欧洲启动大型基础研究项目的意愿。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111205" target="_blank" rel="noopener noreferrer">Meta拟发股筹集950亿美元AI投资资金</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/27 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">这是大型科技公司借助股市为其AI雄心提供资金的最新事例。芯片制造商英伟达、AMD和博通将作为基石投资者支持这笔交易。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">这是大型科技公司借助股市为其AI雄心提供资金的最新事例。芯片制造商英伟达、AMD和博通将作为基石投资者支持这笔交易。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>这是大型科技公司借助股市为其AI雄心提供资金的最新事例。</li><li>芯片制造商英伟达、AMD和博通将作为基石投资者支持这笔交易。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111204" target="_blank" rel="noopener noreferrer">联合国气候变化研究机构预算被卡</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/27 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">政府间气候变化专门委员会资金受阻之前，一些依赖化石燃料的国家主张将下一阶段气候变化报告推迟至2029年发布。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">政府间气候变化专门委员会资金受阻之前，一些依赖化石燃料的国家主张将下一阶段气候变化报告推迟至2029年发布。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>政府间气候变化专门委员会资金受阻之前，一些依赖化石燃料的国家主张将下一阶段气候变化报告推迟至2029年发布。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111199" target="_blank" rel="noopener noreferrer">中国风电制造商为欧洲业务架设“防火墙”</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/26 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">明阳智能表示，与英国章鱼能源组建合资公司并在欧洲成立独立法律实体，有助于让客户相信，从中国无法访问欧洲数据。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">明阳智能表示，与英国章鱼能源组建合资公司并在欧洲成立独立法律实体，有助于让客户相信，从中国无法访问欧洲数据。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>明阳智能表示，与英国章鱼能源组建合资公司并在欧洲成立独立法律实体，有助于让客户相信，从中国无法访问欧洲数据。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111191" target="_blank" rel="noopener noreferrer">乌克兰证实星链限制已被解除</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/26 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">对乌克兰军事行动至关重要的星链系统在经历近11天限制后，已恢复正常速度运行。此前特朗普称其不知道谁下令对该系统实施限速。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">对乌克兰军事行动至关重要的星链系统在经历近11天限制后，已恢复正常速度运行。此前特朗普称其不知道谁下令对该系统实施限速。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>对乌克兰军事行动至关重要的星链系统在经历近11天限制后，已恢复正常速度运行。</li><li>此前特朗普称其不知道谁下令对该系统实施限速。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111190" target="_blank" rel="noopener noreferrer">穆迪未下调评级 法国政府获意外喘息机会</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/26 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">这家评级机构决定维持法国的Aa3主权信用评级和负面展望，但警告该国当前状况比其几个月前的预期更为严峻。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">这家评级机构决定维持法国的Aa3主权信用评级和负面展望，但警告该国当前状况比其几个月前的预期更为严峻。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>这家评级机构决定维持法国的Aa3主权信用评级和负面展望，但警告该国当前状况比其几个月前的预期更为严峻。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111189" target="_blank" rel="noopener noreferrer">特朗普在共和党人压力下取消部分对加关税</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/26 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">此举旨在缓解与加拿大经济联系紧密的美国各州的压力。此前面临胶着选情的共和党参议员候选人纷纷抨击总统发起的贸易战。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">此举旨在缓解与加拿大经济联系紧密的美国各州的压力。此前面临胶着选情的共和党参议员候选人纷纷抨击总统发起的贸易战。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>此举旨在缓解与加拿大经济联系紧密的美国各州的压力。</li><li>此前面临胶着选情的共和党参议员候选人纷纷抨击总统发起的贸易战。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111179" target="_blank" rel="noopener noreferrer">美国财政部提议收紧敏感领域对华投资监管</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/23 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">拟议限制措施将影响人工智能、高超音速武器与生物科技等领域的美国对华投资。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">拟议限制措施将影响人工智能、高超音速武器与生物科技等领域的美国对华投资。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>拟议限制措施将影响人工智能、高超音速武器与生物科技等领域的美国对华投资。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111176" target="_blank" rel="noopener noreferrer">特朗普重振美国旅游业努力未能奏效</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/23 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">官方数据显示，在截至9月底的九个月期间，赴美旅游的海外游客人数同比下降5.7%，其中来自西欧的游客人数降幅最大。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">官方数据显示，在截至9月底的九个月期间，赴美旅游的海外游客人数同比下降5.7%，其中来自西欧的游客人数降幅最大。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>官方数据显示，在截至9月底的九个月期间，赴美旅游的海外游客人数同比下降5.</li><li>7%，其中来自西欧的游客人数降幅最大。</li><li>关键数字：5.7%</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111175" target="_blank" rel="noopener noreferrer">默茨警告：德国正成为俄罗斯“密集”间谍活动的目标</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/23 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">此前，一名乌克兰男子因涉嫌向克里姆林宫传递有关军事敏感信息而被德方逮捕。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">此前，一名乌克兰男子因涉嫌向克里姆林宫传递有关军事敏感信息而被德方逮捕。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>此前，一名乌克兰男子因涉嫌向克里姆林宫传递有关军事敏感信息而被德方逮捕。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111174" target="_blank" rel="noopener noreferrer">伊朗战争爆发以来首次出台宽松政策，土耳其央行降息100基点</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/23 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">通胀放缓和消费者信心减弱为政策制定者带来放宽货币政策的空间，尽管油价高企仍对通胀构成上行风险。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">通胀放缓和消费者信心减弱为政策制定者带来放宽货币政策的空间，尽管油价高企仍对通胀构成上行风险。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>通胀放缓和消费者信心减弱为政策制定者带来放宽货币政策的空间，尽管油价高企仍对通胀构成上行风险。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111170" target="_blank" rel="noopener noreferrer">英国拟取消家庭燃气账单上的每日固定费用</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/22 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">英国首相试图向选民表明其政府正采取切实措施以遏制生活成本，但能源专家指出此举很可能意味着需要提高燃气的单位价格。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">英国首相试图向选民表明其政府正采取切实措施以遏制生活成本，但能源专家指出此举很可能意味着需要提高燃气的单位价格。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>英国首相试图向选民表明其政府正采取切实措施以遏制生活成本，但能源专家指出此举很可能意味着需要提高燃气的单位价格。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ftchinese.com/story/001111169" target="_blank" rel="noopener noreferrer">英国政府批准开发北海杰克道天然气田</a></h3>
+  
+  <p class="article-meta">FT中文网 · 10/22 00:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">能源大臣法恩布勒称，该项目将帮助提振英国的能源供应，并保护就业和能源安全。但她称，规模更大的罗斯班克油田项目是“不同的情况”。</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">能源大臣法恩布勒称，该项目将帮助提振英国的能源供应，并保护就业和能源安全。但她称，规模更大的罗斯班克油田项目是“不同的情况”。</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>能源大臣法恩布勒称，该项目将帮助提振英国的能源供应，并保护就业和能源安全。</li><li>但她称，规模更大的罗斯班克油田项目是“不同的情况”。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="http://finance.people.com.cn/n1/2025/0605/c1004-40494880.html" target="_blank" rel="noopener noreferrer">首批全国38个零售业创新提升试点城市名单公布</a></h3>
+  
+  <p class="article-meta">人民网财经 · 06/05 08:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">新华社北京6月5日电（记者谢希瑶）商务部等5部门办公厅近日印发通知，确定第一批全国零售业创新提升试点城市共38个。通知及名单5日对外发布。 据介绍，这38个试点城市根据此前商务部等部门印发的《零售业创新提升工程实施方案》要求，在各地申报试点的基础上，经专家评审并向社会公示。包括北京市、石家庄市、太原市、包头市、上海市、</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">新华社北京6月5日电（记者谢希瑶）商务部等5部门办公厅近日印发通知，确定第一批全国零售业创新提升试点城市共38个。通知及名单5日对外发布。 据介绍，这38个试点城市根据此前商务部等部门印发的《零售业创新提升工程实施方案》要求，在各地申报试点的基础上，经专家评审并向社会公示。包括北京市、石家庄市、太原市、包头市、上海市、苏州市、郑州市、武汉市、长沙市、广州市、重庆市、西安市、拉萨市、银川市、石河子市等，建议试点侧重方向包括“一店一策”场景化改造、供应链提升、数字化赋能、多元化创新、政策创新等。 通知提出，省级相关部门要指导试点城市按照当地历史文化、资源禀赋、行业基础、规划布局，侧重2－3个试点探</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>新华社北京6月5日电（记者谢希瑶）商务部等5部门办公厅近日印发通知，确定第一批全国零售业创新提升试点城市共38个。</li><li>通知及名单5日对外发布。</li><li>据介绍，这38个试点城市根据此前商务部等部门印发的《零售业创新提升工程实施方案》要求，在各地申报试点的基础上，经专家评审并向社会公示。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="http://finance.people.com.cn/n1/2025/0605/c1004-40494893.html" target="_blank" rel="noopener noreferrer">中国人民银行将开展1万亿元买断式逆回购操作</a></h3>
+  
+  <p class="article-meta">人民网财经 · 06/05 08:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">新华社北京6月5日电（记者任军、吴雨）中国人民银行5日发布公告称，为保持银行体系流动性充裕，6月6日，中国人民银行将以固定数量、利率招标、多重价位中标方式开展1万亿元买断式逆回购操作，期限为3个月（91天）。 东方金诚首席宏观分析师王青说，此次操作有助于银行体系流动性持续保持充裕状态，控制资金面波动，稳定市场预期。现阶</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">新华社北京6月5日电（记者任军、吴雨）中国人民银行5日发布公告称，为保持银行体系流动性充裕，6月6日，中国人民银行将以固定数量、利率招标、多重价位中标方式开展1万亿元买断式逆回购操作，期限为3个月（91天）。 东方金诚首席宏观分析师王青说，此次操作有助于银行体系流动性持续保持充裕状态，控制资金面波动，稳定市场预期。现阶段加大中期流动性投放，释放出数量型政策工具持续加力的政策信号，有助于强化逆周期调节。 当日，中国人民银行还更新了5月中央银行各项工具流动性投放情况，其中5月买断式逆回购净回笼2000亿元。 公开市场买断式逆回购是中国人民银行于2024年10月推出的工具，可增强1年以内的流动性跨期</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>新华社北京6月5日电（记者任军、吴雨）中国人民银行5日发布公告称，为保持银行体系流动性充裕，6月6日，中国人民银行将以固定数量、利率招标、多重价位中标方式开展1万亿元买断式逆回购操作，期限为3个月（91天）。</li><li>东方金诚首席宏观分析师王青说，此次操作有助于银行体系流动性持续保持充裕状态，控制资金面波动，稳定市场预期。</li><li>现阶段加大中期流动性投放，释放出数量型政策工具持续加力的政策信号，有助于强化逆周期调节。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="http://finance.people.com.cn/n1/2025/0605/c1004-40494753.html" target="_blank" rel="noopener noreferrer">层高不低于3米！新规范如何让住宅更“宜居”？</a></h3>
+  
+  <p class="article-meta">人民网财经 · 06/05 08:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">人民网北京6月5日电 （记者王连香）今日，住房和城乡建设部召开新闻发布会，介绍《住宅项目规范》（以下简称《规范》）实施有关情况。会上，住房和城乡建设部标准定额司司长姚天玮指出，建“好房子”不等同于建“大房子”“贵房子”，而是要通过好的设计、好的施工、好的材料、好的服务等，解决居住中的痛点问题，全面提升住房品质。 姚天玮</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">人民网北京6月5日电 （记者王连香）今日，住房和城乡建设部召开新闻发布会，介绍《住宅项目规范》（以下简称《规范》）实施有关情况。会上，住房和城乡建设部标准定额司司长姚天玮指出，建“好房子”不等同于建“大房子”“贵房子”，而是要通过好的设计、好的施工、好的材料、好的服务等，解决居住中的痛点问题，全面提升住房品质。 姚天玮表示，下一步，住房和城乡建设部将积极开展《规范》宣贯实施指导工作，包括开展线下、线上的宣传培训，组织编制实施指南等。同时，制修订配套的推荐性国家标准、行业标准，指导支持相关地方标准、团体标准编制，支撑《规范》的落地实施，推进城镇住宅高质量发展。 中国建筑科学研究院有限公司教授级高</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>人民网北京6月5日电 （记者王连香）今日，住房和城乡建设部召开新闻发布会，介绍《住宅项目规范》（以下简称《规范》）实施有关情况。</li><li>会上，住房和城乡建设部标准定额司司长姚天玮指出，建“好房子”不等同于建“大房子”“贵房子”，而是要通过好的设计、好的施工、好的材料、好的服务等，解决居住中的痛点问题，全面提升住房品质。</li><li>姚天玮表示，下一步，住房和城乡建设部将积极开展《规范》宣贯实施指导工作，包括开展线下、线上的宣传培训，组织编制实施指南等。</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="http://finance.people.com.cn/n1/2025/0605/c1004-40494877.html" target="_blank" rel="noopener noreferrer">体育精神赋能 乳制品行业推动品质提升</a></h3>
+  
+  <p class="article-meta">人民网财经 · 06/05 08:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">人民网北京6月5日电 （记者夏晓伦）近年来，中国乳制品行业在政策引导、消费升级与技术革新的多重驱动下，正经历深度变革。从奶源基地建设到产品结构优化，从技术升级到国际竞争力提升，行业在挑战中孕育着新机遇。 与此同时，行业供需结构正加速调整。数据显示，2024年全国牛奶总产量同比下降2.8%，奶牛存栏量亦同比减少，原奶价格</p>
+  </div>
+  <div class="guide-block" hidden>
+    
+    <p class="article-excerpt guide-excerpt">人民网北京6月5日电 （记者夏晓伦）近年来，中国乳制品行业在政策引导、消费升级与技术革新的多重驱动下，正经历深度变革。从奶源基地建设到产品结构优化，从技术升级到国际竞争力提升，行业在挑战中孕育着新机遇。 与此同时，行业供需结构正加速调整。数据显示，2024年全国牛奶总产量同比下降2.8%，奶牛存栏量亦同比减少，原奶价格触底回升预期增强。这一变化倒逼乳企优化产能布局，头部企业通过自建牧场、锁定优质奶源，逐步缓解成本压力。 如今，中国乳制品消费正从“量的满足”转向“质的追求”。在细分领域，功能性产品创新成为焦点。近日，君乐宝在“中国国家体操队指定乳制品暨简醇系列新品发布会”上推出了专利菌群系列新品</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>人民网北京6月5日电 （记者夏晓伦）近年来，中国乳制品行业在政策引导、消费升级与技术革新的多重驱动下，正经历深度变革。</li><li>从奶源基地建设到产品结构优化，从技术升级到国际竞争力提升，行业在挑战中孕育着新机遇。</li><li>与此同时，行业供需结构正加速调整。</li></ul>
+  </div>
+</article>
+  </div>
+    </div>
+  </div>
+<div class="sub-content" data-sub-content="x-mirror" data-cat="finance">
+    
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="attentionvc-ai" data-sub="x-mirror" data-cat="finance">
+    <article class="article">
+  <h3 class="article-title"><a href="https://x.com/rootstock_io/status/2115806243197493475" target="_blank" rel="noopener noreferrer">Bitcoin’s Awkward Age: What’s the Next Source of Demand?</a></h3>
+  <p class="article-stats">@rootstock_io · 站内镜像 · 244.4K 粉丝 · 461.2K 阅 · 530 赞 · 32 转</p>
+  <p class="article-meta">10/29 22:01</p>
+  <div class="orig-block">
+    <p class="article-excerpt">A teenager’s breaking voice sounds worse before it sounds better. The old pitch is gone, the new one hasn’t settled, and for a while all you hear is the crack i</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">A teenager’s breaking voice sounds worse before it sounds better. The old pitch is gone, the new one hasn’t settled, and for a while all you hear is the crack in between. That’s where Bitcoin is right</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>A teenager’s breaking voice sounds worse before it sounds better.</li><li>The old pitch is gone, the new one hasn’t settled, and for a while all you hear is the crack in between.</li><li>That’s where Bitcoin is right</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/predictdotfun/status/2115328311752868024" target="_blank" rel="noopener noreferrer">Introducing $PREDICT, the native token of the Predict Protocol</a></h3>
+  <p class="article-stats">@predictdotfun · 站内镜像 · 62.5K 粉丝 · 196.8K 阅 · 516 赞 · 62 转</p>
+  <p class="article-meta">10/28 14:22</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Introducing $PREDICT, the native token of the Predict Protocol, designed to support participation and incentivize contributions to the ecosystem. Tokenomics The</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Introducing $PREDICT, the native token of the Predict Protocol, designed to support participation and incentivize contributions to the ecosystem. Tokenomics There is a fixed supply of 1B $PREDICT</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Introducing $PREDICT, the native token of the Predict Protocol, designed to support participation and incentivize contri</li><li>Tokenomics There is a fixed supply of 1B $PREDICT</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/playcambria/status/2115458668137205766" target="_blank" rel="noopener noreferrer">Cambria ($RSGP) TGE</a></h3>
+  <p class="article-stats">@playcambria · 站内镜像 · 61.4K 粉丝 · 31.6K 阅 · 542 赞 · 115 转</p>
+  <p class="article-meta">10/28 23:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">TL;DR The Cambria token (RSGP) launches tmrw (Thu Oct 29th) at 11AM ET. CA: 0x44B63aF715D5ef02CC3646a6CE96875e11d69E85 Network: @base (bridged from canonical ET</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">TL;DR The Cambria token (RSGP) launches tmrw (Thu Oct 29th) at 11AM ET. CA: 0x44B63aF715D5ef02CC3646a6CE96875e11d69E85 Network: @base (bridged from canonical ETH token) Total Supply: 5,000,000,000</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>TL;DR The Cambria token (RSGP) launches tmrw (Thu Oct 29th) at 11AM ET.</li><li>CA: 0x44B63aF715D5ef02CC3646a6CE96875e11d69E85 Network: @base (bridged from canonical ETH token) Total Supply: 5,000,000</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/GigaLegendsLTD/status/2115891526874329486" target="_blank" rel="noopener noreferrer">Mint Details </a></h3>
+  <p class="article-stats">@GigaLegendsLTD · 站内镜像 · 6.0K 粉丝 · 26.3K 阅 · 502 赞 · 86 转</p>
+  <p class="article-meta">10/30 03:40</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Giga Legends is not your typical collection, and therefore will not have a typical mint. There will be no whitelist. There will be no public sale either. Giga L</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Giga Legends is not your typical collection, and therefore will not have a typical mint. There will be no whitelist. There will be no public sale either. Giga Legends will be minted exclusively</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Giga Legends is not your typical collection, and therefore will not have a typical mint.</li><li>There will be no whitelist.</li><li>There will be no public sale either.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/moribundusBNB/status/2115862739176300848" target="_blank" rel="noopener noreferrer">Give Your Agent a Soul </a></h3>
+  <p class="article-stats">@moribundusBNB · 站内镜像 · 4.9K 粉丝 · 9.9K 阅 · 609 赞 · 457 转</p>
+  <p class="article-meta">10/30 01:46</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Agents have an ID, a wallet and skills. They don&#39;t have a soul. Tomorrow, they can get one. Moribundus Latin for &quot;the one who is dying.&quot; 4,444 on BNB Chain, one</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Agents have an ID, a wallet and skills. They don&#39;t have a soul. Tomorrow, they can get one. Moribundus Latin for &quot;the one who is dying.&quot; 4,444 on BNB Chain, one per Agent ID. Each one lives 16 hours.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Agents have an ID, a wallet and skills.</li><li>They don&#39;t have a soul.</li><li>Tomorrow, they can get one.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/VALORANT/status/2115064296321302980" target="_blank" rel="noopener noreferrer">Patch Notes 13.09</a></h3>
+  <p class="article-stats">@VALORANT · 站内镜像 · 3.6M 粉丝 · 149.2K 阅 · 2.1K 赞 · 133 转</p>
+  <p class="article-meta">10/27 20:53</p>
+  <div class="orig-block">
+    <p class="article-excerpt">TL;DR: New Agent Hush is here, along with some updated tooltips, Warden buffs, and a plethora of bug fixes. HELLOOO everybody 🙂Get ready to meet our latest Age</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">TL;DR: New Agent Hush is here, along with some updated tooltips, Warden buffs, and a plethora of bug fixes. HELLOOO everybody 🙂Get ready to meet our latest Agent, Hush, as she changes the game. Try</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>TL;DR: New Agent Hush is here, along with some updated tooltips, Warden buffs, and a plethora of bug fixes.</li><li>HELLOOO everybody 🙂Get ready to meet our latest Agent, Hush, as she changes the game.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/chamath/status/2115921893786280267" target="_blank" rel="noopener noreferrer">Memory chip profits are exploding, so why are stocks below their highs?</a></h3>
+  <p class="article-stats">@chamath · 站内镜像 · 2.5M 粉丝 · 149.1K 阅 · 531 赞 · 42 转</p>
+  <p class="article-meta">10/30 05:41</p>
+  <div class="orig-block">
+    <p class="article-excerpt">In fiscal 2025, Micron’s revenue was $37.4 billion. In fiscal 2026, it reached $133.2 billion, up 256%, a faster jump than Nvidia managed in any single year rec</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">In fiscal 2025, Micron’s revenue was $37.4 billion. In fiscal 2026, it reached $133.2 billion, up 256%, a faster jump than Nvidia managed in any single year recently. Last quarter alone, Samsung, the</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>In fiscal 2025, Micron’s revenue was $37.</li><li>4 billion.</li><li>In fiscal 2026, it reached $133.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/jon_stokes/status/2115516720651612490" target="_blank" rel="noopener noreferrer">Apocalypse Prepping: From Temu to Gucci</a></h3>
+  <p class="article-stats">@jon_stokes · 站内镜像 · 34.2K 粉丝 · 122.8K 阅 · 616 赞 · 33 转</p>
+  <p class="article-meta">10/29 02:51</p>
+  <div class="orig-block">
+    <p class="article-excerpt">A few years back, I quit prepping -- I quit doing it, I quit writing about it, I quit doing press about it, I quit being part of the scene, and I generally just</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">A few years back, I quit prepping -- I quit doing it, I quit writing about it, I quit doing press about it, I quit being part of the scene, and I generally just hit eject on anything and everything</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>A few years back, I quit prepping -- I quit doing it, I quit writing about it, I quit doing press about it, I quit being</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/WhiteHouse/status/2115170492734648598" target="_blank" rel="noopener noreferrer">Lower Taxes, Safer Streets, Stronger Border: President Trump’s Texas Record</a></h3>
+  <p class="article-stats">@WhiteHouse · 站内镜像 · 5.3M 粉丝 · 92.8K 阅 · 914 赞 · 218 转</p>
+  <p class="article-meta">10/28 03:55</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Today, President Donald J. Trump returns to Texas with a record of results: historic tax relief, the most secure border in a generation, safer streets, and a su</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Today, President Donald J. Trump returns to Texas with a record of results: historic tax relief, the most secure border in a generation, safer streets, and a surge of new private investment creating</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Today, President Donald J.</li><li>Trump returns to Texas with a record of results: historic tax relief, the most secure border in a generation, safer stre</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/TouchlineX/status/2115448128782344509" target="_blank" rel="noopener noreferrer">Harry Kane and the Ballon d’Or that finally caught up with him</a></h3>
+  <p class="article-stats">@TouchlineX · 站内镜像 · 1.8M 粉丝 · 72.5K 阅 · 529 赞 · 54 转</p>
+  <p class="article-meta">10/28 22:18</p>
+  <div class="orig-block">
+    <p class="article-excerpt">For most of his career, Harry Kane always seemed one step away from receiving football’s approval. When he scored 30 goals in consecutive seasons, people mentio</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">For most of his career, Harry Kane always seemed one step away from receiving football’s approval. When he scored 30 goals in consecutive seasons, people mentioned the empty trophy cabinet. When he</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>For most of his career, Harry Kane always seemed one step away from receiving football’s approval.</li><li>When he scored 30 goals in consecutive seasons, people mentioned the empty trophy cabinet.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/lemire/status/2115046718039306377" target="_blank" rel="noopener noreferrer">Billion-query-per-second lookup tables in C++</a></h3>
+  <p class="article-stats">@lemire · 站内镜像 · 38.6K 粉丝 · 49.9K 阅 · 520 赞 · 42 转</p>
+  <p class="article-meta">10/27 19:43</p>
+  <div class="orig-block">
+    <p class="article-excerpt">A lot of software spends its time mapping strings to values. A web server must identify the HTTP method (GET, POST, ...). It must recognize header names. A URL </p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">A lot of software spends its time mapping strings to values. A web server must identify the HTTP method (GET, POST, ...). It must recognize header names. A URL parser must recognize the protocol</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>A lot of software spends its time mapping strings to values.</li><li>A web server must identify the HTTP method (GET, POST, .</li><li>It must recognize header names.</li></ul>
+  </div>
+</article>
+  </div>
+    </div>
+  </div>
+<div class="sub-content" data-sub-content="wire" data-cat="finance">
+    
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="_merged" data-sub="wire" data-cat="finance">
+    <article class="article">
+  <h3 class="article-title"><a href="https://www.bloomberg.com/news/videos/2026-10-30/varkey-ai-to-help-bridge-teacher-shortage-gap-video" target="_blank" rel="noopener noreferrer">Varkey: AI to Help Bridge Teacher Shortage Gap</a></h3>
+  
+  <p class="article-meta">Bloomberg Markets · 10/30 14:47</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Ongoing regional conflict is testing the UAE&#39;s post-pandemic boom and the new school year is offering another gauge of the country&#39;s resilience. Dubai-based pri</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Ongoing regional conflict is testing the UAE&#39;s post-pandemic boom and the new school year is offering another gauge of the country&#39;s resilience. Dubai-based private school operator GEMS Education plans to launch a school model next January, which combines AI-powered, self-paced learning with teacher</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Ongoing regional conflict is testing the UAE&#39;s post-pandemic boom and the new school year is offering another gauge of t</li><li>Dubai-based private school operator GEMS Education plans to launch a school model next January, which combines AI-powere</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ft.com/content/a9fb5f83-8455-40da-804f-17bdc8eba64e?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">Private equity firm swoops on China Evergrande unit in rare win for creditors</a></h3>
+  
+  <p class="article-meta">Financial Times · 10/30 14:36</p>
+  <div class="orig-block">
+    <p class="article-excerpt">PAG offers $513mn to liquidators recovering assets from world’s most indebted property developer</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">PAG offers $513mn to liquidators recovering assets from world’s most indebted property developer</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>PAG offers $513mn to liquidators recovering assets from world’s most indebted property developer</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.cnbc.com/2026/10/30/iran-trump-hormuz-oil-middle-east-.html" target="_blank" rel="noopener noreferrer">Iran claims four tankers struck mines in Hormuz as strike fears grow after U.S. midterms</a></h3>
+  
+  <p class="article-meta">CNBC · 10/30 14:35</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Hormuz mine claims, Houthi attacks raise fears of renewed strikes as the U.S. reportedly weighs a fresh military campaign after midterm elections.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Hormuz mine claims, Houthi attacks raise fears of renewed strikes as the U.S. reportedly weighs a fresh military campaign after midterm elections.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Hormuz mine claims, Houthi attacks raise fears of renewed strikes as the U.</li><li>reportedly weighs a fresh military campaign after midterm elections.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.ft.com/content/3ba953ae-84bb-4de4-959e-baec3e908fb3?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">Global tech rout deepens as US earnings stoke AI spending fears</a></h3>
+  
+  <p class="article-meta">Financial Times · 10/30 14:35</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Japan’s tech-heavy Nikkei 225 index declines, while Wall Street set to open lower</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Japan’s tech-heavy Nikkei 225 index declines, while Wall Street set to open lower</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Japan’s tech-heavy Nikkei 225 index declines, while Wall Street set to open lower</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-10-30/central-asia-s-fastest-growing-economy-plans-yuan-bond-in-2027" target="_blank" rel="noopener noreferrer">Central Asia’s Fastest Growing Economy Plans Yuan Bond in 2027</a></h3>
+  
+  <p class="article-meta">Bloomberg Markets · 10/30 14:33</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Kyrgyzstan plans to debut a yuan-denominated bond next year as Central Asia’s fastest growing economy continues to expand its banking system and build on its st</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Kyrgyzstan plans to debut a yuan-denominated bond next year as Central Asia’s fastest growing economy continues to expand its banking system and build on its status as a regional transport hub on the former Silk Road.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Kyrgyzstan plans to debut a yuan-denominated bond next year as Central Asia’s fastest growing economy continues to expan</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bbc.co.uk/news/videos/cmpq0g3g2r8zo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Who should pay on the first date?</a></h3>
+  
+  <p class="article-meta">BBC Business · 10/30 14:32</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Yasmin Rufo asks New Yorkers who picks up the bill on a first date, and how much they usually spend.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Yasmin Rufo asks New Yorkers who picks up the bill on a first date, and how much they usually spend.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Yasmin Rufo asks New Yorkers who picks up the bill on a first date, and how much they usually spend.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bloomberg.com/news/videos/2026-10-30/etf-issuers-line-up-anthropic-products-video" target="_blank" rel="noopener noreferrer">ETF Issuers Line Up Anthropic Products</a></h3>
+  
+  <p class="article-meta">Bloomberg Markets · 10/30 14:21</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Traders are not waiting for Anthropic to go public, with money already flowing into ETFs that offer a slice of the private AI company, following a pattern seen </p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Traders are not waiting for Anthropic to go public, with money already flowing into ETFs that offer a slice of the private AI company, following a pattern seen with SpaceX. Bloomberg Intelligence Senior ETF Analyst Eric Balchunas and ETF Analyst Rebecca Sin discuss this on ETF IQ Asia. (Source: Bloo</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Traders are not waiting for Anthropic to go public, with money already flowing into ETFs that offer a slice of the priva</li><li>Bloomberg Intelligence Senior ETF Analyst Eric Balchunas and ETF Analyst Rebecca Sin discuss this on ETF IQ Asia.</li><li>(Source: Bloo</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bbc.co.uk/news/articles/cx7vpq34jy71o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">P&amp;R urged to speed up review of relocation grants</a></h3>
+  
+  <p class="article-meta">BBC Business · 10/30 14:18</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Forward Guernsey believes the allowance is putting pressure on rental prices.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Forward Guernsey believes the allowance is putting pressure on rental prices.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Forward Guernsey believes the allowance is putting pressure on rental prices.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bloomberg.com/news/videos/2026-10-30/the-china-show-10-30-2026-video" target="_blank" rel="noopener noreferrer">AI Boom Shows Cracks After US, China Earnings</a></h3>
+  
+  <p class="article-meta">Bloomberg Markets · 10/30 14:15</p>
+  <div class="orig-block">
+    <p class="article-excerpt">“Bloomberg: The China Show” is your definitive source for news and analysis on the world&#39;s second-biggest economy. From politics and policy to tech and trends, </p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">“Bloomberg: The China Show” is your definitive source for news and analysis on the world&#39;s second-biggest economy. From politics and policy to tech and trends, Yvonne Man and David Ingles give global investors unique insight, delivering in-depth discussions with the newsmakers who matter. (Source: B</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>“Bloomberg: The China Show” is your definitive source for news and analysis on the world&#39;s second-biggest economy.</li><li>From politics and policy to tech and trends, Yvonne Man and David Ingles give global investors unique insight, deliverin</li><li>(Source: B</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bloomberg.com/news/videos/2026-10-30/insight-with-haslinda-amin-10-30-2026-video" target="_blank" rel="noopener noreferrer">Crypto Rocked by Biggest Heist on Record</a></h3>
+  
+  <p class="article-meta">Bloomberg Markets · 10/30 14:14</p>
+  <div class="orig-block">
+    <p class="article-excerpt">&quot;Insight with Haslinda Amin&quot; is a daily news program featuring in-depth, high-profile interviews and analysis to give viewers the complete picture on the storie</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">&quot;Insight with Haslinda Amin&quot; is a daily news program featuring in-depth, high-profile interviews and analysis to give viewers the complete picture on the stories that matter. The show features prominent leaders spanning the worlds of business, finance, politics and culture. (Source: Bloomberg)</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>&quot;Insight with Haslinda Amin&quot; is a daily news program featuring in-depth, high-profile interviews and analysis to give vi</li><li>The show features prominent leaders spanning the worlds of business, finance, politics and culture.</li><li>(Source: Bloomberg)</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.cnbc.com/2026/10/30/novartis-remibrutinib-multiple-sclerosis.html" target="_blank" rel="noopener noreferrer">A pharma giant is moving past one patent cliff — but another is already looming</a></h3>
+  
+  <p class="article-meta">CNBC · 10/30 14:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Disappointing data highlights Novartis&#39; challenge to build its next generation of blockbuster medicines, following a series of clinical trial setbacks.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Disappointing data highlights Novartis&#39; challenge to build its next generation of blockbuster medicines, following a series of clinical trial setbacks.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Disappointing data highlights Novartis&#39; challenge to build its next generation of blockbuster medicines, following a ser</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-10-30/yields-too-high-to-ignore-lure-investors-back-to-long-dated-debt" target="_blank" rel="noopener noreferrer">Yields Too High to Ignore Lure Investors Back to Long-Dated Debt</a></h3>
+  
+  <p class="article-meta">Bloomberg Markets · 10/30 14:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Long-dated government bonds spent much of the year punishing anyone brave enough to own them. Now yields are high enough that investors are coming back.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Long-dated government bonds spent much of the year punishing anyone brave enough to own them. Now yields are high enough that investors are coming back.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Long-dated government bonds spent much of the year punishing anyone brave enough to own them.</li><li>Now yields are high enough that investors are coming back.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bloomberg.com/news/videos/2026-10-30/estimated-6-3-billion-hacked-in-binance-security-breach-video" target="_blank" rel="noopener noreferrer">Estimated $6.3 Billion Hacked in Binance Security Breach</a></h3>
+  
+  <p class="article-meta">Bloomberg Markets · 10/30 13:50</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Binance, the world’s largest crypto exchange, said $6.3 billion of funds have been impacted in what the industry is describing as crypto’s biggest-ever hack. (S</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Binance, the world’s largest crypto exchange, said $6.3 billion of funds have been impacted in what the industry is describing as crypto’s biggest-ever hack. (Source: Bloomberg)</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Binance, the world’s largest crypto exchange, said $6.</li><li>3 billion of funds have been impacted in what the industry is describing as crypto’s biggest-ever hack.</li><li>(Source: Bloomberg)</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-10-30/japanese-stocks-signal-confidence-over-faster-boj-etf-sales" target="_blank" rel="noopener noreferrer">Japanese Stocks Signal Confidence Over Faster BOJ ETF Sales</a></h3>
+  
+  <p class="article-meta">Bloomberg Markets · 10/30 13:48</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Japanese equities shrugged off the Bank of Japan’s surprise move to accelerate selling of its massive holdings of exchange-traded funds, as investors showed con</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Japanese equities shrugged off the Bank of Japan’s surprise move to accelerate selling of its massive holdings of exchange-traded funds, as investors showed confidence in the market’s ability to absorb the extra supply.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Japanese equities shrugged off the Bank of Japan’s surprise move to accelerate selling of its massive holdings of exchan</li></ul>
+  </div>
+</article>
+  </div>
+    </div>
+  </div></div>
+  </section>
+  <section class="panel" data-panel="trading"><section class="trading-overview-card">
+    <span class="eyebrow">市场总览</span>
+    <p class="overview-text trading-overview-text">行情面板仅展示技术指标（LLM_MODE=off，未生成文字点评）。</p>
+  </section>
+
+  
+
+  <section class="fav-pin" id="fav-pin">
+    <h2>我的自选</h2>
+    <div id="fav-pin-body"><p class="fav-pin-empty">点击行情卡片星标，自选保存在本机浏览器（非云同步）。</p></div>
+  </section>
+
+  <section class="trading-tickers">
+    <h2 class="category-title trading-section-title">全部资产</h2>
+    <nav class="trading-group-tabs"><button class="trading-group-tab active" data-group="china-ashare">A 股蓝筹<span class="count">12</span></button><button class="trading-group-tab" data-group="china-etf">基金 / ETF<span class="count">7</span></button><button class="trading-group-tab" data-group="macro">宏观信号<span class="count">3</span></button><button class="trading-group-tab" data-group="china-equity">中概 / 港股<span class="count">3</span></button><button class="trading-group-tab" data-group="us-equity">美股 / ETF<span class="count">3</span></button><button class="trading-group-tab" data-group="crypto">加密货币<span class="count">2</span></button><button class="trading-group-tab" data-group="commodity-fx">商品 / 外汇<span class="count">2</span></button></nav>
+    <div class="trading-group-contents"><div class="trading-group-content active" data-group="china-ashare">
+      
+      <article class="ticker-card" data-symbol="600519.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">600519.SS</h3>
+        <p class="ticker-name">贵州茅台</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥1,392.05</span>
+        <span class="ticker-pct positive">+2.81%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#15803d" stroke-width="1.5" points="0.0,10.5 2.0,8.8 4.1,15.0 6.1,19.5 8.1,19.1 10.2,18.9 12.2,10.8 14.2,11.3 16.3,12.0 18.3,9.5 20.3,12.2 22.4,22.2 24.4,21.2 26.4,19.2 28.5,22.6 30.5,26.4 32.5,19.9 34.6,20.0 36.6,20.3 38.6,22.4 40.7,21.4 42.7,20.9 44.7,20.9 46.8,21.3 48.8,21.1 50.8,14.7 52.9,17.6 54.9,18.9 56.9,22.7 59.0,23.9 61.0,25.9 63.1,25.3 65.1,26.4 67.1,29.4 69.2,27.6 71.2,29.6 73.2,30.5 75.3,30.3 77.3,30.8 79.3,33.7 81.4,32.3 83.4,34.0 85.4,29.3 87.5,29.9 89.5,28.4 91.5,23.3 93.6,26.0 95.6,23.7 97.6,18.2 99.7,14.9 101.7,15.7 103.7,14.3 105.8,18.8 107.8,17.0 109.8,13.7 111.9,10.6 113.9,9.4 115.9,14.5 118.0,9.8 120.0,2.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+4.27%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-9.6%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">69.7</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>1,307.52 / 1,295.72 / 1,327.10</dd></div>
+      <div><dt>MACD / 信号</dt><dd>22.238 / 14.274</dd></div>
+      <div><dt>布林(中)</dt><dd>1,307.52</dd></div><div><dt>ATR(14)</dt><dd>25.58</dd></div><div><dt>KDJ-J</dt><dd>97.8</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">触及布林上轨</span></div>
+  </article><article class="ticker-card" data-symbol="300750.SZ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">300750.SZ</h3>
+        <p class="ticker-name">宁德时代</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥232.92</span>
+        <span class="ticker-pct positive">+1.68%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,3.7 2.0,3.9 4.1,3.8 6.1,2.0 8.1,5.0 10.2,5.0 12.2,3.7 14.2,4.3 16.3,3.7 18.3,3.3 20.3,3.7 22.4,2.7 24.4,3.3 26.4,4.6 28.5,5.3 30.5,4.2 32.5,4.8 34.6,6.7 36.6,6.3 38.6,7.4 40.7,8.2 42.7,9.0 44.7,10.0 46.8,11.7 48.8,11.5 50.8,11.2 52.9,11.7 54.9,13.9 56.9,13.7 59.0,13.5 61.0,14.8 63.1,13.6 65.1,17.3 67.1,19.2 69.2,19.4 71.2,19.8 73.2,20.6 75.3,19.3 77.3,19.9 79.3,21.2 81.4,21.5 83.4,22.4 85.4,21.7 87.5,22.4 89.5,20.5 91.5,20.4 93.6,22.0 95.6,23.6 97.6,23.9 99.7,24.1 101.7,25.9 103.7,27.3 105.8,32.7 107.8,34.0 109.8,31.0 111.9,30.9 113.9,31.8 115.9,32.5 118.0,32.5 120.0,31.8"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-1.97%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-50.2%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">27.8</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>262.58 / 314.26 / 367.95</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-24.662 / -24.023</dd></div>
+      <div><dt>布林(中)</dt><dd>262.58</dd></div><div><dt>ATR(14)</dt><dd>11.06</dd></div><div><dt>KDJ-J</dt><dd>31.9</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="601318.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">601318.SS</h3>
+        <p class="ticker-name">中国平安</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥52.80</span>
+        <span class="ticker-pct negative">-0.75%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,17.4 2.0,14.4 4.1,21.9 6.1,21.5 8.1,23.9 10.2,24.5 12.2,24.8 14.2,28.3 16.3,28.1 18.3,27.2 20.3,32.0 22.4,31.8 24.4,34.0 26.4,30.5 28.5,30.2 30.5,24.6 32.5,17.4 34.6,16.9 36.6,11.8 38.6,13.0 40.7,13.1 42.7,13.2 44.7,6.7 46.8,9.4 48.8,3.1 50.8,2.0 52.9,10.7 54.9,13.7 56.9,11.2 59.0,10.0 61.0,13.2 63.1,13.7 65.1,17.5 67.1,19.3 69.2,20.1 71.2,20.0 73.2,17.2 75.3,14.9 77.3,17.7 79.3,20.5 81.4,24.5 83.4,24.0 85.4,20.4 87.5,23.2 89.5,22.5 91.5,20.6 93.6,27.8 95.6,29.9 97.6,27.3 99.7,26.9 101.7,27.8 103.7,30.0 105.8,30.0 107.8,31.2 109.8,27.4 111.9,23.5 113.9,23.5 115.9,24.9 118.0,20.8 120.0,22.6"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+2.01%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-26.8%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">51.5</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>52.19 / 53.29 / 55.34</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.227 / -0.417</dd></div>
+      <div><dt>布林(中)</dt><dd>52.19</dd></div><div><dt>ATR(14)</dt><dd>1.07</dd></div><div><dt>KDJ-J</dt><dd>107.7</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(3 天前)</span></span><span class="signal-pill tone-bear">空头排列</span><span class="signal-pill tone-bear">KDJ 超买</span></div>
+  </article><article class="ticker-card" data-symbol="600036.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">600036.SS</h3>
+        <p class="ticker-name">招商银行</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥43.55</span>
+        <span class="ticker-pct positive">+1.42%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#15803d" stroke-width="1.5" points="0.0,25.5 2.0,21.1 4.1,27.5 6.1,29.6 8.1,29.4 10.2,30.4 12.2,29.8 14.2,29.5 16.3,31.0 18.3,30.6 20.3,32.4 22.4,34.0 24.4,33.5 26.4,28.3 28.5,30.1 30.5,29.8 32.5,25.7 34.6,26.2 36.6,24.4 38.6,25.7 40.7,27.1 42.7,22.5 44.7,18.1 46.8,18.0 48.8,16.8 50.8,13.1 52.9,16.8 54.9,17.9 56.9,17.3 59.0,13.8 61.0,15.2 63.1,12.3 65.1,16.7 67.1,17.7 69.2,19.6 71.2,19.7 73.2,17.0 75.3,18.3 77.3,19.6 79.3,19.1 81.4,19.4 83.4,20.2 85.4,15.7 87.5,13.0 89.5,14.7 91.5,6.7 93.6,6.5 95.6,7.3 97.6,7.3 99.7,8.6 101.7,5.0 103.7,8.2 105.8,9.6 107.8,12.3 109.8,12.6 111.9,8.3 113.9,5.3 115.9,10.5 118.0,5.6 120.0,2.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+4.26%</dd></div>
+      <div><dt>距 52w 高</dt><dd>+0.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">63.6</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bullish">多头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>42.22 / 41.06 / 38.67</dd></div>
+      <div><dt>MACD / 信号</dt><dd>0.531 / 0.506</dd></div>
+      <div><dt>布林(中)</dt><dd>42.22</dd></div><div><dt>ATR(14)</dt><dd>0.82</dd></div><div><dt>KDJ-J</dt><dd>99.7</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(今天)</span></span><span class="signal-pill tone-bull">接近 52 周高</span><span class="signal-pill tone-bull">多头排列</span></div>
+  </article><article class="ticker-card" data-symbol="000858.SZ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">000858.SZ</h3>
+        <p class="ticker-name">五粮液</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥74.70</span>
+        <span class="ticker-pct positive">+3.35%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,2.2 2.0,2.0 4.1,6.1 6.1,10.8 8.1,14.3 10.2,12.2 12.2,8.4 14.2,12.5 16.3,11.6 18.3,12.1 20.3,16.8 22.4,21.0 24.4,20.9 26.4,23.3 28.5,22.6 30.5,25.7 32.5,24.7 34.6,24.5 36.6,23.2 38.6,25.9 40.7,24.6 42.7,25.4 44.7,23.5 46.8,26.9 48.8,27.4 50.8,22.9 52.9,24.7 54.9,24.1 56.9,25.8 59.0,28.1 61.0,30.6 63.1,30.3 65.1,30.8 67.1,32.3 69.2,32.8 71.2,29.8 73.2,28.8 75.3,27.9 77.3,28.6 79.3,30.9 81.4,33.5 83.4,34.0 85.4,29.6 87.5,29.3 89.5,27.8 91.5,26.1 93.6,28.2 95.6,26.9 97.6,25.3 99.7,22.6 101.7,20.0 103.7,19.9 105.8,22.9 107.8,23.8 109.8,16.5 111.9,10.4 113.9,11.2 115.9,21.5 118.0,21.9 120.0,13.6"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+1.14%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-40.9%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">60.6</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>71.89 / 71.38 / 85.20</dd></div>
+      <div><dt>MACD / 信号</dt><dd>0.804 / 0.549</dd></div>
+      <div><dt>布林(中)</dt><dd>71.89</dd></div><div><dt>ATR(14)</dt><dd>1.66</dd></div><div><dt>KDJ-J</dt><dd>49.3</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">放量</span></div>
+  </article><article class="ticker-card" data-symbol="002594.SZ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">002594.SZ</h3>
+        <p class="ticker-name">比亚迪</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥81.65</span>
+        <span class="ticker-pct negative">-1.03%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,2.0 2.0,4.7 4.1,11.4 6.1,12.1 8.1,14.8 10.2,13.6 12.2,11.4 14.2,13.5 16.3,12.9 18.3,14.3 20.3,16.0 22.4,14.0 24.4,14.7 26.4,16.4 28.5,12.7 30.5,12.8 32.5,12.4 34.6,11.0 36.6,9.5 38.6,10.7 40.7,9.0 42.7,17.4 44.7,16.3 46.8,20.2 48.8,19.2 50.8,19.0 52.9,20.8 54.9,20.7 56.9,22.1 59.0,26.9 61.0,25.9 63.1,23.0 65.1,25.3 67.1,26.0 69.2,23.9 71.2,25.3 73.2,23.4 75.3,20.7 77.3,22.2 79.3,25.2 81.4,27.2 83.4,29.9 85.4,27.3 87.5,30.5 89.5,24.0 91.5,24.7 93.6,29.6 95.6,31.1 97.6,29.5 99.7,28.5 101.7,26.9 103.7,28.8 105.8,32.6 107.8,34.0 109.8,31.2 111.9,29.2 113.9,30.0 115.9,28.5 118.0,29.0 120.0,30.7"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+0.28%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-27.4%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">43.7</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>82.40 / 85.48 / 92.28</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.963 / -1.160</dd></div>
+      <div><dt>布林(中)</dt><dd>82.40</dd></div><div><dt>ATR(14)</dt><dd>1.86</dd></div><div><dt>KDJ-J</dt><dd>76.8</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(4 天前)</span></span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="601012.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">601012.SS</h3>
+        <p class="ticker-name">隆基绿能</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥11.00</span>
+        <span class="ticker-pct negative">-1.35%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,5.7 2.0,2.0 4.1,4.7 6.1,6.0 8.1,8.9 10.2,6.5 12.2,6.3 14.2,8.2 16.3,3.8 18.3,9.4 20.3,10.0 22.4,7.7 24.4,7.6 26.4,12.6 28.5,13.1 30.5,13.0 32.5,16.4 34.6,16.2 36.6,14.7 38.6,16.4 40.7,12.8 42.7,17.4 44.7,17.4 46.8,21.5 48.8,22.1 50.8,21.3 52.9,19.8 54.9,19.8 56.9,20.5 59.0,22.1 61.0,27.0 63.1,26.9 65.1,30.0 67.1,31.1 69.2,31.2 71.2,28.1 73.2,26.5 75.3,26.2 77.3,25.8 79.3,30.6 81.4,33.5 83.4,32.5 85.4,28.4 87.5,30.2 89.5,28.0 91.5,29.5 93.6,30.3 95.6,32.6 97.6,34.0 99.7,32.5 101.7,29.9 103.7,31.7 105.8,31.2 107.8,29.0 109.8,27.2 111.9,24.3 113.9,25.3 115.9,27.6 118.0,29.2 120.0,31.1"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-2.65%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-53.3%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">43.2</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>11.09 / 11.55 / 14.83</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.076 / -0.123</dd></div>
+      <div><dt>布林(中)</dt><dd>11.09</dd></div><div><dt>ATR(14)</dt><dd>0.31</dd></div><div><dt>KDJ-J</dt><dd>20.3</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="000001.SZ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">000001.SZ</h3>
+        <p class="ticker-name">平安银行</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥11.64</span>
+        <span class="ticker-pct positive">+0.87%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#15803d" stroke-width="1.5" points="0.0,15.1 2.0,15.4 4.1,21.3 6.1,27.5 8.1,26.8 10.2,29.4 12.2,26.2 14.2,27.1 16.3,27.5 18.3,27.5 20.3,32.0 22.4,32.4 24.4,34.0 26.4,26.8 28.5,22.6 30.5,22.2 32.5,17.3 34.6,16.4 36.6,11.8 38.6,16.4 40.7,14.4 42.7,12.1 44.7,5.6 46.8,5.9 48.8,6.9 50.8,6.6 52.9,12.8 54.9,10.2 56.9,12.8 59.0,7.9 61.0,11.5 63.1,7.9 65.1,8.9 67.1,12.8 69.2,15.7 71.2,12.8 73.2,11.8 75.3,12.4 77.3,16.0 79.3,17.7 81.4,17.7 83.4,16.0 85.4,8.9 87.5,2.0 89.5,8.2 91.5,3.6 93.6,8.9 95.6,11.1 97.6,14.1 99.7,11.1 101.7,6.2 103.7,13.1 105.8,14.1 107.8,17.7 109.8,20.9 111.9,17.7 113.9,12.1 115.9,17.3 118.0,9.8 120.0,6.6"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+3.93%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-2.1%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">56.2</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bullish">多头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>11.48 / 11.42 / 10.72</dd></div>
+      <div><dt>MACD / 信号</dt><dd>0.011 / 0.008</dd></div>
+      <div><dt>布林(中)</dt><dd>11.48</dd></div><div><dt>ATR(14)</dt><dd>0.23</dd></div><div><dt>KDJ-J</dt><dd>97.1</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(今天)</span></span><span class="signal-pill tone-bull">接近 52 周高</span><span class="signal-pill tone-bull">多头排列</span></div>
+  </article><article class="ticker-card" data-symbol="600276.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">600276.SS</h3>
+        <p class="ticker-name">恒瑞医药</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥48.46</span>
+        <span class="ticker-pct negative">-0.33%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,4.3 2.0,7.1 4.1,6.0 6.1,5.7 8.1,9.4 10.2,2.9 12.2,4.1 14.2,2.0 16.3,3.6 18.3,5.1 20.3,8.1 22.4,7.5 24.4,8.8 26.4,8.0 28.5,16.2 30.5,20.8 32.5,23.4 34.6,24.1 36.6,23.4 38.6,21.1 40.7,21.9 42.7,25.2 44.7,24.7 46.8,26.5 48.8,25.4 50.8,25.3 52.9,24.7 54.9,26.1 56.9,28.7 59.0,33.3 61.0,34.0 63.1,32.8 65.1,32.8 67.1,31.8 69.2,32.5 71.2,30.8 73.2,25.2 75.3,26.1 77.3,26.4 79.3,28.3 81.4,29.3 83.4,26.3 85.4,22.2 87.5,22.7 89.5,23.1 91.5,25.2 93.6,26.6 95.6,26.7 97.6,23.8 99.7,23.7 101.7,25.1 103.7,21.6 105.8,21.7 107.8,25.3 109.8,22.7 111.9,22.7 113.9,26.5 115.9,19.2 118.0,18.5 120.0,18.9"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+3.06%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-34.4%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">58.3</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>46.67 / 46.55 / 52.72</dd></div>
+      <div><dt>MACD / 信号</dt><dd>0.420 / 0.117</dd></div>
+      <div><dt>布林(中)</dt><dd>46.67</dd></div><div><dt>ATR(14)</dt><dd>1.45</dd></div><div><dt>KDJ-J</dt><dd>81.2</dd></div>
+    </dl>
+    
+  </article><article class="ticker-card" data-symbol="601888.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">601888.SS</h3>
+        <p class="ticker-name">中国中免</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥50.30</span>
+        <span class="ticker-pct positive">+1.58%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,2.0 2.0,2.1 4.1,6.0 6.1,7.5 8.1,10.3 10.2,9.4 12.2,8.0 14.2,10.7 16.3,10.2 18.3,12.3 20.3,15.4 22.4,15.5 24.4,16.0 26.4,19.4 28.5,18.6 30.5,21.4 32.5,22.1 34.6,20.3 36.6,18.7 38.6,18.5 40.7,17.8 42.7,20.7 44.7,17.2 46.8,20.0 48.8,16.5 50.8,13.5 52.9,12.8 54.9,13.6 56.9,16.5 59.0,20.4 61.0,23.5 63.1,23.3 65.1,25.6 67.1,25.1 69.2,25.2 71.2,22.4 73.2,21.6 75.3,21.4 77.3,21.7 79.3,24.2 81.4,26.4 83.4,26.0 85.4,24.2 87.5,26.8 89.5,26.1 91.5,27.0 93.6,28.2 95.6,31.1 97.6,34.0 99.7,31.8 101.7,31.7 103.7,30.9 105.8,32.8 107.8,32.8 109.8,29.1 111.9,26.4 113.9,28.5 115.9,29.1 118.0,30.7 120.0,28.1"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+0.58%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-49.4%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">48.1</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>50.01 / 51.69 / 64.32</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.545 / -0.724</dd></div>
+      <div><dt>布林(中)</dt><dd>50.01</dd></div><div><dt>ATR(14)</dt><dd>1.05</dd></div><div><dt>KDJ-J</dt><dd>77.0</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="002475.SZ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">002475.SZ</h3>
+        <p class="ticker-name">立讯精密</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥45.60</span>
+        <span class="ticker-pct negative">-5.14%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,5.1 2.0,13.6 4.1,9.6 6.1,8.7 8.1,8.6 10.2,6.2 12.2,8.9 14.2,9.2 16.3,5.4 18.3,8.3 20.3,7.1 22.4,2.0 24.4,4.5 26.4,14.0 28.5,14.4 30.5,11.4 32.5,13.5 34.6,11.0 36.6,5.9 38.6,5.7 40.7,7.1 42.7,4.8 44.7,6.3 46.8,6.0 48.8,8.0 50.8,12.2 52.9,8.6 54.9,10.5 56.9,8.7 59.0,11.9 61.0,9.8 63.1,15.7 65.1,18.3 67.1,15.4 69.2,17.1 71.2,12.7 73.2,11.9 75.3,11.0 77.3,12.1 79.3,17.4 81.4,22.1 83.4,21.0 85.4,23.2 87.5,25.5 89.5,27.4 91.5,30.2 93.6,30.6 95.6,33.3 97.6,34.0 99.7,34.0 101.7,30.5 103.7,27.3 105.8,26.2 107.8,28.4 109.8,20.7 111.9,22.1 113.9,24.4 115.9,22.4 118.0,26.0 120.0,31.6"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-9.56%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-44.1%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">38.6</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>47.62 / 52.02 / 57.63</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-1.193 / -1.511</dd></div>
+      <div><dt>布林(中)</dt><dd>47.62</dd></div><div><dt>ATR(14)</dt><dd>2.02</dd></div><div><dt>KDJ-J</dt><dd>19.3</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="300059.SZ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">300059.SZ</h3>
+        <p class="ticker-name">东方财富</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥17.60</span>
+        <span class="ticker-pct negative">-2.00%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,4.0 2.0,5.6 4.1,5.2 6.1,2.0 8.1,5.6 10.2,5.9 12.2,5.4 14.2,7.4 16.3,7.5 18.3,8.0 20.3,11.2 22.4,10.1 24.4,13.7 26.4,18.9 28.5,18.2 30.5,17.1 32.5,17.0 34.6,16.9 36.6,12.4 38.6,9.7 40.7,11.8 42.7,12.1 44.7,12.0 46.8,17.1 48.8,16.0 50.8,14.6 52.9,16.2 54.9,17.8 56.9,17.1 59.0,16.4 61.0,23.3 63.1,24.2 65.1,24.8 67.1,22.5 69.2,25.6 71.2,22.7 73.2,19.4 75.3,18.5 77.3,19.8 79.3,23.6 81.4,27.9 83.4,28.9 85.4,28.7 87.5,34.0 89.5,27.0 91.5,28.2 93.6,25.9 95.6,26.7 97.6,23.2 99.7,25.4 101.7,25.7 103.7,26.9 105.8,27.6 107.8,28.8 109.8,20.8 111.9,20.8 113.9,25.4 115.9,26.4 118.0,26.9 120.0,30.7"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-5.12%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-39.2%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">39.9</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>17.97 / 18.52 / 20.18</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.153 / -0.167</dd></div>
+      <div><dt>布林(中)</dt><dd>17.97</dd></div><div><dt>ATR(14)</dt><dd>0.47</dd></div><div><dt>KDJ-J</dt><dd>23.2</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article>
+    </div><div class="trading-group-content" data-group="china-etf">
+      
+      <article class="ticker-card" data-symbol="510300.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">510300.SS</h3>
+        <p class="ticker-name">沪深300ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥4.07</span>
+        <span class="ticker-pct negative">-1.12%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,8.4 2.0,10.8 4.1,8.5 6.1,5.8 8.1,6.0 10.2,4.2 12.2,3.8 14.2,5.2 16.3,4.3 18.3,5.1 20.3,5.3 22.4,2.0 24.4,2.6 26.4,8.4 28.5,8.4 30.5,7.3 32.5,9.6 34.6,10.0 36.6,8.5 38.6,6.8 40.7,7.3 42.7,7.0 44.7,7.1 46.8,9.9 48.8,9.8 50.8,10.0 52.9,9.3 54.9,9.7 56.9,9.1 59.0,10.0 61.0,11.7 63.1,12.8 65.1,14.1 67.1,12.9 69.2,13.7 71.2,11.5 73.2,10.4 75.3,10.2 77.3,11.2 79.3,14.4 81.4,18.7 83.4,18.7 85.4,18.0 87.5,19.9 89.5,20.1 91.5,21.2 93.6,21.8 95.6,24.0 97.6,26.3 99.7,26.6 101.7,26.4 103.7,27.3 105.8,28.8 107.8,32.2 109.8,29.1 111.9,29.0 113.9,31.5 115.9,30.2 118.0,32.0 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-2.70%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-20.2%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">24.1</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>4.25 / 4.48 / 4.69</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.114 / -0.108</dd></div>
+      <div><dt>布林(中)</dt><dd>4.25</dd></div><div><dt>ATR(14)</dt><dd>0.07</dd></div><div><dt>KDJ-J</dt><dd>27.0</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="510500.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">510500.SS</h3>
+        <p class="ticker-name">中证500ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥6.30</span>
+        <span class="ticker-pct negative">-2.85%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,13.8 2.0,15.1 4.1,12.1 6.1,8.5 8.1,8.2 10.2,5.6 12.2,4.7 14.2,5.5 16.3,4.4 18.3,5.7 20.3,5.4 22.4,2.0 24.4,2.2 26.4,8.6 28.5,7.6 30.5,7.6 32.5,9.7 34.6,10.0 36.6,8.9 38.6,5.8 40.7,6.6 42.7,5.9 44.7,7.3 46.8,9.5 48.8,9.0 50.8,10.9 52.9,9.2 54.9,8.9 56.9,9.0 59.0,9.7 61.0,11.9 63.1,12.1 65.1,12.3 67.1,10.2 69.2,10.7 71.2,8.2 73.2,7.5 75.3,7.9 77.3,8.4 79.3,11.3 81.4,14.8 83.4,14.2 85.4,14.3 87.5,17.5 89.5,17.5 91.5,20.1 93.6,20.4 95.6,21.8 97.6,25.6 99.7,25.5 101.7,25.1 103.7,24.4 105.8,24.5 107.8,27.6 109.8,24.7 111.9,26.5 113.9,30.1 115.9,27.8 118.0,30.9 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-8.05%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-31.1%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">25.1</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>6.93 / 7.46 / 7.99</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.293 / -0.257</dd></div>
+      <div><dt>布林(中)</dt><dd>6.93</dd></div><div><dt>ATR(14)</dt><dd>0.20</dd></div><div><dt>KDJ-J</dt><dd>0.9</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span><span class="signal-pill tone-bull">触及布林下轨</span></div>
+  </article><article class="ticker-card" data-symbol="159915.SZ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">159915.SZ</h3>
+        <p class="ticker-name">创业板ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥2.44</span>
+        <span class="ticker-pct negative">-3.94%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,11.4 2.0,12.4 4.1,7.9 6.1,6.7 8.1,7.2 10.2,6.1 12.2,6.8 14.2,6.6 16.3,5.3 18.3,5.7 20.3,4.7 22.4,2.0 24.4,2.8 26.4,8.2 28.5,7.9 30.5,6.7 32.5,9.2 34.6,10.2 36.6,9.8 38.6,8.3 40.7,9.6 42.7,9.3 44.7,10.3 46.8,12.2 48.8,12.3 50.8,12.9 52.9,10.3 54.9,11.2 56.9,11.3 59.0,11.6 61.0,12.1 63.1,12.9 65.1,13.8 67.1,12.3 69.2,12.6 71.2,10.8 73.2,10.2 75.3,10.1 77.3,10.6 79.3,12.8 81.4,16.5 83.4,16.4 85.4,16.6 87.5,19.0 89.5,18.8 91.5,20.7 93.6,20.9 95.6,23.0 97.6,25.0 99.7,25.4 101.7,26.1 103.7,26.2 105.8,27.3 107.8,30.2 109.8,27.5 111.9,28.8 113.9,30.9 115.9,28.8 118.0,31.6 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-9.88%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-44.6%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">23.4</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>2.82 / 3.18 / 3.49</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.200 / -0.181</dd></div>
+      <div><dt>布林(中)</dt><dd>2.82</dd></div><div><dt>ATR(14)</dt><dd>0.10</dd></div><div><dt>KDJ-J</dt><dd>6.0</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="588000.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">588000.SS</h3>
+        <p class="ticker-name">科创50ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥1.23</span>
+        <span class="ticker-pct negative">-5.03%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,9.8 2.0,14.2 4.1,10.8 6.1,6.9 8.1,6.6 10.2,4.3 12.2,4.6 14.2,6.0 16.3,4.7 18.3,5.7 20.3,5.6 22.4,2.0 24.4,2.0 26.4,8.2 28.5,9.0 30.5,8.9 32.5,11.6 34.6,11.5 36.6,10.1 38.6,6.8 40.7,8.4 42.7,7.4 44.7,9.2 46.8,10.7 48.8,11.0 50.8,12.7 52.9,10.9 54.9,12.0 56.9,12.5 59.0,13.1 61.0,14.1 63.1,15.3 65.1,14.1 67.1,10.7 69.2,11.3 71.2,9.0 73.2,8.7 75.3,8.3 77.3,8.4 79.3,10.5 81.4,13.9 83.4,13.2 85.4,15.2 87.5,19.0 89.5,18.8 91.5,20.5 93.6,20.5 95.6,22.8 97.6,23.8 99.7,24.2 101.7,25.4 103.7,24.8 105.8,24.8 107.8,26.8 109.8,24.6 111.9,26.6 113.9,29.5 115.9,27.9 118.0,30.8 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-13.64%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-48.6%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">23.3</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>1.45 / 1.62 / 1.67</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.099 / -0.086</dd></div>
+      <div><dt>布林(中)</dt><dd>1.45</dd></div><div><dt>ATR(14)</dt><dd>0.06</dd></div><div><dt>KDJ-J</dt><dd>-0.3</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">死叉(SMA50↓SMA200) <span class="signal-age">(6 天前)</span></span><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span><span class="signal-pill tone-bull">触及布林下轨</span><span class="signal-pill tone-bull">KDJ 超卖</span></div>
+  </article><article class="ticker-card" data-symbol="512880.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">512880.SS</h3>
+        <p class="ticker-name">证券ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥0.96</span>
+        <span class="ticker-pct negative">-1.13%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,3.3 2.0,3.7 4.1,3.9 6.1,2.8 8.1,5.6 10.2,5.6 12.2,5.0 14.2,6.2 16.3,5.4 18.3,4.5 20.3,7.5 22.4,6.2 24.4,9.6 26.4,12.8 28.5,12.6 30.5,12.6 32.5,11.7 34.6,11.7 36.6,5.6 38.6,3.5 40.7,3.9 42.7,3.7 44.7,2.0 46.8,6.9 48.8,5.2 50.8,3.7 52.9,6.7 54.9,7.9 56.9,7.9 59.0,6.7 61.0,13.7 63.1,14.9 65.1,16.0 67.1,14.5 69.2,17.0 71.2,13.9 73.2,11.5 75.3,11.3 77.3,12.2 79.3,16.2 81.4,20.6 83.4,20.6 85.4,19.8 87.5,23.8 89.5,18.5 91.5,18.3 93.6,18.5 95.6,18.7 97.6,17.7 99.7,19.6 101.7,19.0 103.7,22.8 105.8,24.9 107.8,25.9 109.8,23.2 111.9,21.5 113.9,25.9 115.9,27.6 118.0,31.7 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-5.03%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-27.9%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">27.6</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>1.02 / 1.05 / 1.10</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.021 / -0.017</dd></div>
+      <div><dt>布林(中)</dt><dd>1.02</dd></div><div><dt>ATR(14)</dt><dd>0.02</dd></div><div><dt>KDJ-J</dt><dd>-4.0</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span><span class="signal-pill tone-bull">触及布林下轨</span><span class="signal-pill tone-bull">KDJ 超卖</span></div>
+  </article><article class="ticker-card" data-symbol="512480.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">512480.SS</h3>
+        <p class="ticker-name">半导体ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥0.72</span>
+        <span class="ticker-pct negative">-4.89%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,12.9 2.0,18.4 4.1,14.7 6.1,9.7 8.1,8.6 10.2,5.8 12.2,6.0 14.2,6.8 16.3,5.4 18.3,7.0 20.3,6.3 22.4,2.0 24.4,2.0 26.4,8.8 28.5,9.2 30.5,9.0 32.5,11.5 34.6,11.6 36.6,10.9 38.6,7.4 40.7,9.2 42.7,7.7 44.7,9.9 46.8,11.5 48.8,11.9 50.8,14.1 52.9,12.1 54.9,13.2 56.9,13.6 59.0,14.1 61.0,15.4 63.1,16.4 65.1,15.0 67.1,11.6 69.2,12.2 71.2,9.1 73.2,8.8 75.3,8.3 77.3,8.3 79.3,10.5 81.4,13.8 83.4,13.4 85.4,15.7 87.5,18.9 89.5,19.2 91.5,21.0 93.6,21.1 95.6,23.3 97.6,24.7 99.7,25.1 101.7,26.2 103.7,25.5 105.8,25.4 107.8,27.2 109.8,25.0 111.9,27.7 113.9,30.5 115.9,28.0 118.0,31.1 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-13.88%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-53.8%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">25.8</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>0.85 / 0.95 / 0.96</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.061 / -0.053</dd></div>
+      <div><dt>布林(中)</dt><dd>0.85</dd></div><div><dt>ATR(14)</dt><dd>0.04</dd></div><div><dt>KDJ-J</dt><dd>0.4</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">死叉(SMA50↓SMA200) <span class="signal-age">(今天)</span></span><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="159919.SZ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">159919.SZ</h3>
+        <p class="ticker-name">沪深300ETF(嘉实)</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥4.24</span>
+        <span class="ticker-pct negative">-1.21%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,8.7 2.0,10.8 4.1,8.3 6.1,5.9 8.1,6.3 10.2,4.4 12.2,3.9 14.2,5.3 16.3,4.3 18.3,5.2 20.3,5.3 22.4,2.0 24.4,2.7 26.4,8.8 28.5,8.5 30.5,7.2 32.5,9.6 34.6,10.0 36.6,8.4 38.6,6.7 40.7,7.3 42.7,7.1 44.7,7.1 46.8,10.0 48.8,9.8 50.8,10.0 52.9,9.0 54.9,9.7 56.9,9.0 59.0,9.9 61.0,11.5 63.1,12.8 65.1,14.2 67.1,12.9 69.2,13.6 71.2,11.6 73.2,10.4 75.3,9.9 77.3,11.1 79.3,14.3 81.4,18.7 83.4,18.4 85.4,17.8 87.5,20.1 89.5,19.9 91.5,21.1 93.6,21.6 95.6,23.9 97.6,26.3 99.7,26.3 101.7,26.1 103.7,26.8 105.8,28.5 107.8,31.9 109.8,29.0 111.9,29.0 113.9,31.0 115.9,29.8 118.0,31.9 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-2.80%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-20.3%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">24.0</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>4.44 / 4.68 / 4.89</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.120 / -0.112</dd></div>
+      <div><dt>布林(中)</dt><dd>4.44</dd></div><div><dt>ATR(14)</dt><dd>0.07</dd></div><div><dt>KDJ-J</dt><dd>25.4</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article>
+    </div><div class="trading-group-content" data-group="macro">
+      
+      <article class="ticker-card" data-symbol="000001.SS">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">000001.SS</h3>
+        <p class="ticker-name">上证指数</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥3,599.02</span>
+        <span class="ticker-pct negative">-1.44%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,14.9 2.0,16.8 4.1,15.7 6.1,11.1 8.1,9.4 10.2,6.1 12.2,3.9 14.2,6.6 16.3,5.6 18.3,7.2 20.3,7.2 22.4,2.6 24.4,2.0 26.4,9.8 28.5,9.1 30.5,9.0 32.5,10.9 34.6,10.2 36.6,8.4 38.6,4.8 40.7,5.1 42.7,2.3 44.7,2.9 46.8,6.0 48.8,5.9 50.8,6.9 52.9,6.7 54.9,6.1 56.9,5.2 59.0,6.6 61.0,10.4 63.1,10.6 65.1,12.3 67.1,10.1 69.2,11.4 71.2,8.4 73.2,5.3 75.3,5.1 77.3,6.4 79.3,10.3 81.4,15.6 83.4,15.1 85.4,14.1 87.5,16.6 89.5,16.4 91.5,17.8 93.6,17.5 95.6,20.2 97.6,25.1 99.7,24.4 101.7,23.2 103.7,22.8 105.8,24.7 107.8,29.2 109.8,26.5 111.9,25.9 113.9,30.0 115.9,27.3 118.0,29.7 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-2.48%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-15.5%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">28.3</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>3,735.83 / 3,849.91 / 3,993.61</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-63.269 / -55.375</dd></div>
+      <div><dt>布林(中)</dt><dd>3,735.83</dd></div><div><dt>ATR(14)</dt><dd>53.03</dd></div><div><dt>KDJ-J</dt><dd>29.8</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span><span class="signal-pill tone-bull">触及布林下轨</span></div>
+  </article><article class="ticker-card" data-symbol="399001.SZ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">399001.SZ</h3>
+        <p class="ticker-name">深证成指</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥10,833.78</span>
+        <span class="ticker-pct negative">-2.73%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,11.3 2.0,12.4 4.1,8.8 6.1,6.6 8.1,6.9 10.2,5.3 12.2,5.2 14.2,5.7 16.3,4.4 18.3,5.4 20.3,4.9 22.4,2.0 24.4,2.7 26.4,8.7 28.5,8.0 30.5,7.0 32.5,9.5 34.6,9.9 36.6,9.1 38.6,7.4 40.7,8.2 42.7,7.7 44.7,8.9 46.8,11.0 48.8,10.9 50.8,11.8 52.9,9.7 54.9,10.3 56.9,10.1 59.0,11.0 61.0,12.2 63.1,12.9 65.1,13.7 67.1,12.3 69.2,12.7 71.2,10.8 73.2,10.1 75.3,10.1 77.3,10.8 79.3,13.5 81.4,17.3 83.4,16.9 85.4,17.0 87.5,19.2 89.5,19.1 91.5,21.2 93.6,21.4 95.6,23.4 97.6,25.9 99.7,26.0 101.7,25.9 103.7,26.0 105.8,26.8 107.8,29.7 109.8,27.1 111.9,28.2 113.9,30.6 115.9,28.7 118.0,31.5 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-7.20%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-33.8%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">23.3</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>11,947.95 / 13,049.94 / 14,230.79</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-580.010 / -528.972</dd></div>
+      <div><dt>布林(中)</dt><dd>11,947.95</dd></div><div><dt>ATR(14)</dt><dd>317.68</dd></div><div><dt>KDJ-J</dt><dd>6.6</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="^VIX">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">^VIX</h3>
+        <p class="ticker-name">VIX 恐慌指数</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$17.20</span>
+        <span class="ticker-pct positive">+1.71%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#15803d" stroke-width="1.5" points="0.0,30.2 2.0,27.1 4.1,28.1 6.1,32.1 8.1,31.7 10.2,33.8 12.2,28.6 14.2,25.0 16.3,30.2 18.3,24.0 20.3,28.9 22.4,24.9 24.4,27.1 26.4,28.5 28.5,32.3 30.5,32.8 32.5,30.1 34.6,22.2 36.6,28.5 38.6,33.4 40.7,32.2 42.7,28.0 44.7,25.6 46.8,21.5 48.8,13.9 50.8,25.0 52.9,18.0 54.9,17.4 56.9,14.6 59.0,27.2 61.0,30.7 63.1,30.3 65.1,34.0 67.1,28.6 69.2,25.9 71.2,30.3 73.2,23.7 75.3,23.9 77.3,22.2 79.3,21.9 81.4,27.9 83.4,26.7 85.4,29.6 87.5,29.2 89.5,27.4 91.5,30.5 93.6,28.5 95.6,28.1 97.6,19.3 99.7,21.5 101.7,2.0 103.7,10.6 105.8,16.8 107.8,20.3 109.8,7.3 111.9,5.0 113.9,10.9 115.9,15.7 118.0,19.1 120.0,17.4"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-9.62%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-51.3%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">51.4</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>16.80 / 16.10 / 18.24</dd></div>
+      <div><dt>MACD / 信号</dt><dd>0.539 / 0.549</dd></div>
+      <div><dt>布林(中)</dt><dd>16.80</dd></div><div><dt>ATR(14)</dt><dd>1.70</dd></div><div><dt>KDJ-J</dt><dd>15.1</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">MACD 死叉 <span class="signal-age">(今天)</span></span><span class="signal-pill tone-bear">接近 52 周低</span></div>
+  </article>
+    </div><div class="trading-group-content" data-group="china-equity">
+      
+      <article class="ticker-card" data-symbol="BABA">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">BABA</h3>
+        <p class="ticker-name">阿里巴巴 (BABA)</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$99.54</span>
+        <span class="ticker-pct negative">-1.41%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,7.4 2.0,5.8 4.1,2.0 6.1,6.4 8.1,8.9 10.2,11.9 12.2,10.3 14.2,9.4 16.3,6.1 18.3,5.3 20.3,3.7 22.4,14.7 24.4,15.5 26.4,14.6 28.5,14.2 30.5,17.6 32.5,15.1 34.6,19.9 36.6,21.0 38.6,22.0 40.7,22.0 42.7,20.6 44.7,21.2 46.8,24.4 48.8,25.2 50.8,24.5 52.9,24.5 54.9,24.4 56.9,26.5 59.0,25.2 61.0,20.6 63.1,18.2 65.1,17.6 67.1,23.0 69.2,23.2 71.2,24.0 73.2,25.0 75.3,26.0 77.3,26.2 79.3,26.3 81.4,27.8 83.4,23.0 85.4,24.5 87.5,26.7 89.5,28.0 91.5,22.5 93.6,23.0 95.6,23.0 97.6,22.6 99.7,22.7 101.7,24.7 103.7,25.2 105.8,25.1 107.8,29.2 109.8,31.8 111.9,33.9 113.9,33.3 115.9,33.3 118.0,32.6 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-2.24%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-45.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">31.8</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>106.35 / 110.32 / 126.60</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-2.994 / -2.261</dd></div>
+      <div><dt>布林(中)</dt><dd>106.35</dd></div><div><dt>ATR(14)</dt><dd>2.75</dd></div><div><dt>KDJ-J</dt><dd>-2.4</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">空头排列</span><span class="signal-pill tone-bull">KDJ 超卖</span></div>
+  </article><article class="ticker-card" data-symbol="PDD">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">PDD</h3>
+        <p class="ticker-name">拼多多 (PDD)</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$79.28</span>
+        <span class="ticker-pct positive">+2.34%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,5.9 2.0,4.3 4.1,2.0 6.1,6.5 8.1,9.2 10.2,18.0 12.2,16.9 14.2,13.0 16.3,12.4 18.3,7.1 20.3,8.3 22.4,10.4 24.4,12.8 26.4,11.5 28.5,13.4 30.5,17.1 32.5,15.3 34.6,18.3 36.6,19.9 38.6,21.5 40.7,22.6 42.7,21.6 44.7,26.1 46.8,28.1 48.8,29.5 50.8,29.6 52.9,26.7 54.9,29.1 56.9,27.9 59.0,29.7 61.0,27.6 63.1,26.9 65.1,25.0 67.1,27.1 69.2,28.9 71.2,30.0 73.2,28.4 75.3,30.1 77.3,29.4 79.3,32.0 81.4,34.0 83.4,29.4 85.4,28.5 87.5,28.3 89.5,28.8 91.5,23.2 93.6,23.9 95.6,22.0 97.6,23.0 99.7,21.2 101.7,23.8 103.7,23.1 105.8,22.6 107.8,27.9 109.8,27.1 111.9,27.4 113.9,29.0 115.9,28.5 118.0,30.2 120.0,26.9"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+0.14%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-43.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">48.5</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>79.54 / 80.51 / 91.21</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.422 / -0.291</dd></div>
+      <div><dt>布林(中)</dt><dd>79.54</dd></div><div><dt>ATR(14)</dt><dd>1.94</dd></div><div><dt>KDJ-J</dt><dd>31.1</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">MACD 死叉 <span class="signal-age">(3 天前)</span></span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card" data-symbol="0700.HK">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">0700.HK</h3>
+        <p class="ticker-name">腾讯控股</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">HK$385.00</span>
+        <span class="ticker-pct positive">+1.96%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,2.7 2.0,2.8 4.1,2.0 6.1,5.3 8.1,8.1 10.2,14.5 12.2,14.8 14.2,12.8 16.3,14.0 18.3,12.5 20.3,11.2 22.4,9.5 24.4,14.8 26.4,14.1 28.5,13.1 30.5,12.4 32.5,10.1 34.6,10.8 36.6,14.3 38.6,15.3 40.7,16.9 42.7,13.9 44.7,15.3 46.8,16.2 48.8,16.6 50.8,19.2 52.9,18.3 54.9,17.7 56.9,15.1 59.0,16.8 61.0,19.1 63.1,21.2 65.1,17.8 67.1,11.2 69.2,14.5 71.2,15.3 73.2,15.8 75.3,14.8 77.3,17.2 79.3,17.5 81.4,20.6 83.4,20.0 85.4,18.4 87.5,20.7 89.5,23.6 91.5,19.4 93.6,19.1 95.6,19.3 97.6,19.9 99.7,21.6 101.7,21.6 103.7,23.9 105.8,29.0 107.8,32.5 109.8,31.4 111.9,31.3 113.9,31.7 115.9,30.9 118.0,34.0 120.0,31.7"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-0.26%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-42.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">34.6</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>406.68 / 425.82 / 479.62</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-13.594 / -11.334</dd></div>
+      <div><dt>布林(中)</dt><dd>406.68</dd></div><div><dt>ATR(14)</dt><dd>10.83</dd></div><div><dt>KDJ-J</dt><dd>15.3</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article>
+    </div><div class="trading-group-content" data-group="us-equity">
+      
+      <article class="ticker-card" data-symbol="SPY">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">SPY</h3>
+        <p class="ticker-name">S&amp;P 500 ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$769.36</span>
+        <span class="ticker-pct negative">-0.38%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#15803d" stroke-width="1.5" points="0.0,15.5 2.0,9.5 4.1,9.7 6.1,12.9 8.1,10.4 10.2,3.5 12.2,5.5 14.2,10.2 16.3,16.9 18.3,14.8 20.3,23.1 22.4,19.1 24.4,22.0 26.4,18.8 28.5,18.6 30.5,12.2 32.5,14.4 34.6,17.4 36.6,24.1 38.6,19.8 40.7,9.6 42.7,13.4 44.7,18.8 46.8,23.3 48.8,29.2 50.8,20.9 52.9,25.3 54.9,29.7 56.9,34.0 59.0,23.1 61.0,24.2 63.1,9.1 65.1,9.3 67.1,16.4 69.2,17.2 71.2,11.9 73.2,19.2 75.3,21.0 77.3,23.0 79.3,21.3 81.4,14.1 83.4,7.4 85.4,2.0 87.5,4.4 89.5,8.6 91.5,2.7 93.6,3.3 95.6,3.4 97.6,14.1 99.7,11.3 101.7,22.2 103.7,18.1 105.8,14.8 107.8,9.7 109.8,21.3 111.9,26.4 113.9,19.5 115.9,14.1 118.0,10.7 120.0,14.4"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+0.71%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-1.6%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">50.6</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bullish">多头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>771.16 / 767.63 / 728.53</dd></div>
+      <div><dt>MACD / 信号</dt><dd>0.042 / 0.378</dd></div>
+      <div><dt>布林(中)</dt><dd>771.16</dd></div><div><dt>ATR(14)</dt><dd>6.86</dd></div><div><dt>KDJ-J</dt><dd>82.8</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">接近 52 周高</span><span class="signal-pill tone-bull">多头排列</span></div>
+  </article><article class="ticker-card" data-symbol="QQQ">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">QQQ</h3>
+        <p class="ticker-name">Nasdaq 100 ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$715.34</span>
+        <span class="ticker-pct negative">-1.42%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#15803d" stroke-width="1.5" points="0.0,28.1 2.0,23.2 4.1,24.5 6.1,25.9 8.1,22.8 10.2,18.0 12.2,18.6 14.2,19.3 16.3,26.4 18.3,27.2 20.3,30.2 22.4,28.8 24.4,32.9 26.4,30.3 28.5,30.0 30.5,24.3 32.5,27.0 34.6,26.8 36.6,32.1 38.6,31.2 40.7,26.3 42.7,25.6 44.7,25.9 46.8,27.1 48.8,31.5 50.8,27.9 52.9,31.2 54.9,33.9 56.9,33.8 59.0,26.7 61.0,24.1 63.1,12.5 65.1,9.1 67.1,12.7 69.2,12.7 71.2,10.8 73.2,15.4 75.3,14.6 77.3,13.5 79.3,12.2 81.4,7.8 83.4,4.0 85.4,2.0 87.5,3.1 89.5,9.0 91.5,6.9 93.6,9.9 95.6,11.3 97.6,19.8 99.7,20.3 101.7,30.9 103.7,25.9 105.8,26.3 107.8,22.0 109.8,34.0 111.9,34.0 113.9,29.5 115.9,24.2 118.0,21.7 120.0,27.7"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+1.54%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-6.2%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">44.4</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>731.14 / 725.41 / 679.16</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-4.571 / -2.791</dd></div>
+      <div><dt>布林(中)</dt><dd>731.14</dd></div><div><dt>ATR(14)</dt><dd>11.24</dd></div><div><dt>KDJ-J</dt><dd>78.6</dd></div>
+    </dl>
+    
+  </article><article class="ticker-card" data-symbol="NVDA">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">NVDA</h3>
+        <p class="ticker-name">Nvidia</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$213.66</span>
+        <span class="ticker-pct negative">-0.80%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,23.1 2.0,17.9 4.1,24.6 6.1,24.6 8.1,17.8 10.2,16.5 12.2,16.6 14.2,16.8 16.3,22.3 18.3,24.6 20.3,25.3 22.4,27.5 24.4,34.0 26.4,29.2 28.5,32.8 30.5,13.7 32.5,24.6 34.6,21.2 36.6,24.7 38.6,17.4 40.7,13.2 42.7,11.2 44.7,16.1 46.8,18.2 48.8,23.7 50.8,23.8 52.9,31.4 54.9,30.2 56.9,28.4 59.0,22.7 61.0,19.7 63.1,14.3 65.1,12.8 67.1,16.3 69.2,17.3 71.2,16.7 73.2,12.8 75.3,14.5 77.3,13.3 79.3,10.7 81.4,7.5 83.4,2.4 85.4,2.0 87.5,3.8 89.5,11.1 91.5,12.4 93.6,15.4 95.6,13.2 97.6,20.7 99.7,24.9 101.7,28.1 103.7,25.0 105.8,25.7 107.8,20.0 109.8,30.1 111.9,31.4 113.9,26.2 115.9,24.2 118.0,26.8 120.0,28.6"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+0.68%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-12.2%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">42.3</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>222.93 / 221.99 / 204.28</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-2.840 / -1.811</dd></div>
+      <div><dt>布林(中)</dt><dd>222.93</dd></div><div><dt>ATR(14)</dt><dd>5.72</dd></div><div><dt>KDJ-J</dt><dd>43.1</dd></div>
+    </dl>
+    
+  </article>
+    </div><div class="trading-group-content" data-group="crypto">
+      <div class="crypto-widgets"><div class="crypto-widget fg-fear">
+      <div class="widget-label">加密恐慌贪婪</div>
+      <div class="widget-value">30</div>
+      <div class="widget-sub">恐慌</div>
+    </div><div class="crypto-widget">
+      <div class="widget-label">加密总市值</div>
+      <div class="widget-value">$2.64 T</div>
+      <div class="widget-sub negative">-4.63% / 24h</div>
+    </div><div class="crypto-widget">
+      <div class="widget-label">BTC 主导率</div>
+      <div class="widget-value">59.4%</div>
+      <div class="widget-sub">ETH 10.3%</div>
+    </div><div class="crypto-widget">
+      <div class="widget-label">24h 成交量</div>
+      <div class="widget-value">$141.7 B</div>
+      <div class="widget-sub">活跃币 22,611</div>
+    </div></div>
+      <article class="ticker-card" data-symbol="BTC-USD">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">BTC-USD</h3>
+        <p class="ticker-name">Bitcoin</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$78,465.34</span>
+        <span class="ticker-pct negative">-3.45%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,25.5 2.0,28.8 4.1,29.1 6.1,17.5 8.1,22.2 10.2,21.7 12.2,20.2 14.2,23.8 16.3,25.8 18.3,26.3 20.3,31.2 22.4,29.5 24.4,29.2 26.4,30.4 28.5,26.6 30.5,34.0 32.5,32.4 34.6,31.7 36.6,18.6 38.6,17.6 40.7,17.9 42.7,2.0 44.7,3.3 46.8,8.5 48.8,8.5 50.8,9.5 52.9,8.4 54.9,8.2 56.9,11.0 59.0,10.7 61.0,10.9 63.1,7.1 65.1,8.1 67.1,7.4 69.2,2.4 71.2,4.4 73.2,5.0 75.3,11.7 77.3,16.3 79.3,13.8 81.4,12.7 83.4,10.5 85.4,16.1 87.5,12.2 89.5,16.7 91.5,15.0 93.6,16.9 95.6,17.2 97.6,15.4 99.7,15.8 101.7,12.7 103.7,9.5 105.8,17.4 107.8,18.1 109.8,18.9 111.9,21.2 113.9,21.2 115.9,18.9 118.0,17.5 120.0,25.7"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-2.88%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-29.7%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">37.7</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>81,630.30 / 81,892.34 / 73,105.29</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-627.444 / -289.132</dd></div>
+      <div><dt>布林(中)</dt><dd>81,630.30</dd></div><div><dt>ATR(14)</dt><dd>2,152.16</dd></div><div><dt>KDJ-J</dt><dd>23.6</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">触及布林下轨</span><span class="signal-pill tone-caution">放量</span></div>
+  </article><article class="ticker-card" data-symbol="ETH-USD">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">ETH-USD</h3>
+        <p class="ticker-name">Ethereum</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$2,249.19</span>
+        <span class="ticker-pct negative">-4.60%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,20.8 2.0,23.8 4.1,25.4 6.1,18.3 8.1,21.4 10.2,19.9 12.2,17.9 14.2,19.3 16.3,19.7 18.3,20.8 20.3,22.6 22.4,17.9 24.4,17.2 26.4,20.2 28.5,17.9 30.5,24.9 32.5,23.9 34.6,22.0 36.6,12.0 38.6,10.8 40.7,10.1 42.7,2.0 44.7,3.4 46.8,7.6 48.8,7.4 50.8,7.2 52.9,6.9 54.9,7.4 56.9,7.3 59.0,8.1 61.0,7.6 63.1,6.3 65.1,8.6 67.1,7.4 69.2,5.0 71.2,6.0 73.2,6.8 75.3,14.3 77.3,20.5 79.3,19.7 81.4,18.5 83.4,16.7 85.4,22.2 87.5,19.0 89.5,23.7 91.5,22.4 93.6,23.6 95.6,24.9 97.6,24.3 99.7,24.6 101.7,22.0 103.7,20.6 105.8,25.7 107.8,25.8 109.8,27.5 111.9,29.3 113.9,29.7 115.9,28.0 118.0,27.4 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-4.53%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-43.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">30.8</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>2,405.85 / 2,529.69 / 2,159.11</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-63.434 / -53.308</dd></div>
+      <div><dt>布林(中)</dt><dd>2,405.85</dd></div><div><dt>ATR(14)</dt><dd>91.04</dd></div><div><dt>KDJ-J</dt><dd>19.8</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">触及布林下轨</span><span class="signal-pill tone-caution">放量</span></div>
+  </article>
+    </div><div class="trading-group-content" data-group="commodity-fx">
+      
+      <article class="ticker-card" data-symbol="GC=F">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">GC=F</h3>
+        <p class="ticker-name">黄金期货</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$3,992.90</span>
+        <span class="ticker-pct negative">-0.96%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,15.5 2.0,14.6 4.1,13.7 6.1,12.5 8.1,14.6 10.2,13.8 12.2,12.2 14.2,14.6 16.3,8.9 18.3,7.7 20.3,2.8 22.4,2.0 24.4,2.1 26.4,4.0 28.5,3.5 30.5,9.6 32.5,11.8 34.6,15.7 36.6,14.9 38.6,9.2 40.7,12.0 42.7,13.7 44.7,12.8 46.8,15.2 48.8,15.1 50.8,17.7 52.9,18.6 54.9,16.1 56.9,15.5 59.0,14.4 61.0,16.2 63.1,16.6 65.1,19.2 67.1,20.1 69.2,19.1 71.2,26.0 73.2,25.5 75.3,25.2 77.3,24.5 79.3,26.3 81.4,26.6 83.4,25.2 85.4,27.3 87.5,26.6 89.5,23.9 91.5,25.0 93.6,25.6 95.6,28.8 97.6,26.0 99.7,25.5 101.7,26.4 103.7,27.2 105.8,26.9 107.8,30.9 109.8,33.3 111.9,31.9 113.9,30.3 115.9,31.3 118.0,32.3 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-0.37%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-28.5%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">33.2</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>4,119.74 / 4,296.68 / 4,519.79</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-68.647 / -63.406</dd></div>
+      <div><dt>布林(中)</dt><dd>4,119.74</dd></div><div><dt>ATR(14)</dt><dd>73.64</dd></div><div><dt>KDJ-J</dt><dd>4.3</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span><span class="signal-pill tone-bull">触及布林下轨</span></div>
+  </article><article class="ticker-card" data-symbol="USDCNY=X">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <button type="button" class="fav-star" aria-label="自选" aria-pressed="false" title="加入自选">★</button>
+        <h3 class="ticker-symbol">USDCNY=X</h3>
+        <p class="ticker-name">美元 / 人民币</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥6.65</span>
+        <span class="ticker-pct negative">-0.29%</span>
+      </div>
+    </header>
+    
+    <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,2.0 2.0,2.0 4.1,2.8 6.1,3.3 8.1,3.5 10.2,3.5 12.2,4.4 14.2,3.5 16.3,7.7 18.3,9.9 20.3,10.4 22.4,10.1 24.4,10.6 26.4,9.9 28.5,9.9 30.5,8.8 32.5,8.8 34.6,10.6 36.6,11.0 38.6,11.0 40.7,13.6 42.7,13.6 44.7,13.7 46.8,13.7 48.8,15.1 50.8,14.5 52.9,14.4 54.9,13.5 56.9,15.1 59.0,14.7 61.0,17.8 63.1,18.5 65.1,17.2 67.1,13.5 69.2,13.5 71.2,13.0 73.2,13.8 75.3,16.1 77.3,15.6 79.3,15.6 81.4,15.6 83.4,15.6 85.4,15.6 87.5,15.6 89.5,16.4 91.5,19.6 93.6,19.6 95.6,19.6 97.6,19.4 99.7,19.9 101.7,19.9 103.7,19.9 105.8,24.1 107.8,24.1 109.8,24.1 111.9,24.1 113.9,26.6 115.9,27.2 118.0,27.8 120.0,34.0"/></svg>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-0.47%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-7.6%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-oversold">8.1</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>6.69 / 6.70 / 6.80</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.012 / -0.010</dd></div>
+      <div><dt>布林(中)</dt><dd>6.69</dd></div><div><dt>ATR(14)</dt><dd>0.00</dd></div><div><dt>KDJ-J</dt><dd>-2.1</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-caution">RSI 超卖</span><span class="signal-pill tone-bear">接近 52 周低</span><span class="signal-pill tone-bear">空头排列</span><span class="signal-pill tone-bull">触及布林下轨</span><span class="signal-pill tone-bull">KDJ 超卖</span></div>
+  </article>
+    </div></div>
+  </section>
+
+  <section class="trading-risk">
+    <span class="eyebrow">风险提示</span>
+    <p>过去走势不代表未来表现；仅供技术指标解读参考。</p>
+  </section></section>
+  <section class="panel" data-panel="review"><div class="quant-block">
+    <h2 class="panel-h">大盘快照</h2><div class="idx-grid"><div class="idx-card"><div class="idx-name">上证指数</div>
+            <div class="idx-price">3599.02</div>
+            <div class="ticker-pct negative">-1.44%</div></div><div class="idx-card"><div class="idx-name">深证成指</div>
+            <div class="idx-price">10833.78</div>
+            <div class="ticker-pct negative">-2.73%</div></div><div class="idx-card"><div class="idx-name">创业板指</div>
+            <div class="idx-price">2413.63</div>
+            <div class="ticker-pct negative">-4.13%</div></div></div>
+        <p class="muted">东方财富公开延时接口 · 非实时 · 仅供参考</p>
+    <h2 class="panel-h">板块资金流</h2>
+    <table class="flow-table"><thead><tr><th>板块</th><th>涨跌</th><th>主力净流入</th></tr></thead>
+    <tbody><tr>
+        <td>食品饮料</td>
+        <td class="positive">+0.83%</td>
+        <td class="positive">+28.90 亿</td>
+      </tr><tr>
+        <td>医药生物</td>
+        <td class="negative">-0.61%</td>
+        <td class="positive">+26.18 亿</td>
+      </tr><tr>
+        <td>白酒Ⅲ</td>
+        <td class="positive">+5.15%</td>
+        <td class="positive">+24.45 亿</td>
+      </tr><tr>
+        <td>白酒Ⅱ</td>
+        <td class="positive">+5.15%</td>
+        <td class="positive">+24.45 亿</td>
+      </tr><tr>
+        <td>医疗服务</td>
+        <td class="positive">+1.58%</td>
+        <td class="positive">+16.13 亿</td>
+      </tr><tr>
+        <td>医疗研发外包</td>
+        <td class="positive">+3.37%</td>
+        <td class="positive">+14.16 亿</td>
+      </tr><tr>
+        <td>锂电池</td>
+        <td class="negative">-2.19%</td>
+        <td class="positive">+7.68 亿</td>
+      </tr><tr>
+        <td>电池</td>
+        <td class="negative">-1.92%</td>
+        <td class="positive">+6.23 亿</td>
+      </tr><tr>
+        <td>生物制品</td>
+        <td class="negative">-0.66%</td>
+        <td class="positive">+5.61 亿</td>
+      </tr><tr>
+        <td>其他生物制品</td>
+        <td class="negative">-0.49%</td>
+        <td class="positive">+5.31 亿</td>
+      </tr><tr>
+        <td>白色家电</td>
+        <td class="positive">+0.30%</td>
+        <td class="positive">+5.25 亿</td>
+      </tr><tr>
+        <td>石油石化</td>
+        <td class="negative">-1.06%</td>
+        <td class="positive">+4.99 亿</td>
+      </tr></tbody></table>
+    <p class="muted tiny">东方财富公开延时板块资金流 · 非官方 · 非实时 · 仅供参考 · 不构成投资建议</p>
+    <h2 class="panel-h">事件驱动（标题命中观察池）</h2><p class="event-counts">观察池命中统计：<span class="ev-count" data-symbol="NVDA">Nvidia <b>3</b></span> · <span class="ev-count" data-symbol="GC=F">黄金期货 <b>2</b></span> · <span class="ev-count" data-symbol="USDCNY=X">美元 / 人民币 <b>1</b></span> · <span class="ev-count" data-symbol="BTC-USD">Bitcoin <b>1</b></span></p><ul class="event-list"><li data-symbol="GC=F"><span class="ev-sym">黄金期货</span>
+            <a href="https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main" target="_blank" rel="noopener">Comex Gold, Silver Settle Lower</a>
+            <span class="muted">· WSJ Markets · 命中「Gold」</span></li><li data-symbol="GC=F"><span class="ev-sym">黄金期货</span>
+            <a href="https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main" target="_blank" rel="noopener">Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says</a>
+            <span class="muted">· WSJ Markets · 命中「Gold」</span></li><li data-symbol="NVDA"><span class="ev-sym">Nvidia</span>
+            <a href="https://www.cnbc.com/2026/10/29/nvidia-jensen-huang-chinese-intelligence-asset.html" target="_blank" rel="noopener">Nvidia responds to report Jensen Huang was target of Chinese asset, says diversion allegations were 'investigated and debunked'</a>
+            <span class="muted">· CNBC · 命中「Nvidia」</span></li><li data-symbol="USDCNY=X"><span class="ev-sym">美元 / 人民币</span>
+            <a href="https://www.ftchinese.com/story/001111205" target="_blank" rel="noopener">Meta拟发股筹集950亿美元AI投资资金</a>
+            <span class="muted">· FT中文网 · 命中「美元」</span></li><li data-symbol="BTC-USD"><span class="ev-sym">Bitcoin</span>
+            <a href="https://x.com/rootstock_io/status/2115806243197493475" target="_blank" rel="noopener">Bitcoin’s Awkward Age: What’s the Next Source of Demand?</a>
+            <span class="muted">· X 市场声音（站内镜像） · 命中「Bitcoin」</span></li><li data-symbol="NVDA"><span class="ev-sym">Nvidia</span>
+            <a href="https://www.theguardian.com/technology/2026/oct/29/nvidia-ceo-targeted-chinese-spy" target="_blank" rel="noopener">Nvidia CEO reportedly targeted by an alleged Chinese spy</a>
+            <span class="muted">· The Guardian · 命中「Nvidia」</span></li><li data-symbol="NVDA"><span class="ev-sym">Nvidia</span>
+            <a href="https://thediplomat.com/2026/10/the-promise-and-pitfalls-of-nvidias-venture-in-kazakhstan/" target="_blank" rel="noopener">The Promise and Pitfalls of Nvidia’s Venture in Kazakhstan</a>
+            <span class="muted">· The Diplomat · 命中「Nvidia」</span></li></ul>
+  </div></section>
+  <section class="panel" data-panel="sentiment"><div class="quant-block">
+    <h2 class="panel-h">市场情绪计</h2>
+    <div class="senti-head">
+      <span class="senti-score negative">-100</span>
+      <span class="senti-label negative">强偏空</span>
+      <span class="muted tiny">多 18 / 空 40 · 样本 226 条财经标题</span>
+    </div>
+    <div class="senti-bar"><div class="senti-marker" style="left:0%"></div></div>
+    <div class="senti-scale muted tiny"><span>−100 偏空</span><span>0</span><span>+100 偏多</span></div>
+    <div class="senti-trend">
+      <svg viewBox="0 0 560 64" width="100%" height="64" role="img" aria-label="近期情绪走势">
+        <line x1="4" y1="14.7" x2="556" y2="14.7" stroke="var(--rule)" stroke-dasharray="3 3"/>
+        <polyline points="4.0,56.3 96.0,57.6 188.0,57.6 280.0,57.1 372.0,57.1 464.0,45.9 556.0,58.0" fill="none" stroke="#b91c1c" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <p class="muted tiny">近 7 档情绪走势 · 积累中 7/20（样本足后启用分位与复盘统计）</p>
+    </div>
+    <div class="senti-review">
+      <h3 class="panel-h">信号复盘 · 昨档情绪 vs 今日行情</h3>
+      <p><span class="muted tiny">2026-10-29 13:00</span>
+      情绪 <b class="negative">-72</b>
+      → 今日三指均值 <b class="negative">-2.77%</b></p>
+      <p>偏空情绪 + 市场走弱 → 顺势样本</p>
+      <p class="muted tiny">样本 5/10（不足统计量，仅教学展示） · 规则透明、零 AI · 不构成投资建议</p>
+    </div>
+    
+    <h2 class="panel-h">情绪驱动词</h2>
+    <div class="senti-drivers"><span class="senti-chip negative">关税 <b>−11</b></span><span class="senti-chip negative">风险 <b>−11</b></span><span class="senti-chip positive">突破 <b>+6</b></span><span class="senti-chip negative">selloff <b>−4</b></span><span class="senti-chip negative">plunge <b>−4</b></span><span class="senti-chip positive">回购 <b>+4</b></span><span class="senti-chip positive">surge <b>+3</b></span><span class="senti-chip positive">rally <b>+2</b></span></div>
+    <h2 class="panel-h">板块情绪</h2>
+    <div class="senti-drivers"><span class="senti-chip negative">大盘综合 -100 <b>214篇</b></span><span class="senti-chip negative">ETF -20 <b>2篇</b></span><span class="senti-chip negative">美股 -20 <b>6篇</b></span></div>
+    <p class="muted tiny">基于财经标题的词典规则面板（标题 ×2、摘要 ×1）。零 AI。不构成投资建议。</p>
+  </div></section>
+  <section class="panel" data-panel="techread"><div class="quant-block">
+    <p class="lede">迷你走势帮助散户建立「位置感」：金叉/死叉/超买是描述词，不是自动买卖指令。详见散户学堂。</p>
+    <div class="ticker-grid"><article class="ticker-card" data-symbol="600519.SS">
+        <h3>贵州茅台 <span class="muted">600519.SS</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#15803d" stroke-width="1.5" points="0.0,10.5 2.0,8.8 4.1,15.0 6.1,19.5 8.1,19.1 10.2,18.9 12.2,10.8 14.2,11.3 16.3,12.0 18.3,9.5 20.3,12.2 22.4,22.2 24.4,21.2 26.4,19.2 28.5,22.6 30.5,26.4 32.5,19.9 34.6,20.0 36.6,20.3 38.6,22.4 40.7,21.4 42.7,20.9 44.7,20.9 46.8,21.3 48.8,21.1 50.8,14.7 52.9,17.6 54.9,18.9 56.9,22.7 59.0,23.9 61.0,25.9 63.1,25.3 65.1,26.4 67.1,29.4 69.2,27.6 71.2,29.6 73.2,30.5 75.3,30.3 77.3,30.8 79.3,33.7 81.4,32.3 83.4,34.0 85.4,29.3 87.5,29.9 89.5,28.4 91.5,23.3 93.6,26.0 95.6,23.7 97.6,18.2 99.7,14.9 101.7,15.7 103.7,14.3 105.8,18.8 107.8,17.0 109.8,13.7 111.9,10.6 113.9,9.4 115.9,14.5 118.0,9.8 120.0,2.0"/></svg>
+        <p>收盘 1392.05 · RSI 69.7 · 趋势 neutral</p>
+        <p class="muted tiny">BB 1224.5–1390.5 · ATR 25.58 · KDJ-J 97.8</p>
+        <div><span class="signal-pill">触及布林上轨</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="300750.SZ">
+        <h3>宁德时代 <span class="muted">300750.SZ</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,3.7 2.0,3.9 4.1,3.8 6.1,2.0 8.1,5.0 10.2,5.0 12.2,3.7 14.2,4.3 16.3,3.7 18.3,3.3 20.3,3.7 22.4,2.7 24.4,3.3 26.4,4.6 28.5,5.3 30.5,4.2 32.5,4.8 34.6,6.7 36.6,6.3 38.6,7.4 40.7,8.2 42.7,9.0 44.7,10.0 46.8,11.7 48.8,11.5 50.8,11.2 52.9,11.7 54.9,13.9 56.9,13.7 59.0,13.5 61.0,14.8 63.1,13.6 65.1,17.3 67.1,19.2 69.2,19.4 71.2,19.8 73.2,20.6 75.3,19.3 77.3,19.9 79.3,21.2 81.4,21.5 83.4,22.4 85.4,21.7 87.5,22.4 89.5,20.5 91.5,20.4 93.6,22.0 95.6,23.6 97.6,23.9 99.7,24.1 101.7,25.9 103.7,27.3 105.8,32.7 107.8,34.0 109.8,31.0 111.9,30.9 113.9,31.8 115.9,32.5 118.0,32.5 120.0,31.8"/></svg>
+        <p>收盘 232.92 · RSI 27.8 · 趋势 bearish</p>
+        <p class="muted tiny">BB 207.7–317.5 · ATR 11.06 · KDJ-J 31.9</p>
+        <div><span class="signal-pill">RSI 超卖</span><span class="signal-pill">空头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="601318.SS">
+        <h3>中国平安 <span class="muted">601318.SS</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,17.4 2.0,14.4 4.1,21.9 6.1,21.5 8.1,23.9 10.2,24.5 12.2,24.8 14.2,28.3 16.3,28.1 18.3,27.2 20.3,32.0 22.4,31.8 24.4,34.0 26.4,30.5 28.5,30.2 30.5,24.6 32.5,17.4 34.6,16.9 36.6,11.8 38.6,13.0 40.7,13.1 42.7,13.2 44.7,6.7 46.8,9.4 48.8,3.1 50.8,2.0 52.9,10.7 54.9,13.7 56.9,11.2 59.0,10.0 61.0,13.2 63.1,13.7 65.1,17.5 67.1,19.3 69.2,20.1 71.2,20.0 73.2,17.2 75.3,14.9 77.3,17.7 79.3,20.5 81.4,24.5 83.4,24.0 85.4,20.4 87.5,23.2 89.5,22.5 91.5,20.6 93.6,27.8 95.6,29.9 97.6,27.3 99.7,26.9 101.7,27.8 103.7,30.0 105.8,30.0 107.8,31.2 109.8,27.4 111.9,23.5 113.9,23.5 115.9,24.9 118.0,20.8 120.0,22.6"/></svg>
+        <p>收盘 52.80 · RSI 51.5 · 趋势 bearish</p>
+        <p class="muted tiny">BB 50.8–53.6 · ATR 1.07 · KDJ-J 107.7</p>
+        <div><span class="signal-pill">MACD 金叉</span><span class="signal-pill">空头排列</span><span class="signal-pill">KDJ 超买</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="600036.SS">
+        <h3>招商银行 <span class="muted">600036.SS</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#15803d" stroke-width="1.5" points="0.0,25.5 2.0,21.1 4.1,27.5 6.1,29.6 8.1,29.4 10.2,30.4 12.2,29.8 14.2,29.5 16.3,31.0 18.3,30.6 20.3,32.4 22.4,34.0 24.4,33.5 26.4,28.3 28.5,30.1 30.5,29.8 32.5,25.7 34.6,26.2 36.6,24.4 38.6,25.7 40.7,27.1 42.7,22.5 44.7,18.1 46.8,18.0 48.8,16.8 50.8,13.1 52.9,16.8 54.9,17.9 56.9,17.3 59.0,13.8 61.0,15.2 63.1,12.3 65.1,16.7 67.1,17.7 69.2,19.6 71.2,19.7 73.2,17.0 75.3,18.3 77.3,19.6 79.3,19.1 81.4,19.4 83.4,20.2 85.4,15.7 87.5,13.0 89.5,14.7 91.5,6.7 93.6,6.5 95.6,7.3 97.6,7.3 99.7,8.6 101.7,5.0 103.7,8.2 105.8,9.6 107.8,12.3 109.8,12.6 111.9,8.3 113.9,5.3 115.9,10.5 118.0,5.6 120.0,2.0"/></svg>
+        <p>收盘 43.55 · RSI 63.6 · 趋势 bullish</p>
+        <p class="muted tiny">BB 40.6–43.8 · ATR 0.82 · KDJ-J 99.7</p>
+        <div><span class="signal-pill">MACD 金叉</span><span class="signal-pill">接近 52 周高</span><span class="signal-pill">多头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="000858.SZ">
+        <h3>五粮液 <span class="muted">000858.SZ</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,2.2 2.0,2.0 4.1,6.1 6.1,10.8 8.1,14.3 10.2,12.2 12.2,8.4 14.2,12.5 16.3,11.6 18.3,12.1 20.3,16.8 22.4,21.0 24.4,20.9 26.4,23.3 28.5,22.6 30.5,25.7 32.5,24.7 34.6,24.5 36.6,23.2 38.6,25.9 40.7,24.6 42.7,25.4 44.7,23.5 46.8,26.9 48.8,27.4 50.8,22.9 52.9,24.7 54.9,24.1 56.9,25.8 59.0,28.1 61.0,30.6 63.1,30.3 65.1,30.8 67.1,32.3 69.2,32.8 71.2,29.8 73.2,28.8 75.3,27.9 77.3,28.6 79.3,30.9 81.4,33.5 83.4,34.0 85.4,29.6 87.5,29.3 89.5,27.8 91.5,26.1 93.6,28.2 95.6,26.9 97.6,25.3 99.7,22.6 101.7,20.0 103.7,19.9 105.8,22.9 107.8,23.8 109.8,16.5 111.9,10.4 113.9,11.2 115.9,21.5 118.0,21.9 120.0,13.6"/></svg>
+        <p>收盘 74.70 · RSI 60.6 · 趋势 neutral</p>
+        <p class="muted tiny">BB 68.1–75.7 · ATR 1.66 · KDJ-J 49.3</p>
+        <div><span class="signal-pill">放量</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="002594.SZ">
+        <h3>比亚迪 <span class="muted">002594.SZ</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,2.0 2.0,4.7 4.1,11.4 6.1,12.1 8.1,14.8 10.2,13.6 12.2,11.4 14.2,13.5 16.3,12.9 18.3,14.3 20.3,16.0 22.4,14.0 24.4,14.7 26.4,16.4 28.5,12.7 30.5,12.8 32.5,12.4 34.6,11.0 36.6,9.5 38.6,10.7 40.7,9.0 42.7,17.4 44.7,16.3 46.8,20.2 48.8,19.2 50.8,19.0 52.9,20.8 54.9,20.7 56.9,22.1 59.0,26.9 61.0,25.9 63.1,23.0 65.1,25.3 67.1,26.0 69.2,23.9 71.2,25.3 73.2,23.4 75.3,20.7 77.3,22.2 79.3,25.2 81.4,27.2 83.4,29.9 85.4,27.3 87.5,30.5 89.5,24.0 91.5,24.7 93.6,29.6 95.6,31.1 97.6,29.5 99.7,28.5 101.7,26.9 103.7,28.8 105.8,32.6 107.8,34.0 109.8,31.2 111.9,29.2 113.9,30.0 115.9,28.5 118.0,29.0 120.0,30.7"/></svg>
+        <p>收盘 81.65 · RSI 43.7 · 趋势 bearish</p>
+        <p class="muted tiny">BB 80.1–84.7 · ATR 1.86 · KDJ-J 76.8</p>
+        <div><span class="signal-pill">MACD 金叉</span><span class="signal-pill">空头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="601012.SS">
+        <h3>隆基绿能 <span class="muted">601012.SS</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,5.7 2.0,2.0 4.1,4.7 6.1,6.0 8.1,8.9 10.2,6.5 12.2,6.3 14.2,8.2 16.3,3.8 18.3,9.4 20.3,10.0 22.4,7.7 24.4,7.6 26.4,12.6 28.5,13.1 30.5,13.0 32.5,16.4 34.6,16.2 36.6,14.7 38.6,16.4 40.7,12.8 42.7,17.4 44.7,17.4 46.8,21.5 48.8,22.1 50.8,21.3 52.9,19.8 54.9,19.8 56.9,20.5 59.0,22.1 61.0,27.0 63.1,26.9 65.1,30.0 67.1,31.1 69.2,31.2 71.2,28.1 73.2,26.5 75.3,26.2 77.3,25.8 79.3,30.6 81.4,33.5 83.4,32.5 85.4,28.4 87.5,30.2 89.5,28.0 91.5,29.5 93.6,30.3 95.6,32.6 97.6,34.0 99.7,32.5 101.7,29.9 103.7,31.7 105.8,31.2 107.8,29.0 109.8,27.2 111.9,24.3 113.9,25.3 115.9,27.6 118.0,29.2 120.0,31.1"/></svg>
+        <p>收盘 11.00 · RSI 43.2 · 趋势 bearish</p>
+        <p class="muted tiny">BB 10.7–11.5 · ATR 0.31 · KDJ-J 20.3</p>
+        <div><span class="signal-pill">空头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="000001.SZ">
+        <h3>平安银行 <span class="muted">000001.SZ</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#15803d" stroke-width="1.5" points="0.0,15.1 2.0,15.4 4.1,21.3 6.1,27.5 8.1,26.8 10.2,29.4 12.2,26.2 14.2,27.1 16.3,27.5 18.3,27.5 20.3,32.0 22.4,32.4 24.4,34.0 26.4,26.8 28.5,22.6 30.5,22.2 32.5,17.3 34.6,16.4 36.6,11.8 38.6,16.4 40.7,14.4 42.7,12.1 44.7,5.6 46.8,5.9 48.8,6.9 50.8,6.6 52.9,12.8 54.9,10.2 56.9,12.8 59.0,7.9 61.0,11.5 63.1,7.9 65.1,8.9 67.1,12.8 69.2,15.7 71.2,12.8 73.2,11.8 75.3,12.4 77.3,16.0 79.3,17.7 81.4,17.7 83.4,16.0 85.4,8.9 87.5,2.0 89.5,8.2 91.5,3.6 93.6,8.9 95.6,11.1 97.6,14.1 99.7,11.1 101.7,6.2 103.7,13.1 105.8,14.1 107.8,17.7 109.8,20.9 111.9,17.7 113.9,12.1 115.9,17.3 118.0,9.8 120.0,6.6"/></svg>
+        <p>收盘 11.64 · RSI 56.2 · 趋势 bullish</p>
+        <p class="muted tiny">BB 11.2–11.8 · ATR 0.23 · KDJ-J 97.1</p>
+        <div><span class="signal-pill">MACD 金叉</span><span class="signal-pill">接近 52 周高</span><span class="signal-pill">多头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="600276.SS">
+        <h3>恒瑞医药 <span class="muted">600276.SS</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,4.3 2.0,7.1 4.1,6.0 6.1,5.7 8.1,9.4 10.2,2.9 12.2,4.1 14.2,2.0 16.3,3.6 18.3,5.1 20.3,8.1 22.4,7.5 24.4,8.8 26.4,8.0 28.5,16.2 30.5,20.8 32.5,23.4 34.6,24.1 36.6,23.4 38.6,21.1 40.7,21.9 42.7,25.2 44.7,24.7 46.8,26.5 48.8,25.4 50.8,25.3 52.9,24.7 54.9,26.1 56.9,28.7 59.0,33.3 61.0,34.0 63.1,32.8 65.1,32.8 67.1,31.8 69.2,32.5 71.2,30.8 73.2,25.2 75.3,26.1 77.3,26.4 79.3,28.3 81.4,29.3 83.4,26.3 85.4,22.2 87.5,22.7 89.5,23.1 91.5,25.2 93.6,26.6 95.6,26.7 97.6,23.8 99.7,23.7 101.7,25.1 103.7,21.6 105.8,21.7 107.8,25.3 109.8,22.7 111.9,22.7 113.9,26.5 115.9,19.2 118.0,18.5 120.0,18.9"/></svg>
+        <p>收盘 48.46 · RSI 58.3 · 趋势 neutral</p>
+        <p class="muted tiny">BB 44.5–48.8 · ATR 1.45 · KDJ-J 81.2</p>
+        <div></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="601888.SS">
+        <h3>中国中免 <span class="muted">601888.SS</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,2.0 2.0,2.1 4.1,6.0 6.1,7.5 8.1,10.3 10.2,9.4 12.2,8.0 14.2,10.7 16.3,10.2 18.3,12.3 20.3,15.4 22.4,15.5 24.4,16.0 26.4,19.4 28.5,18.6 30.5,21.4 32.5,22.1 34.6,20.3 36.6,18.7 38.6,18.5 40.7,17.8 42.7,20.7 44.7,17.2 46.8,20.0 48.8,16.5 50.8,13.5 52.9,12.8 54.9,13.6 56.9,16.5 59.0,20.4 61.0,23.5 63.1,23.3 65.1,25.6 67.1,25.1 69.2,25.2 71.2,22.4 73.2,21.6 75.3,21.4 77.3,21.7 79.3,24.2 81.4,26.4 83.4,26.0 85.4,24.2 87.5,26.8 89.5,26.1 91.5,27.0 93.6,28.2 95.6,31.1 97.6,34.0 99.7,31.8 101.7,31.7 103.7,30.9 105.8,32.8 107.8,32.8 109.8,29.1 111.9,26.4 113.9,28.5 115.9,29.1 118.0,30.7 120.0,28.1"/></svg>
+        <p>收盘 50.30 · RSI 48.1 · 趋势 bearish</p>
+        <p class="muted tiny">BB 48.4–51.6 · ATR 1.05 · KDJ-J 77.0</p>
+        <div><span class="signal-pill">空头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="002475.SZ">
+        <h3>立讯精密 <span class="muted">002475.SZ</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,5.1 2.0,13.6 4.1,9.6 6.1,8.7 8.1,8.6 10.2,6.2 12.2,8.9 14.2,9.2 16.3,5.4 18.3,8.3 20.3,7.1 22.4,2.0 24.4,4.5 26.4,14.0 28.5,14.4 30.5,11.4 32.5,13.5 34.6,11.0 36.6,5.9 38.6,5.7 40.7,7.1 42.7,4.8 44.7,6.3 46.8,6.0 48.8,8.0 50.8,12.2 52.9,8.6 54.9,10.5 56.9,8.7 59.0,11.9 61.0,9.8 63.1,15.7 65.1,18.3 67.1,15.4 69.2,17.1 71.2,12.7 73.2,11.9 75.3,11.0 77.3,12.1 79.3,17.4 81.4,22.1 83.4,21.0 85.4,23.2 87.5,25.5 89.5,27.4 91.5,30.2 93.6,30.6 95.6,33.3 97.6,34.0 99.7,34.0 101.7,30.5 103.7,27.3 105.8,26.2 107.8,28.4 109.8,20.7 111.9,22.1 113.9,24.4 115.9,22.4 118.0,26.0 120.0,31.6"/></svg>
+        <p>收盘 45.60 · RSI 38.6 · 趋势 bearish</p>
+        <p class="muted tiny">BB 43.8–51.4 · ATR 2.02 · KDJ-J 19.3</p>
+        <div><span class="signal-pill">空头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="300059.SZ">
+        <h3>东方财富 <span class="muted">300059.SZ</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,4.0 2.0,5.6 4.1,5.2 6.1,2.0 8.1,5.6 10.2,5.9 12.2,5.4 14.2,7.4 16.3,7.5 18.3,8.0 20.3,11.2 22.4,10.1 24.4,13.7 26.4,18.9 28.5,18.2 30.5,17.1 32.5,17.0 34.6,16.9 36.6,12.4 38.6,9.7 40.7,11.8 42.7,12.1 44.7,12.0 46.8,17.1 48.8,16.0 50.8,14.6 52.9,16.2 54.9,17.8 56.9,17.1 59.0,16.4 61.0,23.3 63.1,24.2 65.1,24.8 67.1,22.5 69.2,25.6 71.2,22.7 73.2,19.4 75.3,18.5 77.3,19.8 79.3,23.6 81.4,27.9 83.4,28.9 85.4,28.7 87.5,34.0 89.5,27.0 91.5,28.2 93.6,25.9 95.6,26.7 97.6,23.2 99.7,25.4 101.7,25.7 103.7,26.9 105.8,27.6 107.8,28.8 109.8,20.8 111.9,20.8 113.9,25.4 115.9,26.4 118.0,26.9 120.0,30.7"/></svg>
+        <p>收盘 17.60 · RSI 39.9 · 趋势 bearish</p>
+        <p class="muted tiny">BB 17.4–18.5 · ATR 0.47 · KDJ-J 23.2</p>
+        <div><span class="signal-pill">接近 52 周低</span><span class="signal-pill">空头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="510300.SS">
+        <h3>沪深300ETF <span class="muted">510300.SS</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,8.4 2.0,10.8 4.1,8.5 6.1,5.8 8.1,6.0 10.2,4.2 12.2,3.8 14.2,5.2 16.3,4.3 18.3,5.1 20.3,5.3 22.4,2.0 24.4,2.6 26.4,8.4 28.5,8.4 30.5,7.3 32.5,9.6 34.6,10.0 36.6,8.5 38.6,6.8 40.7,7.3 42.7,7.0 44.7,7.1 46.8,9.9 48.8,9.8 50.8,10.0 52.9,9.3 54.9,9.7 56.9,9.1 59.0,10.0 61.0,11.7 63.1,12.8 65.1,14.1 67.1,12.9 69.2,13.7 71.2,11.5 73.2,10.4 75.3,10.2 77.3,11.2 79.3,14.4 81.4,18.7 83.4,18.7 85.4,18.0 87.5,19.9 89.5,20.1 91.5,21.2 93.6,21.8 95.6,24.0 97.6,26.3 99.7,26.6 101.7,26.4 103.7,27.3 105.8,28.8 107.8,32.2 109.8,29.1 111.9,29.0 113.9,31.5 115.9,30.2 118.0,32.0 120.0,34.0"/></svg>
+        <p>收盘 4.07 · RSI 24.1 · 趋势 bearish</p>
+        <p class="muted tiny">BB 4.0–4.5 · ATR 0.07 · KDJ-J 27.0</p>
+        <div><span class="signal-pill">RSI 超卖</span><span class="signal-pill">接近 52 周低</span><span class="signal-pill">空头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="510500.SS">
+        <h3>中证500ETF <span class="muted">510500.SS</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,13.8 2.0,15.1 4.1,12.1 6.1,8.5 8.1,8.2 10.2,5.6 12.2,4.7 14.2,5.5 16.3,4.4 18.3,5.7 20.3,5.4 22.4,2.0 24.4,2.2 26.4,8.6 28.5,7.6 30.5,7.6 32.5,9.7 34.6,10.0 36.6,8.9 38.6,5.8 40.7,6.6 42.7,5.9 44.7,7.3 46.8,9.5 48.8,9.0 50.8,10.9 52.9,9.2 54.9,8.9 56.9,9.0 59.0,9.7 61.0,11.9 63.1,12.1 65.1,12.3 67.1,10.2 69.2,10.7 71.2,8.2 73.2,7.5 75.3,7.9 77.3,8.4 79.3,11.3 81.4,14.8 83.4,14.2 85.4,14.3 87.5,17.5 89.5,17.5 91.5,20.1 93.6,20.4 95.6,21.8 97.6,25.6 99.7,25.5 101.7,25.1 103.7,24.4 105.8,24.5 107.8,27.6 109.8,24.7 111.9,26.5 113.9,30.1 115.9,27.8 118.0,30.9 120.0,34.0"/></svg>
+        <p>收盘 6.30 · RSI 25.1 · 趋势 bearish</p>
+        <p class="muted tiny">BB 6.3–7.6 · ATR 0.20 · KDJ-J 0.9</p>
+        <div><span class="signal-pill">RSI 超卖</span><span class="signal-pill">接近 52 周低</span><span class="signal-pill">空头排列</span><span class="signal-pill">触及布林下轨</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="159915.SZ">
+        <h3>创业板ETF <span class="muted">159915.SZ</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,11.4 2.0,12.4 4.1,7.9 6.1,6.7 8.1,7.2 10.2,6.1 12.2,6.8 14.2,6.6 16.3,5.3 18.3,5.7 20.3,4.7 22.4,2.0 24.4,2.8 26.4,8.2 28.5,7.9 30.5,6.7 32.5,9.2 34.6,10.2 36.6,9.8 38.6,8.3 40.7,9.6 42.7,9.3 44.7,10.3 46.8,12.2 48.8,12.3 50.8,12.9 52.9,10.3 54.9,11.2 56.9,11.3 59.0,11.6 61.0,12.1 63.1,12.9 65.1,13.8 67.1,12.3 69.2,12.6 71.2,10.8 73.2,10.2 75.3,10.1 77.3,10.6 79.3,12.8 81.4,16.5 83.4,16.4 85.4,16.6 87.5,19.0 89.5,18.8 91.5,20.7 93.6,20.9 95.6,23.0 97.6,25.0 99.7,25.4 101.7,26.1 103.7,26.2 105.8,27.3 107.8,30.2 109.8,27.5 111.9,28.8 113.9,30.9 115.9,28.8 118.0,31.6 120.0,34.0"/></svg>
+        <p>收盘 2.44 · RSI 23.4 · 趋势 bearish</p>
+        <p class="muted tiny">BB 2.4–3.3 · ATR 0.10 · KDJ-J 6.0</p>
+        <div><span class="signal-pill">RSI 超卖</span><span class="signal-pill">接近 52 周低</span><span class="signal-pill">空头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article><article class="ticker-card" data-symbol="588000.SS">
+        <h3>科创50ETF <span class="muted">588000.SS</span></h3>
+        
+        <svg class="spark" viewBox="0 0 120 36" width="120" height="36" aria-hidden="true"><polyline fill="none" stroke="#b91c1c" stroke-width="1.5" points="0.0,9.8 2.0,14.2 4.1,10.8 6.1,6.9 8.1,6.6 10.2,4.3 12.2,4.6 14.2,6.0 16.3,4.7 18.3,5.7 20.3,5.6 22.4,2.0 24.4,2.0 26.4,8.2 28.5,9.0 30.5,8.9 32.5,11.6 34.6,11.5 36.6,10.1 38.6,6.8 40.7,8.4 42.7,7.4 44.7,9.2 46.8,10.7 48.8,11.0 50.8,12.7 52.9,10.9 54.9,12.0 56.9,12.5 59.0,13.1 61.0,14.1 63.1,15.3 65.1,14.1 67.1,10.7 69.2,11.3 71.2,9.0 73.2,8.7 75.3,8.3 77.3,8.4 79.3,10.5 81.4,13.9 83.4,13.2 85.4,15.2 87.5,19.0 89.5,18.8 91.5,20.5 93.6,20.5 95.6,22.8 97.6,23.8 99.7,24.2 101.7,25.4 103.7,24.8 105.8,24.8 107.8,26.8 109.8,24.6 111.9,26.6 113.9,29.5 115.9,27.9 118.0,30.8 120.0,34.0"/></svg>
+        <p>收盘 1.23 · RSI 23.3 · 趋势 bearish</p>
+        <p class="muted tiny">BB 1.2–1.7 · ATR 0.06 · KDJ-J -0.3</p>
+        <div><span class="signal-pill">死叉(SMA50↓SMA200)</span><span class="signal-pill">RSI 超卖</span><span class="signal-pill">接近 52 周低</span><span class="signal-pill">空头排列</span></div>
+        <p class="muted tiny">仅用历史收盘计算 · 无未来函数 · 非投资建议</p>
+      </article></div>
+  </div></section>
+  <section class="panel" data-panel="personas"><div class="quant-block"><p class="lede">规则化人格对照（蒸馏公开投资 checklist），<strong>零 LLM</strong>。字段有限时分数仅供教学，不是荐股。</p>
+    <div class="persona-legend"><span title="偏好低估与安全边际；本站用「距52周低」与趋势中性作粗糙代理（无完整财务，仅教学）。">格雷厄姆 · 安全边际</span> · <span title="偏好多头排列与稳定趋势；用 SMA 多头与非超买作代理。">巴菲特 · 长期持有</span> · <span title="关注动量与常识故事；用 5 日涨幅适中与非极端 RSI 作代理。">彼得·林奇 · 成长可懂</span> · <span title="强调不做短期博弈；惩罚频繁信号噪音与超买追高。">段永平 · 买股票是买公司</span> · <span title="偏好波动可控；用距52周高低适中、趋势中性偏多作代理。">达利欧 · 风险平价直觉</span> · <span title="蒸馏自风控 Skill：忌追高、忌报复交易；超买/逼近52周高扣分。">散户纪律官</span></div><div class="persona-block"><h3>格雷厄姆 · 安全边际</h3><ul><li><span class="verdict v-绿">绿</span>
+            宁德时代 <b>75</b>
+            <span class="muted">相对接近阶段低位（粗糙代理）</span></li><li><span class="verdict v-绿">绿</span>
+            中国平安 <b>75</b>
+            <span class="muted">相对接近阶段低位（粗糙代理）</span></li><li><span class="verdict v-绿">绿</span>
+            比亚迪 <b>75</b>
+            <span class="muted">相对接近阶段低位（粗糙代理）</span></li><li><span class="verdict v-绿">绿</span>
+            隆基绿能 <b>75</b>
+            <span class="muted">相对接近阶段低位（粗糙代理）</span></li></ul></div><div class="persona-block"><h3>巴菲特 · 长期持有</h3><ul><li><span class="verdict v-绿">绿</span>
+            招商银行 <b>80</b>
+            <span class="muted">多头排列</span></li><li><span class="verdict v-绿">绿</span>
+            平安银行 <b>80</b>
+            <span class="muted">多头排列</span></li><li><span class="verdict v-黄">黄</span>
+            贵州茅台 <b>55</b>
+            <span class="muted">字段有限，仅供教学对照</span></li><li><span class="verdict v-黄">黄</span>
+            中国平安 <b>55</b>
+            <span class="muted">字段有限，仅供教学对照</span></li></ul></div><div class="persona-block"><h3>彼得·林奇 · 成长可懂</h3><ul><li><span class="verdict v-绿">绿</span>
+            贵州茅台 <b>70</b>
+            <span class="muted">近5日温和上涨</span></li><li><span class="verdict v-绿">绿</span>
+            中国平安 <b>70</b>
+            <span class="muted">近5日温和上涨</span></li><li><span class="verdict v-绿">绿</span>
+            招商银行 <b>70</b>
+            <span class="muted">近5日温和上涨</span></li><li><span class="verdict v-绿">绿</span>
+            五粮液 <b>70</b>
+            <span class="muted">近5日温和上涨</span></li></ul></div><div class="persona-block"><h3>段永平 · 买股票是买公司</h3><ul><li><span class="verdict v-绿">绿</span>
+            招商银行 <b>70</b>
+            <span class="muted">趋势向上且未极端</span></li><li><span class="verdict v-绿">绿</span>
+            平安银行 <b>70</b>
+            <span class="muted">趋势向上且未极端</span></li><li><span class="verdict v-黄">黄</span>
+            贵州茅台 <b>50</b>
+            <span class="muted">字段有限，仅供教学对照</span></li><li><span class="verdict v-黄">黄</span>
+            宁德时代 <b>50</b>
+            <span class="muted">字段有限，仅供教学对照</span></li></ul></div><div class="persona-block"><h3>达利欧 · 风险平价直觉</h3><ul><li><span class="verdict v-绿">绿</span>
+            贵州茅台 <b>70</b>
+            <span class="muted">处于区间中部，波动相对可控</span></li><li><span class="verdict v-绿">绿</span>
+            五粮液 <b>70</b>
+            <span class="muted">处于区间中部，波动相对可控</span></li><li><span class="verdict v-绿">绿</span>
+            恒瑞医药 <b>70</b>
+            <span class="muted">处于区间中部，波动相对可控</span></li><li><span class="verdict v-绿">绿</span>
+            中国平安 <b>65</b>
+            <span class="muted">处于区间中部，波动相对可控</span></li></ul></div><div class="persona-block"><h3>散户纪律官</h3><ul><li><span class="verdict v-黄">黄</span>
+            宁德时代 <b>55</b>
+            <span class="muted">超卖区可记观察池，非立即满仓</span></li><li><span class="verdict v-黄">黄</span>
+            沪深300ETF <b>55</b>
+            <span class="muted">超卖区可记观察池，非立即满仓</span></li><li><span class="verdict v-黄">黄</span>
+            中证500ETF <b>55</b>
+            <span class="muted">超卖区可记观察池，非立即满仓</span></li><li><span class="verdict v-黄">黄</span>
+            创业板ETF <b>55</b>
+            <span class="muted">超卖区可记观察池，非立即满仓</span></li></ul></div></div></section>
+  <section class="panel" data-panel="risk"><div class="quant-block"><p class="lede">蒸馏自量化风控 Skill · 教学向 · 本站不代下单。</p>
+    <div class="risk-grid"><article class="risk-card v-绿">
+        <header><span class="verdict v-绿">绿</span> <strong>白名单交易</strong></header>
+        <p class="th">只做预先列入观察池的标的</p>
+        <p class="muted">散户亏损常来自临时起意的陌生票。</p>
+      </article><article class="risk-card v-黄">
+        <header><span class="verdict v-黄">黄</span> <strong>单票仓位上限</strong></header>
+        <p class="th">建议 ≤ 20% 总资金（教学默认）</p>
+        <p class="muted">避免一票决定命运；蒸馏自 capital.max_position_pct 思路。</p>
+      </article><article class="risk-card v-红">
+        <header><span class="verdict v-红">红</span> <strong>日亏损熔断</strong></header>
+        <p class="th">单日浮亏 ≥ 3% 停止新开仓</p>
+        <p class="muted">情绪交易放大器；见 quant-risk-gates。</p>
+      </article><article class="risk-card v-红">
+        <header><span class="verdict v-红">红</span> <strong>连续亏损熔断</strong></header>
+        <p class="th">连续 3 笔亏损后强制复盘一天</p>
+        <p class="muted">打断报复性交易循环。</p>
+      </article><article class="risk-card v-黄">
+        <header><span class="verdict v-黄">黄</span> <strong>流动性地板</strong></header>
+        <p class="th">避开日均成交过低的小票（教学）</p>
+        <p class="muted">滑点与无法成交是隐形成本。</p>
+      </article><article class="risk-card v-绿">
+        <header><span class="verdict v-绿">绿</span> <strong>先纸盘后实盘</strong></header>
+        <p class="th">策略至少纸盘验证后再考虑真金</p>
+        <p class="muted">蒸馏 daily-ops：默认只出清单、不下单。</p>
+      </article></div><div class="risk-template"><h3>策略复盘红黄绿（模板）</h3>
+    <ul><li>结论：红 | 黄 | 绿</li><li>样本外摘要</li><li>最大回撤 / 胜率 / 盈亏比</li><li>主要风险</li><li>下一步：继续纸盘 | 缩小仓位 | 停用</li></ul>
+    <p class="muted">下方「教学回测」仅为玩具规则占位数字；正式回测请自有脚本产出 CSV 后套用此模板。</p></div><div class="toy-backtest">
+    <h3>教学回测（玩具规则）</h3>
+    <p class="muted tiny">教学示例 · 非投资建议 · 非正式回测引擎</p>
+    <table class="flow-table">
+      <thead><tr><th>标的</th><th>规则</th><th>笔数</th><th>胜率</th><th>年化≈</th><th>最大回撤</th></tr></thead>
+      <tbody><tr>
+        <td>贵州茅台</td>
+        <td>SMA50/200 多头持有</td>
+        <td>0</td>
+        <td>—</td>
+        <td>+0.0%</td>
+        <td>0.0%</td>
+      </tr><tr>
+        <td>贵州茅台</td>
+        <td>RSI 超卖反弹→超买离场</td>
+        <td>2</td>
+        <td>100%</td>
+        <td>+17.0%</td>
+        <td>-10.0%</td>
+      </tr><tr>
+        <td>宁德时代</td>
+        <td>SMA50/200 多头持有</td>
+        <td>1</td>
+        <td>0%</td>
+        <td>-4.9%</td>
+        <td>-11.3%</td>
+      </tr><tr>
+        <td>宁德时代</td>
+        <td>RSI 超卖反弹→超买离场</td>
+        <td>2</td>
+        <td>50%</td>
+        <td>-12.9%</td>
+        <td>-30.3%</td>
+      </tr><tr>
+        <td>中国平安</td>
+        <td>SMA50/200 多头持有</td>
+        <td>0</td>
+        <td>—</td>
+        <td>+0.0%</td>
+        <td>0.0%</td>
+      </tr><tr>
+        <td>中国平安</td>
+        <td>RSI 超卖反弹→超买离场</td>
+        <td>2</td>
+        <td>100%</td>
+        <td>+11.6%</td>
+        <td>-19.4%</td>
+      </tr><tr>
+        <td>招商银行</td>
+        <td>SMA50/200 多头持有</td>
+        <td>1</td>
+        <td>100%</td>
+        <td>+5.4%</td>
+        <td>-3.2%</td>
+      </tr><tr>
+        <td>招商银行</td>
+        <td>RSI 超卖反弹→超买离场</td>
+        <td>1</td>
+        <td>100%</td>
+        <td>+7.9%</td>
+        <td>-11.8%</td>
+      </tr></tbody>
+    </table>
+  </div></div></section>
+  <section class="panel" data-panel="school"><div class="quant-block school">
+    <article class="lesson"><span class="lvl">L1</span>
+        <h3>看懂 K 线（散户入门）</h3><p>一根 K 线记录一段时间内的开、高、低、收。阳线收盘高于开盘，阴线相反。影线代表试探高低点。先看收盘价相对均线的位置，再看单根形态，避免只凭「锤子线」臆测。本站迷你图用收盘价折线，帮助建立位置感，不是交易信号。</p></article><article class="lesson"><span class="lvl">L1</span>
+        <h3>均线与 RSI</h3><p>均线平滑价格噪音：价格在 SMA50/SMA200 上方且短均线在长均线上方，常称多头排列。RSI 衡量超买超卖，&gt;70 偏热，&lt;30 偏冷——都不是自动买卖点。金叉/死叉是均线交叉的俗称，需结合成交与大盘环境。</p></article><article class="lesson"><span class="lvl">L1</span>
+        <h3>布林带与 ATR</h3><p>布林带 = 中轨均线 ± 若干倍标准差，价格贴上轨/下轨只说明波动位置，不等于反转。ATR 衡量真实波幅，可用来理解「这一票平时晃多大」。本站卡片展示布林与 ATR 数值，供对照，不构成开平仓指令。</p></article><article class="lesson"><span class="lvl">L1</span>
+        <h3>KDJ 与成交量</h3><p>KDJ 对短线摆动敏感，J 值极端区容易钝化。放量（相对均量）可确认突破或恐慌，也可能是对倒噪音。把量价和趋势位置一起看，少单独迷信某一个指标。</p></article><article class="lesson"><span class="lvl">L2</span>
+        <h3>什么是未来函数</h3><p>用「当时还不知道」的信息做信号，回测会虚高。规则：指标只用 ≤ 当日收盘的数据；信号与成交不要同一根 K 线「看见收盘又按收盘价成交」而不说明假设。本站指标均按收盘序列计算，遵守无未来函数纪律。</p></article><article class="lesson"><span class="lvl">L2</span>
+        <h3>纸盘纪律：只出清单不下单</h3><p>量化上手先从「明日关注清单」开始：每天收盘后记录观察池与理由，不自动下单。连续执行两周再谈实盘。蒸馏自 daily-ops Skill：默认 dry-run，真金需额外确认。</p></article><article class="lesson"><span class="lvl">L2</span>
+        <h3>仓位与熔断</h3><p>单票仓位、日亏损熔断、连续亏损停手，是散户存活的硬门槛。详见「风控与纪律」页的红黄绿条款。目标不是暴富，是活得够久。</p></article><article class="lesson"><span class="lvl">L1</span>
+        <h3>先从宽基 ETF 练手</h3><p>沪深300 / 中证500 / 创业板 ETF 比个股噪音小，适合练习看趋势与定投节奏。个股研究需要财务与行业功课，本站「大师视角」只是规则化对照，不是荐股。</p></article><article class="lesson"><span class="lvl">L2</span>
+        <h3>北向资金怎么读</h3><p>北向是情绪与边际资金的参考，不是因果开关。单日大幅流入流出常伴随指数波动，但事后归因容易过度拟合。把它当「温度计」，不要当「遥控」。</p></article><article class="lesson"><span class="lvl">L2</span>
+        <h3>板块资金流（延时）</h3><p>行业/概念资金流来自公开延时社区接口，分类口径会变，且可能与实际成交不完全一致。本站「资金流」面板失败时整段隐藏，成功时也标注非官方、非实时。</p></article><article class="lesson"><span class="lvl">L2</span>
+        <h3>教学回测数字怎么看</h3><p>本站对少量标的跑 SMA 金叉与 RSI 反弹两条玩具规则，给出年化/最大回撤/胜率占位。假设简化（次日开盘近似用次日收盘），仅供理解指标语言。硬标签：教学示例，不是投资建议，更不是实盘引擎。</p></article><article class="lesson"><span class="lvl">L1</span>
+        <h3>浏览器自选（本地）</h3><p>在行情卡片点星标，写入本机 localStorage，下次打开同一浏览器仍会置顶「我的自选」。这不是云同步，清缓存会丢；本站明确不做账号/VIP/云自选。</p></article>
+  </div></section>
+  <section class="panel" data-panel="knowledge"><div class="quant-block knowledge">
+    <p class="lede">内置投研词条 · 客户端检索 · 无付费实时流。</p>
+    <input type="search" id="kb-q" placeholder="搜索：PE、北向、未来函数、龙虎榜…" autocomplete="off"/>
+    <div id="kb-results" class="kb-results"></div>
+    <script type="application/json" id="kb-data">[{"id":"pe","term":"市盈率 PE","aliases":["PE","市盈率"],"body":"股价除以每股收益。高 PE 可能反映高增长预期，也可能是泡沫；需结合行业与增长。","tags":["估值"]},{"id":"pb","term":"市净率 PB","aliases":["PB"],"body":"股价除以每股净资产。银行地产等重资产行业常用；成长股参考价值有限。","tags":["估值"]},{"id":"roe","term":"净资产收益率 ROE","aliases":["ROE"],"body":"净利润 / 净资产。持续高 ROE 常被视为盈利能力强的信号之一；需区分杠杆推高与经营质量。","tags":["财务"]},{"id":"pe-percentile","term":"市盈率分位 / PE 百分位","aliases":["PE分位","PE百分位","估值分位"],"body":"当前 PE 在历史区间中的位置。低分位不自动等于便宜，高分位也不自动等于该卖；要对照增长率与利率环境。","tags":["估值"]},{"id":"limit-up","term":"涨停","aliases":["涨停板"],"body":"A 股主板通常 ±10%（ST ±5%，科创/创业板 ±20%）。涨停不代表第二天继续涨。","tags":["交易规则"]},{"id":"northbound","term":"北向资金","aliases":["北上资金","沪股通","深股通"],"body":"境外投资者经互联互通买入 A 股的资金流向统计，是情绪参考，不是因果。单日波动噪声大。","tags":["资金"]},{"id":"dragon-tiger","term":"龙虎榜","aliases":["龙虎榜单","营业部榜"],"body":"异动席位公开披露。可观察游资/机构痕迹，但榜单滞后且可被对倒干扰，不宜单独跟单。","tags":["资金"]},{"id":"etf","term":"ETF","aliases":["交易型开放式指数基金"],"body":"可在交易所买卖的指数基金，费率通常低于主动基金，适合宽基配置。","tags":["基金"]},{"id":"macd","term":"MACD","aliases":[],"body":"指数平滑异同移动平均线，用于观察动量转折；金叉死叉需结合趋势过滤假信号。","tags":["技术"]},{"id":"rsi","term":"RSI","aliases":[],"body":"相对强弱指标，衡量超买超卖；极端区可能延续，不宜单独作为开仓依据。","tags":["技术"]},{"id":"sma","term":"均线 SMA","aliases":["MA","均线"],"body":"简单移动平均。常用 20/50/200 观察短中长期趋势位置。","tags":["技术"]},{"id":"drawdown","term":"最大回撤","aliases":["回撤"],"body":"净值从高点到低点的最大跌幅。衡量策略或持仓能扛多大痛苦。","tags":["风控"]},{"id":"sharpe","term":"夏普比率","aliases":[],"body":"超额收益 / 波动。越高表示单位风险回报越好，样本外更重要。","tags":["风控"]},{"id":"lookahead","term":"未来函数","aliases":[],"body":"回测中误用未来信息导致曲线虚高。见学堂「什么是未来函数」。","tags":["量化"]},{"id":"paper-trade","term":"纸盘 / 模拟盘","aliases":[],"body":"用虚拟资金按规则记录买卖，验证执行纪律，不涉及真金。","tags":["纪律"]},{"id":"position","term":"仓位管理","aliases":[],"body":"决定买多少比买什么更影响存活。单票上限与留现金是基本功。","tags":["风控"]},{"id":"liquidity","term":"流动性","aliases":[],"body":"能否以合理价格快速成交。小票日成交过低时滑点巨大。","tags":["风控"]},{"id":"dividend","term":"股息率","aliases":[],"body":"每股分红 / 股价。高股息策略关注分红可持续性，而非只看当年数字。","tags":["估值"]},{"id":"turnover","term":"换手率","aliases":["换手"],"body":"成交量相对流通股本的比例。异常放量需结合消息与位置解读；高换手不等于趋势延续。","tags":["交易"]},{"id":"margin","term":"融资融券","aliases":["两融","融资余额"],"body":"借钱炒股或融券做空。杠杆放大收益也放大爆仓风险；余额变化是情绪指标之一，散户慎用。","tags":["交易规则"]},{"id":"st","term":"ST 股票","aliases":[],"body":"风险警示板，涨跌幅限制更严，财务或规范问题需额外谨慎。","tags":["交易规则"]},{"id":"convertible","term":"可转债","aliases":[],"body":"可转成股票的债券，条款复杂；不了解强赎/下修前不要当普通债。","tags":["固收"]},{"id":"index-enhance","term":"指数增强","aliases":[],"body":"在跟踪指数基础上试图获取超额收益，需看跟踪误差与费用。","tags":["基金"]},{"id":"sector","term":"板块轮动","aliases":[],"body":"资金在行业间切换。追热点易买在高潮，可用 ETF 降个股风险。","tags":["策略"]},{"id":"grid","term":"网格交易","aliases":[],"body":"区间内高抛低吸。单边行情会失效，需设定边界与总仓位。","tags":["策略"]},{"id":"dca","term":"定投","aliases":[],"body":"定期定额买入。降低择时压力，不保证不亏，适合长周期宽基。","tags":["策略"]},{"id":"stop-loss","term":"止损","aliases":[],"body":"预先设定可承受亏损退出。关键是执行，不是画线。","tags":["纪律"]},{"id":"alpha","term":"Alpha","aliases":[],"body":"相对基准的超额收益。没有稳定 Alpha 时，低费 beta（指数）更诚实。","tags":["量化"]},{"id":"beta","term":"Beta","aliases":[],"body":"相对市场的敏感度。Beta≈1 大致跟大盘同幅度波动。","tags":["量化"]},{"id":"volume","term":"成交量","aliases":[],"body":"确认趋势的辅助。缩量上涨与放量下跌含义不同，忌教条。","tags":["技术"]},{"id":"gap","term":"跳空","aliases":[],"body":"开盘相对昨收出现缺口。有的回补有的成为支撑/压力，需统计而非迷信。","tags":["技术"]},{"id":"ah-premium","term":"AH 溢价","aliases":[],"body":"同公司 A 股与 H 股价差。反映两地流动性和投资者结构差异。","tags":["市场"]},{"id":"registration","term":"注册制","aliases":[],"body":"发行审核更市场化，退市与波动可能加大，基本面研究更重要。","tags":["制度"]},{"id":"circuit","term":"熔断（历史）","aliases":[],"body":"A 股曾试点指数熔断后暂停。了解制度史有助于理解监管对波动的态度。","tags":["制度"]},{"id":"qdii","term":"QDII","aliases":[],"body":"合格境内机构投资者，可配置海外资产；额度与溢价折价需注意。","tags":["基金"]},{"id":"lof","term":"LOF","aliases":[],"body":"上市型开放式基金，场内场外都能交易，注意溢价套利风险。","tags":["基金"]},{"id":"repo","term":"逆回购","aliases":[],"body":"短期借出资金换取利息，常用作现金管理，注意交易时间与费率。","tags":["固收"]}]</script>
+  </div></section>
+  <section class="panel" data-panel="mcp"><div class="quant-block">
+    <h2 class="panel-h">开放 MCP（本地）</h2>
+    <p>GitHub Pages 只托管静态简报。若要让 Cursor / Claude 调 A 股工具，在仓库根目录启动：</p>
+    <pre class="code">cd mcp && npm install && npm start</pre>
+    <p>工具：<code>list_watchlist</code> · <code>get_quote</code> · <code>get_kline</code> · <code>market_overview</code></p>
+    sentiment_query / sentiment_trend — 零 AI 词典情绪与滚动历史（本地数据产品）
+    <p class="muted">蒸馏东方财富/公开行情思路 · 免费延时 · 需本机网络 · 不构成投资建议。</p>
+  </div></section>
+  <section class="panel" data-panel="politics">
+    <nav class="sub-tabs"><button class="sub-tab active" data-sub="world" data-cat="politics">国际要闻<span class="count">15</span></button><button class="sub-tab" data-sub="hot" data-cat="politics">财经热榜<span class="count">0</span></button></nav>
+<div class="sub-contents"><div class="sub-content active" data-sub-content="world" data-cat="politics">
+    
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="_merged" data-sub="world" data-cat="politics">
+    <article class="article">
+  <h3 class="article-title"><a href="https://www.aljazeera.com/news/2026/10/30/swedish-academic-says-denied-entry-to-uk-over-palestine-event?traffic_source=rss" target="_blank" rel="noopener noreferrer">Swedish academic says denied entry to UK over Palestine event</a></h3>
+  
+  <p class="article-meta">Al Jazeera · 10/30 14:50</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Home Office cancels Andreas Malm&#39;s planned travel to the UK, saying his presence &#39;not conducive to the public good&#39;.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Home Office cancels Andreas Malm&#39;s planned travel to the UK, saying his presence &#39;not conducive to the public good&#39;.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Home Office cancels Andreas Malm&#39;s planned travel to the UK, saying his presence &#39;not conducive to the public good&#39;.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.aljazeera.com/news/2026/10/30/survivors-of-spains-worst-train-crashes-urge-action-after-latest-disaster?traffic_source=rss" target="_blank" rel="noopener noreferrer">Survivors of Spain’s worst train crashes urge action after latest disaster</a></h3>
+  
+  <p class="article-meta">Al Jazeera · 10/30 14:46</p>
+  <div class="orig-block">
+    <p class="article-excerpt">As people suffering post-traumatic stress watch history repeat itself, experts call for investment in safety.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">As people suffering post-traumatic stress watch history repeat itself, experts call for investment in safety.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>As people suffering post-traumatic stress watch history repeat itself, experts call for investment in safety.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.theguardian.com/world/2026/oct/30/friday-briefing-israel-has-a-dilemma-can-its-opposition-govern-with-palestinian-parties" target="_blank" rel="noopener noreferrer">Friday briefing: Israel has a dilemma - can its opposition govern with Palestinian parties?</a></h3>
+  
+  <p class="article-meta">The Guardian · 10/30 14:44</p>
+  <div class="orig-block">
+    <p class="article-excerpt">In today’s newsletter: Benjamin Netanyahu has been left without a majority, now it is up to the coalition to find out whether the desire for change will prove t</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">In today’s newsletter: Benjamin Netanyahu has been left without a majority, now it is up to the coalition to find out whether the desire for change will prove to be a defining political moment Good morning. It was described by many Israelis as the most consequential election in their country’s histo</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>In today’s newsletter: Benjamin Netanyahu has been left without a majority, now it is up to the coalition to find out wh</li><li>It was described by many Israelis as the most consequential election in their country’s histo</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.aljazeera.com/news/2026/10/30/us-midterms-4-days-to-go-what-the-polls-say-as-trump-cancels-two-rallies?traffic_source=rss" target="_blank" rel="noopener noreferrer">US midterms: 4 days to go – What the polls say as Trump cancels two rallies</a></h3>
+  
+  <p class="article-meta">Al Jazeera · 10/30 14:36</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Trump cancels Kansas and Iowa rallies, opting for telephone events across nearly 20 states over the weekend.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Trump cancels Kansas and Iowa rallies, opting for telephone events across nearly 20 states over the weekend.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Trump cancels Kansas and Iowa rallies, opting for telephone events across nearly 20 states over the weekend.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.nytimes.com/2026/10/29/world/middleeast/israel-election-coalition-scenarios.html" target="_blank" rel="noopener noreferrer">With No Clear Winner, How Could Israel Get a Prime Minister?</a></h3>
+  
+  <p class="article-meta">NYT World · 10/30 14:31</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Deadlock is possible, as neither the bloc of Prime Minister Benjamin Netanyahu nor his main challenger have won a majority. But there are still paths to a new g</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Deadlock is possible, as neither the bloc of Prime Minister Benjamin Netanyahu nor his main challenger have won a majority. But there are still paths to a new government.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Deadlock is possible, as neither the bloc of Prime Minister Benjamin Netanyahu nor his main challenger have won a majori</li><li>But there are still paths to a new government.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.nytimes.com/2026/10/29/world/middleeast/israel-voter-data-takeaways.html" target="_blank" rel="noopener noreferrer">What Israeli Election Results Reveal About the Electorate</a></h3>
+  
+  <p class="article-meta">NYT World · 10/30 14:31</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Some groups stood by Prime Minister Benjamin Netanyahu’s party, but support fell off among others. Turnout was also a striking factor in the election.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Some groups stood by Prime Minister Benjamin Netanyahu’s party, but support fell off among others. Turnout was also a striking factor in the election.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Some groups stood by Prime Minister Benjamin Netanyahu’s party, but support fell off among others.</li><li>Turnout was also a striking factor in the election.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.nytimes.com/2026/10/30/world/asia/japan-vivant-spy-show-china.html" target="_blank" rel="noopener noreferrer">How the Japanese Spy Drama ‘Vivant’ Became The Target of China’s Anger</a></h3>
+  
+  <p class="article-meta">NYT World · 10/30 14:15</p>
+  <div class="orig-block">
+    <p class="article-excerpt">“Vivant,” a Japanese thriller that features Chinese spies, has drawn intense criticism from Beijing. Its creators defend the show, saying it is “completely fict</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">“Vivant,” a Japanese thriller that features Chinese spies, has drawn intense criticism from Beijing. Its creators defend the show, saying it is “completely fictional.”</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>“Vivant,” a Japanese thriller that features Chinese spies, has drawn intense criticism from Beijing.</li><li>Its creators defend the show, saying it is “completely fictional.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bbc.co.uk/news/articles/c6gr8l15k744o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Hyrox athlete who soiled herself in race tells BBC she put others at risk but says backlash was traumatic</a></h3>
+  
+  <p class="article-meta">BBC World · 10/30 14:10</p>
+  <div class="orig-block">
+    <p class="article-excerpt">In her first interview since the incident, Joanna Wietrzyk told the BBC she takes responsibility for it but did not deserve such a severe backlash.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">In her first interview since the incident, Joanna Wietrzyk told the BBC she takes responsibility for it but did not deserve such a severe backlash.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>In her first interview since the incident, Joanna Wietrzyk told the BBC she takes responsibility for it but did not dese</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bbc.co.uk/news/articles/cmn4egvez1yzo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Syrians struggle with soaring prices as crisis challenges post-Assad recovery</a></h3>
+  
+  <p class="article-meta">BBC World · 10/30 14:02</p>
+  <div class="orig-block">
+    <p class="article-excerpt">End of subsidies and rising prices drive discontent, testing support for Ahmed al-Sharaa&#39;s government.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">End of subsidies and rising prices drive discontent, testing support for Ahmed al-Sharaa&#39;s government.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>End of subsidies and rising prices drive discontent, testing support for Ahmed al-Sharaa&#39;s government.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.theguardian.com/world/2026/oct/30/battle-lines-redrawn-spain-snap-election-train-disaster-pedro-sanchez-psoe-pp-vox" target="_blank" rel="noopener noreferrer">Battle lines redrawn in Spain’s snap election after latest train disaster</a></h3>
+  
+  <p class="article-meta">The Guardian · 10/30 14:00</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Next month’s poll no longer the contest it was, as Pedro Sánchez finds himself forced to defend government’s safety record One of the most dependable cliches of</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Next month’s poll no longer the contest it was, as Pedro Sánchez finds himself forced to defend government’s safety record One of the most dependable cliches of contemporary Spanish politics is that it never pays to bet against Pedro Sánchez. Time and time again – as leader of the Spanish Socialist</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Next month’s poll no longer the contest it was, as Pedro Sánchez finds himself forced to defend government’s safety reco</li><li>Time and time again – as leader of the Spanish Socialist</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.nytimes.com/2026/10/29/world/glass-skyscrapers-climate-patrick-stewart.html" target="_blank" rel="noopener noreferrer">The Perils of Glittering Skylines</a></h3>
+  
+  <p class="article-meta">NYT World · 10/30 13:36</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Glass skyscrapers are transforming cities, but do they make sense in a world that’s getting hotter?</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Glass skyscrapers are transforming cities, but do they make sense in a world that’s getting hotter?</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Glass skyscrapers are transforming cities, but do they make sense in a world that’s getting hotter?</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.theguardian.com/australia-news/2026/oct/29/erin-patterson-mushroom-murders-appeal-ruling-ntwnfb" target="_blank" rel="noopener noreferrer">Erin Patterson to die in prison after losing appeal against mushroom murder convictions</a></h3>
+  
+  <p class="article-meta">The Guardian · 10/30 13:31</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Victorian court of appeal rules Patterson should be jailed for life with no parole over deadly beef wellington lunch that killed three people Erin Patterson mus</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Victorian court of appeal rules Patterson should be jailed for life with no parole over deadly beef wellington lunch that killed three people Erin Patterson mushroom murders appeal – live updates Get our breaking news email, free app or daily news podcast Erin Patterson has lost her bid to overturn</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Victorian court of appeal rules Patterson should be jailed for life with no parole over deadly beef wellington lunch tha</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.nytimes.com/2026/10/29/world/asia/china-ai-videos-sun-wukong-lin-daiyu.html" target="_blank" rel="noopener noreferrer">China Is Not Happy About Fan-made A.I. Videos of Sun Wukong and Lin Daiyu</a></h3>
+  
+  <p class="article-meta">NYT World · 10/30 13:24</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Mash-up videos of beloved characters from Chinese classics — some made with A.I. — have caught the attention of the authorities.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Mash-up videos of beloved characters from Chinese classics — some made with A.I. — have caught the attention of the authorities.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Mash-up videos of beloved characters from Chinese classics — some made with A.</li><li>— have caught the attention of the authorities.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.bbc.co.uk/news/articles/cwg7xp8kx4v5o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Crypto giant Binance hit by $6.3bn hack suspected to be largest in history</a></h3>
+  
+  <p class="article-meta">BBC World · 10/30 13:15</p>
+  <div class="orig-block">
+    <p class="article-excerpt">Two analytics firms have attributed the incident to a North Korean hacking unit called TraderTraitor.</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">Two analytics firms have attributed the incident to a North Korean hacking unit called TraderTraitor.</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>Two analytics firms have attributed the incident to a North Korean hacking unit called TraderTraitor.</li></ul>
+  </div>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.theguardian.com/australia-news/2026/oct/30/ashley-paul-griffith-queensland-paedophile-childcare-worker-additional-charges-ntwnfb" target="_blank" rel="noopener noreferrer">Former Sydney childcare worker Ashley Paul Griffith hit with 202 more abuse charges</a></h3>
+  
+  <p class="article-meta">The Guardian · 10/30 13:14</p>
+  <div class="orig-block">
+    <p class="article-excerpt">NSW police say charges include child rape and relate to 23 alleged victims aged between one and five at a Sydney childcare centre Get our breaking news email, f</p>
+  </div>
+  <div class="guide-block" hidden>
+    <p class="guide-wire">外电原文 · 无机器翻译</p>
+    <p class="article-excerpt guide-excerpt">NSW police say charges include child rape and relate to 23 alleged victims aged between one and five at a Sydney childcare centre Get our breaking news email, free app or daily news podcast One of Australia’s most notorious paedophiles is facing hundreds more child abuse charges, including for the a</p>
+    
+    <ul class="guide-bullets"><li class="guide-label">导读要点</li><li>NSW police say charges include child rape and relate to 23 alleged victims aged between one and five at a Sydney childca</li></ul>
+  </div>
+</article>
+  </div>
+    </div>
+  </div>
+<div class="sub-content" data-sub-content="hot" data-cat="politics">
+    <nav class="source-tabs"><button class="source-tab active" data-source="douyin-hot" data-sub="hot" data-cat="politics">抖音热榜<span class="count">0</span></button><button class="source-tab" data-source="weibo-hot" data-sub="hot" data-cat="politics">微博热搜<span class="count">0</span></button><button class="source-tab" data-source="zhihu-hot" data-sub="hot" data-cat="politics">知乎热榜<span class="count">0</span></button><button class="source-tab" data-source="baidu-hot" data-sub="hot" data-cat="politics">百度热搜<span class="count">0</span></button></nav>
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="douyin-hot" data-sub="hot" data-cat="politics">
+    <p class="empty">该源今日无内容。</p>
+  </div>
+<div class="source-content" data-source-content="weibo-hot" data-sub="hot" data-cat="politics">
+    <p class="empty">该源今日无内容。</p>
+  </div>
+<div class="source-content" data-source-content="zhihu-hot" data-sub="hot" data-cat="politics">
+    <p class="empty">该源今日无内容。</p>
+  </div>
+<div class="source-content" data-source-content="baidu-hot" data-sub="hot" data-cat="politics">
+    <p class="empty">该源今日无内容。</p>
+  </div>
+    </div>
+  </div></div>
+  </section>
+  <section class="panel" data-panel="tech">
+    <p class="empty">该分类今日无内容。</p>
+  </section>
+  
+
+  <footer>
+    内容均来自原媒体，本站仅作整理与回链。热榜≠事实核查 · 启发式摘要 · 零 AI / 零 API Token。
+  </footer>
+</main>
+<script>
+  document.querySelectorAll('.tabs > .tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = btn.dataset.tab;
+      document.querySelectorAll('.tabs > .tab').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      document.querySelectorAll('.panel').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.panel === target);
+      });
+    });
+  });
+  // Scope sub-tab / source-tab toggles to the parent .panel so two L1 panels
+  // can share the same data-cat (e.g. tech main + community both data-cat=tech)
+  // without stomping on each other's active state.
+  document.querySelectorAll('.sub-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var panel = btn.closest('.panel');
+      if (!panel) return;
+      var sub = btn.dataset.sub;
+      panel.querySelectorAll('.sub-tab').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      panel.querySelectorAll('.sub-content').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.subContent === sub);
+      });
+    });
+  });
+  document.querySelectorAll('.source-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var subContent = btn.closest('.sub-content');
+      if (!subContent) return;
+      var src = btn.dataset.source;
+      subContent.querySelectorAll('.source-tab').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      subContent.querySelectorAll('.source-content').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.sourceContent === src);
+      });
+    });
+  });
+  // Trading panel: asset-group sub-tabs (US/crypto/china/commodity)
+  document.querySelectorAll('.trading-group-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var grp = btn.dataset.group;
+      document.querySelectorAll('.trading-group-tab').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      document.querySelectorAll('.trading-group-content').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.group === grp);
+      });
+    });
+  });
+  // 中文导读 toggle (zero LLM) — persist in localStorage
+  (function () {
+    var KEY = 'opencool-guide';
+    function apply(on) {
+      document.body.classList.toggle('guide-on', on);
+      document.querySelectorAll('.guide-btn').forEach(function (b) {
+        b.classList.toggle('active', (b.dataset.guide === 'on') === on);
+      });
+    }
+    apply(localStorage.getItem(KEY) === '1');
+    document.querySelectorAll('.guide-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var on = btn.dataset.guide === 'on';
+        localStorage.setItem(KEY, on ? '1' : '0');
+        apply(on);
+      });
+    });
+  })();
+  // Local-only favorites (star) — no cloud sync
+  (function () {
+    var KEY = 'opencool-favorites';
+    function load() {
+      try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
+      catch (e) { return []; }
+    }
+    function save(arr) {
+      localStorage.setItem(KEY, JSON.stringify(arr));
+    }
+    function apply() {
+      var favs = load();
+      var set = {};
+      favs.forEach(function (s) { set[s] = true; });
+      document.querySelectorAll('.ticker-card[data-symbol]').forEach(function (card) {
+        var sym = card.getAttribute('data-symbol');
+        var on = !!set[sym];
+        card.classList.toggle('is-fav', on);
+        var btn = card.querySelector('.fav-star');
+        if (btn) {
+          btn.classList.toggle('on', on);
+          btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+          btn.title = on ? '取消自选' : '加入自选';
+        }
+      });
+      document.querySelectorAll('.event-list li[data-symbol], .ev-count[data-symbol]').forEach(function (el) {
+        el.classList.toggle('fav-hit', !!set[el.getAttribute('data-symbol')]);
+      });
+      var pin = document.getElementById('fav-pin-body');
+      if (!pin) return;
+      pin.innerHTML = '';
+      if (!favs.length) {
+        pin.innerHTML = '<p class="fav-pin-empty">点击行情卡片星标，自选保存在本机浏览器（非云同步）。</p>';
+        return;
+      }
+      favs.forEach(function (sym) {
+        var src = document.querySelector('.trading-group-contents .ticker-card[data-symbol="' + sym + '"]');
+        if (!src) return;
+        var clone = src.cloneNode(true);
+        clone.classList.add('fav-hit');
+        pin.appendChild(clone);
+      });
+      pin.querySelectorAll('.fav-star').forEach(function (btn) {
+        btn.addEventListener('click', onStarClick);
+      });
+    }
+    function onStarClick(ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      var card = ev.currentTarget.closest('.ticker-card');
+      if (!card) return;
+      var sym = card.getAttribute('data-symbol');
+      var favs = load().filter(function (s) { return s !== sym; });
+      if (!ev.currentTarget.classList.contains('on')) favs.unshift(sym);
+      save(favs);
+      apply();
+    }
+    document.querySelectorAll('.fav-star').forEach(function (btn) {
+      btn.addEventListener('click', onStarClick);
+    });
+    apply();
+  })();
+  // Knowledge client search
+  (function () {
+    var el = document.getElementById('kb-data');
+    var box = document.getElementById('kb-results');
+    var input = document.getElementById('kb-q');
+    if (!el || !box || !input) return;
+    var data = [];
+    try { data = JSON.parse(el.textContent || '[]'); } catch (e) { data = []; }
+    function render(q) {
+      var s = (q || '').trim().toLowerCase();
+      var rows = data.filter(function (k) {
+        if (!s) return true;
+        var bag = (k.term + ' ' + (k.aliases || []).join(' ') + ' ' + k.body + ' ' + (k.tags || []).join(' ')).toLowerCase();
+        return bag.indexOf(s) !== -1;
+      }).slice(0, 16);
+      box.innerHTML = rows.map(function (k) {
+        return '<article><strong>' + k.term + '</strong> <span class="muted">' + (k.tags || []).join(' · ') + '</span><p>' + k.body + '</p></article>';
+      }).join('') || '<p class="empty">无匹配词条</p>';
+    }
+    render('');
+    input.addEventListener('input', function () { render(input.value); });
+  })();
+</script>
 </body>
 </html>
