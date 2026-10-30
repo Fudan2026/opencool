@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-29T15:36:06.040Z",
+  "generatedAt": "2026-10-30T00:24:39.463Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 15,
-  "avgSentiment": -93.7,
+  "avgSentiment": -94.6,
   "sentimentCurve": [
     {
       "date": "2026-10-27",
@@ -35,26 +35,25 @@
       "date": "2026-10-29",
       "hour": "13",
       "score": -72
+    },
+    {
+      "date": "2026-10-30",
+      "hour": "06",
+      "score": -100
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -90.2,
-      "editions": 6
+      "avg": -91.6,
+      "editions": 7
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 6
-    },
-    {
-      "key": "commodity-fx",
-      "label": "商品汇率",
-      "avg": -20,
-      "editions": 1
+      "editions": 7
     },
     {
       "key": "china-ashare",
@@ -65,8 +64,14 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -13.3,
-      "editions": 6
+      "avg": -14.3,
+      "editions": 7
+    },
+    {
+      "key": "commodity-fx",
+      "label": "商品汇率",
+      "avg": -5,
+      "editions": 2
     }
   ],
   "topEvents": [
@@ -89,35 +94,35 @@
       "displayName": "半导体ETF",
       "title": "字节阿里腾讯砸数百亿美金 抢购英伟达芯片",
       "url": "https://www.dw.com/zh/字节阿里腾讯砸数百亿美金-抢购英伟达芯片/a-79712724?maca=chi-rss-chi-all-1127-rdf",
-      "count": 9
+      "count": 8
     },
     {
       "symbol": "BABA",
       "displayName": "阿里巴巴 (BABA)",
       "title": "字节阿里腾讯砸数百亿美金 抢购英伟达芯片",
       "url": "https://www.dw.com/zh/字节阿里腾讯砸数百亿美金-抢购英伟达芯片/a-79712724?maca=chi-rss-chi-all-1127-rdf",
-      "count": 9
+      "count": 8
     },
     {
       "symbol": "0700.HK",
       "displayName": "腾讯控股",
       "title": "字节阿里腾讯砸数百亿美金 抢购英伟达芯片",
       "url": "https://www.dw.com/zh/字节阿里腾讯砸数百亿美金-抢购英伟达芯片/a-79712724?maca=chi-rss-chi-all-1127-rdf",
-      "count": 9
+      "count": 8
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "字节阿里腾讯砸数百亿美金 抢购英伟达芯片",
       "url": "https://www.dw.com/zh/字节阿里腾讯砸数百亿美金-抢购英伟达芯片/a-79712724?maca=chi-rss-chi-all-1127-rdf",
-      "count": 9
+      "count": 8
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 6
+      "count": 7
     },
     {
       "symbol": "GC=F",
@@ -161,6 +166,12 @@
       "lastSeen": "2026-10-27"
     },
     {
+      "term": "售额",
+      "count": 3,
+      "firstSeen": "2026-10-29",
+      "lastSeen": "2026-10-30"
+    },
+    {
       "term": "国财",
       "count": 3,
       "firstSeen": "2026-10-24",
@@ -179,6 +190,12 @@
       "lastSeen": "2026-10-25"
     },
     {
+      "term": "销售",
+      "count": 3,
+      "firstSeen": "2026-10-29",
+      "lastSeen": "2026-10-30"
+    },
+    {
       "term": "fire",
       "count": 2,
       "firstSeen": "2026-10-25",
@@ -189,12 +206,6 @@
       "count": 2,
       "firstSeen": "2026-10-26",
       "lastSeen": "2026-10-26"
-    },
-    {
-      "term": "售额",
-      "count": 2,
-      "firstSeen": "2026-10-29",
-      "lastSeen": "2026-10-29"
     },
     {
       "term": "德国",
@@ -221,10 +232,10 @@
       "lastSeen": "2026-10-25"
     },
     {
-      "term": "销售",
-      "count": 2,
-      "firstSeen": "2026-10-29",
-      "lastSeen": "2026-10-29"
+      "term": "4美",
+      "count": 1,
+      "firstSeen": "2026-10-30",
+      "lastSeen": "2026-10-30"
     },
     {
       "term": "95bn",
@@ -251,33 +262,27 @@
       "lastSeen": "2026-10-29"
     },
     {
-      "term": "burnham",
+      "term": "deal",
       "count": 1,
-      "firstSeen": "2026-10-22",
-      "lastSeen": "2026-10-22"
-    },
-    {
-      "term": "charges",
-      "count": 1,
-      "firstSeen": "2026-10-22",
-      "lastSeen": "2026-10-22"
+      "firstSeen": "2026-10-23",
+      "lastSeen": "2026-10-23"
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": 0.06,
+      "avgChangePct": 0.04,
       "editions": 14
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.14,
-      "editions": 13
+      "avgChangePct": -0.08,
+      "editions": 12
     },
     {
       "name": "创业板指",
-      "avgChangePct": -0.53,
-      "editions": 12
+      "avgChangePct": -0.43,
+      "editions": 11
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
