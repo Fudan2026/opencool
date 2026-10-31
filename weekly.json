@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-31T12:19:21.373Z",
+  "generatedAt": "2026-10-31T23:48:38.241Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 19,
-  "avgSentiment": -96.8,
+  "daysCovered": 9,
+  "editions": 20,
+  "avgSentiment": -97.1,
   "sentimentCurve": [
     {
       "date": "2026-10-27",
@@ -65,20 +65,25 @@
       "date": "2026-10-31",
       "hour": "19",
       "score": -100
+    },
+    {
+      "date": "2026-11-01",
+      "hour": "06",
+      "score": -100
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -95.1,
-      "editions": 12
+      "avg": -95.4,
+      "editions": 13
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 12
+      "editions": 13
     },
     {
       "key": "china-ashare",
@@ -89,8 +94,8 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -16.7,
-      "editions": 12
+      "avg": -16.9,
+      "editions": 13
     },
     {
       "key": "commodity-fx",
@@ -105,21 +110,21 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 19
+      "count": 20
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 19
+      "count": 20
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 12
+      "count": 13
     },
     {
       "symbol": "512480.SS",
@@ -150,24 +155,24 @@
       "count": 7
     },
     {
-      "symbol": "GC=F",
-      "displayName": "黄金期货",
-      "title": "Full Guide on Legion [ The Republic ] and VP at $0 cost  to a possible Goldmine!",
-      "url": "https://x.com/mztacat/status/2113508606859493432",
-      "count": 5
+      "symbol": "BTC-USD",
+      "displayName": "Bitcoin",
+      "title": "Bitcoin’s Awkward Age: What’s the Next Source of Demand?",
+      "url": "https://x.com/rootstock_io/status/2115806243197493475",
+      "count": 6
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
-      "title": "Nvidia's role as AI financier faces first big test as neoclouds take market hit",
-      "url": "https://www.cnbc.com/2026/10/24/nvidias-role-as-ai-financier-faces-first-big-test-as-neoclouds-take-market-hit.html",
-      "count": 5
+      "title": "The Promise and Pitfalls of Nvidia’s Venture in Kazakhstan",
+      "url": "https://thediplomat.com/2026/10/the-promise-and-pitfalls-of-nvidias-venture-in-kazakhstan/",
+      "count": 6
     },
     {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "特朗普宣布奥迪将斥资40亿美元在美建厂",
-      "url": "https://www.dw.com/zh/特朗普宣布奥迪将斥资40亿美元在美建厂/a-79756218?maca=chi-rss-chi-all-1127-rdf",
+      "symbol": "GC=F",
+      "displayName": "黄金期货",
+      "title": "Full Guide on Legion [ The Republic ] and VP at $0 cost  to a possible Goldmine!",
+      "url": "https://x.com/mztacat/status/2113508606859493432",
       "count": 5
     }
   ],
@@ -296,13 +301,13 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.35,
-      "editions": 19
+      "avgChangePct": -0.4,
+      "editions": 20
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.74,
-      "editions": 16
+      "avgChangePct": -0.86,
+      "editions": 17
     },
     {
       "name": "创业板指",
