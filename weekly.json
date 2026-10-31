@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-31T05:31:07.178Z",
+  "generatedAt": "2026-10-31T12:19:21.373Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 18,
-  "avgSentiment": -96.5,
+  "editions": 19,
+  "avgSentiment": -96.8,
   "sentimentCurve": [
     {
       "date": "2026-10-27",
@@ -60,20 +60,25 @@
       "date": "2026-10-31",
       "hour": "13",
       "score": -100
+    },
+    {
+      "date": "2026-10-31",
+      "hour": "19",
+      "score": -100
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -94.6,
-      "editions": 11
+      "avg": -95.1,
+      "editions": 12
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 11
+      "editions": 12
     },
     {
       "key": "china-ashare",
@@ -84,8 +89,8 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -16.4,
-      "editions": 11
+      "avg": -16.7,
+      "editions": 12
     },
     {
       "key": "commodity-fx",
@@ -100,21 +105,21 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 18
+      "count": 19
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 18
+      "count": 19
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 11
+      "count": 12
     },
     {
       "symbol": "512480.SS",
@@ -169,8 +174,32 @@
   "keywords": [
     {
       "term": "billion",
-      "count": 3,
+      "count": 4,
       "firstSeen": "2026-10-29",
+      "lastSeen": "2026-10-31"
+    },
+    {
+      "term": "binance",
+      "count": 3,
+      "firstSeen": "2026-10-31",
+      "lastSeen": "2026-10-31"
+    },
+    {
+      "term": "comes",
+      "count": 3,
+      "firstSeen": "2026-10-31",
+      "lastSeen": "2026-10-31"
+    },
+    {
+      "term": "hack",
+      "count": 3,
+      "firstSeen": "2026-10-31",
+      "lastSeen": "2026-10-31"
+    },
+    {
+      "term": "know",
+      "count": 3,
+      "firstSeen": "2026-10-31",
       "lastSeen": "2026-10-31"
     },
     {
@@ -184,6 +213,12 @@
       "count": 3,
       "firstSeen": "2026-10-26",
       "lastSeen": "2026-10-26"
+    },
+    {
+      "term": "next",
+      "count": 3,
+      "firstSeen": "2026-10-31",
+      "lastSeen": "2026-10-31"
     },
     {
       "term": "售额",
@@ -216,46 +251,16 @@
       "lastSeen": "2026-10-30"
     },
     {
-      "term": "binance",
-      "count": 2,
-      "firstSeen": "2026-10-31",
-      "lastSeen": "2026-10-31"
-    },
-    {
-      "term": "comes",
-      "count": 2,
-      "firstSeen": "2026-10-31",
-      "lastSeen": "2026-10-31"
-    },
-    {
       "term": "fire",
       "count": 2,
       "firstSeen": "2026-10-25",
       "lastSeen": "2026-10-25"
     },
     {
-      "term": "hack",
-      "count": 2,
-      "firstSeen": "2026-10-31",
-      "lastSeen": "2026-10-31"
-    },
-    {
-      "term": "know",
-      "count": 2,
-      "firstSeen": "2026-10-31",
-      "lastSeen": "2026-10-31"
-    },
-    {
       "term": "meta",
       "count": 2,
       "firstSeen": "2026-10-26",
       "lastSeen": "2026-10-27"
-    },
-    {
-      "term": "next",
-      "count": 2,
-      "firstSeen": "2026-10-31",
-      "lastSeen": "2026-10-31"
     },
     {
       "term": "returns",
@@ -291,8 +296,8 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.29,
-      "editions": 18
+      "avgChangePct": -0.35,
+      "editions": 19
     },
     {
       "name": "深证成指",
