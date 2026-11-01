@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-01T14:33:53.634Z",
+  "generatedAt": "2026-11-01T23:08:54.518Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 20,
-  "avgSentiment": -97.4,
+  "daysCovered": 9,
+  "editions": 21,
+  "avgSentiment": -97.6,
   "sentimentCurve": [
     {
       "date": "2026-10-27",
@@ -80,20 +80,25 @@
       "date": "2026-11-01",
       "hour": "19",
       "score": -100
+    },
+    {
+      "date": "2026-11-02",
+      "hour": "06",
+      "score": -100
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -95.9,
-      "editions": 15
+      "avg": -96.1,
+      "editions": 16
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 15
+      "editions": 16
     },
     {
       "key": "china-ashare",
@@ -104,8 +109,8 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -17.3,
-      "editions": 15
+      "avg": -17.5,
+      "editions": 16
     },
     {
       "key": "commodity-fx",
@@ -120,28 +125,28 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 15
+      "count": 16
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "The Promise and Pitfalls of Nvidia’s Venture in Kazakhstan",
       "url": "https://thediplomat.com/2026/10/the-promise-and-pitfalls-of-nvidias-venture-in-kazakhstan/",
-      "count": 8
+      "count": 9
     },
     {
       "symbol": "BTC-USD",
@@ -188,16 +193,40 @@
   ],
   "keywords": [
     {
+      "term": "agent",
+      "count": 4,
+      "firstSeen": "2026-11-01",
+      "lastSeen": "2026-11-02"
+    },
+    {
       "term": "billion",
       "count": 4,
       "firstSeen": "2026-10-29",
       "lastSeen": "2026-10-31"
     },
     {
-      "term": "agent",
-      "count": 3,
+      "term": "币安",
+      "count": 4,
       "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-01"
+      "lastSeen": "2026-11-02"
+    },
+    {
+      "term": "打新保姆级教程来了",
+      "count": 4,
+      "firstSeen": "2026-11-01",
+      "lastSeen": "2026-11-02"
+    },
+    {
+      "term": "注册",
+      "count": 4,
+      "firstSeen": "2026-11-01",
+      "lastSeen": "2026-11-02"
+    },
+    {
+      "term": "终极指南",
+      "count": 4,
+      "firstSeen": "2026-11-01",
+      "lastSeen": "2026-11-02"
     },
     {
       "term": "binance",
@@ -248,30 +277,6 @@
       "lastSeen": "2026-10-30"
     },
     {
-      "term": "币安",
-      "count": 3,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-01"
-    },
-    {
-      "term": "打新保姆级教程来了",
-      "count": 3,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-01"
-    },
-    {
-      "term": "注册",
-      "count": 3,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-01"
-    },
-    {
-      "term": "终极指南",
-      "count": 3,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-01"
-    },
-    {
       "term": "部署",
       "count": 3,
       "firstSeen": "2026-11-01",
@@ -311,18 +316,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.64,
-      "editions": 20
+      "avgChangePct": -0.68,
+      "editions": 21
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.27,
-      "editions": 18
+      "avgChangePct": -1.35,
+      "editions": 19
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.74,
-      "editions": 17
+      "avgChangePct": -1.87,
+      "editions": 18
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
