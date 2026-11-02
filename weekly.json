@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-02T05:57:49.273Z",
+  "generatedAt": "2026-11-02T11:46:17.345Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 20,
-  "avgSentiment": -97.7,
+  "editions": 21,
+  "avgSentiment": -97.8,
   "sentimentCurve": [
     {
       "date": "2026-10-27",
@@ -90,20 +90,25 @@
       "date": "2026-11-02",
       "hour": "13",
       "score": -100
+    },
+    {
+      "date": "2026-11-02",
+      "hour": "19",
+      "score": -100
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -96.3,
-      "editions": 17
+      "avg": -96.5,
+      "editions": 18
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 17
+      "editions": 18
     },
     {
       "key": "china-ashare",
@@ -114,8 +119,8 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -17.6,
-      "editions": 17
+      "avg": -17.8,
+      "editions": 18
     },
     {
       "key": "commodity-fx",
@@ -130,28 +135,28 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 17
+      "count": 18
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "The Promise and Pitfalls of Nvidia’s Venture in Kazakhstan",
       "url": "https://thediplomat.com/2026/10/the-promise-and-pitfalls-of-nvidias-venture-in-kazakhstan/",
-      "count": 10
+      "count": 11
     },
     {
       "symbol": "BTC-USD",
@@ -189,11 +194,11 @@
       "count": 4
     },
     {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Nvidia's role as AI financier faces first big test as neoclouds take market hit",
-      "url": "https://www.cnbc.com/2026/10/24/nvidias-role-as-ai-financier-faces-first-big-test-as-neoclouds-take-market-hit.html",
-      "count": 3
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
+      "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
+      "count": 4
     }
   ],
   "keywords": [
@@ -294,6 +299,18 @@
       "lastSeen": "2026-10-30"
     },
     {
+      "term": "香港",
+      "count": 3,
+      "firstSeen": "2026-10-30",
+      "lastSeen": "2026-11-02"
+    },
+    {
+      "term": "e集",
+      "count": 2,
+      "firstSeen": "2026-11-02",
+      "lastSeen": "2026-11-02"
+    },
+    {
       "term": "meta",
       "count": 2,
       "firstSeen": "2026-10-26",
@@ -304,35 +321,23 @@
       "count": 2,
       "firstSeen": "2026-10-26",
       "lastSeen": "2026-10-26"
-    },
-    {
-      "term": "香港",
-      "count": 2,
-      "firstSeen": "2026-10-30",
-      "lastSeen": "2026-11-02"
-    },
-    {
-      "term": "4美",
-      "count": 1,
-      "firstSeen": "2026-10-30",
-      "lastSeen": "2026-10-30"
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.74,
-      "editions": 20
+      "avgChangePct": -0.65,
+      "editions": 21
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.61,
-      "editions": 18
+      "avgChangePct": -1.44,
+      "editions": 19
     },
     {
       "name": "创业板指",
-      "avgChangePct": -2.3,
-      "editions": 17
+      "avgChangePct": -2.07,
+      "editions": 18
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
