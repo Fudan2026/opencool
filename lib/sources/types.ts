@@ -46,6 +46,14 @@ export interface SourceDef {
    * Omit or leave empty to return all items unfiltered.
    */
   keywords?: string[];
+  /**
+   * Fallback feed URLs tried in order after the primary `url` fails
+   * (HTTP error, parse error, or empty). First success wins. Intended for
+   * RSSHub routes that flake on the official public instance — point
+   * mirrors at alternative public instances or self-hosted deployments.
+   * Keep primary + mirrors serving the same logical feed.
+   */
+  mirrors?: string[];
 }
 
 export interface RawArticle {

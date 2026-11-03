@@ -432,14 +432,15 @@
     "id": "yahoo-finance",
     "name": "Yahoo Finance",
     "type": "rss",
-    "url": "https://finance.yahoo.com/news/rssindex",
+    "url": "https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC&region=US&lang=en-US",
     "category": "finance",
     "subcategory": "wire",
     "enabled": true,
     "locales": [
       "zh",
       "en"
-    ]
+    ],
+    "notes": "finance.yahoo.com/news/rssindex is 404; feeds.finance.yahoo.com headline feed verified 200 (2026-11-03)."
   },
   {
     "id": "marketwatch-top",
@@ -559,7 +560,11 @@
       "zh"
     ],
     "lang": "zh",
-    "notes": "RSSHub public instance — may flake; failures are non-fatal"
+    "notes": "RSSHub public instance — may flake; failures are non-fatal",
+    "useCurl": true,
+    "mirrors": [
+      "https://hub.slarker.me/wallstreetcn/news/global"
+    ]
   },
   {
     "id": "bbc-world",
@@ -707,7 +712,11 @@
     "locales": [
       "zh"
     ],
-    "notes": "RSSHub jin10 — OpenCool distilled from china-finance-rss / FinNewsCollectionBot"
+    "notes": "RSSHub jin10 — OpenCool distilled from china-finance-rss / FinNewsCollectionBot",
+    "useCurl": true,
+    "mirrors": [
+      "https://hub.slarker.me/jin10"
+    ]
   },
   {
     "id": "cls-telegraph",
@@ -721,7 +730,11 @@
     "locales": [
       "zh"
     ],
-    "notes": "RSSHub CLS telegraph — may flake on public instance"
+    "notes": "RSSHub CLS telegraph — may flake on public instance",
+    "useCurl": true,
+    "mirrors": [
+      "https://hub.slarker.me/cls/telegraph"
+    ]
   },
   {
     "id": "eastmoney-kuaixun",
@@ -735,7 +748,8 @@
     "locales": [
       "zh"
     ],
-    "notes": "RSSHub Eastmoney flashes"
+    "notes": "RSSHub Eastmoney flashes. No reliable mirror found (slarker 404 for this route); useCurl + browser UA is the first-line fix on CI.",
+    "useCurl": true
   },
   {
     "id": "douyin-hot",
@@ -811,7 +825,7 @@
     "id": "caixin",
     "name": "财新",
     "type": "rss",
-    "url": "https://www.caixin.com/rss/latest.xml",
+    "url": "https://hub.slarker.me/caixin/latest",
     "category": "finance",
     "subcategory": "cn-news",
     "lang": "zh",
@@ -819,13 +833,17 @@
     "locales": [
       "zh"
     ],
-    "notes": "OpenCool distilled CN finance — may 403 from some networks"
+    "notes": "official caixin.com/rss/latest.xml is dead (302->404 HTML). Primary = slarker public RSSHub instance (verified); canonical route kept as mirror.",
+    "useCurl": true,
+    "mirrors": [
+      "https://rsshub.app/caixin/latest"
+    ]
   },
   {
     "id": "yicai",
     "name": "第一财经",
     "type": "rss",
-    "url": "https://www.yicai.com/rss/news.xml",
+    "url": "https://hub.slarker.me/yicai/news",
     "category": "finance",
     "subcategory": "cn-news",
     "lang": "zh",
@@ -833,7 +851,11 @@
     "locales": [
       "zh"
     ],
-    "notes": "OpenCool distilled"
+    "notes": "www.yicai.com/rss/news.xml returns 404. Primary = slarker public RSSHub instance (verified); canonical route kept as mirror.",
+    "useCurl": true,
+    "mirrors": [
+      "https://rsshub.app/yicai/news"
+    ]
   },
   {
     "id": "wallstreetcn-live",
