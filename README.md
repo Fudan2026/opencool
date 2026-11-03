@@ -44,6 +44,22 @@ Workflow 默认 `LLM_MODE=auto`：**零 AI · 零 Token 是默认态**。只有�
 
 ---
 
+## Data products (for consumers)
+
+| Path | Content |
+|---|---|
+| `/<date>/<HH>.json` | Edition sidecar — briefs, sentiment, morning brief, fetch health |
+| `/sentiment-history.json` | Rolling 60-edition sentiment series |
+| `/keywords.json` | 7-day keyword frequency (stopword-cleaned) |
+| `/weekly.json` + `/weekly.html` | 7-day review (curve, sectors, events) |
+| `/feed.xml` | RSS 2.0, newest 30 real editions |
+| `/status.html` | Publish matrix + source health |
+| `/llms.txt` | Agent-discoverable index |
+
+Full reference: [`docs/DATA-CONTRACT.md`](docs/DATA-CONTRACT.md).
+
+---
+
 ## 本地跑一期
 
 ```bash
