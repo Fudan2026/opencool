@@ -108,6 +108,54 @@ test("sentiment gauge", async (t) => {
     assert.equal(s20.percentile, 100); // above every sample
   });
 
+  await t.test("anti-pinning: dense bearish corpus stays above -100", () => {
+    // 30 articles, each title carrying 大跌(-2) + 担忧(-1), title x2 →
+    // per-article raw = -6, total -180. The additive scale would pin at
+    // -100 (|raw| ≫ 30); mean-tone lands at -96 with headroom left.
+    const arts = Array.from({ length: 30 }, (_, i) =>
+      art(`市场大跌引发担忧 ${i}`),
+    );
+    const s = scoreSentiment(arts);
+    assert.ok(s.score > -100, `pinned at ${s.score}`);
+    assert.ok(s.score < -30, `should be strongly bearish, got ${s.score}`);
+    assert.ok(s.label.includes("强偏空"));
+    assert.equal(s.raw, -180);
+  });
+
+  await t.test("monotonicity: adding bearish articles never raises score", () => {
+    const base = [
+      art("板块普涨 市场回暖"),
+      art("公司中标 获批大单"),
+      art("外资增持 回购活跃"),
+      art("行业景气 复苏提速"),
+      art("政策利好 预期上调"),
+    ];
+    const moreNegative = [
+      ...base,
+      art("指数大跌 市场暴跌"),
+      art("个股跳水 违约风险"),
+    ];
+    assert.ok(
+      scoreSentiment(moreNegative).score <= scoreSentiment(base).score,
+    );
+  });
+
+  await t.test("quiet realistic mix lands in neutral band", () => {
+    // Production-like density: most headlines carry no lexicon terms.
+    const arts = [
+      art("某公司发布公告"),
+      art("央行开展公开市场操作"),
+      art("指数小幅波动 成交持平"),
+      art("上市公司披露年报"),
+      art("机构调研热度上升"),
+      art("发改委印发方案"),
+      art("港股通标的调整"),
+    ];
+    const s = scoreSentiment(arts);
+    assert.equal(s.label, "中性");
+    assert.ok(Math.abs(s.score) < 8);
+  });
+
   await t.test("longest term wins: 创历史新高 over 新高", () => {
     const s = scoreSentiment([
       art("沪指创历史新高"),

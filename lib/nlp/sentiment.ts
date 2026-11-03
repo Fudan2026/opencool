@@ -9,8 +9,17 @@
  *     terms match before shorter ones at the same position family.
  *   - Chinese negation guard: a negative CJK term whose occurrence is
  *     directly preceded by 不/未/难/止/无 is skipped ("不再下跌", "止跌…").
- *   - score = round(100 · tanh(raw / 10)) clamped to [-100, 100], where
- *     raw is the signed weighted hit total across finance articles.
+ *   - CALIBRATION (wave 6): score = round(100 · tanh((raw / scanned) / K))
+ *     with K = 3, clamped to [-100, 100], where raw is the signed
+ *     weighted hit total and scanned the number of finance articles.
+ *     Per-article mean tone, NOT the additive sum: the additive form
+ *     saturated at ±100 on 9 of 10 production editions (raw ≳ 30 pins
+ *     tanh(raw/10)). K = 3 separates the observed regimes: quiet days
+ *     (|mean| < 0.3 → |score| < 10), strong-event days (|mean| ≈ 1 →
+ *     ±32), uniformly one-sided days (|mean| ≈ 3 → ±76, no pinning;
+ *     pinning would need |mean| > 9.9, unreachable with hit caps).
+ *     `raw` is still exported for observability; `percentile` carries
+ *     cross-era comparability against pre-calibration history.
  */
 
 import { REPORT_LOCALE } from "../sources/registry";
@@ -37,8 +46,10 @@ export interface SectorSentiment {
 
 export interface MarketSentiment {
   generated_at: string;
-  /** -100..100 */
+  /** -100..100, per-article mean tone (calibrated, see file header). */
   score: number;
+  /** Signed weighted hit total before normalization (observability). */
+  raw: number;
   label: string;
   posHits: number;
   negHits: number;
@@ -229,12 +240,15 @@ function matchText(text: string): TermMatch[] {
 }
 
 function labelFor(score: number, scanned: number): string {
-  if (scanned < 5 || Math.abs(score) < 18) {
+  // Thresholds live in the per-article tone domain (wave-6 calibration):
+  // an average headline carrying even one bearish term (≈ −1) is already
+  // meaningful, so the strong bands start at ±30, neutral band at ±8.
+  if (scanned < 5 || Math.abs(score) < 8) {
     return REPORT_LOCALE === "en" ? "Neutral" : "中性";
   }
-  if (score >= 50) return REPORT_LOCALE === "en" ? "Strongly Bullish" : "强偏多";
-  if (score >= 18) return REPORT_LOCALE === "en" ? "Bullish" : "偏多";
-  if (score <= -50) return REPORT_LOCALE === "en" ? "Strongly Bearish" : "强偏空";
+  if (score >= 30) return REPORT_LOCALE === "en" ? "Strongly Bullish" : "强偏多";
+  if (score >= 8) return REPORT_LOCALE === "en" ? "Bullish" : "偏多";
+  if (score <= -30) return REPORT_LOCALE === "en" ? "Strongly Bearish" : "强偏空";
   return REPORT_LOCALE === "en" ? "Bearish" : "偏空";
 }
 
@@ -308,7 +322,18 @@ export function scoreSentiment(
     .filter(([b]) => (sectorHits.get(b)?.pos ?? 0) + (sectorHits.get(b)?.neg ?? 0) > 0)
     .map(([b, r]) => ({
       key: b,
-      score: Math.max(-100, Math.min(100, Math.round(100 * Math.tanh(r / 10)))),
+      score: Math.max(
+        -100,
+        Math.min(
+          100,
+          Math.round(
+            100 *
+              Math.tanh(
+                r / Math.max(sectorArticles.get(b) ?? 1, 1) / 3,
+              ),
+          ),
+        ),
+      ),
       posHits: sectorHits.get(b)?.pos ?? 0,
       negHits: sectorHits.get(b)?.neg ?? 0,
       articles: sectorArticles.get(b) ?? 0,
@@ -318,9 +343,15 @@ export function scoreSentiment(
     }))
     .sort((x, y) => Math.abs(y.score) - Math.abs(x.score));
 
+  // Per-article mean tone, K = 3 — see the calibration note in the header.
   const score = Math.max(
     -100,
-    Math.min(100, Math.round(100 * Math.tanh(raw / 10))),
+    Math.min(
+      100,
+      Math.round(
+        100 * Math.tanh(raw / Math.max(finance.length, 1) / 3),
+      ),
+    ),
   );
   const drivers = [...driverMap.values()]
     .sort((a, b) => Math.abs(b.hits * b.polarity) - Math.abs(a.hits * a.polarity))
@@ -339,6 +370,7 @@ export function scoreSentiment(
   return {
     generated_at: new Date().toISOString(),
     score,
+    raw,
     label: labelFor(score, finance.length),
     posHits,
     negHits,
