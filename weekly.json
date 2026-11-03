@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-03T06:38:52.261Z",
+  "generatedAt": "2026-11-03T12:23:44.458Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 19,
-  "avgSentiment": -97.9,
+  "editions": 20,
+  "avgSentiment": -98,
   "sentimentCurve": [
     {
       "date": "2026-10-27",
@@ -100,20 +100,25 @@
       "date": "2026-11-03",
       "hour": "06",
       "score": -100
+    },
+    {
+      "date": "2026-11-03",
+      "hour": "13",
+      "score": -100
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -96.7,
-      "editions": 19
+      "avg": -96.8,
+      "editions": 20
     },
     {
       "key": "china-etf",
       "label": "ETF",
       "avg": -20,
-      "editions": 19
+      "editions": 20
     },
     {
       "key": "china-ashare",
@@ -124,8 +129,8 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -17.9,
-      "editions": 19
+      "avg": -18,
+      "editions": 20
     },
     {
       "key": "commodity-fx",
@@ -140,21 +145,21 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 19
+      "count": 20
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 19
+      "count": 20
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 19
+      "count": 20
     },
     {
       "symbol": "NVDA",
@@ -171,6 +176,13 @@
       "count": 7
     },
     {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
+      "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
+      "count": 6
+    },
+    {
       "symbol": "BTC-USD",
       "displayName": "Bitcoin",
       "title": "Why Now Is the Time to Add and Hold BTC",
@@ -182,13 +194,6 @@
       "displayName": "比亚迪",
       "title": "US bans vehicles from China’s BYD at Japan military base, calling them ‘unacceptable’ risk",
       "url": "https://www.theguardian.com/world/2026/oct/27/us-bans-byd-electric-vehicles-kadena-military-base",
-      "count": 5
-    },
-    {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
-      "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
       "count": 5
     },
     {
@@ -332,17 +337,17 @@
     {
       "name": "上证指数",
       "avgChangePct": -0.82,
-      "editions": 19
+      "editions": 20
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.69,
-      "editions": 17
+      "avgChangePct": -1.66,
+      "editions": 18
     },
     {
       "name": "创业板指",
-      "avgChangePct": -2.5,
-      "editions": 16
+      "avgChangePct": -2.51,
+      "editions": 17
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
