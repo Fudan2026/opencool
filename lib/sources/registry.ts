@@ -77,7 +77,17 @@ function loadAndValidate(): SourceDef[] {
     }
     if (s.locales !== undefined) {
       if (!Array.isArray(s.locales) || s.locales.some((l) => l !== "zh" && l !== "en")) {
-        throw new Error(`${at} (${s.id}): 'locales' must be an array of "zh" | "en"`);
+        throw new Error(`${at}: 'locales' must be an array of "zh" | "en"`);
+      }
+    }
+    if (s.mirrors !== undefined) {
+      if (
+        !Array.isArray(s.mirrors) ||
+        s.mirrors.some((m) => typeof m !== "string" || !/^https?:\/\//.test(m))
+      ) {
+        throw new Error(
+          `${at} (${s.id}): 'mirrors' must be an array of http(s) URLs`,
+        );
       }
     }
   }

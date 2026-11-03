@@ -21,20 +21,46 @@ function stripHtml(s: string): string {
   return s.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 }
 
+/**
+ * Feed URL try-order: primary first, then mirrors in config order.
+ * Pure so the fallback policy is unit-testable.
+ */
+export function resolveFeedOrder(url: string, mirrors?: string[]): string[] {
+  return [url, ...(mirrors ?? [])].filter(
+    (u, i, arr) => typeof u === "string" && u.length > 0 && arr.indexOf(u) === i,
+  );
+}
+
 export async function fetchRss(
   sourceId: string,
   url: string,
   category: Category,
-  options: { limit?: number; useCurl?: boolean } = {},
+  options: { limit?: number; useCurl?: boolean; mirrors?: string[] } = {},
 ): Promise<RawArticle[]> {
   const limit = options.limit ?? 30;
+  const urls = resolveFeedOrder(url, options.mirrors);
 
-  let feed;
-  if (options.useCurl) {
-    const xml = await curlFetch(url, CURL_HEADERS);
-    feed = await parser.parseString(xml);
-  } else {
-    feed = await parser.parseURL(url);
+  let feed: Awaited<ReturnType<Parser["parseURL"]>> | undefined;
+  let lastErr: unknown;
+  let served = urls[0];
+  for (const u of urls) {
+    try {
+      feed =
+        options.useCurl === true
+          ? await parser.parseString(await curlFetch(u, CURL_HEADERS))
+          : await parser.parseURL(u);
+      served = u;
+      break;
+    } catch (e) {
+      lastErr = e;
+      if (urls.length > 1) {
+        console.warn(`  ${sourceId.padEnd(20)} feed failed (${u}) — trying mirror`);
+      }
+    }
+  }
+  if (!feed) throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
+  if (served !== urls[0]) {
+    console.log(`  ${sourceId.padEnd(20)} served by mirror: ${served}`);
   }
 
   return (feed.items ?? [])
