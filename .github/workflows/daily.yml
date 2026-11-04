@@ -236,6 +236,9 @@ jobs:
       - name: Bake weekly review (7d)
         run: npm run weekly:bake
 
+      - name: Bake search index
+        run: npm run search:bake
+
       - name: Build static site (index + archive)
         run: npm run build-site
 

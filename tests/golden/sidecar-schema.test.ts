@@ -91,6 +91,25 @@ test("golden: sidecar consumer contract", async (t) => {
   });
 });
 
+test("golden: search-index.json contract", async (t) => {
+  const idx = {
+    version: 1,
+    generatedAt: "2026-11-04T00:00:00Z",
+    docs: [{ d: "2026-11-04", h: "06", t: "hero" }],
+    postings: { mlf: [0], 央行: [0] },
+  };
+  const j = JSON.parse(JSON.stringify(idx));
+  assert.equal(j.version, 1);
+  assert.ok(Array.isArray(j.docs));
+  for (const d of j.docs) {
+    for (const k of ["d", "h", "t"]) assert.ok(k in d, `doc field missing: ${k}`);
+  }
+  for (const [tok, list] of Object.entries(j.postings)) {
+    assert.ok(tok.length >= 2, `token too short: ${tok}`);
+    assert.ok(Array.isArray(list) && list.every((n) => Number.isInteger(n)));
+  }
+});
+
 test("golden: legacy sidecars stay consumable (no new fields)", async (t) => {
   const legacy = {
     hero_headline: "旧档标题",
