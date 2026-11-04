@@ -19,6 +19,8 @@
 
 未到点或尚未生成的档期会显示**友好占位页**（不再 404）。首页永远指向最新**真实**一期。
 
+**可选推送**：配置 secrets `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID`（Telegram 频道）或变量 `NTFY_TOPIC`（ntfy.sh 主题）后，每期发布会自动推送；未配置则为干净 no-op。
+
 ```text
 REPORT_TZ=Asia/Shanghai
 REPORT_HOUR=6,13,19
