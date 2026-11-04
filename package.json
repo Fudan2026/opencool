@@ -19,6 +19,7 @@
     "weekly:bake": "tsx scripts/build-weekly.ts",
     "search:bake": "tsx scripts/bake-search.ts",
     "calendar:bake": "tsx scripts/bake-calendar.ts",
+    "themes:bake": "tsx scripts/bake-themes.ts",
     "mcp:sync-watchlist": "tsx scripts/sync-mcp-watchlist.ts",
     "open": "node scripts/open-report.mjs"
   },
