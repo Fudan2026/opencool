@@ -389,6 +389,20 @@ function loadSentimentTrend(): SentimentTrendPoint[] {
 
 const REVIEW_SAMPLE_FLOOR = 10;
 
+/** Today's pre-market tips from the calendar bake (06:00 editions). */
+function loadPremarketTips(today: string): Array<{ time: string; title: string; summary: string; url: string }> {
+  try {
+    const fp = path.join(OUTPUT_DIR, "calendar.json");
+    if (!fs.existsSync(fp)) return [];
+    const j = JSON.parse(fs.readFileSync(fp, "utf8"));
+    if (j?.status !== "ok" || !Array.isArray(j.items)) return [];
+    void today;
+    return j.items.slice(0, 6);
+  } catch {
+    return [];
+  }
+}
+
 /** Full previous-day sidecar (last slot of the newest day < today). */
 function loadYesterdayEdition(today: string):
   | { date: string; hour: string; report: Record<string, unknown> }
@@ -430,7 +444,7 @@ function loadYesterdayEdition(today: string):
  */
 function buildMorningBrief(
   base: { date: string; hour: string; report: Record<string, unknown> },
-  today: { sentimentScore: number | null; keywords: string[]; eventUrls: Set<string>; events: Array<{ symbol: string; displayName: string; title: string; url: string }>; tickers: Array<{ symbol: string; displayName: string; group: string; pct1Day: number }> | undefined },
+  today: { sentimentScore: number | null; keywords: string[]; eventUrls: Set<string>; events: Array<{ symbol: string; displayName: string; title: string; url: string }>; tickers: Array<{ symbol: string; displayName: string; group: string; pct1Day: number }> | undefined; premarketTips: Array<{ time: string; title: string; summary: string; url: string }>; flowLine: string | null },
   reportKeywords: string[],
 ): MorningBrief {
   const baseSent = (base.report as { sentiment?: { score?: number } }).sentiment;
@@ -479,6 +493,8 @@ function buildMorningBrief(
     baseSentiment: baseSent?.score ?? null,
     overnight,
     newKeywords: newKeywords.slice(0, 6),
+    premarketTips: today.premarketTips,
+    flowLine: today.flowLine,
     newEvents: newEvents.slice(0, 5),
     note:
       REPORT_LOCALE === "en"
@@ -634,6 +650,15 @@ async function main() {
               url: e.url,
             })),
             tickers: trading?.tickers,
+            premarketTips: loadPremarketTips(date),
+            flowLine: quant?.fundFlows?.sectors?.length
+              ? `主力净流入前三：${quant.fundFlows.sectors
+                  .slice()
+                  .sort((a, b) => b.netInflowYi - a.netInflowYi)
+                  .slice(0, 3)
+                  .map((x) => `${x.name} ${x.netInflowYi >= 0 ? "+" : ""}${x.netInflowYi.toFixed(1)}亿`)
+                  .join("、")}`
+              : null,
           },
           report.keywords,
         );

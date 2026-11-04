@@ -61,6 +61,8 @@ const TEXTS_ZH = {
   morningOvernight: "隔夜",
   morningNewKw: "新词",
   morningNewEvents: "新事件",
+  morningTips: "盘前要闻",
+  morningFlow: "资金动向",
   guideToggleOff: "原文",
   guideToggleOn: "中文导读",
   guideWireNote: "外电原文 · 无机器翻译",
@@ -137,6 +139,8 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   morningOvernight: "overnight",
   morningNewKw: "new terms",
   morningNewEvents: "new events",
+  morningTips: "Pre-market tips",
+  morningFlow: "Flows",
   guideToggleOff: "Original",
   guideToggleOn: "CN guide",
   guideWireNote: "EN original · no machine translation",
@@ -736,6 +740,17 @@ export function renderHtml(
       <p class="mb-row">${STR.morningSentiment} <b class="${dCls}">${dTxt}</b>${mb.baseSentiment != null ? ` <span class="muted tiny">(base ${mb.baseSentiment})</span>` : ""}</p>
       ${overnight ? `<p class="mb-row">${STR.morningOvernight} ${overnight}</p>` : ""}
       ${kws ? `<p class="mb-row">${STR.morningNewKw} ${kws}</p>` : ""}
+    ${
+      mb.premarketTips?.length
+        ? `<div class="mb-row">${STR.morningTips}<ul class="mb-events">${mb.premarketTips
+            .map(
+              (t) =>
+                `<li><span class="muted tiny">${escapeHtml(t.time)}</span> <a href="${escapeHtml(t.url)}" target="_blank" rel="noopener">${escapeHtml(t.title)}</a></li>`,
+            )
+            .join("")}</ul></div>`
+        : ""
+    }
+    ${mb.flowLine ? `<p class="mb-row">${STR.morningFlow} <span class="muted">${escapeHtml(mb.flowLine)}</span></p>` : ""}
       ${evs ? `<div class="mb-row">${STR.morningNewEvents}<ul class="mb-events">${evs}</ul></div>` : ""}
       <p class="muted tiny">${escapeHtml(mb.note)}</p>
     </div>`;
