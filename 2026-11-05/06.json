@@ -1,8 +1,15 @@
 {
-  "hero_headline": "美国民主党中选大胜，一文看清美股各板块赢家输家",
-  "daily_overview": "启发式两报（零 AI / 零 API Token）：中文财经源优先，外电原文次栏；按「多源交叉 × 时效」排序，不做个性化推荐。 财经头条：美国民主党中选大胜，一文看清美股各板块赢家输家。 时政头条：专访：民主党赢得中期选举如何影响美国的对华政策？。",
+  "hero_headline": "美股期货全线下跌，美元下跌，美债上涨",
+  "daily_overview": "启发式两报（零 AI / 零 API Token）：中文财经源优先，外电原文次栏；按「多源交叉 × 时效」排序，不做个性化推荐。 财经头条：美股期货全线下跌，美元下跌，美债上涨。 时政头条：专访：民主党赢得中期选举如何影响美国的对华政策？。",
   "tech_briefs": [],
   "finance_briefs": [
+    {
+      "title": "美股期货全线下跌，美元下跌，美债上涨",
+      "url": "https://wallstreetcn.com/articles/3785134",
+      "source": "华尔街见闻",
+      "summary": "标普500期货目前跌0.75%，美元跌0.41%。预测网站Polymarket上，民主党中选横扫的概率已经飙升至99%。据央视新闻，民主党当晚从共和党手中夺取北卡罗来纳州参议院席位。加上这一席位，民主党现在必须再从共和党手中夺取三个席位，同时保住自己的所有席位，才能控制参议院。 风险提示及免责条款 市场有风险，投资需谨慎。本文不构成个人投资建议，也未考虑到个别用户特殊的投资目标、财务状况或需要。用户应考虑本文中的任何意见、观点或结论是否",
+      "importance": 8
+    },
     {
       "title": "美国民主党中选大胜，一文看清美股各板块赢家输家",
       "url": "https://wallstreetcn.com/articles/3785208",
@@ -29,13 +36,6 @@
       "url": "https://wallstreetcn.com/articles/3785210",
       "source": "华尔街见闻",
       "summary": "高通预计第一财季营收104亿-112亿美元，分析师预期105.5亿美元。 风险提示及免责条款 市场有风险，投资需谨慎。本文不构成个人投资建议，也未考虑到个别用户特殊的投资目标、财务状况或需要。用户应考虑本文中的任何意见、观点或结论是否符合其特定状况。据此投资，责任自负。",
-      "importance": 8
-    },
-    {
-      "title": "宇树王兴兴：2027年大概率成机器人行业临界点，卡点在“最后几毫米”",
-      "url": "https://wallstreetcn.com/articles/3785206",
-      "source": "华尔街见闻",
-      "summary": "具身智能距离真正爆发的距离，或许比外界预期的更近，但关键技术障碍仍未破除。 11月4日，宇树科技创始人、董事长兼CEO王兴兴在2026年世界互联网大会乌镇峰会互联网企业家论坛上表示，2027年很大概率将成为机器人行业或机器人模型发展的临界点，明年机器人能力有望迎来大幅提升。 他判断，具身智能的\"ChatGPT时刻\"已近在咫尺——届时机器人能够在约80%的陌生场景中，通过语音或文字指令完成约80%的任务。 然而，王兴兴同时指出，机器人与这",
       "importance": 8
     }
   ],
@@ -64,12 +64,12 @@
   ],
   "editor_note": "当前 LLM_MODE=off：标题与摘要来自信源原文；不接 DeepSeek / 任何付费 LLM。",
   "keywords": [
+    "美元",
     "民主",
     "主党",
-    "美元",
+    "美股",
     "财季",
-    "4亿",
-    "亿美"
+    "4亿"
   ],
   "trading": {
     "market_overview": "行情面板仅展示技术指标（LLM_MODE=off，未生成文字点评）。",
@@ -9817,23 +9817,23 @@
         "group": "crypto",
         "currency": "USD",
         "exchangeName": "CCC",
-        "currentPrice": 80354.84,
-        "pct1Day": 3.891384447493098,
-        "pct5Day": 4.0889925092378325,
-        "pct52WeekHigh": -25.20139486574575,
-        "pct52WeekLow": 39.147962883966784,
-        "sma20": 80201.05078125,
-        "sma50": 81991.175,
-        "sma200": 73180.7529296875,
-        "rsi14": 50.48515486541327,
-        "macd": -1096.9283550605905,
-        "macdSignal": -933.233947476189,
-        "macdHistogram": -163.69440758440157,
-        "bbMid": 80201.05078125,
-        "bbUpper": 84251.37302542728,
-        "bbLower": 76150.72853707272,
+        "currentPrice": 80688.46,
+        "pct1Day": 4.322724285633198,
+        "pct5Day": 4.521152783353654,
+        "pct52WeekHigh": -24.890843433562072,
+        "pct52WeekLow": 39.72568220214788,
+        "sma20": 80217.731640625,
+        "sma50": 81997.84734375,
+        "sma200": 73182.421015625,
+        "rsi14": 51.545846592356064,
+        "macd": -1070.3150181660167,
+        "macdSignal": -927.9112800972741,
+        "macdHistogram": -142.40373806874254,
+        "bbMid": 80217.731640625,
+        "bbUpper": 84273.19469113293,
+        "bbLower": 76162.26859011708,
         "atr14": 2160.1665803019932,
-        "kdjJ": 60.69520585228764,
+        "kdjJ": 64.89389068454025,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "neutral",
@@ -9899,7 +9899,7 @@
           78248.453125,
           76677.296875,
           77345.046875,
-          80354.84375
+          80688.4609375
         ],
         "closesFull": [
           101590.5234375,
@@ -10267,7 +10267,7 @@
           78248.453125,
           76677.296875,
           77345.046875,
-          80354.84375
+          80688.4609375
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -10278,23 +10278,23 @@
         "group": "crypto",
         "currency": "USD",
         "exchangeName": "CCC",
-        "currentPrice": 2421.74,
-        "pct1Day": 6.556627638484332,
-        "pct5Day": 8.062524191503993,
-        "pct52WeekHigh": -33.762546329484934,
-        "pct52WeekLow": 60.752097900705316,
-        "sma20": 2349.4550170898438,
-        "sma50": 2506.5358056640625,
-        "sma200": 2156.794334106445,
-        "rsi14": 54.0339707298111,
-        "macd": -54.35344662673424,
-        "macdSignal": -62.42342354094551,
-        "macdHistogram": 8.069976914211267,
-        "bbMid": 2349.4550170898438,
-        "bbUpper": 2491.1689285168895,
-        "bbLower": 2207.741105662798,
+        "currentPrice": 2435.77,
+        "pct1Day": 7.173948030338105,
+        "pct5Day": 8.688568776970156,
+        "pct52WeekHigh": -33.37880923343113,
+        "pct52WeekLow": 61.68339190152577,
+        "sma20": 2350.1565185546874,
+        "sma50": 2506.81640625,
+        "sma200": 2156.8644842529297,
+        "rsi14": 55.17914078010335,
+        "macd": -53.234242010459184,
+        "macdSignal": -62.199582617690496,
+        "macdHistogram": 8.965340607231312,
+        "bbMid": 2350.1565185546874,
+        "bbUpper": 2493.425135968002,
+        "bbLower": 2206.887901141373,
         "atr14": 88.54601737086048,
-        "kdjJ": 87.83784488866927,
+        "kdjJ": 91.91226907488895,
         "volumeSpike": false,
         "maAlign": "mixed",
         "trend": "neutral",
@@ -10366,7 +10366,7 @@
           2273.05224609375,
           2248.88623046875,
           2272.725830078125,
-          2421.739990234375
+          2435.77001953125
         ],
         "closesFull": [
           3292.574462890625,
@@ -10734,7 +10734,7 @@
           2273.05224609375,
           2248.88623046875,
           2272.725830078125,
-          2421.739990234375
+          2435.77001953125
         ],
         "dataStatus": "live",
         "dataNote": "Yahoo"
@@ -10760,7 +10760,7 @@
         "bbMid": 4089.9199829101562,
         "bbUpper": 4265.211659643749,
         "bbLower": 3914.6283061765635,
-        "atr14": 86.86278718109328,
+        "atr14": 86.85565478712007,
         "kdjJ": 72.64085561983634,
         "volumeSpike": false,
         "maAlign": "bear",
@@ -11467,17 +11467,17 @@
       "timestamp": "2026-11-04T00:00:00.000Z"
     },
     "crypto_global": {
-      "totalMarketCapUsd": 2704867925509.452,
-      "total24hVolumeUsd": 98070306549.94493,
-      "marketCapChangePct24h": 0.033273316855101355,
-      "btcDominance": 59.52779630356749,
-      "ethDominance": 10.905442345701715,
-      "activeCryptocurrencies": 22783
+      "totalMarketCapUsd": 2718890129162.1895,
+      "total24hVolumeUsd": 99031927512.88657,
+      "marketCapChangePct24h": 0.5214055452105876,
+      "btcDominance": 59.54310435199355,
+      "ethDominance": 10.929315980557181,
+      "activeCryptocurrencies": 22784
     },
-    "generated_at": "2026-11-04T22:11:20.908Z"
+    "generated_at": "2026-11-04T22:35:53.480Z"
   },
   "quant": {
-    "generated_at": "2026-11-04T22:11:24.530Z",
+    "generated_at": "2026-11-04T22:35:57.838Z",
     "market": {
       "indices": [
         {
@@ -11499,11 +11499,19 @@
           "changePct": 6.4
         }
       ],
-      "fetchedAt": "2026-11-04T22:11:23.206Z",
+      "fetchedAt": "2026-11-04T22:35:56.246Z",
       "note": "东方财富公开延时接口 · 非实时 · 仅供参考"
     },
     "fundFlows": null,
     "events": [
+      {
+        "symbol": "ETH-USD",
+        "displayName": "Ethereum",
+        "title": "L2BEAT is now ETHBEAT",
+        "url": "https://x.com/ethbeat_org/status/2117913893796225035",
+        "source": "X 市场声音（站内镜像）",
+        "matched": "ETH"
+      },
       {
         "symbol": "GC=F",
         "displayName": "黄金期货",
@@ -11521,20 +11529,28 @@
         "matched": "Gold"
       },
       {
-        "symbol": "ETH-USD",
-        "displayName": "Ethereum",
-        "title": "L2BEAT is now ETHBEAT",
-        "url": "https://x.com/ethbeat_org/status/2117913893796225035",
-        "source": "X 市场声音（站内镜像）",
-        "matched": "ETH"
-      },
-      {
         "symbol": "GC=F",
         "displayName": "黄金期货",
         "title": "Gold Climbs Above $4,000 as Dollar, Yields Fall on Democrat Win",
         "url": "https://www.bloomberg.com/news/articles/2026-11-04/gold-steadies-as-traders-track-iran-talk-prospects-us-midterms",
         "source": "Bloomberg Markets",
         "matched": "Gold"
+      },
+      {
+        "symbol": "USDCNY=X",
+        "displayName": "美元 / 人民币",
+        "title": "Meta拟发股筹集950亿美元AI投资资金",
+        "url": "https://www.ftchinese.com/story/001111205",
+        "source": "FT中文网",
+        "matched": "美元"
+      },
+      {
+        "symbol": "USDCNY=X",
+        "displayName": "美元 / 人民币",
+        "title": "美股期货全线下跌，美元下跌，美债上涨",
+        "url": "https://wallstreetcn.com/articles/3785134",
+        "source": "华尔街见闻",
+        "matched": "美元"
       },
       {
         "symbol": "USDCNY=X",
@@ -11571,14 +11587,6 @@
       {
         "symbol": "USDCNY=X",
         "displayName": "美元 / 人民币",
-        "title": "美股期货全线下跌，美元下跌，美债上涨",
-        "url": "https://wallstreetcn.com/articles/3785134",
-        "source": "华尔街见闻",
-        "matched": "美元"
-      },
-      {
-        "symbol": "USDCNY=X",
-        "displayName": "美元 / 人民币",
         "title": "美国财政部将拍卖580亿美元三年期债券；420亿美元十年期债券；250亿美元30年期债券",
         "url": "https://wallstreetcn.com/articles/3785195",
         "source": "华尔街见闻",
@@ -11591,6 +11599,30 @@
         "url": "https://wallstreetcn.com/member/articles/3784925",
         "source": "华尔街见闻",
         "matched": "美元"
+      },
+      {
+        "symbol": "USDCNY=X",
+        "displayName": "美元 / 人民币",
+        "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
+        "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
+        "source": "DW 中文",
+        "matched": "美元"
+      },
+      {
+        "symbol": "USDCNY=X",
+        "displayName": "美元 / 人民币",
+        "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
+        "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
+        "source": "DW 中文",
+        "matched": "美元"
+      },
+      {
+        "symbol": "512480.SS",
+        "displayName": "半导体ETF",
+        "title": "财联社11月5日电，高通CEO称，公司正与一家数据中心加速器客户就后续定制芯片进行深入洽谈。随着苹果产品收入下降，预计12月当季不会是我们业绩最好的季度。",
+        "url": "https://www.cls.cn/detail/2525647",
+        "source": "财联社电报",
+        "matched": "芯片"
       },
       {
         "symbol": "USDCNY=X",
@@ -11622,38 +11654,6 @@
         "title": "财联社11月5日电，Snap盘后跌超10%，公司预计第四财季营收19.5亿美元至19.9亿美元，市场预估19.6亿美元。",
         "url": "https://www.cls.cn/detail/2525628",
         "source": "财联社电报",
-        "matched": "美元"
-      },
-      {
-        "symbol": "USDCNY=X",
-        "displayName": "美元 / 人民币",
-        "title": "财联社11月5日电，Albemarle第三季度调整后每股收益2.58美元，预估2.51美元；第三季度销售净额15.5亿美元，预估15.2亿美元。",
-        "url": "https://www.cls.cn/detail/2525623",
-        "source": "财联社电报",
-        "matched": "美元"
-      },
-      {
-        "symbol": "USDCNY=X",
-        "displayName": "美元 / 人民币",
-        "title": "财联社11月5日电，高盛与阿波罗据悉正在就出售SpaceX规模约400亿美元的AI交易进行谈判。",
-        "url": "https://www.cls.cn/detail/2525621",
-        "source": "财联社电报",
-        "matched": "美元"
-      },
-      {
-        "symbol": "USDCNY=X",
-        "displayName": "美元 / 人民币",
-        "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
-        "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
-        "source": "DW 中文",
-        "matched": "美元"
-      },
-      {
-        "symbol": "USDCNY=X",
-        "displayName": "美元 / 人民币",
-        "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
-        "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-        "source": "DW 中文",
         "matched": "美元"
       },
       {
@@ -11717,12 +11717,17 @@
       {
         "symbol": "USDCNY=X",
         "displayName": "美元 / 人民币",
-        "count": 18
+        "count": 17
       },
       {
         "symbol": "GC=F",
         "displayName": "黄金期货",
         "count": 4
+      },
+      {
+        "symbol": "512480.SS",
+        "displayName": "半导体ETF",
+        "count": 2
       },
       {
         "symbol": "ETH-USD",
@@ -11737,11 +11742,6 @@
       {
         "symbol": "0700.HK",
         "displayName": "腾讯控股",
-        "count": 1
-      },
-      {
-        "symbol": "512480.SS",
-        "displayName": "半导体ETF",
         "count": 1
       }
     ],
@@ -12582,27 +12582,32 @@
     ]
   },
   "sentiment": {
-    "generated_at": "2026-11-04T22:11:24.715Z",
+    "generated_at": "2026-11-04T22:35:58.033Z",
     "score": 0,
-    "raw": -1,
+    "raw": -3,
     "label": "中性",
-    "posHits": 54,
-    "negHits": 59,
-    "scanned": 262,
+    "posHits": 73,
+    "negHits": 87,
+    "scanned": 315,
     "drivers": [
       {
         "term": "风险",
-        "hits": 21,
+        "hits": 32,
         "polarity": -1
       },
       {
         "term": "下跌",
-        "hits": 13,
+        "hits": 16,
+        "polarity": -1
+      },
+      {
+        "term": "关税",
+        "hits": 14,
         "polarity": -1
       },
       {
         "term": "surge",
-        "hits": 10,
+        "hits": 11,
         "polarity": 1
       },
       {
@@ -12611,36 +12616,36 @@
         "polarity": 1
       },
       {
-        "term": "上涨",
-        "hits": 10,
-        "polarity": 1
-      },
-      {
         "term": "rally",
-        "hits": 7,
+        "hits": 9,
         "polarity": 1
       },
       {
-        "term": "plunge",
-        "hits": 5,
-        "polarity": -1
+        "term": "上涨",
+        "hits": 9,
+        "polarity": 1
       },
       {
-        "term": "warning",
-        "hits": 4,
-        "polarity": -1
+        "term": "突破",
+        "hits": 8,
+        "polarity": 1
       }
     ],
     "sectors": [
       {
         "key": "china-etf",
-        "score": -17,
+        "score": -39,
         "posHits": 2,
-        "negHits": 2,
-        "articles": 2,
+        "negHits": 5,
+        "articles": 4,
         "topDrivers": [
           {
-            "term": "上涨",
+            "term": "风险",
+            "hits": 3,
+            "polarity": -1
+          },
+          {
+            "term": "突破",
             "hits": 2,
             "polarity": 1
           },
@@ -12652,11 +12657,40 @@
         ]
       },
       {
+        "key": "commodity-fx",
+        "score": -14,
+        "posHits": 21,
+        "negHits": 35,
+        "articles": 28,
+        "topDrivers": [
+          {
+            "term": "下跌",
+            "hits": 15,
+            "polarity": -1
+          },
+          {
+            "term": "风险",
+            "hits": 12,
+            "polarity": -1
+          },
+          {
+            "term": "反弹",
+            "hits": 6,
+            "polarity": 1
+          },
+          {
+            "term": "增持",
+            "hits": 4,
+            "polarity": 1
+          }
+        ]
+      },
+      {
         "key": "us-equity",
-        "score": -17,
+        "score": -13,
         "posHits": 4,
         "negHits": 5,
-        "articles": 4,
+        "articles": 5,
         "topDrivers": [
           {
             "term": "下跌",
@@ -12681,245 +12715,214 @@
         ]
       },
       {
-        "key": "commodity-fx",
-        "score": -8,
-        "posHits": 20,
-        "negHits": 29,
-        "articles": 26,
+        "key": "general",
+        "score": 2,
+        "posHits": 48,
+        "negHits": 46,
+        "articles": 275,
         "topDrivers": [
-          {
-            "term": "下跌",
-            "hits": 13,
-            "polarity": -1
-          },
           {
             "term": "风险",
-            "hits": 12,
+            "hits": 17,
             "polarity": -1
           },
-          {
-            "term": "反弹",
-            "hits": 6,
-            "polarity": 1
-          },
-          {
-            "term": "增持",
-            "hits": 4,
-            "polarity": 1
-          }
-        ]
-      },
-      {
-        "key": "general",
-        "score": 1,
-        "posHits": 32,
-        "negHits": 27,
-        "articles": 226,
-        "topDrivers": [
           {
             "term": "surge",
-            "hits": 10,
+            "hits": 11,
             "polarity": 1
           },
           {
-            "term": "风险",
-            "hits": 9,
+            "term": "关税",
+            "hits": 10,
             "polarity": -1
           },
           {
             "term": "rally",
-            "hits": 7,
-            "polarity": 1
-          },
-          {
-            "term": "上涨",
-            "hits": 7,
+            "hits": 9,
             "polarity": 1
           }
         ]
       }
     ],
-    "percentile": 100,
+    "percentile": 96,
     "note": "基于财经标题的词典规则面板（标题 ×2、摘要 ×1）。零 AI。不构成投资建议。"
   },
   "fetch_health": {
-    "generated_at": "2026-11-04T22:11:04.181Z",
+    "generated_at": "2026-11-04T22:35:43.408Z",
     "entries": [
       {
+        "id": "attentionvc-ai",
+        "ms": 137,
+        "ok": true,
+        "count": 13
+      },
+      {
         "id": "cnbc-topnews",
-        "ms": 114,
+        "ms": 256,
         "ok": true,
         "count": 30
       },
       {
         "id": "wsj-markets",
-        "ms": 130,
+        "ms": 280,
         "ok": true,
         "count": 20
       },
       {
-        "id": "attentionvc-ai",
-        "ms": 199,
-        "ok": true,
-        "count": 13
-      },
-      {
         "id": "marketwatch-top",
-        "ms": 47,
+        "ms": 59,
         "ok": true,
         "count": 10
       },
       {
-        "id": "bbc-business",
-        "ms": 44,
-        "ok": true,
-        "count": 30
-      },
-      {
         "id": "yahoo-finance",
-        "ms": 133,
+        "ms": 249,
         "ok": true,
-        "count": 14
-      },
-      {
-        "id": "economist-finance",
-        "ms": 108,
-        "ok": true,
-        "count": 30
-      },
-      {
-        "id": "bbc-world",
-        "ms": 13,
-        "ok": true,
-        "count": 23
-      },
-      {
-        "id": "guardian-world",
-        "ms": 66,
-        "ok": true,
-        "count": 30
+        "count": 17
       },
       {
         "id": "bloomberg-markets",
-        "ms": 403,
+        "ms": 359,
         "ok": true,
         "count": 20
       },
       {
         "id": "ft-companies",
-        "ms": 407,
+        "ms": 381,
         "ok": true,
         "count": 25
       },
       {
-        "id": "nyt-world",
-        "ms": 68,
+        "id": "economist-finance",
+        "ms": 95,
         "ok": true,
         "count": 30
       },
       {
+        "id": "ftchinese-news",
+        "ms": 430,
+        "ok": true,
+        "count": 20
+      },
+      {
+        "id": "bbc-world",
+        "ms": 56,
+        "ok": true,
+        "count": 23
+      },
+      {
+        "id": "guardian-world",
+        "ms": 102,
+        "ok": true,
+        "count": 30
+      },
+      {
+        "id": "nyt-world",
+        "ms": 120,
+        "ok": true,
+        "count": 30
+      },
+      {
+        "id": "bbc-business",
+        "ms": 382,
+        "ok": true,
+        "count": 30
+      },
+      {
+        "id": "wallstreetcn",
+        "ms": 467,
+        "ok": true,
+        "count": 25
+      },
+      {
         "id": "npr-world",
-        "ms": 83,
+        "ms": 417,
         "ok": true,
         "count": 10
       },
       {
-        "id": "wallstreetcn",
-        "ms": 472,
+        "id": "dw-chinese",
+        "ms": 543,
         "ok": true,
-        "count": 25
-      },
-      {
-        "id": "jin10-flash",
-        "ms": 95,
-        "ok": true,
-        "count": 0
-      },
-      {
-        "id": "aljazeera",
-        "ms": 585,
-        "ok": true,
-        "count": 25
+        "count": 30
       },
       {
         "id": "eastmoney-kuaixun",
-        "ms": 46,
+        "ms": 39,
         "ok": false,
         "count": 0,
         "error": "Unencoded <\nLine: 0\nColumn: 1342\nChar: ="
       },
       {
-        "id": "cls-telegraph",
-        "ms": 281,
+        "id": "jin10-flash",
+        "ms": 287,
         "ok": true,
-        "count": 20
+        "count": 0
+      },
+      {
+        "id": "aljazeera",
+        "ms": 573,
+        "ok": true,
+        "count": 25
       },
       {
         "id": "the-diplomat",
-        "ms": 645,
+        "ms": 513,
         "ok": true,
         "count": 30
       },
       {
-        "id": "dw-chinese",
-        "ms": 751,
+        "id": "people-finance",
+        "ms": 969,
         "ok": true,
         "count": 30
       },
       {
-        "id": "zhihu-hot",
-        "ms": 724,
-        "ok": true,
-        "count": 0
-      },
-      {
-        "id": "caixin",
-        "ms": 87,
+        "id": "cls-telegraph",
+        "ms": 481,
         "ok": true,
         "count": 20
       },
       {
-        "id": "weibo-hot",
-        "ms": 1161,
+        "id": "caixin",
+        "ms": 278,
         "ok": true,
-        "count": 0
+        "count": 20
       },
       {
         "id": "yicai",
-        "ms": 530,
+        "ms": 329,
         "ok": true,
         "count": 5
       },
       {
-        "id": "douyin-hot",
-        "ms": 1710,
-        "ok": true,
-        "count": 1
-      },
-      {
-        "id": "baidu-hot",
-        "ms": 1829,
+        "id": "zhihu-hot",
+        "ms": 621,
         "ok": true,
         "count": 0
       },
       {
-        "id": "ftchinese-news",
-        "ms": 10002,
-        "ok": false,
-        "count": 0,
-        "error": "Request timed out after 10000ms"
+        "id": "weibo-hot",
+        "ms": 1170,
+        "ok": true,
+        "count": 0
       },
       {
-        "id": "people-finance",
-        "ms": 10000,
-        "ok": false,
-        "count": 0,
-        "error": "Request timed out after 10000ms"
+        "id": "baidu-hot",
+        "ms": 1549,
+        "ok": true,
+        "count": 0
+      },
+      {
+        "id": "douyin-hot",
+        "ms": 1717,
+        "ok": true,
+        "count": 1
       }
     ]
   },
   "morning_brief": {
-    "generated_at": "2026-11-04T22:11:24.720Z",
+    "generated_at": "2026-11-04T22:35:58.036Z",
     "base_edition": "2026-11-04/13",
     "sentimentDelta": 1,
     "baseSentiment": -1,
@@ -12928,7 +12931,7 @@
         "symbol": "ETH-USD",
         "displayName": "Ethereum",
         "group": "crypto",
-        "pct1Day": 6.556627638484332
+        "pct1Day": 7.173948030338105
       },
       {
         "symbol": "BABA",
@@ -12940,7 +12943,7 @@
         "symbol": "BTC-USD",
         "displayName": "Bitcoin",
         "group": "crypto",
-        "pct1Day": 3.891384447493098
+        "pct1Day": 4.322724285633198
       },
       {
         "symbol": "GC=F",
@@ -12962,14 +12965,20 @@
       }
     ],
     "newKeywords": [
+      "美元",
       "民主",
       "主党",
-      "美元",
+      "美股",
       "财季",
-      "4亿",
-      "亿美"
+      "4亿"
     ],
     "premarketTips": [
+      {
+        "time": "06:25",
+        "title": "持续改善环境质量 推进和实现碳达峰——从“十五五”专项规划看绿色发展新气象",
+        "summary": "新华财经北京11月5日电（记者高敬）“十五五”时期是美丽中国建设承前启后、扩面提质，实现生态环境根本好转的关键阶段。“十五五”规划纲要对“加快经济社会发展全面绿色转型建设美丽中国”作出系统部署。今年以来，涵盖固体废物污染防治、林业草原保护利",
+        "url": "http://finance.eastmoney.com/news/1352,202611053922400424.html"
+      },
       {
         "time": "06:05",
         "title": "开放中国“进”无止境",
@@ -12999,12 +13008,6 @@
         "title": "划清用地边界",
         "summary": "大棚遍地、设施种养兴起，设施农业拓宽了农户家门口的增收路子，成为乡村就近就业、稳收致富的重要抓手，但在发展过程中也伴随选址无序、超规占地、私搭乱建“大棚房”等乱象。设施农业用地实行正面清单管理，从选址、规模、备案、登记到监管立明规矩，各环节",
         "url": "http://finance.eastmoney.com/news/1350,202611053922393063.html"
-      },
-      {
-        "time": "06:05",
-        "title": "产业思维重塑工美业",
-        "summary": "工艺美术产业是以手工技艺为核心，依托本土文化，生产兼具审美价值与实用价值工艺品的特色文化产业，被工信部列为我国历史经典产业的七大门类之一。当前，工美产业处于传统传承向现代转型的关键过渡期，已形成覆盖多门类的完整产业体系，但与此同时，生产效率",
-        "url": "http://finance.eastmoney.com/news/1355,202611053922392743.html"
       }
     ],
     "flowLine": null,
@@ -13024,6 +13027,12 @@
       {
         "symbol": "USDCNY=X",
         "displayName": "美元 / 人民币",
+        "title": "美股期货全线下跌，美元下跌，美债上涨",
+        "url": "https://wallstreetcn.com/articles/3785134"
+      },
+      {
+        "symbol": "USDCNY=X",
+        "displayName": "美元 / 人民币",
         "title": "Arm控股第二财季总收入14.4亿美元，分析师预期13.8亿美元。 预计第三财季营收14.9亿-15.9亿美元，分析师预期15.3亿美元",
         "url": "https://wallstreetcn.com/articles/3785211"
       },
@@ -13032,12 +13041,6 @@
         "displayName": "美元 / 人民币",
         "title": "高通预计第一财季营收104亿-112亿美元，分析师预期105.5亿美元",
         "url": "https://wallstreetcn.com/articles/3785210"
-      },
-      {
-        "symbol": "USDCNY=X",
-        "displayName": "美元 / 人民币",
-        "title": "英特尔跌幅收窄，CEO斥资近千万美元增持股票",
-        "url": "https://wallstreetcn.com/articles/3785204"
       }
     ],
     "note": "对比 2026-11-04/13 档的隔夜速览——纯算术、零 AI。不构成投资建议。"

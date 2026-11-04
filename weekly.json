@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T22:13:20.024Z",
+  "generatedAt": "2026-11-04T22:36:45.281Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 9,
@@ -139,20 +139,20 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -18.5,
+      "avg": -18.3,
+      "editions": 22
+    },
+    {
+      "key": "china-etf",
+      "label": "ETF",
+      "avg": -15.3,
       "editions": 22
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": 14.9,
+      "avg": 14,
       "editions": 7
-    },
-    {
-      "key": "china-etf",
-      "label": "ETF",
-      "avg": -14.3,
-      "editions": 22
     }
   ],
   "topEvents": [
@@ -175,7 +175,7 @@
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "NVDA",
