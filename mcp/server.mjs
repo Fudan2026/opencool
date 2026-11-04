@@ -9,6 +9,9 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const MCP_DIR = path.dirname(fileURLToPath(import.meta.url));
 
 /** Resolve daily_reports whether cwd is mcp/ or the repo root. */
 function reportsDir() {
@@ -17,10 +20,25 @@ function reportsDir() {
   }
   return "../daily_reports";
 }
-const WATCHLIST = [
+// Embedded fallback only — the live list is mcp/watchlist.json,
+// generated from lib/trading/watchlist.ts by `npm run mcp:sync-watchlist`
+// (parity is enforced by tests/golden/mcp-parity.test.ts).
+const WATCHLIST_FALLBACK = [
   "600519.SS", "300750.SZ", "601318.SS", "600036.SS", "510300.SS", "159915.SZ",
   "000001.SS", "BABA", "0700.HK", "SPY", "BTC-USD",
 ];
+
+function loadWatchlist() {
+  try {
+    const j = JSON.parse(
+      fs.readFileSync(path.join(MCP_DIR, "watchlist.json"), "utf8"),
+    );
+    if (Array.isArray(j?.entries) && j.entries.length) return j.entries;
+  } catch {
+    /* fall back to the embedded list */
+  }
+  return WATCHLIST_FALLBACK.map((symbol) => ({ symbol, displayName: symbol, group: "unknown" }));
+}
 
 async function yahooChart(symbol, range = "3mo") {
   const url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=${range}&interval=1d`;
@@ -120,11 +138,56 @@ function sentimentTrend(args) {
   };
 }
 
+function searchEditions(args) {
+  const fp = path.join(reportsDir(), "search-index.json");
+  if (!fs.existsSync(fp)) {
+    throw new Error(
+      "search-index.json not found — run npm run search:bake (after daily)",
+    );
+  }
+  const idx = JSON.parse(fs.readFileSync(fp, "utf8"));
+  const q = String(args?.q || "").trim();
+  if (!q) throw new Error("q is required");
+  const limit = Math.max(1, Math.min(Number(args?.limit) || 10, 50));
+  // Tokenizer port of lib/search/tokenize.ts (CJK bigrams + ascii words).
+  const STOP = new Set(["the","and","for","with","from","that","this","are","was","were","will","have","has","had","after","over","into","says","said","to","of","in","on","at","by","it","its","is","be","been","am","as","or","an","not","but","new","out","up","down","about","more","than","can","may","how","why","who","what","when","all","also","just","now","get","one","two","first","amid","via","po","com","www","http","https","中国","美国","市场","今日","报道","公司","企业","行业","问题","工作","进行","表示","记者"]);
+  const terms = [];
+  const seen = new Set();
+  for (const w of (q.toLowerCase().match(/[a-z0-9][a-z0-9.+^=-]{2,}/g) || []))
+    if (!STOP.has(w) && !seen.has(w)) { seen.add(w); terms.push(w); }
+  for (const run of (q.match(/[一-鿿]{2,}/g) || []))
+    for (let i = 0; i < run.length - 1; i++) {
+      const g = run.slice(i, i + 2);
+      if (!seen.has(g)) { seen.add(g); terms.push(g); }
+    }
+  if (!terms.length) throw new Error("query produced no tokens");
+  const lists = terms.map((t) => idx.postings[t] || []).filter((l) => l.length);
+  if (!lists.length) return { query: q, count: 0, results: [] };
+  const intersect = (a, b) => {
+    const o = []; let i = 0, j = 0;
+    while (i < a.length && j < b.length) {
+      if (a[i] === b[j]) { o.push(a[i]); i++; j++; }
+      else if (a[i] < b[j]) i++; else j++;
+    }
+    return o;
+  };
+  let pool = lists[0];
+  for (let i = 1; i < lists.length; i++) pool = intersect(pool, lists[i]);
+  if (!pool.length) {
+    const score = new Map();
+    for (const l of lists) for (const idx2 of l) score.set(idx2, (score.get(idx2) || 0) + 1);
+    pool = [...score.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0]).map((e) => e[0]).slice(0, limit);
+  }
+  const results = pool.slice(0, limit).map((idx2) => idx.docs[idx2]);
+  return { query: q, count: results.length, results };
+}
+
 /** Extremely small JSON-RPC MCP-ish loop over stdin/stdout (tools/list + tools/call). */
 const tools = [
   {
     name: "list_watchlist",
-    description: "List OpenCool default A-share / ETF / macro symbols",
+    description:
+      "List OpenCool watchlist (synced from lib/trading/watchlist.ts): symbols + display names + groups",
     inputSchema: { type: "object", properties: {} },
   },
   {
@@ -160,6 +223,16 @@ const tools = [
     },
   },
   {
+    name: "search_editions",
+    description:
+      "Full-text search over published editions (search-index.json): q (required), limit <= 50",
+    inputSchema: {
+      type: "object",
+      properties: { q: { type: "string" }, limit: { type: "number" } },
+      required: ["q"],
+    },
+  },
+  {
     name: "sentiment_trend",
     description:
       "Rolling sentiment history (sentiment-history.json, newest last); optional limit <= 60",
@@ -171,13 +244,21 @@ const tools = [
 ];
 
 async function handleTool(name, args) {
-  if (name === "list_watchlist") return { symbols: WATCHLIST };
+  if (name === "list_watchlist") {
+    const entries = loadWatchlist();
+    return {
+      symbols: entries.map((e) => e.symbol),
+      details: entries,
+      note: "synced from lib/trading/watchlist.ts via npm run mcp:sync-watchlist",
+    };
+  }
   if (name === "get_quote" || name === "get_kline") {
     return yahooChart(args.symbol || "600519.SS");
   }
   if (name === "market_overview") return marketOverview();
   if (name === "sentiment_query") return sentimentQuery(args);
   if (name === "sentiment_trend") return sentimentTrend(args);
+  if (name === "search_editions") return searchEditions(args);
   throw new Error(`unknown tool ${name}`);
 }
 
