@@ -56,7 +56,8 @@ Workflow 默认 `LLM_MODE=auto`：**零 AI · 零 Token 是默认态**。只有�
 | `/status.html` | Publish matrix + source health |
 | `/llms.txt` | Agent-discoverable index |
 
-Full reference: [`docs/DATA-CONTRACT.md`](docs/DATA-CONTRACT.md).
+Full reference: [`docs/DATA-CONTRACT.md`](docs/DATA-CONTRACT.md) ·
+中文版：[`docs/DATA-CONTRACT.zh-CN.md`](docs/DATA-CONTRACT.zh-CN.md)。
 
 ---
 
