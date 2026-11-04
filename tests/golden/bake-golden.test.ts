@@ -78,15 +78,27 @@ test("golden: build-site end-to-end", async (t) => {
   const R = path.join(tmp, "daily_reports");
   const today = dayOffset(0);
   const yesterday = dayOffset(1);
+  const d2 = dayOffset(2);
+  const d3 = dayOffset(3);
+  const d4 = dayOffset(4);
   const old = dayOffset(40); // beyond PRUNE_ARTICLES_DAYS=30
 
   // today: both slots real; yesterday: 19 real + 06 placeholder;
+  // d2-d4: one slot each (crosses the weekly MIN_DAYS=5 floor);
+  // caixin fails on every sidecar → 7-day streak → overlay E2E;
   // 40 days ago: real edition with a prunable articles sidecar
-  makeSidecar(R, today, "06");
-  makeSidecar(R, today, "19");
-  makeSidecar(R, yesterday, "19");
+  for (const [d, h] of [
+    [today, "06"],
+    [today, "19"],
+    [yesterday, "19"],
+    [d2, "06"],
+    [d3, "06"],
+    [d4, "06"],
+    [old, "06"],
+  ] as const) {
+    makeSidecar(R, d, h, { caixinFail: true });
+  }
   makePlaceholder(R, yesterday, "06");
-  makeSidecar(R, old, "06");
   fs.writeFileSync(
     path.join(R, old, "06-articles.json"),
     JSON.stringify({ articles: [] }),
@@ -94,6 +106,16 @@ test("golden: build-site end-to-end", async (t) => {
   );
 
   bake(tmp);
+
+  // keywords + weekly bakes run AFTER build-site in CI; exercise them on
+  // the same fixture via the real scripts (tsx binary, tmp cwd).
+  const tsxBin = path.join(REPO_ROOT, "node_modules", ".bin", "tsx");
+  for (const script of ["bake-keywords.ts", "build-weekly.ts"]) {
+    execFileSync(tsxBin, [path.join(REPO_ROOT, "scripts", script)], {
+      cwd: tmp,
+      stdio: "pipe",
+    });
+  }
 
   const read = (f: string) => fs.readFileSync(path.join(R, f), "utf8");
 
@@ -133,12 +155,19 @@ test("golden: build-site end-to-end", async (t) => {
 
   await t.test("sentiment-history.json: chronological, placeholders excluded", () => {
     const h = JSON.parse(read("sentiment-history.json"));
-    // 4 real sidecars: 40d-ago 06 + yesterday 19 + today 06/19 (the
-    // yesterday-06 placeholder has no JSON and must not appear)
-    assert.equal(h.count, 4);
-    const dates = h.items.map((i: { date: string }) => i.date);
-    assert.deepEqual(dates, [old, yesterday, today, today]);
-    assert.deepEqual(h.items.map((i: { hour: string }) => i.hour), ["06", "19", "06", "19"]);
+    // 7 real sidecars: old-06 + d4/d3/d2-06 + yesterday-19 + today-06/19
+    // (the yesterday-06 placeholder has no JSON and must not appear)
+    assert.equal(h.count, 7);
+    const keys = h.items.map((i: { date: string; hour: string }) => `${i.date} ${i.hour}`);
+    assert.deepEqual(keys, [
+      `${old} 06`,
+      `${d4} 06`,
+      `${d3} 06`,
+      `${d2} 06`,
+      `${yesterday} 19`,
+      `${today} 06`,
+      `${today} 19`,
+    ]);
   });
 
   await t.test("prune: 40d-old articles sidecar gone, report JSON kept", () => {
@@ -147,12 +176,38 @@ test("golden: build-site end-to-end", async (t) => {
     assert.ok(fs.existsSync(path.join(R, old, "06.html")));
   });
 
-  await t.test("source health: streak logic sees the 3-day fixture only when real", () => {
-    // single day fixture → no 3-day streak → no overlay file
-    assert.ok(!fs.existsSync(path.join(R, "source-overlay.json")));
+  await t.test("source health: 7-day caixin streak lands in the overlay", () => {
+    // caixin fails every edition across 7 fixture days → streak ≥ 3 →
+    // build-site writes source-overlay.json disabling it (E2E lifecycle).
+    const overlay = JSON.parse(read("source-overlay.json"));
+    assert.ok(
+      overlay.disabled.some((d: { id: string }) => d.id === "caixin"),
+      `caixin not disabled: ${JSON.stringify(overlay.disabled)}`,
+    );
+    assert.ok(
+      !overlay.disabled.some((d: { id: string }) => d.id === "healthy-src"),
+    );
     const status = read("status.html");
     assert.ok(status.includes("源健康"));
-    assert.ok(status.includes("healthy-src"));
+    assert.ok(status.includes("已入 overlay 禁用"));
+  });
+
+  await t.test("keywords.json: bake aggregates the fixture window", () => {
+    const k = JSON.parse(read("keywords.json"));
+    assert.equal(k.windowDays, 7);
+    // 6 in-window editions (40d-old is outside the 7-day cutoff)
+    assert.equal(k.editions, 6);
+    assert.ok(k.items.some((i: { term: string }) => i.term === "MLF"));
+    assert.ok(k.items.some((i: { term: string }) => i.term === "央行"));
+  });
+
+  await t.test("weekly.json: 5 fixture days cross MIN_DAYS", () => {
+    const w = JSON.parse(read("weekly.json"));
+    assert.equal(w.daysCovered, 5);
+    // today has two slots (06+19) → 6 editions across 5 days
+    assert.equal(w.editions, 6);
+    assert.ok(Array.isArray(w.sectorAvg));
+    assert.ok(Array.isArray(w.topEvents));
   });
 
   fs.rmSync(tmp, { recursive: true, force: true });

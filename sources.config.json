@@ -748,7 +748,7 @@
     "locales": [
       "zh"
     ],
-    "notes": "RSSHub Eastmoney flashes. No reliable mirror found (slarker 404 for this route); useCurl + browser UA is the first-line fix on CI.",
+    "notes": "RSSHub Eastmoney flashes. No working route/mirror found (slarker 404, fx678 route absent); useCurl first-line, overlay lifecycle owns persistent failure. Research trail: official kuaixun.eastmoney.com page has no official feed; candidates probed 2026-11-03/04.",
     "useCurl": true
   },
   {
@@ -843,7 +843,7 @@
     "id": "yicai",
     "name": "第一财经",
     "type": "rss",
-    "url": "https://hub.slarker.me/yicai/news",
+    "url": "https://fetchrss.com/feed/1uKxrWFtuEwJ1uKxqy1VL3yH.rss",
     "category": "finance",
     "subcategory": "cn-news",
     "lang": "zh",
@@ -851,9 +851,10 @@
     "locales": [
       "zh"
     ],
-    "notes": "www.yicai.com/rss/news.xml returns 404. Primary = slarker public RSSHub instance (verified); canonical route kept as mirror.",
+    "notes": "official www.yicai.com/rss/news.xml 404 (dead); slarker aggregator feed carries unencoded < (XML parse error). Primary = fetchrss generated feed (verified 200 + valid XML, 2026-11-04); aggregator + canonical routes kept as mirrors.",
     "useCurl": true,
     "mirrors": [
+      "https://hub.slarker.me/yicai/news",
       "https://rsshub.app/yicai/news"
     ]
   },
