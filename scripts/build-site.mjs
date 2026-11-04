@@ -833,6 +833,9 @@ No LLM behind any endpoint.
 - Search: /search.html + /search-index.json — inverted index
   {docs:[{d,h,t}],postings:{token:[docIdx...]}} over all real editions;
   tokens = CJK bigrams + ascii words (>=3 chars, stopword-filtered)
+- MCP tools (local): list_watchlist (synced with the pipeline watchlist),
+  get_quote, get_kline, market_overview, sentiment_query, sentiment_trend,
+  search_editions
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html

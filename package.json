@@ -18,6 +18,7 @@
     "keywords:bake": "tsx scripts/bake-keywords.ts",
     "weekly:bake": "tsx scripts/build-weekly.ts",
     "search:bake": "tsx scripts/bake-search.ts",
+    "mcp:sync-watchlist": "tsx scripts/sync-mcp-watchlist.ts",
     "open": "node scripts/open-report.mjs"
   },
   "dependencies": {

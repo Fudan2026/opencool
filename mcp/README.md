@@ -12,6 +12,7 @@
 | `market_overview` | 东方财富延时指数快照 |
 | `sentiment_query` | 最新（或指定 date+hour）档的零 AI 词典情绪：score/label/sectors/percentile |
 | `sentiment_trend` | 滚动情绪历史（sentiment-history.json，时间正序，limit≤60） |
+| `search_editions` | 全文搜索已发布档期（search-index.json，q 必填，limit≤50） |
 
 零付费 API Key。数据有延迟，仅供研究，不构成投资建议。
 
