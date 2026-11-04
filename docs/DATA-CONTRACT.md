@@ -50,6 +50,7 @@ sidecar to distinguish real editions.
 | `feed.xml` | build-site | RSS 2.0, newest 30 **real** editions |
 | `status.html` | build-site | Publish matrix (14d) + source-health + sentiment trend |
 | `source-overlay.json` | build-site | `{disabled:[{id,reason,since}]}` — present only when sources fail ≥3 straight days |
+| `tools.json` + `ai-instructions.html` | build-site | Static MCP manifest (7 tools → static endpoints) + agent onboarding page |
 | `llms.txt` | build-site | Agent-discoverable index of all of the above |
 
 ## MCP tools (local, `cd mcp && npm start`)
