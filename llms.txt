@@ -15,6 +15,12 @@ No LLM behind any endpoint.
   {term,count,firstSeen,lastSeen}, stopword-cleaned
 - Weekly review: /weekly.html + /weekly.json — 7-day sentiment curve,
   sector averages, top events, index averages (baked when >= 5 days)
+- Search: /search.html + /search-index.json — inverted index
+  {docs:[{d,h,t}],postings:{token:[docIdx...]}} over all real editions;
+  tokens = CJK bigrams + ascii words (>=3 chars, stopword-filtered)
+- MCP tools (local): list_watchlist (synced with the pipeline watchlist),
+  get_quote, get_kline, market_overview, sentiment_query, sentiment_trend,
+  search_editions
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html
