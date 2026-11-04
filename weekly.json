@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-04T07:08:27.239Z",
+  "generatedAt": "2026-11-04T22:13:20.024Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 21,
-  "avgSentiment": -89,
+  "daysCovered": 9,
+  "editions": 22,
+  "avgSentiment": -85,
   "sentimentCurve": [
     {
       "date": "2026-10-28",
@@ -110,14 +110,19 @@
       "date": "2026-11-04",
       "hour": "13",
       "score": -1
+    },
+    {
+      "date": "2026-11-05",
+      "hour": "06",
+      "score": 0
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -88.3,
-      "editions": 21
+      "avg": -84.2,
+      "editions": 22
     },
     {
       "key": "macro",
@@ -132,22 +137,22 @@
       "editions": 1
     },
     {
-      "key": "commodity-fx",
-      "label": "商品汇率",
-      "avg": 18.7,
-      "editions": 6
-    },
-    {
       "key": "us-equity",
       "label": "美股",
-      "avg": -18.6,
-      "editions": 21
+      "avg": -18.5,
+      "editions": 22
+    },
+    {
+      "key": "commodity-fx",
+      "label": "商品汇率",
+      "avg": 14.9,
+      "editions": 7
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -14.1,
-      "editions": 21
+      "avg": -14.3,
+      "editions": 22
     }
   ],
   "topEvents": [
@@ -156,14 +161,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "USDCNY=X",
@@ -184,7 +189,7 @@
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 9
+      "count": 10
     },
     {
       "symbol": "BTC-USD",
@@ -347,18 +352,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.71,
-      "editions": 21
+      "avgChangePct": -0.58,
+      "editions": 22
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.28,
-      "editions": 19
+      "avgChangePct": -1.01,
+      "editions": 20
     },
     {
       "name": "创业板指",
-      "avgChangePct": -2.03,
-      "editions": 18
+      "avgChangePct": -1.59,
+      "editions": 19
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
