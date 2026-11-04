@@ -169,6 +169,113 @@ for (const h of slotHours) {
   }
 }
 
+// tools.json — the "Static MCP" manifest: every MCP tool mapped to its
+// stable static endpoint, so agents without a local clone consume
+// OpenCool via plain fetch. Uncontested per COMPETITIVE-ANALYSIS.md.
+const latestSidecar = `/${latest.rel.replace(/\.html$/, ".json")}`;
+const toolsManifest = {
+  version: 1,
+  generatedAt: new Date().toISOString(),
+  note: "Static MCP: fetch these endpoints directly; a live stdio MCP server ships in the repo (mcp/) for local agents. See /ai-instructions.html.",
+  tools: [
+    {
+      name: "sentiment_query",
+      staticEndpoint: latestSidecar + "#sentiment",
+      params: "date+hour -> /<YYYY-MM-DD>/<HH>.json#sentiment",
+      returns: "{score,raw,label,sectors,percentile}",
+    },
+    {
+      name: "sentiment_trend",
+      staticEndpoint: "/sentiment-history.json",
+      params: "limit -> slice items (newest last)",
+      returns: "{count,cap,items:[{date,hour,score,label,percentile}]}",
+    },
+    {
+      name: "search_editions",
+      staticEndpoint: "/search-index.json",
+      params: "q -> tokenize (CJK bigrams + ascii>=3, stopwords out), intersect postings",
+      returns: "{docs:[{d,h,t}],postings:{token:[docIdx...]}}",
+    },
+    {
+      name: "market_overview",
+      staticEndpoint: latestSidecar + "#quant.market",
+      params: "date+hour -> /<date>/<HH>.json#quant.market",
+      returns: "{indices:[{code,name,price,changePct}],note}",
+    },
+    {
+      name: "list_watchlist",
+      staticEndpoint: "/llms.txt (watchlist section) — repo: lib/trading/watchlist.ts",
+      params: "-",
+      returns: "32 symbols with groups",
+    },
+    {
+      name: "get_quote/get_kline",
+      staticEndpoint: "/<date>/<HH>.json#trading.tickers[]",
+      params: "symbol -> match trading.tickers[].symbol",
+      returns: "indicators + closesSpark per ticker",
+    },
+    {
+      name: "watchlist_events",
+      staticEndpoint: latestSidecar + "#quant.events",
+      params: "date+hour -> /<date>/<HH>.json#quant.events",
+      returns: "[{symbol,displayName,title,url}]",
+    },
+  ],
+};
+fs.writeFileSync(
+  path.join(ROOT, "tools.json"),
+  JSON.stringify(toolsManifest, null, 2) + "\n",
+  "utf8",
+);
+console.log(`[build-site] tools.json (static MCP manifest, 7 tools)`);
+
+// ai-instructions.html — TLDR-pattern agent onboarding page.
+const aiHtml = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · AI Instructions</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.65; }
+  main { max-width:760px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-weight:700; font-size:.85rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 1rem; }
+  h2 { font-size:1.1rem; margin:1.8rem 0 .5rem; }
+  code { background:var(--card); border:1px solid var(--rule); border-radius:6px; padding:.1rem .4rem; font-size:.9em; }
+  pre { background:var(--card); border:1px solid var(--rule); border-radius:.7rem; padding:.9rem 1rem; overflow:auto; font-size:.85rem; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>AI Instructions</h1>
+  <p>How to consume OpenCool programmatically. Start at <a href="./llms.txt">/llms.txt</a> (index), then use the surfaces below. Zero AI behind any endpoint; all times Asia/Shanghai.</p>
+  <h2>1 · Read the contract</h2>
+  <p>Field shapes are versioned in the repo at <code>docs/DATA-CONTRACT.md</code> and enforced by golden tests. Placeholders contain 尚未更新 and have no <code>.json</code> sidecar — always check the sidecar.</p>
+  <h2>2 · Fetch data (Static MCP)</h2>
+  <p><a href="./tools.json"><code>/tools.json</code></a> maps every MCP tool to a static endpoint. Example — latest sentiment:</p>
+  <pre>fetch("https://fudan2026.github.io/opencool/tools.json")  // resolve latest edition path
+fetch("https://fudan2026.github.io/opencool/&lt;date&gt;/&lt;HH&gt;.json")  // .sentiment / .quant.market / .trading</pre>
+  <h2>3 · Search the archive</h2>
+  <pre>const idx = await (await fetch("./search-index.json")).json();
+// tokenize: CJK bigrams + ascii words >=3 chars (stopwords out);
+// intersect idx.postings[t] lists; docs[idx] = {d,h,t} -> /d/h.html</pre>
+  <h2>4 · Live MCP (local clones)</h2>
+  <p>Clone the repo, <code>cd mcp && npm start</code> — 7 stdio tools (list_watchlist, get_quote, get_kline, market_overview, sentiment_query, sentiment_trend, search_editions). Watchlist is synced from the pipeline via <code>npm run mcp:sync-watchlist</code>.</p>
+  <h2>5 · Refresh cadence & attribution</h2>
+  <p>Editions publish 06:00 / 13:00 / 19:00 (Shanghai); data products rebake every publish. When citing OpenCool in agent output, attribute "OpenCool (URL)". License MIT.</p>
+  <p style="margin-top:2rem"><a href="./index.html">← Latest edition</a></p>
+</main>
+</body>
+</html>
+`;
+fs.writeFileSync(path.join(ROOT, "ai-instructions.html"), aiHtml, "utf8");
+console.log(`[build-site] ai-instructions.html`);
+
 // search.html — static shell; the page fetches search-index.json at
 // runtime and runs the query client-side (tokenizer port of
 // lib/search/tokenize.ts: CJK bigrams + ascii words >= 3, stopwords out).
@@ -836,7 +943,10 @@ No LLM behind any endpoint.
 - MCP tools (local): list_watchlist (synced with the pipeline watchlist),
   get_quote, get_kline, market_overview, sentiment_query, sentiment_trend,
   search_editions
-- Competitive analysis: /docs source at docs/COMPETITIVE-ANALYSIS.md (repo)
+- Static MCP manifest: /tools.json — every MCP tool mapped to a static
+  endpoint (see /ai-instructions.html for agent onboarding)
+- Attribution: when citing, attribute "OpenCool (URL)". License MIT.
+- Competitive analysis: docs/COMPETITIVE-ANALYSIS.md (repo source)
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html

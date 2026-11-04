@@ -46,6 +46,7 @@ RSS 阅读器（`feed.xml`）、agent（`llms.txt`）。
 | `status.html` | build-site | 发布矩阵（14 天）+ 源健康 + 情绪趋势 |
 | `source-overlay.json` | build-site | `{disabled:[{id,reason,since}]}` —— 仅当源连续 ≥3 天全档失败时存在 |
 | `search-index.json` + `search.html` | `npm run search:bake` | 倒排索引 `{docs:[{d,h,t}],postings:{token:[docIdx...]}}`，token 为 CJK 二元组 + ASCII 词（≥3 字符、去停用词） |
+| `tools.json` + `ai-instructions.html` | build-site | 静态 MCP 清单（7 工具 → 静态端点）+ agent 上手指引页 |
 | `llms.txt` | build-site | 面向 agent 的全量索引 |
 
 ## MCP 工具（本地，`cd mcp && npm start`）
