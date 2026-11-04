@@ -169,6 +169,106 @@ for (const h of slotHours) {
   }
 }
 
+// search.html — static shell; the page fetches search-index.json at
+// runtime and runs the query client-side (tokenizer port of
+// lib/search/tokenize.ts: CJK bigrams + ascii words >= 3, stopwords out).
+if (fs.existsSync(path.join(ROOT, "search-index.json"))) {
+  const searchHtml = `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · 搜索</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.6; }
+  main { max-width:720px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 .8rem; letter-spacing:-.03em; }
+  input { width:100%; padding:.8rem 1rem; border:1px solid var(--rule); border-radius:.75rem;
+    font:600 1rem "Noto Sans SC",system-ui,sans-serif; background:var(--card); color:var(--fg); }
+  input:focus { outline:2px solid var(--accent); outline-offset:1px; }
+  .meta { color:var(--muted); font-size:.85rem; margin-top:.5rem; }
+  .grp { margin-top:1.4rem; }
+  .grp h2 { font-size:.95rem; color:var(--muted); font-weight:600; margin:0 0 .5rem; }
+  a.res { display:block; padding:.7rem .9rem; background:var(--card); border:1px solid var(--rule);
+    border-radius:.7rem; margin-bottom:.45rem; text-decoration:none; color:inherit; }
+  a.res:hover { border-color:var(--accent); }
+  a.res b { display:block; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }
+  .empty { color:var(--muted); margin-top:1.5rem; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>搜索档案</h1>
+  <input id="q" type="search" placeholder="搜索历史档期：关键词 / 公司 / 事件…" autofocus aria-label="搜索">
+  <p class="meta" id="stat"></p>
+  <div id="out"></div>
+  <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
+   · <a class="home" href="./archive.html">历史归档</a></p>
+</main>
+<script>
+const STOP = new Set(["the","and","for","with","from","that","this","are","was","were","will","have","has","had","after","over","into","says","said","to","of","in","on","at","by","it","its","is","be","been","am","as","or","an","not","but","new","out","up","down","about","more","than","can","may","how","why","who","what","when","all","also","just","now","get","one","two","first","amid","via","po","com","www","http","https","中国","美国","市场","今日","报道","公司","企业","行业","问题","工作","进行","表示","记者"]);
+function tokenize(s){
+  const t=String(s||"");const out=[];const seen=new Set();
+  for(const w of (t.toLowerCase().match(/[a-z0-9][a-z0-9.+^=-]{2,}/g)||[]))
+    if(!STOP.has(w)&&!seen.has(w)){seen.add(w);out.push(w);}
+  for(const run of (t.match(/[\u4e00-\u9fff]{2,}/g)||[]))
+    for(let i=0;i<run.length-1;i++){const g=run.slice(i,i+2);if(!seen.has(g)){seen.add(g);out.push(g);}}
+  return out;
+}
+function intersect(a,b){const o=[];let i=0,j=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){o.push(a[i]);i++;j++;}else if(a[i]<b[j])i++;else j++;}return o;}
+let IDX=null;
+async function run(){
+  IDX=await (await fetch("./search-index.json")).json();
+  document.getElementById("stat").textContent="可检索 "+IDX.docs.length+" 期档案 · 零 AI 静态索引";
+  const q=document.getElementById("q");
+  const out=document.getElementById("out");
+  const render=()=>{
+    const terms=tokenize(q.value);
+    if(!terms.length){out.innerHTML="";return;}
+    const lists=terms.map(t=>IDX.postings[t]||[]).filter(l=>l.length);
+    if(!lists.length){out.innerHTML='<p class="empty">无匹配结果。</p>';return;}
+    let pool=lists[0];
+    for(let i=1;i<lists.length;i++)pool=intersect(pool,lists[i]);
+    if(!pool.length){
+      const score=new Map();
+      for(const l of lists)for(const idx of l)score.set(idx,(score.get(idx)||0)+1);
+      pool=[...score.entries()].sort((a,b)=>b[1]-a[1]||b[0]-a[0]).map(e=>e[0]).slice(0,30);
+    }
+    const groups=new Map();
+    for(const idx of pool.slice(0,60)){
+      const doc=IDX.docs[idx];
+      const k=doc.d;
+      if(!groups.has(k))groups.set(k,[]);
+      groups.get(k).push(doc);
+    }
+    out.innerHTML=[...groups.entries()].map(([d,docs])=>
+      '<div class="grp"><h2>'+d+'</h2>'+docs.map(doc=>
+        '<a class="res" href="./'+doc.d+'/'+doc.h+'.html"><b>'+doc.h+':00 · '+doc.t+'</b></a>').join("")+'</div>').join("");
+  };
+  q.addEventListener("input",render);
+  render();
+}
+run().catch(e=>{document.getElementById("stat").textContent="索引加载失败："+e.message;});
+</script>
+</body>
+</html>
+`;
+  fs.writeFileSync(path.join(ROOT, "search.html"), searchHtml, "utf8");
+  console.log("[build-site] search.html");
+}
+
 const latestPath = path.join(ROOT, latest.rel);
 let latestHtml = fs.readFileSync(latestPath, "utf8");
 latestHtml = latestHtml
@@ -190,6 +290,13 @@ if (fs.existsSync(path.join(ROOT, "weekly.html"))) {
     `  <a href="./weekly.html" style="position:fixed;right:1rem;bottom:3.6rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#0d9488;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">📊 周报</a>\n</body>`,
   );
   console.log(`[build-site] index.html += weekly entry`);
+}
+if (fs.existsSync(path.join(ROOT, "search.html"))) {
+  latestHtml = latestHtml.replace(
+    "</body>",
+    `  <a href="./search.html" style="position:fixed;right:1rem;bottom:6.2rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#2563eb;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">🔍 搜索</a>\n</body>`,
+  );
+  console.log(`[build-site] index.html += search entry`);
 }
 fs.writeFileSync(path.join(ROOT, "index.html"), latestHtml, "utf8");
 console.log(`[build-site] index.html  ← ${latest.rel}`);
@@ -318,6 +425,7 @@ const archiveHtml = `<!doctype html>
   <p><a class="home" href="./index.html">← 回到最新一期</a>
    · <a class="home" href="./trails.html">徒步路线收藏</a>
    · <a class="home" href="./weekly.html">周报</a>
+   · <a class="home" href="./search.html">搜索</a>
    · <a class="home" href="./status.html">运行状态</a></p>
 ${dayBlocks}
 </main>
@@ -722,6 +830,9 @@ No LLM behind any endpoint.
   {term,count,firstSeen,lastSeen}, stopword-cleaned
 - Weekly review: /weekly.html + /weekly.json — 7-day sentiment curve,
   sector averages, top events, index averages (baked when >= 5 days)
+- Search: /search.html + /search-index.json — inverted index
+  {docs:[{d,h,t}],postings:{token:[docIdx...]}} over all real editions;
+  tokens = CJK bigrams + ascii words (>=3 chars, stopword-filtered)
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html
