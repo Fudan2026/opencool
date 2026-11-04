@@ -245,6 +245,9 @@ jobs:
       - name: Bake weekly review (7d)
         run: npm run weekly:bake
 
+      - name: Bake theme heat
+        run: npm run themes:bake
+
       - name: Bake search index
         run: npm run search:bake
 
