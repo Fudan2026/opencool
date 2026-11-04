@@ -65,6 +65,10 @@ export interface MorningBrief {
   }>;
   /** Keywords new vs the base edition. */
   newKeywords: string[];
+  /** Pre-market tips (盘前要闻提示) from calendar.json, 06:00 editions. */
+  premarketTips: Array<{ time: string; title: string; summary: string; url: string }>;
+  /** Fund-flow one-liner (from quant.fundFlows), 06:00 editions. */
+  flowLine: string | null;
   /** Watchlist events (quant.events) not present in the base edition. */
   newEvents: Array<{ symbol: string; displayName: string; title: string; url: string }>;
   note: string;

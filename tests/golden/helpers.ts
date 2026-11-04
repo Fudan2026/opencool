@@ -85,6 +85,15 @@ export function morningBriefFixture(): MorningBrief {
       { symbol: "BTC-USD", displayName: "比特币", group: "crypto", pct1Day: 2.5 },
     ],
     newKeywords: ["MLF", "降准"],
+    premarketTips: [
+      {
+        time: "08:32",
+        title: "科技巨头AI需求放缓？产业链企业回应",
+        summary: "没有下调迹象 有订单价格上调",
+        url: "https://example.com/tip1",
+      },
+    ],
+    flowLine: "主力净流入前三：银行 +12.3亿、电力 +8.1亿、煤炭 +5.6亿",
     newEvents: [
       {
         symbol: "600519.SS",

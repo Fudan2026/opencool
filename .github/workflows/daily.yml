@@ -209,6 +209,9 @@ jobs:
             echo "gh-pages doesn't exist yet — first run"
           fi
 
+      - name: Bake pre-market tips
+        run: npm run calendar:bake
+
       - name: Generate edition report
         env:
           # OpenCool: auto = stays zero-AI unless the FREE ZHIPU_API_KEY
