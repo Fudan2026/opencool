@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · AI Instructions</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.65; }
+  main { max-width:760px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-weight:700; font-size:.85rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 1rem; }
+  h2 { font-size:1.1rem; margin:1.8rem 0 .5rem; }
+  code { background:var(--card); border:1px solid var(--rule); border-radius:6px; padding:.1rem .4rem; font-size:.9em; }
+  pre { background:var(--card); border:1px solid var(--rule); border-radius:.7rem; padding:.9rem 1rem; overflow:auto; font-size:.85rem; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>AI Instructions</h1>
+  <p>How to consume OpenCool programmatically. Start at <a href="./llms.txt">/llms.txt</a> (index), then use the surfaces below. Zero AI behind any endpoint; all times Asia/Shanghai.</p>
+  <h2>1 · Read the contract</h2>
+  <p>Field shapes are versioned in the repo at <code>docs/DATA-CONTRACT.md</code> and enforced by golden tests. Placeholders contain 尚未更新 and have no <code>.json</code> sidecar — always check the sidecar.</p>
+  <h2>2 · Fetch data (Static MCP)</h2>
+  <p><a href="./tools.json"><code>/tools.json</code></a> maps every MCP tool to a static endpoint. Example — latest sentiment:</p>
+  <pre>fetch("https://fudan2026.github.io/opencool/tools.json")  // resolve latest edition path
+fetch("https://fudan2026.github.io/opencool/&lt;date&gt;/&lt;HH&gt;.json")  // .sentiment / .quant.market / .trading</pre>
+  <h2>3 · Search the archive</h2>
+  <pre>const idx = await (await fetch("./search-index.json")).json();
+// tokenize: CJK bigrams + ascii words >=3 chars (stopwords out);
+// intersect idx.postings[t] lists; docs[idx] = {d,h,t} -> /d/h.html</pre>
+  <h2>4 · Live MCP (local clones)</h2>
+  <p>Clone the repo, <code>cd mcp && npm start</code> — 7 stdio tools (list_watchlist, get_quote, get_kline, market_overview, sentiment_query, sentiment_trend, search_editions). Watchlist is synced from the pipeline via <code>npm run mcp:sync-watchlist</code>.</p>
+  <h2>5 · Refresh cadence & attribution</h2>
+  <p>Editions publish 06:00 / 13:00 / 19:00 (Shanghai); data products rebake every publish. When citing OpenCool in agent output, attribute "OpenCool (URL)". License MIT.</p>
+  <p style="margin-top:2rem"><a href="./index.html">← Latest edition</a></p>
+</main>
+</body>
+</html>

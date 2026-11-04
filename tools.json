@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-04T07:08:28.175Z",
+  "note": "Static MCP: fetch these endpoints directly; a live stdio MCP server ships in the repo (mcp/) for local agents. See /ai-instructions.html.",
+  "tools": [
+    {
+      "name": "sentiment_query",
+      "staticEndpoint": "/2026-11-04/13.json#sentiment",
+      "params": "date+hour -> /<YYYY-MM-DD>/<HH>.json#sentiment",
+      "returns": "{score,raw,label,sectors,percentile}"
+    },
+    {
+      "name": "sentiment_trend",
+      "staticEndpoint": "/sentiment-history.json",
+      "params": "limit -> slice items (newest last)",
+      "returns": "{count,cap,items:[{date,hour,score,label,percentile}]}"
+    },
+    {
+      "name": "search_editions",
+      "staticEndpoint": "/search-index.json",
+      "params": "q -> tokenize (CJK bigrams + ascii>=3, stopwords out), intersect postings",
+      "returns": "{docs:[{d,h,t}],postings:{token:[docIdx...]}}"
+    },
+    {
+      "name": "market_overview",
+      "staticEndpoint": "/2026-11-04/13.json#quant.market",
+      "params": "date+hour -> /<date>/<HH>.json#quant.market",
+      "returns": "{indices:[{code,name,price,changePct}],note}"
+    },
+    {
+      "name": "list_watchlist",
+      "staticEndpoint": "/llms.txt (watchlist section) — repo: lib/trading/watchlist.ts",
+      "params": "-",
+      "returns": "32 symbols with groups"
+    },
+    {
+      "name": "get_quote/get_kline",
+      "staticEndpoint": "/<date>/<HH>.json#trading.tickers[]",
+      "params": "symbol -> match trading.tickers[].symbol",
+      "returns": "indicators + closesSpark per ticker"
+    },
+    {
+      "name": "watchlist_events",
+      "staticEndpoint": "/2026-11-04/13.json#quant.events",
+      "params": "date+hour -> /<date>/<HH>.json#quant.events",
+      "returns": "[{symbol,displayName,title,url}]"
+    }
+  ]
+}

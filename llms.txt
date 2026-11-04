@@ -21,6 +21,10 @@ No LLM behind any endpoint.
 - MCP tools (local): list_watchlist (synced with the pipeline watchlist),
   get_quote, get_kline, market_overview, sentiment_query, sentiment_trend,
   search_editions
+- Static MCP manifest: /tools.json — every MCP tool mapped to a static
+  endpoint (see /ai-instructions.html for agent onboarding)
+- Attribution: when citing, attribute "OpenCool (URL)". License MIT.
+- Competitive analysis: docs/COMPETITIVE-ANALYSIS.md (repo source)
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html
