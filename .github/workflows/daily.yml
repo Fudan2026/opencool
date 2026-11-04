@@ -16,6 +16,8 @@ name: Daily Brief
 #      paid LLM secrets for this fork's default path.
 #   5. Optional: secret/var ALERT_WEBHOOK_URL for missing-edition / failure pings
 #      (scripts/notify-failure.mjs no-ops when unset).
+#      Optional push: secrets TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (Telegram)
+#      or variable NTFY_TOPIC (ntfy.sh) — new editions get pushed; no-op unset.
 #   6. Actions → Daily Brief → Run workflow once to seed.
 #
 # Live: https://<user>.github.io/<repo>/
@@ -40,6 +42,7 @@ jobs:
     outputs:
       should-run: ${{ steps.check.outputs.should-run }}
       edition-hour: ${{ steps.check.outputs.edition-hour }}
+      edition-date: ${{ steps.check.outputs.edition-date }}
     steps:
       - name: Check schedule
         id: check
@@ -83,6 +86,7 @@ jobs:
             echo "Manual trigger — edition slot $SLOT"
             echo "should-run=true" >> "$GITHUB_OUTPUT"
             echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
+            echo "edition-date=$TODAY" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -124,6 +128,7 @@ jobs:
               echo "✓ Exact hour match — slot $SLOT"
               echo "should-run=true" >> "$GITHUB_OUTPUT"
               echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
+            echo "edition-date=$TODAY" >> "$GITHUB_OUTPUT"
               exit 0
             fi
           done
@@ -152,6 +157,7 @@ jobs:
               echo "↻ Catchup: ${TODAY}/${SLOT}.json not confirmed (HTTP $HTTP_CODE) — recovering"
               echo "should-run=true" >> "$GITHUB_OUTPUT"
               echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
+            echo "edition-date=$TODAY" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             echo "Slot $SLOT published (HTTP $HTTP_CODE)"
@@ -261,6 +267,17 @@ jobs:
           publish_branch: gh-pages
           keep_files: false
           commit_message: 'brief: ${{ needs.gate.outputs.edition-hour }} for ${{ github.run_id }}'
+
+      - name: Push new edition (opt-in)
+        if: success()
+        env:
+          EDITION_DATE: ${{ needs.gate.outputs.edition-date }}
+          EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ vars.NTFY_TOPIC }}
+        run: node scripts/notify-publish.mjs
 
       - name: Alert on job failure
         # cancelled() too: a timeout/hung build is cancelled, not failure —
