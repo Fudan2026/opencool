@@ -836,6 +836,7 @@ No LLM behind any endpoint.
 - MCP tools (local): list_watchlist (synced with the pipeline watchlist),
   get_quote, get_kline, market_overview, sentiment_query, sentiment_trend,
   search_editions
+- Competitive analysis: /docs source at docs/COMPETITIVE-ANALYSIS.md (repo)
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html
