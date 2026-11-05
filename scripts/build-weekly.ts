@@ -45,6 +45,7 @@ interface EditionRow {
   events: Array<{ symbol: string; displayName: string; title: string; url: string }>;
   keywords?: string[];
   indices?: Array<{ name: string; changePct: number }>;
+  themes?: Array<{ key: string; name: string; hits: number }>;
 }
 
 function main() {
@@ -79,6 +80,13 @@ function main() {
           ),
           keywords: r?.keywords,
           indices: r?.quant?.market?.indices,
+          themes: (r?.themes ?? []).map(
+            (x: { key: string; name: string; articleHits: number }) => ({
+              key: x.key,
+              name: x.name,
+              hits: x.articleHits,
+            }),
+          ),
         });
       } catch {
         // unreadable — skip
@@ -127,6 +135,19 @@ function main() {
     .sort((a, b) => b.count - a.count)
     .slice(0, 10);
 
+  const themeAcc = new Map<string, { name: string; hits: number }>();
+  for (const r of rows) {
+    for (const t of r.themes ?? []) {
+      const cur = themeAcc.get(t.key) ?? { name: t.name, hits: 0 };
+      cur.hits += t.hits;
+      themeAcc.set(t.key, cur);
+    }
+  }
+  const themeAvg = [...themeAcc.entries()]
+    .map(([key, v]) => ({ key, name: v.name, totalHits: v.hits }))
+    .sort((a, b) => b.totalHits - a.totalHits)
+    .slice(0, 12);
+
   const kwAgg = aggregateKeywords(
     rows.map((r) => ({ date: r.date, hour: r.hour, keywords: r.keywords })),
     WINDOW_DAYS,
@@ -160,6 +181,7 @@ function main() {
     sectorAvg,
     topEvents,
     keywords: kwAgg.items.slice(0, 20),
+    themeAvg,
     indexRows,
     note: "零 AI · 纯算术周报 · 不构成投资建议",
   };

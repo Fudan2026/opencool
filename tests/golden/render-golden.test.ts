@@ -58,6 +58,7 @@ test("golden: report page structure", async (t) => {
     assert.ok(html.includes("产业链企业回应"));
     assert.ok(html.includes("资金动向"));
     assert.ok(html.includes("银行 +12.3亿"));
+    assert.ok(html.includes("题材热点"));
   });
 
   await t.test("sentiment panel: gauge, trend, sectors, percentile", () => {

@@ -44,10 +44,18 @@ export interface DailyReport {
   quant?: QuantSection;
   /** Zero-token dictionary sentiment gauge over finance headlines. */
   sentiment?: MarketSentiment;
+  /** Theme article-hit counts (curated catalog), top 12 by heat. */
+  themes?: ThemeHit[];
   /** 06:00-only overnight digest vs the previous day's last edition. */
   morning_brief?: MorningBrief;
   /** Per-source fetch telemetry attached by scripts/daily.ts. */
   fetch_health?: FetchHealth;
+}
+
+export interface ThemeHit {
+  key: string;
+  name: string;
+  articleHits: number;
 }
 
 export interface MorningBrief {
