@@ -169,6 +169,109 @@ for (const h of slotHours) {
   }
 }
 
+// mcp-desk.html — 机构数据台: operator-baked snapshot from the ZCode
+// financial MCP plugins (quota-daily). Every row shows its source for
+// independent verification (复查). Gated on data/mcp-desk.json.
+if (fs.existsSync("data/mcp-desk.json")) {
+  const desk = JSON.parse(fs.readFileSync("data/mcp-desk.json", "utf8"));
+  const escH = (x) => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const macroRows = desk.macro
+    .map((m) => `<tr><td>${escH(m.k)}</td><td><b>${escH(m.v)}</b></td><td class="d-meta">${escH(m.asOf)}</td><td class="d-src">${escH(m.src)}</td></tr>`)
+    .join("");
+  const idxRows = desk.indexValuation
+    .map((i) => `<tr><td>${escH(i.name)}</td><td><b>${i.close.toLocaleString("en-US")}</b></td><td>${i.chg ? `<span class="${i.chg.startsWith("-") ? "neg" : "pos"}">${escH(i.chg)}</span>` : "—"}</td><td>${i.pe ?? "—"}${i.peTtm ? ` (TTM ${i.peTtm})` : ""}</td><td>${i.pb ?? "—"}</td><td class="d-src">${escH(i.src)}</td></tr>`)
+    .join("");
+  const stockRows = desk.stocksDualSource
+    .map((st) => {
+      const okv = st.verdict === "一致";
+      return `<tr><td>${escH(st.name)} <span class="d-meta">${escH(st.symbol)}</span></td>
+        <td>THS ${st.ths.totalMcap.toLocaleString("en-US")}</td>
+        <td>Wind ${st.wind.totalMcap.toLocaleString("en-US")}</td>
+        <td><span class="${okv ? "pos" : "neg"}">${okv ? "✓ 一致" : "✗ Δ" + st.mcapDeltaPct + "%"}</span></td>
+        <td class="d-meta">Wind ${escH(st.wind.price)} ${escH(st.wind.chg)}</td></tr>`;
+    })
+    .join("");
+  const fundRows = desk.funds
+    .map((f) => `<tr><td>${escH(f.name)} <span class="d-meta">${escH(f.code)}</span></td><td><b>${f.price}</b></td><td class="${f.chg.startsWith("-") ? "neg" : "pos"}">${escH(f.chg)}</td><td>${f.scaleYi.toFixed(1)} 亿</td><td class="d-src">${escH(f.src)}</td></tr>`)
+    .join("");
+  const newsRows = desk.news
+    .map((n) => `<li><a href="${escH(n.url)}" target="_blank" rel="noopener">${escH(n.title)}</a> <span class="d-meta">${escH(n.src)} · ${escH(n.date)}</span></li>`)
+    .join("");
+  const smokeRows = desk.localMcpSmoke.results
+    .map((r) => `<span class="d-chip ${r.ok === true ? "pos" : r.ok === false ? "neg" : ""}">${escH(r.tool)} ${r.ok === true ? "✓" : r.ok === false ? "✗" : "—"}${r.note ? ` <span class="d-meta">${escH(r.note)}</span>` : ""}</span>`)
+    .join("");
+  const deskHtml = `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · MCP 机构数据台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.6; }
+  main { max-width:820px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 .3rem; }
+  h2 { font-size:1.05rem; margin:1.9rem 0 .6rem; }
+  .meta { color:var(--muted); font-size:.9rem; }
+  table { border-collapse:collapse; width:100%; background:var(--card); border-radius:.75rem; overflow:hidden; margin-bottom:.5rem; }
+  th, td { text-align:left; padding:.5rem .75rem; border-bottom:1px solid var(--rule); font-size:.85rem; }
+  th { color:var(--muted); font-weight:600; }
+  .d-src { color:var(--muted); font-size:.75rem; max-width:15rem; }
+  .d-meta { color:var(--muted); font-size:.78rem; }
+  .pos { color:#15803d; font-weight:600; } .neg { color:#b91c1c; font-weight:600; }
+  .d-chip { display:inline-flex; gap:.3rem; align-items:baseline; padding:.25rem .6rem; border:1px solid var(--rule);
+    border-radius:999px; font-size:.8rem; background:var(--card); margin:.15rem .2rem .15rem 0; }
+  ul { margin:.3rem 0; padding-left:1.2rem; } li { margin:.35rem 0; font-size:.9rem; }
+  a { color:var(--accent); text-decoration:none; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>MCP 机构数据台</h1>
+  <p class="meta">检索时点 ${desk.retrievedAt} · 采集窗口 ${desk.harvestWindow} · ZCode MCP 调用 ${desk.harvestCalls.zcodeMcp} 次 + 本仓 stdio 冒烟 ${desk.harvestCalls.localStdio} 次</p>
+  <p class="meta">操作员烘焙快照（额度每日重置，随批发布刷新）。<b>每行标注来源，可独立复查。</b>零 AI，不构成投资建议。</p>
+
+  <h2>宏观 · 流动性</h2>
+  <table><thead><tr><th>指标</th><th>数值</th><th>截至</th><th>来源（可复查）</th></tr></thead><tbody>${macroRows}</tbody></table>
+
+  <h2>指数估值</h2>
+  <table><thead><tr><th>指数</th><th>收盘</th><th>涨跌</th><th>PE</th><th>PB</th><th>来源</th></tr></thead><tbody>${idxRows}</tbody></table>
+
+  <h2>双源交叉验证（同花顺 × Wind）</h2>
+  <table><thead><tr><th>标的</th><th>总市值 (THS)</th><th>总市值 (Wind)</th><th>校验</th><th>行情 (Wind)</th></tr></thead><tbody>${stockRows}</tbody></table>
+
+  <h2>ETF 快照</h2>
+  <table><thead><tr><th>基金</th><th>价</th><th>涨跌</th><th>规模</th><th>来源</th></tr></thead><tbody>${fundRows}</tbody></table>
+
+  <h2>当日要闻（来源可点开复查）</h2>
+  <ul>${newsRows}</ul>
+
+  <h2>本仓 MCP 服务冒烟（stdio · 9 工具）</h2>
+  <div>${smokeRows}</div>
+  <p class="meta">本会话修复：themes_query 的 TS 注解致 .mjs 语法错（自 #30 起）、lhb_query 缺 dispatch 分支（自 #31 起）——全量冒烟暴露后修复。</p>
+
+  <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
+   · <a class="home" href="./status.html">运行状态</a>
+   · <a class="home" href="./archive.html">历史归档</a></p>
+</main>
+</body>
+</html>
+`;
+  fs.writeFileSync(path.join(ROOT, "mcp-desk.html"), deskHtml, "utf8");
+  console.log(`[build-site] mcp-desk.html (${desk.harvestCalls.zcodeMcp} MCP calls)`);
+}
+
 // tools.json — the "Static MCP" manifest: every MCP tool mapped to its
 // stable static endpoint, so agents without a local clone consume
 // OpenCool via plain fetch. Uncontested per COMPETITIVE-ANALYSIS.md.
@@ -700,6 +803,7 @@ const archiveHtml = `<!doctype html>
    · <a class="home" href="./trails.html">徒步路线收藏</a>
    · <a class="home" href="./weekly.html">周报</a>
    · <a class="home" href="./search.html">搜索</a>${archHeatLink}
+   · <a class="home" href="./mcp-desk.html">机构数据台</a>
    · <a class="home" href="./status.html">运行状态</a></p>
 ${dayBlocks}
 </main>
@@ -998,7 +1102,8 @@ function buildStatusHtml() {
   <p class="meta">连续 ${3} 天全档失败的源写入 source-overlay.json（运行时禁用，config 永不改动；删除条目即恢复）。</p>
   <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
    · <a class="home" href="./archive.html">历史归档</a>
-   · <a class="home" href="./trails.html">徒步路线收藏</a>${statusHeatLink}</p>
+   · <a class="home" href="./trails.html">徒步路线收藏</a>${statusHeatLink}
+   · <a class="home" href="./mcp-desk.html">机构数据台</a></p>
   <p class="meta tiny">本页由 build-site 自动生成 · ${new Date().toISOString()}</p>
 </main>
 </body>
@@ -1120,6 +1225,9 @@ No LLM behind any endpoint.
   constituents + per-edition article hits
 - Dragon-tiger list: /lhb.json — top movers by net amount (previous
   trading day)
+- MCP desk: /mcp-desk.html — operator-baked institutional snapshot
+  (macro, index valuations, THS×Wind dual-source cross-check, funds,
+  day headlines), every row source-attributed for verification
 ${llmsHeatRow}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.

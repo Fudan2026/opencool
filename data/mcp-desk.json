@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "retrievedAt": "2026-11-05T16:01:13Z",
+  "harvestWindow": "2026-11-05 ~ 2026-11-06 (operator ZCode MCP session)",
+  "note": "Operator-baked snapshot via ZCode-hosted financial MCP plugins (quota resets daily). Every row carries its source for independent verification (复查). Prices/valuations are as-of the stated dates.",
+  "harvestCalls": {
+    "zcodeMcp": 12,
+    "localStdio": 9
+  },
+  "macro": [
+    {
+      "k": "CPI 同比",
+      "v": "+0.9%",
+      "asOf": "2026-09",
+      "src": "Wind EDB Z2479929 (IMF)"
+    },
+    {
+      "k": "LPR 1Y / 5Y",
+      "v": "3.0% / 3.5%",
+      "asOf": "2026-10-20",
+      "src": "全国银行间同业拆借中心 (Wind EDB M0096870)"
+    },
+    {
+      "k": "制造业 PMI",
+      "v": "49.3 (前值 50.1)",
+      "asOf": "2026-10",
+      "src": "国家统计局 (Wind EDB M0017126)"
+    },
+    {
+      "k": "M2 同比",
+      "v": "+7.2%",
+      "asOf": "2026-09",
+      "src": "中国人民银行 (Wind EDB M0001385)"
+    },
+    {
+      "k": "10Y 国债到期收益率",
+      "v": "1.6036%",
+      "asOf": "2026-11-05",
+      "src": "中证指数公司 (Wind EDB M1001654)"
+    }
+  ],
+  "indexValuation": [
+    {
+      "name": "上证指数",
+      "close": 3689.91,
+      "pe": 16.9,
+      "pb": 1.48,
+      "src": "同花顺 iFinD (ths_pe_index)",
+      "asOf": "2026-11-05"
+    },
+    {
+      "name": "深证成指",
+      "close": 11471.09,
+      "pe": 30.06,
+      "pb": 2.49,
+      "src": "同花顺 iFinD",
+      "asOf": "2026-11-05"
+    },
+    {
+      "name": "创业板指",
+      "close": 2566.8,
+      "pe": 36.66,
+      "pb": 4.86,
+      "src": "同花顺 iFinD",
+      "asOf": "2026-11-05"
+    },
+    {
+      "name": "沪深300",
+      "close": 4113.41,
+      "chg": "+0.29%",
+      "peTtm": 13.54,
+      "src": "Wind",
+      "asOf": "2026-11-05"
+    },
+    {
+      "name": "中证500",
+      "close": 6740.93,
+      "chg": "+1.80%",
+      "peTtm": 28.63,
+      "src": "Wind",
+      "asOf": "2026-11-05"
+    }
+  ],
+  "stocksDualSource": [
+    {
+      "name": "贵州茅台",
+      "symbol": "600519.SH",
+      "ths": {
+        "totalMcap": 1815118484652
+      },
+      "wind": {
+        "price": 1452.0,
+        "chg": "+0.38%",
+        "totalMcap": 1815118484652
+      },
+      "mcapDeltaPct": 0.0,
+      "verdict": "一致"
+    },
+    {
+      "name": "宁德时代",
+      "symbol": "300750.SZ",
+      "ths": {
+        "totalMcap": 1237964987693
+      },
+      "wind": {
+        "price": 264.06,
+        "chg": "+4.42%",
+        "totalMcap": 1237981354540
+      },
+      "mcapDeltaPct": 0.00013,
+      "verdict": "一致"
+    }
+  ],
+  "funds": [
+    {
+      "code": "510300.SH",
+      "name": "沪深300ETF",
+      "price": 4.195,
+      "chg": "+0.48%",
+      "scaleYi": 1068.79,
+      "src": "Wind",
+      "asOf": "2026-11-05"
+    },
+    {
+      "code": "159915.SZ",
+      "name": "创业板ETF",
+      "price": 2.584,
+      "chg": "+0.90%",
+      "scaleYi": 650.43,
+      "src": "Wind",
+      "asOf": "2026-11-05"
+    }
+  ],
+  "news": [
+    {
+      "title": "回购政策制度性升级：再贷款利率降至1%、转为长期制度性安排",
+      "src": "中国证券报",
+      "date": "2026-11-05",
+      "url": "https://www.cs.com.cn/ssgs/07/2026/11/05/detail_2026110510050044.html"
+    },
+    {
+      "title": "多部门协同打出稳市政策组合拳：互换便利第三批1000亿落地（31家机构）",
+      "src": "证券时报",
+      "date": "2026-11-05",
+      "url": "https://www.stcn.com/article/detail/4324971.html"
+    },
+    {
+      "title": "中银证券徐高：沪深300股息率约3% 显著高于10Y国债1.6% 风险溢价超6%处近十年高位",
+      "src": "证券时报",
+      "date": "2026-11-05",
+      "url": "https://stcn.com/article/detail/4323165.html"
+    },
+    {
+      "title": "一揽子稳市政策协同发力：11-04 A股放量普涨 科创50大涨近10% 两市成交超2万亿",
+      "src": "中国经济网",
+      "date": "2026-11-05",
+      "url": "http://m.ce.cn/gp/gd/202611/t20261105_3283806.shtml"
+    }
+  ],
+  "localMcpSmoke": {
+    "server": "mcp/server.mjs (stdio, 9 tools)",
+    "results": [
+      {
+        "tool": "list_watchlist",
+        "ok": true,
+        "note": "32 symbols"
+      },
+      {
+        "tool": "get_quote",
+        "ok": false,
+        "note": "yahoo 403 — local network only; CI unaffected"
+      },
+      {
+        "tool": "market_overview",
+        "ok": true,
+        "note": "3 indices"
+      },
+      {
+        "tool": "sentiment_query",
+        "ok": true
+      },
+      {
+        "tool": "sentiment_trend",
+        "ok": true
+      },
+      {
+        "tool": "search_editions",
+        "ok": true
+      },
+      {
+        "tool": "themes_query",
+        "ok": true,
+        "note": "10 themes ≥1 hit"
+      },
+      {
+        "tool": "lhb_query",
+        "ok": true,
+        "note": "8 rows — dispatch branch fixed this session"
+      },
+      {
+        "tool": "get_kline",
+        "ok": null,
+        "note": "same yahoo path as get_quote"
+      }
+    ],
+    "fixThisSession": "themes_query carried a TypeScript annotation inside .mjs (server broken since PR#30); lhb_query had no dispatch branch (PR#31) — both caught by full-smoke and fixed"
+  }
+}

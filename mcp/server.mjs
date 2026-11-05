@@ -268,6 +268,13 @@ async function handleTool(name, args) {
   if (name === "sentiment_query") return sentimentQuery(args);
   if (name === "sentiment_trend") return sentimentTrend(args);
   if (name === "search_editions") return searchEditions(args);
+  if (name === "lhb_query") {
+    const fp = path.join(reportsDir(), "lhb.json");
+    if (!fs.existsSync(fp)) {
+      throw new Error("lhb.json not found — run npm run lhb:bake");
+    }
+    return JSON.parse(fs.readFileSync(fp, "utf8"));
+  }
   if (name === "themes_query") {
     const fp = path.join(reportsDir(), "themes.json");
     if (!fs.existsSync(fp)) {
@@ -277,7 +284,7 @@ async function handleTool(name, args) {
     const minHits = Number(args?.minHits) || 0;
     return {
       edition: j.edition,
-      themes: (j.themes ?? []).filter((t: { articleHits: number }) => t.articleHits >= minHits),
+      themes: (j.themes ?? []).filter((t) => t.articleHits >= minHits),
     };
   }
   throw new Error(`unknown tool ${name}`);
