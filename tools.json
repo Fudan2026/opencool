@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-05T12:13:05.838Z",
+  "generatedAt": "2026-11-05T15:46:41.669Z",
   "note": "Static MCP: fetch these endpoints directly; a live stdio MCP server ships in the repo (mcp/) for local agents. See /ai-instructions.html.",
   "tools": [
     {
@@ -50,6 +50,12 @@
       "staticEndpoint": "/themes.json",
       "params": "minHeat -> filter themes",
       "returns": "{themes:[{key,name,boardCode,boardChangePct,articleHits,constituents}]}"
+    },
+    {
+      "name": "lhb_query",
+      "staticEndpoint": "/lhb.json",
+      "params": "-",
+      "returns": "{tradeDate,rows:[{code,name,changePct,netAmtYi}]}"
     }
   ]
 }

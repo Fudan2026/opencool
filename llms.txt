@@ -23,6 +23,9 @@ No LLM behind any endpoint.
   search_editions
 - Theme heat: /themes.json — 24 curated themes: board heat + top
   constituents + per-edition article hits
+- Dragon-tiger list: /lhb.json — top movers by net amount (previous
+  trading day)
+- Sector heatmap: /heatmap.html — watchlist tiles colored by pct1Day (latest edition)
 - Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.
