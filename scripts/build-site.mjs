@@ -388,6 +388,158 @@ run().catch(e=>{document.getElementById("stat").textContent="索引加载失败�
   console.log("[build-site] search.html");
 }
 
+// heatmap.html — Finviz-style sector heat grid baked from the latest real
+// edition sidecar (trading.tickers). Tile width flexes with |pct1Day|;
+// green (#15803d) when up, red (#b91c1c) when down, gray around flat.
+// Emitted only when tickers carry a usable pct1Day — trees/fixtures
+// without trading data skip the page so status/archive never link a 404.
+const HEAT_GROUPS = [
+  ["china-ashare", "A股蓝筹"],
+  ["china-etf", "ETF"],
+  ["china-equity", "中概港股"],
+  ["us-equity", "美股"],
+  ["crypto", "加密"],
+  ["commodity-fx", "商品汇率"],
+  ["macro", "宏观指数"],
+];
+
+function heatEscape(s) {
+  return String(s).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+  );
+}
+
+function heatSignedPct(v) {
+  const abs = Math.abs(v).toFixed(2).replace(/\.?0+$/, "");
+  return `${v > 0 ? "+" : ""}${v < 0 ? "-" : ""}${abs}%`;
+}
+
+function heatMix(c1, c2, t) {
+  const ch = (c, i) => parseInt(c.slice(1 + i * 2, 3 + i * 2), 16);
+  return `#${[0, 1, 2]
+    .map((i) =>
+      Math.round(ch(c1, i) + (ch(c2, i) - ch(c1, i)) * t)
+        .toString(16)
+        .padStart(2, "0"),
+    )
+    .join("")}`;
+}
+
+function heatTileStyle(pct) {
+  const a = Math.abs(pct);
+  if (a < 0.05) return { bg: "#9ca3af", fg: "#1a1510" };
+  const t = Math.min(1, a / 3);
+  return {
+    bg: pct > 0 ? heatMix("#86efac", "#15803d", t) : heatMix("#fca5a5", "#b91c1c", t),
+    fg: t > 0.55 ? "#fff" : "#1a1510",
+  };
+}
+
+let heatmapEmitted = false;
+{
+  const sidecarPath = path.join(ROOT, latest.rel.replace(/\.html$/, ".json"));
+  let heatTickers = [];
+  if (fs.existsSync(sidecarPath)) {
+    try {
+      const report = JSON.parse(fs.readFileSync(sidecarPath, "utf8"));
+      heatTickers = (report?.trading?.tickers ?? []).filter(
+        (t) =>
+          t &&
+          typeof t.pct1Day === "number" &&
+          Number.isFinite(t.pct1Day) &&
+          typeof t.displayName === "string" &&
+          t.displayName.length > 0,
+      );
+    } catch {
+      // unreadable sidecar — heatmap skipped below
+    }
+  }
+  if (heatTickers.length === 0) {
+    console.log("[build-site] heatmap skipped — no tickers data");
+  } else {
+    const byGroup = new Map(HEAT_GROUPS.map(([g]) => [g, []]));
+    const unknownGroup = [];
+    for (const t of heatTickers) {
+      if (byGroup.has(t.group)) byGroup.get(t.group).push(t);
+      else unknownGroup.push(t);
+    }
+    const heatSection = (label, rows) => {
+      const tiles = rows
+        .slice()
+        .sort((x, y) => Math.abs(y.pct1Day) - Math.abs(x.pct1Day))
+        .map((t) => {
+          const { bg, fg } = heatTileStyle(t.pct1Day);
+          const w = Math.max(0.3, Math.min(5, Math.abs(t.pct1Day)));
+          return `          <div class="tile" style="flex:${w} 1 118px;background:${bg};color:${fg}" title="${heatEscape(t.symbol ?? "")} ${t.pct1Day.toFixed(2)}%"><b>${heatEscape(t.displayName)}</b><span>${heatSignedPct(t.pct1Day)}</span></div>`;
+        })
+        .join("\n");
+      return `      <section class="grp">
+        <h2>${heatEscape(label)} <span class="g-n">${rows.length}</span></h2>
+        <div class="tiles">
+${tiles}
+        </div>
+      </section>`;
+    };
+    const heatSections = [
+      ...HEAT_GROUPS.filter(([g]) => (byGroup.get(g) ?? []).length > 0).map(
+        ([g, label]) => heatSection(label, byGroup.get(g)),
+      ),
+      ...(unknownGroup.length ? [heatSection("其他", unknownGroup)] : []),
+    ].join("\n");
+    const hourLabel = latest.hour === "legacy" ? latest.hour : `${latest.hour}:00`;
+    const heatmapHtml = `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · 热力图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.5; }
+  main { max-width:960px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 .3rem; letter-spacing:-.03em; }
+  .meta { color:var(--muted); }
+  .grp { margin-top:1.6rem; }
+  .grp h2 { font-size:.95rem; color:var(--muted); font-weight:600; margin:0 0 .55rem; }
+  .g-n { opacity:.55; font-weight:400; margin-left:.3rem; }
+  .tiles { display:flex; flex-wrap:wrap; gap:4px; }
+  .tile { min-width:112px; padding:.55rem .7rem; border-radius:.55rem; min-height:3.7rem;
+    display:flex; flex-direction:column; justify-content:space-between; gap:.15rem; }
+  .tile b { font-size:.85rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tile span { font-family:"DM Sans",sans-serif; font-weight:700; font-size:1.05rem; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>热力图</h1>
+  <p class="meta">${heatTickers.length} 只标的 · 最新档 ${latest.date} ${hourLabel} · 绿涨红跌 · 宽度随 |pct1Day|</p>
+${heatSections}
+  <p style="margin-top:2.5rem"><a class="home" href="./index.html">← 回到最新一期</a>
+   · <a class="home" href="./archive.html">历史归档</a>
+   · <a class="home" href="./status.html">运行状态</a></p>
+</main>
+</body>
+</html>
+`;
+    fs.writeFileSync(path.join(ROOT, "heatmap.html"), heatmapHtml, "utf8");
+    heatmapEmitted = true;
+    console.log(
+      `[build-site] heatmap.html (${heatTickers.length} tickers · ${latest.date}/${latest.hour})`,
+    );
+  }
+}
+
 const latestPath = path.join(ROOT, latest.rel);
 let latestHtml = fs.readFileSync(latestPath, "utf8");
 latestHtml = latestHtml
@@ -495,6 +647,9 @@ const dayBlocks = dates
   })
   .join("\n");
 
+const archHeatLink = heatmapEmitted
+  ? `\n   · <a class="home" href="./heatmap.html">热力图</a>`
+  : "";
 const archiveHtml = `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -544,7 +699,7 @@ const archiveHtml = `<!doctype html>
   <p><a class="home" href="./index.html">← 回到最新一期</a>
    · <a class="home" href="./trails.html">徒步路线收藏</a>
    · <a class="home" href="./weekly.html">周报</a>
-   · <a class="home" href="./search.html">搜索</a>
+   · <a class="home" href="./search.html">搜索</a>${archHeatLink}
    · <a class="home" href="./status.html">运行状态</a></p>
 ${dayBlocks}
 </main>
@@ -782,6 +937,9 @@ function buildStatusHtml() {
     .map((m) => `<span class="s-leg"><i style="background:${m.color}"></i>${m.label}</span>`)
     .join("");
   const headCells = slotHours.map((h) => `<th>${h}:00</th>`).join("");
+  const statusHeatLink = heatmapEmitted
+    ? `\n   · <a class="home" href="./heatmap.html">热力图</a>`
+    : "";
 
   return `<!doctype html>
 <html lang="zh-CN">
@@ -840,7 +998,7 @@ function buildStatusHtml() {
   <p class="meta">连续 ${3} 天全档失败的源写入 source-overlay.json（运行时禁用，config 永不改动；删除条目即恢复）。</p>
   <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
    · <a class="home" href="./archive.html">历史归档</a>
-   · <a class="home" href="./trails.html">徒步路线收藏</a></p>
+   · <a class="home" href="./trails.html">徒步路线收藏</a>${statusHeatLink}</p>
   <p class="meta tiny">本页由 build-site 自动生成 · ${new Date().toISOString()}</p>
 </main>
 </body>
@@ -932,6 +1090,9 @@ ${feedItems}
 fs.writeFileSync(path.join(ROOT, "feed.xml"), feedXml, "utf8");
 console.log(`[build-site] feed.xml (${realForFeed.length} real editions)`);
 
+const llmsHeatRow = heatmapEmitted
+  ? "- Sector heatmap: /heatmap.html — watchlist tiles colored by pct1Day (latest edition)\n"
+  : "";
 const llmsTxt = `# OpenCool
 
 Zero-AI, zero-token CN finance triple brief (Shanghai 06:00/13:00/19:00),
@@ -959,7 +1120,7 @@ No LLM behind any endpoint.
   constituents + per-edition article hits
 - Dragon-tiger list: /lhb.json — top movers by net amount (previous
   trading day)
-- Static MCP manifest: /tools.json — every MCP tool mapped to a static
+${llmsHeatRow}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.
 - Competitive analysis: docs/COMPETITIVE-ANALYSIS.md (repo source)

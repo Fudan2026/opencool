@@ -30,6 +30,12 @@ function makeSidecar(dir: string, date: string, hour: string, opts: { caixinFail
     editor_note: "",
     keywords: ["MLF", "央行"],
     sentiment: { score: -30, label: "偏空", posHits: 1, negHits: 2, scanned: 10, percentile: null },
+    trading: {
+      tickers: [
+        { symbol: "600519.SS", displayName: "贵州茅台", group: "china-ashare", pct1Day: 2.1 },
+        { symbol: "BTC-USD", displayName: "比特币", group: "crypto", pct1Day: -1.4 },
+      ],
+    },
     fetch_health: {
       generated_at: new Date().toISOString(),
       entries: [
@@ -151,6 +157,23 @@ test("golden: build-site end-to-end", async (t) => {
     ]) {
       assert.ok(llms.includes(p), `llms.txt missing ${p}`);
     }
+  });
+
+  await t.test("heatmap: baked from sidecar trading.tickers", () => {
+    const hm = read("heatmap.html");
+    assert.ok(hm.includes("热力图"));
+    assert.ok(hm.includes("贵州茅台"));
+    assert.ok(hm.includes("比特币"));
+    assert.ok(hm.includes("+2.1%"));
+    assert.ok(hm.includes("-1.4%"));
+    // nav wiring follows emission (fixture now carries trading data)
+    assert.ok(read("status.html").includes('href="./heatmap.html"'));
+    assert.ok(read("archive.html").includes('href="./heatmap.html"'));
+    assert.ok(
+      read("llms.txt").includes(
+        "- Sector heatmap: /heatmap.html — watchlist tiles colored by pct1Day (latest edition)",
+      ),
+    );
   });
 
   await t.test("sentiment-history.json: chronological, placeholders excluded", () => {
