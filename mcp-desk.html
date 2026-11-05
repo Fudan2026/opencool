@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · MCP 机构数据台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.6; }
+  main { max-width:820px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 .3rem; }
+  h2 { font-size:1.05rem; margin:1.9rem 0 .6rem; }
+  .meta { color:var(--muted); font-size:.9rem; }
+  table { border-collapse:collapse; width:100%; background:var(--card); border-radius:.75rem; overflow:hidden; margin-bottom:.5rem; }
+  th, td { text-align:left; padding:.5rem .75rem; border-bottom:1px solid var(--rule); font-size:.85rem; }
+  th { color:var(--muted); font-weight:600; }
+  .d-src { color:var(--muted); font-size:.75rem; max-width:15rem; }
+  .d-meta { color:var(--muted); font-size:.78rem; }
+  .pos { color:#15803d; font-weight:600; } .neg { color:#b91c1c; font-weight:600; }
+  .d-chip { display:inline-flex; gap:.3rem; align-items:baseline; padding:.25rem .6rem; border:1px solid var(--rule);
+    border-radius:999px; font-size:.8rem; background:var(--card); margin:.15rem .2rem .15rem 0; }
+  ul { margin:.3rem 0; padding-left:1.2rem; } li { margin:.35rem 0; font-size:.9rem; }
+  a { color:var(--accent); text-decoration:none; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>MCP 机构数据台</h1>
+  <p class="meta">检索时点 2026-11-05T16:01:13Z · 采集窗口 2026-11-05 ~ 2026-11-06 (operator ZCode MCP session) · ZCode MCP 调用 12 次 + 本仓 stdio 冒烟 9 次</p>
+  <p class="meta">操作员烘焙快照（额度每日重置，随批发布刷新）。<b>每行标注来源，可独立复查。</b>零 AI，不构成投资建议。</p>
+
+  <h2>宏观 · 流动性</h2>
+  <table><thead><tr><th>指标</th><th>数值</th><th>截至</th><th>来源（可复查）</th></tr></thead><tbody><tr><td>CPI 同比</td><td><b>+0.9%</b></td><td class="d-meta">2026-09</td><td class="d-src">Wind EDB Z2479929 (IMF)</td></tr><tr><td>LPR 1Y / 5Y</td><td><b>3.0% / 3.5%</b></td><td class="d-meta">2026-10-20</td><td class="d-src">全国银行间同业拆借中心 (Wind EDB M0096870)</td></tr><tr><td>制造业 PMI</td><td><b>49.3 (前值 50.1)</b></td><td class="d-meta">2026-10</td><td class="d-src">国家统计局 (Wind EDB M0017126)</td></tr><tr><td>M2 同比</td><td><b>+7.2%</b></td><td class="d-meta">2026-09</td><td class="d-src">中国人民银行 (Wind EDB M0001385)</td></tr><tr><td>10Y 国债到期收益率</td><td><b>1.6036%</b></td><td class="d-meta">2026-11-05</td><td class="d-src">中证指数公司 (Wind EDB M1001654)</td></tr></tbody></table>
+
+  <h2>指数估值</h2>
+  <table><thead><tr><th>指数</th><th>收盘</th><th>涨跌</th><th>PE</th><th>PB</th><th>来源</th></tr></thead><tbody><tr><td>上证指数</td><td><b>3,689.91</b></td><td>—</td><td>16.9</td><td>1.48</td><td class="d-src">同花顺 iFinD (ths_pe_index)</td></tr><tr><td>深证成指</td><td><b>11,471.09</b></td><td>—</td><td>30.06</td><td>2.49</td><td class="d-src">同花顺 iFinD</td></tr><tr><td>创业板指</td><td><b>2,566.8</b></td><td>—</td><td>36.66</td><td>4.86</td><td class="d-src">同花顺 iFinD</td></tr><tr><td>沪深300</td><td><b>4,113.41</b></td><td><span class="pos">+0.29%</span></td><td>— (TTM 13.54)</td><td>—</td><td class="d-src">Wind</td></tr><tr><td>中证500</td><td><b>6,740.93</b></td><td><span class="pos">+1.80%</span></td><td>— (TTM 28.63)</td><td>—</td><td class="d-src">Wind</td></tr></tbody></table>
+
+  <h2>双源交叉验证（同花顺 × Wind）</h2>
+  <table><thead><tr><th>标的</th><th>总市值 (THS)</th><th>总市值 (Wind)</th><th>校验</th><th>行情 (Wind)</th></tr></thead><tbody><tr><td>贵州茅台 <span class="d-meta">600519.SH</span></td>
+        <td>THS 1,815,118,484,652</td>
+        <td>Wind 1,815,118,484,652</td>
+        <td><span class="pos">✓ 一致</span></td>
+        <td class="d-meta">Wind 1452 +0.38%</td></tr><tr><td>宁德时代 <span class="d-meta">300750.SZ</span></td>
+        <td>THS 1,237,964,987,693</td>
+        <td>Wind 1,237,981,354,540</td>
+        <td><span class="pos">✓ 一致</span></td>
+        <td class="d-meta">Wind 264.06 +4.42%</td></tr></tbody></table>
+
+  <h2>ETF 快照</h2>
+  <table><thead><tr><th>基金</th><th>价</th><th>涨跌</th><th>规模</th><th>来源</th></tr></thead><tbody><tr><td>沪深300ETF <span class="d-meta">510300.SH</span></td><td><b>4.195</b></td><td class="pos">+0.48%</td><td>1068.8 亿</td><td class="d-src">Wind</td></tr><tr><td>创业板ETF <span class="d-meta">159915.SZ</span></td><td><b>2.584</b></td><td class="pos">+0.90%</td><td>650.4 亿</td><td class="d-src">Wind</td></tr></tbody></table>
+
+  <h2>当日要闻（来源可点开复查）</h2>
+  <ul><li><a href="https://www.cs.com.cn/ssgs/07/2026/11/05/detail_2026110510050044.html" target="_blank" rel="noopener">回购政策制度性升级：再贷款利率降至1%、转为长期制度性安排</a> <span class="d-meta">中国证券报 · 2026-11-05</span></li><li><a href="https://www.stcn.com/article/detail/4324971.html" target="_blank" rel="noopener">多部门协同打出稳市政策组合拳：互换便利第三批1000亿落地（31家机构）</a> <span class="d-meta">证券时报 · 2026-11-05</span></li><li><a href="https://stcn.com/article/detail/4323165.html" target="_blank" rel="noopener">中银证券徐高：沪深300股息率约3% 显著高于10Y国债1.6% 风险溢价超6%处近十年高位</a> <span class="d-meta">证券时报 · 2026-11-05</span></li><li><a href="http://m.ce.cn/gp/gd/202611/t20261105_3283806.shtml" target="_blank" rel="noopener">一揽子稳市政策协同发力：11-04 A股放量普涨 科创50大涨近10% 两市成交超2万亿</a> <span class="d-meta">中国经济网 · 2026-11-05</span></li></ul>
+
+  <h2>本仓 MCP 服务冒烟（stdio · 9 工具）</h2>
+  <div><span class="d-chip pos">list_watchlist ✓ <span class="d-meta">32 symbols</span></span><span class="d-chip neg">get_quote ✗ <span class="d-meta">yahoo 403 — local network only; CI unaffected</span></span><span class="d-chip pos">market_overview ✓ <span class="d-meta">3 indices</span></span><span class="d-chip pos">sentiment_query ✓</span><span class="d-chip pos">sentiment_trend ✓</span><span class="d-chip pos">search_editions ✓</span><span class="d-chip pos">themes_query ✓ <span class="d-meta">10 themes ≥1 hit</span></span><span class="d-chip pos">lhb_query ✓ <span class="d-meta">8 rows — dispatch branch fixed this session</span></span><span class="d-chip ">get_kline — <span class="d-meta">same yahoo path as get_quote</span></span></div>
+  <p class="meta">本会话修复：themes_query 的 TS 注解致 .mjs 语法错（自 #30 起）、lhb_query 缺 dispatch 分支（自 #31 起）——全量冒烟暴露后修复。</p>
+
+  <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
+   · <a class="home" href="./status.html">运行状态</a>
+   · <a class="home" href="./archive.html">历史归档</a></p>
+</main>
+</body>
+</html>

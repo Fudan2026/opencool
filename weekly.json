@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-05T15:46:39.691Z",
+  "generatedAt": "2026-11-05T16:10:13.521Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 22,
-  "avgSentiment": -76.2,
+  "daysCovered": 9,
+  "editions": 23,
+  "avgSentiment": -73.1,
   "sentimentCurve": [
     {
       "date": "2026-10-29",
@@ -115,6 +115,11 @@
       "date": "2026-11-05",
       "hour": "19",
       "score": -3
+    },
+    {
+      "date": "2026-11-06",
+      "hour": "06",
+      "score": -5
     }
   ],
   "sectorAvg": [
@@ -122,31 +127,25 @@
       "key": "china-equity",
       "label": "中概港股",
       "avg": 98,
-      "editions": 1
+      "editions": 2
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 77.5,
-      "editions": 2
+      "avg": 84,
+      "editions": 3
     },
     {
       "key": "crypto",
       "label": "加密",
       "avg": -76,
-      "editions": 1
+      "editions": 2
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -75.4,
-      "editions": 22
-    },
-    {
-      "key": "us-equity",
-      "label": "美股",
-      "avg": -20.3,
-      "editions": 22
+      "avg": -72.4,
+      "editions": 23
     },
     {
       "key": "china-ashare",
@@ -155,16 +154,22 @@
       "editions": 1
     },
     {
+      "key": "us-equity",
+      "label": "美股",
+      "avg": -18.7,
+      "editions": 23
+    },
+    {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -14.8,
-      "editions": 22
+      "avg": -15,
+      "editions": 23
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": 7.1,
-      "editions": 9
+      "avg": 4.8,
+      "editions": 10
     }
   ],
   "topEvents": [
@@ -173,28 +178,28 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 12
+      "count": 13
     },
     {
       "symbol": "NVDA",
@@ -218,39 +223,39 @@
       "count": 4
     },
     {
+      "symbol": "ETH-USD",
+      "displayName": "Ethereum",
+      "title": "L2BEAT is now ETHBEAT",
+      "url": "https://x.com/ethbeat_org/status/2117913893796225035",
+      "count": 4
+    },
+    {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
+      "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
+      "count": 4
+    },
+    {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Nvidia CEO reportedly targeted by an alleged Chinese spy",
       "url": "https://www.theguardian.com/technology/2026/oct/29/nvidia-ceo-targeted-chinese-spy",
       "count": 3
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Nvidia orders data centre clients to reduce China exposure",
-      "url": "https://www.ft.com/content/1902df70-1380-4588-bad5-171352b575f2?syn-25a6b1a6=1",
-      "count": 3
-    },
-    {
-      "symbol": "ETH-USD",
-      "displayName": "Ethereum",
-      "title": "L2BEAT is now ETHBEAT",
-      "url": "https://x.com/ethbeat_org/status/2117913893796225035",
-      "count": 3
     }
   ],
   "keywords": [
+    {
+      "term": "billion",
+      "count": 5,
+      "firstSeen": "2026-10-29",
+      "lastSeen": "2026-11-06"
+    },
     {
       "term": "agent",
       "count": 4,
       "firstSeen": "2026-11-01",
       "lastSeen": "2026-11-02"
-    },
-    {
-      "term": "billion",
-      "count": 4,
-      "firstSeen": "2026-10-29",
-      "lastSeen": "2026-10-31"
     },
     {
       "term": "币安",
@@ -363,66 +368,66 @@
   ],
   "themeAvg": [
     {
-      "key": "ai",
-      "name": "人工智能",
-      "totalHits": 7
-    },
-    {
-      "key": "bank",
-      "name": "银行",
-      "totalHits": 6
-    },
-    {
-      "key": "robotics",
-      "name": "机器人",
-      "totalHits": 5
-    },
-    {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 5
+      "totalHits": 12
+    },
+    {
+      "key": "ai",
+      "name": "人工智能",
+      "totalHits": 10
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 5
+      "totalHits": 10
     },
     {
-      "key": "oil",
-      "name": "石油石化",
-      "totalHits": 4
+      "key": "bank",
+      "name": "银行",
+      "totalHits": 9
+    },
+    {
+      "key": "robotics",
+      "name": "机器人",
+      "totalHits": 7
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 4
+      "totalHits": 7
+    },
+    {
+      "key": "oil",
+      "name": "石油石化",
+      "totalHits": 5
     },
     {
       "key": "comms",
       "name": "通信",
-      "totalHits": 2
+      "totalHits": 4
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 1
+      "totalHits": 2
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.55,
-      "editions": 22
+      "avgChangePct": -0.52,
+      "editions": 23
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.86,
-      "editions": 20
+      "avgChangePct": -0.77,
+      "editions": 21
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.5,
-      "editions": 19
+      "avgChangePct": -1.38,
+      "editions": 20
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
