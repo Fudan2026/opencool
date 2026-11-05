@@ -1,21 +1,11 @@
 {
-  "generatedAt": "2026-11-04T22:36:45.281Z",
+  "generatedAt": "2026-11-05T11:29:44.833Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 9,
-  "editions": 22,
-  "avgSentiment": -85,
+  "daysCovered": 8,
+  "editions": 21,
+  "avgSentiment": -79.9,
   "sentimentCurve": [
-    {
-      "date": "2026-10-28",
-      "hour": "06",
-      "score": -99
-    },
-    {
-      "date": "2026-10-28",
-      "hour": "13",
-      "score": -98
-    },
     {
       "date": "2026-10-29",
       "hour": "06",
@@ -115,20 +105,31 @@
       "date": "2026-11-05",
       "hour": "06",
       "score": 0
+    },
+    {
+      "date": "2026-11-05",
+      "hour": "19",
+      "score": -5
     }
   ],
   "sectorAvg": [
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -84.2,
-      "editions": 22
+      "avg": -79,
+      "editions": 21
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 58,
-      "editions": 1
+      "avg": 78.5,
+      "editions": 2
+    },
+    {
+      "key": "us-equity",
+      "label": "美股",
+      "avg": -21.5,
+      "editions": 21
     },
     {
       "key": "china-ashare",
@@ -137,22 +138,16 @@
       "editions": 1
     },
     {
-      "key": "us-equity",
-      "label": "美股",
-      "avg": -18.3,
-      "editions": 22
-    },
-    {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -15.3,
-      "editions": 22
+      "avg": -13.6,
+      "editions": 21
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": 14,
-      "editions": 7
+      "avg": 10.4,
+      "editions": 8
     }
   ],
   "topEvents": [
@@ -161,21 +156,21 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 22
+      "count": 21
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 22
+      "count": 21
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 22
+      "count": 21
     },
     {
       "symbol": "NVDA",
@@ -189,7 +184,7 @@
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 10
+      "count": 11
     },
     {
       "symbol": "BTC-USD",
@@ -199,13 +194,6 @@
       "count": 7
     },
     {
-      "symbol": "002594.SZ",
-      "displayName": "比亚迪",
-      "title": "US bans vehicles from China’s BYD at Japan military base, calling them ‘unacceptable’ risk",
-      "url": "https://www.theguardian.com/world/2026/oct/27/us-bans-byd-electric-vehicles-kadena-military-base",
-      "count": 4
-    },
-    {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "China denies allegations of spy operation targeting Nvidia CEO",
@@ -213,18 +201,25 @@
       "count": 4
     },
     {
-      "symbol": "BTC-USD",
-      "displayName": "Bitcoin",
-      "title": "Why Now Is the Time to Add and Hold BTC",
-      "url": "https://x.com/intangiblecoins/status/2114730275242426648",
-      "count": 3
-    },
-    {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Nvidia CEO reportedly targeted by an alleged Chinese spy",
       "url": "https://www.theguardian.com/technology/2026/oct/29/nvidia-ceo-targeted-chinese-spy",
       "count": 3
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Nvidia orders data centre clients to reduce China exposure",
+      "url": "https://www.ft.com/content/1902df70-1380-4588-bad5-171352b575f2?syn-25a6b1a6=1",
+      "count": 3
+    },
+    {
+      "symbol": "GC=F",
+      "displayName": "黄金期货",
+      "title": "Gold Dips to Near $4,000 as Fed Holds Rates With Little Guidance",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-28/gold-edges-lower-after-fed-holds-rates-with-limited-guidance",
+      "count": 2
     }
   ],
   "keywords": [
@@ -349,21 +344,73 @@
       "lastSeen": "2026-11-03"
     }
   ],
+  "themeAvg": [
+    {
+      "key": "ai",
+      "name": "人工智能",
+      "totalHits": 4
+    },
+    {
+      "key": "bank",
+      "name": "银行",
+      "totalHits": 4
+    },
+    {
+      "key": "robotics",
+      "name": "机器人",
+      "totalHits": 2
+    },
+    {
+      "key": "semiconductor",
+      "name": "半导体",
+      "totalHits": 1
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "totalHits": 1
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "totalHits": 1
+    },
+    {
+      "key": "oil",
+      "name": "石油石化",
+      "totalHits": 1
+    },
+    {
+      "key": "agriculture",
+      "name": "农业",
+      "totalHits": 1
+    },
+    {
+      "key": "comms",
+      "name": "通信",
+      "totalHits": 1
+    },
+    {
+      "key": "media",
+      "name": "传媒",
+      "totalHits": 1
+    }
+  ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.58,
-      "editions": 22
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": -1.01,
+      "avgChangePct": -0.61,
       "editions": 20
     },
     {
+      "name": "深证成指",
+      "avgChangePct": -1.09,
+      "editions": 18
+    },
+    {
       "name": "创业板指",
-      "avgChangePct": -1.59,
-      "editions": 19
+      "avgChangePct": -1.63,
+      "editions": 18
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
