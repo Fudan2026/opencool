@@ -63,6 +63,7 @@ const TEXTS_ZH = {
   morningNewEvents: "新事件",
   morningTips: "盘前要闻",
   morningFlow: "资金动向",
+  morningLhb: "龙虎榜",
   guideToggleOff: "原文",
   guideToggleOn: "中文导读",
   guideWireNote: "外电原文 · 无机器翻译",
@@ -141,6 +142,7 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   morningNewEvents: "new events",
   morningTips: "Pre-market tips",
   morningFlow: "Flows",
+  morningLhb: "Dragon-Tiger",
   guideToggleOff: "Original",
   guideToggleOn: "CN guide",
   guideWireNote: "EN original · no machine translation",
@@ -751,6 +753,16 @@ export function renderHtml(
         : ""
     }
     ${mb.flowLine ? `<p class="mb-row">${STR.morningFlow} <span class="muted">${escapeHtml(mb.flowLine)}</span></p>` : ""}
+    ${
+      mb.lhbRows?.length
+        ? `<div class="mb-row">${STR.morningLhb}<ul class="mb-events">${mb.lhbRows
+            .map(
+              (r) =>
+                `<li><a href="https://quote.eastmoney.com/${escapeHtml(r.code)}.html" target="_blank" rel="noopener">${escapeHtml(r.name)}</a> <span class="${r.changePct >= 0 ? "positive" : "negative"}">${r.changePct >= 0 ? "+" : ""}${r.changePct.toFixed(1)}%</span> <span class="muted tiny">净买 ${r.netAmtYi.toFixed(2)}亿</span></li>`,
+            )
+            .join("")}</ul></div>`
+        : ""
+    }
       ${evs ? `<div class="mb-row">${STR.morningNewEvents}<ul class="mb-events">${evs}</ul></div>` : ""}
       <p class="muted tiny">${escapeHtml(mb.note)}</p>
     </div>`;

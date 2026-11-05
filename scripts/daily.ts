@@ -390,6 +390,19 @@ function loadSentimentTrend(): SentimentTrendPoint[] {
 
 const REVIEW_SAMPLE_FLOOR = 10;
 
+/** 龙虎榜 rows from the lhb bake (06:00 editions). */
+function loadLhb(): Array<{ code: string; name: string; changePct: number; netAmtYi: number; tradeDate: string }> {
+  try {
+    const fp = path.join(OUTPUT_DIR, "lhb.json");
+    if (!fs.existsSync(fp)) return [];
+    const j = JSON.parse(fs.readFileSync(fp, "utf8"));
+    if (j?.status !== "ok" || !Array.isArray(j.rows)) return [];
+    return j.rows.slice(0, 6);
+  } catch {
+    return [];
+  }
+}
+
 /** Today's pre-market tips from the calendar bake (06:00 editions). */
 function loadPremarketTips(today: string): Array<{ time: string; title: string; summary: string; url: string }> {
   try {
@@ -445,7 +458,7 @@ function loadYesterdayEdition(today: string):
  */
 function buildMorningBrief(
   base: { date: string; hour: string; report: Record<string, unknown> },
-  today: { sentimentScore: number | null; keywords: string[]; eventUrls: Set<string>; events: Array<{ symbol: string; displayName: string; title: string; url: string }>; tickers: Array<{ symbol: string; displayName: string; group: string; pct1Day: number }> | undefined; premarketTips: Array<{ time: string; title: string; summary: string; url: string }>; flowLine: string | null },
+  today: { sentimentScore: number | null; keywords: string[]; eventUrls: Set<string>; events: Array<{ symbol: string; displayName: string; title: string; url: string }>; tickers: Array<{ symbol: string; displayName: string; group: string; pct1Day: number }> | undefined; premarketTips: Array<{ time: string; title: string; summary: string; url: string }>; lhbRows: Array<{ code: string; name: string; changePct: number; netAmtYi: number; tradeDate: string }>; flowLine: string | null },
   reportKeywords: string[],
 ): MorningBrief {
   const baseSent = (base.report as { sentiment?: { score?: number } }).sentiment;
@@ -495,6 +508,7 @@ function buildMorningBrief(
     overnight,
     newKeywords: newKeywords.slice(0, 6),
     premarketTips: today.premarketTips,
+    lhbRows: today.lhbRows ?? [],
     flowLine: today.flowLine,
     newEvents: newEvents.slice(0, 5),
     note:
@@ -671,6 +685,7 @@ async function main() {
             })),
             tickers: trading?.tickers,
             premarketTips: loadPremarketTips(date),
+            lhbRows: loadLhb(),
             flowLine: quant?.fundFlows?.sectors?.length
               ? `主力净流入前三：${quant.fundFlows.sectors
                   .slice()

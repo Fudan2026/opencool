@@ -218,6 +218,9 @@ jobs:
       - name: Bake pre-market tips
         run: npm run calendar:bake
 
+      - name: Bake dragon-tiger list
+        run: npm run lhb:bake
+
       - name: Generate edition report
         env:
           # OpenCool: auto = stays zero-AI unless the FREE ZHIPU_API_KEY

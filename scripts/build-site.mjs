@@ -226,6 +226,12 @@ const toolsManifest = {
       params: "minHeat -> filter themes",
       returns: "{themes:[{key,name,boardCode,boardChangePct,articleHits,constituents}]}",
     },
+    {
+      name: "lhb_query",
+      staticEndpoint: "/lhb.json",
+      params: "-",
+      returns: "{tradeDate,rows:[{code,name,changePct,netAmtYi}]}",
+    },
   ],
 };
 fs.writeFileSync(
@@ -951,6 +957,8 @@ No LLM behind any endpoint.
   search_editions
 - Theme heat: /themes.json — 24 curated themes: board heat + top
   constituents + per-edition article hits
+- Dragon-tiger list: /lhb.json — top movers by net amount (previous
+  trading day)
 - Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.

@@ -77,6 +77,8 @@ export interface MorningBrief {
   premarketTips: Array<{ time: string; title: string; summary: string; url: string }>;
   /** Fund-flow one-liner (from quant.fundFlows), 06:00 editions. */
   flowLine: string | null;
+  /** 龙虎榜 top movers by net amount (lhb.json), 06:00 editions. */
+  lhbRows: Array<{ code: string; name: string; changePct: number; netAmtYi: number; tradeDate: string }>;
   /** Watchlist events (quant.events) not present in the base edition. */
   newEvents: Array<{ symbol: string; displayName: string; title: string; url: string }>;
   note: string;
