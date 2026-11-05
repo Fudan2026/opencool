@@ -59,6 +59,9 @@ test("golden: report page structure", async (t) => {
     assert.ok(html.includes("资金动向"));
     assert.ok(html.includes("银行 +12.3亿"));
     assert.ok(html.includes("题材热点"));
+    assert.ok(html.includes("龙虎榜"));
+    assert.ok(html.includes("银之杰"));
+    assert.ok(html.includes("净买 4.64亿"));
   });
 
   await t.test("sentiment panel: gauge, trend, sectors, percentile", () => {

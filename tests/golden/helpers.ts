@@ -94,6 +94,9 @@ export function morningBriefFixture(): MorningBrief {
       },
     ],
     flowLine: "主力净流入前三：银行 +12.3亿、电力 +8.1亿、煤炭 +5.6亿",
+    lhbRows: [
+      { code: "300085", name: "银之杰", changePct: 12.1, netAmtYi: 4.64, tradeDate: "2026-11-04" },
+    ],
     newEvents: [
       {
         symbol: "600519.SS",
