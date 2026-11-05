@@ -125,6 +125,28 @@ export function reportFixture(over: Partial<DailyReport> = {}): DailyReport {
     keywords: ["MLF", "央行", "流动性"],
     sentiment: sentimentFixture(),
     morning_brief: morningBriefFixture(),
+    themes: [
+      { key: "semiconductor", name: "半导体", articleHits: 4 },
+      { key: "ai", name: "人工智能", articleHits: 3 },
+    ],
+    quant: {
+      generated_at: "2026-10-27T03:00:00Z",
+      market: {
+        indices: [
+          { code: "000001", name: "上证指数", price: 3350.12, changePct: 0.42 },
+          { code: "399001", name: "深证成指", price: 10890.3, changePct: -0.21 },
+        ],
+        note: "fixture delayed snapshot",
+      },
+      events: [],
+      eventCounts: [],
+      personas: [],
+      riskGates: [],
+      backtestTemplate: { template: "fixture" },
+      toyBacktests: [],
+      school: [],
+      knowledge: [],
+    },
     ...over,
   };
 }

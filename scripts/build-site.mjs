@@ -220,6 +220,12 @@ const toolsManifest = {
       params: "date+hour -> /<date>/<HH>.json#quant.events",
       returns: "[{symbol,displayName,title,url}]",
     },
+    {
+      name: "themes_query",
+      staticEndpoint: "/themes.json",
+      params: "minHeat -> filter themes",
+      returns: "{themes:[{key,name,boardCode,boardChangePct,articleHits,constituents}]}",
+    },
   ],
 };
 fs.writeFileSync(
@@ -943,6 +949,8 @@ No LLM behind any endpoint.
 - MCP tools (local): list_watchlist (synced with the pipeline watchlist),
   get_quote, get_kline, market_overview, sentiment_query, sentiment_trend,
   search_editions
+- Theme heat: /themes.json — 24 curated themes: board heat + top
+  constituents + per-edition article hits
 - Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.

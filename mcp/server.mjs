@@ -223,6 +223,15 @@ const tools = [
     },
   },
   {
+    name: "themes_query",
+    description:
+      "Curated theme heat (themes.json): board changePct + article hits + top constituents; optional minHits filter",
+    inputSchema: {
+      type: "object",
+      properties: { minHits: { type: "number" } },
+    },
+  },
+  {
     name: "search_editions",
     description:
       "Full-text search over published editions (search-index.json): q (required), limit <= 50",
@@ -259,6 +268,18 @@ async function handleTool(name, args) {
   if (name === "sentiment_query") return sentimentQuery(args);
   if (name === "sentiment_trend") return sentimentTrend(args);
   if (name === "search_editions") return searchEditions(args);
+  if (name === "themes_query") {
+    const fp = path.join(reportsDir(), "themes.json");
+    if (!fs.existsSync(fp)) {
+      throw new Error("themes.json not found — run npm run themes:bake");
+    }
+    const j = JSON.parse(fs.readFileSync(fp, "utf8"));
+    const minHits = Number(args?.minHits) || 0;
+    return {
+      edition: j.edition,
+      themes: (j.themes ?? []).filter((t: { articleHits: number }) => t.articleHits >= minHits),
+    };
+  }
   throw new Error(`unknown tool ${name}`);
 }
 

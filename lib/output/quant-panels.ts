@@ -59,7 +59,26 @@ function renderFundFlowPanel(quant?: QuantSection): string {
     <p class="muted tiny">${esc(ff.note)}</p>`;
 }
 
-export function renderReviewPanel(quant?: QuantSection): string {
+function renderThemeBlock(
+  themes?: Array<{ key: string; name: string; articleHits: number }>,
+): string {
+  if (!themes?.length) return "";
+  const chips = themes
+    .slice(0, 10)
+    .map(
+      (t) =>
+        `<span class="senti-chip">${esc(t.name)} <b>×${t.articleHits}</b></span>`,
+    )
+    .join("");
+  return `<h2 class="panel-h">题材热点</h2>
+    <div class="senti-drivers">${chips}</div>
+    <p class="muted tiny">命中次数为当日财经标题命中（词典规则）；板块行情与成分股详见 status 页 / themes.json。</p>`;
+}
+
+export function renderReviewPanel(
+  quant?: QuantSection,
+  themes?: Array<{ key: string; name: string; articleHits: number }>,
+): string {
   if (!quant) {
     return `<p class="empty">今日复盘数据尚未生成。</p>`;
   }
@@ -104,6 +123,7 @@ export function renderReviewPanel(quant?: QuantSection): string {
 
   return `<div class="quant-block">
     <h2 class="panel-h">大盘快照</h2>${idxHtml}
+    ${renderThemeBlock(themes)}
     ${flowHtml}
     <h2 class="panel-h">事件驱动（标题命中观察池）</h2>${countHtml}${evHtml}
   </div>`;

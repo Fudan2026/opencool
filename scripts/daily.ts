@@ -35,6 +35,7 @@ import { todayKey, editionHourKey, parseReportHours, editionKind } from "../lib/
 import { buildQuantSection } from "../lib/invest/quant";
 import { scoreSentiment, MIN_HISTORY_SAMPLES } from "../lib/nlp/sentiment";
 import { cleanKeywords } from "../lib/nlp/keywords";
+import { THEME_CATALOG, themeArticleHits } from "../lib/themes/catalog";
 import type { MorningBrief } from "../lib/ai/pipeline";
 import type { QuantSection } from "../lib/invest/types";
 
@@ -625,6 +626,25 @@ async function main() {
   const sentimentTrend = loadSentimentTrend();
   const sentimentHistory = sentimentTrend.map((t) => t.score);
   report.sentiment = scoreSentiment(articles, sentimentHistory);
+  // Theme article hits — pure catalog matching over all article titles
+  // (zero network; board heat merges in bake-themes at publish time).
+  report.themes = THEME_CATALOG
+    .map((th) => ({
+      key: th.key,
+      name: th.name,
+      articleHits: themeArticleHits(
+        articles.map((a) => a.title),
+        th,
+      ).hits,
+    }))
+    .filter((x) => x.articleHits > 0)
+    .sort((a, b) => b.articleHits - a.articleHits)
+    .slice(0, 12);
+  if (report.themes.length) {
+    console.log(
+      `[daily] themes: ${report.themes.slice(0, 4).map((t) => t.name + "×" + t.articleHits).join(", ")}`,
+    );
+  }
   console.log(
     `[daily] sentiment: ${report.sentiment.label} (${report.sentiment.score}, +${report.sentiment.posHits}/−${report.sentiment.negHits} over ${report.sentiment.scanned} finance items` +
       (report.sentiment.percentile !== null

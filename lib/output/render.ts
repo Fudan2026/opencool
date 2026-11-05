@@ -1177,7 +1177,7 @@ export function renderHtml(
     ${renderRawCategoryPanel("finance", raw.finance)}
   </section>
   ${trading ? `<section class="panel" data-panel="trading">${renderTradingPanel(trading)}</section>` : ""}
-  <section class="panel" data-panel="review">${renderReviewPanel(quant)}</section>
+  <section class="panel" data-panel="review">${renderReviewPanel(quant, report.themes)}</section>
   <section class="panel" data-panel="sentiment">${renderSentimentPanel(sentiment, sentimentContext)}</section>
   <section class="panel" data-panel="techread">${renderTechReadPanel(trading)}</section>
   <section class="panel" data-panel="personas">${renderPersonasPanel(quant)}</section>
