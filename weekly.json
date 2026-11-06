@@ -1,21 +1,11 @@
 {
-  "generatedAt": "2026-11-05T16:10:13.521Z",
+  "generatedAt": "2026-11-06T07:23:27.776Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 9,
-  "editions": 23,
-  "avgSentiment": -73.1,
+  "daysCovered": 8,
+  "editions": 22,
+  "avgSentiment": -69.5,
   "sentimentCurve": [
-    {
-      "date": "2026-10-29",
-      "hour": "06",
-      "score": -98
-    },
-    {
-      "date": "2026-10-29",
-      "hour": "13",
-      "score": -72
-    },
     {
       "date": "2026-10-30",
       "hour": "06",
@@ -120,6 +110,11 @@
       "date": "2026-11-06",
       "hour": "06",
       "score": -5
+    },
+    {
+      "date": "2026-11-06",
+      "hour": "13",
+      "score": -18
     }
   ],
   "sectorAvg": [
@@ -130,46 +125,46 @@
       "editions": 2
     },
     {
-      "key": "macro",
-      "label": "宏观指数",
-      "avg": 84,
-      "editions": 3
+      "key": "general",
+      "label": "大盘综合",
+      "avg": -69.2,
+      "editions": 22
     },
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -76,
-      "editions": 2
-    },
-    {
-      "key": "general",
-      "label": "大盘综合",
-      "avg": -72.4,
-      "editions": 23
+      "avg": -61.3,
+      "editions": 3
     },
     {
       "key": "china-ashare",
       "label": "A 股蓝筹",
-      "avg": 20,
+      "avg": -58,
       "editions": 1
+    },
+    {
+      "key": "macro",
+      "label": "宏观指数",
+      "avg": 40.5,
+      "editions": 4
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -18.7,
-      "editions": 23
+      "avg": -21.2,
+      "editions": 22
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -15,
-      "editions": 23
+      "avg": -17,
+      "editions": 22
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": 4.8,
-      "editions": 10
+      "avg": -1.4,
+      "editions": 11
     }
   ],
   "topEvents": [
@@ -178,28 +173,28 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 23
+      "count": 22
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 23
+      "count": 22
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 23
+      "count": 22
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 13
+      "count": 14
     },
     {
       "symbol": "NVDA",
@@ -216,24 +211,24 @@
       "count": 7
     },
     {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "China denies allegations of spy operation targeting Nvidia CEO",
-      "url": "https://www.bbc.co.uk/news/articles/ckgj9plnlxdeo?at_medium=RSS&at_campaign=rss",
-      "count": 4
-    },
-    {
       "symbol": "ETH-USD",
       "displayName": "Ethereum",
       "title": "L2BEAT is now ETHBEAT",
       "url": "https://x.com/ethbeat_org/status/2117913893796225035",
-      "count": 4
+      "count": 5
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
       "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
+      "count": 5
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "China denies allegations of spy operation targeting Nvidia CEO",
+      "url": "https://www.bbc.co.uk/news/articles/ckgj9plnlxdeo?at_medium=RSS&at_campaign=rss",
       "count": 4
     },
     {
@@ -246,16 +241,16 @@
   ],
   "keywords": [
     {
-      "term": "billion",
-      "count": 5,
-      "firstSeen": "2026-10-29",
-      "lastSeen": "2026-11-06"
-    },
-    {
       "term": "agent",
       "count": 4,
       "firstSeen": "2026-11-01",
       "lastSeen": "2026-11-02"
+    },
+    {
+      "term": "billion",
+      "count": 4,
+      "firstSeen": "2026-10-31",
+      "lastSeen": "2026-11-06"
     },
     {
       "term": "币安",
@@ -318,12 +313,6 @@
       "lastSeen": "2026-10-31"
     },
     {
-      "term": "售额",
-      "count": 3,
-      "firstSeen": "2026-10-29",
-      "lastSeen": "2026-10-30"
-    },
-    {
       "term": "联社",
       "count": 3,
       "firstSeen": "2026-11-04",
@@ -342,12 +331,6 @@
       "lastSeen": "2026-11-01"
     },
     {
-      "term": "销售",
-      "count": 3,
-      "firstSeen": "2026-10-29",
-      "lastSeen": "2026-10-30"
-    },
-    {
       "term": "香港",
       "count": 3,
       "firstSeen": "2026-10-30",
@@ -364,70 +347,97 @@
       "count": 2,
       "firstSeen": "2026-11-02",
       "lastSeen": "2026-11-02"
+    },
+    {
+      "term": "jobs",
+      "count": 2,
+      "firstSeen": "2026-11-03",
+      "lastSeen": "2026-11-03"
+    },
+    {
+      "term": "media",
+      "count": 2,
+      "firstSeen": "2026-11-03",
+      "lastSeen": "2026-11-03"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 12
+      "totalHits": 17
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 10
-    },
-    {
-      "key": "semiconductor",
-      "name": "半导体",
-      "totalHits": 10
+      "totalHits": 13
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 9
+      "totalHits": 13
     },
     {
-      "key": "robotics",
-      "name": "机器人",
-      "totalHits": 7
+      "key": "semiconductor",
+      "name": "半导体",
+      "totalHits": 12
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 7
+      "totalHits": 11
+    },
+    {
+      "key": "robotics",
+      "name": "机器人",
+      "totalHits": 9
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 5
+      "totalHits": 8
+    },
+    {
+      "key": "brokerage",
+      "name": "券商",
+      "totalHits": 6
     },
     {
       "key": "comms",
       "name": "通信",
-      "totalHits": 4
+      "totalHits": 5
     },
     {
       "key": "media",
       "name": "传媒",
       "totalHits": 2
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "totalHits": 2
+    },
+    {
+      "key": "consumer-elec",
+      "name": "消费电子",
+      "totalHits": 1
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.52,
-      "editions": 23
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": -0.77,
+      "avgChangePct": -0.48,
       "editions": 21
     },
     {
-      "name": "创业板指",
-      "avgChangePct": -1.38,
+      "name": "深证成指",
+      "avgChangePct": -0.64,
       "editions": 20
+    },
+    {
+      "name": "创业板指",
+      "avgChangePct": -1.19,
+      "editions": 19
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
