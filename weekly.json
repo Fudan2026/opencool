@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-06T07:23:27.776Z",
+  "generatedAt": "2026-11-06T15:23:12.972Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 22,
-  "avgSentiment": -69.5,
+  "editions": 23,
+  "avgSentiment": -66.8,
   "sentimentCurve": [
     {
       "date": "2026-10-30",
@@ -115,20 +115,25 @@
       "date": "2026-11-06",
       "hour": "13",
       "score": -18
+    },
+    {
+      "date": "2026-11-06",
+      "hour": "19",
+      "score": -7
     }
   ],
   "sectorAvg": [
     {
       "key": "china-equity",
       "label": "中概港股",
-      "avg": 98,
-      "editions": 2
+      "avg": 94.3,
+      "editions": 3
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -69.2,
-      "editions": 22
+      "avg": -66.4,
+      "editions": 23
     },
     {
       "key": "crypto",
@@ -151,20 +156,20 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -21.2,
-      "editions": 22
+      "avg": -22.2,
+      "editions": 23
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -17,
-      "editions": 22
+      "avg": -16.3,
+      "editions": 23
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -1.4,
-      "editions": 11
+      "avg": -3.7,
+      "editions": 12
     }
   ],
   "topEvents": [
@@ -173,28 +178,28 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 14
+      "count": 15
     },
     {
       "symbol": "NVDA",
@@ -215,7 +220,7 @@
       "displayName": "Ethereum",
       "title": "L2BEAT is now ETHBEAT",
       "url": "https://x.com/ethbeat_org/status/2117913893796225035",
-      "count": 5
+      "count": 6
     },
     {
       "symbol": "USDCNY=X",
@@ -232,11 +237,11 @@
       "count": 4
     },
     {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Nvidia CEO reportedly targeted by an alleged Chinese spy",
-      "url": "https://www.theguardian.com/technology/2026/oct/29/nvidia-ceo-targeted-chinese-spy",
-      "count": 3
+      "symbol": "512480.SS",
+      "displayName": "半导体ETF",
+      "title": "消息人士：约60万块英伟达H200芯片在港等待运往中国内地",
+      "url": "https://www.dw.com/zh/消息人士：约60万块英伟达h200芯片在港等待运往中国内地/a-79866758?maca=chi-rss-chi-all-1127-rdf",
+      "count": 4
     }
   ],
   "keywords": [
@@ -365,52 +370,52 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 17
-    },
-    {
-      "key": "ai",
-      "name": "人工智能",
-      "totalHits": 13
-    },
-    {
-      "key": "bank",
-      "name": "银行",
-      "totalHits": 13
+      "totalHits": 22
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 12
+      "totalHits": 18
+    },
+    {
+      "key": "ai",
+      "name": "人工智能",
+      "totalHits": 16
+    },
+    {
+      "key": "bank",
+      "name": "银行",
+      "totalHits": 16
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 11
+      "totalHits": 12
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 9
+      "totalHits": 11
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 8
+      "totalHits": 9
     },
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 6
+      "totalHits": 7
     },
     {
       "key": "comms",
       "name": "通信",
-      "totalHits": 5
+      "totalHits": 6
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 2
+      "totalHits": 3
     },
     {
       "key": "defense",
@@ -426,18 +431,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.48,
-      "editions": 21
+      "avgChangePct": -0.51,
+      "editions": 22
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.64,
-      "editions": 20
+      "avgChangePct": -0.73,
+      "editions": 21
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.19,
-      "editions": 19
+      "avgChangePct": -1.33,
+      "editions": 20
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
