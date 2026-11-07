@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-07T07:46:03.951Z",
+  "generatedAt": "2026-11-07T15:07:10.679Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 22,
-  "avgSentiment": -56.5,
+  "editions": 23,
+  "avgSentiment": -54.2,
   "sentimentCurve": [
     {
       "date": "2026-10-31",
@@ -115,6 +115,11 @@
       "date": "2026-11-07",
       "hour": "13",
       "score": -2
+    },
+    {
+      "date": "2026-11-07",
+      "hour": "19",
+      "score": -3
     }
   ],
   "sectorAvg": [
@@ -139,32 +144,32 @@
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -56,
-      "editions": 22
+      "avg": -53.7,
+      "editions": 23
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 28.2,
-      "editions": 6
+      "avg": 25.7,
+      "editions": 7
     },
     {
       "key": "us-equity",
       "label": "美股",
       "avg": -24.7,
-      "editions": 22
+      "editions": 23
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -17.6,
-      "editions": 22
+      "avg": -18.8,
+      "editions": 23
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -6.2,
-      "editions": 13
+      "avg": -6,
+      "editions": 14
     }
   ],
   "topEvents": [
@@ -173,28 +178,28 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 17
+      "count": 18
     },
     {
       "symbol": "NVDA",
@@ -365,37 +370,37 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 34
+      "totalHits": 38
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 25
+      "totalHits": 28
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 22
+      "totalHits": 25
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 22
+      "totalHits": 25
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 18
+      "totalHits": 23
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 13
+      "totalHits": 14
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 11
+      "totalHits": 12
     },
     {
       "key": "brokerage",
@@ -415,29 +420,29 @@
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 4
+      "totalHits": 5
     },
     {
-      "key": "travel",
-      "name": "旅游酒店",
-      "totalHits": 2
+      "key": "infra",
+      "name": "基建",
+      "totalHits": 3
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.46,
-      "editions": 21
+      "avgChangePct": -0.49,
+      "editions": 22
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.72,
-      "editions": 21
+      "avgChangePct": -0.8,
+      "editions": 22
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.31,
-      "editions": 20
+      "avgChangePct": -1.44,
+      "editions": 21
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"

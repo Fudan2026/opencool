@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-07T07:46:20.924Z",
+  "generatedAt": "2026-11-07T15:07:27.291Z",
   "source": "eastmoney-concept-boards",
   "status": "ok",
-  "edition": "2026-11-07/13",
+  "edition": "2026-11-07/19",
   "themes": [
     {
       "key": "ai",
@@ -10,9 +10,8 @@
       "boardCode": "BK0800",
       "boardName": "人工智能",
       "boardChangePct": -2.31,
-      "articleHits": 4,
+      "articleHits": 3,
       "matchedAliases": [
-        "人工智能",
         "AI"
       ],
       "constituents": [
@@ -59,55 +58,161 @@
       ]
     },
     {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0695",
-      "boardName": "小金属概念",
-      "boardChangePct": -2.32,
-      "articleHits": 2,
+      "key": "bank",
+      "name": "银行",
+      "boardCode": "BK0525",
+      "boardName": "参股银行",
+      "boardChangePct": -0.93,
+      "articleHits": 3,
       "matchedAliases": [
-        "稀土"
+        "银行"
       ],
       "constituents": [
         {
-          "symbol": "002149",
-          "name": "西部材料",
-          "changePct": 3.54
+          "symbol": "601188",
+          "name": "龙江交通",
+          "changePct": 10.12
         },
         {
-          "symbol": "002667",
-          "name": "*ST威领",
-          "changePct": 2.56
+          "symbol": "600327",
+          "name": "大东方",
+          "changePct": 10.09
         },
         {
-          "symbol": "000603",
-          "name": "盛达资源",
-          "changePct": 1.84
+          "symbol": "603366",
+          "name": "日出东方",
+          "changePct": 10.04
         },
         {
-          "symbol": "603389",
-          "name": "亚振家居",
-          "changePct": 1.82
+          "symbol": "600644",
+          "name": "乐山电力",
+          "changePct": 8.25
         },
         {
-          "symbol": "000975",
-          "name": "山金国际",
-          "changePct": 1.44
+          "symbol": "600410",
+          "name": "华胜天成",
+          "changePct": 5.32
         },
         {
-          "symbol": "600641",
-          "name": "先导基电",
-          "changePct": 1.23
+          "symbol": "600697",
+          "name": "欧亚集团",
+          "changePct": 3.3
         },
         {
-          "symbol": "600295",
-          "name": "鄂尔多斯",
-          "changePct": 1.09
+          "symbol": "000541",
+          "name": "佛山照明",
+          "changePct": 3.19
         },
         {
-          "symbol": "600301",
-          "name": "华锡有色",
-          "changePct": 0.51
+          "symbol": "601107",
+          "name": "四川成渝",
+          "changePct": 3.05
+        }
+      ]
+    },
+    {
+      "key": "semiconductor",
+      "name": "半导体",
+      "boardCode": "BK0952",
+      "boardName": "第三代半导体",
+      "boardChangePct": -2.68,
+      "articleHits": 2,
+      "matchedAliases": [
+        "芯片"
+      ],
+      "constituents": [
+        {
+          "symbol": "300123",
+          "name": "ST亚光",
+          "changePct": 13.65
+        },
+        {
+          "symbol": "002943",
+          "name": "宇晶股份",
+          "changePct": 5.14
+        },
+        {
+          "symbol": "920719",
+          "name": "宁新新材",
+          "changePct": 4.24
+        },
+        {
+          "symbol": "301129",
+          "name": "瑞纳智能",
+          "changePct": 2.39
+        },
+        {
+          "symbol": "300102",
+          "name": "乾照光电",
+          "changePct": 2.18
+        },
+        {
+          "symbol": "600509",
+          "name": "天富能源",
+          "changePct": 1.2
+        },
+        {
+          "symbol": "603595",
+          "name": "ST东尼",
+          "changePct": 1.03
+        },
+        {
+          "symbol": "688230",
+          "name": "芯导科技",
+          "changePct": 0.82
+        }
+      ]
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "boardCode": "BK0490",
+      "boardName": "军工",
+      "boardChangePct": -2.13,
+      "articleHits": 2,
+      "matchedAliases": [
+        "导弹"
+      ],
+      "constituents": [
+        {
+          "symbol": "300237",
+          "name": "美晨科技",
+          "changePct": 20
+        },
+        {
+          "symbol": "920175",
+          "name": "东方碳素",
+          "changePct": 18.85
+        },
+        {
+          "symbol": "300123",
+          "name": "ST亚光",
+          "changePct": 13.65
+        },
+        {
+          "symbol": "600038",
+          "name": "中直股份",
+          "changePct": 5.93
+        },
+        {
+          "symbol": "300217",
+          "name": "东方电热",
+          "changePct": 5.19
+        },
+        {
+          "symbol": "688053",
+          "name": "ST思科瑞",
+          "changePct": 4.68
+        },
+        {
+          "symbol": "301571",
+          "name": "国科天成",
+          "changePct": 4.4
+        },
+        {
+          "symbol": "002611",
+          "name": "东方精工",
+          "changePct": 3.96
         }
       ]
     },
@@ -117,9 +222,9 @@
       "boardCode": "BK1134",
       "boardName": "算力概念",
       "boardChangePct": -2.26,
-      "articleHits": 2,
+      "articleHits": 1,
       "matchedAliases": [
-        "数据中心"
+        "英伟达"
       ],
       "constituents": [
         {
@@ -165,67 +270,55 @@
       ]
     },
     {
-      "key": "infra",
-      "name": "基建",
-      "boardCode": null,
-      "boardName": null,
-      "boardChangePct": null,
-      "articleHits": 2,
-      "matchedAliases": [
-        "基建"
-      ],
-      "constituents": []
-    },
-    {
-      "key": "semiconductor",
-      "name": "半导体",
-      "boardCode": "BK0952",
-      "boardName": "第三代半导体",
-      "boardChangePct": -2.68,
+      "key": "brokerage",
+      "name": "券商",
+      "boardCode": "BK1685",
+      "boardName": "保险重仓",
+      "boardChangePct": -0.24,
       "articleHits": 1,
       "matchedAliases": [
-        "芯片"
+        "保险"
       ],
       "constituents": [
         {
-          "symbol": "300123",
-          "name": "ST亚光",
-          "changePct": 13.65
+          "symbol": "601825",
+          "name": "沪农商行",
+          "changePct": 4.27
         },
         {
-          "symbol": "002943",
-          "name": "宇晶股份",
-          "changePct": 5.14
+          "symbol": "600066",
+          "name": "宇通客车",
+          "changePct": 3.87
         },
         {
-          "symbol": "920719",
-          "name": "宁新新材",
-          "changePct": 4.24
+          "symbol": "600941",
+          "name": "中国移动",
+          "changePct": 3.24
         },
         {
-          "symbol": "301129",
-          "name": "瑞纳智能",
-          "changePct": 2.39
+          "symbol": "600256",
+          "name": "广汇能源",
+          "changePct": 3.06
         },
         {
-          "symbol": "300102",
-          "name": "乾照光电",
+          "symbol": "600795",
+          "name": "国电电力",
+          "changePct": 2.68
+        },
+        {
+          "symbol": "600039",
+          "name": "四川路桥",
+          "changePct": 2.56
+        },
+        {
+          "symbol": "600023",
+          "name": "浙能电力",
+          "changePct": 2.28
+        },
+        {
+          "symbol": "600027",
+          "name": "华电国际",
           "changePct": 2.18
-        },
-        {
-          "symbol": "600509",
-          "name": "天富能源",
-          "changePct": 1.2
-        },
-        {
-          "symbol": "603595",
-          "name": "ST东尼",
-          "changePct": 1.03
-        },
-        {
-          "symbol": "688230",
-          "name": "芯导科技",
-          "changePct": 0.82
         }
       ]
     },
@@ -332,6 +425,57 @@
       ]
     },
     {
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0695",
+      "boardName": "小金属概念",
+      "boardChangePct": -2.32,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "002149",
+          "name": "西部材料",
+          "changePct": 3.54
+        },
+        {
+          "symbol": "002667",
+          "name": "*ST威领",
+          "changePct": 2.56
+        },
+        {
+          "symbol": "000603",
+          "name": "盛达资源",
+          "changePct": 1.84
+        },
+        {
+          "symbol": "603389",
+          "name": "亚振家居",
+          "changePct": 1.82
+        },
+        {
+          "symbol": "000975",
+          "name": "山金国际",
+          "changePct": 1.44
+        },
+        {
+          "symbol": "600641",
+          "name": "先导基电",
+          "changePct": 1.23
+        },
+        {
+          "symbol": "600295",
+          "name": "鄂尔多斯",
+          "changePct": 1.09
+        },
+        {
+          "symbol": "600301",
+          "name": "华锡有色",
+          "changePct": 0.51
+        }
+      ]
+    },
+    {
       "key": "robotics",
       "name": "机器人",
       "boardCode": "BK1190",
@@ -379,57 +523,6 @@
           "symbol": "300033",
           "name": "同花顺",
           "changePct": -3.06
-        }
-      ]
-    },
-    {
-      "key": "defense",
-      "name": "军工",
-      "boardCode": "BK0490",
-      "boardName": "军工",
-      "boardChangePct": -2.13,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "300237",
-          "name": "美晨科技",
-          "changePct": 20
-        },
-        {
-          "symbol": "920175",
-          "name": "东方碳素",
-          "changePct": 18.85
-        },
-        {
-          "symbol": "300123",
-          "name": "ST亚光",
-          "changePct": 13.65
-        },
-        {
-          "symbol": "600038",
-          "name": "中直股份",
-          "changePct": 5.93
-        },
-        {
-          "symbol": "300217",
-          "name": "东方电热",
-          "changePct": 5.19
-        },
-        {
-          "symbol": "688053",
-          "name": "ST思科瑞",
-          "changePct": 4.68
-        },
-        {
-          "symbol": "301571",
-          "name": "国科天成",
-          "changePct": 4.4
-        },
-        {
-          "symbol": "002611",
-          "name": "东方精工",
-          "changePct": 3.96
         }
       ]
     },
@@ -689,108 +782,6 @@
       ]
     },
     {
-      "key": "bank",
-      "name": "银行",
-      "boardCode": "BK0525",
-      "boardName": "参股银行",
-      "boardChangePct": -0.93,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "601188",
-          "name": "龙江交通",
-          "changePct": 10.12
-        },
-        {
-          "symbol": "600327",
-          "name": "大东方",
-          "changePct": 10.09
-        },
-        {
-          "symbol": "603366",
-          "name": "日出东方",
-          "changePct": 10.04
-        },
-        {
-          "symbol": "600644",
-          "name": "乐山电力",
-          "changePct": 8.25
-        },
-        {
-          "symbol": "600410",
-          "name": "华胜天成",
-          "changePct": 5.32
-        },
-        {
-          "symbol": "600697",
-          "name": "欧亚集团",
-          "changePct": 3.3
-        },
-        {
-          "symbol": "000541",
-          "name": "佛山照明",
-          "changePct": 3.19
-        },
-        {
-          "symbol": "601107",
-          "name": "四川成渝",
-          "changePct": 3.05
-        }
-      ]
-    },
-    {
-      "key": "brokerage",
-      "name": "券商",
-      "boardCode": "BK1685",
-      "boardName": "保险重仓",
-      "boardChangePct": -0.24,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "601825",
-          "name": "沪农商行",
-          "changePct": 4.27
-        },
-        {
-          "symbol": "600066",
-          "name": "宇通客车",
-          "changePct": 3.87
-        },
-        {
-          "symbol": "600941",
-          "name": "中国移动",
-          "changePct": 3.24
-        },
-        {
-          "symbol": "600256",
-          "name": "广汇能源",
-          "changePct": 3.06
-        },
-        {
-          "symbol": "600795",
-          "name": "国电电力",
-          "changePct": 2.68
-        },
-        {
-          "symbol": "600039",
-          "name": "四川路桥",
-          "changePct": 2.56
-        },
-        {
-          "symbol": "600023",
-          "name": "浙能电力",
-          "changePct": 2.28
-        },
-        {
-          "symbol": "600027",
-          "name": "华电国际",
-          "changePct": 2.18
-        }
-      ]
-    },
-    {
       "key": "ev",
       "name": "新能源车",
       "boardCode": null,
@@ -863,6 +854,16 @@
     {
       "key": "steel",
       "name": "钢铁",
+      "boardCode": null,
+      "boardName": null,
+      "boardChangePct": null,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": []
+    },
+    {
+      "key": "infra",
+      "name": "基建",
       "boardCode": null,
       "boardName": null,
       "boardChangePct": null,
