@@ -1,26 +1,11 @@
 {
-  "generatedAt": "2026-11-06T23:01:22.014Z",
+  "generatedAt": "2026-11-07T07:46:03.951Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 9,
-  "editions": 24,
-  "avgSentiment": -64.2,
+  "daysCovered": 8,
+  "editions": 22,
+  "avgSentiment": -56.5,
   "sentimentCurve": [
-    {
-      "date": "2026-10-30",
-      "hour": "06",
-      "score": -100
-    },
-    {
-      "date": "2026-10-30",
-      "hour": "13",
-      "score": -100
-    },
-    {
-      "date": "2026-10-30",
-      "hour": "19",
-      "score": -100
-    },
     {
       "date": "2026-10-31",
       "hour": "06",
@@ -125,15 +110,14 @@
       "date": "2026-11-07",
       "hour": "06",
       "score": -6
+    },
+    {
+      "date": "2026-11-07",
+      "hour": "13",
+      "score": -2
     }
   ],
   "sectorAvg": [
-    {
-      "key": "general",
-      "label": "大盘综合",
-      "avg": -63.8,
-      "editions": 24
-    },
     {
       "key": "crypto",
       "label": "加密",
@@ -153,27 +137,33 @@
       "editions": 4
     },
     {
-      "key": "us-equity",
-      "label": "美股",
-      "avg": -24,
-      "editions": 24
+      "key": "general",
+      "label": "大盘综合",
+      "avg": -56,
+      "editions": 22
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 23.2,
-      "editions": 5
+      "avg": 28.2,
+      "editions": 6
+    },
+    {
+      "key": "us-equity",
+      "label": "美股",
+      "avg": -24.7,
+      "editions": 22
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -17.9,
-      "editions": 24
+      "avg": -17.6,
+      "editions": 22
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -4.3,
+      "avg": -6.2,
       "editions": 13
     }
   ],
@@ -183,69 +173,69 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 24
+      "count": 22
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 24
+      "count": 22
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 24
+      "count": 22
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 16
+      "count": 17
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "The Promise and Pitfalls of Nvidia’s Venture in Kazakhstan",
       "url": "https://thediplomat.com/2026/10/the-promise-and-pitfalls-of-nvidias-venture-in-kazakhstan/",
-      "count": 11
-    },
-    {
-      "symbol": "BTC-USD",
-      "displayName": "Bitcoin",
-      "title": "Bitcoin’s Awkward Age: What’s the Next Source of Demand?",
-      "url": "https://x.com/rootstock_io/status/2115806243197493475",
-      "count": 7
+      "count": 9
     },
     {
       "symbol": "ETH-USD",
       "displayName": "Ethereum",
       "title": "L2BEAT is now ETHBEAT",
       "url": "https://x.com/ethbeat_org/status/2117913893796225035",
-      "count": 7
-    },
-    {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
-      "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
-      "count": 5
+      "count": 8
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "消息人士：约60万块英伟达H200芯片在港等待运往中国内地",
       "url": "https://www.dw.com/zh/消息人士：约60万块英伟达h200芯片在港等待运往中国内地/a-79866758?maca=chi-rss-chi-all-1127-rdf",
-      "count": 5
+      "count": 6
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "消息人士：约60万块英伟达H200芯片在港等待运往中国内地",
       "url": "https://www.dw.com/zh/消息人士：约60万块英伟达h200芯片在港等待运往中国内地/a-79866758?maca=chi-rss-chi-all-1127-rdf",
+      "count": 6
+    },
+    {
+      "symbol": "BTC-USD",
+      "displayName": "Bitcoin",
+      "title": "Bitcoin’s Awkward Age: What’s the Next Source of Demand?",
+      "url": "https://x.com/rootstock_io/status/2115806243197493475",
+      "count": 5
+    },
+    {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
+      "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
       "count": 5
     }
   ],
@@ -323,6 +313,12 @@
       "lastSeen": "2026-10-31"
     },
     {
+      "term": "美股",
+      "count": 3,
+      "firstSeen": "2026-11-05",
+      "lastSeen": "2026-11-07"
+    },
+    {
       "term": "联社",
       "count": 3,
       "firstSeen": "2026-11-04",
@@ -339,12 +335,6 @@
       "count": 3,
       "firstSeen": "2026-11-01",
       "lastSeen": "2026-11-01"
-    },
-    {
-      "term": "香港",
-      "count": 3,
-      "firstSeen": "2026-10-30",
-      "lastSeen": "2026-11-02"
     },
     {
       "term": "cut",
@@ -375,37 +365,37 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 29
+      "totalHits": 34
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 22
+      "totalHits": 25
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 19
+      "totalHits": 22
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 19
+      "totalHits": 22
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 14
+      "totalHits": 18
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 11
+      "totalHits": 13
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 10
+      "totalHits": 11
     },
     {
       "key": "brokerage",
@@ -420,7 +410,7 @@
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 4
+      "totalHits": 5
     },
     {
       "key": "defense",
@@ -428,26 +418,26 @@
       "totalHits": 4
     },
     {
-      "key": "consumer-elec",
-      "name": "消费电子",
-      "totalHits": 1
+      "key": "travel",
+      "name": "旅游酒店",
+      "totalHits": 2
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.54,
-      "editions": 23
+      "avgChangePct": -0.46,
+      "editions": 21
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.82,
-      "editions": 22
+      "avgChangePct": -0.72,
+      "editions": 21
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.46,
-      "editions": 21
+      "avgChangePct": -1.31,
+      "editions": 20
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
