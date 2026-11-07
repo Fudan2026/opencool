@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-07T15:07:10.679Z",
+  "generatedAt": "2026-11-07T23:07:22.076Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 23,
-  "avgSentiment": -54.2,
+  "daysCovered": 9,
+  "editions": 24,
+  "avgSentiment": -52,
   "sentimentCurve": [
     {
       "date": "2026-10-31",
@@ -120,6 +120,11 @@
       "date": "2026-11-07",
       "hour": "19",
       "score": -3
+    },
+    {
+      "date": "2026-11-08",
+      "hour": "06",
+      "score": -2
     }
   ],
   "sectorAvg": [
@@ -144,32 +149,32 @@
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -53.7,
-      "editions": 23
-    },
-    {
-      "key": "macro",
-      "label": "宏观指数",
-      "avg": 25.7,
-      "editions": 7
+      "avg": -51.5,
+      "editions": 24
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -24.7,
-      "editions": 23
+      "avg": -24.2,
+      "editions": 24
+    },
+    {
+      "key": "macro",
+      "label": "宏观指数",
+      "avg": 23.9,
+      "editions": 8
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -18.8,
-      "editions": 23
+      "avg": -20.2,
+      "editions": 24
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -6,
-      "editions": 14
+      "avg": -5.7,
+      "editions": 15
     }
   ],
   "topEvents": [
@@ -178,14 +183,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 23
+      "count": 24
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 23
+      "count": 24
     },
     {
       "symbol": "USDCNY=X",
@@ -199,7 +204,7 @@
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 18
+      "count": 19
     },
     {
       "symbol": "NVDA",
@@ -318,6 +323,12 @@
       "lastSeen": "2026-10-31"
     },
     {
+      "term": "美元",
+      "count": 3,
+      "firstSeen": "2026-11-05",
+      "lastSeen": "2026-11-08"
+    },
+    {
       "term": "美股",
       "count": 3,
       "firstSeen": "2026-11-05",
@@ -358,54 +369,53 @@
       "count": 2,
       "firstSeen": "2026-11-03",
       "lastSeen": "2026-11-03"
-    },
-    {
-      "term": "media",
-      "count": 2,
-      "firstSeen": "2026-11-03",
-      "lastSeen": "2026-11-03"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 38
+      "totalHits": 43
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 28
+      "totalHits": 31
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 25
+      "totalHits": 28
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 25
+      "totalHits": 28
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 23
+      "totalHits": 27
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 14
+      "totalHits": 15
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 12
+      "totalHits": 13
     },
     {
       "key": "brokerage",
       "name": "券商",
       "totalHits": 8
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "totalHits": 7
     },
     {
       "key": "comms",
@@ -418,26 +428,21 @@
       "totalHits": 5
     },
     {
-      "key": "defense",
-      "name": "军工",
-      "totalHits": 5
-    },
-    {
       "key": "infra",
       "name": "基建",
-      "totalHits": 3
+      "totalHits": 5
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.49,
-      "editions": 22
+      "avgChangePct": -0.52,
+      "editions": 23
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.8,
-      "editions": 22
+      "avgChangePct": -0.88,
+      "editions": 23
     },
     {
       "name": "创业板指",
