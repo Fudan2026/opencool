@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-08T07:13:46.739Z",
+  "generatedAt": "2026-11-08T15:03:21.940Z",
   "note": "Static MCP: fetch these endpoints directly; a live stdio MCP server ships in the repo (mcp/) for local agents. See /ai-instructions.html.",
   "tools": [
     {
       "name": "sentiment_query",
-      "staticEndpoint": "/2026-11-08/13.json#sentiment",
+      "staticEndpoint": "/2026-11-08/19.json#sentiment",
       "params": "date+hour -> /<YYYY-MM-DD>/<HH>.json#sentiment",
       "returns": "{score,raw,label,sectors,percentile}"
     },
@@ -23,7 +23,7 @@
     },
     {
       "name": "market_overview",
-      "staticEndpoint": "/2026-11-08/13.json#quant.market",
+      "staticEndpoint": "/2026-11-08/19.json#quant.market",
       "params": "date+hour -> /<date>/<HH>.json#quant.market",
       "returns": "{indices:[{code,name,price,changePct}],note}"
     },
@@ -41,7 +41,7 @@
     },
     {
       "name": "watchlist_events",
-      "staticEndpoint": "/2026-11-08/13.json#quant.events",
+      "staticEndpoint": "/2026-11-08/19.json#quant.events",
       "params": "date+hour -> /<date>/<HH>.json#quant.events",
       "returns": "[{symbol,displayName,title,url}]"
     },
