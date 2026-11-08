@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-08T15:03:05.351Z",
+  "generatedAt": "2026-11-08T23:46:03.908Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 23,
-  "avgSentiment": -41.6,
+  "daysCovered": 9,
+  "editions": 24,
+  "avgSentiment": -40.2,
   "sentimentCurve": [
     {
       "date": "2026-11-01",
@@ -120,9 +120,20 @@
       "date": "2026-11-08",
       "hour": "19",
       "score": -5
+    },
+    {
+      "date": "2026-11-09",
+      "hour": "06",
+      "score": -7
     }
   ],
   "sectorAvg": [
+    {
+      "key": "china-equity",
+      "label": "中概港股",
+      "avg": 62.4,
+      "editions": 5
+    },
     {
       "key": "crypto",
       "label": "加密",
@@ -130,46 +141,40 @@
       "editions": 3
     },
     {
-      "key": "china-ashare",
-      "label": "A 股蓝筹",
-      "avg": -58,
-      "editions": 1
-    },
-    {
-      "key": "china-equity",
-      "label": "中概港股",
-      "avg": 56.3,
-      "editions": 4
-    },
-    {
       "key": "general",
       "label": "大盘综合",
-      "avg": -41,
-      "editions": 23
-    },
-    {
-      "key": "us-equity",
-      "label": "美股",
-      "avg": -24.2,
-      "editions": 23
+      "avg": -39.5,
+      "editions": 24
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 23.9,
-      "editions": 8
+      "avg": 27.7,
+      "editions": 9
+    },
+    {
+      "key": "us-equity",
+      "label": "美股",
+      "avg": -25.7,
+      "editions": 24
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -20.4,
-      "editions": 23
+      "avg": -19.9,
+      "editions": 24
+    },
+    {
+      "key": "china-ashare",
+      "label": "A 股蓝筹",
+      "avg": 14.5,
+      "editions": 2
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -6.1,
-      "editions": 17
+      "avg": -5,
+      "editions": 18
     }
   ],
   "topEvents": [
@@ -178,14 +183,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 23
+      "count": 24
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 23
+      "count": 24
     },
     {
       "symbol": "USDCNY=X",
@@ -230,17 +235,17 @@
       "count": 6
     },
     {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
-      "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
-      "count": 5
-    },
-    {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "US believes Nvidia’s Huang had romantic relationship with alleged Chinese spy",
       "url": "https://www.ft.com/content/a55a2a22-4479-4f93-a445-6147a5c6d790?syn-25a6b1a6=1",
+      "count": 6
+    },
+    {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
+      "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
       "count": 5
     }
   ],
@@ -370,32 +375,32 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 43
-    },
-    {
-      "key": "ai",
-      "name": "人工智能",
-      "totalHits": 34
-    },
-    {
-      "key": "bank",
-      "name": "银行",
-      "totalHits": 34
+      "totalHits": 49
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 34
+      "totalHits": 38
+    },
+    {
+      "key": "ai",
+      "name": "人工智能",
+      "totalHits": 37
+    },
+    {
+      "key": "bank",
+      "name": "银行",
+      "totalHits": 37
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 31
+      "totalHits": 34
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 17
+      "totalHits": 19
     },
     {
       "key": "robotics",
@@ -405,7 +410,7 @@
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 9
+      "totalHits": 10
     },
     {
       "key": "brokerage",
@@ -415,34 +420,34 @@
     {
       "key": "infra",
       "name": "基建",
+      "totalHits": 8
+    },
+    {
+      "key": "media",
+      "name": "传媒",
       "totalHits": 7
     },
     {
       "key": "comms",
       "name": "通信",
       "totalHits": 6
-    },
-    {
-      "key": "media",
-      "name": "传媒",
-      "totalHits": 6
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.42,
-      "editions": 21
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": -0.79,
+      "avgChangePct": -0.45,
       "editions": 22
     },
     {
+      "name": "深证成指",
+      "avgChangePct": -0.86,
+      "editions": 23
+    },
+    {
       "name": "创业板指",
-      "avgChangePct": -1.3,
-      "editions": 20
+      "avgChangePct": -1.42,
+      "editions": 21
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"

@@ -1,60 +1,113 @@
 {
-  "generatedAt": "2026-11-08T15:03:21.139Z",
+  "generatedAt": "2026-11-08T23:46:19.094Z",
   "source": "eastmoney-concept-boards",
   "status": "ok",
-  "edition": "2026-11-08/19",
+  "edition": "2026-11-09/06",
   "themes": [
     {
-      "key": "travel",
-      "name": "旅游酒店",
-      "boardCode": "BK0485",
-      "boardName": "旅游酒店",
-      "boardChangePct": -1.68,
-      "articleHits": 2,
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": -2.26,
+      "articleHits": 4,
       "matchedAliases": [
-        "旅游",
-        "酒店"
+        "算力",
+        "数据中心"
       ],
       "constituents": [
         {
-          "symbol": "603199",
-          "name": "九华旅游",
-          "changePct": 0.41
+          "symbol": "300949",
+          "name": "奥雅股份",
+          "changePct": 12.52
         },
         {
-          "symbol": "002306",
-          "name": "ST云网",
-          "changePct": 0
+          "symbol": "002929",
+          "name": "润建股份",
+          "changePct": 10.01
         },
         {
-          "symbol": "600754",
-          "name": "锦江酒店",
-          "changePct": -0.09
+          "symbol": "002973",
+          "name": "侨银股份",
+          "changePct": 10
         },
         {
-          "symbol": "900942",
-          "name": "黄山Ｂ股",
-          "changePct": -0.17
+          "symbol": "600156",
+          "name": "华升股份",
+          "changePct": 9.95
         },
         {
-          "symbol": "600258",
-          "name": "首旅酒店",
-          "changePct": -0.37
+          "symbol": "920090",
+          "name": "*ST同辉",
+          "changePct": 8.3
         },
         {
-          "symbol": "002707",
-          "name": "众信旅游",
-          "changePct": -0.37
+          "symbol": "300212",
+          "name": "*ST易录",
+          "changePct": 8.15
         },
         {
-          "symbol": "601888",
-          "name": "中国中免",
-          "changePct": -0.46
+          "symbol": "600289",
+          "name": "ST信通",
+          "changePct": 6.15
         },
         {
-          "symbol": "000796",
-          "name": "凯撒旅业",
-          "changePct": -0.59
+          "symbol": "600410",
+          "name": "华胜天成",
+          "changePct": 5.32
+        }
+      ]
+    },
+    {
+      "key": "ai",
+      "name": "人工智能",
+      "boardCode": "BK0800",
+      "boardName": "人工智能",
+      "boardChangePct": -2.31,
+      "articleHits": 3,
+      "matchedAliases": [
+        "AI"
+      ],
+      "constituents": [
+        {
+          "symbol": "300949",
+          "name": "奥雅股份",
+          "changePct": 12.52
+        },
+        {
+          "symbol": "002889",
+          "name": "东方嘉盛",
+          "changePct": 10.04
+        },
+        {
+          "symbol": "002929",
+          "name": "润建股份",
+          "changePct": 10.01
+        },
+        {
+          "symbol": "001308",
+          "name": "康冠科技",
+          "changePct": 9.98
+        },
+        {
+          "symbol": "002712",
+          "name": "思美传媒",
+          "changePct": 9.96
+        },
+        {
+          "symbol": "600229",
+          "name": "城市传媒",
+          "changePct": 9.93
+        },
+        {
+          "symbol": "920090",
+          "name": "*ST同辉",
+          "changePct": 8.3
+        },
+        {
+          "symbol": "300212",
+          "name": "*ST易录",
+          "changePct": 8.15
         }
       ]
     },
@@ -64,7 +117,7 @@
       "boardCode": "BK0695",
       "boardName": "小金属概念",
       "boardChangePct": -2.32,
-      "articleHits": 1,
+      "articleHits": 2,
       "matchedAliases": [
         "黄金"
       ],
@@ -112,12 +165,65 @@
       ]
     },
     {
+      "key": "liquor",
+      "name": "白酒",
+      "boardCode": "BK0896",
+      "boardName": "白酒",
+      "boardChangePct": -2.01,
+      "articleHits": 2,
+      "matchedAliases": [
+        "茅台"
+      ],
+      "constituents": [
+        {
+          "symbol": "600809",
+          "name": "山西汾酒",
+          "changePct": 1.29
+        },
+        {
+          "symbol": "600365",
+          "name": "ST通葡",
+          "changePct": 0.39
+        },
+        {
+          "symbol": "000568",
+          "name": "泸州老窖",
+          "changePct": 0.09
+        },
+        {
+          "symbol": "600519",
+          "name": "贵州茅台",
+          "changePct": 0.07
+        },
+        {
+          "symbol": "600257",
+          "name": "大湖股份",
+          "changePct": 0
+        },
+        {
+          "symbol": "000596",
+          "name": "古井贡酒",
+          "changePct": -0.18
+        },
+        {
+          "symbol": "600153",
+          "name": "建发股份",
+          "changePct": -0.34
+        },
+        {
+          "symbol": "600382",
+          "name": "广东明珠",
+          "changePct": -0.37
+        }
+      ]
+    },
+    {
       "key": "bank",
       "name": "银行",
       "boardCode": "BK0525",
       "boardName": "参股银行",
       "boardChangePct": -0.93,
-      "articleHits": 1,
+      "articleHits": 2,
       "matchedAliases": [
         "银行"
       ],
@@ -163,18 +269,6 @@
           "changePct": 3.05
         }
       ]
-    },
-    {
-      "key": "infra",
-      "name": "基建",
-      "boardCode": null,
-      "boardName": null,
-      "boardChangePct": null,
-      "articleHits": 1,
-      "matchedAliases": [
-        "基建"
-      ],
-      "constituents": []
     },
     {
       "key": "consumer-elec",
@@ -330,57 +424,6 @@
       ]
     },
     {
-      "key": "ai",
-      "name": "人工智能",
-      "boardCode": "BK0800",
-      "boardName": "人工智能",
-      "boardChangePct": -2.31,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "300949",
-          "name": "奥雅股份",
-          "changePct": 12.52
-        },
-        {
-          "symbol": "002889",
-          "name": "东方嘉盛",
-          "changePct": 10.04
-        },
-        {
-          "symbol": "002929",
-          "name": "润建股份",
-          "changePct": 10.01
-        },
-        {
-          "symbol": "001308",
-          "name": "康冠科技",
-          "changePct": 9.98
-        },
-        {
-          "symbol": "002712",
-          "name": "思美传媒",
-          "changePct": 9.96
-        },
-        {
-          "symbol": "600229",
-          "name": "城市传媒",
-          "changePct": 9.93
-        },
-        {
-          "symbol": "920090",
-          "name": "*ST同辉",
-          "changePct": 8.3
-        },
-        {
-          "symbol": "300212",
-          "name": "*ST易录",
-          "changePct": 8.15
-        }
-      ]
-    },
-    {
       "key": "robotics",
       "name": "机器人",
       "boardCode": "BK1190",
@@ -428,57 +471,6 @@
           "symbol": "300033",
           "name": "同花顺",
           "changePct": -3.06
-        }
-      ]
-    },
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": -2.26,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "300949",
-          "name": "奥雅股份",
-          "changePct": 12.52
-        },
-        {
-          "symbol": "002929",
-          "name": "润建股份",
-          "changePct": 10.01
-        },
-        {
-          "symbol": "002973",
-          "name": "侨银股份",
-          "changePct": 10
-        },
-        {
-          "symbol": "600156",
-          "name": "华升股份",
-          "changePct": 9.95
-        },
-        {
-          "symbol": "920090",
-          "name": "*ST同辉",
-          "changePct": 8.3
-        },
-        {
-          "symbol": "300212",
-          "name": "*ST易录",
-          "changePct": 8.15
-        },
-        {
-          "symbol": "600289",
-          "name": "ST信通",
-          "changePct": 6.15
-        },
-        {
-          "symbol": "600410",
-          "name": "华胜天成",
-          "changePct": 5.32
         }
       ]
     },
@@ -534,57 +526,6 @@
       ]
     },
     {
-      "key": "liquor",
-      "name": "白酒",
-      "boardCode": "BK0896",
-      "boardName": "白酒",
-      "boardChangePct": -2.01,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "600809",
-          "name": "山西汾酒",
-          "changePct": 1.29
-        },
-        {
-          "symbol": "600365",
-          "name": "ST通葡",
-          "changePct": 0.39
-        },
-        {
-          "symbol": "000568",
-          "name": "泸州老窖",
-          "changePct": 0.09
-        },
-        {
-          "symbol": "600519",
-          "name": "贵州茅台",
-          "changePct": 0.07
-        },
-        {
-          "symbol": "600257",
-          "name": "大湖股份",
-          "changePct": 0
-        },
-        {
-          "symbol": "000596",
-          "name": "古井贡酒",
-          "changePct": -0.18
-        },
-        {
-          "symbol": "600153",
-          "name": "建发股份",
-          "changePct": -0.34
-        },
-        {
-          "symbol": "600382",
-          "name": "广东明珠",
-          "changePct": -0.37
-        }
-      ]
-    },
-    {
       "key": "pharma",
       "name": "创新药",
       "boardCode": "BK1106",
@@ -632,6 +573,57 @@
           "symbol": "688235",
           "name": "百济神州",
           "changePct": 1.66
+        }
+      ]
+    },
+    {
+      "key": "travel",
+      "name": "旅游酒店",
+      "boardCode": "BK0485",
+      "boardName": "旅游酒店",
+      "boardChangePct": -1.68,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "603199",
+          "name": "九华旅游",
+          "changePct": 0.41
+        },
+        {
+          "symbol": "002306",
+          "name": "ST云网",
+          "changePct": 0
+        },
+        {
+          "symbol": "600754",
+          "name": "锦江酒店",
+          "changePct": -0.09
+        },
+        {
+          "symbol": "900942",
+          "name": "黄山Ｂ股",
+          "changePct": -0.17
+        },
+        {
+          "symbol": "600258",
+          "name": "首旅酒店",
+          "changePct": -0.37
+        },
+        {
+          "symbol": "002707",
+          "name": "众信旅游",
+          "changePct": -0.37
+        },
+        {
+          "symbol": "601888",
+          "name": "中国中免",
+          "changePct": -0.46
+        },
+        {
+          "symbol": "000796",
+          "name": "凯撒旅业",
+          "changePct": -0.59
         }
       ]
     },
@@ -861,6 +853,16 @@
     {
       "key": "steel",
       "name": "钢铁",
+      "boardCode": null,
+      "boardName": null,
+      "boardChangePct": null,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": []
+    },
+    {
+      "key": "infra",
+      "name": "基建",
       "boardCode": null,
       "boardName": null,
       "boardChangePct": null,
