@@ -272,6 +272,80 @@ if (fs.existsSync("data/mcp-desk.json")) {
   console.log(`[build-site] mcp-desk.html (${desk.harvestCalls.zcodeMcp} MCP calls)`);
 }
 
+// ---------------------------------------------------------------------------
+// News → practice funnel. OpenCool informs, SuPro practices (supro.si).
+// Every outbound SuPro link carries the same UTM scheme so the sister site
+// can attribute traffic per surface (home / timing / signals / paper / news /
+// landing / badge). Keep copy calm and retail-friendly: no hype, no advice.
+// ---------------------------------------------------------------------------
+const SUPRO_UTM = "utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice";
+
+function suproLink(pathname, content) {
+  const p = pathname.startsWith("/") ? pathname : `/${pathname}`;
+  return `https://supro.si${p}?${SUPRO_UTM}&utm_content=${content}`;
+}
+
+const SUPRO_LINKS = {
+  home: suproLink("/", "home"),
+  timing: suproLink("/timing/broad/", "timing"),
+  signals: suproLink("/signals", "signals"),
+  paper: suproLink("/paper", "paper"),
+  news: suproLink("/news", "news"),
+  landing: suproLink("/", "landing"),
+  badge: suproLink("/", "badge"),
+};
+
+// Injected once per edition page (06 / 13 / 19) before </main>. Idempotent:
+// the marker guards against double injection when build-site re-runs.
+const FUNNEL_MARKER = 'data-funnel="supro"';
+
+function funnelCtaHtml() {
+  return `  <section class="funnel-cta" ${FUNNEL_MARKER} aria-label="OpenCool × SuPro">
+    <h2>看完新闻，然后呢？</h2>
+    <p class="funnel-lead">OpenCool 负责<b>看懂</b>市场：三报、题材结构、情绪计。SuPro 负责<b>上手</b>练一遍：择时、信号、纸盘复盘。两边互为姐妹项目，看报 → 研究 → 模拟实操，一条闭环。</p>
+    <p class="funnel-links">
+      <a class="funnel-link primary" href="${SUPRO_LINKS.home}" target="_blank" rel="noopener">进入 SuPro →</a>
+      <a class="funnel-link" href="${SUPRO_LINKS.timing}" target="_blank" rel="noopener">大盘择时</a>
+      <a class="funnel-link" href="${SUPRO_LINKS.signals}" target="_blank" rel="noopener">今日信号</a>
+      <a class="funnel-link" href="${SUPRO_LINKS.paper}" target="_blank" rel="noopener">纸盘演练</a>
+      <a class="funnel-link" href="${SUPRO_LINKS.news}" target="_blank" rel="noopener">资讯一站</a>
+    </p>
+    <p class="funnel-note">纸盘模拟，非投资建议；行情以数据源为准。</p>
+  </section>
+`;
+}
+
+const FUNNEL_STYLE = `  <style>
+  .funnel-cta { margin:2.5rem 0 0; padding:1.1rem 1.25rem; background:var(--card);
+    border:1px solid var(--rule); border-left:3px solid #1e3a8a; border-radius:.9rem; }
+  .funnel-cta h2 { margin:0 0 .45rem; font-size:1.02rem; }
+  .funnel-lead { margin:0 0 .7rem; color:var(--fg-soft); font-size:.9rem; line-height:1.6; }
+  .funnel-links { margin:0 0 .5rem; display:flex; flex-wrap:wrap; gap:.4rem; }
+  .funnel-link { display:inline-block; padding:.4rem .85rem; border-radius:999px;
+    border:1px solid var(--rule); color:var(--fg); text-decoration:none; font-size:.84rem; }
+  .funnel-link:hover { border-color:#1e3a8a; color:#1e3a8a; }
+  .funnel-link.primary { background:#1e3a8a; border-color:#1e3a8a; color:#fff; }
+  .funnel-note { margin:0; color:var(--muted); font-size:.76rem; }
+  </style>
+`;
+
+function injectFunnelCta(html) {
+  if (html.includes(FUNNEL_MARKER)) return { html, injected: false };
+  const anchor = html.includes("<footer")
+    ? "<footer"
+    : html.includes("</main>")
+      ? "</main>"
+      : "</body>";
+  if (!html.includes(anchor)) return { html, injected: false };
+  const withStyle = html.includes("</head>")
+    ? html.replace("</head>", `${FUNNEL_STYLE}</head>`)
+    : html;
+  return {
+    html: withStyle.replace(anchor, `${funnelCtaHtml()}${anchor}`),
+    injected: true,
+  };
+}
+
 // supro.html — sister-project landing (SuPro / supro.si). Content
 // adapted verbatim from the SuPro repo README; the news→practice funnel:
 // OpenCool informs, SuPro practices.
@@ -319,9 +393,19 @@ const suproHtml = `<!doctype html>
   <h2>SuPro — Super Professional · 苏坡</h2>
   <p>帮助用户<b>筛选、比较、选用</b> AI / Agent 产品的专业站点：America.gov 级别的品牌首页与 Composer、AI 产品目录（logo · 名称 · 周榜）、以及 <b>苏坡大模型 / Supro Model</b> —— DeepSeek AIaaS，按实际 tokens 折算 gold 计费（中文「苏坡」取自苏东坡，致敬大智能时代的从容乐观）。</p>
   <p>
-    <a class="cta primary" href="https://supro.si" target="_blank" rel="noopener">进入 supro.si →</a>
+    <a class="cta primary" href="${SUPRO_LINKS.landing}" target="_blank" rel="noopener">进入 supro.si →</a>
     <a class="cta ghost" href="https://fudan2026.github.io/Agenter/" target="_blank" rel="noopener">Pages 镜像</a>
   </p>
+
+  <h2>从看报直接开始练</h2>
+  <p class="meta">按你此刻要做的事选一个入口：</p>
+  <p>
+    <a class="cta ghost" href="${SUPRO_LINKS.timing}" target="_blank" rel="noopener">大盘择时 →</a>
+    <a class="cta ghost" href="${SUPRO_LINKS.signals}" target="_blank" rel="noopener">今日信号 →</a>
+    <a class="cta ghost" href="${SUPRO_LINKS.paper}" target="_blank" rel="noopener">纸盘演练 →</a>
+    <a class="cta ghost" href="${SUPRO_LINKS.news}" target="_blank" rel="noopener">资讯一站 →</a>
+  </p>
+  <p class="note">纸盘模拟，非投资建议；行情以数据源为准。</p>
 
   <h2>产品版图</h2>
   <table>
@@ -357,6 +441,23 @@ const suproHtml = `<!doctype html>
 `;
 fs.writeFileSync(path.join(ROOT, "supro.html"), suproHtml, "utf8");
 console.log(`[build-site] supro.html (sister-project funnel)`);
+
+// Inject the news→practice CTA into every real edition page (06 / 13 / 19).
+// Runs before index.html is derived, so the homepage inherits it too.
+{
+  let funnelCount = 0;
+  for (const e of editions) {
+    if (e.placeholder) continue;
+    const fp = path.join(ROOT, e.rel);
+    if (!fs.existsSync(fp)) continue;
+    const src = fs.readFileSync(fp, "utf8");
+    const { html, injected } = injectFunnelCta(src);
+    if (!injected) continue;
+    fs.writeFileSync(fp, html, "utf8");
+    funnelCount += 1;
+  }
+  console.log(`[build-site] funnel CTA injected into ${funnelCount} edition page(s)`);
+}
 
 // tools.json — the "Static MCP" manifest: every MCP tool mapped to its
 // stable static endpoint, so agents without a local clone consume
@@ -760,7 +861,7 @@ if (fs.existsSync(path.join(ROOT, "search.html"))) {
 }
 latestHtml = latestHtml.replace(
   "</body>",
-  `  <a href="https://supro.si" target="_blank" rel="noopener" style="position:fixed;right:1rem;bottom:8.8rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#1e3a8a;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">🚀 量化实操·苏坡</a>\n</body>`,
+  `  <a href="${SUPRO_LINKS.badge}" target="_blank" rel="noopener" style="position:fixed;right:1rem;bottom:8.8rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#1e3a8a;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">🚀 量化实操·苏坡</a>\n</body>`,
 );
 console.log(`[build-site] index.html += supro entry`);
 fs.writeFileSync(path.join(ROOT, "index.html"), latestHtml, "utf8");

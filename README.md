@@ -43,6 +43,8 @@ Workflow 默认 `LLM_MODE=auto`：**零 AI · 零 Token 是默认态**。只有�
 - **散户学堂 / 知识库**：静态教程 + 客户端检索
 - **徒步路线收藏**：`trails.html` 星标收藏（本机 localStorage，无账号）
 - **开放 MCP**：见 [`mcp/README.md`](mcp/README.md)（仅本地 Agent，Pages 不跑服务）
+- **姐妹项目 SuPro**：`/supro.html` 是「看新闻 → 练实操」的出口 —— OpenCool 负责看懂市场（三报 / 题材 / 情绪计），[SuPro（supro.si）](https://supro.si/) 负责上手演练（择时 / 信号 / 纸盘复盘）。每期简报底部与首页浮标都带 UTM 深链。
+- **Sister project SuPro**: `/supro.html` is the "read → practice" exit — OpenCool informs (briefs, themes, sentiment), [SuPro](https://supro.si/) lets you practice (timing, signals, paper trading). Every edition footer and the homepage floating badge carry UTM-tagged deep links.
 
 ---
 
