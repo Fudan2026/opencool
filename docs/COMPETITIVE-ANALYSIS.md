@@ -144,3 +144,67 @@ theme mapping, calendar) and the uncontested agent-infra lane (Static
 MCP + ai-instructions + attribution) define Waves 8-9. Wave 8 ships the
 distill, the proven 盘前 format, the nobody-else-has Static MCP
 surface, and opt-in push.
+
+---
+
+## Wave 10 deep-dive (2026-11): the moat map & the news→practice funnel
+
+Fresh web distill targeting the "automated news workflow" crowd and the
+advanced-feature frontier. Search-synthesis items flagged LOW-CONFIDENCE
+(no primary URL for each synthesis line).
+
+### The 2026 moat consensus
+
+- **Single features are commoditized.** n8n-style AI-daily pipelines
+  (RSS → AI summary → push) run sub-14-minute end-to-end with 200+
+  source crawlers — aggregation + summarization is table stakes
+  (LOW-CONFIDENCE synthesis).
+- **Durable moats = workflow penetration + proprietary/real-experience
+  content + 被推荐权 (recommendability)**: personalized, decision-oriented
+  output rather than raw aggregation (LOW-CONFIDENCE industry synthesis).
+- **The space moved past one-size digests**: ByteDance's Doubao daily
+  digest was pulled (Feb 2026) — read as strategic retreat while the
+  market shifts toward vertical, customizable, interactive digests
+  (LOW-CONFIDENCE).
+
+### Frontier moves worth tracking
+
+- **TrendRadar v6.10** ([sansan0/TrendRadar](https://github.com/sansan0/TrendRadar)):
+  MCP toolset rework — `aggregate_news` (cross-platform dedup
+  aggregation) and `compare_periods` (week-over-week/month-over-month
+  trend comparison). **Our `compare_periods` candidate**: wave-9's
+  `sentiment-history.json` + `weekly.json` already hold the series — a
+  static periods-compare endpoint is a natural Wave 11 item.
+- **NewsNow** ([newsnext/newsnow](https://github.com/newsnext/newsnow)):
+  remains aggregation/display (realtime hot lists, OAuth
+  personalization) — speed + breadth + UX, easily replicated.
+- **TrendRadar consumes NewsNow's API as a data source** — evidence
+  that the aggregator layer is commoditizing into infrastructure
+  (LOW-CONFIDENCE).
+
+### Honest 追平 ledger (catch-up items)
+
+| Competitor capability | Our status | Verdict |
+|---|---|---|
+| `compare_periods` trend comparison (TrendRadar v6.10) | sentiment-history + weekly hold the series | Wave 11 — static endpoint is cheap |
+| Role-based digest formatting (CTO/CMO versions, LOW-CONF) | single zh/en audience format | later — i18n surface |
+| Interactive chat-with-your-news (TrendRadar MCP chat) | `LLM_MODE=auto` gives the free GLM path; not wired to a chat UX | later — contradicts zero-AI default, opt-in only |
+| 9-channel push (TrendRadar) | Telegram + ntfy shipped (PR #28) | **caught up** — channels added on demand |
+| 题材→成分股 engines (选股宝/韭研公社) | **shipped wave 9** (themes.json + panel) | **caught up** |
+
+### The breakthrough thesis: news → practice, closed loop
+
+The 2026 consensus says the moat is workflow penetration and
+recommendability. No surveyed product closes the **news → practice**
+loop inside one ecosystem: aggregators inform and stop; quant suites
+practice but don't inform.
+
+**OpenCool informs → SuPro practices** (supro.si): the funnel completes
+the workflow — 看完三报想实操 → SuPro's Paper Pro (¥100M journal,
+3 bps, t+1 fills, no broker API in the browser), Factor Studio +
+Strategy Lab, 苏坡大模型 AIaaS, Sim Desk. Wave 10 ships the funnel:
+a dedicated supro.html landing page (content from the SuPro README,
+verbatim-anchored), a site-wide entry badge, and nav links. The
+reciprocal backlink (supro.si /news → OpenCool) is requested from the
+SuPro team via issue — one ecosystem, two surfaces, recommendability
+earned on both.
