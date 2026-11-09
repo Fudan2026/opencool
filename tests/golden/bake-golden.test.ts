@@ -57,7 +57,7 @@ function makeSidecar(dir: string, date: string, hour: string, opts: { caixinFail
   );
   fs.writeFileSync(
     path.join(dir, date, `${hour}.html`),
-    `<html><h1>${date} ${hour}</h1></html>`,
+    `<html><head><title>t</title></head><body><main><h1>${date} ${hour}</h1></main><footer>f</footer></body></html>`,
     "utf8",
   );
 }
@@ -127,6 +127,34 @@ test("golden: build-site end-to-end", async (t) => {
 
   await t.test("index points at newest real edition", () => {
     assert.ok(read("index.html").includes(`${today} 19`));
+  });
+
+  await t.test("funnel: every real edition carries the SuPro CTA once", () => {
+    const todayHtml = read(`${today}/19.html`);
+    assert.ok(todayHtml.includes('data-funnel="supro"'));
+    assert.equal(todayHtml.split('data-funnel="supro"').length - 1, 1);
+    assert.ok(todayHtml.includes("utm_source=opencool&utm_medium=brief"));
+    assert.ok(todayHtml.includes("utm_campaign=news_to_practice"));
+    for (const content of ["home", "timing", "signals", "paper", "news"]) {
+      assert.ok(
+        todayHtml.includes(`utm_content=${content}`),
+        `edition CTA missing utm_content=${content}`,
+      );
+    }
+    assert.ok(todayHtml.includes("https://supro.si/timing/broad/?"));
+    assert.ok(todayHtml.includes("https://supro.si/signals?"));
+    // placeholders are never decorated
+    assert.ok(!read(`${yesterday}/06.html`).includes('data-funnel="supro"'));
+  });
+
+  await t.test("funnel: supro.html landing + homepage badge use the UTM scheme", () => {
+    const supro = read("supro.html");
+    assert.ok(supro.includes("utm_content=landing"));
+    assert.ok(supro.includes("https://supro.si/timing/broad/?"));
+    assert.ok(supro.includes("https://supro.si/paper?"));
+    const home = read("index.html");
+    assert.ok(home.includes("utm_content=badge"));
+    assert.ok(home.includes("量化实操·苏坡"));
   });
 
   await t.test("status matrix: real vs placeholder vs missing", () => {
