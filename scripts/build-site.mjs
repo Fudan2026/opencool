@@ -272,6 +272,92 @@ if (fs.existsSync("data/mcp-desk.json")) {
   console.log(`[build-site] mcp-desk.html (${desk.harvestCalls.zcodeMcp} MCP calls)`);
 }
 
+// supro.html — sister-project landing (SuPro / supro.si). Content
+// adapted verbatim from the SuPro repo README; the news→practice funnel:
+// OpenCool informs, SuPro practices.
+const suproHtml = `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · 量化实操 · SuPro (supro.si)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; --navy:#1e3a8a; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.65; }
+  main { max-width:820px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2.1rem; margin:.4rem 0 .3rem; letter-spacing:-.03em; }
+  h2 { font-size:1.1rem; margin:1.9rem 0 .6rem; }
+  .meta { color:var(--muted); font-size:.9rem; }
+  .cta { display:inline-block; margin:.4rem .6rem .4rem 0; padding:.8rem 1.4rem; border-radius:.8rem;
+    font:600 1rem "Noto Sans SC",system-ui,sans-serif; text-decoration:none; }
+  .cta.primary { background:var(--navy); color:#fff; }
+  .cta.ghost { border:1px solid var(--navy); color:var(--navy); background:var(--card); }
+  table { border-collapse:collapse; width:100%; background:var(--card); border-radius:.75rem; overflow:hidden; margin:.6rem 0; }
+  th, td { text-align:left; padding:.55rem .8rem; border-bottom:1px solid var(--rule); font-size:.88rem; }
+  th { color:var(--muted); font-weight:600; }
+  code { background:var(--card); border:1px solid var(--rule); border-radius:6px; padding:.05rem .35rem; font-size:.9em; }
+  .safe { background:var(--card); border:1px solid var(--rule); border-radius:.75rem; padding:.8rem 1rem; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }
+  .note { color:var(--muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool × SuPro</div>
+  <h1>看完新闻，然后呢？</h1>
+  <p class="meta">OpenCool 让你<b>看见</b>市场；<b>SuPro（supro.si）</b>让你<b>练手</b>市场。姐妹项目，一套生态。</p>
+
+  <h2>SuPro — Super Professional · 苏坡</h2>
+  <p>帮助用户<b>筛选、比较、选用</b> AI / Agent 产品的专业站点：America.gov 级别的品牌首页与 Composer、AI 产品目录（logo · 名称 · 周榜）、以及 <b>苏坡大模型 / Supro Model</b> —— DeepSeek AIaaS，按实际 tokens 折算 gold 计费（中文「苏坡」取自苏东坡，致敬大智能时代的从容乐观）。</p>
+  <p>
+    <a class="cta primary" href="https://supro.si" target="_blank" rel="noopener">进入 supro.si →</a>
+    <a class="cta ghost" href="https://fudan2026.github.io/Agenter/" target="_blank" rel="noopener">Pages 镜像</a>
+  </p>
+
+  <h2>产品版图</h2>
+  <table>
+    <thead><tr><th>路线</th><th>能力</th></tr></thead>
+    <tbody>
+      <tr><td><code>/</code></td><td>品牌首页 — Supro Composer → Supro Model · AI 目录 · 周榜 · Quant</td></tr>
+      <tr><td><code>/fin</code></td><td><b>苏坡大模型 / Supro Model</b>（登录确认 + gold ≥20）— multifactor / e2e / transformer / report / allocate + 经典模式</td></tr>
+      <tr><td><code>/quant</code></td><td>Factor Studio · Committee · screens→Paper · Strategy Lab（15 种模式 · 多年 OHLC）</td></tr>
+      <tr><td><code>/paper</code></td><td>Paper Pro — brackets · 风控包 · Sim 对账 · TWAP/VWAP</td></tr>
+      <tr><td><code>/sim</code></td><td>Sim Desk — 模拟炒股；与 <code>/paper?panel=reconcile</code> 衔接</td></tr>
+      <tr><td><code>/news</code></td><td>AI · 公告 · 问财资讯一站页（<code>?section=ai|filings|iwencai</code>）</td></tr>
+      <tr><td><code>/compare</code> · <code>/learn</code> · <code>/handbook</code></td><td>对比矩阵 · 引导教程 · 双语手册</td></tr>
+      <tr><td><code>/asset/:symbol</code></td><td>K 线 + 均线 + 因子暴露</td></tr>
+    </tbody>
+  </table>
+
+  <h2>纸盘与安全红线</h2>
+  <div class="safe">
+    <p>Paper：<b>¥100,000,000</b> 起始资金 · <b>3 bps</b> RT · 每手 100 股 · 信号 t → <b>t+1 开盘</b>成交；Sim：可编辑限价 @ 昨收。</p>
+    <p><b>浏览器内零券商 API</b> —— 快速实盘 = 清单导出 + 纸盘，券商侧人工下单。Wave Loop V1 治理（shadow → semi_auto → full_auto，kill switch 永远最高优先），资金阶梯 T1 ¥10k → T3 ¥200k，晋升 AI 提议、人工批准。</p>
+  </div>
+
+  <h2>为什么是一条生态链</h2>
+  <p>OpenCool 的三报、题材结构、情绪计回答「市场发生了什么」；SuPro 的因子工作室、策略实验室、纸盘回答「那我该怎么做」。两边数据与品牌互认：<b>看报 → 研究 → 纸盘实操 → 复盘</b>，一个闭环，无需在多个孤立工具间搬运。</p>
+
+  <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
+   · <a class="home" href="./archive.html">历史归档</a>
+   · <a class="home" href="./mcp-desk.html">机构数据台</a>
+   · <a class="home" href="./supro.html">量化实操·SuPro</a></p>
+</main>
+</body>
+</html>
+`;
+fs.writeFileSync(path.join(ROOT, "supro.html"), suproHtml, "utf8");
+console.log(`[build-site] supro.html (sister-project funnel)`);
+
 // tools.json — the "Static MCP" manifest: every MCP tool mapped to its
 // stable static endpoint, so agents without a local clone consume
 // OpenCool via plain fetch. Uncontested per COMPETITIVE-ANALYSIS.md.
@@ -672,6 +758,11 @@ if (fs.existsSync(path.join(ROOT, "search.html"))) {
   );
   console.log(`[build-site] index.html += search entry`);
 }
+latestHtml = latestHtml.replace(
+  "</body>",
+  `  <a href="https://supro.si" target="_blank" rel="noopener" style="position:fixed;right:1rem;bottom:8.8rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#1e3a8a;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">🚀 量化实操·苏坡</a>\n</body>`,
+);
+console.log(`[build-site] index.html += supro entry`);
 fs.writeFileSync(path.join(ROOT, "index.html"), latestHtml, "utf8");
 console.log(`[build-site] index.html  ← ${latest.rel}`);
 
@@ -804,6 +895,7 @@ const archiveHtml = `<!doctype html>
    · <a class="home" href="./weekly.html">周报</a>
    · <a class="home" href="./search.html">搜索</a>${archHeatLink}
    · <a class="home" href="./mcp-desk.html">机构数据台</a>
+   · <a class="home" href="./supro.html">量化实操·SuPro</a>
    · <a class="home" href="./status.html">运行状态</a></p>
 ${dayBlocks}
 </main>
@@ -1228,6 +1320,9 @@ No LLM behind any endpoint.
 - MCP desk: /mcp-desk.html — operator-baked institutional snapshot
   (macro, index valuations, THS×Wind dual-source cross-check, funds,
   day headlines), every row source-attributed for verification
+- Sister project: /supro.html — SuPro (supro.si): AI/Agent product
+  directory, 苏坡大模型 DeepSeek AIaaS, quant + paper practice. The
+  news→practice funnel: OpenCool informs, SuPro practices
 ${llmsHeatRow}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.
