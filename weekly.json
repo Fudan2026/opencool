@@ -1,26 +1,11 @@
 {
-  "generatedAt": "2026-11-08T23:46:03.908Z",
+  "generatedAt": "2026-11-09T06:06:59.308Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 9,
-  "editions": 24,
-  "avgSentiment": -40.2,
+  "daysCovered": 8,
+  "editions": 22,
+  "avgSentiment": -30.5,
   "sentimentCurve": [
-    {
-      "date": "2026-11-01",
-      "hour": "06",
-      "score": -100
-    },
-    {
-      "date": "2026-11-01",
-      "hour": "13",
-      "score": -99
-    },
-    {
-      "date": "2026-11-01",
-      "hour": "19",
-      "score": -100
-    },
     {
       "date": "2026-11-02",
       "hour": "06",
@@ -125,6 +110,11 @@
       "date": "2026-11-09",
       "hour": "06",
       "score": -7
+    },
+    {
+      "date": "2026-11-09",
+      "hour": "13",
+      "score": -5
     }
   ],
   "sectorAvg": [
@@ -143,8 +133,8 @@
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -39.5,
-      "editions": 24
+      "avg": -29.8,
+      "editions": 22
     },
     {
       "key": "macro",
@@ -155,14 +145,14 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -25.7,
-      "editions": 24
+      "avg": -27,
+      "editions": 22
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -19.9,
-      "editions": 24
+      "avg": -20.5,
+      "editions": 22
     },
     {
       "key": "china-ashare",
@@ -173,8 +163,8 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -5,
-      "editions": 18
+      "avg": -6.9,
+      "editions": 17
     }
   ],
   "topEvents": [
@@ -183,28 +173,28 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 24
+      "count": 22
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 24
+      "count": 22
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 22
+      "count": 19
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 20
+      "count": 19
     },
     {
       "symbol": "ETH-USD",
@@ -212,13 +202,6 @@
       "title": "L2BEAT is now ETHBEAT",
       "url": "https://x.com/ethbeat_org/status/2117913893796225035",
       "count": 8
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "The Promise and Pitfalls of Nvidia’s Venture in Kazakhstan",
-      "url": "https://thediplomat.com/2026/10/the-promise-and-pitfalls-of-nvidias-venture-in-kazakhstan/",
-      "count": 6
     },
     {
       "symbol": "512480.SS",
@@ -247,39 +230,16 @@
       "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
       "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
       "count": 5
+    },
+    {
+      "symbol": "GC=F",
+      "displayName": "黄金期货",
+      "title": "Gold Drops as Tech Stock Slump Forces Investors to Cover Losses",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-06/gold-set-for-biggest-weekly-gain-since-august-after-us-midterms",
+      "count": 4
     }
   ],
   "keywords": [
-    {
-      "term": "agent",
-      "count": 4,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-02"
-    },
-    {
-      "term": "币安",
-      "count": 4,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-02"
-    },
-    {
-      "term": "打新保姆级教程来了",
-      "count": 4,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-02"
-    },
-    {
-      "term": "注册",
-      "count": 4,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-02"
-    },
-    {
-      "term": "终极指南",
-      "count": 4,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-02"
-    },
     {
       "term": "1月",
       "count": 3,
@@ -309,12 +269,6 @@
       "count": 3,
       "firstSeen": "2026-11-04",
       "lastSeen": "2026-11-05"
-    },
-    {
-      "term": "部署",
-      "count": 3,
-      "firstSeen": "2026-11-01",
-      "lastSeen": "2026-11-01"
     },
     {
       "term": "0高",
@@ -369,6 +323,42 @@
       "count": 2,
       "firstSeen": "2026-11-08",
       "lastSeen": "2026-11-08"
+    },
+    {
+      "term": "亿美",
+      "count": 2,
+      "firstSeen": "2026-11-07",
+      "lastSeen": "2026-11-08"
+    },
+    {
+      "term": "修超",
+      "count": 2,
+      "firstSeen": "2026-11-08",
+      "lastSeen": "2026-11-08"
+    },
+    {
+      "term": "月5",
+      "count": 2,
+      "firstSeen": "2026-11-05",
+      "lastSeen": "2026-11-05"
+    },
+    {
+      "term": "港p",
+      "count": 2,
+      "firstSeen": "2026-11-02",
+      "lastSeen": "2026-11-02"
+    },
+    {
+      "term": "社1",
+      "count": 2,
+      "firstSeen": "2026-11-04",
+      "lastSeen": "2026-11-05"
+    },
+    {
+      "term": "美俄中商讨是否举行三国领导人会晤",
+      "count": 2,
+      "firstSeen": "2026-11-03",
+      "lastSeen": "2026-11-03"
     }
   ],
   "themeAvg": [
@@ -380,17 +370,17 @@
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 38
+      "totalHits": 41
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 37
+      "totalHits": 40
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 37
+      "totalHits": 40
     },
     {
       "key": "semiconductor",
@@ -400,7 +390,7 @@
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 19
+      "totalHits": 20
     },
     {
       "key": "robotics",
@@ -410,7 +400,17 @@
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 10
+      "totalHits": 11
+    },
+    {
+      "key": "infra",
+      "name": "基建",
+      "totalHits": 9
+    },
+    {
+      "key": "media",
+      "name": "传媒",
+      "totalHits": 8
     },
     {
       "key": "brokerage",
@@ -418,36 +418,26 @@
       "totalHits": 8
     },
     {
-      "key": "infra",
-      "name": "基建",
-      "totalHits": 8
-    },
-    {
-      "key": "media",
-      "name": "传媒",
+      "key": "travel",
+      "name": "旅游酒店",
       "totalHits": 7
-    },
-    {
-      "key": "comms",
-      "name": "通信",
-      "totalHits": 6
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.45,
-      "editions": 22
+      "avgChangePct": -0.25,
+      "editions": 20
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.86,
-      "editions": 23
+      "avgChangePct": -0.55,
+      "editions": 21
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.42,
-      "editions": 21
+      "avgChangePct": -1.06,
+      "editions": 20
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
