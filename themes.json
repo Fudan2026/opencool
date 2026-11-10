@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-10T08:20:19.751Z",
+  "generatedAt": "2026-11-10T11:45:14.207Z",
   "source": "eastmoney-concept-boards",
   "status": "ok",
-  "edition": "2026-11-10/13",
+  "edition": "2026-11-10/19",
   "themes": [
     {
       "key": "ai-compute",
@@ -10,10 +10,9 @@
       "boardCode": "BK1134",
       "boardName": "算力概念",
       "boardChangePct": 2.6,
-      "articleHits": 6,
+      "articleHits": 3,
       "matchedAliases": [
-        "数据中心",
-        "英伟达"
+        "数据中心"
       ],
       "constituents": [
         {
@@ -59,77 +58,12 @@
       ]
     },
     {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0695",
-      "boardName": "小金属概念",
-      "boardChangePct": 0.98,
-      "articleHits": 3,
-      "matchedAliases": [
-        "铜"
-      ],
-      "constituents": [
-        {
-          "symbol": "002009",
-          "name": "天奇股份",
-          "changePct": 10.01
-        },
-        {
-          "symbol": "000657",
-          "name": "中钨高新",
-          "changePct": 6.7
-        },
-        {
-          "symbol": "603389",
-          "name": "亚振家居",
-          "changePct": 5.56
-        },
-        {
-          "symbol": "002842",
-          "name": "翔鹭钨业",
-          "changePct": 4.79
-        },
-        {
-          "symbol": "002378",
-          "name": "章源钨业",
-          "changePct": 4.1
-        },
-        {
-          "symbol": "603045",
-          "name": "福达合金",
-          "changePct": 3.93
-        },
-        {
-          "symbol": "600552",
-          "name": "凯盛科技",
-          "changePct": 3.86
-        },
-        {
-          "symbol": "002149",
-          "name": "西部材料",
-          "changePct": 3.59
-        }
-      ]
-    },
-    {
-      "key": "oil",
-      "name": "石油石化",
-      "boardCode": null,
-      "boardName": null,
-      "boardChangePct": null,
-      "articleHits": 3,
-      "matchedAliases": [
-        "原油"
-      ],
-      "constituents": []
-    },
-    {
       "key": "ai",
       "name": "人工智能",
       "boardCode": "BK0800",
       "boardName": "人工智能",
       "boardChangePct": 2.55,
-      "articleHits": 2,
+      "articleHits": 3,
       "matchedAliases": [
         "AI"
       ],
@@ -177,14 +111,120 @@
       ]
     },
     {
-      "key": "coal",
-      "name": "煤炭",
+      "key": "brokerage",
+      "name": "券商",
+      "boardCode": "BK1686",
+      "boardName": "保险新进",
+      "boardChangePct": 1.26,
+      "articleHits": 1,
+      "matchedAliases": [
+        "保险"
+      ],
+      "constituents": [
+        {
+          "symbol": "300322",
+          "name": "硕贝德",
+          "changePct": 8.57
+        },
+        {
+          "symbol": "300420",
+          "name": "五洋自控",
+          "changePct": 8.01
+        },
+        {
+          "symbol": "688227",
+          "name": "品高股份",
+          "changePct": 7.46
+        },
+        {
+          "symbol": "688059",
+          "name": "华锐精密",
+          "changePct": 6.77
+        },
+        {
+          "symbol": "300464",
+          "name": "星徽股份",
+          "changePct": 5.85
+        },
+        {
+          "symbol": "603730",
+          "name": "岱美股份",
+          "changePct": 5.72
+        },
+        {
+          "symbol": "002837",
+          "name": "英维克",
+          "changePct": 5.24
+        },
+        {
+          "symbol": "003036",
+          "name": "泰坦股份",
+          "changePct": 4.57
+        }
+      ]
+    },
+    {
+      "key": "bank",
+      "name": "银行",
+      "boardCode": "BK0525",
+      "boardName": "参股银行",
+      "boardChangePct": 0.87,
+      "articleHits": 1,
+      "matchedAliases": [
+        "信贷"
+      ],
+      "constituents": [
+        {
+          "symbol": "601188",
+          "name": "龙江交通",
+          "changePct": 10.02
+        },
+        {
+          "symbol": "603366",
+          "name": "日出东方",
+          "changePct": 10.01
+        },
+        {
+          "symbol": "600327",
+          "name": "大东方",
+          "changePct": 10
+        },
+        {
+          "symbol": "600510",
+          "name": "黑牡丹",
+          "changePct": 9.97
+        },
+        {
+          "symbol": "002277",
+          "name": "友阿股份",
+          "changePct": 6.81
+        },
+        {
+          "symbol": "300251",
+          "name": "光线传媒",
+          "changePct": 6.08
+        },
+        {
+          "symbol": "600802",
+          "name": "福建水泥",
+          "changePct": 5.87
+        },
+        {
+          "symbol": "002357",
+          "name": "富临运业",
+          "changePct": 5.84
+        }
+      ]
+    },
+    {
+      "key": "infra",
+      "name": "基建",
       "boardCode": null,
       "boardName": null,
       "boardChangePct": null,
-      "articleHits": 2,
+      "articleHits": 1,
       "matchedAliases": [
-        "煤炭"
+        "基建"
       ],
       "constituents": []
     },
@@ -546,53 +586,53 @@
       ]
     },
     {
-      "key": "brokerage",
-      "name": "券商",
-      "boardCode": "BK1686",
-      "boardName": "保险新进",
-      "boardChangePct": 1.26,
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0695",
+      "boardName": "小金属概念",
+      "boardChangePct": 0.98,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "300322",
-          "name": "硕贝德",
-          "changePct": 8.57
+          "symbol": "002009",
+          "name": "天奇股份",
+          "changePct": 10.01
         },
         {
-          "symbol": "300420",
-          "name": "五洋自控",
-          "changePct": 8.01
+          "symbol": "000657",
+          "name": "中钨高新",
+          "changePct": 6.7
         },
         {
-          "symbol": "688227",
-          "name": "品高股份",
-          "changePct": 7.46
+          "symbol": "603389",
+          "name": "亚振家居",
+          "changePct": 5.56
         },
         {
-          "symbol": "688059",
-          "name": "华锐精密",
-          "changePct": 6.77
+          "symbol": "002842",
+          "name": "翔鹭钨业",
+          "changePct": 4.79
         },
         {
-          "symbol": "300464",
-          "name": "星徽股份",
-          "changePct": 5.85
+          "symbol": "002378",
+          "name": "章源钨业",
+          "changePct": 4.1
         },
         {
-          "symbol": "603730",
-          "name": "岱美股份",
-          "changePct": 5.72
+          "symbol": "603045",
+          "name": "福达合金",
+          "changePct": 3.93
         },
         {
-          "symbol": "002837",
-          "name": "英维克",
-          "changePct": 5.24
+          "symbol": "600552",
+          "name": "凯盛科技",
+          "changePct": 3.86
         },
         {
-          "symbol": "003036",
-          "name": "泰坦股份",
-          "changePct": 4.57
+          "symbol": "002149",
+          "name": "西部材料",
+          "changePct": 3.59
         }
       ]
     },
@@ -644,57 +684,6 @@
           "symbol": "600199",
           "name": "金种子酒",
           "changePct": 1.71
-        }
-      ]
-    },
-    {
-      "key": "bank",
-      "name": "银行",
-      "boardCode": "BK0525",
-      "boardName": "参股银行",
-      "boardChangePct": 0.87,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "601188",
-          "name": "龙江交通",
-          "changePct": 10.02
-        },
-        {
-          "symbol": "603366",
-          "name": "日出东方",
-          "changePct": 10.01
-        },
-        {
-          "symbol": "600327",
-          "name": "大东方",
-          "changePct": 10
-        },
-        {
-          "symbol": "600510",
-          "name": "黑牡丹",
-          "changePct": 9.97
-        },
-        {
-          "symbol": "002277",
-          "name": "友阿股份",
-          "changePct": 6.81
-        },
-        {
-          "symbol": "300251",
-          "name": "光线传媒",
-          "changePct": 6.08
-        },
-        {
-          "symbol": "600802",
-          "name": "福建水泥",
-          "changePct": 5.87
-        },
-        {
-          "symbol": "002357",
-          "name": "富临运业",
-          "changePct": 5.84
         }
       ]
     },
@@ -821,6 +810,26 @@
       "constituents": []
     },
     {
+      "key": "coal",
+      "name": "煤炭",
+      "boardCode": null,
+      "boardName": null,
+      "boardChangePct": null,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": []
+    },
+    {
+      "key": "oil",
+      "name": "石油石化",
+      "boardCode": null,
+      "boardName": null,
+      "boardChangePct": null,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": []
+    },
+    {
       "key": "agriculture",
       "name": "农业",
       "boardCode": null,
@@ -853,16 +862,6 @@
     {
       "key": "steel",
       "name": "钢铁",
-      "boardCode": null,
-      "boardName": null,
-      "boardChangePct": null,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": []
-    },
-    {
-      "key": "infra",
-      "name": "基建",
       "boardCode": null,
       "boardName": null,
       "boardChangePct": null,

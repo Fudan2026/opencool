@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-10T08:20:03.442Z",
+  "generatedAt": "2026-11-10T11:44:57.752Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 21,
-  "avgSentiment": -18.1,
+  "editions": 22,
+  "avgSentiment": -17.4,
   "sentimentCurve": [
     {
       "date": "2026-11-03",
@@ -110,6 +110,11 @@
       "date": "2026-11-10",
       "hour": "13",
       "score": -6
+    },
+    {
+      "date": "2026-11-10",
+      "hour": "19",
+      "score": -2
     }
   ],
   "sectorAvg": [
@@ -128,26 +133,26 @@
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 28.1,
-      "editions": 10
+      "avg": 28.5,
+      "editions": 11
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -28,
-      "editions": 21
+      "avg": -27.8,
+      "editions": 22
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -20.1,
-      "editions": 21
+      "avg": -18.5,
+      "editions": 22
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -17.3,
-      "editions": 21
+      "avg": -16.5,
+      "editions": 22
     },
     {
       "key": "china-ashare",
@@ -158,8 +163,8 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -8.3,
-      "editions": 19
+      "avg": -8.1,
+      "editions": 20
     }
   ],
   "topEvents": [
@@ -168,14 +173,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "USDCNY=X",
@@ -227,11 +232,11 @@
       "count": 5
     },
     {
-      "symbol": "GC=F",
-      "displayName": "黄金期货",
-      "title": "Gold Drops as Tech Stock Slump Forces Investors to Cover Losses",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-06/gold-set-for-biggest-weekly-gain-since-august-after-us-midterms",
-      "count": 4
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Nvidia opens investigation after report CEO Jensen Huang was target of foreign intelligence",
+      "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation",
+      "count": 5
     }
   ],
   "keywords": [
@@ -360,22 +365,22 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 64
+      "totalHits": 70
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 47
+      "totalHits": 50
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 46
+      "totalHits": 49
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 45
+      "totalHits": 47
     },
     {
       "key": "semiconductor",
@@ -385,17 +390,22 @@
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 25
+      "totalHits": 27
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 16
+      "totalHits": 17
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 14
+      "totalHits": 15
+    },
+    {
+      "key": "media",
+      "name": "传媒",
+      "totalHits": 11
     },
     {
       "key": "infra",
@@ -403,14 +413,9 @@
       "totalHits": 10
     },
     {
-      "key": "media",
-      "name": "传媒",
-      "totalHits": 9
-    },
-    {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 8
+      "totalHits": 9
     },
     {
       "key": "travel",
@@ -421,18 +426,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.29,
-      "editions": 19
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": -0.6,
+      "avgChangePct": -0.27,
       "editions": 20
     },
     {
+      "name": "深证成指",
+      "avgChangePct": -0.53,
+      "editions": 21
+    },
+    {
       "name": "创业板指",
-      "avgChangePct": -1.08,
-      "editions": 19
+      "avgChangePct": -0.96,
+      "editions": 20
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
