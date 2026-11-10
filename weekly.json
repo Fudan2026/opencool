@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-10T11:44:57.752Z",
+  "generatedAt": "2026-11-10T22:19:32.325Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 22,
-  "avgSentiment": -17.4,
+  "daysCovered": 9,
+  "editions": 23,
+  "avgSentiment": -16.9,
   "sentimentCurve": [
     {
       "date": "2026-11-03",
@@ -115,20 +115,25 @@
       "date": "2026-11-10",
       "hour": "19",
       "score": -2
+    },
+    {
+      "date": "2026-11-11",
+      "hour": "06",
+      "score": -5
     }
   ],
   "sectorAvg": [
-    {
-      "key": "china-equity",
-      "label": "中概港股",
-      "avg": 62.4,
-      "editions": 5
-    },
     {
       "key": "crypto",
       "label": "加密",
       "avg": -61.3,
       "editions": 3
+    },
+    {
+      "key": "china-equity",
+      "label": "中概港股",
+      "avg": 46.7,
+      "editions": 6
     },
     {
       "key": "macro",
@@ -139,20 +144,20 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -27.8,
-      "editions": 22
+      "avg": -27.3,
+      "editions": 23
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -18.5,
-      "editions": 22
+      "avg": -19,
+      "editions": 23
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -16.5,
-      "editions": 22
+      "avg": -15.9,
+      "editions": 23
     },
     {
       "key": "china-ashare",
@@ -163,8 +168,8 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -8.1,
-      "editions": 20
+      "avg": -8.3,
+      "editions": 21
     }
   ],
   "topEvents": [
@@ -173,14 +178,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "USDCNY=X",
@@ -225,17 +230,17 @@
       "count": 6
     },
     {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
-      "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
-      "count": 5
-    },
-    {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Nvidia opens investigation after report CEO Jensen Huang was target of foreign intelligence",
       "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation",
+      "count": 6
+    },
+    {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "中方称“就中俄美元首会晤同相关方保持着沟通”",
+      "url": "https://www.dw.com/zh/中方称-就中俄美元首会晤同相关方保持着沟通/a-79855265?maca=chi-rss-chi-all-1127-rdf",
       "count": 5
     }
   ],
@@ -293,6 +298,12 @@
       "count": 2,
       "firstSeen": "2026-11-03",
       "lastSeen": "2026-11-03"
+    },
+    {
+      "term": "nvidia",
+      "count": 2,
+      "firstSeen": "2026-11-09",
+      "lastSeen": "2026-11-11"
     },
     {
       "term": "thousands",
@@ -353,59 +364,53 @@
       "count": 2,
       "firstSeen": "2026-11-04",
       "lastSeen": "2026-11-05"
-    },
-    {
-      "term": "美俄中商讨是否举行三国领导人会晤",
-      "count": 2,
-      "firstSeen": "2026-11-03",
-      "lastSeen": "2026-11-03"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 70
-    },
-    {
-      "key": "bank",
-      "name": "银行",
-      "totalHits": 50
+      "totalHits": 74
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 49
+      "totalHits": 53
+    },
+    {
+      "key": "bank",
+      "name": "银行",
+      "totalHits": 53
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 47
+      "totalHits": 49
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 39
+      "totalHits": 41
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 27
+      "totalHits": 30
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 17
+      "totalHits": 18
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 15
+      "totalHits": 17
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 11
+      "totalHits": 12
     },
     {
       "key": "infra",
@@ -426,18 +431,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.27,
-      "editions": 20
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": -0.53,
+      "avgChangePct": -0.25,
       "editions": 21
     },
     {
+      "name": "深证成指",
+      "avgChangePct": -0.47,
+      "editions": 22
+    },
+    {
       "name": "创业板指",
-      "avgChangePct": -0.96,
-      "editions": 20
+      "avgChangePct": -0.84,
+      "editions": 21
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
