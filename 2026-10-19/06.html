@@ -336,6 +336,18 @@
   .toy-backtest { margin-top:1rem; }
 
 </style>
+  <style>
+  .funnel-cta { margin:2.5rem 0 0; padding:1.1rem 1.25rem; background:var(--card);
+    border:1px solid var(--rule); border-left:3px solid #1e3a8a; border-radius:.9rem; }
+  .funnel-cta h2 { margin:0 0 .45rem; font-size:1.02rem; }
+  .funnel-lead { margin:0 0 .7rem; color:var(--fg-soft); font-size:.9rem; line-height:1.6; }
+  .funnel-links { margin:0 0 .5rem; display:flex; flex-wrap:wrap; gap:.4rem; }
+  .funnel-link { display:inline-block; padding:.4rem .85rem; border-radius:999px;
+    border:1px solid var(--rule); color:var(--fg); text-decoration:none; font-size:.84rem; }
+  .funnel-link:hover { border-color:#1e3a8a; color:#1e3a8a; }
+  .funnel-link.primary { background:#1e3a8a; border-color:#1e3a8a; color:#fff; }
+  .funnel-note { margin:0; color:var(--muted); font-size:.76rem; }
+  </style>
 </head>
 <body>
 <main>
@@ -2411,7 +2423,19 @@
   </section>
   
 
-  <footer>
+    <section class="funnel-cta" data-funnel="supro" aria-label="OpenCool × SuPro">
+    <h2>看完新闻，然后呢？</h2>
+    <p class="funnel-lead">OpenCool 负责<b>看懂</b>市场：三报、题材结构、情绪计。SuPro 负责<b>上手</b>练一遍：择时、信号、纸盘复盘。两边互为姐妹项目，看报 → 研究 → 模拟实操，一条闭环。</p>
+    <p class="funnel-links">
+      <a class="funnel-link primary" href="https://supro.si/?utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice&utm_content=home" target="_blank" rel="noopener">进入 SuPro →</a>
+      <a class="funnel-link" href="https://supro.si/timing/broad/?utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice&utm_content=timing" target="_blank" rel="noopener">大盘择时</a>
+      <a class="funnel-link" href="https://supro.si/signals?utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice&utm_content=signals" target="_blank" rel="noopener">今日信号</a>
+      <a class="funnel-link" href="https://supro.si/paper?utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice&utm_content=paper" target="_blank" rel="noopener">纸盘演练</a>
+      <a class="funnel-link" href="https://supro.si/news?utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice&utm_content=news" target="_blank" rel="noopener">资讯一站</a>
+    </p>
+    <p class="funnel-note">纸盘模拟，非投资建议；行情以数据源为准。</p>
+  </section>
+<footer>
     内容均来自原媒体，本站仅作整理与回链。热榜≠事实核查 · 启发式摘要 · 零 AI / 零 API Token。
   </footer>
 </main>

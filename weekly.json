@@ -1,26 +1,11 @@
 {
-  "generatedAt": "2026-11-09T17:12:51.936Z",
+  "generatedAt": "2026-11-10T08:20:03.442Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 9,
-  "editions": 23,
-  "avgSentiment": -29.3,
+  "daysCovered": 8,
+  "editions": 21,
+  "avgSentiment": -18.1,
   "sentimentCurve": [
-    {
-      "date": "2026-11-02",
-      "hour": "06",
-      "score": -100
-    },
-    {
-      "date": "2026-11-02",
-      "hour": "13",
-      "score": -100
-    },
-    {
-      "date": "2026-11-02",
-      "hour": "19",
-      "score": -100
-    },
     {
       "date": "2026-11-03",
       "hour": "06",
@@ -120,6 +105,11 @@
       "date": "2026-11-10",
       "hour": "06",
       "score": -5
+    },
+    {
+      "date": "2026-11-10",
+      "hour": "13",
+      "score": -6
     }
   ],
   "sectorAvg": [
@@ -136,28 +126,28 @@
       "editions": 3
     },
     {
-      "key": "general",
-      "label": "大盘综合",
-      "avg": -28.7,
-      "editions": 23
-    },
-    {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 27.7,
-      "editions": 9
+      "avg": 28.1,
+      "editions": 10
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -26.8,
-      "editions": 23
+      "avg": -28,
+      "editions": 21
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -18.2,
-      "editions": 23
+      "avg": -20.1,
+      "editions": 21
+    },
+    {
+      "key": "general",
+      "label": "大盘综合",
+      "avg": -17.3,
+      "editions": 21
     },
     {
       "key": "china-ashare",
@@ -168,8 +158,8 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -6.8,
-      "editions": 18
+      "avg": -8.3,
+      "editions": 19
     }
   ],
   "topEvents": [
@@ -178,28 +168,28 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 23
+      "count": 21
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 23
+      "count": 21
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
       "url": "https://www.ftchinese.com/story/001111205",
-      "count": 19
+      "count": 16
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 19
+      "count": 16
     },
     {
       "symbol": "ETH-USD",
@@ -288,12 +278,6 @@
       "lastSeen": "2026-11-03"
     },
     {
-      "term": "e集",
-      "count": 2,
-      "firstSeen": "2026-11-02",
-      "lastSeen": "2026-11-02"
-    },
-    {
       "term": "jobs",
       "count": 2,
       "firstSeen": "2026-11-03",
@@ -360,52 +344,58 @@
       "lastSeen": "2026-11-10"
     },
     {
-      "term": "港p",
+      "term": "社1",
       "count": 2,
-      "firstSeen": "2026-11-02",
-      "lastSeen": "2026-11-02"
+      "firstSeen": "2026-11-04",
+      "lastSeen": "2026-11-05"
+    },
+    {
+      "term": "美俄中商讨是否举行三国领导人会晤",
+      "count": 2,
+      "firstSeen": "2026-11-03",
+      "lastSeen": "2026-11-03"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 57
+      "totalHits": 64
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 44
-    },
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "totalHits": 44
+      "totalHits": 47
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 43
+      "totalHits": 46
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "totalHits": 45
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 36
+      "totalHits": 39
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 23
+      "totalHits": 25
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 15
+      "totalHits": 16
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 13
+      "totalHits": 14
     },
     {
       "key": "infra",
@@ -431,18 +421,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.22,
-      "editions": 21
+      "avgChangePct": -0.29,
+      "editions": 19
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.53,
-      "editions": 22
+      "avgChangePct": -0.6,
+      "editions": 20
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.02,
-      "editions": 21
+      "avgChangePct": -1.08,
+      "editions": 19
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
