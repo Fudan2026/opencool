@@ -33,6 +33,8 @@ No LLM behind any endpoint.
   news→practice funnel: OpenCool informs, SuPro practices
 - Trend comparison: /periods.html + /periods.json — WoW (6 Monday-based
   weeks) and MoM (3 months) buckets of sentiment/theme/index deltas
+- Subscribe: /subscribe.html — local-only subscription intent (no email
+  leaves the browser unless SUBSCRIBE_ENDPOINT is explicitly configured)
 - Sector heatmap: /heatmap.html — watchlist tiles colored by pct1Day (latest edition)
 - Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)

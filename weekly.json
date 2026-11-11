@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-11T03:12:00.012Z",
+  "generatedAt": "2026-11-11T04:17:10.869Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 20,
-  "avgSentiment": -4.3,
+  "avgSentiment": -4.2,
   "sentimentCurve": [
     {
       "date": "2026-11-04",
@@ -104,16 +104,10 @@
     {
       "date": "2026-11-11",
       "hour": "06",
-      "score": -2
+      "score": -1
     }
   ],
   "sectorAvg": [
-    {
-      "key": "china-equity",
-      "label": "中概港股",
-      "avg": 64.7,
-      "editions": 6
-    },
     {
       "key": "crypto",
       "label": "加密",
@@ -121,21 +115,27 @@
       "editions": 3
     },
     {
+      "key": "china-equity",
+      "label": "中概港股",
+      "avg": 56,
+      "editions": 6
+    },
+    {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 30.9,
+      "avg": 28.8,
       "editions": 12
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -28.1,
+      "avg": -27.6,
       "editions": 20
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -14.6,
+      "avg": -16.4,
       "editions": 20
     },
     {
@@ -147,7 +147,7 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -9.8,
+      "avg": -8.8,
       "editions": 20
     },
     {
@@ -231,16 +231,16 @@
   ],
   "keywords": [
     {
+      "term": "美元",
+      "count": 4,
+      "firstSeen": "2026-11-05",
+      "lastSeen": "2026-11-11"
+    },
+    {
       "term": "1月",
       "count": 3,
       "firstSeen": "2026-11-04",
       "lastSeen": "2026-11-05"
-    },
-    {
-      "term": "美元",
-      "count": 3,
-      "firstSeen": "2026-11-05",
-      "lastSeen": "2026-11-08"
     },
     {
       "term": "美股",
@@ -375,17 +375,17 @@
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 41
+      "totalHits": 43
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 30
+      "totalHits": 28
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 19
+      "totalHits": 17
     },
     {
       "key": "defense",
@@ -395,12 +395,12 @@
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 15
+      "totalHits": 13
     },
     {
       "key": "infra",
       "name": "基建",
-      "totalHits": 13
+      "totalHits": 10
     },
     {
       "key": "brokerage",
@@ -421,12 +421,12 @@
     },
     {
       "name": "深证成指",
-      "avgChangePct": -0.43,
+      "avgChangePct": -0.42,
       "editions": 19
     },
     {
       "name": "创业板指",
-      "avgChangePct": -0.63,
+      "avgChangePct": -0.61,
       "editions": 18
     }
   ],
