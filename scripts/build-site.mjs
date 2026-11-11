@@ -435,7 +435,8 @@ const suproHtml = `<!doctype html>
    · <a class="home" href="./archive.html">历史归档</a>
    · <a class="home" href="./mcp-desk.html">机构数据台</a>
    · <a class="home" href="./supro.html">量化实操·SuPro</a>
-   · <a class="home" href="./periods.html">趋势对比</a></p>
+   · <a class="home" href="./periods.html">趋势对比</a>
+   · <a class="home" href="./subscribe.html">订阅</a></p>
 </main>
 </body>
 </html>
@@ -538,6 +539,142 @@ if (fs.existsSync(path.join(ROOT, "periods.json"))) {
   fs.writeFileSync(path.join(ROOT, "periods.html"), perHtml, "utf8");
   console.log(`[build-site] periods.html (${per.weeks.length}w × ${per.months.length}m)`);
 }
+
+// subscribe.html — subscription foundation. Stores intent locally only;
+// no email is sent anywhere unless the repo owner explicitly configures
+// SUBSCRIBE_ENDPOINT. A future backend can be attached without a redesign.
+const subscribeEndpoint = process.env.SUBSCRIBE_ENDPOINT || "";
+const subscribeHtml = `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · 订阅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.65; }
+  main { max-width:720px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 .5rem; }
+  .meta { color:var(--muted); font-size:.9rem; }
+  form { background:var(--card); border:1px solid var(--rule); border-radius:.8rem; padding:1.2rem; margin-top:1.2rem; }
+  label { display:block; margin:.6rem 0 .3rem; font-size:.9rem; font-weight:600; }
+  input[type=email], select { width:100%; padding:.75rem .9rem; border:1px solid var(--rule); border-radius:.65rem;
+    font:500 1rem "Noto Sans SC",system-ui,sans-serif; background:#fff; color:var(--fg); }
+  input[type=email]:focus, select:focus { outline:2px solid var(--accent); outline-offset:1px; }
+  .consent { display:flex; gap:.5rem; align-items:flex-start; font-size:.85rem; color:var(--muted); margin-top:.8rem; }
+  .consent input { margin-top:.25rem; }
+  button, .btn { display:inline-block; margin-top:1rem; padding:.7rem 1.1rem; border:0; border-radius:.65rem;
+    background:var(--accent); color:#fff; font:600 .95rem "Noto Sans SC",system-ui,sans-serif; cursor:pointer; }
+  button.secondary, .btn.secondary { background:var(--card); color:var(--accent); border:1px solid var(--accent); }
+  .status { margin-top:.9rem; padding:.7rem .9rem; border-radius:.65rem; font-size:.85rem; }
+  .status.ok { background:#ecfdf3; color:#15803d; }
+  .status.err { background:#fef2f2; color:#b91c1c; }
+  .privacy { margin-top:1rem; font-size:.8rem; color:var(--muted); }
+  a { color:var(--accent); text-decoration:none; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>订阅 OpenCool</h1>
+  <p class="meta">留下邮箱，选择你想收的档位。当前版本<b>仅在本机保存订阅意向，不发送邮件、不上传任何信息</b>；后端开通后可无缝接入。</p>
+  <form id="subscribe-form" data-endpoint="${subscribeEndpoint}" novalidate>
+    <label for="email">邮箱 / Email</label>
+    <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" inputmode="email">
+    <label for="frequency">订阅内容 / Frequency</label>
+    <select id="frequency" name="frequency">
+      <option value="all">每日三报（06:00 / 13:00 / 19:00）</option>
+      <option value="morning">只收早报 06:00</option>
+      <option value="noon">只收午报 13:00</option>
+      <option value="evening">只收晚报 19:00</option>
+      <option value="weekly">每周复盘（weekly）</option>
+    </select>
+    <label class="consent"><input id="consent" type="checkbox" required>
+      <span>我知道当前只保存到本机 localStorage；不会收到实际邮件，直到后端订阅服务开通。</span></label>
+    <button type="submit">保存订阅意向</button>
+    <button type="button" class="secondary" id="export-intent">导出我的意向 JSON</button>
+    <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+  </form>
+  <p class="privacy">隐私说明：邮箱只保存在你的浏览器里。点击「导出」可把意向 JSON 下载到本机；如需删除，清除浏览器站点数据即可。<br>
+  现在也可以直接 <a href="./feed.xml">用 RSS 订阅</a>（无需邮箱）。未来 endpoint 开通后，表单才会按显式配置发送。</p>
+  <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a> · <a class="home" href="./archive.html">历史归档</a></p>
+</main>
+<script>
+(function () {
+  var KEY = 'opencool-subscription-intent';
+  var form = document.getElementById('subscribe-form');
+  var status = document.getElementById('status');
+  function show(kind, text) {
+    status.className = 'status ' + kind;
+    status.textContent = text;
+    status.hidden = false;
+  }
+  function readForm() {
+    return {
+      email: document.getElementById('email').value.trim(),
+      frequency: document.getElementById('frequency').value,
+      createdAt: new Date().toISOString(),
+      delivery: 'local-intent-only'
+    };
+  }
+  form.addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    status.hidden = true;
+    var data = readForm();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      show('err', '邮箱格式看起来不正确，请检查后再保存。');
+      return;
+    }
+    if (!document.getElementById('consent').checked) {
+      show('err', '请先勾选「只保存到本机」的知情确认。');
+      return;
+    }
+    var endpoint = form.dataset.endpoint;
+    if (!endpoint) {
+      localStorage.setItem(KEY, JSON.stringify(data));
+      show('ok', '订阅意向已保存到本机，未发送邮件、未上传服务器。可点击「导出我的意向 JSON」留存。');
+      return;
+    }
+    try {
+      var res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        signal: AbortSignal.timeout(10000)
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      show('ok', '已提交到订阅服务（endpoint 由站点配置）。');
+    } catch (e) {
+      show('err', '订阅服务暂不可用，意向未离开本机：' + e.message);
+    }
+  });
+  document.getElementById('export-intent').addEventListener('click', function () {
+    var raw = localStorage.getItem(KEY);
+    if (!raw) { show('err', '本机还没有保存过订阅意向，请先提交。'); return; }
+    var blob = new Blob([raw], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'opencool-subscription-intent.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+})();
+</script>
+</body>
+</html>
+`;
+fs.writeFileSync(path.join(ROOT, "subscribe.html"), subscribeHtml, "utf8");
+console.log(`[build-site] subscribe.html${subscribeEndpoint ? " (endpoint configured)" : " (local-only)"}`);
 
 // tools.json — the "Static MCP" manifest: every MCP tool mapped to its
 // stable static endpoint, so agents without a local clone consume
@@ -950,6 +1087,11 @@ latestHtml = latestHtml.replace(
   `  <a href="${SUPRO_LINKS.badge}" target="_blank" rel="noopener" style="position:fixed;right:1rem;bottom:8.8rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#1e3a8a;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">🚀 量化实操·苏坡</a>\n</body>`,
 );
 console.log(`[build-site] index.html += supro entry`);
+latestHtml = latestHtml.replace(
+  "</body>",
+  `  <a href="./subscribe.html" style="position:fixed;right:1rem;bottom:11.4rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#0f766e;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">✉️ 订阅</a>\n</body>`,
+);
+console.log(`[build-site] index.html += subscribe entry`);
 fs.writeFileSync(path.join(ROOT, "index.html"), latestHtml, "utf8");
 console.log(`[build-site] index.html  ← ${latest.rel}`);
 
@@ -1084,6 +1226,7 @@ const archiveHtml = `<!doctype html>
    · <a class="home" href="./mcp-desk.html">机构数据台</a>
    · <a class="home" href="./supro.html">量化实操·SuPro</a>
    · <a class="home" href="./periods.html">趋势对比</a>
+   · <a class="home" href="./subscribe.html">订阅</a>
    · <a class="home" href="./status.html">运行状态</a></p>
 ${dayBlocks}
 </main>
@@ -1513,6 +1656,8 @@ No LLM behind any endpoint.
   news→practice funnel: OpenCool informs, SuPro practices
 - Trend comparison: /periods.html + /periods.json — WoW (6 Monday-based
   weeks) and MoM (3 months) buckets of sentiment/theme/index deltas
+- Subscribe: /subscribe.html — local-only subscription intent (no email
+  leaves the browser unless SUBSCRIBE_ENDPOINT is explicitly configured)
 ${llmsHeatRow}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.
