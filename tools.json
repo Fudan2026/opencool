@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-10T22:19:50.769Z",
+  "generatedAt": "2026-11-11T00:57:13.536Z",
   "note": "Static MCP: fetch these endpoints directly; a live stdio MCP server ships in the repo (mcp/) for local agents. See /ai-instructions.html.",
   "tools": [
     {
@@ -56,6 +56,12 @@
       "staticEndpoint": "/lhb.json",
       "params": "-",
       "returns": "{tradeDate,rows:[{code,name,changePct,netAmtYi}]}"
+    },
+    {
+      "name": "periods_compare",
+      "staticEndpoint": "/periods.json",
+      "params": "-",
+      "returns": "{weeks:[{key,end,editions,avgSentiment,deltaVsPrev,...}],months:[...]}"
     }
   ]
 }
