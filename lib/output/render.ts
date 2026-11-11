@@ -65,6 +65,8 @@ const TEXTS_ZH = {
   morningFlow: "资金动向",
   morningLhb: "龙虎榜",
   guideToggleOff: "原文",
+  readQuick: "快读",
+  readDeep: "投研",
   guideToggleOn: "中文导读",
   guideWireNote: "外电原文 · 无机器翻译",
   guidePoints: "导读要点",
@@ -144,6 +146,8 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   morningFlow: "Flows",
   morningLhb: "Dragon-Tiger",
   guideToggleOff: "Original",
+  readQuick: "Quick read",
+  readDeep: "Deep dive",
   guideToggleOn: "CN guide",
   guideWireNote: "EN original · no machine translation",
   guidePoints: "Guide points",
@@ -794,6 +798,10 @@ export function renderHtml(
       <button type="button" class="guide-btn active" data-guide="off">${STR.guideToggleOff}</button>
       <button type="button" class="guide-btn" data-guide="on">${STR.guideToggleOn}</button>
     </div>
+    <div class="depth-switch" role="group" aria-label="reading depth">
+      <button type="button" class="depth-btn" data-depth="quick">${STR.readQuick}</button>
+      <button type="button" class="depth-btn active" data-depth="deep">${STR.readDeep}</button>
+    </div>
     ${
       process.env.WEB_MODE === "true"
         ? `<a class="archive-link" href="../archive.html">${STR.archiveLink}</a>`
@@ -1100,6 +1108,22 @@ export function renderHtml(
   .pick-stance-bear { background: rgba(220,38,38,0.12); color: #dc2626; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
   .pick-stance-neutral { background: var(--card); color: var(--muted); padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
   .merged-source { font-size: 0.75rem; color: var(--muted); }
+  .depth-switch { display:inline-flex; gap:0.25rem; margin:0.75rem 0 0; padding:0.2rem; }
+  .depth-btn { border:1px solid var(--rule); background:var(--card); color:var(--muted);
+    border-radius:999px; padding:.35rem .8rem; font-size:.85rem; cursor:pointer; }
+  .depth-btn.active { border-color:var(--accent); color:var(--accent); font-weight:700; }
+  body.read-quick .panel[data-panel="techread"],
+  body.read-quick .panel[data-panel="personas"],
+  body.read-quick .panel[data-panel="risk"],
+  body.read-quick .panel[data-panel="school"],
+  body.read-quick .panel[data-panel="knowledge"],
+  body.read-quick .panel[data-panel="mcp"] { display:none !important; }
+  body.read-quick .tabs .tab[data-tab="techread"],
+  body.read-quick .tabs .tab[data-tab="personas"],
+  body.read-quick .tabs .tab[data-tab="risk"],
+  body.read-quick .tabs .tab[data-tab="school"],
+  body.read-quick .tabs .tab[data-tab="knowledge"],
+  body.read-quick .tabs .tab[data-tab="mcp"] { display:none; }
   .guide-switch { display:inline-flex; gap:0.25rem; margin:0.75rem 0 0; padding:0.2rem;
     background:rgba(255,255,255,0.55); border-radius:999px; border:1px solid var(--rule); }
   .guide-btn { border:0; background:transparent; padding:0.35rem 0.85rem; border-radius:999px;
@@ -1279,6 +1303,25 @@ export function renderHtml(
         var on = btn.dataset.guide === 'on';
         localStorage.setItem(KEY, on ? '1' : '0');
         apply(on);
+      });
+    });
+  })();
+  // Reading depth toggle (quick vs deep) — persist in localStorage.
+  (function () {
+    var KEY = 'opencool-read-depth';
+    function apply(mode) {
+      var quick = mode === 'quick';
+      document.body.classList.toggle('read-quick', quick);
+      document.querySelectorAll('.depth-btn').forEach(function (b) {
+        b.classList.toggle('active', (b.dataset.depth === 'quick') === quick);
+      });
+    }
+    apply(localStorage.getItem(KEY) || 'deep');
+    document.querySelectorAll('.depth-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var mode = btn.dataset.depth;
+        localStorage.setItem(KEY, mode);
+        apply(mode);
       });
     });
   })();
