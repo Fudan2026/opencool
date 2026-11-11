@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-11T00:56:57.257Z",
+  "generatedAt": "2026-11-11T03:12:00.012Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 20,
-  "avgSentiment": -4.5,
+  "avgSentiment": -4.3,
   "sentimentCurve": [
     {
       "date": "2026-11-04",
@@ -104,10 +104,16 @@
     {
       "date": "2026-11-11",
       "hour": "06",
-      "score": -6
+      "score": -2
     }
   ],
   "sectorAvg": [
+    {
+      "key": "china-equity",
+      "label": "中概港股",
+      "avg": 64.7,
+      "editions": 6
+    },
     {
       "key": "crypto",
       "label": "加密",
@@ -115,27 +121,21 @@
       "editions": 3
     },
     {
-      "key": "china-equity",
-      "label": "中概港股",
-      "avg": 45.5,
-      "editions": 6
+      "key": "macro",
+      "label": "宏观指数",
+      "avg": 30.9,
+      "editions": 12
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -29.2,
+      "avg": -28.1,
       "editions": 20
-    },
-    {
-      "key": "macro",
-      "label": "宏观指数",
-      "avg": 28.5,
-      "editions": 11
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -17.8,
+      "avg": -14.6,
       "editions": 20
     },
     {
@@ -147,7 +147,7 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -9.2,
+      "avg": -9.8,
       "editions": 20
     },
     {
@@ -231,22 +231,16 @@
   ],
   "keywords": [
     {
-      "term": "美元",
-      "count": 4,
-      "firstSeen": "2026-11-05",
-      "lastSeen": "2026-11-11"
-    },
-    {
       "term": "1月",
       "count": 3,
       "firstSeen": "2026-11-04",
       "lastSeen": "2026-11-05"
     },
     {
-      "term": "亿美",
+      "term": "美元",
       "count": 3,
-      "firstSeen": "2026-11-07",
-      "lastSeen": "2026-11-11"
+      "firstSeen": "2026-11-05",
+      "lastSeen": "2026-11-08"
     },
     {
       "term": "美股",
@@ -289,6 +283,12 @@
       "count": 2,
       "firstSeen": "2026-11-05",
       "lastSeen": "2026-11-10"
+    },
+    {
+      "term": "亿美",
+      "count": 2,
+      "firstSeen": "2026-11-07",
+      "lastSeen": "2026-11-08"
     },
     {
       "term": "修超",
@@ -355,7 +355,7 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 74
+      "totalHits": 75
     },
     {
       "key": "ai",
@@ -370,22 +370,22 @@
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 50
+      "totalHits": 49
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 42
+      "totalHits": 41
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 28
+      "totalHits": 30
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 17
+      "totalHits": 19
     },
     {
       "key": "defense",
@@ -395,17 +395,17 @@
     {
       "key": "media",
       "name": "传媒",
+      "totalHits": 15
+    },
+    {
+      "key": "infra",
+      "name": "基建",
       "totalHits": 13
     },
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 10
-    },
-    {
-      "key": "infra",
-      "name": "基建",
-      "totalHits": 10
+      "totalHits": 9
     },
     {
       "key": "travel",
@@ -416,7 +416,7 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.16,
+      "avgChangePct": -0.17,
       "editions": 18
     },
     {
@@ -426,7 +426,7 @@
     },
     {
       "name": "创业板指",
-      "avgChangePct": -0.67,
+      "avgChangePct": -0.63,
       "editions": 18
     }
   ],
