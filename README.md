@@ -65,6 +65,18 @@ Full reference: [`docs/DATA-CONTRACT.md`](docs/DATA-CONTRACT.md) ·
 
 ---
 
+## 用户自定义题材（Wave 12）
+
+在仓库根目录放 `themes.custom.json`（见 `themes.custom.example.json`）即可扩展题材库：新键追加，同键覆盖内置定义；文件缺失时完全使用内置目录。也可用 `THEMES_EXTRA_FILE=/path/to/custom.json` 指定路径。字段 `key`、`name`、`aliases`、`boardHints` 均必填，非法结构会在烘焙时直接报错而不是静默降级。
+
+```json
+[{"key":"stablecoin","name":"稳定币","aliases":["稳定币","USDT"],"boardHints":["稳定币"]}]
+```
+
+`boardHints` 按名称匹配东方财富概念板块（不是硬编码 BK 码），自定义题材会自动获得板块热度与成分股。
+
+---
+
 ## 本地跑一期
 
 ```bash

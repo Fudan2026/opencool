@@ -47,6 +47,8 @@ sources.config.json   # SINGLE SOURCE OF TRUTH for the source registry
 
 3. **Date keying uses `lib/utils.ts` `todayKey()`.** Honors `REPORT_TZ` env var; defaults to system local TZ. Don't hardcode `Asia/Shanghai` or `UTC` anywhere.
 
+4. **Theme customization via `themes.custom.json`** (optional): user entries merge with `lib/themes/catalog.ts` `loadThemeCatalog()` — new keys append, same-key entries replace built-ins; invalid shape throws loudly. Never hardcode user themes in TS. The file is optional and ignored when absent; `THEMES_EXTRA_FILE` can override the path.
+
 4. **Localization via `REPORT_LOCALE` (`zh` | `en`).** All UI text in render.ts goes through `STR.<key>`; LLM prompts have ZH/EN pairs picked at module-init. When adding strings, add both.
 
 5. **Per-source fetch errors are non-fatal.** `scripts/daily.ts` has a try/catch per source. Never `process.exit()` inside a fetcher.

@@ -11,9 +11,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
-  THEME_CATALOG,
   themeArticleHits,
   resolveBoard,
+  loadThemeCatalog,
   type ThemeDef,
 } from "../lib/themes/catalog";
 
@@ -113,7 +113,7 @@ async function main() {
   const themes: Array<Record<string, unknown>> = [];
   let okThemes = 0;
 
-  for (const th of THEME_CATALOG as ThemeDef[]) {
+  for (const th of loadThemeCatalog()) {
     const board = boards.length ? resolveBoard(th, boards) : null;
     let constituents: BoardRow[] = [];
     if (board) {
