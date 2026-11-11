@@ -80,6 +80,14 @@ test("golden: report page structure", async (t) => {
     assert.ok(html.includes("测试源"));
   });
 
+  await t.test("reading depth toggle present, deep default unchanged", () => {
+    assert.ok(html.includes('data-depth="quick"'));
+    assert.ok(html.includes('data-depth="deep"'));
+    assert.ok(html.includes('opencool-read-depth'));
+    assert.ok(html.includes('body.read-quick .panel[data-panel="school"]'));
+    assert.ok(!html.includes('class="read-quick"'));
+  });
+
   await t.test("edition nav (sibling hours) present", () => {
     assert.ok(html.includes("06:00"));
     assert.ok(html.includes("19:00"));
