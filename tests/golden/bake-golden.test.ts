@@ -111,17 +111,17 @@ test("golden: build-site end-to-end", async (t) => {
     "utf8",
   );
 
-  bake(tmp);
-
-  // keywords + weekly bakes run AFTER build-site in CI; exercise them on
-  // the same fixture via the real scripts (tsx binary, tmp cwd).
+  // Bakes run BEFORE build-site in CI (their artifacts feed it:
+  // keywords/periods.json gate page emission) — same order here.
   const tsxBin = path.join(REPO_ROOT, "node_modules", ".bin", "tsx");
-  for (const script of ["bake-keywords.ts", "build-weekly.ts"]) {
+  for (const script of ["bake-keywords.ts", "build-weekly.ts", "bake-periods.ts"]) {
     execFileSync(tsxBin, [path.join(REPO_ROOT, "scripts", script)], {
       cwd: tmp,
       stdio: "pipe",
     });
   }
+
+  bake(tmp);
 
   const read = (f: string) => fs.readFileSync(path.join(R, f), "utf8");
 
@@ -250,6 +250,18 @@ test("golden: build-site end-to-end", async (t) => {
     assert.equal(k.editions, 6);
     assert.ok(k.items.some((i: { term: string }) => i.term === "MLF"));
     assert.ok(k.items.some((i: { term: string }) => i.term === "央行"));
+  });
+
+  await t.test("periods.json + periods.html: WoW buckets with delta chain", () => {
+    const per = JSON.parse(read("periods.json"));
+    assert.ok(per.weeks.length >= 2, `weeks=${per.weeks.length}`);
+    assert.equal(per.weeks[0].deltaVsPrev, null);
+    assert.ok(per.weeks[per.weeks.length - 1].deltaVsPrev !== null);
+    assert.ok(Array.isArray(per.months) && per.months.length >= 1);
+    const html = read("periods.html");
+    assert.ok(html.includes("周度趋势"));
+    assert.ok(html.includes("月度趋势"));
+    assert.ok(!html.includes("position:fixed"), "periods page must stay iframe-safe");
   });
 
   await t.test("weekly.json: 5 fixture days cross MIN_DAYS", () => {

@@ -251,6 +251,9 @@ jobs:
       - name: Bake theme heat
         run: npm run themes:bake
 
+      - name: Bake trend periods
+        run: npm run periods:bake
+
       - name: Bake search index
         run: npm run search:bake
 
