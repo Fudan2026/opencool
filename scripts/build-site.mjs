@@ -434,7 +434,8 @@ const suproHtml = `<!doctype html>
   <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
    · <a class="home" href="./archive.html">历史归档</a>
    · <a class="home" href="./mcp-desk.html">机构数据台</a>
-   · <a class="home" href="./supro.html">量化实操·SuPro</a></p>
+   · <a class="home" href="./supro.html">量化实操·SuPro</a>
+   · <a class="home" href="./periods.html">趋势对比</a></p>
 </main>
 </body>
 </html>
@@ -457,6 +458,85 @@ console.log(`[build-site] supro.html (sister-project funnel)`);
     funnelCount += 1;
   }
   console.log(`[build-site] funnel CTA injected into ${funnelCount} edition page(s)`);
+}
+
+// periods.html — trend intelligence (WoW/MoM deltas over sentiment,
+// themes, index moves). Iframe/embed-friendly: inline CSS, no fixed
+// positioning, no external JS. Gated on daily_reports/periods.json
+// (baked by npm run periods:bake).
+if (fs.existsSync(path.join(ROOT, "periods.json"))) {
+  const per = JSON.parse(fs.readFileSync(path.join(ROOT, "periods.json"), "utf8"));
+  const bucketRows = (buckets) =>
+    buckets
+      .map((b) => {
+        const arrow =
+          b.deltaVsPrev == null ? "●" : b.deltaVsPrev > 0 ? "▲" : b.deltaVsPrev < 0 ? "▼" : "●";
+        const cls =
+          b.deltaVsPrev == null ? "d-meta" : b.deltaVsPrev > 0 ? "pos" : "neg";
+        const ratio =
+          b.posNegRatio == null ? "—" : `${Math.round(b.posNegRatio * 100)}% 多`;
+        const themes = b.topThemes.length
+          ? b.topThemes.map((t) => `${t.name}×${t.hits}`).join("、")
+          : "—";
+        const idx = b.avgIndexChangePct == null ? "—" : `${b.avgIndexChangePct >= 0 ? "+" : ""}${b.avgIndexChangePct.toFixed(2)}%`;
+        return `<tr><td><b>${b.key}</b> ~ ${b.end}</td>
+          <td>${b.editions}</td>
+          <td><span class="${cls}">${arrow} ${b.avgSentiment ?? "—"}</span>${b.deltaVsPrev != null ? ` <span class="d-meta">(Δ${b.deltaVsPrev > 0 ? "+" : ""}${b.deltaVsPrev})</span>` : ""}</td>
+          <td>${ratio}</td>
+          <td class="d-src">${themes}</td>
+          <td class="${idx.startsWith("-") ? "neg" : "pos"}">${idx}</td></tr>`;
+      })
+      .join("");
+  const perHtml = `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · 趋势对比</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.6; }
+  main { max-width:820px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 .3rem; }
+  h2 { font-size:1.05rem; margin:1.9rem 0 .6rem; }
+  .meta { color:var(--muted); font-size:.9rem; }
+  table { border-collapse:collapse; width:100%; background:var(--card); border-radius:.75rem; overflow:hidden; margin-bottom:.5rem; }
+  th, td { text-align:left; padding:.55rem .8rem; border-bottom:1px solid var(--rule); font-size:.85rem; }
+  th { color:var(--muted); font-weight:600; }
+  .pos { color:#15803d; font-weight:600; } .neg { color:#b91c1c; font-weight:600; }
+  .d-src { color:var(--muted); font-size:.78rem; max-width:14rem; }
+  .d-meta { color:var(--muted); font-size:.78rem; }
+  a { color:var(--accent); text-decoration:none; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>趋势对比</h1>
+  <p class="meta">${per.editions} 档 · 周一制 ISO 周 · Δ 为与前桶均值之差 · ${per.note}</p>
+  <h2>周度趋势（近 ${per.weeks.length} 周）</h2>
+  <table><thead><tr><th>周</th><th>档数</th><th>情绪均值</th><th>多空比</th><th>主题命中</th><th>指数均值</th></tr></thead><tbody>${bucketRows(per.weeks)}</tbody></table>
+  <h2>月度趋势（近 ${per.months.length} 月）</h2>
+  <table><thead><tr><th>月</th><th>档数</th><th>情绪均值</th><th>多空比</th><th>主题命中</th><th>指数均值</th></tr></thead><tbody>${bucketRows(per.months)}</tbody></table>
+  <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
+   · <a class="home" href="./weekly.html">周报</a>
+   · <a class="home" href="./status.html">运行状态</a></p>
+</main>
+</body>
+</html>
+`;
+  fs.writeFileSync(path.join(ROOT, "periods.html"), perHtml, "utf8");
+  console.log(`[build-site] periods.html (${per.weeks.length}w × ${per.months.length}m)`);
 }
 
 // tools.json — the "Static MCP" manifest: every MCP tool mapped to its
@@ -521,6 +601,12 @@ const toolsManifest = {
       staticEndpoint: "/lhb.json",
       params: "-",
       returns: "{tradeDate,rows:[{code,name,changePct,netAmtYi}]}",
+    },
+    {
+      name: "periods_compare",
+      staticEndpoint: "/periods.json",
+      params: "-",
+      returns: "{weeks:[{key,end,editions,avgSentiment,deltaVsPrev,...}],months:[...]}",
     },
   ],
 };
@@ -997,6 +1083,7 @@ const archiveHtml = `<!doctype html>
    · <a class="home" href="./search.html">搜索</a>${archHeatLink}
    · <a class="home" href="./mcp-desk.html">机构数据台</a>
    · <a class="home" href="./supro.html">量化实操·SuPro</a>
+   · <a class="home" href="./periods.html">趋势对比</a>
    · <a class="home" href="./status.html">运行状态</a></p>
 ${dayBlocks}
 </main>
@@ -1424,6 +1511,8 @@ No LLM behind any endpoint.
 - Sister project: /supro.html — SuPro (supro.si): AI/Agent product
   directory, 苏坡大模型 DeepSeek AIaaS, quant + paper practice. The
   news→practice funnel: OpenCool informs, SuPro practices
+- Trend comparison: /periods.html + /periods.json — WoW (6 Monday-based
+  weeks) and MoM (3 months) buckets of sentiment/theme/index deltas
 ${llmsHeatRow}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.

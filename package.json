@@ -20,6 +20,7 @@
     "search:bake": "tsx scripts/bake-search.ts",
     "calendar:bake": "tsx scripts/bake-calendar.ts",
     "lhb:bake": "tsx scripts/bake-lhb.ts",
+    "periods:bake": "tsx scripts/bake-periods.ts",
     "themes:bake": "tsx scripts/bake-themes.ts",
     "mcp:sync-watchlist": "tsx scripts/sync-mcp-watchlist.ts",
     "open": "node scripts/open-report.mjs"
