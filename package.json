@@ -23,7 +23,8 @@
     "periods:bake": "tsx scripts/bake-periods.ts",
     "themes:bake": "tsx scripts/bake-themes.ts",
     "mcp:sync-watchlist": "tsx scripts/sync-mcp-watchlist.ts",
-    "open": "node scripts/open-report.mjs"
+    "open": "node scripts/open-report.mjs",
+    "docker:daily": "tsx scripts/docker-daily.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.96.0",
