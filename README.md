@@ -66,6 +66,12 @@ Full reference: [`docs/DATA-CONTRACT.md`](docs/DATA-CONTRACT.md) ·
 
 ---
 
+## 用户订阅（前端地基）
+
+`subscribe.html` 提供邮箱与订阅档位输入。当前**只把订阅意向保存到本机 localStorage，不发送邮件、不上传服务器**；支持导出意向 JSON。未来后端就绪时，通过 `SUBSCRIBE_ENDPOINT` 显式配置提交地址即可接入，无需改页面。现在也可以直接用 [`feed.xml`](feed.xml) 的 RSS 订阅。
+
+---
+
 ## 用户自定义题材（Wave 12）
 
 在仓库根目录放 `themes.custom.json`（见 `themes.custom.example.json`）即可扩展题材库：新键追加，同键覆盖内置定义；文件缺失时完全使用内置目录。也可用 `THEMES_EXTRA_FILE=/path/to/custom.json` 指定路径。字段 `key`、`name`、`aliases`、`boardHints` 均必填，非法结构会在烘焙时直接报错而不是静默降级。

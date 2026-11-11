@@ -175,6 +175,14 @@ test("golden: build-site end-to-end", async (t) => {
     assert.ok(!feed.includes(`${yesterday}/06.html`));
   });
 
+  await t.test("subscribe.html is local-only by default", () => {
+    const html = read("subscribe.html");
+    assert.ok(html.includes('type="email"'));
+    assert.ok(html.includes("opencool-subscription-intent"));
+    assert.ok(html.includes("不发送邮件、不上传任何信息"));
+    assert.ok(html.includes('data-endpoint=""'));
+  });
+
   await t.test("llms.txt registers data products", () => {
     const llms = read("llms.txt");
     for (const p of [
