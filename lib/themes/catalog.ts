@@ -46,6 +46,43 @@ export const THEME_CATALOG: readonly ThemeDef[] = [
   { key: "travel", name: "旅游酒店", aliases: ["旅游", "酒店", "免税"], boardHints: ["旅游酒店", "旅游景点"] },
 ];
 
+import fs from "node:fs";
+
+/**
+ * Load the catalog with optional user overrides. Default: built-in 24
+ * themes plus themes.custom.json when present (or THEMES_EXTRA_FILE).
+ * Same-key custom entries REPLACE the built-in definition; new keys append.
+ * Invalid file/entry shape throws a clear error — never silently drops.
+ */
+export function loadThemeCatalog(extraFile?: string): ThemeDef[] {
+  const fp = extraFile || process.env.THEMES_EXTRA_FILE || "themes.custom.json";
+  if (!fs.existsSync(fp)) return [...THEME_CATALOG];
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(fs.readFileSync(fp, "utf8"));
+  } catch (e) {
+    throw new Error(`themes custom file is not valid JSON: ${fp} — ${(e as Error).message}`);
+  }
+  if (!Array.isArray(parsed)) {
+    throw new Error(`themes custom file must be an array of ThemeDef objects: ${fp}`);
+  }
+  const byKey = new Map<string, ThemeDef>(THEME_CATALOG.map((t) => [t.key, t]));
+  parsed.forEach((raw, i) => {
+    const t = raw as Partial<ThemeDef>;
+    const at = `${fp}[${i}]`;
+    if (typeof t.key !== "string" || typeof t.name !== "string" || !t.key || !t.name) {
+      throw new Error(`${at}: key and name must be non-empty strings`);
+    }
+    for (const field of ["aliases", "boardHints"] as const) {
+      if (!Array.isArray(t[field]) || (t[field] as unknown[]).some((x) => typeof x !== "string")) {
+        throw new Error(`${at}: '${field}' must be an array of strings`);
+      }
+    }
+    byKey.set(t.key, { key: t.key, name: t.name, aliases: t.aliases!, boardHints: t.boardHints! });
+  });
+  return [...byKey.values()];
+}
+
 /**
  * Pure article-matching: count how many of the theme's aliases appear
  * in a text. Substring counting, capped at 3 per alias (same cap
