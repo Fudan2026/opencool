@@ -78,6 +78,18 @@ Full reference: [`docs/DATA-CONTRACT.md`](docs/DATA-CONTRACT.md) ·
 
 ---
 
+## Docker 一键分发
+
+```bash
+docker pull ghcr.io/fudan2026/opencool:latest
+mkdir -p daily_reports logs
+docker run -d --name opencool -v "$PWD/daily_reports:/app/daily_reports" -v "$PWD/logs:/app/logs" ghcr.io/fudan2026/opencool:latest
+```
+
+也支持 `docker compose up -d --build`。镜像由 `.github/workflows/docker.yml` 自动构建并发布 GHCR（amd64/arm64）。完整环境变量与操作说明见 [`docs/DOCKER.md`](docs/DOCKER.md)。
+
+---
+
 ## 本地跑一期
 
 ```bash
