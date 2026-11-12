@@ -759,11 +759,11 @@
     "category": "politics",
     "subcategory": "hot",
     "lang": "zh",
-    "enabled": true,
+    "enabled": false,
     "locales": [
       "zh"
     ],
-    "notes": "DailyHotApi; OpenCool finance whitelist filter applied in fetcher"
+    "notes": "Disabled 2026-11-12 per authority-only directive: douyin hot list is entertainment-dominated. Finance whitelist yielded 0 in recent runs. weibo-hot kept as the social pulse."
   },
   {
     "id": "weibo-hot",
@@ -787,11 +787,11 @@
     "category": "politics",
     "subcategory": "hot",
     "lang": "zh",
-    "enabled": true,
+    "enabled": false,
     "locales": [
       "zh"
     ],
-    "notes": "DailyHotApi; OpenCool finance whitelist filter applied in fetcher"
+    "notes": "Disabled 2026-11-12 per authority-only directive: mixed entertainment, low finance density, 0 items in recent runs."
   },
   {
     "id": "baidu-hot",
@@ -801,11 +801,11 @@
     "category": "politics",
     "subcategory": "hot",
     "lang": "zh",
-    "enabled": true,
+    "enabled": false,
     "locales": [
       "zh"
     ],
-    "notes": "DailyHotApi; OpenCool finance whitelist filter applied in fetcher"
+    "notes": "Disabled 2026-11-12 per authority-only directive: entertainment-dominated, 0 items in recent runs."
   },
   {
     "id": "reuters-business",
@@ -866,11 +866,14 @@
     "category": "finance",
     "subcategory": "cn-news",
     "lang": "zh",
-    "enabled": false,
+    "enabled": true,
     "locales": [
       "zh"
     ],
-    "notes": "Distilled TrendRadar/NewsHub wallstreetcn-quick via RSSHub — may flake [OpenCool: soft-disabled — RSSHub often hangs Actions; re-enable anytime]"
+    "notes": "7x24 live flash (authoritative). Revived 2026-11-12: slarker mirror verified 200+XML with real finance items; primary rsshub.app stays first (CI-403 -> mirror failover).",
+    "mirrors": [
+      "https://hub.slarker.me/wallstreetcn/live"
+    ]
   },
   {
     "id": "cls-depth",
