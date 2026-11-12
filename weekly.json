@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-12T00:53:20.344Z",
+  "generatedAt": "2026-11-12T09:49:31.823Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 20,
+  "editions": 21,
   "avgSentiment": -4.2,
   "sentimentCurve": [
     {
@@ -105,6 +105,11 @@
       "date": "2026-11-12",
       "hour": "06",
       "score": 0
+    },
+    {
+      "date": "2026-11-12",
+      "hour": "13",
+      "score": -5
     }
   ],
   "sectorAvg": [
@@ -129,14 +134,14 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -25.5,
-      "editions": 20
+      "avg": -25.4,
+      "editions": 21
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -23,
-      "editions": 20
+      "avg": -21.6,
+      "editions": 21
     },
     {
       "key": "china-ashare",
@@ -147,14 +152,14 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -12.8,
-      "editions": 20
+      "avg": -12.7,
+      "editions": 21
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -3,
-      "editions": 20
+      "avg": -3.1,
+      "editions": 21
     }
   ],
   "topEvents": [
@@ -163,14 +168,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "USDCNY=X",
@@ -205,6 +210,13 @@
       "displayName": "美元 / 人民币",
       "title": "Anthropic斥资34亿美元接手发电设备",
       "url": "https://www.ftchinese.com/story/001111311",
+      "count": 8
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "What do we know about Nvidia CEO’s affair with a suspected Chinese spy?",
+      "url": "https://www.bbc.co.uk/news/videos/cq3989nkzn3ko?at_medium=RSS&at_campaign=rss",
       "count": 7
     },
     {
@@ -219,13 +231,6 @@
       "displayName": "Nvidia",
       "title": "消息人士：约60万块英伟达H200芯片在港等待运往中国内地",
       "url": "https://www.dw.com/zh/消息人士：约60万块英伟达h200芯片在港等待运往中国内地/a-79866758?maca=chi-rss-chi-all-1127-rdf",
-      "count": 6
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "US believes Nvidia’s Huang had romantic relationship with alleged Chinese spy",
-      "url": "https://www.ft.com/content/a55a2a22-4479-4f93-a445-6147a5c6d790?syn-25a6b1a6=1",
       "count": 6
     }
   ],
@@ -355,52 +360,52 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 82
+      "totalHits": 87
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 60
+      "totalHits": 63
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 59
+      "totalHits": 62
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 52
+      "totalHits": 57
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 45
+      "totalHits": 48
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 30
+      "totalHits": 33
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 24
+      "totalHits": 25
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 22
+      "totalHits": 24
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 16
+      "totalHits": 17
     },
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 13
+      "totalHits": 15
     },
     {
       "key": "infra",
@@ -408,26 +413,26 @@
       "totalHits": 10
     },
     {
-      "key": "travel",
-      "name": "旅游酒店",
-      "totalHits": 8
+      "key": "comms",
+      "name": "通信",
+      "totalHits": 9
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.22,
-      "editions": 18
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": -0.51,
+      "avgChangePct": -0.25,
       "editions": 19
     },
     {
+      "name": "深证成指",
+      "avgChangePct": -0.57,
+      "editions": 20
+    },
+    {
       "name": "创业板指",
-      "avgChangePct": -0.64,
-      "editions": 18
+      "avgChangePct": -0.74,
+      "editions": 19
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
