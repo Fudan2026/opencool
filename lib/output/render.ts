@@ -18,6 +18,14 @@ import {
 } from "../trading/watchlist";
 import { guideBullets, isLikelyEnglishTitle } from "../invest/guide";
 import {
+  routeEdition,
+  MIN_SECTION_ITEMS,
+  type RoutedEdition,
+  type RoutedLane,
+  type RoutedSection,
+} from "../topics/routing";
+import { laneLabel, topicLabel, type LaneKey, type TopicKey } from "../topics/taxonomy";
+import {
   renderReviewPanel,
   renderTechReadPanel,
   renderPersonasPanel,
@@ -116,6 +124,19 @@ const TEXTS_ZH = {
   mdImportance: "重要度",
   archiveLink: "历史归档",
   heroOverview: "本期速览",
+  // Topic-routed news block (IA increment 2). Lane labels name the *language*
+  // of the copy, not the venue of the story — see lib/topics/taxonomy.ts.
+  laneZh: "中文财经",
+  laneExternal: "外电原文",
+  topicGlobalMarkets: "全球市场",
+  topicWorld: "国际时政",
+  topicTechAi: "科技AI",
+  topicPolicy: "政策政务",
+  topicFilings: "公司公告",
+  topicOpinion: "观点解读",
+  viewByTopic: "按话题",
+  viewBySource: "按来源",
+  laneEmpty: "今日该栏目无内容。",
 };
 
 const TEXTS_EN: typeof TEXTS_ZH = {
@@ -199,6 +220,17 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   mdImportance: "Importance",
   archiveLink: "Archive",
   heroOverview: "This edition",
+  laneZh: "Chinese-Language",
+  laneExternal: "External Wire",
+  topicGlobalMarkets: "Global Markets",
+  topicWorld: "World",
+  topicTechAi: "Tech & AI",
+  topicPolicy: "Policy",
+  topicFilings: "Filings",
+  topicOpinion: "Analysis",
+  viewByTopic: "By topic",
+  viewBySource: "By source",
+  laneEmpty: "Nothing in this lane today.",
 };
 
 const STR = REPORT_LOCALE === "en" ? TEXTS_EN : TEXTS_ZH;
@@ -225,6 +257,47 @@ export type SubGroup = {
 };
 
 export type RawByCategory = Record<Category, SubGroup[]>;
+
+/**
+ * One topic section as rendered: the items selected by the router plus the
+ * label and the pool size that produced them.
+ *
+ * `available` is carried into the markup as `data-available` so the density
+ * evidence in the PR body and the golden guard can read composition straight
+ * off the page instead of re-deriving it from the sidecar.
+ */
+export interface TopicSectionView {
+  topic: TopicKey;
+  label: string;
+  items: ArticleInput[];
+  available: number;
+}
+
+/**
+ * One lane as rendered. `sections` is the shipped view (topic-routed);
+ * `bySource` is the secondary 按来源 view that keeps the old subcategory/source
+ * browsing available so routing never *removes* a way to reach an article.
+ */
+export interface LaneView {
+  lane: LaneKey;
+  label: string;
+  count: number;
+  sections: TopicSectionView[];
+  bySource: SubGroup[];
+  /** Topics with candidates that could not field a balanced section. */
+  omitted: Array<{ topic: TopicKey; available: number }>;
+}
+
+export type RawNews = {
+  /** The shipped news block: two language lanes, each topic-routed. */
+  lanes: LaneView[];
+  /**
+   * The pre-routing category → subcategory → source grouping, kept for the
+   * tech/community panels (which are not news topics) and as the source of the
+   * 按来源 view. Nothing here is capped by topic.
+   */
+  legacy: RawByCategory;
+};
 
 // ----- labels & ordering -----
 
@@ -360,7 +433,15 @@ function mergedLimitFor(
 
 // ----- grouping -----
 
-export function groupRaw(
+/**
+ * Legacy grouping: category → subcategory → source, capped by the
+ * `SOURCE_DISPLAY_LIMITS` / `MERGED_SUBGROUP_LIMITS` tables.
+ *
+ * Still the source of the secondary 按来源 view (and of the tech/community
+ * panels), so a reader who wants to browse one wire's raw output keeps that
+ * path. The shipped default view is topic-routed — see `groupRaw`.
+ */
+export function groupBySource(
   articles: ArticleInput[],
   registry: SourceDef[],
 ): RawByCategory {
@@ -504,6 +585,164 @@ export function groupRaw(
   return out;
 }
 
+// ----- topic routing (IA increment 2) -----
+
+/**
+ * Topic labels resolved from `TEXTS_ZH` / `TEXTS_EN`.
+ *
+ * `lib/topics/taxonomy.ts` owns the bilingual table too, and that copy is what
+ * `topicLabel()` returns. This map exists so the *rendered* label comes from the
+ * same `STR` object as every other string on the page — the repo's i18n rule is
+ * that all display text goes through the pairs, and a taxonomy module that
+ * bypassed it would be the one place a translator forgot to look.
+ */
+const TOPIC_LABELS: Record<TopicKey, string> = {
+  "global-markets": STR.topicGlobalMarkets,
+  world: STR.topicWorld,
+  "tech-ai": STR.topicTechAi,
+  policy: STR.topicPolicy,
+  filings: STR.topicFilings,
+  opinion: STR.topicOpinion,
+};
+
+const LANE_LABELS: Record<LaneKey, string> = {
+  zh: STR.laneZh,
+  external: STR.laneExternal,
+};
+
+function topicLabelLocalized(topic: TopicKey): string {
+  return TOPIC_LABELS[topic] ?? topicLabel(topic, REPORT_LOCALE);
+}
+
+function laneLabelLocalized(lane: LaneKey): string {
+  return LANE_LABELS[lane] ?? laneLabel(lane, REPORT_LOCALE);
+}
+
+/**
+ * Build the shipped news block: two language lanes, each routed into topic
+ * sections with density caps and cross-source dedupe.
+ *
+ * The editorial filters that used to live only in the merged-list path
+ * (sports, entertainment, V2EX off-topic) now run *before* routing so a
+ * filtered article cannot consume a section slot. That ordering matters: the
+ * audit found a weather forecast and a cricket press conference occupying
+ * finance/politics slots, and a cap applied before the filter would have kept
+ * them while dropping real news.
+ *
+ * Non-fatal by construction — `routeEdition` is pure and catches per-article
+ * failures inside the classifier, so a single malformed article degrades to a
+ * source-tier topic instead of taking the block down.
+ */
+export function groupRaw(
+  articles: ArticleInput[],
+  registry: SourceDef[],
+): RawNews {
+  const enabledIds = new Set(
+    registry.filter((s) => s.enabled !== false).map((s) => s.id),
+  );
+  const subcategories: Record<string, string | undefined> = {};
+  for (const s of registry) subcategories[s.id] = s.subcategory;
+
+  const eligible = articles.filter((a) => {
+    if (!enabledIds.has(a.sourceId)) return false;
+    if (a.category === "politics" && isSportsArticle(a.title)) return false;
+    if (isEntertainmentTitle(a.title)) return false;
+    if (
+      (a.sourceId === "v2ex-hot" || a.sourceId === "linuxdo") &&
+      V2EX_OFF_TOPIC_RE.test(a.title)
+    ) {
+      return false;
+    }
+    return true;
+  });
+
+  const routed = routeEdition(eligible, subcategories);
+  const bySource = groupBySource(eligible, registry);
+  const registryById = new Map(registry.map((s) => [s.id, s] as const));
+
+  const lanes: LaneView[] = [];
+  for (const lane of routed.lanes) {
+    lanes.push({
+      lane: lane.lane,
+      label: laneLabelLocalized(lane.lane),
+      count: lane.sections.reduce((n, s) => n + s.items.length, 0),
+      sections: lane.sections.map((s) => ({
+        topic: s.topic,
+        label: topicLabelLocalized(s.topic),
+        items: s.items,
+        available: s.available,
+      })),
+      bySource: laneViewBySource(lane, registryById),
+      omitted: lane.omitted.map((o) => ({ topic: o.topic, available: o.available })),
+    });
+  }
+  return { lanes, legacy: bySource };
+}
+
+/**
+ * Per-source cap inside the 按来源 view.
+ *
+ * The view exists to *recover reach* for items the topic caps left out, not to
+ * re-publish the whole fetch. Without a bound it emitted ~500 compact rows and
+ * nearly doubled the page (52 KB → 88 KB gzipped); at 12 the page grows by
+ * roughly a third while every source's newest dozen items stay one click away —
+ * which is more than the legacy panels ever showed per source.
+ */
+const LANE_SOURCE_VIEW_LIMIT = 12;
+
+/**
+ * The 按来源 view for one lane: each contributing source's newest items.
+ *
+ * Built from the lane's own pool rather than by filtering the legacy
+ * category/subcategory grouping, because that grouping is capped
+ * (`MERGED_SUBGROUP_LIMITS`) and would therefore hide exactly the items the
+ * topic caps left out — the one thing this view exists to recover. The only
+ * articles genuinely absent are the duplicates `dedupeStories` suppressed,
+ * which are by definition the same story as a survivor.
+ *
+ * Grouping key is the registry's `category:subcategory` when the source is
+ * known, so the tab labels stay familiar (中文财经 / 外电原文 / 国际要闻); a
+ * source with no registry entry lands in its declared category alone.
+ */
+function laneViewBySource(
+  lane: RoutedLane,
+  registryById: ReadonlyMap<string, SourceDef>,
+): SubGroup[] {
+  const groups = new Map<string, { name: string; order: number; sources: Map<string, ArticleInput[]> }>();
+  lane.pool.forEach((item, order) => {
+    const def = registryById.get(item.sourceId);
+    const key = def ? `${def.category}:${def.subcategory ?? "all"}` : `source:${item.sourceId}`;
+    let group = groups.get(key);
+    if (!group) {
+      const name = def
+        ? SUBCATEGORY_LABELS[def.subcategory ?? ""] ?? CATEGORY_LABELS[def.category]
+        : item.source || item.sourceId;
+      group = { name, order, sources: new Map() };
+      groups.set(key, group);
+    }
+    const arr = group.sources.get(item.sourceId) ?? [];
+    arr.push(item);
+    group.sources.set(item.sourceId, arr);
+  });
+
+  const subs: SubGroup[] = [];
+  for (const [id, group] of [...groups.entries()].sort((a, b) => a[1].order - b[1].order)) {
+    const sources: SourceGroup[] = [];
+    for (const [sourceId, items] of group.sources) {
+      sources.push({
+        sourceId,
+        sourceName: items[0]?.source || sourceId,
+        items: [...items]
+          .sort((a, b) => (b.publishedAt?.getTime() ?? 0) - (a.publishedAt?.getTime() ?? 0))
+          .slice(0, LANE_SOURCE_VIEW_LIMIT),
+      });
+    }
+    if (sources.length === 0) continue;
+    subs.push({ id, name: group.name, sources });
+  }
+  return subs;
+}
+
 // ----- HTML helpers -----
 
 function escapeHtml(s: string): string {
@@ -578,20 +817,38 @@ function renderArticleHtml(a: ArticleInput, showSource = false): string {
 </article>`;
 }
 
+/**
+ * Compact row for the secondary 按来源 view: headline, source, time. No excerpt
+ * and no guide block — the full text is one click away in the topic view.
+ */
+function renderCompactArticle(a: ArticleInput, showSource = false): string {
+  const metaLine = [
+    showSource && a.source ? escapeHtml(a.source) : "",
+    formatDate(a.publishedAt),
+  ]
+    .filter(Boolean)
+    .join(" · ");
+  return `<article class="article article-compact">
+  <h3 class="article-title"><a href="${escapeHtml(a.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(a.title)}</a></h3>
+  ${metaLine ? `<p class="article-meta">${metaLine}</p>` : ""}
+</article>`;
+}
+
 function renderSourceContent(
-  category: Category,
+  category: string,
   subId: string,
   source: SourceGroup,
   isActive: boolean,
+  itemRenderer: (a: ArticleInput, showSource: boolean) => string = renderArticleHtml,
 ): string {
   const showSource = source.merged === true;
   return `<div class="source-content${isActive ? " active" : ""}" data-source-content="${escapeHtml(source.sourceId)}" data-sub="${escapeHtml(subId)}" data-cat="${category}">
-    ${source.items.length === 0 ? `<p class="empty">${STR.emptySource}</p>` : source.items.map((a) => renderArticleHtml(a, showSource)).join("\n")}
+    ${source.items.length === 0 ? `<p class="empty">${STR.emptySource}</p>` : source.items.map((a) => itemRenderer(a, showSource)).join("\n")}
   </div>`;
 }
 
 function renderSourceTabs(
-  category: Category,
+  category: string,
   subId: string,
   sources: SourceGroup[],
 ): string {
@@ -607,11 +864,16 @@ function renderSourceTabs(
     .join("")}</nav>`;
 }
 
-function renderSubContent(category: Category, sub: SubGroup, isActive: boolean): string {
+function renderSubContent(
+  category: string,
+  sub: SubGroup,
+  isActive: boolean,
+  itemRenderer?: (a: ArticleInput, showSource: boolean) => string,
+): string {
   return `<div class="sub-content${isActive ? " active" : ""}" data-sub-content="${escapeHtml(sub.id)}" data-cat="${category}">
     ${renderSourceTabs(category, sub.id, sub.sources)}
     <div class="source-contents">
-      ${sub.sources.map((s, i) => renderSourceContent(category, sub.id, s, i === 0)).join("\n")}
+      ${sub.sources.map((s, i) => renderSourceContent(category, sub.id, s, i === 0, itemRenderer)).join("\n")}
     </div>
   </div>`;
 }
@@ -636,6 +898,83 @@ function renderRawCategoryPanel(
     .map((s, i) => renderSubContent(category, s, i === 0))
     .join("\n");
   return `<nav class="sub-tabs">${subTabs}</nav>\n<div class="sub-contents">${panels}</div>`;
+}
+
+// ----- topic-routed lane panels (IA increment 2) -----
+
+/**
+ * One topic section.
+ *
+ * A section is a flat list — the source label is shown inline on every item
+ * because there is no L3 source tab here (that is the whole point: the reader
+ * is browsing a topic, not a wire). `data-available` records how many items the
+ * section had before capping, so the density evidence is readable straight off
+ * the published page.
+ *
+ * Empty sections are never passed in: `groupRaw` omits them, which is how the
+ * permanent 技术动态 / 财经热榜 empty shells disappear without special-casing.
+ */
+function renderTopicSection(section: TopicSectionView, lane: LaneKey): string {
+  if (section.items.length === 0) return "";
+  const items = section.items.map((a) => renderArticleHtml(a, true)).join("\n");
+  return `<section class="topic-section" data-topic="${section.topic}" data-lane="${lane}" data-available="${section.available}" data-rendered="${section.items.length}">
+  <h3 class="topic-heading">${escapeHtml(section.label)}<span class="count">${section.items.length}</span></h3>
+  <div class="topic-items">${items}</div>
+</section>`;
+}
+
+/**
+ * The 按来源 view for one lane, reusing the existing sub/source tabs.
+ *
+ * Rendered as a sibling of the topic view inside the same panel, hidden by
+ * default and toggled by the 按话题 / 按来源 switch. Keeping it in the DOM means
+ * the toggle is a class flip, not a re-render, so no JavaScript is required to
+ * read the primary view.
+ *
+ * Items here are compact (headline + source + time, no excerpt) on purpose:
+ * this view exists to *locate* something the topic caps left out, and each
+ * article also appears in full in the topic view. Rendering both bodies would
+ * roughly double the page for no added reach.
+ */
+function renderLaneBySource(lane: LaneView): string {
+  if (lane.bySource.length === 0) return "";
+  const subTabs = lane.bySource
+    .map((s, i) => {
+      const count = s.sources.reduce((n, src) => n + src.items.length, 0);
+      return `<button class="sub-tab${i === 0 ? " active" : ""}" data-sub="${escapeHtml(s.id)}" data-cat="${lane.lane}">${escapeHtml(s.name)}<span class="count">${count}</span></button>`;
+    })
+    .join("");
+  const panels = lane.bySource
+    .map((s, i) => renderSubContent(lane.lane, s, i === 0, renderCompactArticle))
+    .join("\n");
+  return `<div class="lane-by-source">
+    <nav class="sub-tabs">${subTabs}</nav>
+    <div class="sub-contents">${panels}</div>
+  </div>`;
+}
+
+/**
+ * One lane panel: the topic sections in locked order, plus the source view.
+ *
+ * When the lane has no sections at all the panel still says so in words rather
+ * than rendering an empty shell with a heading — "该栏目今日无内容" is honest,
+ * an empty section is not.
+ */
+function renderLanePanel(lane: LaneView): string {
+  const sections = lane.sections
+    .map((s) => renderTopicSection(s, lane.lane))
+    .filter(Boolean)
+    .join("\n");
+  const bySource = renderLaneBySource(lane);
+  const body = sections || `<p class="empty">${STR.laneEmpty}</p>`;
+  return `<div class="lane-views">
+    <nav class="view-tabs" role="group" aria-label="view mode">
+      <button type="button" class="view-btn active" data-view="topic">${STR.viewByTopic}</button>
+      ${bySource ? `<button type="button" class="view-btn" data-view="source">${STR.viewBySource}</button>` : ""}
+    </nav>
+    <div class="lane-view lane-view-topic active">${body}</div>
+    ${bySource ? `<div class="lane-view lane-view-source">${bySource}</div>` : ""}
+  </div>`;
 }
 
 // ----- top-level renderer -----
@@ -677,7 +1016,7 @@ function editionLabelFor(hour?: string): string {
 
 export function renderHtml(
   report: DailyReport,
-  raw: RawByCategory,
+  raw: RawNews,
   date: string,
   opts: RenderHtmlOptions = {},
 ): string {
@@ -689,20 +1028,39 @@ export function renderHtml(
   const editionLabel = editionLabelFor(editionHour);
   const siblingHours = (opts.siblingHours ?? []).filter(Boolean);
 
-  const techMainSubs = raw.tech.filter((s) => TECH_MAIN_SUBS.has(s.id));
-  const techCommunitySubs = raw.tech.filter((s) => TECH_COMMUNITY_SUBS.has(s.id));
+  const lanes = raw.lanes;
+  const techMainSubs = raw.legacy.tech.filter((s) => TECH_MAIN_SUBS.has(s.id));
+  const techCommunitySubs = raw.legacy.tech.filter((s) => TECH_COMMUNITY_SUBS.has(s.id));
 
   const sumItems = (subs: SubGroup[]) =>
     subs.reduce(
       (n, sg) => n + sg.sources.reduce((m, s) => m + s.items.length, 0),
       0,
     );
+  // Only the tech/community panels still count by category; the news lanes
+  // carry their own counts so a lane can never disagree with its sections.
   const counts = {
     tech: sumItems(techMainSubs),
-    finance: sumItems(raw.finance),
-    politics: sumItems(raw.politics),
     community: sumItems(techCommunitySubs),
   };
+
+  // Lane tabs: the shipped news entry points. A lane with nothing to show keeps
+  // its tab only when every lane is empty, so the page never presents an empty
+  // tab beside a full one — the same rule topic sections follow one level down.
+  const visibleLanes = lanes.filter((l) => l.count > 0);
+  const tabbedLanes = visibleLanes.length > 0 ? visibleLanes : lanes.slice(0, 1);
+  const laneTabs = tabbedLanes
+    .map(
+      (l, i) =>
+        `<button class="tab${i === 0 ? " active" : ""}" data-tab="${l.lane}">${escapeHtml(l.label)}<span class="count">${l.count}</span></button>`,
+    )
+    .join("");
+  const lanePanels = (visibleLanes.length > 0 ? visibleLanes : tabbedLanes)
+    .map(
+      (l, i) =>
+        `<section class="panel${i === 0 ? " active" : ""}" data-panel="${l.lane}">${renderLanePanel(l)}</section>`,
+    )
+    .join("\n");
 
   const tz = getReportTz() || "local";
   const siblingNav =
@@ -1191,6 +1549,27 @@ export function renderHtml(
     border:1px solid var(--rule); border-radius:.75rem; }
   .senti-review p { margin:.3rem 0; }
 
+  /* ----- topic-routed lane block (IA increment 2) ----- */
+  .view-tabs { display:inline-flex; gap:0.25rem; margin:0 0 0.85rem; padding:0.2rem;
+    background:rgba(255,255,255,0.65); border:1px solid var(--rule); border-radius:999px; }
+  .view-btn { border:0; background:transparent; padding:0.3rem 0.75rem; border-radius:999px;
+    font:inherit; font-size:0.82rem; font-weight:600; cursor:pointer; color:var(--muted); }
+  .view-btn.active { background:var(--accent); color:var(--accent-fg); }
+  .lane-view { display:none; }
+  .lane-view.active { display:block; }
+  .topic-section { margin:0 0 1.5rem; }
+  .topic-section:last-child { margin-bottom:0; }
+  .topic-heading { display:flex; align-items:baseline; gap:0.45rem;
+    font-family:"Fraunces","Noto Sans SC",serif; font-size:1.05rem; font-weight:700;
+    margin:0 0 0.55rem; padding-bottom:0.3rem; border-bottom:2px solid var(--rule); }
+  .topic-heading .count { font-family:"DM Sans",system-ui,sans-serif; font-size:0.72rem;
+    font-weight:600; color:var(--accent); background:var(--rank-high-bg);
+    padding:0.05rem 0.45rem; border-radius:999px; }
+  .topic-items .article { background:var(--card); border:1px solid var(--rule);
+    border-radius:0.7rem; padding:0.7rem 0.9rem; margin:0 0 0.5rem; }
+  .topic-items .article:last-child { margin-bottom:0; }
+  .topic-items .article-title { font-size:0.95rem; }
+
 </style>
 </head>
 <body>
@@ -1198,7 +1577,7 @@ export function renderHtml(
   ${heroBlock}
 
   <nav class="tabs" role="tablist">
-    <button class="tab active" data-tab="finance">${CATEGORY_LABELS.finance}<span class="count">${counts.finance}</span></button>
+    ${laneTabs}
     ${trading ? `<button class="tab" data-tab="trading">${STR.catTrading}<span class="count">${trading.tickers.length}</span></button>` : ""}
     <button class="tab" data-tab="review">${STR.catReview}</button>
     <button class="tab" data-tab="sentiment">${STR.catSentiment}</button>
@@ -1208,14 +1587,11 @@ export function renderHtml(
     <button class="tab" data-tab="school">${STR.catSchool}</button>
     <button class="tab" data-tab="knowledge">${STR.catKnowledge}</button>
     <button class="tab" data-tab="mcp">${STR.catMcp}</button>
-    <button class="tab" data-tab="politics">${CATEGORY_LABELS.politics}<span class="count">${counts.politics}</span></button>
-    <button class="tab" data-tab="tech">${CATEGORY_LABELS.tech}<span class="count">${counts.tech}</span></button>
+    ${counts.tech > 0 ? `<button class="tab" data-tab="tech">${CATEGORY_LABELS.tech}<span class="count">${counts.tech}</span></button>` : ""}
     ${techCommunitySubs.length > 0 ? `<button class="tab" data-tab="community">${STR.catCommunity}<span class="count">${counts.community}</span></button>` : ""}
   </nav>
 
-  <section class="panel active" data-panel="finance">
-    ${renderRawCategoryPanel("finance", raw.finance)}
-  </section>
+  ${lanePanels}
   ${trading ? `<section class="panel" data-panel="trading">${renderTradingPanel(trading)}</section>` : ""}
   <section class="panel" data-panel="review">${renderReviewPanel(quant, report.themes)}</section>
   <section class="panel" data-panel="sentiment">${renderSentimentPanel(sentiment, sentimentContext)}</section>
@@ -1225,12 +1601,9 @@ export function renderHtml(
   <section class="panel" data-panel="school">${renderSchoolPanel()}</section>
   <section class="panel" data-panel="knowledge">${renderKnowledgePanel()}</section>
   <section class="panel" data-panel="mcp">${renderMcpHelpPanel()}</section>
-  <section class="panel" data-panel="politics">
-    ${renderRawCategoryPanel("politics", raw.politics)}
-  </section>
-  <section class="panel" data-panel="tech">
+  ${counts.tech > 0 ? `<section class="panel" data-panel="tech">
     ${renderRawCategoryPanel("tech", techMainSubs)}
-  </section>
+  </section>` : ""}
   ${techCommunitySubs.length > 0 ? `<section class="panel" data-panel="community">
     ${renderRawCategoryPanel("tech", techCommunitySubs)}
   </section>` : ""}
@@ -1248,6 +1621,22 @@ export function renderHtml(
       });
       document.querySelectorAll('.panel').forEach(function (p) {
         p.classList.toggle('active', p.dataset.panel === target);
+      });
+    });
+  });
+  // Topic / source view switch inside a lane panel. Class flip only — the
+  // topic view is server-rendered and visible with JavaScript disabled, so the
+  // secondary view can never be the only path to an article.
+  document.querySelectorAll('.view-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var views = btn.closest('.lane-views');
+      if (!views) return;
+      var which = btn.dataset.view;
+      views.querySelectorAll('.view-btn').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      views.querySelectorAll('.lane-view').forEach(function (v) {
+        v.classList.toggle('active', v.classList.contains('lane-view-' + which));
       });
     });
   });

@@ -37,11 +37,29 @@ The config file is written by `node scripts/install.mjs --global`. If it's missi
 | Re-run trading section | `npm run regen-trading [date]` | ~2 min, 1 LLM call |
 | Top-up missing summary | `npm run regen-enrich <cat:sub> [date]` | ~20-40s, 1 LLM call |
 | Open today's report in Chrome | `npm run open` | instant |
+| Before/after density evidence for one edition | `npm run topics:report [-- <date> <hour>]` | instant |
 | Sonnet quota + call history | `npm run quota-report` | instant |
 
 `[date]` defaults to today's date in the report timezone (system local, or `REPORT_TZ` if set). The pipeline and the OS scheduler both run in local time, so the report's date label = the date when the trigger fired in the report timezone. A user with `REPORT_TZ=Asia/Shanghai` whose machine fires the trigger at 23:00 UTC-8 will get a "next-day Shanghai" file, e.g. `daily_reports/2026-05-17/2026-05-17.html`.
 
 `<cat:sub>` accepted by `regen-enrich`: `finance:news`, `politics:world`, `tech:ai-news`. Single-source X 推文 (`tech:x-viral`) is enriched as part of `daily` only — no top-up path.
+
+`npm run daily` now enriches *the routed selection* (whatever `routeEdition`
+chose to render), not those three legacy buckets — the buckets no longer
+describe the page.
+
+## How the news block is composed
+
+Two language lanes (`zh` 中文财经 = Chinese-language copy, `external` 外电原文),
+each routed into up to six topic sections in fixed order: 全球市场 → 国际时政 →
+科技AI → 政策政务 → 公司公告 → 观点解读. Within each section: duplicates across
+sources removed, at most 40% of slots from one source, at most 2 items per story
+cluster (≤8 per edition), and a section under three items is omitted rather than
+rendered thin. A 按来源 toggle keeps per-source browsing available.
+
+Pipeline log line to watch: `[daily] routed: zh[global-markets×8 world×6 …]`.
+`withheld(n)` means a topic had `n` candidates but could not field three from
+three sources — the honest alternative to rendering a one-source section.
 
 ## File map — where to change what
 
@@ -49,9 +67,14 @@ The config file is written by `node scripts/install.mjs --global`. If it's missi
 |---|---|
 | Add / disable / re-categorize a source | `sources.config.json` (project root — single source of truth; `lib/sources/registry.ts` is just a loader) |
 | Rename L1 tab labels | `lib/output/render.ts` `CATEGORY_LABELS` |
+| Rename a news lane / topic section | `lib/topics/taxonomy.ts` (keys + order) and the `STR` pairs in `lib/output/render.ts` (display text) |
 | Reorder / rename L2 subcategories | `SUBCATEGORY_ORDER` + `SUBCATEGORY_LABELS` in same file |
 | Change per-source item cap | `SOURCE_DISPLAY_LIMITS` |
 | Change merged-timeline cap | `MERGED_SUBGROUP_LIMITS` |
+| Change a topic section's slots / 40% share | `SECTION_LIMITS` in `lib/topics/routing.ts` |
+| Change the per-story density cap | `CLUSTER_CAP_PER_SECTION` / `CLUSTER_CAP_PER_EDITION` in the same file |
+| Teach the story-cluster key a new entity | `lib/topics/entities.ts` |
+| See what routing did to a baked edition | `npm run topics:report -- <date> <hour>` |
 | Add a Sonnet enrichment prompt | `lib/ai/enrich.ts` — copy `XVIRAL_SYSTEM_PROMPT` pattern |
 | Wire an enrichment into pipeline | `scripts/daily.ts` — `await enrichXxx(articles)` in `main()` |
 | Add a new fetcher type | New file in `lib/sources/` + branch in `lib/sources/dispatch.ts` |

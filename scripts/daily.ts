@@ -19,13 +19,7 @@ import {
   enrichTrendingPapersSummaries,
   enrichXViralSummaries,
 } from "../lib/ai/enrich";
-import {
-  groupRaw,
-  isSportsArticle,
-  MERGED_SUBGROUP_LIMITS,
-  renderHtml,
-  renderMarkdown,
-} from "../lib/output/render";
+import { groupRaw, renderHtml, renderMarkdown } from "../lib/output/render";
 import { analyzeWatchlist } from "../lib/trading/runner";
 import { fetchCryptoFearGreed } from "../lib/trading/fear-greed";
 import { fetchCryptoGlobal } from "../lib/trading/coingecko";
@@ -38,6 +32,7 @@ import { cleanKeywords } from "../lib/nlp/keywords";
 import { loadLeadConfig, applyLead } from "../lib/editorial/lead";
 import { THEME_CATALOG, themeArticleHits } from "../lib/themes/catalog";
 import { classifyAll, type TopicTag } from "../lib/topics/classify";
+import { routeEdition } from "../lib/topics/routing";
 import type { SourceDef } from "../lib/sources/types";
 import type { MorningBrief } from "../lib/ai/pipeline";
 import type { QuantSection } from "../lib/invest/types";
@@ -45,15 +40,17 @@ import type { QuantSection } from "../lib/invest/types";
 const OUTPUT_DIR = "daily_reports";
 
 /**
- * Attach shadow-mode two-axis tags to the articles written to the sidecar.
+ * Attach two-axis tags to the articles written to the sidecar.
  *
- * Increment 1 of the IA redesign: additive only. Each article gains `lane`,
- * `laneConfidence`, `topic`, `topicConfidence`, `domestic` and
- * `domesticConfidence`. The returned array is used solely for
- * `${base}-articles.json`; the in-memory `articles` feeding
- * `groupRaw`/`renderHtml` is never mutated, which is what keeps the rendered
- * HTML byte-identical. Non-fatal by construction — `classifyAll` never throws,
- * and any surprise here degrades to the untagged list.
+ * Increment 1 shipped this in shadow mode (additive only, HTML byte-identical).
+ * Increment 2 makes the tags load-bearing: `groupRaw` routes on them, so the
+ * same values persisted here are what the page is built from. The classifier
+ * remains pure and total, so a bad article degrades to a source-tier topic
+ * rather than failing the run.
+ *
+ * Ordering note: this runs at the sidecar write site, *after* the digest, so an
+ * LLM failure cannot affect routing and a routing surprise cannot affect the
+ * digest.
  */
 function withTopics(
   articles: ArticleInput[],
@@ -65,18 +62,20 @@ function withTopics(
     const lanes = { zh: 0, external: 0 };
     const topics = new Map<string, number>();
     let domestic = 0;
+    let fallback = 0;
     for (const a of tagged) {
       lanes[a.lane] += 1;
       topics.set(a.topic, (topics.get(a.topic) ?? 0) + 1);
       if (a.domestic) domestic += 1;
+      if (a.topicConfidence === 0) fallback += 1;
     }
     const topicSummary = [...topics.entries()]
       .sort((a, b) => b[1] - a[1])
       .map(([t, n]) => `${t}×${n}`)
       .join(", ");
     console.log(
-      `[daily] topics (shadow): zh×${lanes.zh} external×${lanes.external} | ` +
-        `${topicSummary} | domestic×${domestic}`,
+      `[daily] topics: zh×${lanes.zh} external×${lanes.external} | ` +
+        `${topicSummary} | domestic×${domestic} fallback×${fallback}`,
     );
     return tagged;
   } catch (e) {
@@ -86,8 +85,36 @@ function withTopics(
   }
 }
 
-// Hard deadline: a hung fetch (black-holed socket, slow-drip response)
-// must fail the run fast so the hourly gh-pages catchup can retry the
+/**
+ * Log what the router did, in the one place an operator looks.
+ *
+ * Two numbers matter operationally: how many duplicate stories were suppressed
+ * (should be small and non-zero) and whether any section had to be withheld
+ * because it could not field three balanced items. Both are non-fatal by
+ * design, so the log is the only signal that an edition was shaped rather than
+ * reported.
+ */
+function logRoutingHealth(raw: ReturnType<typeof groupRaw>) {
+  try {
+    const parts: string[] = [];
+    let dupes = 0;
+    for (const lane of raw.lanes) {
+      const sections = lane.sections
+        .map((s) => `${s.topic}×${s.items.length}`)
+        .join(" ");
+      parts.push(`${lane.lane}[${sections || "—"}]`);
+      for (const s of lane.sections) dupes += Math.max(0, s.available - s.items.length);
+      for (const o of lane.omitted) {
+        parts.push(`${lane.lane}:${o.topic}=withheld(${o.available})`);
+      }
+    }
+    console.log(`[daily] routed: ${parts.join(" | ")} | capped×${dupes}`);
+  } catch {
+    // logging must never be the thing that fails a publish
+  }
+}
+
+// Hard deadline: a hung fetch (black-holed socket, slow-drip response)// must fail the run fast so the hourly gh-pages catchup can retry the
 // slot, instead of silently burning the whole CI job timeout.
 const deadlineRaw = Number(process.env.PIPELINE_DEADLINE_MIN || 20);
 const PIPELINE_DEADLINE_MIN =
@@ -192,22 +219,51 @@ async function enrichGhTrending(articles: ArticleInput[]): Promise<void> {
 }
 
 /**
- * finance:news is rendered as a merged time-sorted list (see
- * MERGED_SUBGROUP_LIMITS in render.ts). Enrich exactly the items that
- * will be displayed: take all enabled finance:news articles, sort by
- * publishedAt desc, slice to the merge limit, ask Sonnet for Chinese
- * factual summaries.
+ * Enrich exactly the items the reader will see.
+ *
+ * Before routing, this function was three calls keyed on merged-subgroup names
+ * (`finance:news`, `politics:world`, `tech:ai-news`), two of which no longer
+ * exist as subcategories — so the LLM was spending most of its budget on a
+ * timeline that no longer matched the page. Routing makes the target set
+ * computable: run the same `routeEdition` the renderer runs, collect the
+ * selected URLs, and enrich those.
+ *
+ * Same-locale sources are still skipped (no point writing a Chinese summary of
+ * Chinese copy), and the whole step stays non-fatal — `enrichFinanceNewsSummaries`
+ * already swallows failures and returns an empty map.
  */
-async function enrichFinanceNews(articles: ArticleInput[]): Promise<void> {
-  await enrichMergedSubgroup(articles, "finance", "news");
-}
+async function enrichRoutedSelection(
+  articles: ArticleInput[],
+  tagged: ArticleInput[],
+): Promise<void> {
+  const subcategories: Record<string, string | undefined> = {};
+  for (const s of sources) subcategories[s.id] = s.subcategory;
+  const rendered = new Set<string>();
+  for (const lane of routeEdition(tagged, subcategories).lanes) {
+    for (const section of lane.sections) {
+      for (const item of section.items) rendered.add(item.url);
+    }
+  }
 
-async function enrichPolitics(articles: ArticleInput[]): Promise<void> {
-  await enrichMergedSubgroup(articles, "politics", "world");
-}
-
-async function enrichAiNews(articles: ArticleInput[]): Promise<void> {
-  await enrichMergedSubgroup(articles, "tech", "ai-news");
+  const sameLocaleIds = new Set(
+    sources.filter((s) => (s.lang ?? "en") === REPORT_LOCALE).map((s) => s.id),
+  );
+  const toEnrich = articles.filter(
+    (a) => rendered.has(a.url) && !sameLocaleIds.has(a.sourceId) && !a.summary,
+  );
+  if (toEnrich.length === 0) return;
+  console.log(
+    `[daily] enriching ${toEnrich.length}/${rendered.size} routed items with ${REPORT_LOCALE} summaries…`,
+  );
+  const t0 = Date.now();
+  const summaries = await enrichFinanceNewsSummaries(toEnrich);
+  for (const a of toEnrich) {
+    const s = summaries.get(a.url);
+    if (s) a.summary = s;
+  }
+  console.log(
+    `[daily] enrichment done in ${((Date.now() - t0) / 1000).toFixed(1)}s, matched ${summaries.size}/${toEnrich.length}`,
+  );
 }
 
 /**
@@ -267,60 +323,6 @@ async function enrichTrendingPapers(articles: ArticleInput[]): Promise<void> {
   }
   console.log(
     `[daily] enrichment done in ${((Date.now() - t0) / 1000).toFixed(1)}s, matched ${summaries.size}/${papers.length}`,
-  );
-}
-
-/**
- * Shared implementation for "merged subgroup" enrichment: collect all
- * enabled articles in (category, subcategory), sort by date desc, take
- * the display cap (from MERGED_SUBGROUP_LIMITS), and ask the LLM to
- * summarize them into REPORT_LOCALE in a single batch. Symmetric to the
- * merge logic in render.ts groupRaw, so display and enrichment stay aligned.
- *
- * Sources whose `lang` already matches REPORT_LOCALE are skipped — no
- * point translating English to English (en mode) or Chinese to Chinese
- * (zh mode).
- */
-async function enrichMergedSubgroup(
-  articles: ArticleInput[],
-  category: "tech" | "finance" | "politics",
-  subcategory: string,
-): Promise<void> {
-  const subSources = sources.filter(
-    (s) =>
-      s.category === category &&
-      s.subcategory === subcategory &&
-      s.enabled !== false,
-  );
-  const enabledIds = new Set(subSources.map((s) => s.id));
-  const sameLocaleIds = new Set(
-    subSources.filter((s) => (s.lang ?? "en") === REPORT_LOCALE).map((s) => s.id),
-  );
-  const limit = MERGED_SUBGROUP_LIMITS[`${category}:${subcategory}`] ?? 12;
-  // Top-N respects all enabled sources (so we don't reshape the merged
-  // timeline). Enrichment only targets items NOT already in the target
-  // language within that slice.
-  const top = articles
-    .filter((a) => enabledIds.has(a.sourceId))
-    .filter((a) => category !== "politics" || !isSportsArticle(a.title))
-    .sort(
-      (a, b) =>
-        (b.publishedAt?.getTime() ?? 0) - (a.publishedAt?.getTime() ?? 0),
-    )
-    .slice(0, limit);
-  const toEnrich = top.filter((a) => !sameLocaleIds.has(a.sourceId));
-  if (toEnrich.length === 0) return;
-  console.log(
-    `[daily] enriching ${toEnrich.length}/${top.length} ${category}:${subcategory} items with ${REPORT_LOCALE} summaries…`,
-  );
-  const t0 = Date.now();
-  const summaries = await enrichFinanceNewsSummaries(toEnrich);
-  for (const a of toEnrich) {
-    const s = summaries.get(a.url);
-    if (s) a.summary = s;
-  }
-  console.log(
-    `[daily] enrichment done in ${((Date.now() - t0) / 1000).toFixed(1)}s, matched ${summaries.size}/${toEnrich.length}`,
   );
 }
 
@@ -632,14 +634,18 @@ async function main() {
     throw new Error("no articles fetched — aborting");
   }
 
+  // Classify once, immediately after fetch. Both the enrichment step and the
+  // write site need lane/topic, and computing them twice would risk the two
+  // disagreeing; `classifyAll` is pure and never throws, so this cannot fail
+  // the run.
+  const tagged = withTopics(articles, sources);
+
   if (!llmOff) {
-    // Enrich GH Trending, papers, finance news, and politics with summaries.
+    // Enrich GH Trending, papers, and the routed news selection.
     stage("enrichment");
     await enrichGhTrending(articles);
     await enrichTrendingPapers(articles);
-    await enrichFinanceNews(articles);
-    await enrichPolitics(articles);
-    await enrichAiNews(articles);
+    await enrichRoutedSelection(articles, tagged);
     await enrichXViral(articles);
   } else {
     console.log(`[daily] skipping LLM enrichment`);
@@ -774,15 +780,16 @@ async function main() {
   const dateDir = path.join(OUTPUT_DIR, date);
   fs.mkdirSync(dateDir, { recursive: true });
   const base = path.join(dateDir, hour);
-  const raw = groupRaw(articles, sources);
+  // Tag once, then use the *same* tagged list for both the sidecar and the
+  // render. Increment 2 routes on these values, so persisting one classification
+  // and rendering another would be a silent drift between what a reader sees and
+  // what `npm run render` would reproduce from the cache.
+  const raw = groupRaw(tagged, sources);
+  logRoutingHealth(raw);
   fs.writeFileSync(`${base}.json`, JSON.stringify(report, null, 2), "utf8");
-  // Shadow-mode topic tagging (increment 1): the sidecar gains `topic` +
-  // `topicConfidence` per article; `articles` (and therefore `raw` and the
-  // rendered HTML) is untouched, so the page stays byte-identical. Failures
-  // are logged and never fatal — `classifyAll` already falls back per item.
   fs.writeFileSync(
     `${base}-articles.json`,
-    JSON.stringify({ date, hour, articles: withTopics(articles, sources) }, null, 2),
+    JSON.stringify({ date, hour, articles: tagged }, null, 2),
     "utf8",
   );
   fs.writeFileSync(
