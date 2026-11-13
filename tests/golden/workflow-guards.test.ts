@@ -153,6 +153,45 @@ test("golden: publish-lag assertion is wired and cannot deadlock the slot", asyn
   });
 });
 
+test("golden: daily.yml stays parseable — no inline multi-line scripts", async (t) => {
+  /**
+   * A workflow that does not parse fails the run before any step executes.
+   * That is what happened when an inline `node -e '…'` block with an unquoted
+   * `:` landed in the tape job: every push went red in 0s with "This run likely
+   * failed because of a workflow file issue", and no test caught it because the
+   * guards above only regex the text.
+   *
+   * The project ships zero dependencies, so there is no YAML parser here. The
+   * hazard is specific and cheap to ban structurally: a multi-line quoted shell
+   * body is the only construct in this file that can break YAML while still
+   * looking correct. Scripts belong in `scripts/`, invoked by path.
+   */
+  const src = fs.readFileSync(WORKFLOW, "utf8");
+
+  await t.test("the three jobs exist at two-space indent", () => {
+    for (const job of ["gate", "build", "tape"]) {
+      assert.match(src, new RegExp(`^  ${job}:$`, "m"), `job "${job}" must exist`);
+    }
+  });
+
+  await t.test("no inline multi-line node block (the unparseable-YAML hazard)", () => {
+    assert.deepEqual(
+      [...src.matchAll(/run:\s*node\s+--input-type=module/g)].map((m) => m[0]),
+      [],
+      "move inline node -e bodies into scripts/ — a bare colon inside them breaks the YAML",
+    );
+    assert.deepEqual([...src.matchAll(/run:\s*node\s+-e\s/g)].map((m) => m[0]), []);
+  });
+
+  await t.test("every `run:` is a single-line command or a block scalar", () => {
+    // `run: ` must be followed by either more text on the same line or `>` / `|`.
+    for (const m of src.matchAll(/^ {8}run: (.*)$/gm)) {
+      const rest = m[1].trim();
+      assert.ok(rest.length > 0, "a run: key with no command and no block scalar is a parse error");
+    }
+  });
+});
+
 test("golden: a missing llm-calls.jsonl is the documented pass case", () => {
   const src = fs.readFileSync(
     path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../scripts/assert-zero-llm.mjs"),
@@ -212,6 +251,18 @@ test("golden: tape job is zero-token and cannot disturb the edition path", async
     // `keep_files: false` in the tape job would wipe every edition on gh-pages.
     const publish = stepSource(job, "Publish tape to gh-pages");
     assert.match(publish, /keep_files: true/);
+  });
+
+  await t.test("the integrity assert runs a real script, before publish", () => {
+    const names = stepNames(job);
+    const step = stepSource(job, "Assert snapshot integrity");
+    assert.match(step, /node scripts\/assert-tape-snapshot\.mjs/);
+    assert.match(step, /--date/);
+    assert.match(step, /--slot/);
+    assert.ok(
+      names.indexOf("Assert snapshot integrity") < names.indexOf("Publish tape to gh-pages"),
+      "an unreadable snapshot must fail before it is published",
+    );
   });
 
   await t.test("the edition publish is untouched", () => {

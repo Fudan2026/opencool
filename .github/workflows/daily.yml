@@ -458,38 +458,9 @@ jobs:
         env:
           TAPE_DATE: ${{ needs.gate.outputs.tape-date }}
           TAPE_SLOT: ${{ needs.gate.outputs.tape-slot }}
-        run: node --input-type=module -e '
-          import fs from "node:fs";
-          const dir = `daily_reports/tape/${process.env.TAPE_DATE}`;
-          const key = process.env.TAPE_SLOT.replace(":", "");
-          const files = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
-          const wrote = files.filter((f) => f === `${key}.json` || f.startsWith(`${key}.rev-`));
-          console.log(`tape dir ${dir}: [${files.sort().join(", ")}]`);
-          if (!wrote.length) {
-            console.error(`::error::no snapshot for slot ${process.env.TAPE_SLOT} in ${dir}`);
-            process.exit(1);
-          }
-          const stamp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/;
-          const snap = JSON.parse(fs.readFileSync(`${dir}/${wrote.sort().at(-1)}`, "utf8"));
-          for (const [name, section] of Object.entries(snap)) {
-            if (!section || !Array.isArray(section.records)) continue;
-            if (!stamp.test(section.asOf) || !stamp.test(section.observedAt)) {
-              console.error(`::error::${name} is missing an offset ISO clock`);
-              process.exit(1);
-            }
-            for (const rec of section.records) {
-              if (!stamp.test(rec.asOf) || !stamp.test(rec.observedAt)) {
-                console.error(`::error::${name} record without both clocks: ${JSON.stringify(rec).slice(0, 120)}`);
-                process.exit(1);
-              }
-            }
-          }
-          const counts = Object.entries(snap)
-            .filter(([, s]) => s && Array.isArray(s.records))
-            .map(([n, s]) => `${n}=${s.unavailable ? "n/a" : s.records.length}`)
-            .join(" ");
-          console.log(`wrote ${dir}/${wrote.sort().at(-1)} slot=${snap.slot} rev=${snap.revision} ${counts}`);
-        '
+        run: >-
+          node scripts/assert-tape-snapshot.mjs
+          --date "$TAPE_DATE" --slot "$TAPE_SLOT"
 
       # Publish ONLY the tape tree. `keep_files: true` is what makes this safe:
       # the edition job owns every other path in the published branch, and this
