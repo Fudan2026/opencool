@@ -80,10 +80,12 @@ jobs:
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
           REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,13,19' }}
           REPORT_DAYS: ${{ vars.REPORT_DAYS }}
-          # How many past days to rescan for a missing sidecar. 2 covers a
-          # midnight rollover plus one retry window; raise it to heal a longer
-          # outage (each extra day costs 3 more API probes per tick).
-          REPORT_LOOKBACK_DAYS: ${{ vars.REPORT_LOOKBACK_DAYS || '2' }}
+          # How many past days to rescan for a missing sidecar. 1 covers the
+          # midnight rollover this gate exists to fix. Raise it deliberately
+          # to heal a longer outage — but note a backfill re-fetches the feeds
+          # now, so a slot recovered N days late files current news under an
+          # older date. Each extra day costs 3 more API probes per tick.
+          REPORT_LOOKBACK_DAYS: ${{ vars.REPORT_LOOKBACK_DAYS || '1' }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/gate.mjs

@@ -31,7 +31,16 @@ import { pathToFileURL } from "node:url";
 
 const API_BASE = "https://api.github.com";
 const DEFAULT_HOURS = [6, 13, 19];
-const DEFAULT_LOOKBACK_DAYS = 2;
+/**
+ * One day, on purpose. A backfill re-fetches the feeds at build time, so a
+ * slot recovered a few hours after midnight carries news from that same
+ * night and is close to what the slot would have published. A slot recovered
+ * two days late would file today's headlines under a date two days old — a
+ * badge does not make that a truthful record of that day. The rollover
+ * failure this fixes needs exactly one day of lookback; losing more than
+ * that is an outage, not a dropped trigger.
+ */
+const DEFAULT_LOOKBACK_DAYS = 1;
 const CONTENT_REF = "gh-pages";
 
 function pad2(n) {
