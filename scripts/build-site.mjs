@@ -676,10 +676,107 @@ const subscribeHtml = `<!doctype html>
 fs.writeFileSync(path.join(ROOT, "subscribe.html"), subscribeHtml, "utf8");
 console.log(`[build-site] subscribe.html${subscribeEndpoint ? " (endpoint configured)" : " (local-only)"}`);
 
+// ---------------------------------------------------------------------------
+// Versioned /v1 namespace + the integrity page (increments 5/6).
+//
+// Both are produced by `npm run v1:bake`, which runs before this script. They
+// are detected rather than assumed: a local build-site run without the v1 bake
+// must not link to pages that are not in the published tree, because a dead
+// link on the honesty surface is worse than no link at all.
+// ---------------------------------------------------------------------------
+const v1ManifestPath = path.join(ROOT, "v1", "manifest.json");
+const v1CoveragePath = path.join(ROOT, "v1", "coverage.json");
+const integrityPath = path.join(ROOT, "integrity.html");
+const v1Emitted = fs.existsSync(v1ManifestPath) && fs.existsSync(v1CoveragePath);
+const integrityEmitted = fs.existsSync(integrityPath);
+let v1Coverage = null;
+if (v1Emitted) {
+  try {
+    v1Coverage = JSON.parse(fs.readFileSync(v1CoveragePath, "utf8"));
+  } catch {
+    v1Coverage = null;
+  }
+}
+if (!v1Emitted) {
+  console.log("[build-site] /v1 not found — run `npm run v1:bake` before build-site");
+}
+
+/**
+ * Drop the site-nav item for a page that is not in the tree.
+ *
+ * `render.ts` emits `../hour.html`, `../stories.html` and `../integrity.html`
+ * unconditionally inside every edition's nav row, because a page's own template
+ * cannot know which sibling bakes ran. This rewrites the copy that lands at the
+ * root: a nav link that 404s — on any page, but especially on the integrity
+ * page — would be the exact dishonesty those pages exist to avoid.
+ */
+function stripMissingNav(html, rel, present, label) {
+  if (present) return { html, removed: false };
+  const escaped = rel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // The anchor may carry attributes around href (the integrity entry carries
+  // `data-nav`), so match the whole tag rather than one fixed shape.
+  const re = new RegExp(`<a\\b[^>]*href="${escaped}"[^>]*>[^<]*</a>`, "g");
+  const next = html.replace(re, "");
+  return { html: next, removed: next !== html };
+}
+
+const navPresence = [
+  { rel: "../hour.html", present: fs.existsSync(path.join(ROOT, "hour.html")), label: "hour.html" },
+  { rel: "../stories.html", present: fs.existsSync(path.join(ROOT, "stories.html")), label: "stories.html" },
+  { rel: "../integrity.html", present: integrityEmitted, label: "integrity.html" },
+];
+
 // tools.json — the "Static MCP" manifest: every MCP tool mapped to its
 // stable static endpoint, so agents without a local clone consume
 // OpenCool via plain fetch. Uncontested per COMPETITIVE-ANALYSIS.md.
 const latestSidecar = `/${latest.rel.replace(/\.html$/, ".json")}`;
+/**
+ * The versioned, point-in-time surfaces, as MCP-style entries.
+ *
+ * Kept in their own list so the static tool table can be assembled with a
+ * conditional spread: an agent must never be handed a `/v1` endpoint on a build
+ * where `npm run v1:bake` did not run, because that entry would 404 with no way
+ * to tell "not captured" from "not published". Individual entries are filtered
+ * again per file, so `pinned_reactions` appears only once the reaction bake has
+ * produced its input.
+ */
+const V1_TOOLS = [
+  {
+    name: "asof_snapshot",
+    staticEndpoint: "/v1/asof/<YYYY-MM-DD>.json",
+    params: "date -> every intraday slot that day, in order",
+    returns:
+      "{date,tradingDay,expectedSlots,slots:[{slot,asOf,observedAt,revision,captures[],sections{}}],gaps[],counts}",
+  },
+  {
+    name: "coverage_report",
+    staticEndpoint: "/v1/coverage.json",
+    params: "-",
+    returns:
+      "{tape,days:[{date,expectedSlots,capturedSlots,missingSlots,revisions,sections,gaps}],stories,horizons,summary}",
+  },
+  {
+    name: "pinned_stories",
+    staticEndpoint: "/v1/stories.json",
+    params: "-",
+    returns: "{stories:[{id,firstSeenAt,sightings,headlineRevisions,firstMover}],counts,firstMover}",
+  },
+  {
+    name: "pinned_themes",
+    staticEndpoint: "/v1/themes.json",
+    params: "minHeat -> filter themes",
+    returns: "{themes:[{key,name,boardCode,boardChangePct,articleHits,constituents}]}",
+  },
+  {
+    name: "pinned_reactions",
+    staticEndpoint: "/v1/reactions.json",
+    params: "-",
+    file: "v1/reactions.json",
+    returns:
+      "{counts:{horizons:{'1h'|'1d'|'5d':{ok,pending,gap}}},observations[],aggregates,gaps[]}",
+  },
+];
+
 const toolsManifest = {
   version: 1,
   generatedAt: new Date().toISOString(),
@@ -745,6 +842,14 @@ const toolsManifest = {
       params: "-",
       returns: "{weeks:[{key,end,editions,avgSentiment,deltaVsPrev,...}],months:[...]}",
     },
+    // Versioned, point-in-time surfaces. These are the endpoints to pin: the
+    // root paths above may evolve, /v1 paths may not. Listed only when the v1
+    // bake ran, and per entry only when the file exists — the same rule the
+    // manifest itself follows, because an entry with no file behind it is a
+    // broken promise either way.
+    ...(v1Emitted
+      ? V1_TOOLS.filter((t) => !t.file || fs.existsSync(path.join(ROOT, t.file)))
+      : []),
   ],
 };
 fs.writeFileSync(
@@ -752,7 +857,7 @@ fs.writeFileSync(
   JSON.stringify(toolsManifest, null, 2) + "\n",
   "utf8",
 );
-console.log(`[build-site] tools.json (static MCP manifest, 7 tools)`);
+console.log(`[build-site] tools.json (static MCP manifest, ${toolsManifest.tools.length} tools)`);
 
 // ai-instructions.html — TLDR-pattern agent onboarding page.
 const aiHtml = `<!doctype html>
@@ -1062,7 +1167,16 @@ latestHtml = latestHtml
   // the prefix — same treatment as the archive link just above.
   .replace(/href="\.\.\/hour\.html"/g, 'href="./hour.html"')
   .replace(/href="\.\.\/stories\.html"/g, 'href="./stories.html"')
+  .replace(/href="\.\.\/integrity\.html"/g, 'href="./integrity.html"')
   .replace(/href="\.\/(\d{2})\.html"/g, `href="./${latest.date}/$1.html"`);
+
+// Every page that carries the nav row gets the same treatment: a sibling link
+// whose page this build did not produce is removed rather than left to 404.
+for (const nav of navPresence) {
+  if (nav.present) continue;
+  latestHtml = stripMissingNav(latestHtml, nav.rel.replace("../", "./"), false, nav.label).html;
+  console.log(`[build-site] index.html: dropped nav link to missing ${nav.label}`);
+}
 // Homepage-only entry to the trails favorites page (archive already links
 // it). Injected only when trails.html exists, so a local build-site run
 // without build-trails doesn't ship a dead link.
@@ -1097,6 +1211,15 @@ latestHtml = latestHtml.replace(
   `  <a href="./subscribe.html" style="position:fixed;right:1rem;bottom:11.4rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#0f766e;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">✉️ 订阅</a>\n</body>`,
 );
 console.log(`[build-site] index.html += subscribe entry`);
+if (integrityEmitted) {
+  // Placed above the existing pills so it stays visible; the stack is anchored
+  // from the bottom, so this sits at the top of the pile.
+  latestHtml = latestHtml.replace(
+    "</body>",
+    `  <a href="./integrity.html" style="position:fixed;right:1rem;bottom:14rem;z-index:99;padding:0.5rem 0.95rem;border-radius:999px;background:#57534e;color:#fff;font:600 0.85rem/1 'Noto Sans SC',system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.18)">🧾 数据完整性</a>\n</body>`,
+  );
+  console.log(`[build-site] index.html += integrity entry`);
+}
 fs.writeFileSync(path.join(ROOT, "index.html"), latestHtml, "utf8");
 console.log(`[build-site] index.html  ← ${latest.rel}`);
 
@@ -1178,6 +1301,11 @@ const dayBlocks = dates
 const archHeatLink = heatmapEmitted
   ? `\n   · <a class="home" href="./heatmap.html">热力图</a>`
   : "";
+// The integrity page is linked only when it exists: a dead link on the page
+// that promises honesty would be the joke telling itself.
+const archIntegrityLink = integrityEmitted
+  ? `\n   · <a class="home" href="./integrity.html">数据完整性</a>`
+  : "";
 const archiveHtml = `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -1229,7 +1357,7 @@ const archiveHtml = `<!doctype html>
    · <a class="home" href="./stories.html">故事线</a>
    · <a class="home" href="./trails.html">徒步路线收藏</a>
    · <a class="home" href="./weekly.html">周报</a>
-   · <a class="home" href="./search.html">搜索</a>${archHeatLink}
+   · <a class="home" href="./search.html">搜索</a>${archHeatLink}${archIntegrityLink}
    · <a class="home" href="./mcp-desk.html">机构数据台</a>
    · <a class="home" href="./supro.html">量化实操·SuPro</a>
    · <a class="home" href="./periods.html">趋势对比</a>
@@ -1474,6 +1602,9 @@ function buildStatusHtml() {
   const statusHeatLink = heatmapEmitted
     ? `\n   · <a class="home" href="./heatmap.html">热力图</a>`
     : "";
+  const statusIntegrityLink = integrityEmitted
+    ? `\n   · <a class="home" href="./integrity.html">数据完整性</a>`
+    : "";
 
   return `<!doctype html>
 <html lang="zh-CN">
@@ -1532,7 +1663,7 @@ function buildStatusHtml() {
   <p class="meta">连续 ${3} 天全档失败的源写入 source-overlay.json（运行时禁用，config 永不改动；删除条目即恢复）。</p>
   <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
    · <a class="home" href="./archive.html">历史归档</a>
-   · <a class="home" href="./trails.html">徒步路线收藏</a>${statusHeatLink}
+   · <a class="home" href="./trails.html">徒步路线收藏</a>${statusHeatLink}${statusIntegrityLink}
    · <a class="home" href="./mcp-desk.html">机构数据台</a></p>
   <p class="meta tiny">本页由 build-site 自动生成 · ${new Date().toISOString()}</p>
 </main>
@@ -1625,6 +1756,40 @@ ${feedItems}
 fs.writeFileSync(path.join(ROOT, "feed.xml"), feedXml, "utf8");
 console.log(`[build-site] feed.xml (${realForFeed.length} real editions)`);
 
+// Point-in-time surface. Only advertised when the bake actually ran AND when it
+// has something to say: pointing an agent at an empty tape would be the same lie
+// as an empty table. The gap wording is deliberately blunt.
+const v1SnapshotLine = (() => {
+  if (!v1Emitted || !v1Coverage) return "";
+  const c = v1Coverage;
+  const pct = c.summary?.coveragePct;
+  if (!c.tape?.started) {
+    return `- Point-in-time tape: /v1/manifest.json — capture has NOT started yet. The first
+  honest snapshot is expected ${c.tape?.launchDate ?? "2026-11-16"} 09:35 Asia/Shanghai;
+  /v1/coverage.json publishes the empty ledger and names every gap rather than
+  showing a clean slate.
+`;
+  }
+  const days = c.tape?.days ?? 0;
+  return `- Point-in-time tape: /v1/manifest.json + /v1/asof/<YYYY-MM-DD>.json —
+  ${c.tape?.snapshots ?? 0} immutable snapshot(s) across ${days} day(s)
+  (${c.tape?.firstDate ?? "—"} → ${c.tape?.lastDate ?? "—"}),
+  ${pct === null ? "coverage n/a (no obligations yet)" : `${pct}% of expected slots captured`},
+  ${c.summary?.gaps ?? 0} named gap(s). Every slot and every section carries
+  asOf (market clock) + observedAt (our fetch clock); a re-capture writes
+  <HHMM>.rev-N.json and never rewrites the base bytes.
+- Integrity surface: /integrity.html + /v1/coverage.json — per-day expected vs
+  captured slots, every gap with its reason, revision counts, first-seen
+  coverage and pending +1h/+1d/+5d horizons. Gaps are named, never hidden.
+`;
+})();
+// The namespace line is only advertised when the namespace exists — never point
+// an agent at a manifest that is not in the tree.
+const llmsVersionedRow = v1Emitted
+  ? "- Versioned namespace: /v1/manifest.json — deprecation policy (additive-only\n  within v1, breaking change = /v2/), license and data terms, endpoint list\n"
+  : "";
+const llmsV1Block = v1SnapshotLine;
+
 const llmsHeatRow = heatmapEmitted
   ? "- Sector heatmap: /heatmap.html — watchlist tiles colored by pct1Day (latest edition)\n"
   : "";
@@ -1679,11 +1844,12 @@ No LLM behind any endpoint.
   weeks) and MoM (3 months) buckets of sentiment/theme/index deltas
 - Subscribe: /subscribe.html — local-only subscription intent (no email
   leaves the browser unless SUBSCRIBE_ENDPOINT is explicitly configured)
-${llmsHeatRow}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
+${llmsHeatRow}${llmsV1Block}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.
 - Competitive analysis: docs/COMPETITIVE-ANALYSIS.md (repo source)
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
+${llmsVersionedRow}
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html
 

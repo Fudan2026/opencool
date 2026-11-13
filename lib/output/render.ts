@@ -143,6 +143,7 @@ const TEXTS_ZH = {
   // are written as sentence frames with placeholders rather than labels.
   navHour: "盘中逐时报",
   navStories: "故事线",
+  navIntegrity: "数据完整性",
   navHome: "回到最新一期",
   hourTitle: "盘中逐时报",
   hourSubtitle: "半个钟头一个截面：谁动了、动得多宽、指数怎么说",
@@ -259,6 +260,101 @@ const TEXTS_ZH = {
   storiesThreadHeading: "全部故事线",
   storiesWindow: "账本窗口 {from} 至 {to} · {days} 天",
   storiesFooter: "只记录我们何时看到，不记录媒体自称何时发布。零 AI。",
+  // Integrity page (/integrity.html). The page exists to name what is missing,
+  // so every string here is deliberately plain: no "all good" wording, no
+  // cheerleading, and a percentage is never shown when nothing was expected.
+  integrityTitle: "数据完整性",
+  integrityTagline: "逐日缺口 · 修订次数 · 首次观测覆盖率 · 零 AI",
+  integrityIntro:
+    "这一页只做一件事：把每条数据的缺口说清楚。没有跑到的时点、没有取到的分区、缺失的输入文件，都在下面点名，不隐藏、不凑数。",
+  integrityNoTapeTitle: "采集尚未开始，这里没有历史可展示。",
+  integrityNoTapeBody:
+    "盘中时点快照（tape）的采集机制刚刚上线，目前本地与已发布的树里都还没有任何一天的数据。第一个诚实的快照预计在 {date} 09:35（上海时间）写入。在那之前，下面不会出现任何表格或百分比——空表格看起来像成功，而那不是事实。",
+  integrityTapeStarted: "采集已开始：最早 {first}，最近 {last}。",
+  integritySummary: "总览",
+  integritySummaryLine:
+    "交易日 {tradingDays} 天 · 应到 {expected} 个时点 · 实到 {captured} 个 · 缺口 {gaps} 条 · 满勤 {complete} 天",
+  integrityCoveragePct: "覆盖率 {pct}%",
+  integrityCoverageNA: "覆盖率不适用：目前还没有「应到」的时点，因此不存在百分比。",
+  integrityDaysHeading: "逐日缺口",
+  integrityDayRow: "{date} · 实到 {captured}/{expected} 个时点 · 缺口 {gaps} 条 · 修订 {revisions} 次",
+  integrityDayClosed: "{date} · 非交易日，不要求采集",
+  integrityDayForced: "另有 {captured} 个时点为强制采集（TAPE_SLOT 手动回放），不代表当日按时覆盖",
+  integrityDayPendingInline: "（另有 {pending} 个时点未到点）",
+  integrityDayBeforeLaunch: "{date} · 早于上线日，不可能有数据",
+  integrityDayComplete: "{date} · 实到 {captured}/{expected} · 无缺口",
+  integrityGapsHeading: "缺口清单",
+  integrityColDate: "日期",
+  integrityColSlot: "时点",
+  integrityColCode: "代码",
+  integrityColPath: "路径",
+  integrityColDescription: "说明",
+  integrityColSlots: "时点数",
+  integrityColMeasured: "已测量",
+  integrityColPending: "待测",
+  integrityColReason: "原因",
+  integrityNoGaps: "目前没有缺口可列。",
+  integrityRevisionsHeading: "修订次数",
+  integrityRevisionsLine: "重采写入 .rev-N 文件，不覆盖原始字节；修订共 {n} 次。",
+  integrityFirstSeenHeading: "首次观测覆盖率",
+  integrityFirstSeenLine:
+    "故事台账 {total} 条 · 带 firstSeenAt {withFirst} 条（{pct}%）· 缺 firstSeenAt {without} 条",
+  integrityFirstSeenMissing:
+    "故事台账 daily_reports/stories.json 尚未生成或不可读，因此这一项没有数字可报。",
+  integrityHorizonHeading: "反应窗口（+1h / +1d / +5d）",
+  integrityHorizonUnavailable:
+    "反应库尚未产出，所有窗口都在等待中：{pending} 条故事待测。",
+  integritySectionsHeading: "分区覆盖（出现记录的时点数）",
+  integrityContractHeading: "我们承诺什么",
+  integrityContractPromise: "承诺：{text}",
+  integrityContractNotPromise: "不承诺：{text}",
+  // The guarantee texts themselves. Keys mirror `V1_GUARANTEES` in
+  // lib/v1/contract.ts; the English copy here must stay byte-identical to the
+  // `en` string there, and the golden test enforces that.
+  integrityPromiseStaticJson:
+    "每个文件都是构建期由仓库发布树中已有的文件生成的静态 JSON。",
+  integrityPromiseTwoClocks:
+    "每条盘中数据都带两个时钟：asOf（行情所描述的市场时刻）与 observedAt（我们抓取它的时刻），均为带偏移的 ISO 8601。",
+  integrityPromiseGapsNamed:
+    "缺失的时点、分区或输入文件都会以稳定代码写进 gaps[]，绝不静默略过。",
+  integrityPromiseAppendOnly:
+    "重采写入 <HHMM>.rev-N.json，永不覆盖首个快照的原始字节。",
+  integrityPromiseAdditiveOnly:
+    "v1 内只增不改；破坏性变更以 /v2/ 发布。",
+  integrityNotPromisePush:
+    "不做实时推送：没有 WebSocket、没有 SSE、没有流式。一切都只是构建时刷新的文件。",
+  integrityNotPromiseDepth:
+    "不做 L2 十档或订单簿 —— 我们不买、不转售、不编造需要授权的盘口数据。",
+  integrityNotPromiseRevisionHistory:
+    "除已发布的修订轨迹（tape/<date>/revisions.jsonl 与 .rev-N.json）之外，不提供更深的修订史。",
+  integrityNotPromiseArchiveEdits:
+    "不回头修改已归档内容：已发布的时点不被重写，补发的档期会标注为补发。",
+  integrityNotPromiseSla:
+    "不做 SLA：漏采的时点会成为一个具名缺口，而不是一次赔付。",
+  integrityDeprecationHeading: "弃用策略",
+  integrityDeprecationBody:
+    "v1 内只增不改：任何字段都不会被删除或改类型；破坏性变更另开 /v2/。旧路径在新版本发布后至少保留 12 个月，且清单里会写明继任者。",
+  integrityEndpointsHeading: "机器可读端点",
+  integrityEndpointManifest: "命名空间清单：端点、快照索引、覆盖总览、许可与弃用策略",
+  integrityEndpointAsof: "某一天的全部盘中快照，按时点顺序；每个时点带两个时钟，缺口在 gaps[] 点名",
+  integrityEndpointCoverage: "逐日应到/实到时点数、每个具名缺口、修订次数、首次观测覆盖率与待测反应窗口",
+  integrityEndpointStories: "故事台账：稳定 id、首次观测时刻、后续目击、头条修订、各信源抢发排名",
+  integrityEndpointThemes: "题材板块热度：板块代码与名称、板块涨跌、涨跌家数、文章命中、成分股",
+  integrityEndpointReactions: "新闻→价格反应库（+1h/+1d/+5d）：尚未产出时不列入清单，也不发空文件",
+  integrityGapReasonMissed: "该时点未采到（触发器丢失或交易所休市，离线无法区分）",
+  integrityGapReasonFuture: "日期在未来",
+  integrityGapReasonSectionUnavailable: "分区未能采集：{reason}",
+  integrityGapReasonBaseMissing: "缺少首个快照文件",
+  integrityGapReasonInputMissing: "输入文件缺失",
+  integrityGapReasonInputUnreadable: "输入文件不可读",
+  integritySectionIndices: "指数",
+  integritySectionIndustries: "行业板块",
+  integritySectionThemes: "题材板块",
+  integritySectionFundFlows: "资金流",
+  integritySectionLimitPool: "涨跌停池",
+  integrityNavHome: "回到首页",
+  integrityNavStatus: "运行状态",
+  integrityNavArchive: "历史归档",
 };
 
 const TEXTS_EN: typeof TEXTS_ZH = {
@@ -356,6 +452,7 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   laneEmpty: "Nothing in this lane today.",
   navHour: "Intraday tape",
   navStories: "Story threads",
+  navIntegrity: "Data integrity",
   navHome: "Latest edition",
   hourTitle: "Intraday tape",
   hourSubtitle: "One cross-section every half hour: who moved, how broadly, what the index said",
@@ -471,6 +568,104 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   storiesThreadHeading: "All story threads",
   storiesWindow: "Ledger window {from} to {to} · {days} days",
   storiesFooter: "We record when we saw it, never when the publisher claims it appeared. Zero AI.",
+  integrityTitle: "Data integrity",
+  integrityTagline: "Per-day gaps · revisions · first-seen coverage · zero AI",
+  integrityIntro:
+    "This page does one thing: it names every gap. Slots we did not capture, sections that came back unavailable, input files that are missing — all of it is listed below, nothing hidden, nothing padded.",
+  integrityNoTapeTitle: "Capture has not started — there is no history to show.",
+  integrityNoTapeBody:
+    "The intraday point-in-time tape just shipped, and there is not a single day of it in the local tree or the published tree yet. The first honest snapshot is expected at {date} 09:35 Shanghai. Until then this page shows no table and no percentage: an empty table looks like success, and that would be false.",
+  integrityTapeStarted: "Capture is running: earliest {first}, latest {last}.",
+  integritySummary: "Summary",
+  integritySummaryLine:
+    "{tradingDays} trading day(s) · {expected} slot(s) expected · {captured} captured · {gaps} gap(s) · {complete} complete day(s)",
+  integrityCoveragePct: "Coverage {pct}%",
+  integrityCoverageNA:
+    "Coverage does not apply yet: there are no expected slots, so there is no percentage to report.",
+  integrityDaysHeading: "Gaps by day",
+  integrityDayRow: "{date} · {captured}/{expected} slots captured · {gaps} gap(s) · {revisions} revision(s)",
+  integrityDayClosed: "{date} · not a trading day — nothing expected",
+  integrityDayForced:
+    "{captured} slot(s) were force-captured by a manual replay and do not count as timely coverage",
+  integrityDayPendingInline: " ({pending} slot(s) not yet due)",
+  integrityDayBeforeLaunch: "{date} · before the launch date — data cannot exist",
+  integrityDayComplete: "{date} · {captured}/{expected} · no gaps",
+  integrityGapsHeading: "Gap list",
+  integrityColDate: "Date",
+  integrityColSlot: "Slot",
+  integrityColCode: "Code",
+  integrityColPath: "Path",
+  integrityColDescription: "What it is",
+  integrityColSlots: "Slots",
+  integrityColMeasured: "Measured",
+  integrityColPending: "Pending",
+  integrityColReason: "Why",
+  integrityNoGaps: "No gaps to list.",
+  integrityRevisionsHeading: "Revisions",
+  integrityRevisionsLine:
+    "A re-capture writes a .rev-N file and never overwrites the original bytes; {n} revision(s) so far.",
+  integrityFirstSeenHeading: "First-seen coverage",
+  integrityFirstSeenLine:
+    "{total} story record(s) · {withFirst} carry firstSeenAt ({pct}%) · {without} without it",
+  integrityFirstSeenMissing:
+    "The story ledger daily_reports/stories.json has not been baked yet or is unreadable, so there is no number to report for this.",
+  integrityHorizonHeading: "Reaction horizons (+1h / +1d / +5d)",
+  integrityHorizonUnavailable:
+    "The reaction library has not been baked yet, so every horizon is pending: {pending} story record(s) waiting.",
+  integritySectionsHeading: "Section coverage (slots with records)",
+  integrityContractHeading: "What we promise",
+  integrityContractPromise: "Promised: {text}",
+  integrityContractNotPromise: "Not promised: {text}",
+  integrityPromiseStaticJson:
+    "Every file is static JSON produced at build time from files already in this repository's publish tree.",
+  integrityPromiseTwoClocks:
+    "Every tape value carries asOf (market clock) and observedAt (our fetch clock), both ISO 8601 with an offset.",
+  integrityPromiseGapsNamed:
+    "A missing slot, section or input is named in gaps[] with a stable code — never silently absent.",
+  integrityPromiseAppendOnly:
+    "A re-capture writes <HHMM>.rev-N.json; it never overwrites the base capture's bytes.",
+  integrityPromiseAdditiveOnly:
+    "Additive-only within v1; a breaking change ships as /v2/.",
+  integrityNotPromisePush:
+    "No real-time push: no WebSocket, no SSE, no streaming. Everything is a file, refreshed by a build.",
+  integrityNotPromiseDepth:
+    "No L2 depth or order book — we do not buy, resell or fabricate licensed depth data.",
+  integrityNotPromiseRevisionHistory:
+    "No revision history beyond the published trail (tape/<date>/revisions.jsonl and the .rev-N.json files).",
+  integrityNotPromiseArchiveEdits:
+    "No retroactive archive edits: published slots are not rewritten, and a backfilled edition is labelled as one.",
+  integrityNotPromiseSla: "No SLA: a missed tick is a named gap, not a refund.",
+  integrityDeprecationHeading: "Deprecation policy",
+  integrityDeprecationBody:
+    "Within v1 it is additive only: no field is removed or retyped; a breaking change ships as /v2/. The old path stays writable for at least 12 months after the new one publishes, and the manifest names the successor.",
+  integrityEndpointsHeading: "Machine-readable endpoints",
+  integrityEndpointManifest:
+    "Namespace manifest: endpoints, snapshot index, coverage summary, license and deprecation policy",
+  integrityEndpointAsof:
+    "Every intraday snapshot for one day, in slot order; each slot carries two clocks and gaps[] names what is absent",
+  integrityEndpointCoverage:
+    "Per-day expected vs captured slots, every named gap, revision counts, first-seen coverage and pending horizons",
+  integrityEndpointStories:
+    "Story ledger: stable ids, first-seen instants, later sightings, headline revisions, per-wire first-mover ranking",
+  integrityEndpointThemes:
+    "Theme board heat: board code/name, board move, advancing/declining counts, article hits, constituents",
+  integrityEndpointReactions:
+    "News-to-price reaction library (+1h/+1d/+5d); not listed — and never served empty — until it is baked",
+  integrityGapReasonMissed:
+    "slot not captured (dropped trigger, or the exchange was closed — indistinguishable offline)",
+  integrityGapReasonFuture: "date is in the future",
+  integrityGapReasonSectionUnavailable: "section could not be captured: {reason}",
+  integrityGapReasonBaseMissing: "first capture file is missing",
+  integrityGapReasonInputMissing: "input file is missing",
+  integrityGapReasonInputUnreadable: "input file is unreadable",
+  integritySectionIndices: "Indices",
+  integritySectionIndustries: "Industry boards",
+  integritySectionThemes: "Theme boards",
+  integritySectionFundFlows: "Fund flows",
+  integritySectionLimitPool: "Limit pool",
+  integrityNavHome: "Latest edition",
+  integrityNavStatus: "Run status",
+  integrityNavArchive: "Archive",
 };
 
 const STR = REPORT_LOCALE === "en" ? TEXTS_EN : TEXTS_ZH;
@@ -1015,6 +1210,10 @@ export function siteNavLinks(): string {
     `<a href="../archive.html">${STR.archiveLink}</a>`,
     `<a href="../hour.html">${STR.navHour}</a>`,
     `<a href="../stories.html">${STR.navStories}</a>`,
+    // Tagged so build-site can drop it on a tree where the v1 bake did not run
+    // (a local `build-site` without `v1:bake`). A nav item that 404s on the
+    // pages whose whole claim is honesty is worse than a missing nav item.
+    `<a data-nav="integrity" href="../integrity.html">${STR.navIntegrity}</a>`,
   ].join("");
 }
 
@@ -2401,4 +2600,467 @@ export function renderMarkdown(report: DailyReport, date: string): string {
     );
   }
   return blocks.filter(Boolean).join("\n");
+}
+
+// ----- integrity page -----
+
+/**
+ * Shape of what the integrity page needs.
+ *
+ * Declared structurally rather than importing `lib/v1/build.ts`: the renderer
+ * must not depend on a build module that reads the filesystem, and keeping this
+ * narrow means a change to the bake cannot silently change the page.
+ */
+export interface IntegrityCoverageView {
+  generatedAt: string;
+  timezone: string;
+  tape: {
+    launchDate: string;
+    started: boolean;
+    expectedSlotsPerDay: number;
+    firstDate: string | null;
+    lastDate: string | null;
+    days: number;
+    tradingDays: number;
+    snapshots: number;
+    revisionFiles: number;
+  };
+  days: Array<{
+    date: string;
+    tradingDay: boolean;
+    beforeLaunch: boolean;
+    expectedSlots: number;
+    capturedSlots: number;
+    pendingSlots: string[];
+    revisions: number;
+    sections: Record<string, number>;
+    gaps: Array<{ slot: string | null; code: string; reason: string; section?: string }>;
+  }>;
+  stories: {
+    available: boolean;
+    reason?: string;
+    total: number;
+    withFirstSeenAt: number;
+    withoutFirstSeenAt: number;
+    firstSeenCoveragePct: number;
+    editions: number | null;
+    sightings: number | null;
+  };
+  horizons: Array<{ key: string; hours: number; measured: number; pending: number; available: boolean }>;
+  gaps: Array<{ date: string | null; slot: string | null; code: string; reason: string }>;
+  summary: {
+    daysWithGaps: number;
+    daysComplete: number;
+    expectedSlots: number;
+    capturedSlots: number;
+    coveragePct: number | null;
+    gaps: number;
+  };
+}
+
+export interface IntegrityManifestView {
+  endpoints: Array<{ id: string; path: string; description: string }>;
+  guarantees: {
+    promised: Array<{ key: string; text: string }>;
+    notPromised: Array<{ key: string; text: string }>;
+  };
+}
+
+/**
+ * Localized text for a guarantee key.
+ *
+ * Returns `null` for a key with no `STR` entry, and the caller falls back to the
+ * English `text` the manifest carries — a new guarantee must render as
+ * *something*, never as a blank bullet. `tests/golden/v1-contract.test.ts`
+ * asserts every key does have a pair in both tables, and that the English text
+ * matches the manifest byte for byte.
+ */
+function guaranteeText(key: string): string | null {
+  const table = STR as Record<string, string | undefined>;
+  const value = table[`integrity${key}`];
+  return typeof value === "string" ? value : null;
+}
+
+/** Localized one-line description for an endpoint id. */
+function endpointText(id: string, fallback: string): string {
+  const table = STR as Record<string, string | undefined>;
+  const key = `integrityEndpoint${id.charAt(0).toUpperCase()}${id.slice(1)}`;
+  const value = table[key];
+  return typeof value === "string" ? value : fallback;
+}
+
+const SECTION_LABELS: Record<string, string> = {
+  indices: STR.integritySectionIndices,
+  industries: STR.integritySectionIndustries,
+  themes: STR.integritySectionThemes,
+  fundFlows: STR.integritySectionFundFlows,
+  limitPool: STR.integritySectionLimitPool,
+};
+
+/**
+ * Localized sentence for a gap code.
+ *
+ * The code is the contract; the sentence is presentation. An unknown code falls
+ * back to the English `reason` the JSON carries, so a future code renders as
+ * something honest rather than as a blank cell.
+ */
+function gapReason(
+  code: string,
+  reason: string,
+  vars: { date: string; launchDate: string; sectionReason?: string },
+): string {
+  switch (code) {
+    case "missed":
+      return STR.integrityGapReasonMissed;
+    case "future":
+      return STR.integrityGapReasonFuture;
+    case "section-unavailable":
+      return fill(STR.integrityGapReasonSectionUnavailable, {
+        reason: vars.sectionReason ?? reason,
+      });
+    case "base-missing":
+      return STR.integrityGapReasonBaseMissing;
+    case "input-missing":
+      return `${STR.integrityGapReasonInputMissing} — ${reason}`;
+    case "input-unreadable":
+      return `${STR.integrityGapReasonInputUnreadable} — ${reason}`;
+    default:
+      return reason;
+  }
+}
+
+const INTEGRITY_STYLE = `  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; --warn:#b45309; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.6; }
+  main { max-width:880px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 .3rem; letter-spacing:-.03em; }
+  h2 { font-size:1.05rem; margin:2rem 0 .6rem; }
+  .meta { color:var(--muted); font-size:.9rem; }
+  .lede { color:var(--fg); font-size:.95rem; max-width:46rem; }
+  .empty { background:var(--card); border:1px solid var(--rule); border-left:3px solid var(--warn);
+    border-radius:.8rem; padding:1.1rem 1.25rem; margin:1.5rem 0; }
+  .empty h2 { margin:0 0 .5rem; font-size:1.05rem; }
+  .empty p { margin:.4rem 0; }
+  table { border-collapse:collapse; width:100%; background:var(--card); border-radius:.75rem; overflow:hidden; }
+  th, td { text-align:left; padding:.5rem .8rem; border-bottom:1px solid var(--rule); font-size:.85rem; vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  .n { font-family:"DM Sans",sans-serif; font-weight:700; }
+  .gap-code { color:var(--muted); font-size:.75rem; }
+  tr.closed td { color:var(--muted); }
+  .stat { display:flex; flex-wrap:wrap; gap:.4rem; margin:.6rem 0; }
+  .stat span { background:var(--card); border:1px solid var(--rule); border-radius:999px;
+    padding:.25rem .7rem; font-size:.82rem; }
+  ul { margin:.4rem 0; padding-left:1.2rem; }
+  li { margin:.3rem 0; font-size:.88rem; }
+  code { background:var(--card); border:1px solid var(--rule); border-radius:5px; padding:.05rem .3rem; font-size:.86em; }
+  a { color:var(--accent); text-decoration:none; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }`;
+
+/**
+ * `/integrity.html` — the honesty surface.
+ *
+ * Deliberately not a dashboard. There are no green checkmarks, no score, and no
+ * encouraging headline: a point-in-time vendor whose page looks clean while it
+ * is missing a third of its slots has told the reader nothing. So the page
+ * shows counts and names every gap, and when there is no data at all it says so
+ * in a sentence instead of rendering an empty table that reads like success.
+ */
+export function renderIntegrityHtml(
+  coverage: IntegrityCoverageView,
+  manifest: IntegrityManifestView,
+): string {
+  const { tape, summary, stories } = coverage;
+  const e = escapeHtml;
+
+  const hasAnyTape = tape.started && tape.snapshots > 0;
+
+  const noTapeBlock = hasAnyTape
+    ? ""
+    : `  <section class="empty" data-surface="no-tape">
+    <h2>${e(STR.integrityNoTapeTitle)}</h2>
+    <p>${e(fill(STR.integrityNoTapeBody, { date: tape.launchDate }))}</p>
+  </section>`;
+
+  const startedLine = hasAnyTape
+    ? `  <p class="meta">${e(
+        fill(STR.integrityTapeStarted, {
+          first: tape.firstDate ?? "—",
+          last: tape.lastDate ?? "—",
+        }),
+      )}</p>`
+    : "";
+
+  const pctLine =
+    summary.coveragePct === null
+      ? `  <p class="meta">${e(STR.integrityCoverageNA)}</p>`
+      : `  <p class="meta">${e(
+          fill(STR.integritySummaryLine, {
+            tradingDays: tape.tradingDays,
+            expected: summary.expectedSlots,
+            captured: summary.capturedSlots,
+            gaps: summary.gaps,
+            complete: summary.daysComplete,
+          }),
+        )} · <span class="n">${e(
+          fill(STR.integrityCoveragePct, { pct: summary.coveragePct }),
+        )}</span></p>`;
+
+  const summaryBlock = hasAnyTape
+    ? `  <h2>${e(STR.integritySummary)}</h2>\n${pctLine}`
+    : "";
+
+  // Per-day rows. Every day gets a row, including complete ones: silence about
+  // a gap is the only thing this page refuses to do. A non-trading day says so
+  // and still reports a forced capture if one happened, rather than hiding it.
+  const dayRows = hasAnyTape
+    ? coverage.days
+        .slice()
+        .reverse()
+        .map((d) => {
+          if (!d.tradingDay) {
+            // A weekend owes nothing; saying "0/0 captured" would be noise. But
+            // a forced out-of-session capture is a fact about our own store, so
+            // it is stated rather than hidden behind "not a trading day".
+            const forced =
+              d.capturedSlots > 0
+                ? ` · ${fill(STR.integrityDayForced, { captured: d.capturedSlots })}`
+                : "";
+            return `      <tr class="closed"><td>${e(d.date)}</td><td colspan="3" class="meta">${e(
+              fill(STR.integrityDayClosed, { date: d.date }),
+            )}${e(forced)}</td></tr>`;
+          }
+          if (d.beforeLaunch) {
+            // Before launch the day owes nothing, so there is no x/y to report.
+            // If a capture exists anyway (a forced replay), it is stated as such
+            // rather than folded into the count: it did not exist at the time and
+            // a reader must not read it as timely coverage.
+            const forced =
+              d.capturedSlots > 0
+                ? ` · ${fill(STR.integrityDayForced, { captured: d.capturedSlots })}`
+                : "";
+            return `      <tr><td>${e(d.date)}</td><td colspan="3" class="meta">${e(
+              fill(STR.integrityDayBeforeLaunch, { date: d.date }),
+            )}${e(forced)}</td></tr>`;
+          }
+          const pendingSuffix =
+            d.pendingSlots.length > 0
+              ? fill(STR.integrityDayPendingInline, { pending: d.pendingSlots.length })
+              : "";
+          const rowText =
+            d.gaps.length === 0
+              ? fill(STR.integrityDayComplete, {
+                  date: d.date,
+                  captured: d.capturedSlots,
+                  expected: d.expectedSlots,
+                })
+              : fill(STR.integrityDayRow, {
+                  date: d.date,
+                  captured: d.capturedSlots,
+                  expected: d.expectedSlots,
+                  gaps: d.gaps.length,
+                  revisions: d.revisions,
+                });
+          return `      <tr><td>${e(d.date)}</td><td colspan="3">${e(rowText + pendingSuffix)}</td></tr>`;
+        })
+        .join("\n")
+    : "";
+
+  const daysBlock = hasAnyTape
+    ? `  <h2>${e(STR.integrityDaysHeading)}</h2>
+  <table data-surface="days">
+    <thead><tr><th>${e(STR.integrityColDate)}</th><th>${e(STR.integrityDaysHeading)}</th></tr></thead>
+    <tbody>
+${dayRows}
+    </tbody>
+  </table>`
+    : "";
+
+  const gapRows: string[] = [];
+  for (const d of coverage.days) {
+    for (const g of d.gaps) {
+      gapRows.push(
+        `      <tr><td>${e(d.date)}</td><td>${e(g.slot ?? "—")}</td><td class="gap-code">${e(
+          g.code,
+        )}</td><td>${e(
+          gapReason(g.code, g.reason, {
+            date: d.date,
+            launchDate: tape.launchDate,
+            sectionReason: g.reason,
+          }),
+        )}</td></tr>`,
+      );
+    }
+  }
+  for (const g of coverage.gaps) {
+    gapRows.push(
+      `      <tr><td>${e(g.date ?? "—")}</td><td>${e(g.slot ?? "—")}</td><td class="gap-code">${e(
+        g.code,
+      )}</td><td>${e(
+        gapReason(g.code, g.reason, {
+          date: g.date ?? "",
+          launchDate: tape.launchDate,
+        }),
+      )}</td></tr>`,
+    );
+  }
+
+  const gapsBlock = hasAnyTape
+    ? `  <h2>${e(STR.integrityGapsHeading)}</h2>
+  ${
+    gapRows.length === 0
+      ? `<p class="meta">${e(STR.integrityNoGaps)}</p>`
+      : `<table data-surface="gaps">
+    <thead><tr><th>${e(STR.integrityColDate)}</th><th>${e(STR.integrityColSlot)}</th><th>${e(
+      STR.integrityColCode,
+    )}</th><th>${e(STR.integrityColReason)}</th></tr></thead>
+    <tbody>
+${gapRows.join("\n")}
+    </tbody>
+  </table>`
+  }`
+    : "";
+
+  const revisionsBlock = hasAnyTape
+    ? `  <h2>${e(STR.integrityRevisionsHeading)}</h2>
+  <p class="meta">${e(fill(STR.integrityRevisionsLine, { n: tape.revisionFiles }))}</p>`
+    : "";
+
+  const firstSeenBlock = stories.available
+    ? `  <h2>${e(STR.integrityFirstSeenHeading)}</h2>
+  <p class="meta">${e(
+    fill(STR.integrityFirstSeenLine, {
+      total: stories.total,
+      withFirst: stories.withFirstSeenAt,
+      pct: stories.firstSeenCoveragePct,
+      without: stories.withoutFirstSeenAt,
+    }),
+  )}</p>`
+    : `  <h2>${e(STR.integrityFirstSeenHeading)}</h2>
+  <p class="meta">${e(STR.integrityFirstSeenMissing)}</p>`;
+
+  const horizonRows = coverage.horizons
+    .map(
+      (h) =>
+        `      <tr><td>+${e(h.key)}</td><td class="n">${h.measured}</td><td class="n">${h.pending}</td></tr>`,
+    )
+    .join("\n");
+  const horizonAvailable = coverage.horizons.some((h) => h.available);
+  const horizonBlock = `  <h2>${e(STR.integrityHorizonHeading)}</h2>
+  ${
+    horizonAvailable
+      ? `<table><thead><tr><th>${e(STR.integrityHorizonHeading)}</th><th>${e(
+          STR.integrityColMeasured,
+        )}</th><th>${e(STR.integrityColPending)}</th></tr></thead>
+    <tbody>
+${horizonRows}
+    </tbody></table>`
+      : `<p class="meta">${e(
+          fill(STR.integrityHorizonUnavailable, {
+            pending: coverage.horizons[0]?.pending ?? stories.total,
+          }),
+        )}</p>`
+  }`;
+
+  // Section coverage: how many slots each section actually carried records in.
+  // A section that is unavailable everywhere shows 0 rather than being omitted.
+  const sectionNames = Object.keys(SECTION_LABELS);
+  const sectionTotals = new Map<string, number>();
+  for (const name of sectionNames) sectionTotals.set(name, 0);
+  for (const d of coverage.days) {
+    for (const [name, n] of Object.entries(d.sections)) {
+      if (sectionTotals.has(name)) sectionTotals.set(name, (sectionTotals.get(name) ?? 0) + n);
+    }
+  }
+  const sectionBlock = hasAnyTape
+    ? `  <h2>${e(STR.integritySectionsHeading)}</h2>
+  <table><thead><tr><th>${e(STR.integritySectionsHeading)}</th><th>${e(
+    STR.integrityColSlots,
+  )}</th></tr></thead>
+    <tbody>
+${sectionNames
+  .map(
+    (name) =>
+      `      <tr><td>${e(SECTION_LABELS[name])}</td><td class="n">${sectionTotals.get(name) ?? 0}</td></tr>`,
+  )
+  .join("\n")}
+    </tbody></table>`
+    : "";
+
+  const promiseItems = manifest.guarantees.promised
+    .map(
+      (g) =>
+        `      <li>${e(fill(STR.integrityContractPromise, { text: guaranteeText(g.key) ?? g.text }))}</li>`,
+    )
+    .join("\n");
+  const notPromiseItems = manifest.guarantees.notPromised
+    .map(
+      (g) =>
+        `      <li>${e(fill(STR.integrityContractNotPromise, { text: guaranteeText(g.key) ?? g.text }))}</li>`,
+    )
+    .join("\n");
+
+  const endpointRows = manifest.endpoints
+    .map(
+      (ep) =>
+        `      <tr><td><code>${e(ep.path)}</code></td><td class="meta">${e(
+          endpointText(ep.id, ep.description),
+        )}</td></tr>`,
+    )
+    .join("\n");
+
+  return `<!doctype html>
+<html lang="${REPORT_LOCALE === "en" ? "en" : "zh-CN"}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${e(STR.siteTitle)} · ${e(STR.integrityTitle)}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+${INTEGRITY_STYLE}
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">${e(STR.siteTitle)}</div>
+  <h1>${e(STR.integrityTitle)}</h1>
+  <p class="meta">${e(STR.integrityTagline)}</p>
+  <p class="lede">${e(STR.integrityIntro)}</p>
+${noTapeBlock}
+${startedLine}
+${summaryBlock}
+${daysBlock}
+${gapsBlock}
+${revisionsBlock}
+${firstSeenBlock}
+${horizonBlock}
+${sectionBlock}
+  <h2>${e(STR.integrityContractHeading)}</h2>
+  <ul>
+${promiseItems}
+${notPromiseItems}
+  </ul>
+  <h2>${e(STR.integrityDeprecationHeading)}</h2>
+  <p class="meta">${e(STR.integrityDeprecationBody)}</p>
+  <h2>${e(STR.integrityEndpointsHeading)}</h2>
+  <table><thead><tr><th>${e(STR.integrityColPath)}</th><th>${e(
+    STR.integrityColDescription,
+  )}</th></tr></thead>
+    <tbody>
+${endpointRows}
+    </tbody></table>
+  <p class="meta">generated ${e(coverage.generatedAt)} · ${e(coverage.timezone)}</p>
+  <p style="margin-top:2rem"><a class="home" href="./index.html">← ${e(STR.integrityNavHome)}</a>
+   · <a class="home" href="./archive.html">${e(STR.integrityNavArchive)}</a>
+   · <a class="home" href="./status.html">${e(STR.integrityNavStatus)}</a></p>
+</main>
+</body>
+</html>
+`;
 }

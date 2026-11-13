@@ -63,9 +63,10 @@
 缺 `asOf`，文件无法用于研究；缺 `observedAt`，文件退化成「今天的看法套上昨天的日期」——正是上节所说的 look-ahead。
 概念来源同上（FRED/ALFRED、TradePolaris、StockFit）。
 
-> **诚实边界 / honest boundary**：双时钟的 **hourly tape 目前尚未上线**——`/tape/...` 实测返回 **404**（2026-11-13）。
-> 今天的现实是**每天 3 期**快照，`asOf` 只以「抓取时刻」的近似形式散落在 sidecar 的 `fetch_health.generated_at` 与 `quant.market.fetchedAt` 里，没有统一的 `observedAt` 字段。
-> 所以：**时点资产是正在建成的，不是已建成的。** 本文件中每一处双时钟主张都按 `planned` 读，见 §5 缺口表第 1 项。
+> **诚实边界 / honest boundary**：双时钟 **tape 的机制已上线**（`lib/tape/` + `scripts/bake-tape.ts`，`/v1/asof/<date>.json` 发布），
+> 但**数据还是零天**：第一个诚实快照预计在 2026-11-16 09:35（上海时间）写入，此前不可回溯编造。
+> 报告正文仍是**每天 3 期**快照，其 `asOf` 只以「抓取时刻」的近似形式散落在 sidecar 的 `fetch_health.generated_at` 与 `quant.market.fetchedAt` 里。
+> 所以：**时点资产是已建成机制的、尚未积累历史的。** 机制本身按 `built` 读（§4），历史积累按时间增长（§5 缺口表第 1 项）。
 
 ## 2. 竞品对照
 
@@ -114,14 +115,14 @@
 
 | 条款 | 状态 | 证据 / 出处 |
 |---|---|---|
-| **`/v1` 命名空间**：`/v1/manifest.json`、`/v1/asof/<YYYY-MM-DD>.json`、`/v1/stories.json`、`/v1/reactions.json`、`/v1/themes.json`、`/v1/coverage.json` | **planned** | 规划来源：时点数据平台计划（point-in-time platform plan）第 5 节。实测 2026-11-13：`/v1/manifest.json` 返回 **404**，命名空间尚未上线 |
+| **`/v1` 命名空间**：`/v1/manifest.json`、`/v1/asof/<YYYY-MM-DD>.json`、`/v1/stories.json`、`/v1/themes.json`、`/v1/coverage.json`（`/v1/reactions.json` 待反应库烘焙上线后自动纳入） | **built** | `npm run v1:bake` 在 build job 内、发布前生成；`scripts/assert-v1.mjs` 断言清单里没有「有路径无文件」的端点。执行版契约 `lib/v1/contract.ts` + `tests/golden/v1-contract.test.ts`。2026-11-13 之前实测 404，现已上线 |
 | **只增不改（additive-only）**：新增可选字段永远安全；移动/重命名字段必须同时改 golden 测试、在本契约留版本注记、并在 `llms.txt` 给弃用窗口 | **built（策略层）** | [`DATA-CONTRACT.md`](./DATA-CONTRACT.md) 的 *Change policy* 第 1–3 条；执行者为 `tests/golden/sidecar-schema.test.ts` |
 | **弃用窗口**：破坏性变更前先公告并保留过渡期 | **built（策略层，未版本化）**；`/v1` 命名空间内的机器可读弃用声明为 **planned** | `DATA-CONTRACT.md` 第 3 条要求「在 `llms.txt` 给弃用窗口」；`/v1/manifest.json` 承载版本与弃用策略属 planned |
 | **MIT 许可，含商用与再分发** | **built** | <https://raw.githubusercontent.com/Fudan2026/opencool/main/LICENSE>；GitHub API 元数据 `license.spdx_id = MIT` |
 | **跨域可读**：任何浏览器、任何 agent 都能直接取，无需 key | **built** | 实测 `llms.txt` 响应头含 `access-control-allow-origin: *` 与 `etag`（<https://fudan2026.github.io/opencool/llms.txt>） |
 | **全站 Asia/Shanghai**：日期键、档期、页面时间一律上海时区 | **built（生产环境）** | 生产 workflow 固定 `REPORT_TZ: Asia/Shanghai`（<https://github.com/Fudan2026/opencool/blob/main/.github/workflows/daily.yml>）；代码侧不硬编码时区，`lib/utils.ts` 由 `REPORT_TZ` 决定（[`AGENTS.md`](../AGENTS.md) 核心不变式 3） |
 | **缺口公开而非隐藏**：每期 sidecar 带 `fetch_health.entries[]`（每源耗时/成功/条数/错误），站点有 `status.html` 发布矩阵与源健康 | **built** | [`DATA-CONTRACT.md`](./DATA-CONTRACT.md) 的 `fetch_health.entries[]`；实测 <https://fudan2026.github.io/opencool/status.html> 200 |
-| **逐快照覆盖率与缺口清单**：`/v1/coverage.json` + `/integrity.html` 点名每一天的缺口与修订次数 | **planned** | 规划来源：时点数据平台计划第 6 节。实测 2026-11-13 两者均 **404** |
+| **逐快照覆盖率与缺口清单**：`/v1/coverage.json` + `/integrity.html` 点名每一天的缺口、修订次数、首次观测覆盖率与待测反应窗口 | **built** | 同一次 `npm run v1:bake` 产出；无 tape 数据时页面用一句话说明「采集尚未开始」，不画空表、不报百分比（`summary.coveragePct: null`）。页面无评分、无绿色对勾 |
 | **不回头改已发布的一期** | **built（流程层）** | 调度门以「gh-pages 上 `<date>/<HH>.json` 是否为干净 HTTP 200」判定档期已发布，已发布即跳过（`scripts/gate.mjs`）；补发页眉标注「补发」，不假装是当日快照（[`README.md`](../README.md)） |
 
 **我们明确不承诺**（因为还没建，且不打算用承诺掩盖）：SLA、正常运行时间保证、逐笔成交、逐秒快照、跨市场（港/美）同等深度、基本面修订史、退市证券全量保留。见下节。
@@ -132,7 +133,7 @@
 
 | # | 今天没有的东西 | 现状证据 | 距离（要补什么） |
 |---|---|---|---|
-| 1 | **小时级盘中历史（hourly tape）** | `/tape/...` 实测 404；今日仅 06/13/19 三期 | 规划增量 2（tape capture）：新增 `lib/tape/` + `scripts/bake-tape.ts`，每个交易时点写 `<HHMM>.json`，双时钟 `asOf`+`observedAt`，重跑写 `.rev-N.json` 而非覆盖；半小时间隔、约 9 个/日；复用现有 `gate.mjs` 调度模型。**积累速度受限于上线时刻，无法回溯造假** |
+| 1 | **小时级盘中历史（hourly tape）的深度** | 机制已上线（`lib/tape/` + `scripts/bake-tape.ts`，每交易日 10 个时点写 `<HHMM>.json`，双时钟 `asOf`+`observedAt`，重跑写 `.rev-N.json` 不覆盖）；但**已采集天数为 0**，首个快照预计 2026-11-16 09:35 | 只剩时间这一项：**积累速度受限于上线时刻，无法回溯造假**。`/v1/coverage.json` 与 `/integrity.html` 逐日点名缺口与修订次数，不虚报覆盖率 |
 | 2 | **基本面修订史（revision history）** | 本站无任何财务报表明细接口；`/v1/asof` 未上线 | 需先建 vintage store（增量 2），再接入带申报日的源并保留原始申报与重述两份记录——参考做法：「保留两个值，各自标记携带它的申报文件」<https://developer.stockfit.io/blog/point-in-time-data-backtesting>。**当前零进度** |
 | 3 | **退市证券保留** | 观察池为 **32 个标的 / 7 个资产组**（`lib/trading/watchlist.ts`），全部为在售标的；无退市名录 | 需引入含 `active=false` 的证券主数据（如 Massive 的 All Tickers：<https://massive.com/docs/rest/stocks/tickers/ticker-overview>）并自建历史成分快照。**这是幸存者偏差的根，也是最贵的一项** |
 | 4 | **超出已积累范围的盘中历史** | 无 tape；`sentiment-history.json` 实测仅 **48 条**、2026-10-27 → 2026-11-13（上限 60） | 只能靠**时间**积累；不可回填。可回填的只有上游源本身保留的历史（如 Tushare 历史分钟，2000 元一次性，<https://tushare.pro/document/2?doc_id=290>）——但那不是我们的 availability time，仍不能算 vintage |
@@ -204,9 +205,10 @@ That is what we can supply and retail can barely buy: **not "latest", but "then"
 
 Drop `asOf` and the file is unusable for research. Drop `observedAt` and it degenerates into "today's view wearing yesterday's date" — exactly the look-ahead described above.
 
-> **Honest boundary**: the dual-clock **hourly tape does not exist yet** (`/tape/...` returns 404, checked 2026-11-13).
-> Today's reality is **3 editions per day**, and `asOf` exists only as an approximation via `fetch_health.generated_at` and `quant.market.fetchedAt` in the sidecar.
-> The point-in-time asset is **being built**, not built. See the gap table in §5. Read every dual-clock claim below as **planned**.
+> **Honest boundary**: the dual-clock **tape mechanism has shipped** (`lib/tape/` + `scripts/bake-tape.ts`, published at `/v1/asof/<date>.json`),
+> but there is **zero data in it**: the first honest snapshot is expected at 2026-11-16 09:35 Shanghai and cannot be backdated.
+> The digest itself is still **3 editions per day**, and its `asOf` exists only as an approximation via `fetch_health.generated_at` and `quant.market.fetchedAt` in the sidecar.
+> So: the point-in-time asset is **built but empty** — the mechanism is `built` (§4), the history accumulates with time (§5, gap row 1).
 
 ## 2. Comparison
 
@@ -255,14 +257,14 @@ Two columns: **built** and **planned**. Never claim planned is built — that is
 
 | Term | Status | Evidence |
 |---|---|---|
-| **`/v1` namespace**: `/v1/manifest.json`, `/v1/asof/<YYYY-MM-DD>.json`, `/v1/stories.json`, `/v1/reactions.json`, `/v1/themes.json`, `/v1/coverage.json` | **planned** | Source: the point-in-time platform plan §5. Measured 2026-11-13: `/v1/manifest.json` returns **404**; the namespace is not live |
+| **`/v1` namespace**: `/v1/manifest.json`, `/v1/asof/<YYYY-MM-DD>.json`, `/v1/stories.json`, `/v1/themes.json`, `/v1/coverage.json` (`/v1/reactions.json` joins automatically once the reaction bake ships) | **built** | `npm run v1:bake` runs inside the build job before publish; `scripts/assert-v1.mjs` rejects a manifest that advertises an endpoint with no file behind it. Executable contract: `lib/v1/contract.ts` + `tests/golden/v1-contract.test.ts`. Measured 404 before 2026-11-13; now live |
 | **Additive-only**: new optional fields always safe; moving/renaming a field requires a golden-test update, a version note in this contract, and a deprecation window in `llms.txt` | **built (policy level)** | [`DATA-CONTRACT.md`](./DATA-CONTRACT.md) *Change policy* items 1–3, enforced by `tests/golden/sidecar-schema.test.ts` |
 | **Deprecation window**: announce breaking changes and keep a transition period | **built (policy, unversioned)**; machine-readable deprecation inside `/v1` is **planned** | `DATA-CONTRACT.md` item 3 requires "a deprecation window in `llms.txt`"; `/v1/manifest.json` carrying versions and deprecation policy is planned |
 | **MIT, commercial use and redistribution allowed** | **built** | <https://raw.githubusercontent.com/Fudan2026/opencool/main/LICENSE>; GitHub API metadata `license.spdx_id = MIT` |
 | **CORS-open**: any browser, any agent, no key | **built** | Measured `access-control-allow-origin: *` and `etag` on <https://fudan2026.github.io/opencool/llms.txt> |
 | **Asia/Shanghai everywhere**: date keys, slots and page times | **built (production)** | Workflow pins `REPORT_TZ: Asia/Shanghai` (<https://github.com/Fudan2026/opencool/blob/main/.github/workflows/daily.yml>); code never hardcodes a zone — `lib/utils.ts` reads `REPORT_TZ` ([`AGENTS.md`](../AGENTS.md) invariant 3) |
 | **Gaps published, not hidden**: every sidecar carries `fetch_health.entries[]` (per-source ms/ok/count/error); `status.html` shows the publish matrix and source health | **built** | [`DATA-CONTRACT.md`](./DATA-CONTRACT.md) `fetch_health.entries[]`; measured <https://fudan2026.github.io/opencool/status.html> → 200 |
-| **Per-snapshot coverage and gap ledger**: `/v1/coverage.json` + `/integrity.html` naming every gap and revision count | **planned** | Source: the point-in-time platform plan §6. Measured 2026-11-13: both **404** |
+| **Per-snapshot coverage and gap ledger**: `/v1/coverage.json` + `/integrity.html` naming every gap, revision count, first-seen coverage and pending reaction horizons | **built** | Produced by the same `npm run v1:bake`; with no tape data the page says "capture has not started" in a sentence instead of drawing an empty table, and reports no percentage (`summary.coveragePct: null`). No score, no green checkmarks |
 | **No retroactive edits to a published edition** | **built (process level)** | The gate treats a clean HTTP 200 `<date>/<HH>.json` on gh-pages as published and skips it (`scripts/gate.mjs`); a backfilled edition is labelled 补发 and does not pretend to be a same-day snapshot ([`README.md`](../README.md)) |
 
 **What we explicitly do not promise** (and will not paper over with a commitment): an SLA, uptime guarantees, tick data, per-second snapshots, HK/US coverage at equal depth, fundamentals revision history, or full delisted-security retention. See below.
@@ -273,7 +275,7 @@ The "distance" column names the engineering still required, not calendar time.
 
 | # | Missing today | Evidence of absence | Distance to close |
 |---|---|---|---|
-| 1 | **Hourly intraday history (the tape)** | `/tape/...` measured 404; only 06/13/19 today | Planned increment 2 (tape capture): new `lib/tape/` + `scripts/bake-tape.ts` writing `<HHMM>.json` per trading tick, dual `asOf`+`observedAt`, re-runs writing `.rev-N.json` instead of overwriting; half-hourly, ~9/day; reuses `gate.mjs`. **Accumulation starts at launch — it cannot be backdated** |
+| 1 | **Depth of the hourly intraday history** | Mechanism has shipped (`lib/tape/` + `scripts/bake-tape.ts`: ten slots per trading day, dual `asOf`+`observedAt`, re-runs writing `.rev-N.json` rather than overwriting) but **zero days captured**; first snapshot expected 2026-11-16 09:35 | Only time is missing. **Accumulation starts at launch — it cannot be backdated.** `/v1/coverage.json` and `/integrity.html` name every gap and revision count per day rather than quoting a flattering coverage number |
 | 2 | **Fundamentals revision history** | No financial-statement endpoints at all; `/v1/asof` not live | Needs the vintage store first (increment 2), then a source carrying filing dates, keeping both original and restated values — "keep both values, each tagged with the filing that carried it" <https://developer.stockfit.io/blog/point-in-time-data-backtesting>. **Zero progress today** |
 | 3 | **Delisted securities** | Watchlist is **32 tickers / 7 asset groups** (`lib/trading/watchlist.ts`), all currently listed; no delisted roster | Needs a security master with `active=false` support (e.g. Massive All Tickers: <https://massive.com/docs/rest/stocks/tickers/ticker-overview>) plus our own historical membership snapshots. **The root of survivorship bias, and the most expensive item** |
 | 4 | **Intraday history beyond what capture accumulated** | No tape; `sentiment-history.json` measured at **48 items**, 2026-10-27 → 2026-11-13 (cap 60) | Only **time** buys this; it cannot be backfilled. Upstream history can be bought (Tushare historical minutes, ¥2,000 one-off, <https://tushare.pro/document/2?doc_id=290>) but it carries the vendor's availability time, not ours — not vintage |

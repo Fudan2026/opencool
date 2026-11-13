@@ -506,3 +506,77 @@ test("golden: the reading pages are wired into the edition build", async (t) => 
     assert.deepEqual([...src.matchAll(/run:\s*node\s+-e\s/g)].map((m) => m[0]), []);
   });
 });
+
+/**
+ * The `/v1` namespace and `/integrity.html` are the surfaces a consumer pins, so
+ * two properties of the build job are load-bearing and asserted here:
+ *
+ *   - the bake runs INSIDE the build job, before the publish step (a v1 file
+ *     written after `peaceiris` pushes the tree simply never ships);
+ *   - an assertion runs before the publish, because a manifest that advertises
+ *     an endpoint with no file behind it is the exact broken promise the
+ *     namespace exists to prevent.
+ *
+ * Also re-asserted: the v1 bake is zero-token. It reads local files and does
+ * arithmetic; if it ever grows an LLM call the existing post-run assert would
+ * catch it, but pinning it here makes the intent explicit.
+ */
+test("golden: the v1 namespace bake is wired before publish and guarded", async (t) => {
+  const job = buildJobSource();
+  const names = stepNames(job);
+
+  await t.test("the bake step exists and runs the npm script", () => {
+    assert.ok(names.includes("Bake v1 namespace and integrity page"), "missing v1 bake step");
+    assert.match(stepSource(job, "Bake v1 namespace and integrity page"), /npm run v1:bake/);
+  });
+
+  await t.test("it runs before the static site build, so nav links can be emitted", () => {
+    const bakeAt = names.indexOf("Bake v1 namespace and integrity page");
+    const siteAt = names.indexOf("Build static site (index + archive)");
+    assert.ok(bakeAt >= 0 && siteAt >= 0);
+    assert.ok(bakeAt < siteAt, "build-site links integrity.html only when it exists");
+  });
+
+  await t.test("it runs before the publish step", () => {
+    const bakeAt = names.indexOf("Bake v1 namespace and integrity page");
+    const publishAt = names.indexOf("Publish to gh-pages");
+    assert.ok(bakeAt >= 0 && publishAt >= 0);
+    assert.ok(bakeAt < publishAt, "a v1 file written after the push never ships");
+  });
+
+  await t.test("the contract assert runs a real script, before publish", () => {
+    assert.ok(names.includes("Assert v1 contract"), "missing v1 contract assert");
+    const step = stepSource(job, "Assert v1 contract");
+    assert.match(step, /npm run assert:v1/);
+    const assertAt = names.indexOf("Assert v1 contract");
+    const publishAt = names.indexOf("Publish to gh-pages");
+    assert.ok(assertAt < publishAt, "a broken v1 file must not reach gh-pages");
+  });
+
+  await t.test("it runs after the story ledger and theme bakes, so their inputs exist", () => {
+    const storiesAt = names.indexOf("Bake story ledger");
+    const themesAt = names.indexOf("Bake theme heat");
+    const bakeAt = names.indexOf("Bake v1 namespace and integrity page");
+    assert.ok(storiesAt >= 0 && themesAt >= 0 && bakeAt >= 0);
+    assert.ok(storiesAt < bakeAt, "v1 re-exports the ledger");
+    assert.ok(themesAt < bakeAt, "v1 re-exports the theme board");
+  });
+
+  await t.test("the bake step is zero-token by construction", () => {
+    const step = stepSource(job, "Bake v1 namespace and integrity page");
+    assert.equal(
+      /API_KEY:\s*\$\{\{/.test(step),
+      false,
+      "the v1 bake reads local files; it must not receive a provider key",
+    );
+    // Job-level LLM_MODE=off already covers it, and the post-run assert counts
+    // any call, but the step must not re-enable a backend.
+    assert.equal(/LLM_MODE:\s*'auto'/.test(step), false);
+  });
+
+  await t.test("the v1 bake receives REPORT_TZ so its clocks carry the market offset", () => {
+    const step = stepSource(job, "Bake v1 namespace and integrity page");
+    assert.match(step, /REPORT_TZ:/);
+    assert.match(step, /vars\.REPORT_TZ \|\| 'Asia\/Shanghai'/);
+  });
+});
