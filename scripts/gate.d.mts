@@ -12,13 +12,29 @@ export interface GateCheck {
   slot: string;
   status: number | null;
   skipped?: string;
+  /** Present when the file was read: its own fetch instant. */
+  generatedAt?: string | null;
+  generatedSh?: string | null;
+  /** Signed minutes from fetch to slot (positive = fetched before the slot). */
+  earlyMinutes?: number | null;
+  /** True when the sidecar exists but was fetched before its slot. */
+  premature?: boolean;
+  freshness?: "honest" | "premature" | "unknown";
+  path?: string;
 }
+
+/** What the edition probe answers: a bare status, or status + fetch instant. */
+export type EditionProbeResult = number | { status: number; generatedAt?: string | null };
+
+export type EditionProbe = (date: string, slot: string) => Promise<EditionProbeResult>;
 
 export interface GateDecision {
   shouldRun: boolean;
   date: string;
   hour: string;
   reason: string;
+  /** Due instant of the chosen slot, rendered in REPORT_TZ. */
+  dueSh?: string;
   checks: GateCheck[];
 }
 
@@ -27,8 +43,31 @@ export interface DecideEditionOptions {
   hours: number[];
   lookbackDays: number;
   daysSpec: string;
-  probe: (date: string, slot: string) => Promise<number>;
+  probe: EditionProbe;
+  tz?: string;
+  toleranceMin?: number;
 }
+
+export const PREMATURE_TOLERANCE_MIN: number;
+
+export interface FreshnessVerdict {
+  verdict: "honest" | "premature" | "unknown";
+  honest: boolean;
+  generatedAt: string | null;
+  generatedSh: string | null;
+  dueSh: string;
+  earlyMinutes: number | null;
+}
+
+export function judgeSidecarFreshness(input: {
+  generatedAt?: string | null;
+  date: string;
+  slot: string;
+  tz?: string;
+  toleranceMin?: number;
+}): FreshnessVerdict;
+
+export function slotLabel(dateKey: string, slot: string, tz?: string): string;
 
 export function parseHours(raw?: string | null): number[];
 export function addDays(dateKey: string, delta: number): string;
@@ -42,7 +81,7 @@ export function makeContentsProbe(opts: {
   repo: string;
   token: string;
   fetchImpl?: typeof fetch;
-}): (date: string, slot: string) => Promise<number>;
+}): (date: string, slot: string) => Promise<EditionProbeResult>;
 export function makePathProbe(opts: {
   repo: string;
   token: string;
@@ -66,8 +105,10 @@ export function decideTriggered(opts: {
   hours: number[];
   lookbackDays: number;
   daysSpec: string;
-  probe: (date: string, slot: string) => Promise<number>;
+  probe: EditionProbe;
   eventName: string;
+  tz?: string;
+  toleranceMin?: number;
 }): Promise<TriggeredDecision>;
 
 export interface TapeDecision {
