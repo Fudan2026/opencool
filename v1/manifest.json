@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "namespace": "v1",
+  "generatedAt": "2026-11-14T03:49:41+08:00",
+  "timezone": "Asia/Shanghai",
+  "endpoints": [
+    {
+      "id": "manifest",
+      "path": "/v1/manifest.json",
+      "version": 1,
+      "available": true,
+      "description": "This document: endpoints, snapshot index, coverage summary, license and the deprecation policy."
+    },
+    {
+      "id": "coverage",
+      "path": "/v1/coverage.json",
+      "version": 1,
+      "available": true,
+      "description": "Per-day expected vs captured slot counts, every named gap, revision counts, first-seen coverage and pending reaction horizons."
+    },
+    {
+      "id": "stories",
+      "path": "/v1/stories.json",
+      "version": 1,
+      "available": true,
+      "description": "Story ledger re-exported under the frozen path: stable ids, firstSeenAt, sightings, headline revisions, per-wire first-mover ranking."
+    },
+    {
+      "id": "themes",
+      "path": "/v1/themes.json",
+      "version": 1,
+      "available": true,
+      "description": "Theme board heat re-exported under the frozen path: board code/name, board move, advancing/declining counts, article hits, constituents."
+    }
+  ],
+  "snapshots": {
+    "launchDate": "2026-11-16",
+    "started": false,
+    "expectedSlotsPerDay": 10,
+    "firstDate": null,
+    "lastDate": null,
+    "totalSlots": 0,
+    "totalRevisionFiles": 0,
+    "days": []
+  },
+  "coverage": {
+    "days": 0,
+    "tradingDays": 0,
+    "daysWithGaps": 0,
+    "expectedSlots": 0,
+    "capturedSlots": 0,
+    "coveragePct": null,
+    "gaps": 0
+  },
+  "license": {
+    "code": "MIT",
+    "url": "https://github.com/Fudan2026/opencool/blob/main/LICENSE",
+    "data": "Code is MIT. Data terms: quotes come from public delayed endpoints of the exchanges' own vendors and are published for reading, at most one publish cycle behind; they are not a licensed real-time feed, are not for order execution, and are not investment advice. Story headlines and links remain the property of their publishers. No third-party licensed dataset is redistributed. If you mirror this data, keep the gaps page visible — a mirror that drops gaps is no longer point-in-time."
+  },
+  "deprecation": {
+    "policy": "Within /v1 nothing a consumer sees is removed or retyped. New fields may appear at any time and consumers must ignore unknown ones. A field that must change shape is added alongside the old one, and the old one keeps its exact type until /v1 is retired.",
+    "breakingChange": "A breaking change ships as a new namespace: /v2/<same path>.",
+    "successor": "/v2/manifest.json",
+    "noticePeriod": "After /v2/ publishes, /v1/ keeps being written for at least 12 months and its manifest keeps naming the successor. No silent removal: an endpoint that stops is removed from the manifest in the same build that stops writing it."
+  },
+  "guarantees": {
+    "promised": [
+      {
+        "key": "PromiseStaticJson",
+        "text": "Every file is static JSON produced at build time from files already in this repository's publish tree."
+      },
+      {
+        "key": "PromiseTwoClocks",
+        "text": "Every tape value carries asOf (market clock) and observedAt (our fetch clock), both ISO 8601 with an offset."
+      },
+      {
+        "key": "PromiseGapsNamed",
+        "text": "A missing slot, section or input is named in gaps[] with a stable code — never silently absent."
+      },
+      {
+        "key": "PromiseAppendOnly",
+        "text": "A re-capture writes <HHMM>.rev-N.json; it never overwrites the base capture's bytes."
+      },
+      {
+        "key": "PromiseAdditiveOnly",
+        "text": "Additive-only within v1; a breaking change ships as /v2/."
+      }
+    ],
+    "notPromised": [
+      {
+        "key": "NotPromisePush",
+        "text": "No real-time push: no WebSocket, no SSE, no streaming. Everything is a file, refreshed by a build."
+      },
+      {
+        "key": "NotPromiseDepth",
+        "text": "No L2 depth or order book — we do not buy, resell or fabricate licensed depth data."
+      },
+      {
+        "key": "NotPromiseRevisionHistory",
+        "text": "No revision history beyond the published trail (tape/<date>/revisions.jsonl and the .rev-N.json files)."
+      },
+      {
+        "key": "NotPromiseArchiveEdits",
+        "text": "No retroactive archive edits: published slots are not rewritten, and a backfilled edition is labelled as one."
+      },
+      {
+        "key": "NotPromiseSla",
+        "text": "No SLA: a missed tick is a named gap, not a refund."
+      }
+    ]
+  }
+}

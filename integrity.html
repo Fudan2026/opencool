@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenCool · 数据完整性</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; --warn:#b45309; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    background: radial-gradient(ellipse 80% 50% at 10% -10%, #ffe8cc 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, #ffd6e7 0%, transparent 50%), var(--bg);
+    color:var(--fg); line-height:1.6; }
+  main { max-width:880px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  .brand { font-family:"DM Sans",sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2rem; margin:.4rem 0 .3rem; letter-spacing:-.03em; }
+  h2 { font-size:1.05rem; margin:2rem 0 .6rem; }
+  .meta { color:var(--muted); font-size:.9rem; }
+  .lede { color:var(--fg); font-size:.95rem; max-width:46rem; }
+  .empty { background:var(--card); border:1px solid var(--rule); border-left:3px solid var(--warn);
+    border-radius:.8rem; padding:1.1rem 1.25rem; margin:1.5rem 0; }
+  .empty h2 { margin:0 0 .5rem; font-size:1.05rem; }
+  .empty p { margin:.4rem 0; }
+  table { border-collapse:collapse; width:100%; background:var(--card); border-radius:.75rem; overflow:hidden; }
+  th, td { text-align:left; padding:.5rem .8rem; border-bottom:1px solid var(--rule); font-size:.85rem; vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  .n { font-family:"DM Sans",sans-serif; font-weight:700; }
+  .gap-code { color:var(--muted); font-size:.75rem; }
+  tr.closed td { color:var(--muted); }
+  .stat { display:flex; flex-wrap:wrap; gap:.4rem; margin:.6rem 0; }
+  .stat span { background:var(--card); border:1px solid var(--rule); border-radius:999px;
+    padding:.25rem .7rem; font-size:.82rem; }
+  ul { margin:.4rem 0; padding-left:1.2rem; }
+  li { margin:.3rem 0; font-size:.88rem; }
+  code { background:var(--card); border:1px solid var(--rule); border-radius:5px; padding:.05rem .3rem; font-size:.86em; }
+  a { color:var(--accent); text-decoration:none; }
+  .home { color:var(--accent); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">OpenCool</div>
+  <h1>数据完整性</h1>
+  <p class="meta">逐日缺口 · 修订次数 · 首次观测覆盖率 · 零 AI</p>
+  <p class="lede">这一页只做一件事：把每条数据的缺口说清楚。没有跑到的时点、没有取到的分区、缺失的输入文件，都在下面点名，不隐藏、不凑数。</p>
+  <section class="empty" data-surface="no-tape">
+    <h2>采集尚未开始，这里没有历史可展示。</h2>
+    <p>盘中时点快照（tape）的采集机制刚刚上线，目前本地与已发布的树里都还没有任何一天的数据。第一个诚实的快照预计在 2026-11-16 09:35（上海时间）写入。在那之前，下面不会出现任何表格或百分比——空表格看起来像成功，而那不是事实。</p>
+  </section>
+
+
+
+
+
+  <h2>首次观测覆盖率</h2>
+  <p class="meta">故事台账 2000 条 · 带 firstSeenAt 2000 条（100%）· 缺 firstSeenAt 0 条</p>
+  <h2>反应窗口（+1h / +1d / +5d）</h2>
+  <p class="meta">反应库尚未产出，所有窗口都在等待中：2000 条故事待测。</p>
+
+  <h2>我们承诺什么</h2>
+  <ul>
+      <li>承诺：每个文件都是构建期由仓库发布树中已有的文件生成的静态 JSON。</li>
+      <li>承诺：每条盘中数据都带两个时钟：asOf（行情所描述的市场时刻）与 observedAt（我们抓取它的时刻），均为带偏移的 ISO 8601。</li>
+      <li>承诺：缺失的时点、分区或输入文件都会以稳定代码写进 gaps[]，绝不静默略过。</li>
+      <li>承诺：重采写入 &lt;HHMM&gt;.rev-N.json，永不覆盖首个快照的原始字节。</li>
+      <li>承诺：v1 内只增不改；破坏性变更以 /v2/ 发布。</li>
+      <li>不承诺：不做实时推送：没有 WebSocket、没有 SSE、没有流式。一切都只是构建时刷新的文件。</li>
+      <li>不承诺：不做 L2 十档或订单簿 —— 我们不买、不转售、不编造需要授权的盘口数据。</li>
+      <li>不承诺：除已发布的修订轨迹（tape/&lt;date&gt;/revisions.jsonl 与 .rev-N.json）之外，不提供更深的修订史。</li>
+      <li>不承诺：不回头修改已归档内容：已发布的时点不被重写，补发的档期会标注为补发。</li>
+      <li>不承诺：不做 SLA：漏采的时点会成为一个具名缺口，而不是一次赔付。</li>
+  </ul>
+  <h2>弃用策略</h2>
+  <p class="meta">v1 内只增不改：任何字段都不会被删除或改类型；破坏性变更另开 /v2/。旧路径在新版本发布后至少保留 12 个月，且清单里会写明继任者。</p>
+  <h2>机器可读端点</h2>
+  <table><thead><tr><th>路径</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td><code>/v1/manifest.json</code></td><td class="meta">命名空间清单：端点、快照索引、覆盖总览、许可与弃用策略</td></tr>
+      <tr><td><code>/v1/coverage.json</code></td><td class="meta">逐日应到/实到时点数、每个具名缺口、修订次数、首次观测覆盖率与待测反应窗口</td></tr>
+      <tr><td><code>/v1/stories.json</code></td><td class="meta">故事台账：稳定 id、首次观测时刻、后续目击、头条修订、各信源抢发排名</td></tr>
+      <tr><td><code>/v1/themes.json</code></td><td class="meta">题材板块热度：板块代码与名称、板块涨跌、涨跌家数、文章命中、成分股</td></tr>
+    </tbody></table>
+  <p class="meta">generated 2026-11-14T03:49:41+08:00 · Asia/Shanghai</p>
+  <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到首页</a>
+   · <a class="home" href="./archive.html">历史归档</a>
+   · <a class="home" href="./status.html">运行状态</a></p>
+</main>
+</body>
+</html>
