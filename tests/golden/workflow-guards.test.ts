@@ -161,3 +161,101 @@ test("golden: a missing llm-calls.jsonl is the documented pass case", () => {
   assert.match(src, /missing: true/, "absent log must be a first-class result");
   assert.match(src, /records\.length === 0/, "pass is defined as zero records");
 });
+
+/**
+ * The tape job is held to the same zero-token rule as the build job, and must
+ * not be able to disturb the edition path. Both are structural properties of
+ * `daily.yml`, so they are asserted against the file: a future edit that drops
+ * the pin, forwards a key, or reshapes the edition publish fails here.
+ */
+test("golden: tape job is zero-token and cannot disturb the edition path", async (t) => {
+  const src = fs.readFileSync(WORKFLOW, "utf8");
+  const start = src.indexOf("\n  tape:");
+  assert.ok(start >= 0, "tape job not found in daily.yml");
+  const rest = src.slice(start + 1);
+  const next = rest.search(/\n {2}[a-z][\w-]*:/);
+  const job = next >= 0 ? rest.slice(0, next) : rest;
+
+  await t.test("LLM_MODE is pinned to off at job level", () => {
+    const jobEnv = job.slice(0, job.indexOf("    steps:"));
+    assert.match(
+      jobEnv,
+      /^ {4}env:\n(?: {6}.+\n)*? {6}LLM_MODE: 'off'$/m,
+      "the tape job must set LLM_MODE: 'off' in its job-level env",
+    );
+  });
+
+  await t.test("the capture step also pins off explicitly", () => {
+    assert.match(stepSource(job, "Capture snapshot"), /LLM_MODE: 'off'/);
+  });
+
+  await t.test("no provider key is forwarded to any tape step", () => {
+    for (const name of ["ZHIPU_API_KEY", "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "DEEPSEEK_API_KEY", "MINIMAX_API_KEY"]) {
+      assert.equal(new RegExp(`${name}:\\s*\\$\\{\\{`).test(job), false, `${name} must not reach the tape job`);
+    }
+  });
+
+  await t.test("a zero-call assert runs, scoped to the run, before publish", () => {
+    const names = stepNames(job);
+    assert.ok(names.includes("Assert zero LLM calls"), "missing zero-LLM assert in the tape job");
+    const step = stepSource(job, "Assert zero LLM calls");
+    assert.match(step, /node scripts\/assert-zero-llm\.mjs/);
+    assert.match(step, /--since/);
+    assert.match(job, /LLM_LOG_SINCE=/, "run start must export LLM_LOG_SINCE");
+    assert.ok(
+      names.indexOf("Assert zero LLM calls") < names.indexOf("Publish tape to gh-pages"),
+      "a logged call must fail before the tape is published",
+    );
+  });
+
+  await t.test("the tape publish never deletes what the edition job wrote", () => {
+    // `keep_files: false` in the tape job would wipe every edition on gh-pages.
+    const publish = stepSource(job, "Publish tape to gh-pages");
+    assert.match(publish, /keep_files: true/);
+  });
+
+  await t.test("the edition publish is untouched", () => {
+    // The edition job restores and publishes the whole tree; both behaviours
+    // are load-bearing and predate the tape.
+    const build = buildJobSource();
+    assert.match(stepSource(build, "Publish to gh-pages"), /keep_files: false/);
+    assert.match(stepSource(build, "Restore existing reports from gh-pages"), /checkout origin\/gh-pages -- \./);
+  });
+
+  await t.test("the tape job consumes only the gate's tape outputs", () => {
+    assert.match(job, /needs\.gate\.outputs\.tape-slot/);
+    assert.match(job, /needs\.gate\.outputs\.tape-date/);
+    assert.equal(job.includes("needs.gate.outputs.should-run"), false, "the tape job must not key on the edition decision");
+    assert.equal(job.includes("needs.gate.outputs.edition-date"), false);
+  });
+
+  await t.test("the gate exposes the tape outputs and runs the tape decision", () => {
+    const gate = src.slice(0, src.indexOf("\n  build:"));
+    for (const out of ["tape-should-run", "tape-date", "tape-slot", "tape-reason"]) {
+      assert.match(gate, new RegExp(`^ {6}${out}: \\$\\{\\{ steps\\.tape\\.outputs\\.${out} \\}\\}$`, "m"));
+    }
+    const step = stepSource(gate, "Check tape schedule");
+    assert.match(step, /node scripts\/gate\.mjs --mode=tape/);
+  });
+
+  await t.test("the gate job stays cheap: no npm ci, no setup-node", () => {
+    const gate = src.slice(0, src.indexOf("\n  build:"));
+    assert.equal(
+      /uses: actions\/setup-node/.test(gate),
+      false,
+      "the gate must not set up Node",
+    );
+    assert.equal(/run: npm ci/.test(gate), false, "the gate must not install dependencies");
+    // …and the tape decision reuses the single sparse checkout of gate.mjs
+    // instead of adding a second checkout.
+    assert.equal(
+      (src.match(/sparse-checkout: \|/g) ?? []).length,
+      1,
+      "the tape decision must reuse the gate's one sparse checkout, not add another",
+    );
+  });
+
+  await t.test("a tape tick does not cancel an in-flight capture", () => {
+    assert.match(job, /cancel-in-progress: false/);
+  });
+});

@@ -10,6 +10,13 @@ export interface IndexSnap {
   name: string;
   price: number;
   changePct: number;
+  /**
+   * Upstream quote stamp in epoch **seconds** (`f86`), when the payload carried
+   * one. Optional because it is metadata, not part of the quote: the edition
+   * panels ignore it and the point-in-time tape records it as the index value's
+   * market clock.
+   */
+  quoteStamp?: number | null;
 }
 
 export interface MarketOverview {
@@ -18,30 +25,44 @@ export interface MarketOverview {
   note: string;
 }
 
-async function fetchEmIndex(secid: string): Promise<IndexSnap | null> {
-  const fields = "f57,f58,f43,f169,f170,f46,f44,f45,f168,f47,f48,f60";
+export interface MarketOverviewOptions {
+  fetchImpl?: typeof fetch;
+}
+
+async function fetchEmIndex(
+  secid: string,
+  options: MarketOverviewOptions = {},
+): Promise<IndexSnap | null> {
+  // f86 is the quote timestamp; asking for it costs nothing and is the only way
+  // a caller can tell when the value it just received was actually struck.
+  const fields = "f57,f58,f43,f169,f170,f46,f44,f45,f168,f47,f48,f60,f86";
   const urls = [
     `https://push2.eastmoney.com/api/qt/stock/get?secid=${secid}&fields=${fields}`,
     `https://push2delay.eastmoney.com/api/qt/stock/get?secid=${secid}&fields=${fields}`,
   ];
   const j = await fetchJson<{
-    data?: { f57?: string; f58?: string; f43?: number; f170?: number };
+    data?: { f57?: string; f58?: string; f43?: number; f170?: number; f86?: number };
   }>(urls, {
     headers: { Referer: "https://quote.eastmoney.com/" },
     timeoutMs: 10_000,
+    fetchImpl: options.fetchImpl,
   });
   const d = j?.data;
   if (!d?.f58 || d.f43 == null) return null;
+  const stamp = Number(d.f86);
   return {
     code: String(d.f57 ?? secid),
     name: d.f58,
     price: d.f43 / 100,
     changePct: (d.f170 ?? 0) / 100,
+    quoteStamp: Number.isFinite(stamp) && stamp > 1_000_000_000 ? stamp : null,
   };
 }
 
 /** 1.000001 上证 · 0.399001 深成指 · 0.399006 创业板 */
-export async function fetchMarketOverview(): Promise<MarketOverview | null> {
+export async function fetchMarketOverview(
+  options: MarketOverviewOptions = {},
+): Promise<MarketOverview | null> {
   const pairs: [string, string][] = [
     ["1.000001", "上证指数"],
     ["0.399001", "深证成指"],
@@ -49,7 +70,7 @@ export async function fetchMarketOverview(): Promise<MarketOverview | null> {
   ];
   const indices: IndexSnap[] = [];
   for (const [secid] of pairs) {
-    const snap = await fetchEmIndex(secid);
+    const snap = await fetchEmIndex(secid, options);
     if (snap) indices.push(snap);
   }
   if (indices.length === 0) return null;

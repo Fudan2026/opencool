@@ -44,6 +44,16 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      # Manual tape capture for one session slot (`09:35` … `15:05`), leaving
+      # the edition trigger untouched. Empty is the normal case: the gate then
+      # decides from the clock. This is the only way to capture outside a
+      # session window, and it exists so the mechanism can be exercised without
+      # waiting for 09:35.
+      tape_slot:
+        description: 'Force a tape capture for one slot (HH:MM or HHMM); leave empty'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -70,6 +80,13 @@ jobs:
       edition-date: ${{ steps.check.outputs.edition-date }}
       backfill: ${{ steps.check.outputs.backfill }}
       reason: ${{ steps.check.outputs.reason }}
+      # Point-in-time tape decision (same script, `--mode=tape`). The edition
+      # outputs above are produced by the unmodified edition call; the tape call
+      # writes a disjoint set of outputs, so neither can move the other.
+      tape-should-run: ${{ steps.tape.outputs.tape-should-run }}
+      tape-date: ${{ steps.tape.outputs.tape-date }}
+      tape-slot: ${{ steps.tape.outputs.tape-slot }}
+      tape-reason: ${{ steps.tape.outputs.tape-reason }}
     steps:
       - name: Checkout gate script
         uses: actions/checkout@v4
@@ -93,6 +110,27 @@ jobs:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/gate.mjs
+
+      # Tape capture decision — same script, `--mode=tape`, same sparse checkout
+      # so this step needs no `npm ci` and no setup-node. Runs after the edition
+      # decision on purpose: it must never be able to change that step's
+      # outputs, and a failure here must not fail the gate job (fail-open: a
+      # missing tape tick is a named gap in the tape index, not a lost edition).
+      - name: Check tape schedule
+        id: tape
+        continue-on-error: true
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          # How far past a slot's nominal time a capture is still filed under
+          # that slot. 20min absorbs a dropped scheduled trigger; beyond it the
+          # slot stays a gap rather than being written late under a timestamp it
+          # does not describe. 0 = exact-minute capture only.
+          TAPE_GRACE_MIN: ${{ vars.TAPE_GRACE_MIN || '20' }}
+          # Empty in every normal run. Set to a slot (e.g. 1405) via
+          # workflow_dispatch to force one capture.
+          TAPE_SLOT: ${{ github.event.inputs.tape_slot }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/gate.mjs --mode=tape
 
 
   build:
@@ -319,3 +357,160 @@ jobs:
           EDITION_DATE: ${{ needs.gate.outputs.edition-date }}
           EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
         run: node scripts/notify-failure.mjs --failure --reason "build job failed"
+
+
+  # POINT-IN-TIME TAPE — half-hourly captures during the two A-share sessions.
+  #
+  # Deliberately a separate, narrowly-scoped job rather than steps inside
+  # `build`:
+  #   - `build` runs when an EDITION is due (06/13/19 + catchup) and carries the
+  #     gh-pages publish, the publish-lag assert and the edition push;
+  #   - the tape runs when a SESSION SLOT is due (10 half-hourly slots) and
+  #     publishes only the immutable snapshot files.
+  # Folding it into `build` would mean an edition build every half hour, or a
+  # tape tick gated on an edition being due — neither is the deliverable. The
+  # gate job stays the single decision point: it runs `gate.mjs` twice, once per
+  # mode, and these two jobs hang off its two disjoint output sets.
+  tape:
+    name: Tape capture
+    # Depends on `build` as well as `gate`, and runs even when `build` was
+    # skipped (the usual case: no edition due), which is why `always()` is
+    # required — a skipped dependency otherwise blocks the dependent job.
+    #
+    # Ordering behind `build` closes a write race: the edition job publishes its
+    # whole tree with `keep_files: false`, so a snapshot pushed while a build is
+    # running would be deleted by that build's own push. Running after it means
+    # the snapshot lands on a finished tree. Across workflow runs the same race
+    # is closed by the in-flight guard in `gate.mjs --mode=tape`.
+    needs: [gate, build]
+    if: always() && needs.gate.outputs.tape-should-run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    # One capture at a time. Unlike the build group this does NOT cancel in
+    # progress: a cancelled capture writes no file, and the slot would become a
+    # gap for no reason. A queued second tick is cheap and lands as a revision.
+    concurrency:
+      group: daily-brief-tape
+      cancel-in-progress: false
+    # Same structural zero-token pin as the build job: the tape is arithmetic
+    # over quote feeds and must never be able to reach an LLM backend, whether
+    # or not a key happens to exist.
+    env:
+      LLM_MODE: 'off'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Scope for the zero-token assertion below — same meaning as the build
+      # job's: only calls recorded at/after this instant count.
+      - name: Record run start
+        run: echo "LLM_LOG_SINCE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+
+      # The append-only store lives in the published tree, so the previous
+      # snapshots must be on disk before writing: `wx` would otherwise create a
+      # second `rev-N` for a slot that already shipped, or a fresh day directory
+      # with no history behind it.
+      - name: Restore existing tape from gh-pages
+        run: |
+          mkdir -p daily_reports
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git fetch origin gh-pages --depth=1
+            git --work-tree=daily_reports checkout origin/gh-pages -- tape || true
+            echo "Restored $(find daily_reports/tape -name '*.json' 2>/dev/null | wc -l) prior tape file(s)"
+          else
+            echo "gh-pages doesn't exist yet — first tape capture"
+          fi
+
+      - name: Capture snapshot
+        env:
+          # Zero-token mode is pinned at job level; restated so a future
+          # step-level env cannot silently re-enable the LLM path.
+          LLM_MODE: 'off'
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          # The slot the gate decided on. The baker re-derives the slot from the
+          # schedule when this is empty, and honours it verbatim when set, so
+          # the file written is always the one the gate named.
+          TAPE_SLOT: ${{ needs.gate.outputs.tape-slot }}
+          TAPE_DATE: ${{ needs.gate.outputs.tape-date }}
+        run: npm run tape:bake
+
+      # ZERO-TOKEN ASSERT — same check, same script, same rule as the build
+      # job. The tape reads quote feeds and does arithmetic; a single logged
+      # LLM call here means the pin was bypassed and the run must fail before
+      # it publishes.
+      - name: Assert zero LLM calls
+        run: node scripts/assert-zero-llm.mjs --since "$LLM_LOG_SINCE"
+
+      # Fail-open proof, not decoration: publishing an empty capture would hide
+      # a broken upstream behind a green run. The snapshot must exist, must
+      # parse, and must carry two clocks on every record — the same guard the
+      # baker runs before writing, re-run against what is actually on disk.
+      - name: Assert snapshot integrity
+        env:
+          TAPE_DATE: ${{ needs.gate.outputs.tape-date }}
+          TAPE_SLOT: ${{ needs.gate.outputs.tape-slot }}
+        run: node --input-type=module -e '
+          import fs from "node:fs";
+          const dir = `daily_reports/tape/${process.env.TAPE_DATE}`;
+          const key = process.env.TAPE_SLOT.replace(":", "");
+          const files = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
+          const wrote = files.filter((f) => f === `${key}.json` || f.startsWith(`${key}.rev-`));
+          console.log(`tape dir ${dir}: [${files.sort().join(", ")}]`);
+          if (!wrote.length) {
+            console.error(`::error::no snapshot for slot ${process.env.TAPE_SLOT} in ${dir}`);
+            process.exit(1);
+          }
+          const stamp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/;
+          const snap = JSON.parse(fs.readFileSync(`${dir}/${wrote.sort().at(-1)}`, "utf8"));
+          for (const [name, section] of Object.entries(snap)) {
+            if (!section || !Array.isArray(section.records)) continue;
+            if (!stamp.test(section.asOf) || !stamp.test(section.observedAt)) {
+              console.error(`::error::${name} is missing an offset ISO clock`);
+              process.exit(1);
+            }
+            for (const rec of section.records) {
+              if (!stamp.test(rec.asOf) || !stamp.test(rec.observedAt)) {
+                console.error(`::error::${name} record without both clocks: ${JSON.stringify(rec).slice(0, 120)}`);
+                process.exit(1);
+              }
+            }
+          }
+          const counts = Object.entries(snap)
+            .filter(([, s]) => s && Array.isArray(s.records))
+            .map(([n, s]) => `${n}=${s.unavailable ? "n/a" : s.records.length}`)
+            .join(" ");
+          console.log(`wrote ${dir}/${wrote.sort().at(-1)} slot=${snap.slot} rev=${snap.revision} ${counts}`);
+        '
+
+      # Publish ONLY the tape tree. `keep_files: true` is what makes this safe:
+      # the edition job owns every other path in the published branch, and this
+      # job must never delete an edition it did not write. The tape itself is
+      # append-only on disk, so a re-push can only add files.
+      - name: Publish tape to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./daily_reports
+          publish_branch: gh-pages
+          keep_files: true
+          commit_message: 'tape: ${{ needs.gate.outputs.tape-date }}/${{ needs.gate.outputs.tape-slot }} for ${{ github.run_id }}'
+
+      # A tape failure must not page as an edition failure: the alert script
+      # reports missing EDITION html, and this job writes none. The tape's own
+      # gap surface is `tape/<date>/index.json`, which names an absent slot
+      # rather than pretending the run was clean.
+      - name: Alert on tape failure
+        if: failure() || cancelled()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+        run: node scripts/notify-failure.mjs --failure --reason "tape capture failed (${{ needs.gate.outputs.tape-reason }})"

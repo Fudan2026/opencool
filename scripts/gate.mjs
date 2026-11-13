@@ -43,6 +43,29 @@ const DEFAULT_HOURS = [6, 13, 19];
 const DEFAULT_LOOKBACK_DAYS = 1;
 const CONTENT_REF = "gh-pages";
 
+/**
+ * Tape capture slots — half-hourly during the two A-share sessions, Shanghai,
+ * weekdays only. Ten per day, not 24x7: overnight the quote feed returns the
+ * previous close, so an overnight tick adds rows and no information.
+ *
+ * Lives here (zero-dependency ESM, runnable by bare Node) because the tape gate
+ * runs on the same cheap tick as the edition gate and must not need `npm ci`.
+ * `lib/tape/schedule.ts` re-exports it, so the baker and the gate can never
+ * disagree about which slots exist.
+ */
+export const TAPE_SLOTS = [
+  "09:35",
+  "10:05",
+  "10:35",
+  "11:05",
+  "11:35",
+  "13:05",
+  "13:35",
+  "14:05",
+  "14:35",
+  "15:05",
+];
+
 function pad2(n) {
   return String(n).padStart(2, "0");
 }
@@ -185,9 +208,22 @@ async function getJson(url, token, fetchImpl) {
 
 /** `<date>/<slot>.json` on gh-pages → HTTP status. Network failure → 0. */
 export function makeContentsProbe({ repo, token, fetchImpl = fetch }) {
-  return async (date, slot) => {
+  const probePath = makePathProbe({ repo, token, fetchImpl });
+  return async (date, slot) => probePath(`${date}/${slot}.json`);
+}
+
+/**
+ * Arbitrary path inside the published tree → HTTP status (0 on any failure).
+ *
+ * The edition probe needs `<date>/<slot>.json`; the tape gate needs
+ * `tape/<date>/<HHMM>.json` to tell "this slot is already captured" from
+ * "capture it". One implementation so the 200-only rule cannot drift between
+ * the two.
+ */
+export function makePathProbe({ repo, token, fetchImpl = fetch }) {
+  return async (relPath) => {
     if (!repo || !token) return 0;
-    const url = `${API_BASE}/repos/${repo}/contents/${date}/${slot}.json?ref=${CONTENT_REF}`;
+    const url = `${API_BASE}/repos/${repo}/contents/${relPath}?ref=${CONTENT_REF}`;
     try {
       const res = await fetchImpl(url, {
         method: "GET",
@@ -201,7 +237,7 @@ export function makeContentsProbe({ repo, token, fetchImpl = fetch }) {
       });
       return res.status;
     } catch (e) {
-      console.warn(`[gate] probe ${date}/${slot}.json failed: ${e?.message ?? e}`);
+      console.warn(`[gate] probe ${relPath} failed: ${e?.message ?? e}`);
       return 0;
     }
   };
@@ -264,6 +300,203 @@ export async function hasBuildInFlight({
   } catch (e) {
     return { inFlight: false, checked: false, detail: `guard error: ${e?.message ?? e}` };
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Tape mode                                                           */
+/* ------------------------------------------------------------------ */
+
+function pad2n(n) {
+  return String(n).padStart(2, "0");
+}
+
+/** `09:35` → 575 minutes since midnight. */
+function slotMinutes(slot) {
+  const [h, m] = String(slot).split(":").map((s) => parseInt(s, 10));
+  return h * 60 + m;
+}
+
+/** Is `dateKey` Monday–Friday? Weekends have no session. */
+export function isTradingWeekday(dateKey) {
+  const dow = dayOfWeek(dateKey);
+  return dow >= 1 && dow <= 5;
+}
+
+/**
+ * Which capture slot is this tick for? `null` when it is not a capture tick.
+ *
+ * `graceMin` (default 20) is the catch-up window: the first tick at or after a
+ * slot captures it, and later ticks inside `slot + grace` capture it again —
+ * which is how a silently dropped scheduled trigger still gets a snapshot.
+ * Past the grace the slot is left as a NAMED GAP instead of being written late:
+ * a 15:05 file created at 16:40 would claim to describe 15:05 while carrying
+ * 16:40 prices, and that lie is exactly what this store exists to avoid.
+ */
+export function dueTapeSlot(now, graceMin = 20) {
+  if (!isTradingWeekday(now.date)) return null;
+  const nowMin = now.hour * 60 + now.minute;
+  let chosen = null;
+  for (const slot of TAPE_SLOTS) {
+    const m = slotMinutes(slot);
+    if (nowMin < m) continue;
+    if (nowMin > m + Math.max(0, graceMin)) continue;
+    chosen = slot;
+  }
+  return chosen;
+}
+
+/**
+ * Tape decision. Cheap by construction — at most ten Contents API probes per
+ * tick, and only inside a session window, so the ordinary half hour costs
+ * nothing.
+ *
+ * Existence oracle: `tape/<date>/<HHMM>.json` on gh-pages. Only a clean 200
+ * means captured, same rule the edition gate uses. A `rev-N` sibling does not
+ * count as "captured" for the base slot's *first* capture (the base file is
+ * always written first), so probing the base name is sufficient.
+ */
+export async function decideTape({
+  now,
+  graceMin = 20,
+  probe,
+  forceSlot = "",
+}) {
+  const checks = [];
+  if (forceSlot) {
+    const slot = /^\d{2}:\d{2}$/.test(forceSlot)
+      ? forceSlot
+      : `${forceSlot.slice(0, 2)}:${forceSlot.slice(-2)}`;
+    if (!TAPE_SLOTS.includes(slot)) {
+      return {
+        shouldRun: false,
+        date: now.date,
+        slot: "",
+        reason: "slot-not-in-schedule",
+        checks: [{ slot, status: null, skipped: "not a session slot" }],
+      };
+    }
+    return {
+      shouldRun: true,
+      date: now.date,
+      slot,
+      reason: "forced",
+      checks: [{ slot, status: null }],
+    };
+  }
+  if (!isTradingWeekday(now.date)) {
+    return { shouldRun: false, date: now.date, slot: "", reason: "weekend", checks };
+  }
+
+  const slot = dueTapeSlot(now, graceMin);
+  if (!slot) {
+    return { shouldRun: false, date: now.date, slot: "", reason: "outside-session-window", checks };
+  }
+
+  const key = slot.replace(":", "");
+  const relPath = `tape/${now.date}/${key}.json`;
+  let status;
+  try {
+    status = await probe(relPath);
+  } catch {
+    status = 0;
+  }
+  if (typeof status !== "number") status = 0;
+  checks.push({ slot, status, path: relPath });
+  if (status === 200) {
+    return { shouldRun: false, date: now.date, slot, reason: "already-captured", checks };
+  }
+  return { shouldRun: true, date: now.date, slot, reason: "capture", checks };
+}
+
+function writeTapeOutputs(result) {
+  const lines = [
+    "tape-should-run=" + (result.shouldRun ? "true" : "false"),
+    "tape-date=" + (result.shouldRun ? result.date : ""),
+    "tape-slot=" + (result.shouldRun ? result.slot : ""),
+    `tape-reason=${result.reason}`,
+  ];
+  const out = process.env.GITHUB_OUTPUT;
+  if (out) fs.appendFileSync(out, `${lines.join("\n")}\n`);
+  console.log(lines.join("\n"));
+
+  const summary = process.env.GITHUB_STEP_SUMMARY;
+  if (summary) {
+    const rows = (result.checks || [])
+      .map((c) =>
+        c.skipped
+          ? `| ${c.slot} | — | skipped (${c.skipped}) |`
+          : `| ${c.slot} | ${c.status === 200 ? "captured" : `MISSING (HTTP ${c.status})`} |`,
+      )
+      .join("\n");
+    fs.appendFileSync(
+      summary,
+      [
+        `### Tape gate — ${result.shouldRun ? `${result.date} / ${result.slot} (${result.reason})` : `no capture (${result.reason})`}`,
+        "",
+        "| slot | state |",
+        "| --- | --- |",
+        rows || "| — | — |",
+        "",
+      ].join("\n"),
+    );
+  }
+}
+
+async function mainTape() {
+  const tz = process.env.REPORT_TZ?.trim() || "Asia/Shanghai";
+  const repo = process.env.GITHUB_REPOSITORY || "";
+  const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || "";
+  const graceMin = intEnv("TAPE_GRACE_MIN", 20);
+  const forceSlot = process.env.TAPE_SLOT?.trim() || "";
+
+  const nowRaw = process.env.GATE_NOW?.trim();
+  const nowDate = nowRaw ? new Date(nowRaw) : new Date();
+  if (Number.isNaN(nowDate.getTime())) throw new Error(`GATE_NOW is not a date: "${nowRaw}"`);
+  const now = civilNow(nowDate, tz);
+
+  console.log(
+    `[gate:tape] now ${now.date} ${pad2n(now.hour)}:${pad2n(now.minute)} ${tz} (dow ${now.dow}) ` +
+      `grace=${graceMin}min force=${forceSlot || "none"} slots=${TAPE_SLOTS.length}`,
+  );
+
+  const result = await decideTape({
+    now,
+    graceMin,
+    forceSlot,
+    probe: makePathProbe({ repo, token }),
+  });
+
+  // Do not capture while an edition build is in flight.
+  //
+  // The edition job publishes its whole tree with `keep_files: false`, and it
+  // restores `tape/` at job start — so a snapshot published *during* a build is
+  // deleted by that build's push, and the tape would silently lose a tick it
+  // reported as captured. The tick after the build finishes (still inside the
+  // slot's grace window) captures it instead; past the window the slot stays a
+  // named gap, which is the honest outcome. Reuses the edition gate's existing
+  // guard rather than inventing a second one, and fails OPEN like it does: a
+  // guard we cannot consult must not starve the tape.
+  if (result.shouldRun && !forceSlot) {
+    const guard = await hasBuildInFlight({
+      repo,
+      token,
+      selfRunId: process.env.GITHUB_RUN_ID || "",
+    });
+    if (guard.inFlight) {
+      console.log(`[gate:tape] edition build in flight (${guard.detail}) — deferring this capture`);
+      result.shouldRun = false;
+      result.reason = "build-in-flight";
+    } else if (!guard.checked) {
+      console.warn(`[gate:tape] in-flight guard unavailable (${guard.detail}) — capturing anyway`);
+    }
+  }
+
+  if (result.shouldRun) {
+    console.log(`[gate:tape] ↻ capture ${result.date}/${result.slot} (${result.reason})`);
+  } else {
+    console.log(`[gate:tape] ✗ no capture (${result.reason})`);
+  }
+  writeTapeOutputs(result);
 }
 
 function intEnv(name, fallback) {
@@ -374,7 +607,14 @@ async function main() {
 const invokedDirectly =
   process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url;
 if (invokedDirectly) {
-  main().catch((e) => {
+  // `--mode=tape` switches the same cheap gate script to the tape decision.
+  // One entry point, two decisions, no second scheduler and no second copy of
+  // the "only a 200 counts" rule.
+  const tapeMode = process.argv.some(
+    (a) => a === "--mode=tape" || a === "--tape",
+  );
+  const run = tapeMode ? mainTape : main;
+  run().catch((e) => {
     console.error(`[gate] FAILED: ${e?.message ?? e}`);
     process.exit(1);
   });

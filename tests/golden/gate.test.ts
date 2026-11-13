@@ -16,11 +16,14 @@ import {
   dayMatches,
   dayOfWeek,
   decideEdition,
+  decideTape,
   dueSlots,
   hasBuildInFlight,
+  isTradingWeekday,
   latestDueSlot,
   makeContentsProbe,
   parseHours,
+  TAPE_SLOTS,
 } from "../../scripts/gate.mjs";
 import {
   isValidDateKey,
@@ -371,6 +374,119 @@ test("gate — helpers", async (t) => {
     });
     assert.equal(r.inFlight, false);
     assert.equal(r.checked, false);
+  });
+});
+
+test("gate — tape mode decides capture without touching the edition path", async (t) => {
+  await t.test("inside a session slot → capture that slot", async () => {
+    const asked: string[] = [];
+    const r = await decideTape({
+      now: nowAt("2026-11-13T01:35:00Z"), // 09:35 SH
+      graceMin: 20,
+      probe: async (p: string) => {
+        asked.push(p);
+        return 404;
+      },
+    });
+    assert.equal(r.shouldRun, true);
+    assert.equal(r.slot, "09:35");
+    assert.equal(r.reason, "capture");
+    assert.deepEqual(asked, ["tape/2026-11-13/0935.json"]);
+  });
+
+  await t.test("an already-captured slot is a no-op", async () => {
+    const r = await decideTape({
+      now: nowAt("2026-11-13T01:35:00Z"),
+      probe: async () => 200,
+    });
+    assert.equal(r.shouldRun, false);
+    assert.equal(r.reason, "already-captured");
+    assert.equal(r.slot, "09:35");
+  });
+
+  await t.test("a flaky probe status is treated as missing, like the edition gate", async () => {
+    for (const status of [403, 429, 500, 0, 302]) {
+      const r = await decideTape({
+        now: nowAt("2026-11-13T01:35:00Z"),
+        probe: async () => status,
+      });
+      assert.equal(r.shouldRun, true, `HTTP ${status} must capture`);
+    }
+  });
+
+  await t.test("outside the session window nothing is captured", async () => {
+    for (const iso of [
+      "2026-11-13T01:00:00Z", // 09:00 SH, before the open
+      "2026-11-13T04:00:00Z", // 12:00 SH, lunch break
+      "2026-11-13T09:00:00Z", // 17:00 SH, after the close
+    ]) {
+      const r = await decideTape({ now: nowAt(iso), probe: async () => 404 });
+      assert.equal(r.shouldRun, false, iso);
+      assert.equal(r.reason, "outside-session-window");
+    }
+  });
+
+  await t.test("a weekend never captures", async () => {
+    const r = await decideTape({
+      now: nowAt("2026-11-14T01:35:00Z"), // Saturday 09:35 SH
+      probe: async () => 404,
+    });
+    assert.equal(r.shouldRun, false);
+    assert.equal(r.reason, "weekend");
+  });
+
+  await t.test("the force slot is honoured and validated against the schedule", async () => {
+    const forced = await decideTape({
+      now: nowAt("2026-11-13T09:00:00Z"),
+      forceSlot: "1405",
+      probe: async () => 404,
+    });
+    assert.equal(forced.shouldRun, true);
+    assert.equal(forced.slot, "14:05");
+    assert.equal(forced.reason, "forced");
+
+    const bad = await decideTape({
+      now: nowAt("2026-11-13T09:00:00Z"),
+      forceSlot: "12:00",
+      probe: async () => 404,
+    });
+    assert.equal(bad.shouldRun, false);
+    assert.equal(bad.reason, "slot-not-in-schedule");
+  });
+
+  await t.test("the tape decision never moves an edition decision", async () => {
+    // Same clock: the edition gate has an edition due, the tape gate has a
+    // capture due, and the two run as separate steps off the same gate job.
+    const now = nowAt("2026-11-13T01:35:00Z");
+    const edition = await decideEdition({
+      now,
+      hours: HOURS,
+      lookbackDays: 0,
+      daysSpec: "*",
+      probe: async () => 404,
+    });
+    const tape = await decideTape({ now, probe: async () => 404 });
+    assert.equal(edition.shouldRun, true);
+    assert.equal(edition.hour, "06");
+    assert.equal(tape.shouldRun, true);
+    assert.equal(tape.slot, "09:35");
+  });
+
+  await t.test("TAPE_SLOTS is the ten session slots", () => {
+    assert.deepEqual(TAPE_SLOTS, [
+      "09:35",
+      "10:05",
+      "10:35",
+      "11:05",
+      "11:35",
+      "13:05",
+      "13:35",
+      "14:05",
+      "14:35",
+      "15:05",
+    ]);
+    assert.equal(isTradingWeekday("2026-11-13"), true);
+    assert.equal(isTradingWeekday("2026-11-14"), false);
   });
 });
 
