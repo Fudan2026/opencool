@@ -10,6 +10,8 @@ import type {
 } from "../../lib/ai/pipeline";
 import type { RawByCategory, RawNews, SubGroup, LaneView } from "../../lib/output/render";
 import type { TopicKey } from "../../lib/topics/taxonomy";
+import type { MarketSentiment } from "../../lib/nlp/sentiment";
+import { BACKTEST_VERDICT_TEMPLATE } from "../../lib/invest/risk-gates";
 
 export function article(over: Partial<ArticleInput> = {}): ArticleInput {
   return {
@@ -153,10 +155,11 @@ export function rawNews(over: Partial<RawNews> = {}): RawNews {
   };
 }
 
-export function sentimentFixture() {
+export function sentimentFixture(): MarketSentiment {
   return {
     generated_at: "2026-10-27T03:00:00Z",
     score: -42,
+    raw: -29,
     label: "偏空",
     posHits: 4,
     negHits: 11,
@@ -259,13 +262,14 @@ export function reportFixture(over: Partial<DailyReport> = {}): DailyReport {
           { code: "000001", name: "上证指数", price: 3350.12, changePct: 0.42 },
           { code: "399001", name: "深证成指", price: 10890.3, changePct: -0.21 },
         ],
+        fetchedAt: "2026-10-27T03:00:00Z",
         note: "fixture delayed snapshot",
       },
       events: [],
       eventCounts: [],
       personas: [],
       riskGates: [],
-      backtestTemplate: { template: "fixture" },
+      backtestTemplate: BACKTEST_VERDICT_TEMPLATE,
       toyBacktests: [],
       school: [],
       knowledge: [],
