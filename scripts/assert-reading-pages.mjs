@@ -95,4 +95,17 @@ function main() {
   }
 }
 
-main();
+/**
+ * Only run when invoked as a script.
+ *
+ * `workflow-guards.test.ts` imports `checkPage` to unit-test it, and a bare
+ * `main()` at module scope made that import execute the real assertion against
+ * a directory with no pages — failing the suite. That went unnoticed because
+ * the test file was only ever run by a `build` job that the first post-merge
+ * weekends skipped; the `pages` job's own step calls this script by path, so
+ * the guard is now on the module boundary like every other assert script here.
+ */
+const invokedDirectly =
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname);
+if (invokedDirectly) main();

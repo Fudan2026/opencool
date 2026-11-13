@@ -153,6 +153,13 @@ empty table.
 7. **License**: code MIT; data terms are stated in `manifest.license.data`
    (delayed vendor quotes, reading only, not for execution, not advice, no
    third-party licensed dataset redistributed).
+8. **The manifest is the index of what is real.** Publish happens with
+   `keep_files: true`, which merges directories on the remote rather than
+   replacing them, so a `v1/asof/…` file that stops being produced can linger on
+   the branch until a full-tree publish. `manifest.json` is rewritten every run
+   and names exactly the endpoints and days that exist — read it instead of
+   guessing paths, and treat a file absent from the manifest as not part of the
+   contract even if it still resolves.
 
 ### What `/v1` explicitly does **not** promise
 
