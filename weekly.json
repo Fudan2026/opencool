@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T00:17:12.883Z",
+  "generatedAt": "2026-11-13T00:50:53.781Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
@@ -104,7 +104,7 @@
     {
       "date": "2026-11-13",
       "hour": "06",
-      "score": -4
+      "score": -3
     }
   ],
   "sectorAvg": [
@@ -123,20 +123,20 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -24.8,
+      "avg": -24.9,
+      "editions": 20
+    },
+    {
+      "key": "china-etf",
+      "label": "ETF",
+      "avg": -19.7,
       "editions": 20
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 20.2,
-      "editions": 11
-    },
-    {
-      "key": "china-etf",
-      "label": "ETF",
-      "avg": -19.2,
-      "editions": 20
+      "avg": 19,
+      "editions": 10
     },
     {
       "key": "china-ashare",
@@ -147,13 +147,13 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -11.8,
+      "avg": -11.2,
       "editions": 20
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -3.4,
+      "avg": -3.3,
       "editions": 20
     }
   ],
@@ -177,7 +177,7 @@
       "displayName": "Nvidia",
       "title": "Nvidia opens investigation after report CEO Jensen Huang was target of foreign intelligence",
       "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation",
-      "count": 10
+      "count": 9
     },
     {
       "symbol": "USDCNY=X",
@@ -232,15 +232,21 @@
   "keywords": [
     {
       "term": "美元",
-      "count": 4,
+      "count": 3,
       "firstSeen": "2026-11-07",
-      "lastSeen": "2026-11-13"
+      "lastSeen": "2026-11-11"
     },
     {
       "term": "0高",
       "count": 2,
       "firstSeen": "2026-11-08",
       "lastSeen": "2026-11-08"
+    },
+    {
+      "term": "1月",
+      "count": 2,
+      "firstSeen": "2026-11-12",
+      "lastSeen": "2026-11-13"
     },
     {
       "term": "huang",
@@ -285,10 +291,28 @@
       "lastSeen": "2026-11-08"
     },
     {
+      "term": "月1",
+      "count": 2,
+      "firstSeen": "2026-11-12",
+      "lastSeen": "2026-11-13"
+    },
+    {
       "term": "美股",
       "count": 2,
       "firstSeen": "2026-11-06",
       "lastSeen": "2026-11-07"
+    },
+    {
+      "term": "联社",
+      "count": 2,
+      "firstSeen": "2026-11-12",
+      "lastSeen": "2026-11-13"
+    },
+    {
+      "term": "财联",
+      "count": 2,
+      "firstSeen": "2026-11-12",
+      "lastSeen": "2026-11-13"
     },
     {
       "term": "超1",
@@ -309,58 +333,34 @@
       "lastSeen": "2026-11-11"
     },
     {
-      "term": "1月",
-      "count": 1,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-12"
-    },
-    {
-      "term": "2026年11月13日",
-      "count": 1,
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13"
-    },
-    {
       "term": "2日",
       "count": 1,
       "firstSeen": "2026-11-12",
       "lastSeen": "2026-11-12"
     },
     {
+      "term": "3日",
+      "count": 1,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-13"
+    },
+    {
       "term": "4万亿日元",
       "count": 1,
       "firstSeen": "2026-11-09",
       "lastSeen": "2026-11-09"
-    },
-    {
-      "term": "ai交易回撤",
-      "count": 1,
-      "firstSeen": "2026-11-06",
-      "lastSeen": "2026-11-06"
-    },
-    {
-      "term": "apple",
-      "count": 1,
-      "firstSeen": "2026-11-10",
-      "lastSeen": "2026-11-10"
-    },
-    {
-      "term": "billion",
-      "count": 1,
-      "firstSeen": "2026-11-06",
-      "lastSeen": "2026-11-06"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 99
+      "totalHits": 98
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 64
+      "totalHits": 65
     },
     {
       "key": "bank",
@@ -370,7 +370,7 @@
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 56
+      "totalHits": 57
     },
     {
       "key": "semiconductor",
@@ -380,7 +380,7 @@
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 34
+      "totalHits": 35
     },
     {
       "key": "defense",
