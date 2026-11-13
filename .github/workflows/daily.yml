@@ -218,6 +218,14 @@ jobs:
       - name: Bake theme heat
         run: npm run themes:bake
 
+      # Story ledger: folds this edition into daily_reports/stories.json, which
+      # the gh-pages restore above brought in and the publish step below sends
+      # back. That round trip IS the persistence — no new store, no database.
+      # Fail-open: a corrupt ledger falls back to replaying the retained
+      # sidecars, and the script exits 0 even if that fails.
+      - name: Bake story ledger
+        run: npm run stories:bake
+
       # Guard: theme board heat silently shipped `boards=0` from 2026-11-11 to
       # 2026-11-13 while CI stayed green. Fail the run instead of publishing a
       # themes.json where no theme resolved a board.
