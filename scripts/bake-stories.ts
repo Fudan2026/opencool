@@ -50,6 +50,7 @@ import {
   buildPayload,
   emptyLedger,
   ingestEdition,
+  ledgerTimezone,
   pruneLedger,
   reviveLedger,
   sortStories,
@@ -60,6 +61,7 @@ import {
   type LedgerStats,
   type StoryArticle,
 } from "../lib/stories/ledger";
+import { isoWithOffset } from "../lib/stories/time";
 import { getReportTz } from "../lib/utils";
 
 const ROOT = "daily_reports";
@@ -211,8 +213,12 @@ function main(): void {
 
   const pruned = pruneLedger(ledger);
   sortStories(ledger);
-  ledger.updatedAt = new Date().toISOString();
-  ledger.timezone = getReportTz() ?? ledger.timezone;
+  ledger.updatedAt = isoWithOffset(new Date());
+  // `REPORT_TZ` decides the offset every instant is rendered in, so it must be
+  // applied here even when the restored ledger was written under another zone.
+  // A warm run therefore repairs a ledger whose offsets were stamped in the
+  // runner's clock: the instants are re-derived, not trusted from the file.
+  ledger.timezone = ledgerTimezone();
   ledger.retentionDays = retentionDays;
   ledger.maxStories = maxStories;
 
