@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-13T10:03:49.155Z",
+  "generatedAt": "2026-11-13T13:13:23.772Z",
   "source": "bake-periods",
-  "editions": 78,
+  "editions": 79,
   "weeks": [
     {
       "key": "2026-10-05",
@@ -78,33 +78,33 @@
     {
       "key": "2026-11-09",
       "end": "2026-11-13",
-      "editions": 12,
-      "avgSentiment": -3.3,
+      "editions": 13,
+      "avgSentiment": -3.5,
       "posNegRatio": 0.39,
       "topThemes": [
         {
           "name": "算力",
-          "hits": 68
+          "hits": 76
         },
         {
           "name": "人工智能",
-          "hits": 41
+          "hits": 45
         },
         {
           "name": "银行",
-          "hits": 37
+          "hits": 40
+        },
+        {
+          "name": "石油石化",
+          "hits": 31
         },
         {
           "name": "有色金属",
-          "hits": 28
-        },
-        {
-          "name": "半导体",
-          "hits": 26
+          "hits": 29
         }
       ],
-      "avgIndexChangePct": -0.46,
-      "deltaVsPrev": 29.6
+      "avgIndexChangePct": -0.58,
+      "deltaVsPrev": 29.4
     }
   ],
   "months": [
@@ -131,33 +131,33 @@
     {
       "key": "2026-11",
       "end": "2026-11-13",
-      "editions": 35,
-      "avgSentiment": -28.5,
+      "editions": 36,
+      "avgSentiment": -27.8,
       "posNegRatio": 0.38,
       "topThemes": [
         {
           "name": "算力",
-          "hits": 111
+          "hits": 119
         },
         {
           "name": "人工智能",
-          "hits": 75
+          "hits": 79
         },
         {
           "name": "银行",
-          "hits": 71
+          "hits": 74
         },
         {
           "name": "有色金属",
-          "hits": 62
+          "hits": 63
         },
         {
           "name": "半导体",
-          "hits": 57
+          "hits": 60
         }
       ],
-      "avgIndexChangePct": -0.74,
-      "deltaVsPrev": 68.3
+      "avgIndexChangePct": -0.78,
+      "deltaVsPrev": 69
     }
   ],
   "note": "Zero AI · pure arithmetic · not investment advice"

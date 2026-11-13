@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-13T10:03:46.622Z",
+  "generatedAt": "2026-11-13T13:13:21.880Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 21,
-  "avgSentiment": -4.3,
+  "editions": 22,
+  "avgSentiment": -4.4,
   "sentimentCurve": [
     {
       "date": "2026-11-06",
@@ -110,6 +110,11 @@
       "date": "2026-11-13",
       "hour": "13",
       "score": -1
+    },
+    {
+      "date": "2026-11-13",
+      "hour": "19",
+      "score": -5
     }
   ],
   "sectorAvg": [
@@ -126,22 +131,22 @@
       "editions": 5
     },
     {
-      "key": "us-equity",
-      "label": "美股",
-      "avg": -24.4,
-      "editions": 21
-    },
-    {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 24.2,
-      "editions": 11
+      "avg": 28.5,
+      "editions": 12
+    },
+    {
+      "key": "us-equity",
+      "label": "美股",
+      "avg": -24.5,
+      "editions": 22
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -18.6,
-      "editions": 21
+      "avg": -19.1,
+      "editions": 22
     },
     {
       "key": "china-ashare",
@@ -152,14 +157,14 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -12,
-      "editions": 21
+      "avg": -13.2,
+      "editions": 22
     },
     {
       "key": "general",
       "label": "大盘综合",
       "avg": -3,
-      "editions": 21
+      "editions": 22
     }
   ],
   "topEvents": [
@@ -168,14 +173,21 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 21
+      "count": 22
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Trump says FBI investigating Nvidia boss's affair with alleged Chinese spy",
+      "url": "https://www.bbc.co.uk/news/articles/cqg7x7dpvym8o?at_medium=RSS&at_campaign=rss",
+      "count": 10
     },
     {
       "symbol": "NVDA",
@@ -185,10 +197,10 @@
       "count": 9
     },
     {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Trump says FBI investigating Nvidia boss's affair with alleged Chinese spy",
-      "url": "https://www.bbc.co.uk/news/articles/cqg7x7dpvym8o?at_medium=RSS&at_campaign=rss",
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "Anthropic斥资34亿美元接手发电设备",
+      "url": "https://www.ftchinese.com/story/001111311",
       "count": 9
     },
     {
@@ -206,6 +218,13 @@
       "count": 9
     },
     {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
+      "url": "https://www.bbc.co.uk/news/articles/c64g1gzy2vdzo?at_medium=RSS&at_campaign=rss",
+      "count": 9
+    },
+    {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Meta拟发股筹集950亿美元AI投资资金",
@@ -217,20 +236,6 @@
       "displayName": "美元 / 人民币",
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
-      "count": 8
-    },
-    {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "Anthropic斥资34亿美元接手发电设备",
-      "url": "https://www.ftchinese.com/story/001111311",
-      "count": 8
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
-      "url": "https://www.bbc.co.uk/news/articles/c64g1gzy2vdzo?at_medium=RSS&at_campaign=rss",
       "count": 8
     }
   ],
@@ -290,6 +295,12 @@
       "lastSeen": "2026-11-08"
     },
     {
+      "term": "仁勋",
+      "count": 2,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-13"
+    },
+    {
       "term": "伟达",
       "count": 2,
       "firstSeen": "2026-11-12",
@@ -344,63 +355,57 @@
       "lastSeen": "2026-11-08"
     },
     {
-      "term": "12月加息25个基点的概率升至85",
-      "count": 1,
-      "firstSeen": "2026-11-11",
-      "lastSeen": "2026-11-11"
-    },
-    {
-      "term": "2日",
-      "count": 1,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-12"
+      "term": "黄仁",
+      "count": 2,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-13"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 106
+      "totalHits": 114
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 68
+      "totalHits": 72
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 65
+      "totalHits": 68
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 58
+      "totalHits": 59
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 52
+      "totalHits": 55
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 38
+      "totalHits": 44
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 27
+      "totalHits": 28
+    },
+    {
+      "key": "brokerage",
+      "name": "券商",
+      "totalHits": 26
     },
     {
       "key": "robotics",
       "name": "机器人",
       "totalHits": 25
-    },
-    {
-      "key": "brokerage",
-      "name": "券商",
-      "totalHits": 22
     },
     {
       "key": "media",
@@ -421,18 +426,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.47,
-      "editions": 19
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": -1.17,
+      "avgChangePct": -0.48,
       "editions": 20
     },
     {
+      "name": "深证成指",
+      "avgChangePct": -1.21,
+      "editions": 21
+    },
+    {
       "name": "创业板指",
-      "avgChangePct": -1.6,
-      "editions": 19
+      "avgChangePct": -1.68,
+      "editions": 20
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
