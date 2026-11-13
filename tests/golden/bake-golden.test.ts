@@ -114,7 +114,12 @@ test("golden: build-site end-to-end", async (t) => {
   // Bakes run BEFORE build-site in CI (their artifacts feed it:
   // keywords/periods.json gate page emission) — same order here.
   const tsxBin = path.join(REPO_ROOT, "node_modules", ".bin", "tsx");
-  for (const script of ["bake-keywords.ts", "build-weekly.ts", "bake-periods.ts"]) {
+  for (const script of [
+    "bake-keywords.ts",
+    "build-weekly.ts",
+    "bake-periods.ts",
+    "bake-v1.ts",
+  ]) {
     execFileSync(tsxBin, [path.join(REPO_ROOT, "scripts", script)], {
       cwd: tmp,
       stdio: "pipe",
@@ -193,6 +198,61 @@ test("golden: build-site end-to-end", async (t) => {
     ]) {
       assert.ok(llms.includes(p), `llms.txt missing ${p}`);
     }
+  });
+
+  await t.test("v1 namespace: manifest + coverage are published inside the tree", () => {
+    const manifest = JSON.parse(read("v1/manifest.json"));
+    assert.equal(manifest.schemaVersion, 1);
+    assert.equal(manifest.namespace, "v1");
+    // Only endpoints with a file behind them are advertised. This fixture has
+    // no tape directory, so `asof` is correctly absent — the same rule that keeps
+    // /v1/reactions.json out of the manifest until its bake has run.
+    const ids = manifest.endpoints.map((e: { id: string }) => e.id);
+    assert.ok(ids.includes("manifest"), "the manifest must list itself");
+    assert.ok(ids.includes("coverage"), "coverage.json was written, so it is advertised");
+    assert.equal(ids.includes("asof"), false, "no day file exists, so asof is not advertised");
+    const cov = JSON.parse(read("v1/coverage.json"));
+    assert.equal(cov.namespace, "v1");
+    assert.ok(Array.isArray(cov.days));
+    // This fixture tree has no tape directory at all, so the namespace must
+    // report "not started" rather than a clean 100%.
+    assert.equal(cov.tape.started, false);
+    assert.equal(cov.summary.coveragePct, null);
+  });
+
+  await t.test("v1 endpoints are advertised in tools.json and llms.txt", () => {
+    const tools = JSON.parse(read("tools.json"));
+    const names = tools.tools.map((t: { name: string }) => t.name);
+    for (const n of ["asof_snapshot", "coverage_report", "pinned_stories", "pinned_themes"]) {
+      assert.ok(names.includes(n), `tools.json missing ${n}`);
+    }
+    assert.ok(read("llms.txt").includes("/v1/manifest.json"));
+  });
+
+  await t.test("the site nav drops links to pages this build did not produce", () => {
+    // The edition template emits ../hour.html, ../stories.html and
+    // ../integrity.html unconditionally; only the bakes decide which exist. A
+    // nav link that 404s — especially on the honesty page's own site — is the
+    // defect this stripping exists to prevent.
+    const home = read("index.html");
+    for (const rel of ["./hour.html", "./stories.html"]) {
+      // This fixture never runs reading:pages, so neither page exists.
+      assert.equal(
+        home.includes(`<a href="${rel}">`),
+        false,
+        `index.html still links ${rel}, which was not built`,
+      );
+    }
+  });
+
+  await t.test("integrity.html exists and states that capture has not started", () => {
+    const html = read("integrity.html");
+    assert.ok(html.includes('data-surface="no-tape"'), "the not-started notice must be present");
+    assert.equal(html.includes('data-surface="days"'), false, "no empty day table");
+    // Reachable from the existing surfaces, not an orphan page.
+    assert.ok(read("archive.html").includes('href="./integrity.html"'));
+    assert.ok(read("status.html").includes('href="./integrity.html"'));
+    assert.ok(read("index.html").includes('href="./integrity.html"'));
   });
 
   await t.test("heatmap: baked from sidecar trading.tickers", () => {

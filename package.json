@@ -29,6 +29,8 @@
     "reactions:bake": "tsx scripts/bake-reactions.ts",
     "stories:bake": "tsx scripts/bake-stories.ts",
     "board-map:bake": "tsx scripts/bake-board-map.ts",
+    "v1:bake": "tsx scripts/bake-v1.ts",
+    "assert:v1": "node scripts/assert-v1.mjs",
     "mcp:sync-watchlist": "tsx scripts/sync-mcp-watchlist.ts",
     "open": "node scripts/open-report.mjs",
     "docker:daily": "tsx scripts/docker-daily.mjs"
