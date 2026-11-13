@@ -177,6 +177,129 @@ test("publish-lag: verdicts", async (t) => {
   });
 });
 
+/**
+ * PREMATURE — the mirror of LATE, and the reason this suite grew a case.
+ *
+ * Run 43481490148 published `2026-11-14/06.json` at 02:26 SH, 3h34m before the
+ * 06:00 slot, after `latestDueSlot()` fell back to `hours[0]` before any slot
+ * was due. The lag assert printed `lag=-213m verdict=REPUBLISH` and stayed
+ * green, so nothing anywhere reported it — and because the gate then probes
+ * `06.json` and gets 200, the real 06:00 edition never runs.
+ */
+test("publish-lag: publishing EARLY is a breach, not a republish", async (t) => {
+  // Replay of the real incident: slot 2026-11-14 06:00 SH, published 02:26 SH.
+  // The slot instant is 22:00Z on 11-13, so the measured publish lands 3h34m
+  // before it. The publish instant below is set to the incident's recorded lag
+  // (-213m in the gate log) so the assertion pins the exact number.
+  const incident = {
+    date: "2026-11-14",
+    hour: "06",
+    tz: SH,
+    publishedAt: new Date("2026-11-13T18:27:00Z"), // 02:27 SH on 11-14
+  };
+
+  await t.test("the measured -213m publish is a failing PREMATURE BREACH", () => {
+    const r = evaluatePublishLag({ ...incident, trigger: "push" });
+    assert.equal(r.lagMinutes, -213);
+    assert.equal(r.ok, false);
+    assert.equal(r.premature, true);
+    assert.match(r.verdict, /PREMATURE BREACH/);
+  });
+
+  await t.test("the real 02:26:22 publish is a breach by more than the limit", () => {
+    // Same incident at the exact sidecar instant — 213.6m early. Whichever
+    // second it landed on, it is far beyond the 20m limit and must fail.
+    const r = evaluatePublishLag({
+      ...incident,
+      publishedAt: new Date("2026-11-13T18:26:22Z"),
+      trigger: "push",
+    });
+    assert.equal(r.ok, false);
+    assert.equal(r.premature, true);
+    assert.ok(Math.abs(r.lagMinutes) > DEFAULT_LAG_LIMIT_MIN);
+  });
+
+  await t.test("a premature file being 'already published' does not launder it", () => {
+    // This is exactly the 43481490148 shape: the premature file exists, so the
+    // next run sees ALREADY_PUBLISHED=true. That must not turn it green.
+    for (const trigger of ["push", "manual", "exact", "catchup"]) {
+      const r = evaluatePublishLag({
+        ...incident,
+        trigger,
+        alreadyPublished: true,
+      });
+      assert.equal(r.ok, false, `${trigger} + alreadyPublished must still fail`);
+      assert.equal(r.premature, true);
+      assert.match(r.verdict, /PREMATURE BREACH/);
+    }
+  });
+
+  await t.test("a backfilled early publish stays green (recovery, not a claim)", () => {
+    const r = evaluatePublishLag({ ...incident, backfilled: true });
+    assert.equal(r.ok, true);
+    assert.equal(r.premature, false);
+    assert.match(r.verdict, /BACKFILL/);
+  });
+
+  await t.test("exactly the limit early is still within limits", () => {
+    const r = evaluatePublishLag({
+      date: "2026-11-14",
+      hour: "06",
+      tz: SH,
+      publishedAt: new Date(SLOT_06.getTime() + 86_400_000 - DEFAULT_LAG_LIMIT_MIN * 60_000),
+    });
+    assert.equal(r.lagMinutes, -DEFAULT_LAG_LIMIT_MIN);
+    assert.equal(r.ok, true, "only strictly beyond the limit is a breach");
+    assert.equal(r.premature, false);
+  });
+
+  await t.test("one minute beyond the limit early is a breach", () => {
+    const r = evaluatePublishLag({
+      date: "2026-11-14",
+      hour: "06",
+      tz: SH,
+      publishedAt: new Date(SLOT_06.getTime() + 86_400_000 - (DEFAULT_LAG_LIMIT_MIN + 1) * 60_000),
+    });
+    assert.equal(r.lagMinutes, -(DEFAULT_LAG_LIMIT_MIN + 1));
+    assert.equal(r.ok, false);
+    assert.equal(r.premature, true);
+  });
+
+  await t.test("a custom limit widens the early tolerance too", () => {
+    const r = evaluatePublishLag({
+      date: "2026-11-14",
+      hour: "06",
+      tz: SH,
+      limitMin: 240,
+      publishedAt: new Date("2026-11-13T18:27:00Z"),
+    });
+    assert.equal(r.ok, true, "-213m is inside a 240m tolerance");
+  });
+
+  await t.test("the existing late / on-time / republish verdicts are unchanged", () => {
+    const base = { date: "2026-11-13", hour: "06", tz: SH };
+    assert.equal(evaluatePublishLag({ ...base, publishedAt: SLOT_06 }).ok, true);
+    assert.match(
+      evaluatePublishLag({ ...base, publishedAt: new Date(SLOT_06.getTime() + 21 * 60_000) }).verdict,
+      /LATE BREACH/,
+    );
+    // A republish a long way LATE is still green: the slot was met earlier.
+    const republish = evaluatePublishLag({
+      ...base,
+      publishedAt: new Date(SLOT_06.getTime() + 120 * 60_000),
+      alreadyPublished: true,
+    });
+    assert.equal(republish.ok, true);
+    assert.match(republish.verdict, /REPUBLISH/);
+  });
+
+  await t.test("the log line reports the premature verdict with its sign", () => {
+    const line = formatLagLine(evaluatePublishLag({ ...incident, trigger: "push" }));
+    assert.match(line, /lag=-213m/);
+    assert.match(line, /PREMATURE BREACH/);
+  });
+});
+
 test("publish-lag: the single log line carries every field", () => {
   const r = evaluatePublishLag({
     date: "2026-11-13",

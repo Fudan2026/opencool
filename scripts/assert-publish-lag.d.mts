@@ -12,6 +12,8 @@ export interface PublishLagResult {
   lagMinutes: number;
   verdict: string;
   ok: boolean;
+  /** True when the edition published more than the limit BEFORE its slot. */
+  premature: boolean;
   notified: boolean;
 }
 

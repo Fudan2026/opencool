@@ -54,6 +54,12 @@ export interface BoardQuote {
   up: number;
   /** Constituents that declined. */
   down: number;
+  /**
+   * Upstream quote stamp in epoch **seconds** (`f124`), when the payload
+   * carried one. The point-in-time tape records this as the market clock of a
+   * board value; the edition panels ignore it.
+   */
+  quoteStamp?: number | null;
 }
 
 export interface ConstituentRefs {
@@ -97,6 +103,7 @@ interface EmQuoteRow {
   f3?: number | string | boolean | null;
   f104?: number;
   f105?: number;
+  f124?: number | string | null;
 }
 
 export interface EmQuoteResponse {
@@ -145,6 +152,11 @@ export function parseBoardRegistry(pages: readonly unknown[]): BoardEntry[] {
  * `f3` is the change percent; a suspended or freshly listed board reports `"-"`
  * which must not become `0` silently — it is dropped so callers can tell
  * "no quote" from "flat".
+ *
+ * `f124` is the upstream quote stamp (epoch seconds); it is carried through as
+ * `quoteStamp` because the point-in-time tape has to record the market clock of
+ * a value, not just our fetch clock. It stays optional: a payload without it is
+ * still a usable quote, it just cannot claim a market timestamp.
  */
 export function parseBoardQuotes(payload: unknown): Map<string, BoardQuote> {
   const out = new Map<string, BoardQuote>();
@@ -155,11 +167,13 @@ export function parseBoardQuotes(payload: unknown): Map<string, BoardQuote> {
     if (!code) continue;
     const raw = row?.f3;
     if (typeof raw !== "number" || !Number.isFinite(raw)) continue;
+    const stamp = Number(row?.f124);
     out.set(code, {
       name: String(row?.f14 ?? "").trim(),
       changePct: raw,
       up: Number(row?.f104) || 0,
       down: Number(row?.f105) || 0,
+      quoteStamp: Number.isFinite(stamp) && stamp > 1_000_000_000 ? stamp : null,
     });
   }
   return out;
@@ -226,7 +240,7 @@ export async function fetchBoardQuotes(
       QUOTE_HOSTS.map(
         (host) =>
           `${host}/api/qt/ulist.np/get?fltt=2&invt=2` +
-          `&fields=f12,f14,f3,f104,f105&secids=${chunk.join(",")}`,
+          `&fields=f12,f14,f3,f104,f105,f124&secids=${chunk.join(",")}`,
       ),
       {
         headers: QUOTE_HEADERS,
