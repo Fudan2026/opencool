@@ -1057,6 +1057,11 @@ const latestPath = path.join(ROOT, latest.rel);
 let latestHtml = fs.readFileSync(latestPath, "utf8");
 latestHtml = latestHtml
   .replace(/href="\.\.\/archive\.html"/g, 'href="./archive.html"')
+  // The reading pages live at the tree root next to index/archive, so the
+  // edition page's `../` links resolve there and the homepage copy must drop
+  // the prefix — same treatment as the archive link just above.
+  .replace(/href="\.\.\/hour\.html"/g, 'href="./hour.html"')
+  .replace(/href="\.\.\/stories\.html"/g, 'href="./stories.html"')
   .replace(/href="\.\/(\d{2})\.html"/g, `href="./${latest.date}/$1.html"`);
 // Homepage-only entry to the trails favorites page (archive already links
 // it). Injected only when trails.html exists, so a local build-site run
@@ -1220,6 +1225,8 @@ const archiveHtml = `<!doctype html>
   <h1>归档</h1>
   <p class="meta">${editions.length} 期 · 自 ${ARCHIVE_NORM_FROM} 起每日三报：早报 06:00 · 午报 13:00 · 晚报 19:00（上海时区）· 零 AI</p>
   <p><a class="home" href="./index.html">← 回到最新一期</a>
+   · <a class="home" href="./hour.html">盘中逐时报</a>
+   · <a class="home" href="./stories.html">故事线</a>
    · <a class="home" href="./trails.html">徒步路线收藏</a>
    · <a class="home" href="./weekly.html">周报</a>
    · <a class="home" href="./search.html">搜索</a>${archHeatLink}

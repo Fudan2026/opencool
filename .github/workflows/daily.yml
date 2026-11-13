@@ -325,6 +325,18 @@ jobs:
       - name: Bake search index
         run: npm run search:bake
 
+      # Reading pages (increment 7): /hour.html and /stories.html. Must run
+      # BEFORE build-site — the homepage copy inherits the nav links from the
+      # latest edition's markup, and build-site rewrites their `../` prefixes for
+      # the root. Fail-open by construction: the script exits 0 and names a gap
+      # when the tape or the ledger is absent, so a missing product can never
+      # cost the edition.
+      - name: Build reading pages (hour + stories)
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
+        run: npm run reading:pages
+
       - name: Build static site (index + archive)
         run: npm run build-site
 
@@ -471,6 +483,11 @@ jobs:
           if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
             git fetch origin gh-pages --depth=1
             git --work-tree=daily_reports checkout origin/gh-pages -- tape || true
+            # The ledger is restored too because the intraday page below embeds
+            # the stories that entered it in the slot's window. Without it that
+            # column would render as a gap on every intraday refresh and then
+            # reappear on the next edition build.
+            git --work-tree=daily_reports checkout origin/gh-pages -- stories.json || true
             echo "Restored $(find daily_reports/tape -name '*.json' 2>/dev/null | wc -l) prior tape file(s)"
           else
             echo "gh-pages doesn't exist yet — first tape capture"
@@ -488,6 +505,20 @@ jobs:
           TAPE_SLOT: ${{ needs.gate.outputs.tape-slot }}
           TAPE_DATE: ${{ needs.gate.outputs.tape-date }}
         run: npm run tape:bake
+
+      # Refresh the intraday page from the tape that now includes this capture.
+      # `--only=hour` because this job restores only `tape/` and `stories.json`:
+      # rebuilding stories.html here would overwrite the real ledger page with
+      # whatever partial state this job happens to hold.
+      #
+      # Runs BEFORE the zero-token assert on purpose — that assert is scoped to
+      # this run and must cover the last generating step, so a new step placed
+      # after it would be unguarded.
+      - name: Rebuild intraday page
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
+        run: npm run reading:pages -- --only=hour
 
       # ZERO-TOKEN ASSERT — same check, same script, same rule as the build
       # job. The tape reads quote feeds and does arithmetic; a single logged
@@ -508,10 +539,17 @@ jobs:
           node scripts/assert-tape-snapshot.mjs
           --date "$TAPE_DATE" --slot "$TAPE_SLOT"
 
-      # Publish ONLY the tape tree. `keep_files: true` is what makes this safe:
-      # the edition job owns every other path in the published branch, and this
-      # job must never delete an edition it did not write. The tape itself is
-      # append-only on disk, so a re-push can only add files.
+      # Publish ONLY the tape tree and the page just rebuilt from it.
+      # `keep_files: true` is what makes this safe: the edition job owns every
+      # other path in the published branch, and this job must never delete an
+      # edition it did not write. The tape itself is append-only on disk, so a
+      # re-push can only add files.
+      #
+      # `stories.json` is also present in the tree here because the page build
+      # above read it. That is deliberately left alone rather than excluded by
+      # staging a second directory: it was restored from this same branch and is
+      # never written by this job, so the push re-sends identical bytes. A
+      # filtered publish_dir would be a second thing to keep correct.
       - name: Publish tape to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:

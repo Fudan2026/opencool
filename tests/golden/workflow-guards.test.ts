@@ -355,4 +355,92 @@ test("golden: tape job is zero-token and cannot disturb the edition path", async
   await t.test("a tape tick does not cancel an in-flight capture", () => {
     assert.match(job, /cancel-in-progress: false/);
   });
+
+  await t.test("the intraday page is rebuilt from the capture before publish", () => {
+    // Without this the page the tape job publishes would describe the previous
+    // capture, and the newest slot would be missing from /hour.html until the
+    // next edition build hours later.
+    const names = stepNames(job);
+    assert.ok(names.includes("Rebuild intraday page"), "missing intraday page rebuild");
+    const step = stepSource(job, "Rebuild intraday page");
+    assert.match(step, /npm run reading:pages/);
+    assert.match(step, /--only=hour/, "must not rebuild stories.html from a partial tree");
+    assert.ok(
+      names.indexOf("Capture snapshot") < names.indexOf("Rebuild intraday page"),
+      "the page must be rebuilt after the capture it describes",
+    );
+    assert.ok(
+      names.indexOf("Rebuild intraday page") < names.indexOf("Publish tape to gh-pages"),
+      "the page must exist before the publish step runs",
+    );
+  });
+
+  await t.test("the intraday rebuild is still covered by the zero-token assert", () => {
+    // The assert is scoped `--since` this run and must run after the last
+    // generating step; a new step added below it would be unguarded.
+    const names = stepNames(job);
+    assert.ok(
+      names.indexOf("Rebuild intraday page") < names.indexOf("Assert zero LLM calls"),
+      "a generating step must precede the zero-token assert",
+    );
+  });
+
+  await t.test("the tape job restores the ledger the intraday page reads", () => {
+    // The hour page embeds stories that entered the ledger in the slot window;
+    // without the restore that column renders as a gap on every intraday
+    // refresh.
+    assert.match(
+      stepSource(job, "Restore existing tape from gh-pages"),
+      /stories\.json/,
+      "the ledger must be restored alongside tape/",
+    );
+  });
+});
+
+/**
+ * The two reading pages are products over point-in-time artifacts. If a build
+ * step stops running they still render — as an empty state — which is exactly
+ * the kind of failure that stays green while the site loses a page. These
+ * assertions pin the wiring, and pin the page names the publish tree needs.
+ */
+test("golden: the reading pages are wired into the edition build", async (t) => {
+  const job = buildJobSource();
+  const names = stepNames(job);
+
+  await t.test("the page build step exists and runs the npm script", () => {
+    assert.ok(names.includes("Build reading pages (hour + stories)"), "missing reading-page build step");
+    assert.match(stepSource(job, "Build reading pages (hour + stories)"), /npm run reading:pages/);
+  });
+
+  await t.test("it runs before build-site, which rewrites the nav for the homepage", () => {
+    assert.ok(
+      names.indexOf("Build reading pages (hour + stories)") <
+        names.indexOf("Build static site (index + archive)"),
+      "build-site rewrites ./hour.html links for the root, so the pages must exist first",
+    );
+  });
+
+  await t.test("it runs after the ledger bake it reads", () => {
+    assert.ok(
+      names.indexOf("Bake story ledger") < names.indexOf("Build reading pages (hour + stories)"),
+      "stories.html must be built from the current ledger",
+    );
+  });
+
+  await t.test("the pages ship before the zero-token assert and the publish", () => {
+    const at = names.indexOf("Build reading pages (hour + stories)");
+    assert.ok(at < names.indexOf("Assert zero LLM calls"));
+    assert.ok(at < names.indexOf("Publish to gh-pages"));
+  });
+
+  await t.test("it receives the report timezone and locale", () => {
+    const step = stepSource(job, "Build reading pages (hour + stories)");
+    assert.match(step, /REPORT_TZ:/);
+    assert.match(step, /REPORT_LOCALE:/);
+  });
+
+  await t.test("no inline multi-line node body was added for the pages", () => {
+    const src = fs.readFileSync(WORKFLOW, "utf8");
+    assert.deepEqual([...src.matchAll(/run:\s*node\s+-e\s/g)].map((m) => m[0]), []);
+  });
 });

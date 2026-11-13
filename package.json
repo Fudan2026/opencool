@@ -16,6 +16,7 @@
     "test": "tsx --test lib/**/*.test.ts tests/**/*.test.ts",
     "deploy": "node scripts/deploy.mjs",
     "build-site": "node scripts/build-site.mjs",
+    "reading:pages": "tsx scripts/build-reading-pages.ts",
     "build-trails": "tsx scripts/build-trails.ts",
     "keywords:bake": "tsx scripts/bake-keywords.ts",
     "weekly:bake": "tsx scripts/build-weekly.ts",
