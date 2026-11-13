@@ -28,6 +28,8 @@ scripts/
   render.ts           # re-render HTML/MD from cached sidecar (~1s)
   regen-trading.ts    # rerun just the trading commentary
   regen-enrich.ts     # top up missing summaries for a subgroup
+  bake-themes.ts      # theme board heat + constituents + article hits
+  bake-board-map.ts   # refresh lib/themes/board-map.json (weekly, not per edition)
   build-site.mjs      # generate index.html + archive.html for static hosting
   deploy.mjs          # scp HTML to a remote nginx host (opt-in)
   sources.ts          # `npm run sources` — list/validate sources.config.json
@@ -55,6 +57,8 @@ sources.config.json   # SINGLE SOURCE OF TRUTH for the source registry
 
 6. **No agent-specific build steps.** No `next build`, no bundling. `tsx` runs TS directly. The HTML is hand-rendered, CSS is inlined string-templated.
 
+7. **Theme board data never comes from `clist/get`.** `push2.eastmoney.com/api/qt/clist/get` 502s for our clients for hours at a time (measured 0/40 from a VM, and CI logged `boards=0` on every edition from 2026-11-11 to 2026-11-13 while tests stayed green). `bake-themes` therefore reads the registry from `datacenter-web.eastmoney.com` (`RPT_EM_BOARD`, with `lib/themes/board-map.json` as the committed fallback refreshed weekly by the `board-map` workflow) and quotes from `api/qt/ulist.np/get`, which stays healthy on the same host and accepts a comma list of `90.BKxxxx` secids. Constituents come from `RPT_BOARD_CONSTITUENT` on the same registry host. See `lib/invest/board-registry.ts`. Never reintroduce a `clist/get` dependency for boards: `daily.yml` fails the run when fewer than 15 of 24 themes resolve a board, and `lib/invest/board-registry.test.ts` fails on a silently-empty parse.
+
 ## Commands
 
 | Task | Command | Cost |
@@ -64,6 +68,8 @@ sources.config.json   # SINGLE SOURCE OF TRUTH for the source registry
 | Re-render from cache | `npm run render [date]` | <1s |
 | Re-run trading section | `npm run regen-trading [date]` | ~2 min, 1 LLM call |
 | Top up missing summaries | `npm run regen-enrich <cat:sub> [date]` | ~30s, 1 LLM call |
+| Bake theme board heat | `npm run themes:bake` | ~1-2 min, no LLM |
+| Refresh board registry snapshot | `npm run board-map:bake` | ~15s, weekly in CI |
 | Static-site generator | `npm run build-site` | <1s |
 | List sources by status | `npm run sources` | instant |
 | Validate sources.config.json | `npm run sources:check` | instant |
