@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-13T18:27:12.427Z",
+  "generatedAt": "2026-11-13T22:35:56.770Z",
   "note": "Static MCP: fetch these endpoints directly; a live stdio MCP server ships in the repo (mcp/) for local agents. See /ai-instructions.html.",
   "tools": [
     {
@@ -62,6 +62,37 @@
       "staticEndpoint": "/periods.json",
       "params": "-",
       "returns": "{weeks:[{key,end,editions,avgSentiment,deltaVsPrev,...}],months:[...]}"
+    },
+    {
+      "name": "asof_snapshot",
+      "staticEndpoint": "/v1/asof/<YYYY-MM-DD>.json",
+      "params": "date -> every intraday slot that day, in order",
+      "returns": "{date,tradingDay,expectedSlots,slots:[{slot,asOf,observedAt,revision,captures[],sections{}}],gaps[],counts}"
+    },
+    {
+      "name": "coverage_report",
+      "staticEndpoint": "/v1/coverage.json",
+      "params": "-",
+      "returns": "{tape,days:[{date,expectedSlots,capturedSlots,missingSlots,revisions,sections,gaps}],stories,horizons,summary}"
+    },
+    {
+      "name": "pinned_stories",
+      "staticEndpoint": "/v1/stories.json",
+      "params": "-",
+      "returns": "{stories:[{id,firstSeenAt,sightings,headlineRevisions,firstMover}],counts,firstMover}"
+    },
+    {
+      "name": "pinned_themes",
+      "staticEndpoint": "/v1/themes.json",
+      "params": "minHeat -> filter themes",
+      "returns": "{themes:[{key,name,boardCode,boardChangePct,articleHits,constituents}]}"
+    },
+    {
+      "name": "pinned_reactions",
+      "staticEndpoint": "/v1/reactions.json",
+      "params": "-",
+      "file": "v1/reactions.json",
+      "returns": "{counts:{horizons:{'1h'|'1d'|'5d':{ok,pending,gap}}},observations[],aggregates,gaps[]}"
     }
   ]
 }

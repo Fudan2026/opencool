@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-13T18:26:41.892Z",
+  "generatedAt": "2026-11-13T22:35:12.946Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 9,
   "editions": 23,
-  "avgSentiment": -4.3,
+  "avgSentiment": -4.5,
   "sentimentCurve": [
     {
       "date": "2026-11-06",
@@ -119,7 +119,7 @@
     {
       "date": "2026-11-14",
       "hour": "06",
-      "score": -4
+      "score": -8
     }
   ],
   "sectorAvg": [
@@ -132,8 +132,8 @@
     {
       "key": "china-equity",
       "label": "中概港股",
-      "avg": 47.6,
-      "editions": 5
+      "avg": 55.2,
+      "editions": 6
     },
     {
       "key": "macro",
@@ -144,13 +144,13 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -24,
+      "avg": -23.9,
       "editions": 23
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -21.4,
+      "avg": -20.5,
       "editions": 23
     },
     {
@@ -162,13 +162,13 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -11.4,
+      "avg": -11.2,
       "editions": 23
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -3,
+      "avg": -3.2,
       "editions": 23
     }
   ],
@@ -209,6 +209,13 @@
       "count": 11
     },
     {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "Anthropic斥资34亿美元接手发电设备",
+      "url": "https://www.ftchinese.com/story/001111311",
+      "count": 10
+    },
+    {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
@@ -220,13 +227,6 @@
       "displayName": "Nvidia",
       "title": "Nvidia opens investigation after report CEO Jensen Huang was target of foreign intelligence",
       "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation",
-      "count": 9
-    },
-    {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "Anthropic斥资34亿美元接手发电设备",
-      "url": "https://www.ftchinese.com/story/001111311",
       "count": 9
     },
     {
@@ -318,12 +318,6 @@
       "lastSeen": "2026-11-08"
     },
     {
-      "term": "什么",
-      "count": 2,
-      "firstSeen": "2026-11-09",
-      "lastSeen": "2026-11-14"
-    },
-    {
       "term": "伟达",
       "count": 2,
       "firstSeen": "2026-11-12",
@@ -364,18 +358,24 @@
       "count": 2,
       "firstSeen": "2026-11-08",
       "lastSeen": "2026-11-08"
+    },
+    {
+      "term": "黄仁",
+      "count": 2,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-14"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 118
+      "totalHits": 117
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 82
+      "totalHits": 81
     },
     {
       "key": "bank",
@@ -395,7 +395,7 @@
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 45
+      "totalHits": 44
     },
     {
       "key": "defense",
@@ -403,24 +403,24 @@
       "totalHits": 30
     },
     {
-      "key": "brokerage",
-      "name": "券商",
-      "totalHits": 27
-    },
-    {
       "key": "robotics",
       "name": "机器人",
+      "totalHits": 26
+    },
+    {
+      "key": "brokerage",
+      "name": "券商",
       "totalHits": 25
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 22
+      "totalHits": 21
     },
     {
       "key": "comms",
       "name": "通信",
-      "totalHits": 11
+      "totalHits": 13
     },
     {
       "key": "infra",

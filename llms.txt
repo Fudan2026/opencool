@@ -28,6 +28,21 @@ No LLM behind any endpoint.
   sighting, headline revision trails, and a per-wire first-mover ranking
   (contestedFirsts = earliest AND followed; leads are measured between our
   fetches, so the granularity is the edition cadence)
+- Reaction windows: /reactions.json — per story, the sector move at +1h/+1d/+5d
+  after firstSeenAt, net of the market: {headlineMetric: "marketExcessPct",
+  method{...}, counts{attributed,horizons}, aggregates{byTopic,byEntity},
+  observations[], gaps[]}. Aggregates publish n/median/mean/p25/p75/hitRate
+  only at n >= 20; below that a row is status "insufficient" with n and NO
+  distribution. Horizons are "pending" until a tape snapshot exists at or after
+  firstSeenAt + horizon — never extrapolated. Tape history begins at the first
+  real A-share session (2026-11-16 09:35 Asia/Shanghai), so early editions are
+  legitimately all-pending. counts.attributed has five mutually exclusive
+  buckets: entity/topic (a sector board resolved and was quoted), market (the
+  tape HAD started and the story genuinely has no sector link — a finding),
+  pending (the tape had not started, so no board had ever been quoted and
+  nothing could be attributed — "could not check yet", NOT a market fallback),
+  and unmapped (tape started, nothing quoted). Read pending, not market, as the
+  "no data yet" state. Read the method block before quoting a number.
 - Dragon-tiger list: /lhb.json — top movers by net amount (previous
   trading day)
 - MCP desk: /mcp-desk.html — operator-baked institutional snapshot
@@ -41,11 +56,18 @@ No LLM behind any endpoint.
 - Subscribe: /subscribe.html — local-only subscription intent (no email
   leaves the browser unless SUBSCRIBE_ENDPOINT is explicitly configured)
 - Sector heatmap: /heatmap.html — watchlist tiles colored by pct1Day (latest edition)
+- Point-in-time tape: /v1/manifest.json — capture has NOT started yet. The first
+  honest snapshot is expected 2026-11-16 09:35 Asia/Shanghai;
+  /v1/coverage.json publishes the empty ledger and names every gap rather than
+  showing a clean slate.
 - Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.
 - Competitive analysis: docs/COMPETITIVE-ANALYSIS.md (repo source)
 - Status dashboard: /status.html — publish matrix (14d) + fetch health
+- Versioned namespace: /v1/manifest.json — deprecation policy (additive-only
+  within v1, breaking change = /v2/), license and data terms, endpoint list
+
 - RSS: /feed.xml — newest 30 real editions (placeholders never included)
 - Archive: /archive.html · Home: /index.html
 
