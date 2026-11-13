@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-13T00:50:53.781Z",
+  "generatedAt": "2026-11-13T10:03:46.622Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 20,
-  "avgSentiment": -4.5,
+  "editions": 21,
+  "avgSentiment": -4.3,
   "sentimentCurve": [
     {
       "date": "2026-11-06",
@@ -105,6 +105,11 @@
       "date": "2026-11-13",
       "hour": "06",
       "score": -3
+    },
+    {
+      "date": "2026-11-13",
+      "hour": "13",
+      "score": -1
     }
   ],
   "sectorAvg": [
@@ -123,20 +128,20 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -24.9,
-      "editions": 20
-    },
-    {
-      "key": "china-etf",
-      "label": "ETF",
-      "avg": -19.7,
-      "editions": 20
+      "avg": -24.4,
+      "editions": 21
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 19,
-      "editions": 10
+      "avg": 24.2,
+      "editions": 11
+    },
+    {
+      "key": "china-etf",
+      "label": "ETF",
+      "avg": -18.6,
+      "editions": 21
     },
     {
       "key": "china-ashare",
@@ -147,14 +152,14 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -11.2,
-      "editions": 20
+      "avg": -12,
+      "editions": 21
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -3.3,
-      "editions": 20
+      "avg": -3,
+      "editions": 21
     }
   ],
   "topEvents": [
@@ -163,20 +168,41 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Nvidia opens investigation after report CEO Jensen Huang was target of foreign intelligence",
       "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation",
+      "count": 9
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Trump says FBI investigating Nvidia boss's affair with alleged Chinese spy",
+      "url": "https://www.bbc.co.uk/news/articles/cqg7x7dpvym8o?at_medium=RSS&at_campaign=rss",
+      "count": 9
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Zoe Kleinman: Nvidia CEO's affair will cause ripples across US and beyond",
+      "url": "https://www.bbc.co.uk/news/articles/cj3vqv3nee72o?at_medium=RSS&at_campaign=rss",
+      "count": 9
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Nvidia shares tumble over investigation into Huang's affair with alleged Chinese spy",
+      "url": "https://www.bbc.co.uk/news/articles/c6zxjx01vyleo?at_medium=RSS&at_campaign=rss",
       "count": 9
     },
     {
@@ -203,30 +229,9 @@
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
-      "title": "Trump says FBI investigating Nvidia boss's affair with alleged Chinese spy",
-      "url": "https://www.bbc.co.uk/news/articles/cqg7x7dpvym8o?at_medium=RSS&at_campaign=rss",
+      "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
+      "url": "https://www.bbc.co.uk/news/articles/c64g1gzy2vdzo?at_medium=RSS&at_campaign=rss",
       "count": 8
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Zoe Kleinman: Nvidia CEO's affair will cause ripples across US and beyond",
-      "url": "https://www.bbc.co.uk/news/articles/cj3vqv3nee72o?at_medium=RSS&at_campaign=rss",
-      "count": 8
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Nvidia shares tumble over investigation into Huang's affair with alleged Chinese spy",
-      "url": "https://www.bbc.co.uk/news/articles/c6zxjx01vyleo?at_medium=RSS&at_campaign=rss",
-      "count": 8
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "What do we know about Nvidia CEO’s affair with a suspected Chinese spy?",
-      "url": "https://www.bbc.co.uk/news/videos/cq3989nkzn3ko?at_medium=RSS&at_campaign=rss",
-      "count": 7
     }
   ],
   "keywords": [
@@ -285,6 +290,12 @@
       "lastSeen": "2026-11-08"
     },
     {
+      "term": "伟达",
+      "count": 2,
+      "firstSeen": "2026-11-12",
+      "lastSeen": "2026-11-13"
+    },
+    {
       "term": "修超",
       "count": 2,
       "firstSeen": "2026-11-08",
@@ -304,6 +315,12 @@
     },
     {
       "term": "联社",
+      "count": 2,
+      "firstSeen": "2026-11-12",
+      "lastSeen": "2026-11-13"
+    },
+    {
+      "term": "英伟",
       "count": 2,
       "firstSeen": "2026-11-12",
       "lastSeen": "2026-11-13"
@@ -337,97 +354,85 @@
       "count": 1,
       "firstSeen": "2026-11-12",
       "lastSeen": "2026-11-12"
-    },
-    {
-      "term": "3日",
-      "count": 1,
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13"
-    },
-    {
-      "term": "4万亿日元",
-      "count": 1,
-      "firstSeen": "2026-11-09",
-      "lastSeen": "2026-11-09"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 98
+      "totalHits": 106
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 65
+      "totalHits": 68
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 62
+      "totalHits": 65
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 57
+      "totalHits": 58
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 48
+      "totalHits": 52
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 35
+      "totalHits": 38
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 26
+      "totalHits": 27
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 22
+      "totalHits": 25
     },
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 20
+      "totalHits": 22
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 19
+      "totalHits": 20
+    },
+    {
+      "key": "comms",
+      "name": "通信",
+      "totalHits": 11
     },
     {
       "key": "infra",
       "name": "基建",
       "totalHits": 10
-    },
-    {
-      "key": "comms",
-      "name": "通信",
-      "totalHits": 9
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
       "avgChangePct": -0.47,
-      "editions": 18
-    },
-    {
-      "name": "深证成指",
-      "avgChangePct": -1.12,
       "editions": 19
     },
     {
+      "name": "深证成指",
+      "avgChangePct": -1.17,
+      "editions": 20
+    },
+    {
       "name": "创业板指",
-      "avgChangePct": -1.5,
-      "editions": 18
+      "avgChangePct": -1.6,
+      "editions": 19
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
