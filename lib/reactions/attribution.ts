@@ -110,6 +110,16 @@ export const MARKET_INDEX_CODE = "000001";
 export interface AttributionContext {
   /** Theme key → resolved concept board, from the tape. */
   themeBoards: Map<string, { code: string; name: string }>;
+  /**
+   * Whether the tape has started at all — i.e. whether any snapshot exists.
+   *
+   * This is deliberately NOT inferred from `themeBoards` being empty: an empty
+   * map is ambiguous between "no capture yet" and "captured, but this theme's
+   * board was not in the quote batch", and conflating those is precisely how
+   * every story ended up labelled `market`. The caller knows which it is and
+   * must say so.
+   */
+  tapeStarted: boolean;
   /** True when the tape quoted this index code, so a market fallback is measurable. */
   hasIndex?: (code: string) => boolean;
   /** Themes in the catalog, for display names. */
@@ -138,6 +148,31 @@ export function attributeStory(
 
   const themes = ctx.themes ?? loadThemeCatalog();
   const themeName = (key: string) => themes.find((t) => t.key === key)?.name ?? key;
+
+  // 0. Before the tape exists, nothing has been quoted, so nothing can be
+  //    attributed — not an entity, not a topic, and emphatically not "market".
+  //    This must come first: the steps below all decide between *findings*, and
+  //    a tape that has not started supports no finding at all. Returning
+  //    `market` here (the previous behaviour, via an `hasIndex` that was true
+  //    by construction) reported ~2,000 stories as sectorless for several days
+  //    and then silently redistributed them on the first real session.
+  if (!ctx.tapeStarted) {
+    const knownEntity = (story.entities ?? []).find((e) => linkByEntity.has(e)) ?? null;
+    return {
+      ...base,
+      target: null,
+      targetLabel: null,
+      attribution: "pending",
+      // No target was selected, so no entity selected one either — the field
+      // keeps its documented meaning. The candidate is named in the reason so
+      // the diagnostic is not lost.
+      entity: null,
+      attributionPending: true,
+      attributionReason: knownEntity
+        ? `tape has not started — no sector board has been quoted yet, so ${knownEntity}'s board cannot be resolved; this is not a market fallback`
+        : "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+    };
+  }
 
   // 1. Entity, in the story's own declared order (which is priority order in
   //    the entity table), first link whose board the tape quoted.
@@ -172,7 +207,10 @@ export function attributeStory(
     }
   }
 
-  // 3. Market fallback: measured, but only asserts that the tape moved.
+  // 3. Market fallback. Reaching here means the tape HAS started (step 0
+  //    returned otherwise), so this is a real finding: no entity or topic link
+  //    resolved against a tape that was actually capturing. It still only
+  //    asserts "did the tape move", never "this sector moved".
   if (ctx.hasIndex && !ctx.hasIndex(MARKET_INDEX_CODE)) {
     return {
       ...base,
@@ -195,7 +233,17 @@ export function attributeStory(
   };
 }
 
-/** True when the story could not be measured on anything at all. */
+/**
+ * True when the story could not be measured on anything at all.
+ *
+ * `"pending"` is not unmapped: it has no target *yet*, and counting it here
+ * would report "we lost 2,000 stories" on day one.
+ */
 export function isUnmapped(story: AttributedStory): boolean {
   return story.attribution === null;
+}
+
+/** True when the attribution is provisional because the tape has not started. */
+export function isAttributionPending(story: AttributedStory): boolean {
+  return story.attribution === "pending";
 }

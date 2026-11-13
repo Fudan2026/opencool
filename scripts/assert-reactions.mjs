@@ -67,6 +67,72 @@ const rows = [
   ...(Array.isArray(payload.aggregates?.byEntity) ? payload.aggregates.byEntity : []),
 ];
 
+/*
+ * ATTRIBUTION HONESTY — the regression this check exists for.
+ *
+ * `counts.attributed.market` is a *finding*: the tape ran, the index was
+ * quoted, and the story has no defensible sector link. Before the tape has
+ * started, no board has ever been quoted, so no story can be attributed either
+ * way — those stories are `pending`. Shipping `market: 2000` on a cold tape
+ * told a consumer "we decided none of these has a sector", and then silently
+ * redistributed them the first day tape existed.
+ *
+ * So: a cold tape must report zero market. This is a hard fail, not a warning,
+ * because the file's whole purpose is to be quotable.
+ */
+const tapeStarted =
+  typeof payload.tape?.days === "number" &&
+  typeof payload.tape?.snapshots === "number" &&
+  (payload.tape.days > 0 || payload.tape.snapshots > 0);
+const attributed = payload.counts?.attributed ?? {};
+if (typeof attributed.market !== "number") {
+  problems.push("counts.attributed.market must be a number");
+}
+if (typeof attributed.pending !== "number") {
+  // Absent `pending` means the file predates the fourth state; without it a
+  // consumer cannot tell "could not check" from "checked, no sector".
+  problems.push("counts.attributed.pending is missing — pending is a first-class state, not an omission");
+}
+if (!tapeStarted && typeof attributed.market === "number" && attributed.market > 0) {
+  problems.push(
+    `tape has not started but counts.attributed.market=${attributed.market} — nothing can be attributed before a board is quoted; these stories are pending, not market`,
+  );
+}
+if (!tapeStarted && typeof attributed.pending === "number" && attributed.pending === 0) {
+  const stories = typeof payload.counts?.stories === "number" ? payload.counts.stories : 0;
+  if (stories > 0) {
+    problems.push(
+      `tape has not started and ${stories} stories exist, yet counts.attributed.pending=0 — the attribution block claims a finding it cannot have`,
+    );
+  }
+}
+{
+  const fields = ["entity", "topic", "market", "pending", "unmapped"].filter(
+    (f) => typeof attributed[f] === "number",
+  );
+  if (fields.length) {
+    const sum = fields.reduce((n, f) => n + attributed[f], 0);
+    const stories = typeof payload.counts?.stories === "number" ? payload.counts.stories : null;
+    if (stories !== null && sum !== stories) {
+      problems.push(
+        `counts.attributed sums to ${sum} but counts.stories is ${stories} — every story must land in exactly one bucket`,
+      );
+    }
+  }
+}
+
+for (const story of Array.isArray(payload.observations) ? payload.observations : []) {
+  if (!tapeStarted && story.attribution === "market") {
+    problems.push(`story ${story.id}: attributed market on a tape that has not started (must be pending)`);
+  }
+  if (story.attribution === "pending" && story.target != null) {
+    problems.push(`story ${story.id}: attribution pending but a target was selected`);
+  }
+  if (story.attribution === "pending" && story.attributionPending !== true) {
+    problems.push(`story ${story.id}: attribution pending without the attributionPending marker`);
+  }
+}
+
 for (const row of rows) {
   const where = `aggregate ${JSON.stringify(row.key)}`;
   if (typeof row.n === "undefined") {
@@ -145,6 +211,8 @@ const h = c.horizons ?? {};
 console.log(
   `[reactions] ok headline=${payload.headlineMetric} stories=${c.stories} ` +
     `tapeDays=${payload.tape?.days} rows=${rows.length} ` +
+    `attr=entity${attributed.entity ?? "?"}/topic${attributed.topic ?? "?"}` +
+    `/market${attributed.market ?? "?"}/pending${attributed.pending ?? "?"}/unmapped${attributed.unmapped ?? "?"} ` +
     `horizons=${Object.entries(h)
       .map(([k, v]) => `${k}:ok${v.ok}/pend${v.pending}`)
       .join(",")} gaps=${(payload.gaps ?? []).length}`,

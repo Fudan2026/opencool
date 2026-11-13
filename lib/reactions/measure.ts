@@ -148,6 +148,14 @@ export function measureHorizon(
   const minCross = options.minCrossSection ?? MIN_CROSS_SECTION;
   const minWindowFraction = options.minWindowFraction ?? MIN_WINDOW_FRACTION;
   if (!story.target) {
+    // A `pending` attribution has no target *because the tape has not started*,
+    // which is a waiting condition — the same thing as any other pending
+    // horizon. Reporting it as `gap` would say "this can never be measured",
+    // and on day one that would mislabel every horizon of every story as a
+    // permanent hole instead of "not yet".
+    if (story.attribution === "pending") {
+      return { status: "pending", reason: `attribution pending: ${story.attributionReason}` };
+    }
     return { status: "gap", reason: "unmapped: no sector or index to measure" };
   }
   const seenMs = Date.parse(story.firstSeenAt);

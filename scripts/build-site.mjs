@@ -1831,7 +1831,13 @@ No LLM behind any endpoint.
   distribution. Horizons are "pending" until a tape snapshot exists at or after
   firstSeenAt + horizon — never extrapolated. Tape history begins at the first
   real A-share session (2026-11-16 09:35 Asia/Shanghai), so early editions are
-  legitimately all-pending. Read the method block before quoting a number.
+  legitimately all-pending. counts.attributed has five mutually exclusive
+  buckets: entity/topic (a sector board resolved and was quoted), market (the
+  tape HAD started and the story genuinely has no sector link — a finding),
+  pending (the tape had not started, so no board had ever been quoted and
+  nothing could be attributed — "could not check yet", NOT a market fallback),
+  and unmapped (tape started, nothing quoted). Read pending, not market, as the
+  "no data yet" state. Read the method block before quoting a number.
 - Dragon-tiger list: /lhb.json — top movers by net amount (previous
   trading day)
 - MCP desk: /mcp-desk.html — operator-baked institutional snapshot
