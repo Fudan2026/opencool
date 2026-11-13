@@ -81,6 +81,16 @@ async function main(): Promise<void> {
   }
 
   const label = `${date} ${slot} (${isoWithOffset(now, tz)})`;
+  // A forced capture (TAPE_SLOT / TAPE_DATE) can land on a day with no session.
+  // The snapshot is still worth writing — its clocks show the market value is
+  // from an earlier session — but the run log must say so, because a weekend
+  // folder in the tape is a statement about our capture, not about the market.
+  if (!isTradingWeekday(date)) {
+    console.warn(
+      `[tape:bake] ${date} is not a trading weekday — capturing anyway because TAPE_SLOT/TAPE_DATE forced it. ` +
+        `The snapshot's asOf will show the earlier session it actually describes.`,
+    );
+  }
   const resolved = await resolveBoards();
   const { snapshot, registry, summary, degraded } = await captureSnapshot({
     date,

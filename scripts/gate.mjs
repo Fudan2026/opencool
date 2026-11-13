@@ -185,11 +185,26 @@ export async function decideEdition({ now, hours, lookbackDays, daysSpec, probe 
   return { shouldRun: false, date: "", hour: "", reason: "all-published", checks };
 }
 
-/** Latest due slot today — the dispatch / push path (publish immediately). */
+/**
+ * The latest slot already DUE today — the dispatch / push path.
+ *
+ * Returns `null` when no slot is due yet (`now.hour < min(hours)`). That null is
+ * load-bearing, not a convenience: the historical fallback `chosen = hours[0]`
+ * meant a 02:25 push resolved to the 06:00 slot and published the day's first
+ * edition 3h34m EARLY, under a `06` label whose content was 02:26 market data
+ * (run 43481490148). At 06:00 the gate then probed `06.json`, saw 200 and
+ * concluded the slot was met, so the real 06:00 edition never ran — a permanent
+ * vintage error in the one field that carries the claim.
+ *
+ * `null` says "nothing is due"; the caller must not publish, and must not
+ * substitute a slot that is not yet due.
+ */
 export function latestDueSlot(now, hours) {
-  let chosen = hours[0];
+  const first = Math.min(...hours);
+  if (now.hour < first) return null;
+  let chosen = null;
   for (const h of hours) if (now.hour >= h) chosen = h;
-  return pad2(chosen);
+  return chosen === null ? null : pad2(chosen);
 }
 
 async function getJson(url, token, fetchImpl) {
@@ -544,6 +559,41 @@ function writeOutputs(result) {
   }
 }
 
+/**
+ * Decision for a `push` / `workflow_dispatch` event.
+ *
+ * A push or a dispatch has no slot of its own — it only means "somebody just
+ * changed something, publish what is due". So:
+ *
+ *   - a slot is already due today → publish the latest one (the historical
+ *     behaviour, and the reason a merge goes live);
+ *   - NOTHING is due yet (`latestDueSlot` → null, i.e. before `hours[0]`) →
+ *     fall through to the catchup scan instead of publishing the day's first
+ *     slot early. That fall-through still heals a genuinely missing past slot;
+ *     at 02:25 with everything published it yields `should-run=false`.
+ *
+ * Returning early with `hours[0]` here is what published `2026-11-14/06.json`
+ * at 02:26 SH (run 43481490148) and permanently blocked the real 06:00 edition.
+ *
+ * Exported so the replays in `tests/golden/gate.test.ts` drive the real decision
+ * rather than a copy of it.
+ */
+export async function decideTriggered({ now, hours, lookbackDays, daysSpec, probe, eventName }) {
+  const hour = latestDueSlot(now, hours);
+  if (hour !== null) {
+    return {
+      shouldRun: true,
+      date: now.date,
+      hour,
+      reason: eventName === "push" ? "push" : "manual",
+      checks: [],
+      dueYet: true,
+    };
+  }
+  const caught = await decideEdition({ now, hours, lookbackDays, daysSpec, probe });
+  return { ...caught, dueYet: false };
+}
+
 async function main() {
   const tz = process.env.REPORT_TZ?.trim() || "Asia/Shanghai";
   const hours = parseHours(process.env.REPORT_HOUR);
@@ -567,21 +617,35 @@ async function main() {
 
   const probe = makeContentsProbe({ repo, token });
 
-  if (eventName === "workflow_dispatch" || eventName === "push") {
-    const hour = latestDueSlot(now, hours);
-    const result = {
-      shouldRun: true,
-      date: now.date,
-      hour,
-      reason: eventName === "push" ? "push" : "manual",
-      checks: [],
-    };
-    console.log(`[gate] ${eventName} → latest due slot ${now.date}/${hour}`);
-    writeOutputs(result);
-    return;
-  }
+  // How many past days a dispatch may heal. A dispatch/push has no "slot" of
+  // its own, so when nothing is due yet it falls through to the catchup scan.
+  let result;
 
-  let result = await decideEdition({ now, hours, lookbackDays, daysSpec, probe });
+  if (eventName === "workflow_dispatch" || eventName === "push") {
+    result = await decideTriggered({ now, hours, lookbackDays, daysSpec, probe, eventName });
+    if (result.dueYet) {
+      // Unchanged from before this fix: a push/dispatch with a due slot
+      // publishes it straight away and does NOT consult the in-flight guard.
+      // A merge to main going live must never be suppressed by a concurrent
+      // build; keep that behaviour exactly.
+      console.log(`[gate] ${eventName} → latest due slot ${result.date}/${result.hour}`);
+      writeOutputs(result);
+      return;
+    }
+    // Nothing is due yet today. Publishing anyway would file the day's first
+    // edition hours early under a later slot label — the 02:26 `06.json`
+    // vintage error of run 43481490148 — and the real slot would then never
+    // run, because its probe would find the premature file and call it met.
+    //
+    // The catchup scan above still heals a genuinely missing PAST slot; at
+    // 02:25 with everything published it yields should-run=false.
+    console.log(
+      `[gate] ${eventName} before the first slot (${pad2(now.hour)}:${pad2(now.minute)} < ${pad2(Math.min(...hours))}:00) ` +
+        `— nothing is due yet; used the catchup scan (${result.reason})`,
+    );
+  } else {
+    result = await decideEdition({ now, hours, lookbackDays, daysSpec, probe });
+  }
 
   if (result.shouldRun) {
     const guard = await hasBuildInFlight({ repo, token, selfRunId });
