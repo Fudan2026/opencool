@@ -1651,6 +1651,15 @@ No LLM behind any endpoint.
   sighting, headline revision trails, and a per-wire first-mover ranking
   (contestedFirsts = earliest AND followed; leads are measured between our
   fetches, so the granularity is the edition cadence)
+- Reaction windows: /reactions.json — per story, the sector move at +1h/+1d/+5d
+  after firstSeenAt, net of the market: {headlineMetric: "marketExcessPct",
+  method{...}, counts{attributed,horizons}, aggregates{byTopic,byEntity},
+  observations[], gaps[]}. Aggregates publish n/median/mean/p25/p75/hitRate
+  only at n >= 20; below that a row is status "insufficient" with n and NO
+  distribution. Horizons are "pending" until a tape snapshot exists at or after
+  firstSeenAt + horizon — never extrapolated. Tape history begins at the first
+  real A-share session (2026-11-16 09:35 Asia/Shanghai), so early editions are
+  legitimately all-pending. Read the method block before quoting a number.
 - Dragon-tiger list: /lhb.json — top movers by net amount (previous
   trading day)
 - MCP desk: /mcp-desk.html — operator-baked institutional snapshot
