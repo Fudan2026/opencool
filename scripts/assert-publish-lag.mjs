@@ -121,21 +121,28 @@ export function minutesBetween(from, to) {
  * Enforcement rules, in order:
  *   - backfilled (补发) → lag reported, green: a past date recovered late is a
  *     recovery, not a missed slot;
- *   - already live before this run → REPUBLISH, green: the slot was met by an
- *     earlier run, and this build merely rewrote it;
+ *   - PREMATURE → published more than `limitMin` BEFORE its slot, and not a
+ *     backfill → a breach that fails the run. Being early is not "on time": a
+ *     file published at 02:26 under a `06` label describes 02:26 market data
+ *     while claiming 06:00, and because the gate then sees a 200 at 06:00 the
+ *     real slot never runs. That is a permanent vintage error in the one field
+ *     that carries the claim, so it must be as loud as lateness (run
+ *     43481490148 printed `lag=-213m verdict=REPUBLISH` and stayed green);
+ *   - already live before this run, lag within limits → REPUBLISH, green: the
+ *     slot was met by an earlier run and this build merely rewrote it. An early
+ *     publish BEYOND the limit is the premature breach above, even if a file
+ *     existed — a premature file is exactly what would make `alreadyPublished`
+ *     true;
  *   - otherwise → the lag limit applies. That includes a push/dispatch build
  *     that is the FIRST publish of a due slot: the edition was late, whoever
  *     happened to publish it.
- * A `push`/`manual` build whose slot is already live never reaches the limit
- * (it is a REPUBLISH), so routine merges cannot turn main red — the alarm
- * stays on genuine lateness.
  *
  * @param {{date: string, hour: string, publishedAt: Date, tz?: string,
  *   limitMin?: number, backfilled?: boolean, alreadyPublished?: boolean,
  *   trigger?: string}} input
  * @returns {{date: string, slot: string, slotInstant: Date, publishedAt: Date,
  *   publishedSh: string, lagMinutes: number, verdict: string, ok: boolean,
- *   notified: boolean}}
+ *   premature: boolean, notified: boolean}}
  */
 export function evaluatePublishLag(input) {
   const tz = input.tz || DEFAULT_TZ;
@@ -146,13 +153,19 @@ export function evaluatePublishLag(input) {
   const slotInstant = zonedWallToInstant(input.date, Number(slotHour), tz);
   const lagMinutes = minutesBetween(slotInstant, input.publishedAt);
   const late = lagMinutes > limitMin;
+  const early = lagMinutes < -limitMin;
   const trigger = String(input.trigger ?? "").trim().toLowerCase();
 
   let verdict;
   let ok;
+  let premature = false;
   if (input.backfilled) {
     verdict = "BACKFILL (补发 — recovery of a past date, not a breach)";
     ok = true;
+  } else if (early) {
+    premature = true;
+    verdict = `PREMATURE BREACH (published ${-lagMinutes}m early, limit ${limitMin}m)`;
+    ok = false;
   } else if (input.alreadyPublished) {
     verdict = "REPUBLISH (edition was already live; slot was met earlier)";
     ok = true;
@@ -176,6 +189,7 @@ export function evaluatePublishLag(input) {
     lagMinutes,
     verdict,
     ok,
+    premature,
     notified: false,
   };
 }
@@ -231,9 +245,11 @@ function envFlag(name) {
 }
 
 function notifyBreach(result, detail) {
-  const reason = `published ${result.lagMinutes}m late (slot ${result.date} ${result.slot} SH, published ${result.publishedSh} SH)`;
+  const reason = result.premature
+    ? `published ${-result.lagMinutes}m EARLY (slot ${result.date} ${result.slot} SH, published ${result.publishedSh} SH) — the file claims a slot it does not describe, and the real slot will never run`
+    : `published ${result.lagMinutes}m late (slot ${result.date} ${result.slot} SH, published ${result.publishedSh} SH)`;
   // Mark the breach so the generic "Alert on job failure" step does not page
-  // a second time for the same late edition.
+  // a second time for the same late/premature edition.
   if (process.env.GITHUB_ENV) {
     try {
       fs.appendFileSync(process.env.GITHUB_ENV, "PUBLISH_LAG_NOTIFIED=true\n");
@@ -308,10 +324,17 @@ function main() {
     return;
   }
 
-  console.error(
-    `::error::edition ${result.date}/${result.slot} published ${result.lagMinutes}m after its slot (limit ${limitMin}m)`,
-  );
-  notifyBreach(result, "publish lag");
+  if (result.premature) {
+    console.error(
+      `::error::edition ${result.date}/${result.slot} published ${-result.lagMinutes}m BEFORE its slot (limit ${limitMin}m) — ` +
+        `a premature file describes earlier market data under a later label, and the gate will treat the slot as met`,
+    );
+  } else {
+    console.error(
+      `::error::edition ${result.date}/${result.slot} published ${result.lagMinutes}m after its slot (limit ${limitMin}m)`,
+    );
+  }
+  notifyBreach(result, result.premature ? "premature publish" : "publish lag");
   process.exit(1);
 }
 

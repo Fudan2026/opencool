@@ -16,11 +16,15 @@ import {
   dayMatches,
   dayOfWeek,
   decideEdition,
+  decideTape,
+  decideTriggered,
   dueSlots,
   hasBuildInFlight,
+  isTradingWeekday,
   latestDueSlot,
   makeContentsProbe,
   parseHours,
+  TAPE_SLOTS,
 } from "../../scripts/gate.mjs";
 import {
   isValidDateKey,
@@ -265,8 +269,18 @@ test("gate — helpers", async (t) => {
     assert.equal(addDays("2026-12-31", 1), "2027-01-01");
   });
 
-  await t.test("latestDueSlot: before all slots, mid-day, after all", () => {
-    assert.equal(latestDueSlot({ date: "2026-11-13", hour: 3, minute: 0, dow: 5 }, HOURS), "06");
+  await t.test("latestDueSlot: before all slots → null (nothing is due)", () => {
+    // The fallback to hours[0] published the 06:00 edition at 02:26 (run
+    // 43481490148) and then blocked the real 06:00 slot forever, because the
+    // 06:00 probe found the premature file and called the slot met.
+    assert.equal(latestDueSlot({ date: "2026-11-14", hour: 2, minute: 25, dow: 6 }, HOURS), null);
+    assert.equal(latestDueSlot({ date: "2026-11-13", hour: 3, minute: 0, dow: 5 }, HOURS), null);
+    assert.equal(latestDueSlot({ date: "2026-11-13", hour: 5, minute: 59, dow: 5 }, HOURS), null);
+  });
+
+  await t.test("latestDueSlot: mid-day and after all slots still pick the latest due", () => {
+    assert.equal(latestDueSlot({ date: "2026-11-13", hour: 6, minute: 0, dow: 5 }, HOURS), "06");
+    assert.equal(latestDueSlot({ date: "2026-11-13", hour: 7, minute: 30, dow: 5 }, HOURS), "06");
     assert.equal(latestDueSlot({ date: "2026-11-13", hour: 15, minute: 0, dow: 5 }, HOURS), "13");
     assert.equal(latestDueSlot({ date: "2026-11-13", hour: 23, minute: 0, dow: 5 }, HOURS), "19");
   });
@@ -371,6 +385,237 @@ test("gate — helpers", async (t) => {
     });
     assert.equal(r.inFlight, false);
     assert.equal(r.checked, false);
+  });
+});
+
+test("gate — tape mode decides capture without touching the edition path", async (t) => {
+  await t.test("inside a session slot → capture that slot", async () => {
+    const asked: string[] = [];
+    const r = await decideTape({
+      now: nowAt("2026-11-13T01:35:00Z"), // 09:35 SH
+      graceMin: 20,
+      probe: async (p: string) => {
+        asked.push(p);
+        return 404;
+      },
+    });
+    assert.equal(r.shouldRun, true);
+    assert.equal(r.slot, "09:35");
+    assert.equal(r.reason, "capture");
+    assert.deepEqual(asked, ["tape/2026-11-13/0935.json"]);
+  });
+
+  await t.test("an already-captured slot is a no-op", async () => {
+    const r = await decideTape({
+      now: nowAt("2026-11-13T01:35:00Z"),
+      probe: async () => 200,
+    });
+    assert.equal(r.shouldRun, false);
+    assert.equal(r.reason, "already-captured");
+    assert.equal(r.slot, "09:35");
+  });
+
+  await t.test("a flaky probe status is treated as missing, like the edition gate", async () => {
+    for (const status of [403, 429, 500, 0, 302]) {
+      const r = await decideTape({
+        now: nowAt("2026-11-13T01:35:00Z"),
+        probe: async () => status,
+      });
+      assert.equal(r.shouldRun, true, `HTTP ${status} must capture`);
+    }
+  });
+
+  await t.test("outside the session window nothing is captured", async () => {
+    for (const iso of [
+      "2026-11-13T01:00:00Z", // 09:00 SH, before the open
+      "2026-11-13T04:00:00Z", // 12:00 SH, lunch break
+      "2026-11-13T09:00:00Z", // 17:00 SH, after the close
+    ]) {
+      const r = await decideTape({ now: nowAt(iso), probe: async () => 404 });
+      assert.equal(r.shouldRun, false, iso);
+      assert.equal(r.reason, "outside-session-window");
+    }
+  });
+
+  await t.test("a weekend never captures", async () => {
+    const r = await decideTape({
+      now: nowAt("2026-11-14T01:35:00Z"), // Saturday 09:35 SH
+      probe: async () => 404,
+    });
+    assert.equal(r.shouldRun, false);
+    assert.equal(r.reason, "weekend");
+  });
+
+  await t.test("the force slot is honoured and validated against the schedule", async () => {
+    const forced = await decideTape({
+      now: nowAt("2026-11-13T09:00:00Z"),
+      forceSlot: "1405",
+      probe: async () => 404,
+    });
+    assert.equal(forced.shouldRun, true);
+    assert.equal(forced.slot, "14:05");
+    assert.equal(forced.reason, "forced");
+
+    const bad = await decideTape({
+      now: nowAt("2026-11-13T09:00:00Z"),
+      forceSlot: "12:00",
+      probe: async () => 404,
+    });
+    assert.equal(bad.shouldRun, false);
+    assert.equal(bad.reason, "slot-not-in-schedule");
+  });
+
+  await t.test("the tape decision never moves an edition decision", async () => {
+    // Same clock: the edition gate has an edition due, the tape gate has a
+    // capture due, and the two run as separate steps off the same gate job.
+    const now = nowAt("2026-11-13T01:35:00Z");
+    const edition = await decideEdition({
+      now,
+      hours: HOURS,
+      lookbackDays: 0,
+      daysSpec: "*",
+      probe: async () => 404,
+    });
+    const tape = await decideTape({ now, probe: async () => 404 });
+    assert.equal(edition.shouldRun, true);
+    assert.equal(edition.hour, "06");
+    assert.equal(tape.shouldRun, true);
+    assert.equal(tape.slot, "09:35");
+  });
+
+  await t.test("TAPE_SLOTS is the ten session slots", () => {
+    assert.deepEqual(TAPE_SLOTS, [
+      "09:35",
+      "10:05",
+      "10:35",
+      "11:05",
+      "11:35",
+      "13:05",
+      "13:35",
+      "14:05",
+      "14:35",
+      "15:05",
+    ]);
+    assert.equal(isTradingWeekday("2026-11-13"), true);
+    assert.equal(isTradingWeekday("2026-11-14"), false);
+  });
+});
+
+test("gate — push / dispatch before the first slot must not publish early", async (t) => {
+  /**
+   * Replay of run 43481490148: a merge pushed at 02:25 SH on 2026-11-14 (a
+   * Saturday) published `2026-11-14/06.json` carrying 02:26 market data — the
+   * 06:00 slot, 3h34m early. The gate log said it plainly:
+   *
+   *   [gate] now 2026-11-14 02:25 Asia/Shanghai (dow 6) ... event=push
+   *   [gate] push → latest due slot 2026-11-14/06
+   *
+   * Nothing downstream caught it: the lag assert printed
+   * `lag=-213m verdict=REPUBLISH` and stayed green.
+   */
+  await t.test("02:25 push with everything published → no build", async () => {
+    const now = nowAt("2026-11-13T18:25:00Z"); // 2026-11-14 02:25 SH
+    assert.equal(now.date, "2026-11-14");
+    assert.equal(now.hour, 2);
+    const probe = probeFrom({
+      // Yesterday's three slots are all live; today has nothing yet.
+      "2026-11-13/06": 200,
+      "2026-11-13/13": 200,
+      "2026-11-13/19": 200,
+    });
+    const r = await decideTriggered({
+      now,
+      hours: HOURS,
+      lookbackDays: 1,
+      daysSpec: "*",
+      probe,
+      eventName: "push",
+    });
+    assert.equal(r.shouldRun, false, "a push before the first slot must not publish");
+    assert.equal(r.reason, "all-published");
+    assert.equal(r.dueYet, false);
+    assert.equal(r.hour, "");
+    // It scanned, it did not invent a slot.
+    assert.ok(probe.calls.every((c) => !c.startsWith("2026-11-14")), "today has no due slot to probe");
+  });
+
+  await t.test("02:25 push still heals a genuinely missing yesterday slot", async () => {
+    // The fall-through must not become "never publish on a push": if yesterday
+    // 19 is missing, that is a real gap and the push is the only trigger awake.
+    const now = nowAt("2026-11-13T18:25:00Z");
+    const r = await decideTriggered({
+      now,
+      hours: HOURS,
+      lookbackDays: 1,
+      daysSpec: "*",
+      probe: probeFrom({
+        "2026-11-13/06": 200,
+        "2026-11-13/13": 200,
+        // 2026-11-13/19 deliberately absent
+      }),
+      eventName: "push",
+    });
+    assert.equal(r.shouldRun, true);
+    assert.equal(r.reason, "backfill");
+    assert.equal(r.date, "2026-11-13");
+    assert.equal(r.hour, "19");
+  });
+
+  await t.test("06:30 push → builds today 06 (the slot really is due)", async () => {
+    const now = nowAt("2026-11-13T22:30:00Z"); // 2026-11-14 06:30 SH
+    assert.equal(now.date, "2026-11-14");
+    assert.equal(now.hour, 6);
+    const r = await decideTriggered({
+      now,
+      hours: HOURS,
+      lookbackDays: 1,
+      daysSpec: "*",
+      probe: probeFrom({
+        "2026-11-13/06": 200,
+        "2026-11-13/13": 200,
+        "2026-11-13/19": 200,
+        // today's 06 is not published yet
+      }),
+      eventName: "push",
+    });
+    assert.equal(r.shouldRun, true);
+    assert.equal(r.reason, "push");
+    assert.equal(r.dueYet, true);
+    assert.equal(r.date, "2026-11-14");
+    assert.equal(r.hour, "06");
+  });
+
+  await t.test("06:30 push publishes 06, never a later slot", async () => {
+    // The mirror error of the premature bug: picking a slot that is not due yet.
+    const now = nowAt("2026-11-13T22:30:00Z");
+    const r = await decideTriggered({
+      now,
+      hours: HOURS,
+      lookbackDays: 0,
+      daysSpec: "*",
+      probe: async () => 404,
+      eventName: "push",
+    });
+    assert.equal(r.hour, "06");
+  });
+
+  await t.test("a scheduled trigger is unchanged by the fix", async () => {
+    // 02:25 on a schedule: decideEdition already had no due slot today and
+    // scanned yesterday; the fix must not alter that path.
+    const now = nowAt("2026-11-13T18:25:00Z");
+    const r = await decideEdition({
+      now,
+      hours: HOURS,
+      lookbackDays: 1,
+      daysSpec: "*",
+      probe: probeFrom({
+        "2026-11-13/06": 200,
+        "2026-11-13/13": 200,
+        "2026-11-13/19": 200,
+      }),
+    });
+    assert.equal(r.shouldRun, false);
+    assert.equal(r.reason, "all-published");
   });
 });
 
