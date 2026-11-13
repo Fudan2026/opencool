@@ -587,3 +587,103 @@ jobs:
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
         run: node scripts/notify-failure.mjs --failure --reason "tape capture failed (${{ needs.gate.outputs.tape-reason }})"
+
+  # READING PAGES — /hour.html and /stories.html.
+  #
+  # These two pages are products over the point-in-time artifacts, not editions:
+  # /hour announces that it is waiting for the next session, and /stories shows
+  # the ledger accumulated so far. Both are meaningful on a day with no edition
+  # due, which is exactly the day the `build` job above skips — so gating them on
+  # an edition being due is what left them unpublished for three days after the
+  # feature merged, and what left the tape tree itself unreachable, since the
+  # `tape` job is gated on a capture being due (weekends: never).
+  #
+  # Hence a separate, cheap job that runs on every tick and on every push. It
+  # publishes ONLY the pages and the tape tree it reads, with `keep_files: true`,
+  # so it can never delete an edition, a sidecar or the ledger: the edition job
+  # remains the sole owner of everything else in the branch.
+  pages:
+    name: Reading pages
+    # Runs even when `build` and `tape` were skipped — the common case, and the
+    # case this job exists for. `always()` is required because a skipped
+    # dependency would otherwise block it.
+    needs: [gate, build, tape]
+    if: always() && !cancelled()
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    # Pages are derived from the tape and the ledger; a newer run's output is
+    # strictly more complete, so cancelling an older one costs nothing.
+    concurrency:
+      group: daily-brief-pages
+      cancel-in-progress: true
+    env:
+      LLM_MODE: 'off'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Record run start
+        run: echo "LLM_LOG_SINCE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+
+      # The pages are derived artifacts: they must be built from what is
+      # actually published, not from a fresh empty tree. `tape/` and
+      # `stories.json` are the only inputs.
+      - name: Restore tape and ledger from gh-pages
+        run: |
+          mkdir -p daily_reports
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git fetch origin gh-pages --depth=1
+            git --work-tree=daily_reports checkout origin/gh-pages -- tape || true
+            git --work-tree=daily_reports checkout origin/gh-pages -- stories.json || true
+            echo "Restored $(find daily_reports/tape -name '*.json' 2>/dev/null | wc -l) tape file(s)"
+          else
+            echo "gh-pages doesn't exist yet — the pages will render their waiting state"
+          fi
+
+      # Writes daily_reports/hour.html and daily_reports/stories.html. Fail-open:
+      # exits 0 with a named gap when there is no tape or no ledger, because a
+      # page that says "waiting for Monday 09:35" is the deliverable on a day
+      # with nothing to report.
+      - name: Build reading pages
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
+        run: npm run reading:pages
+
+      # Same structural zero-token rule as the other jobs: these pages are
+      # arithmetic over published JSON and must never be able to reach a model.
+      - name: Assert zero LLM calls
+        run: node scripts/assert-zero-llm.mjs --since "$LLM_LOG_SINCE"
+
+      # Fail-loud proof that the pages are real: both files must exist and each
+      # must carry its page marker. A page that rendered nothing would otherwise
+      # publish a 200 with an empty body and look fine from the outside.
+      - name: Assert both pages exist
+        run: >-
+          node scripts/assert-reading-pages.mjs
+          --dir daily_reports
+
+      - name: Publish reading pages and tape
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./daily_reports
+          publish_branch: gh-pages
+          keep_files: true
+          commit_message: 'pages: reading pages for ${{ github.run_id }}'
+
+      - name: Alert on pages failure
+        if: failure() || cancelled()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+        run: node scripts/notify-failure.mjs --failure --reason "reading pages failed"

@@ -300,6 +300,105 @@ test("golden: reaction windows bake is wired between the ledger and the guards",
   });
 });
 
+/**
+ * The reading pages must publish on a day with NO edition due — that is the
+ * exact failure this job exists to prevent. After the feature merged on a
+ * Saturday, the gate answered `all-published`, the build job was skipped, and
+ * /hour.html and /stories.html 404'd for days while the code was on main. The
+ * `tape` job could not cover it either: it is gated on a capture being due, and
+ * a weekend never captures.
+ *
+ * So these assertions are about UNCONDITIONALITY: the job must run when every
+ * other job was skipped, must not depend on an edition or a capture, and must
+ * publish with `keep_files: true` so it cannot delete what it did not write.
+ */
+test("golden: reading pages publish even when no edition is due", async (t) => {
+  const src = fs.readFileSync(WORKFLOW, "utf8");
+  const start = src.indexOf("\n  pages:");
+  assert.ok(start >= 0, "pages job not found in daily.yml");
+  const rest = src.slice(start + 1);
+  const next = rest.search(/\n {2}[a-z][\w-]*:/);
+  const job = next >= 0 ? rest.slice(0, next) : rest;
+
+  await t.test("the job exists and is not gated on should-run or a tape capture", () => {
+    assert.match(job, /^ {4}if: always\(\) && !cancelled\(\)$/m, "pages must run unconditionally");
+    assert.equal(
+      /needs\.gate\.outputs\.(should-run|tape-should-run)/.test(job),
+      false,
+      "the pages job must not key on an edition or tape decision",
+    );
+  });
+
+  await t.test("it can run after skipped dependencies", () => {
+    // `needs: [gate, build, tape]` + `always()` is what lets it run when build
+    // and tape were skipped, which is the normal weekend case.
+    assert.match(job, /needs: \[gate, build, tape\]/);
+  });
+
+  await t.test("it builds both pages and asserts they exist before publishing", () => {
+    const names = stepNames(job);
+    assert.ok(names.includes("Build reading pages"));
+    assert.match(stepSource(job, "Build reading pages"), /npm run reading:pages/);
+    assert.ok(names.includes("Assert both pages exist"));
+    const assertStep = stepSource(job, "Assert both pages exist");
+    assert.match(assertStep, /node scripts\/assert-reading-pages\.mjs/);
+    assert.ok(
+      names.indexOf("Assert both pages exist") < names.indexOf("Publish reading pages and tape"),
+      "an empty page must fail before it is published",
+    );
+  });
+
+  await t.test("it publishes only additively, so it cannot delete an edition", () => {
+    assert.match(stepSource(job, "Publish reading pages and tape"), /keep_files: true/);
+  });
+
+  await t.test("it restores the tape and ledger it renders", () => {
+    const step = stepSource(job, "Restore tape and ledger from gh-pages");
+    assert.match(step, /checkout origin\/gh-pages -- tape/);
+    assert.match(step, /checkout origin\/gh-pages -- stories\.json/);
+  });
+
+  await t.test("it is zero-token and scoped like the other jobs", () => {
+    const jobEnv = job.slice(0, job.indexOf("    steps:"));
+    assert.match(jobEnv, /^ {6}LLM_MODE: 'off'$/m);
+    const names = stepNames(job);
+    assert.ok(names.includes("Assert zero LLM calls"));
+    assert.match(stepSource(job, "Assert zero LLM calls"), /--since/);
+    assert.ok(
+      names.indexOf("Assert zero LLM calls") < names.indexOf("Publish reading pages and tape"),
+    );
+  });
+
+  await t.test("no inline multi-line node body was introduced", () => {
+    assert.deepEqual([...job.matchAll(/run:\s*node\s+-e\s/g)].map((m) => m[0]), []);
+  });
+});
+
+test("golden: the assert script rejects an absent or empty page", async () => {
+  const { checkPage } = (await import("../../scripts/assert-reading-pages.mjs")) as {
+    checkPage: (dir: string, spec: { file: string; markers: string[]; minBytes: number }) => string[];
+  };
+  const fsMod = await import("node:fs");
+  const os = await import("node:os");
+  const pathMod = await import("node:path");
+  const dir = fsMod.mkdtempSync(pathMod.join(os.tmpdir(), "assert-pages-"));
+
+  // Absent.
+  assert.ok(checkPage(dir, { file: "hour.html", markers: ["盘中逐时报"], minBytes: 100 }).length);
+
+  // Present but empty.
+  fsMod.writeFileSync(pathMod.join(dir, "hour.html"), "<!doctype html><html></html>", "utf8");
+  assert.ok(checkPage(dir, { file: "hour.html", markers: ["盘中逐时报"], minBytes: 100 }).length);
+
+  // A leaked placeholder is a failure even when long enough.
+  const big = `<!doctype html><html><body>盘中逐时报 ${"x".repeat(200)} 来源 {sourceName}</body></html>`;
+  fsMod.writeFileSync(pathMod.join(dir, "hour.html"), big, "utf8");
+  const problems = checkPage(dir, { file: "hour.html", markers: ["盘中逐时报"], minBytes: 100 });
+  assert.ok(problems.some((p: string) => p.includes("placeholder")));
+
+  fsMod.rmSync(dir, { recursive: true, force: true });
+});
+
 test("golden: a missing llm-calls.jsonl is the documented pass case", () => {
   const src = fs.readFileSync(
     path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../scripts/assert-zero-llm.mjs"),

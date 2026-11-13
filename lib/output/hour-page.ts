@@ -276,6 +276,54 @@ function storyItems(r: SlotReading): string {
   return `${inWindow}${earlier}`;
 }
 
+/**
+ * Slot-integrity notice.
+ *
+ * `mislabelled` is an error: the file's name does not describe its content, so
+ * the prose below it must not be read as that slot's session reading. It gets a
+ * hard-edged banner above the sentences and the prose is visually de-emphasised
+ * — but the numbers stay, because the honest response to a bad file is to show
+ * it and label it, not to hide it.
+ *
+ * `market-closed` is ordinary: a weekend or holiday capture correctly describes
+ * the last close. It gets a quiet note, never the error styling.
+ */
+function integrityBlock(r: SlotReading): string {
+  const it = r.integrity;
+  if (it.kind === "ok") return "";
+  if (it.kind === "unresolved") {
+    return `<p class="sent-muted" data-integrity="unresolved">${esc(S.hourIntegrityUnresolved)}</p>`;
+  }
+  const minutes = Math.round(Math.abs(it.marketLagMinutes ?? 0));
+  if (it.kind === "mislabelled") {
+    return `<div class="integrity-bad" data-integrity="mislabelled" data-market-lag="${it.marketLagMinutes}">
+        <p class="integrity-title"><span class="integrity-badge">${esc(
+          S.hourIntegrityBadgeMislabel,
+        )}</span>${esc(S.hourIntegrityMislabelTitle)}</p>
+        <p>${esc(
+          fill(S.hourIntegrityMislabelBody, {
+            slot: r.slot,
+            asOf: dateTimeOf(r.asOf),
+            minutes,
+          }),
+        )}</p>
+      </div>`;
+  }
+  return `<div class="integrity-note" data-integrity="market-closed" data-market-lag="${it.marketLagMinutes}">
+      <p class="integrity-title"><span class="integrity-badge soft">${esc(
+        S.hourIntegrityBadgeClosed,
+      )}</span>${esc(S.hourIntegrityClosedTitle)}</p>
+      <p>${esc(
+        fill(S.hourIntegrityClosedBody, {
+          slot: r.slot,
+          asOf: dateTimeOf(r.asOf),
+          observedAt: dateTimeOf(r.observedAt),
+          minutes,
+        }),
+      )}</p>
+    </div>`;
+}
+
 /** Prose block for one slot: sentences first, tables after. */
 function slotBody(r: SlotReading): string {
   const sentences = [
@@ -289,7 +337,9 @@ function slotBody(r: SlotReading): string {
   ].filter((x): x is string => Boolean(x));
 
   const prose = sentences.length
-    ? `<div class="prose">${sentences.map((s) => `<p>${esc(s)}</p>`).join("")}</div>`
+    ? `<div class="prose${
+        r.integrity.kind === "mislabelled" ? " prose-flagged" : ""
+      }">${sentences.map((s) => `<p>${esc(s)}</p>`).join("")}</div>`
     : `<p class="sent-muted">${esc(S.hourSectionGapHint)}</p>`;
 
   const indexTable = r.index?.length
@@ -314,7 +364,8 @@ function slotBody(r: SlotReading): string {
     )
     .join("")}</tbody></table>`;
 
-  return `${clockBlock(r)}
+  return `${integrityBlock(r)}
+    ${clockBlock(r)}
     ${gapChips(r)}
     ${prose}
     ${indexTable ? `<h3 class="sub-head">${esc(S.hourSectionIndices)}</h3>${indexTable}` : ""}
@@ -379,6 +430,9 @@ const CSS = `
   .chip .dot { width:0.42rem; height:0.42rem; border-radius:50%; background:var(--rule); }
   .chip.has-data .dot { background:var(--accent); }
   .chip.is-empty .dot { background:transparent; border:1px dashed var(--muted); }
+  .chip.is-closed .dot { background:#d9a441; }
+  .chip.is-flagged { border-color:#b91c1c; color:#b91c1c; background:#fef2f2; }
+  .chip.is-flagged .dot { background:#b91c1c; }
   .day-panel, .slot-panel { display:none; }
   .day-panel.active, .slot-panel.active { display:block; }
   .card { background:var(--card); border:1px solid var(--rule); border-radius:1rem;
@@ -402,6 +456,17 @@ const CSS = `
     border-radius:0.75rem; padding:0.85rem 1rem; margin:0 0 0.9rem; }
   .gap-block p { margin:0.15rem 0; font-size:0.9rem; color:#6b4a10; }
   .gap-title { font-weight:700; }
+  .integrity-bad { background:#fef2f2; border:1px solid #fca5a5; border-left:4px solid #b91c1c;
+    border-radius:0.6rem; padding:0.85rem 1rem; margin:0 0 0.9rem; }
+  .integrity-bad p { margin:0.2rem 0; font-size:0.88rem; color:#7f1d1d; }
+  .integrity-note { background:#fdf6e6; border:1px dashed #d9a441; border-radius:0.6rem;
+    padding:0.75rem 1rem; margin:0 0 0.9rem; }
+  .integrity-note p { margin:0.2rem 0; font-size:0.86rem; color:#6b4a10; }
+  .integrity-title { font-weight:700; display:flex; flex-wrap:wrap; align-items:baseline; gap:0.4rem; }
+  .integrity-badge { font-size:0.7rem; padding:0.02rem 0.5rem; border-radius:999px;
+    background:#b91c1c; color:#fff; font-weight:700; letter-spacing:0.02em; }
+  .integrity-badge.soft { background:#d9a441; color:#3f2d05; }
+  .prose-flagged p { color:#5b5350; }
   .sub-head { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em;
     color:var(--muted); font-weight:700; margin:1.2rem 0 0.45rem; }
   .tape-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin:0 0 0.4rem; }
@@ -496,12 +561,28 @@ export function renderHourPage(opts: HourPageOptions): string {
         [...day.slots].reverse().find((s) => s.snapshot)?.time ?? day.slots[0]?.time;
 
       const slotChips = `<div class="chips" role="group" aria-label="${esc(S.hourSlotNav)}">${day.slots
-        .map(
-          (s) =>
-            `<button type="button" class="slot-chip chip ${s.snapshot ? "has-data" : "is-empty"}${
-              s.time === defaultSlot ? " active" : ""
-            }" data-slot="${esc(s.time)}"><span class="dot"></span>${esc(s.time)}</button>`,
-        )
+        .map((s) => {
+          const reading = readings.get(`${day.date}/${s.time}`);
+          // A mislabelled slot is flagged in the nav itself, so a reader can
+          // see it is not a normal reading before opening it.
+          const bad = reading?.integrity.kind === "mislabelled";
+          const closed = reading?.integrity.kind === "market-closed";
+          const cls = [
+            "slot-chip chip",
+            s.snapshot ? "has-data" : "is-empty",
+            bad ? "is-flagged" : "",
+            closed ? "is-closed" : "",
+            s.time === defaultSlot ? "active" : "",
+          ]
+            .filter(Boolean)
+            .join(" ");
+          const title = bad
+            ? ` title="${esc(S.hourIntegrityBadgeMislabel)}"`
+            : closed
+              ? ` title="${esc(S.hourIntegrityBadgeClosed)}"`
+              : "";
+          return `<button type="button" class="${cls}"${title} data-slot="${esc(s.time)}"><span class="dot"></span>${esc(s.time)}</button>`;
+        })
         .join("")}</div>`;
 
       const slotPanels = day.slots
