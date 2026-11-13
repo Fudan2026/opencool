@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>故事线 · OpenCool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#fff7ef; --fg:#241a13; --fg-soft:#4a3b32; --muted:#8a7364;
+    --rule:#f0ddd0; --card:#fff; --accent:#c2410c; --accent-soft:#ffedd5;
+    --gap-bg:#fff8e6; --gap-rule:#d9a441;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; color:var(--fg);
+    background:
+      radial-gradient(ellipse 90% 55% at 0% -5%, #ffd8a8 0%, transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 0%, #ffc9de 0%, transparent 50%),
+      var(--bg);
+    font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  main { max-width:920px; margin:0 auto; padding:2rem 1.35rem 4rem; }
+  a { color:var(--accent); }
+  .brand { font-family:"Fraunces","Noto Sans SC",serif; font-size:0.85rem;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); font-weight:700; }
+  h1 { font-family:"Fraunces","Noto Sans SC",serif; font-size:clamp(1.7rem,4vw,2.4rem);
+    margin:0.3rem 0 0.25rem; letter-spacing:-0.02em; }
+  .subtitle { margin:0 0 0.5rem; color:var(--muted); font-size:0.95rem; }
+  .counts { margin:0; color:var(--fg-soft); font-size:0.86rem; }
+  .note { background:var(--accent-soft); border-left:3px solid var(--accent);
+    border-radius:0 0.6rem 0.6rem 0; padding:0.7rem 0.95rem; margin:1.1rem 0 1.3rem;
+    font-size:0.86rem; color:#7c2d12; }
+  .note strong { display:block; font-size:0.74rem; text-transform:uppercase;
+    letter-spacing:0.1em; margin-bottom:0.2rem; }
+  .thread { background:var(--card); border:1px solid var(--rule); border-radius:1rem;
+    padding:1.05rem 1.15rem 1.15rem; margin:0 0 1rem; box-shadow:0 10px 30px rgba(194,65,12,0.05); }
+  .thread-title { font-family:"Fraunces","Noto Sans SC",serif; font-size:1.08rem;
+    margin:0 0 0.3rem; line-height:1.45; }
+  .thread-meta { margin:0 0 0.7rem; display:flex; flex-wrap:wrap; gap:0.75rem; }
+  .thread-meta .mono { font-size:0.76rem; color:var(--muted); }
+  .lag { font-size:0.76rem; color:var(--accent); font-weight:600; }
+  .first-mover { display:flex; flex-wrap:wrap; align-items:baseline; gap:0.5rem;
+    background:linear-gradient(90deg, rgba(255,237,213,0.8), rgba(255,237,213,0.15));
+    border:1px solid var(--rule); border-radius:0.7rem; padding:0.5rem 0.8rem; margin:0 0 0.9rem; }
+  .fm-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em;
+    color:var(--muted); font-weight:700; }
+  .fm-value { font-size:0.9rem; font-weight:600; }
+  .basis-badge { font-size:0.68rem; padding:0.05rem 0.5rem; border-radius:999px;
+    background:#fff; border:1px dashed var(--muted); color:var(--muted); font-weight:600; }
+  .sub-head { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.11em;
+    color:var(--muted); font-weight:700; margin:0.9rem 0 0.35rem; }
+  table { width:100%; border-collapse:collapse; font-size:0.84rem; }
+  th, td { text-align:left; padding:0.3rem 0.42rem; border-bottom:1px solid var(--rule); vertical-align:top; }
+  th { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.07em; color:var(--muted); }
+  .rank-table td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .rank-table td.strong { color:var(--accent); font-weight:700; }
+  .mono { font-variant-numeric:tabular-nums; }
+  .muted { color:var(--muted); }
+  .small { font-size:0.82rem; }
+  .rev-list { margin:0; padding-left:1.1rem; }
+  .rev-list li { margin:0.25rem 0; font-size:0.84rem; }
+  .rev-when { color:var(--muted); margin-right:0.4rem; }
+  .rev-wire { font-weight:600; }
+  .rev-pair { display:flex; flex-direction:column; gap:0.1rem; }
+  .rev-from { color:var(--muted); text-decoration:line-through; }
+  .rev-to { color:var(--fg); font-weight:600; }
+  .trail-list { padding-left:1.1rem; margin:0; }
+  .trail-list > li { margin:0 0 0.8rem; }
+  .trail-title { margin:0 0 0.3rem; font-weight:600; font-size:0.9rem; }
+  .trail-count { font-size:0.7rem; padding:0.02rem 0.45rem; border-radius:999px;
+    background:var(--accent-soft); color:var(--accent); font-weight:700; }
+  .rev-delta { display:flex; gap:0.6rem; font-size:0.76rem; margin-top:0.1rem; }
+  .rev-added { color:#15803d; }
+  .rev-removed { color:#b91c1c; text-decoration:line-through; }
+  .gap-block { background:var(--gap-bg); border:1px dashed var(--gap-rule);
+    border-radius:0.9rem; padding:1.3rem 1.2rem; }
+  .gap-block h2 { margin:0 0 0.4rem; font-family:"Fraunces","Noto Sans SC",serif; font-size:1.2rem; }
+  .gap-block p { margin:0.2rem 0; color:#6b4a10; font-size:0.9rem; }
+  footer { margin-top:2.2rem; padding-top:0.9rem; border-top:1px solid var(--rule);
+    color:var(--muted); font-size:0.78rem; }
+  footer a { color:var(--accent); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">OpenCool</div>
+    <h1>故事线</h1>
+    <p class="subtitle">同一件事的历次观测、标题修订与首发归属</p>
+  </header>
+  <p class="counts">账本内 2000 条故事、2380 条观测、15 条故事含标题修订（共 134 次修订）。</p>
+      <p class="counts">账本窗口 2026-10-14 至 2026-11-13 · 30 天</p>
+      <section class="note" data-lead-basis="observed">
+        <strong>谁最先报道 · 观测粒度 · 非反应速度</strong>
+        领先时间是观测粒度，不是反应速度：我们每期抓一次，所以“领先 900 分钟”意味着“早报就拿到了、对手晚报才出现”，而不是 900 分钟内跑赢了谁。
+        <br>排序按“有争议首发”：最早观测且随后确有另一家跟进；只被一家报道的故事不计入。
+      </section>
+      <table class="rank-table" data-rank-basis="contested">
+      <thead><tr>
+        <th>来源</th>
+        <th>有争议首发</th>
+        <th>总首发</th>
+        <th>并列首发</th>
+        <th>涉及故事</th>
+        <th>领先中位（分钟）</th>
+        <th>样本</th>
+      </tr></thead>
+      <tbody><tr><td>Bloomberg Markets</td><td class="num strong">4</td><td class="num">223</td><td class="num">4</td><td class="num">241</td><td class="num">9616</td><td class="num muted">4</td></tr><tr><td>Financial Times</td><td class="num strong">4</td><td class="num">180</td><td class="num">5</td><td class="num">196</td><td class="num">3182</td><td class="num muted">4</td></tr><tr><td>Al Jazeera</td><td class="num strong">2</td><td class="num">241</td><td class="num">2</td><td class="num">257</td><td class="num">2160</td><td class="num muted">2</td></tr><tr><td>财联社电报</td><td class="num strong">1</td><td class="num">150</td><td class="num">4</td><td class="num">179</td><td class="num">928</td><td class="num muted">1</td></tr><tr><td>CNBC</td><td class="num strong">1</td><td class="num">121</td><td class="num">6</td><td class="num">142</td><td class="num">36139</td><td class="num muted">1</td></tr><tr><td>BBC World</td><td class="num strong">1</td><td class="num">120</td><td class="num">4</td><td class="num">137</td><td class="num">10080</td><td class="num muted">1</td></tr><tr><td>The Guardian</td><td class="num strong">1</td><td class="num">111</td><td class="num">3</td><td class="num">127</td><td class="num">1440</td><td class="num muted">1</td></tr><tr><td>MarketWatch</td><td class="num strong">1</td><td class="num">61</td><td class="num">1</td><td class="num">72</td><td class="num">1500</td><td class="num muted">1</td></tr><tr><td>抖音热榜</td><td class="num strong">1</td><td class="num">2</td><td class="num">0</td><td class="num">8</td><td class="num">23685</td><td class="num muted">1</td></tr><tr><td>人民网财经</td><td class="num strong">1</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">10080</td><td class="num muted">1</td></tr><tr><td>Yahoo Finance</td><td class="num strong">0</td><td class="num">206</td><td class="num">0</td><td class="num">221</td><td class="num">—</td><td class="num muted">0</td></tr><tr><td>华尔街见闻</td><td class="num strong">0</td><td class="num">112</td><td class="num">1</td><td class="num">137</td><td class="num">—</td><td class="num muted">0</td></tr><tr><td>财新</td><td class="num strong">0</td><td class="num">97</td><td class="num">1</td><td class="num">109</td><td class="num">—</td><td class="num muted">0</td></tr><tr><td>华尔街见闻快讯</td><td class="num strong">0</td><td class="num">78</td><td class="num">5</td><td class="num">105</td><td class="num">—</td><td class="num muted">0</td></tr><tr><td>NYT World</td><td class="num strong">0</td><td class="num">74</td><td class="num">6</td><td class="num">90</td><td class="num">—</td><td class="num muted">0</td></tr><tr><td>The Diplomat</td><td class="num strong">0</td><td class="num">43</td><td class="num">3</td><td class="num">50</td><td class="num">—</td><td class="num muted">0</td></tr><tr><td>DW 中文</td><td class="num strong">0</td><td class="num">33</td><td class="num">4</td><td class="num">43</td><td class="num">—</td><td class="num muted">0</td></tr><tr><td>BBC Business</td><td class="num strong">0</td><td class="num">32</td><td class="num">4</td><td class="num">44</td><td class="num">—</td><td class="num muted">0</td></tr><tr><td>X 市场声音（站内镜像）</td><td class="num strong">0</td><td class="num">30</td><td class="num">2</td><td class="num">39</td><td class="num">—</td><td class="num muted">0</td></tr><tr><td>NPR World</td><td class="num strong">0</td><td class="num">23</td><td class="num">3</td><td class="num">32</td><td class="num">—</td><td class="num muted">0</td></tr></tbody></table>
+      <h2 class="sub-head" style="margin-top:1.4rem">改动最多的话题</h2>
+      <section class="revision-trail" data-trail-stories="15" data-trail-total="134">
+      <ol class="trail-list"><li data-trail-story="st_42dca5f915">
+            <p class="trail-title">Nvidia, AMD, Dell sink in global tech rout on AI funding worries <span class="trail-count">23</span></p>
+            <ol class="rev-list"><li><span class="rev-when mono">10-28 07:08</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Nvidia to invest $3 billion in Meta as tech giants deepen AI partnership</span><span class="rev-to">改 · Nvidia, AMD to invest $4 billion in Meta as tech giants deepen AI partnership</span></div>
+                    <div class="rev-delta"><span class="rev-added">+amd</span></div></li><li><span class="rev-when mono">11-10 01:11</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Asian Stocks to Open Higher, Nvidia Probe Looms: Markets Wrap</span><span class="rev-to">改 · Stocks Climb as Buyers Step In Despite Nvidia Woes: Markets Wrap</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as buyers climb despite in step woes</span><span class="rev-removed">−asian higher looms open probe to</span></div></li><li><span class="rev-when mono">11-10 01:11</span>
+                    <div class="rev-pair"><span class="rev-from">原 · FirstFT: Nvidia CEO admits to affair after allegations of relationship with Chinese spy</span><span class="rev-to">改 · FirstFT: Nvidia shares fall as it probes alleged Chinese spy scandal</span></div>
+                    <div class="rev-delta"><span class="rev-added">+alleged as fall it probes scandal shares</span><span class="rev-removed">−admits affair after allegations ceo of relationship to</span></div></li><li><span class="rev-when mono">11-10 19:43</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Faisal Islam: What Jensen Huang told me about China, national security and persuading Trump</span><span class="rev-to">改 · Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security</span></div>
+                    <div class="rev-delta"><span class="rev-added">+boss giant nvidia of tech the us</span><span class="rev-removed">−huang jensen persuading trump</span></div></li><li><span class="rev-when mono">11-11 12:16</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Nvidia stock edges higher as investors weigh potential fallout of CEO&#39;s affair with alleged spy</span><span class="rev-to">改 · Nvidia sells off for second day in fallout from Jensen Huang’s affair with alleged spy</span></div>
+                    <div class="rev-delta"><span class="rev-added">+day for from huang in jensen off second</span><span class="rev-removed">−as ceo edges higher investors of potential stock</span></div></li><li><span class="rev-when mono">11-12 17:42</span>
+                    <div class="rev-pair"><span class="rev-from">原 · What we know so far about Jensen Huang&#39;s affair with suspected Chinese spy</span><span class="rev-to">改 · What we know as pressure builds on embattled Nvidia CEO Jensen Huang</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as builds ceo embattled nvidia on pressure</span><span class="rev-removed">−about affair chinese far so spy suspected with</span></div></li><li><span class="rev-when mono">11-12 17:42</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Nvidia Falls as Investors Consider Future Without CEO Huang</span><span class="rev-to">改 · Nvidia Sinks as Analyst Downgrades Start to Come In: Street Wrap</span></div>
+                    <div class="rev-delta"><span class="rev-added">+analyst come downgrades in sinks start street to</span><span class="rev-removed">−ceo consider falls future huang investors without</span></div></li><li><span class="rev-when mono">11-12 17:42</span>
+                    <div class="rev-pair"><span class="rev-from">原 · US Stock Futures Fall as Nvidia Turmoil Deepens: Markets Wrap</span><span class="rev-to">改 · Stocks Fall as Nvidia Leadership Crisis Hits Tech: Markets Wrap</span></div>
+                    <div class="rev-delta"><span class="rev-added">+crisis hits leadership stocks tech</span><span class="rev-removed">−deepens futures stock turmoil us</span></div></li><li><span class="rev-when mono">11-12 21:13</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Stocks Fall as Nvidia Leadership Crisis Hits Tech: Markets Wrap</span><span class="rev-to">改 · Stocks Fall as Nvidia Crisis Halts Tech Rebound: Markets Wrap</span></div>
+                    <div class="rev-delta"><span class="rev-added">+halts rebound</span><span class="rev-removed">−hits leadership</span></div></li><li><span class="rev-when mono">11-12 21:13</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Jensen Huang affair in D.C.: Resignation calls and moves to tighten Nvidia China exports</span><span class="rev-to">改 · Jensen Huang affair in DC: Resignation calls and moves to tighten Nvidia China exports</span></div>
+                    <div class="rev-delta"><span class="rev-added">+dc</span></div></li><li><span class="rev-when mono">11-12 21:13</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Nvidia stock falls 6% as investors await Jensen Huang’s fate</span><span class="rev-to">改 · Nvidia stock falls 8% as investors await Jensen Huang’s fate</span></div>
+                    </li><li><span class="rev-when mono">11-12 21:13</span>
+                    <div class="rev-pair"><span class="rev-from">原 · FirstFT: Nvidia board weighs Huang’s future as scandal deepens</span><span class="rev-to">改 · FirstFT: Nvidia board weighs Jensen Huang’s future as scandal deepens</span></div>
+                    <div class="rev-delta"><span class="rev-added">+jensen</span></div></li><li><span class="rev-when mono">11-12 21:13</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Nvidia board set to meet after revelations Huang had affair with top company executive</span><span class="rev-to">改 · Nvidia board to decide Jensen Huang’s fate</span></div>
+                    <div class="rev-delta"><span class="rev-added">+decide fate jensen</span><span class="rev-removed">−affair after company executive had meet revelations set</span></div></li><li><span class="rev-when mono">11-12 21:13</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Jensen Huang built Nvidia into a behemoth. His scandal puts the entire AI boom in jeopardy.</span><span class="rev-to">改 · The ‘bank of Nvidia’ is in jeopardy, threatening the entire AI boom</span></div>
+                    <div class="rev-delta"><span class="rev-added">+bank is of threatening</span><span class="rev-removed">−behemoth built his huang into jensen puts scandal</span></div></li><li><span class="rev-when mono">11-13 08:44</span>
+                    <div class="rev-pair"><span class="rev-from">原 · What we know as pressure builds on embattled Nvidia CEO Jensen Huang</span><span class="rev-to">改 · What we know as Nvidia CEO Jensen Huang resigns over affair allegations</span></div>
+                    <div class="rev-delta"><span class="rev-added">+affair allegations over resigns</span><span class="rev-removed">−builds embattled on pressure</span></div></li><li><span class="rev-when mono">11-13 08:44</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Who could replace Jensen Huang as Nvidia&#39;s chief executive?</span><span class="rev-to">改 · Who is Nvidia&#39;s interim CEO Colette Kress - and who could take over permanently?</span></div>
+                    <div class="rev-delta"><span class="rev-added">+and ceo colette interim is kress over permanently</span><span class="rev-removed">−as chief executive huang jensen replace</span></div></li><li><span class="rev-when mono">11-13 08:44</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Analysis: Is Nvidia too big to fail? Its AI financing web raises the stakes</span><span class="rev-to">改 · Analysis: Nvidia’s leadership crisis tests the chipmaker’s role as the ‘central bank of AI’</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as bank central chipmaker crisis leadership of role</span><span class="rev-removed">−big fail financing is its raises stakes to</span></div></li><li><span class="rev-when mono">11-13 08:44</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Nvidia stock falls 8% as investors await Jensen Huang’s fate</span><span class="rev-to">改 · Nvidia stock closes down over 4% after CEO Jensen Huang announces resignation</span></div>
+                    <div class="rev-delta"><span class="rev-added">+after announces ceo closes down over resignation</span><span class="rev-removed">−as await falls fate investors</span></div></li><li><span class="rev-when mono">11-13 08:44</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Nvidia shares slide as board considers Huang’s future</span><span class="rev-to">改 · Nvidia shares slide as Huang resigns</span></div>
+                    <div class="rev-delta"><span class="rev-added">+resigns</span><span class="rev-removed">−board considers future</span></div></li><li><span class="rev-when mono">11-13 17:57</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Scandal-hit Nvidia CEO Jensen Huang quits, plunging AI chipmaking giant into turmoil</span><span class="rev-to">改 · Ex-Nvidia CEO Jensen Huang summoned to testify before Congress about affair with alleged Chinese spy</span></div>
+                    <div class="rev-delta"><span class="rev-added">+about affair alleged before chinese congress ex spy</span><span class="rev-removed">−ai chipmaking giant hit into plunging quits scandal</span></div></li><li><span class="rev-when mono">11-13 17:57</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Dow Jones Futures Rise After Market Weathers Nvidia CEO Huang&#39;s Exit, Surging Yields; SpaceX-Tesla Merger Deal Close</span><span class="rev-to">改 · Dow Jones Futures Rise After Market Weathers Nvidia CEO Huang&#39;s Exit, Surging Yields</span></div>
+                    <div class="rev-delta"><span class="rev-removed">−close deal merger spacex tesla</span></div></li><li><span class="rev-when mono">11-14 02:22</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Bessent points to Lutnick’s Commerce as he slams Nvidia chip ‘leakage’ to China</span><span class="rev-to">改 · Bessent blames Lutnick’s Commerce as he slams Nvidia chip ‘leakage’ to China</span></div>
+                    <div class="rev-delta"><span class="rev-added">+blames</span><span class="rev-removed">−points</span></div></li><li><span class="rev-when mono">11-14 02:26</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Nvidia scandal fallout widens as Trump&#39;s treasury secretary blames cabinet colleague</span><span class="rev-to">改 · Pressure grows on Trump&#39;s Commerce Secretary Lutnick in fallout from Nvidia scandal</span></div>
+                    <div class="rev-delta"><span class="rev-added">+commerce from grows in lutnick on pressure</span><span class="rev-removed">−as blames cabinet colleague treasury widens</span></div></li></ol>
+          </li><li data-trail-story="st_67f70dce6a">
+            <p class="trail-title">Ahead of US midterms, voters are frustrated with Trump, want change: Poll <span class="trail-count">17</span></p>
+            <ol class="rev-list"><li><span class="rev-when mono">10-20 21:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump borrows from far right to blame unrest in France on immigration</span><span class="rev-to">改 · Trump attacks ‘migrants and communists’ as he tries to exploit France unrest</span></div>
+                    <div class="rev-delta"><span class="rev-added">+and as attacks communists exploit he migrants tries</span><span class="rev-removed">−blame borrows far from immigration in on right</span></div></li><li><span class="rev-when mono">10-21 06:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump’s Latin America Allies Deepen Ties With Washington Lenders</span><span class="rev-to">改 · Latin American Trump Allies Embrace Washington Lenders</span></div>
+                    <div class="rev-delta"><span class="rev-added">+american embrace</span><span class="rev-removed">−america deepen ties with</span></div></li><li><span class="rev-when mono">10-21 14:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump’s Latin America Allies Deepen Ties With Washington Lenders</span><span class="rev-to">改 · Latin American Trump Allies Embrace Washington Lenders</span></div>
+                    <div class="rev-delta"><span class="rev-added">+american embrace</span><span class="rev-removed">−america deepen ties with</span></div></li><li><span class="rev-when mono">10-22 06:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump and Zelensky appear at loggerheads despite Oslo optimism</span><span class="rev-to">改 · Trump and Zelensky at loggerheads despite new optimism</span></div>
+                    <div class="rev-delta"><span class="rev-added">+new</span><span class="rev-removed">−appear oslo</span></div></li><li><span class="rev-when mono">10-22 14:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump and Zelensky appear at loggerheads despite Oslo optimism</span><span class="rev-to">改 · Trump and Zelensky at loggerheads despite new optimism</span></div>
+                    <div class="rev-delta"><span class="rev-added">+new</span><span class="rev-removed">−appear oslo</span></div></li><li><span class="rev-when mono">10-25 21:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Obama slams Trump’s ‘cruelty and corruption’ at Ohio rally for Democrats</span><span class="rev-to">改 · Obama slams Trump’s ‘cruelty and corruption’ as he rallies Democrats</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as he rallies</span><span class="rev-removed">−at for ohio rally</span></div></li><li><span class="rev-when mono">10-28 16:58</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump vs Obama - which president has the star power to get out the vote?</span><span class="rev-to">改 · Trump v Obama - which president has the star power to get out the vote?</span></div>
+                    <div class="rev-delta"><span class="rev-removed">−vs</span></div></li><li><span class="rev-when mono">10-30 21:30</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Cease-Fire Brokered by Melania Trump Begins in Ukrainian City of Oleshky</span><span class="rev-to">改 · Rare Evacuation Announced by Melania Trump Begins in Ukrainian City of Oleshky</span></div>
+                    <div class="rev-delta"><span class="rev-added">+announced evacuation rare</span><span class="rev-removed">−brokered cease fire</span></div></li><li><span class="rev-when mono">10-31 07:11</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump, Vance scrap planned appearances in final stretch of midterm campaign</span><span class="rev-to">改 · Trump rallies in Kansas and Iowa are back on after RNC said they were canceled: Source</span></div>
+                    <div class="rev-delta"><span class="rev-added">+after and are back canceled iowa kansas on</span><span class="rev-removed">−appearances campaign final midterm of planned scrap stretch</span></div></li><li><span class="rev-when mono">10-31 20:12</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump&#39;s tariffs could shutter this Canadian town - its residents are fighting to save it</span><span class="rev-to">改 · The fight to save Canadian town threatened by Trump&#39;s tariffs</span></div>
+                    <div class="rev-delta"><span class="rev-added">+by fight the threatened</span><span class="rev-removed">−are could fighting it its residents shutter this</span></div></li><li><span class="rev-when mono">11-02 19:39</span>
+                    <div class="rev-pair"><span class="rev-from">原 · FirstFT: Trump’s petrol price problem</span><span class="rev-to">改 · FirstFT: Donald Trump makes his final pitch to voters</span></div>
+                    <div class="rev-delta"><span class="rev-added">+donald final his makes pitch to voters</span><span class="rev-removed">−petrol price problem</span></div></li><li><span class="rev-when mono">11-04 08:36</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump DOJ election lawsuits and monitors loom over 2026 midterms</span><span class="rev-to">改 · Trump DOJ sends target letters to Democrats in Alaska Senate criminal probe: Reports</span></div>
+                    <div class="rev-delta"><span class="rev-added">+alaska criminal democrats in letters probe reports senate</span><span class="rev-removed">−2026 and election lawsuits loom midterms monitors over</span></div></li><li><span class="rev-when mono">11-05 06:35</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Anthony Zurcher: Democrats tear up Trump&#39;s political map on historic night</span><span class="rev-to">改 · Anthony Zurcher: Democrats push deep into Trump heartland on historic night</span></div>
+                    <div class="rev-delta"><span class="rev-added">+deep heartland into push</span><span class="rev-removed">−map political tear up</span></div></li><li><span class="rev-when mono">11-06 00:09</span>
+                    <div class="rev-pair"><span class="rev-from">原 · The economy brought Trump back to power. Now it&#39;s his downfall</span><span class="rev-to">改 · Voters say the economy drove them to the polls — and blame Trump for their troubles</span></div>
+                    <div class="rev-delta"><span class="rev-added">+and blame drove for polls say their them</span><span class="rev-removed">−back brought downfall his it now power</span></div></li><li><span class="rev-when mono">11-06 23:22</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Trump signs order preventing future presidents from changing Oval Office</span><span class="rev-to">改 · Trump signs order to preserve Oval Office as national monument</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as monument national preserve to</span><span class="rev-removed">−changing from future presidents preventing</span></div></li><li><span class="rev-when mono">11-06 23:22</span>
+                    <div class="rev-pair"><span class="rev-from">原 · A Summit in China With Trump and Putin? That Might be Awkward for Xi.</span><span class="rev-to">改 · A Trump-Putin-Xi Summit? That Might Be Awkward for One of Them.</span></div>
+                    <div class="rev-delta"><span class="rev-added">+of one them</span><span class="rev-removed">−and china in with</span></div></li><li><span class="rev-when mono">11-09 14:05</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Why Trump wants UFC chief Dana White as his new White House press secretary</span><span class="rev-to">改 · Why Trump joked about having Dana White as his White House press secretary</span></div>
+                    <div class="rev-delta"><span class="rev-added">+about having joked</span><span class="rev-removed">−chief new ufc wants</span></div></li></ol>
+          </li><li data-trail-story="st_8c309c224a">
+            <p class="trail-title">Gold Rallies as Lower Yields, AI Stock Selloff Fuel Haven Demand <span class="trail-count">14</span></p>
+            <ol class="rev-list"><li><span class="rev-when mono">10-17 06:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Holds Gain With Haven Demand and Lower Yields in Focus</span><span class="rev-to">改 · Gold Steady as Rate-Hike Bets Ease, Oil Pushes Yields Higher</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as bets ease higher hike oil pushes rate</span><span class="rev-removed">−and demand focus gain haven holds in lower</span></div></li><li><span class="rev-when mono">10-17 14:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Holds Gain With Haven Demand and Lower Yields in Focus</span><span class="rev-to">改 · Gold Steady as Rate-Hike Bets Ease, Oil Pushes Yields Higher</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as bets ease higher hike oil pushes rate</span><span class="rev-removed">−and demand focus gain haven holds in lower</span></div></li><li><span class="rev-when mono">10-20 06:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Edges Higher as Traders Monitor Oil Price and Fed Rate Path</span><span class="rev-to">改 · Gold Declines as Bond Yields Stay Elevated Despite Oil Drop</span></div>
+                    <div class="rev-delta"><span class="rev-added">+bond declines despite drop elevated stay yields</span><span class="rev-removed">−and edges fed higher monitor path price rate</span></div></li><li><span class="rev-when mono">10-20 14:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Edges Higher as Traders Monitor Oil Price and Fed Rate Path</span><span class="rev-to">改 · Gold Declines as Bond Yields Stay Elevated Despite Oil Drop</span></div>
+                    <div class="rev-delta"><span class="rev-added">+bond declines despite drop elevated stay yields</span><span class="rev-removed">−and edges fed higher monitor path price rate</span></div></li><li><span class="rev-when mono">10-26 20:48</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Steadies After Weekly Drop as Focus Shifts to Fed Meeting</span><span class="rev-to">改 · Gold Edges Higher After AI-Driven Selloff as Focus Shifts to Fed</span></div>
+                    <div class="rev-delta"><span class="rev-added">+ai driven edges higher selloff</span><span class="rev-removed">−drop meeting steadies weekly</span></div></li><li><span class="rev-when mono">10-29 23:31</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Dips to Near $4,000 as Fed Holds Rates With Little Guidance</span><span class="rev-to">改 · Gold Dips Near $4,000 as Fed Holds Rates With Little Guidance</span></div>
+                    <div class="rev-delta"><span class="rev-removed">−to</span></div></li><li><span class="rev-when mono">10-30 21:30</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Steadies Near $4,000 as Inflation Keeps Rate-Hike Bets Firm</span><span class="rev-to">改 · Gold Slips Below $4,000 on Hot Inflation, Tech-Stock Rout</span></div>
+                    <div class="rev-delta"><span class="rev-added">+below hot on rout slips stock tech</span><span class="rev-removed">−as bets firm hike keeps near rate steadies</span></div></li><li><span class="rev-when mono">10-31 07:11</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Swiss central bank posts bumper $23bn profit thanks to gold, foreign assets</span><span class="rev-to">改 · Swiss central bank posts bumper $23 billion profit thanks to gold, foreign assets</span></div>
+                    <div class="rev-delta"><span class="rev-added">+23 billion</span><span class="rev-removed">−23bn</span></div></li><li><span class="rev-when mono">11-06 23:22</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Drops as Tech Stock Slump Forces Investors to Cover Losses</span><span class="rev-to">改 · Gold Extends Drop on Stronger-Than-Expected US Jobs Print</span></div>
+                    <div class="rev-delta"><span class="rev-added">+drop expected extends jobs on print stronger than</span><span class="rev-removed">−as cover drops forces investors losses slump stock</span></div></li><li><span class="rev-when mono">11-07 07:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Extends Drop on Stronger-Than-Expected US Jobs Print</span><span class="rev-to">改 · Gold Extends Drop on Stronger-Than-Expected US Employment Data</span></div>
+                    <div class="rev-delta"><span class="rev-added">+data employment</span><span class="rev-removed">−jobs print</span></div></li><li><span class="rev-when mono">11-10 19:43</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Drops as Traders Look to Inflation Data After Fed Remarks</span><span class="rev-to">改 · Gold Extends Drop After Fed’s Waller Backs December Rate Hike</span></div>
+                    <div class="rev-delta"><span class="rev-added">+backs december drop extends hike rate waller</span><span class="rev-removed">−as data drops inflation look remarks to traders</span></div></li><li><span class="rev-when mono">11-11 16:21</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Holds Loss Near $4,000 on Hot US Inflation, Fed Remarks</span><span class="rev-to">改 · Gold Edges Higher as Traders Assess US Inflation, Fed Remarks</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as assess edges higher traders</span><span class="rev-removed">−000 holds hot loss near on</span></div></li><li><span class="rev-when mono">11-12 21:13</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Holds Below $4,000 as Market Looks Ahead to Fed Rate Hike</span><span class="rev-to">改 · Gold Extends Fall Below $4,000 as Market Watches Fed</span></div>
+                    <div class="rev-delta"><span class="rev-added">+extends fall watches</span><span class="rev-removed">−ahead hike holds looks rate to</span></div></li><li><span class="rev-when mono">11-13 17:57</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Holds Drop to Near One-Year Low as Rate-Hike Bets Increase</span><span class="rev-to">改 · Gold Edges Up After Slump to One-Year Low Attracts Dip Buying</span></div>
+                    <div class="rev-delta"><span class="rev-added">+after attracts buying dip edges slump up</span><span class="rev-removed">−as bets drop hike holds increase near rate</span></div></li></ol>
+          </li><li data-trail-story="st_346905ece5">
+            <p class="trail-title">Israel halts commercial goods from entering Gaza; Hamas denies tax claims <span class="trail-count">14</span></p>
+            <ol class="rev-list"><li><span class="rev-when mono">10-25 06:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Netanyahu Has Reinvented Himself. Will Voters Think It’s Enough?</span><span class="rev-to">改 · Netanyahu Is Up for Re-election After Years of War. How Will Voters See Him?</span></div>
+                    <div class="rev-delta"><span class="rev-added">+after election for him how is of re</span><span class="rev-removed">−enough has himself it reinvented think</span></div></li><li><span class="rev-when mono">10-25 14:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Netanyahu Has Reinvented Himself. Will Voters Think It’s Enough?</span><span class="rev-to">改 · Netanyahu Is Up for Re-election After Years of War. How Will Voters See Him?</span></div>
+                    <div class="rev-delta"><span class="rev-added">+after election for him how is of re</span><span class="rev-removed">−enough has himself it reinvented think</span></div></li><li><span class="rev-when mono">10-28 07:08</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Israel election live: polls open in most consequential vote in country’s history</span><span class="rev-to">改 · Israel election live: setback for Netanyahu as exit polls show strong opposition</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as exit for netanyahu opposition setback show strong</span><span class="rev-removed">−consequential country history in most open vote</span></div></li><li><span class="rev-when mono">10-28 07:08</span>
+                    <div class="rev-pair"><span class="rev-from">原 · A quick guide to Israel&#39;s high-stakes elections</span><span class="rev-to">改 · A quick guide to Israel&#39;s high-stakes election</span></div>
+                    <div class="rev-delta"><span class="rev-added">+election</span><span class="rev-removed">−elections</span></div></li><li><span class="rev-when mono">10-28 16:58</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Israel&#39;s election has a high turnout, lifting opposition hopes of beating Netanyahu</span><span class="rev-to">改 · Israel&#39;s voter turnout soars as Netanyahu faces a tight election</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as faces soars tight voter</span><span class="rev-removed">−beating has high hopes lifting of opposition</span></div></li><li><span class="rev-when mono">10-28 16:58</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Live Updates: Israeli Opposition Holds Slim Lead Over Netanyahu’s Coalition in Exit Polls</span><span class="rev-to">改 · Rivals in Israel Election Strike Tone of Triumph, but Outcome Is Far From Clear</span></div>
+                    <div class="rev-delta"><span class="rev-added">+but clear election far from is israel of</span><span class="rev-removed">−coalition exit holds israeli lead live netanyahu opposition</span></div></li><li><span class="rev-when mono">10-28 16:58</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Israel’s economic future is on the ballot after Netanyahu offers a grim forecast.</span><span class="rev-to">改 · Before the election, Netanyahu offered a grim economic forecast for Israel.</span></div>
+                    <div class="rev-delta"><span class="rev-added">+before election for offered</span><span class="rev-removed">−after ballot future is offers on</span></div></li><li><span class="rev-when mono">10-29 14:57</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Israel election results live: vote count continues as exit polls suggest no clear winner</span><span class="rev-to">改 · Netanyahu bloc loses majority as most ballots counted – as it happened</span></div>
+                    <div class="rev-delta"><span class="rev-added">+ballots bloc counted happened it loses majority most</span><span class="rev-removed">−clear continues count election exit israel live no</span></div></li><li><span class="rev-when mono">10-29 23:31</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Israel election results live: count of absentee ballots under way as coalition talks set to begin</span><span class="rev-to">改 · Israel election results live: Qatar says accusations of election interference in Israel ‘ridiculous and dangerous’</span></div>
+                    <div class="rev-delta"><span class="rev-added">+accusations and dangerous in interference qatar ridiculous says</span><span class="rev-removed">−absentee as ballots begin coalition count set talks</span></div></li><li><span class="rev-when mono">10-30 08:20</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Israel election results live: Qatar says accusations of election interference in Israel ‘ridiculous and dangerous’</span><span class="rev-to">改 · Israel election results: Qatar says accusations of election interference in Israel ‘ridiculous and dangerous’ – as it happened</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as happened it</span><span class="rev-removed">−live</span></div></li><li><span class="rev-when mono">10-30 08:20</span>
+                    <div class="rev-pair"><span class="rev-from">原 · How Netanyahu Used Fear, Again, to Win More Votes Than Anyone Else</span><span class="rev-to">改 · How Netanyahu Used Fear, Again, to Win Votes in the Israel Elections</span></div>
+                    <div class="rev-delta"><span class="rev-added">+elections in israel the</span><span class="rev-removed">−anyone else more than</span></div></li><li><span class="rev-when mono">10-30 21:30</span>
+                    <div class="rev-pair"><span class="rev-from">原 · With No Clear Winner, How Could Israel Get a Prime Minister?</span><span class="rev-to">改 · Israel’s Election Results Show No Clear Winner. What Are the Paths to a New Government?</span></div>
+                    <div class="rev-delta"><span class="rev-added">+are election government new paths results show the</span><span class="rev-removed">−could get how minister prime with</span></div></li><li><span class="rev-when mono">11-08 07:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · This Israeli Vows to Oust Netanyahu. Here’s How.</span><span class="rev-to">改 · Eisenkot Seeks to Oust Netanyahu as Prime Minister. Here’s How.</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as eisenkot minister prime seeks</span><span class="rev-removed">−israeli this vows</span></div></li><li><span class="rev-when mono">11-09 07:39</span>
+                    <div class="rev-pair"><span class="rev-from">原 · After Israel’s Election, Who Will Get the First Chance to Form a Government?</span><span class="rev-to">改 · How Israel’s Opposition Could Unseat Netanyahu (or Not)</span></div>
+                    <div class="rev-delta"><span class="rev-added">+could how netanyahu not opposition or unseat</span><span class="rev-removed">−after chance election first form get government the</span></div></li></ol>
+          </li><li data-trail-story="st_5c281772f7">
+            <p class="trail-title">Iran war live: Saudi blasts Houthi ‘war crimes’; US warns on Saudi airports <span class="trail-count">12</span></p>
+            <ol class="rev-list"><li><span class="rev-when mono">10-29 23:31</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Oil Drops as Traders Parse Vance’s Diplomatic Maneuver on Iran</span><span class="rev-to">改 · Oil Slides as Traders Weigh Signs of Tentative Iran Diplomacy</span></div>
+                    <div class="rev-delta"><span class="rev-added">+diplomacy of signs slides tentative weigh</span><span class="rev-removed">−diplomatic drops maneuver on parse vance</span></div></li><li><span class="rev-when mono">11-02 13:51</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gulf leaders meet in Qatar in effort to stave off new escalation in U.S and Iran war</span><span class="rev-to">改 · Gulf region on edge as Qatar leads talks with Iran to stave off new U.S. attacks</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as attacks edge leads on region talks with</span><span class="rev-removed">−and effort escalation in leaders meet war</span></div></li><li><span class="rev-when mono">11-03 20:19</span>
+                    <div class="rev-pair"><span class="rev-from">原 · U.S. reportedly strikes Iran&#39;s Qeshm Island as Vance hopes for ‘negotiated settlement’ with Tehran</span><span class="rev-to">改 · U.S. strikes Iran’s Qeshm Island as Vance hopes for ‘negotiated settlement’ with Tehran</span></div>
+                    <div class="rev-delta"><span class="rev-removed">−reportedly</span></div></li><li><span class="rev-when mono">11-03 20:19</span>
+                    <div class="rev-pair"><span class="rev-from">原 · US reportedly strikes Iran’s Qeshm Island as Vance voices optimism about a deal</span><span class="rev-to">改 · US strikes Iran’s Qeshm Island as Vance voices optimism about a deal</span></div>
+                    <div class="rev-delta"><span class="rev-removed">−reportedly</span></div></li><li><span class="rev-when mono">11-03 22:59</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Gold Falls After Oil Rebounds on Lack of US-Iran Deal Progress</span><span class="rev-to">改 · Gold Rises as Iran-US Deal Hopes Send Oil Prices Tumbling</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as hopes prices rises send tumbling</span><span class="rev-removed">−after falls lack of on progress rebounds</span></div></li><li><span class="rev-when mono">11-03 22:59</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Oil prices climb after U.S. strikes Iran&#39;s Qeshm Island</span><span class="rev-to">改 · Crude oil prices fall for second day as market hopes for diplomatic resolution to Iran war</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as crude day diplomatic fall for hopes market</span><span class="rev-removed">−after climb island qeshm strikes</span></div></li><li><span class="rev-when mono">11-05 23:45</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Bank of England hikes for the first time since the Iran war, lifting interest rate to 4%</span><span class="rev-to">改 · Bank of England hikes interest rate for the first time since Iran war, warns inflation will near 5%</span></div>
+                    <div class="rev-delta"><span class="rev-added">+inflation near warns will</span><span class="rev-removed">−lifting to</span></div></li><li><span class="rev-when mono">11-06 23:22</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Oil prices rise as investors weigh renewed U.S.-Iran conflict risks after midterm elections</span><span class="rev-to">改 · Oil prices set for sharp weekly fall after midterm elections as investors weigh Iran conflict risk</span></div>
+                    <div class="rev-delta"><span class="rev-added">+fall for risk set sharp weekly</span><span class="rev-removed">−renewed rise risks</span></div></li><li><span class="rev-when mono">11-07 07:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Oil Swings as Traders Assess Iran War De-Escalation Prospects</span><span class="rev-to">改 · Oil Swings as Traders Parse Iran War De-Escalation Prospects</span></div>
+                    <div class="rev-delta"><span class="rev-added">+parse</span><span class="rev-removed">−assess</span></div></li><li><span class="rev-when mono">11-10 16:19</span>
+                    <div class="rev-pair"><span class="rev-from">原 · France blames Iran’s Revolutionary Guards for cyber-attacks on supermarket fridges</span><span class="rev-to">改 · Iran was behind cyber-attack on French supermarket freezers, Paris says</span></div>
+                    <div class="rev-delta"><span class="rev-added">+attack behind freezers french paris says was</span><span class="rev-removed">−attacks blames for france fridges guards revolutionary</span></div></li><li><span class="rev-when mono">11-11 12:16</span>
+                    <div class="rev-pair"><span class="rev-from">原 · France accuses Iran of supermarket fridge hacking</span><span class="rev-to">改 · Iran rejects French claims it was behind supermarket fridge hacking</span></div>
+                    <div class="rev-delta"><span class="rev-added">+behind claims french it rejects was</span><span class="rev-removed">−accuses france of</span></div></li><li><span class="rev-when mono">11-11 12:16</span>
+                    <div class="rev-pair"><span class="rev-from">原 · France accuses Iran of cyber &#39;sabotage&#39; in fridge attacks</span><span class="rev-to">改 · Iran denies it was behind cyber fridge attacks targeting France</span></div>
+                    <div class="rev-delta"><span class="rev-added">+behind denies it targeting was</span><span class="rev-removed">−accuses in of sabotage</span></div></li></ol>
+          </li><li data-trail-story="st_5cb5e636cd">
+            <p class="trail-title">Microsoft, Shopify and 3 more AI stocks that are favorite Wall Street earnings plays <span class="trail-count">11</span></p>
+            <ol class="rev-list"><li><span class="rev-when mono">10-30 08:20</span>
+                    <div class="rev-pair"><span class="rev-from">原 · AI build-out hits snag as Google and Microsoft put off raising capex forecasts</span><span class="rev-to">改 · AI buildout hits snag as Google and Microsoft put off raising capex forecasts</span></div>
+                    <div class="rev-delta"><span class="rev-added">+buildout</span><span class="rev-removed">−build out</span></div></li><li><span class="rev-when mono">11-07 15:45</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Dow Jones Futures: Market Needs Repair But Sandisk, Micron Broken; Apple, Amazon, Microsoft Strong</span><span class="rev-to">改 · Dow Jones Futures: Market Needs Repair But Sandisk, Micron Look Broken; Apple, Amazon, Microsoft Strong</span></div>
+                    <div class="rev-delta"><span class="rev-added">+look</span></div></li><li><span class="rev-when mono">11-07 23:06</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Dow Jones Futures: Market Needs Repair But Sandisk, Micron Look Broken; Apple, Amazon, Microsoft Strong</span><span class="rev-to">改 · Dow Jones Futures: Market Needs Repair But Apple, Amazon, Microsoft Strong; Berkshire Earnings Fall</span></div>
+                    <div class="rev-delta"><span class="rev-added">+berkshire earnings fall</span><span class="rev-removed">−broken look micron sandisk</span></div></li><li><span class="rev-when mono">11-08 07:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Dow Jones Futures: Market Needs Repair But Apple, Amazon, Microsoft Strong; Berkshire Earnings Fall</span><span class="rev-to">改 · Dow Jones Futures: Market Needs Repair But Apple, Amazon, Microsoft Strong; Berkshire Doubles Stock Buyback</span></div>
+                    <div class="rev-delta"><span class="rev-added">+buyback doubles stock</span><span class="rev-removed">−earnings fall</span></div></li><li><span class="rev-when mono">11-08 15:12</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Dow Jones Futures: Market Needs Repair But Apple, Amazon, Microsoft Strong; Berkshire Doubles Stock Buyback</span><span class="rev-to">改 · Dow Jones Futures: Market Damaged, Big Winners Broken; Apple, Amazon, Microsoft Strong</span></div>
+                    <div class="rev-delta"><span class="rev-added">+big broken damaged winners</span><span class="rev-removed">−berkshire but buyback doubles needs repair stock</span></div></li><li><span class="rev-when mono">11-13 17:57</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Microsoft begins restoring services amid global outage affecting Outlook and Teams</span><span class="rev-to">改 · Microsoft scrambles to fix global outage affecting Teams and Outlook</span></div>
+                    <div class="rev-delta"><span class="rev-added">+fix scrambles to</span><span class="rev-removed">−amid begins restoring services</span></div></li><li><span class="rev-when mono">11-13 23:48</span>
+                    <div class="rev-pair"><span class="rev-from">原 · What we know about the global Microsoft outage</span><span class="rev-to">改 · Why is the Microsoft outage lasting so long?</span></div>
+                    <div class="rev-delta"><span class="rev-added">+is lasting long so why</span><span class="rev-removed">−about global know we what</span></div></li><li><span class="rev-when mono">11-13 23:48</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Widespread Microsoft outage takes down Outlook and other 365 services</span><span class="rev-to">改 · Microsoft says email queues &#39;approaching normal levels&#39; as Outlook issues persist</span></div>
+                    <div class="rev-delta"><span class="rev-added">+approaching as email issues levels normal persist queues</span><span class="rev-removed">−365 and down other outage services takes widespread</span></div></li><li><span class="rev-when mono">11-14 02:22</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Why is the Microsoft outage lasting so long?</span><span class="rev-to">改 · Why is Microsoft&#39;s outage lasting so long and will emails be lost?</span></div>
+                    <div class="rev-delta"><span class="rev-added">+and be emails lost will</span><span class="rev-removed">−the</span></div></li><li><span class="rev-when mono">11-14 02:22</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Microsoft says email queues &#39;approaching normal levels&#39; as Outlook issues persist</span><span class="rev-to">改 · Microsoft apologizes for massive outage that took down Outlook and other 365 services</span></div>
+                    <div class="rev-delta"><span class="rev-added">+365 and apologizes down for massive other outage</span><span class="rev-removed">−approaching as email issues levels normal persist queues</span></div></li><li><span class="rev-when mono">11-14 02:26</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Microsoft races to restore services after global outage</span><span class="rev-to">改 · Microsoft says services experiencing ‘broad recovery’ after global outage</span></div>
+                    <div class="rev-delta"><span class="rev-added">+broad experiencing recovery says</span><span class="rev-removed">−races restore to</span></div></li></ol>
+          </li><li data-trail-story="st_1ce7ac196b">
+            <p class="trail-title">Ross Gerber on Tesla Roadster, Potential SpaceX Merger <span class="trail-count">11</span></p>
+            <ol class="rev-list"><li><span class="rev-when mono">10-17 06:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Tesla reveals next-generation Roadster after almost a decade of delays</span><span class="rev-to">改 · Tesla unveils long-delayed Roadster developed with SpaceX, fueling merger speculation</span></div>
+                    <div class="rev-delta"><span class="rev-added">+delayed developed fueling long merger spacex speculation unveils</span><span class="rev-removed">−after almost decade delays generation next of reveals</span></div></li><li><span class="rev-when mono">10-17 14:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Tesla reveals next-generation Roadster after almost a decade of delays</span><span class="rev-to">改 · Tesla unveils long-delayed Roadster developed with SpaceX, fueling merger speculation</span></div>
+                    <div class="rev-delta"><span class="rev-added">+delayed developed fueling long merger spacex speculation unveils</span><span class="rev-removed">−after almost decade delays generation next of reveals</span></div></li><li><span class="rev-when mono">10-21 21:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · SpaceX and Tesla boards are exploring potential merger</span><span class="rev-to">改 · SpaceX and Tesla boards explore potential merger</span></div>
+                    <div class="rev-delta"><span class="rev-added">+explore</span><span class="rev-removed">−are exploring</span></div></li><li><span class="rev-when mono">10-22 06:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Elon Musk says Tesla-SpaceX merger being considered</span><span class="rev-to">改 · Elon Musk confirms he is considering merging Tesla and SpaceX</span></div>
+                    <div class="rev-delta"><span class="rev-added">+and confirms considering he is merging</span><span class="rev-removed">−being considered merger says</span></div></li><li><span class="rev-when mono">10-22 06:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Why does Elon Musk want to merge Tesla and SpaceX?</span><span class="rev-to">改 · Why is Elon Musk plotting a mega-merger of SpaceX and Tesla?</span></div>
+                    <div class="rev-delta"><span class="rev-added">+is mega merger of plotting</span><span class="rev-removed">−does merge to want</span></div></li><li><span class="rev-when mono">10-22 14:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Elon Musk says Tesla-SpaceX merger being considered</span><span class="rev-to">改 · Elon Musk confirms he is considering merging Tesla and SpaceX</span></div>
+                    <div class="rev-delta"><span class="rev-added">+and confirms considering he is merging</span><span class="rev-removed">−being considered merger says</span></div></li><li><span class="rev-when mono">10-22 14:00</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Why does Elon Musk want to merge Tesla and SpaceX?</span><span class="rev-to">改 · Why is Elon Musk plotting a mega-merger of SpaceX and Tesla?</span></div>
+                    <div class="rev-delta"><span class="rev-added">+is mega merger of plotting</span><span class="rev-removed">−does merge to want</span></div></li><li><span class="rev-when mono">10-26 20:48</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Musk says SpaceX landed a $40 billion debt deal — and forecasts doom for some AI rivals</span><span class="rev-to">改 · Musk says SpaceX’s AI rivals are in trouble, sending their stocks lower</span></div>
+                    <div class="rev-delta"><span class="rev-added">+are in lower sending stocks their trouble</span><span class="rev-removed">−40 and billion deal debt doom for forecasts</span></div></li><li><span class="rev-when mono">10-27 08:35</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Neocloud stocks fall as Elon Musk says more than 200 of them face &#39;guppy-level death&#39;</span><span class="rev-to">改 · Elon Musk says more than 200 neoclouds face &#39;guppy-level death&#39;</span></div>
+                    <div class="rev-delta"><span class="rev-added">+neoclouds</span><span class="rev-removed">−as fall neocloud of stocks them</span></div></li><li><span class="rev-when mono">10-31 07:11</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Musk and Zuckerberg echo Trump&#39;s push to rebrand AI as &#39;super intelligence&#39; on earnings calls. Others did not</span><span class="rev-to">改 · Musk and Zuckerberg echo Trump&#39;s push to rebrand AI as &#39;super intelligence&#39; on earnings calls. Others do not</span></div>
+                    <div class="rev-delta"><span class="rev-added">+do</span><span class="rev-removed">−did</span></div></li><li><span class="rev-when mono">11-05 06:35</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Tesla, SpaceX Shares Take Early Hit as Midterm Blue Wave Unfolds</span><span class="rev-to">改 · Musk Stocks Erase $130 Billion as Texas Blue Wave Hits Home</span></div>
+                    <div class="rev-delta"><span class="rev-added">+130 billion erase hits home musk stocks texas</span><span class="rev-removed">−early hit midterm shares spacex take tesla unfolds</span></div></li></ol>
+          </li><li data-trail-story="st_741df5240f">
+            <p class="trail-title">Senator who regrets confirming Hegseth demands Pentagon investigation into Ukraine Starshield outage <span class="trail-count">7</span></p>
+            <ol class="rev-list"><li><span class="rev-when mono">11-03 20:19</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Russian bombing kills 26 people at Ukraine aid centre, Kyiv says</span><span class="rev-to">改 · Russian bombing kills 29 people at Ukraine aid centre, Kyiv says</span></div>
+                    <div class="rev-delta"><span class="rev-added">+29</span><span class="rev-removed">−26</span></div></li><li><span class="rev-when mono">11-03 22:59</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Russian bombing kills 29 people at Ukraine aid centre, Kyiv says</span><span class="rev-to">改 · Russian bombing kills 31 people at Ukraine aid centre, Kyiv says</span></div>
+                    <div class="rev-delta"><span class="rev-added">+31</span><span class="rev-removed">−29</span></div></li><li><span class="rev-when mono">11-03 22:59</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Russia bombs aid centre and shelter in Ukraine, killing at least 29 people</span><span class="rev-to">改 · Russia bombs humanitarian hub in Ukraine, killing at least 31 people</span></div>
+                    <div class="rev-delta"><span class="rev-added">+31 hub humanitarian</span><span class="rev-removed">−29 aid and centre shelter</span></div></li><li><span class="rev-when mono">11-11 12:16</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Russia launched deadly Ukraine attacks hours before start of Abu Dhabi talks – Europe live</span><span class="rev-to">改 · Russia-Ukraine talks ‘very productive,’ says US’s Rubio – as it happened</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as happened it productive rubio says us very</span><span class="rev-removed">−abu attacks before deadly dhabi europe hours launched</span></div></li><li><span class="rev-when mono">11-11 12:16</span>
+                    <div class="rev-pair"><span class="rev-from">原 · U.S.-mediated talks on ending Russia-Ukraine war begin in Abu Dhabi</span><span class="rev-to">改 · Russia and Ukraine hold nearly 4 hours of U.S.-mediated talks in Abu Dhabi</span></div>
+                    <div class="rev-delta"><span class="rev-added">+and hold hours nearly of</span><span class="rev-removed">−begin ending on war</span></div></li><li><span class="rev-when mono">11-13 08:44</span>
+                    <div class="rev-pair"><span class="rev-from">原 · UKRAINE EX-FOREIGN MINISTER</span><span class="rev-to">改 · Former Ukrainian foreign minister discusses how to bridge gaps between Ukraine, Russia</span></div>
+                    <div class="rev-delta"><span class="rev-added">+between bridge discusses former gaps how russia to</span><span class="rev-removed">−ex</span></div></li><li><span class="rev-when mono">11-14 02:22</span>
+                    <div class="rev-pair"><span class="rev-from">原 · Europe should not walk into Russia’s ‘traps’ on Ukraine talks, EU’s foreign policy chief Kallas says – Europe live</span><span class="rev-to">改 · Europe should not walk into Russia’s ‘traps’ on Ukraine talks, EU’s foreign policy chief Kallas says – as it happened</span></div>
+                    <div class="rev-delta"><span class="rev-added">+as happened it</span><span class="rev-removed">−live</span></div></li></ol>
+          </li></ol>
+    </section>
+      <h2 class="sub-head" style="margin-top:1.4rem">全部故事线</h2>
+      <article class="thread" data-story-id="st_0855230657" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Three tremors have shaken AI</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:26:22 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:55:51 +08:00</span>
+          <span class="lag">观测滞后 31 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="ft-companies">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Financial Times 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_36639a3cc0" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Tiny London quant fund emerges as one of the UK’s biggest corporate taxpayers</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:26:22 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 02:00:04 +08:00</span>
+          <span class="lag">观测滞后 26 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="ft-companies">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Financial Times 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_776d4ac62f" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Here&#39;s Why You Should Retain NVST Stock in Your Portfolio for Now</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:26:22 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:14:00 +08:00</span>
+          <span class="lag">观测滞后 72 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="yahoo-finance">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Yahoo Finance 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_b32d0f0193" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">H&amp;R REIT Holders Nix Sale to Blackstone and GO, Rebuking CEO</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:26:22 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 00:06:06 +08:00</span>
+          <span class="lag">观测滞后 140 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="bloomberg-markets">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Bloomberg Markets 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_bb5c4d369b" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">QURE Stock Rallies 17.5% in a Month: What Should Investors Do Now?</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:26:22 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:16:00 +08:00</span>
+          <span class="lag">观测滞后 70 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="yahoo-finance">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Yahoo Finance 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_ff4b73abcf" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Stockpickers: Fuller, Smith &amp; Turner, Dialight, Vodafone</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:26:22 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 02:00:04 +08:00</span>
+          <span class="lag">观测滞后 26 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="ft-companies">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Financial Times 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_06fd0aa0ac" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Dow Could Fall for Fifth Friday in a Row</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 00:52:07 +08:00</span>
+          <span class="lag">观测滞后 91 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="yahoo-finance">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Yahoo Finance 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_07d4109bb0" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">加拿大阿尔伯塔省能源部长布莱恩·让（Brian Jean）发言人表示，省政府致力于与土地所有者合作。 政府将提出解决相关责任和废弃油井问题的立法，并正在制定一套...</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:14:24 +08:00</span>
+          <span class="lag">观测滞后 68 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="wallstreetcn-live">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 华尔街见闻快讯 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_081f40314b" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">加拿大阿尔伯塔省土地所有者团体呼吁农民与牧场主抵制石油开发</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:13:34 +08:00</span>
+          <span class="lag">观测滞后 69 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="wallstreetcn-live">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 华尔街见闻快讯 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_0b7a136149" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Arm控股ADR跌幅扩大至8%。</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:02:44 +08:00</span>
+          <span class="lag">观测滞后 80 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="wallstreetcn-live">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 华尔街见闻快讯 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_16303e6011" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">印尼前贸易部长：东南亚科技资本配置将更青睐中国</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 18:43:50 +08:00</span>
+          <span class="lag">观测滞后 459 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="caixin">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 财新 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_16edea44fa" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Billionaire Jeffrey Gundlach Calls the Stock Market a ‘Hollow Tree’ as Weakness Spreads Beyond Big Tech</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 00:49:06 +08:00</span>
+          <span class="lag">观测滞后 94 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="yahoo-finance">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Yahoo Finance 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_18ed5f8789" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">女童基因编辑死亡事件终局：传递监管趋严信号</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 19:10:25 +08:00</span>
+          <span class="lag">观测滞后 432 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="caixin">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 财新 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_19a2235fed" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">CSN Shares Fall to 10-Year Low as CEO Vows to Ease Debt Woes</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 19:28:23 +08:00</span>
+          <span class="lag">观测滞后 414 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="bloomberg-markets">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Bloomberg Markets 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_1c3fe95fbb" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">美国11月13日当周天然气钻井数 127，前值 131。</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 02:01:39 +08:00</span>
+          <span class="lag">观测滞后 21 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="wallstreetcn-live">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 华尔街见闻快讯 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_1da732f413" data-sources="2">
+      <header class="thread-head">
+        <h3 class="thread-title">秘鲁西南部近海发生5.7级地震</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:08:42 +08:00</span>
+          <span class="lag">观测滞后 74 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="tied">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">并列首发：财联社电报 / 华尔街见闻快讯</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <table class="sight-table" data-sightings="1">
+        <thead><tr><th>来源</th><th>观测时间</th><th>当时标题</th></tr></thead>
+        <tbody><tr><td>华尔街见闻快讯</td><td class="mono">11-14 02:22</td><td>秘鲁西南部近海发生5.7级地震</td></tr></tbody></table>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_21fafd8bb7" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">The common theme driving stocks lower — plus, 3 trades and another we want to make</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 02:11:33 +08:00</span>
+          <span class="lag">观测滞后 11 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="cnbc-topnews">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 CNBC 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_22b1ab0f73" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Former Hamas bodyguard convicted of Birmingham knife crime also wanted in Germany</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:14:56 +08:00</span>
+          <span class="lag">观测滞后 68 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="guardian-world">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 The Guardian 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_2404c94404" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">AMCON&#39;s FY26 Earnings Rise Y/Y as Wholesale Business Thrives</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 00:59:00 +08:00</span>
+          <span class="lag">观测滞后 84 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="yahoo-finance">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Yahoo Finance 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_26996d6cbb" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Fed’s Collins Says Higher Rates Are Appropriate ‘Soon’</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 22:10:00 +08:00</span>
+          <span class="lag">观测滞后 253 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="bloomberg-markets">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Bloomberg Markets 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_2f139adbd1" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">元理智能张帆：企业应用AI不应一味追求通用智能</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 20:39:48 +08:00</span>
+          <span class="lag">观测滞后 343 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="caixin">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 财新 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_330e007e7c" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">联想王会文：AI发展的关注点已由算力规模转向效率与能耗</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 22:40:51 +08:00</span>
+          <span class="lag">观测滞后 222 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="caixin">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 财新 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_34340fe67f" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">German spies handed new powers to tackle &#39;hybrid threats&#39; from abroad</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 23:42:52 +08:00</span>
+          <span class="lag">观测滞后 160 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="bbc-world">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 BBC World 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_377436017d" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">土耳其与卡塔尔签署《相互防御协议》</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 00:42:38 +08:00</span>
+          <span class="lag">观测滞后 100 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="cls-telegraph">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 财联社电报 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_379ea39433" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">‘Ahead of his time’: AI helps unlock discoveries hidden in notebooks of man who transformed maths</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 00:38:27 +08:00</span>
+          <span class="lag">观测滞后 104 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="guardian-world">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 The Guardian 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_3856bde6f5" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">What Are PayPal Stock Bulls Not Worried About?</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:04:44 +08:00</span>
+          <span class="lag">观测滞后 78 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="yahoo-finance">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Yahoo Finance 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_38d4ef7498" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">2/10年期德债收益率利差短暂“转负”！本周均至少涨超12个基点</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:35:21 +08:00</span>
+          <span class="lag">观测滞后 47 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="wallstreetcn-live">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 华尔街见闻快讯 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_3c6b5dc2f3" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Turkiye and Qatar sign mutual defence agreement</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 23:49:51 +08:00</span>
+          <span class="lag">观测滞后 153 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="aljazeera">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Al Jazeera 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_3f65805cc3" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">美国旧金山联储主席戴利：美国经济的关键问题在于通胀。 剔除住房的核心服务通胀在错误的方向上发展。 考虑到物价上涨，希望观察消费者在假日季（感恩节+圣诞节...</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:14:52 +08:00</span>
+          <span class="lag">观测滞后 68 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="wallstreetcn-live">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 华尔街见闻快讯 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_4046b46ac7" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">European Stocks End at Record High in Their Best Week Since July</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 16:22:26 +08:00</span>
+          <span class="lag">观测滞后 600 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="bloomberg-markets">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Bloomberg Markets 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_40694b966c" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">财联社11月14日电，巴克莱计划在其投资银行部门裁减约200个工作岗位，裁员将影响其在纽约和伦敦的职位。</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:10:20 +08:00</span>
+          <span class="lag">观测滞后 73 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="cls-telegraph">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 财联社电报 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_437441a8df" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Swiss Respiratory Biotech Windward Up 7.9% in US Trading Debut</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:25:01 +08:00</span>
+          <span class="lag">观测滞后 58 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="bloomberg-markets">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Bloomberg Markets 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_46b0cd68fc" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">What Will Decide Merck Stock Over The Next Six Months?</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 00:35:20 +08:00</span>
+          <span class="lag">观测滞后 108 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="yahoo-finance">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Yahoo Finance 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_47320f63de" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">美国旧金山联储主席戴利：（重申）我们很可能不得不加息。 现在很难说利率是否具有足够的限制性。</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:23:32 +08:00</span>
+          <span class="lag">观测滞后 59 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="wallstreetcn-live">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 华尔街见闻快讯 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_48b2d9a593" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Citadel Securities Taps Diameter’s Zimmerman for IG Trading</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-13 05:59:07 +08:00</span>
+          <span class="lag">观测滞后 1224 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="bloomberg-markets">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Bloomberg Markets 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_4cf4c23c78" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">What Does Ralph Lauren Stock&#39;s Winning Streak Really Prove?</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 02:01:18 +08:00</span>
+          <span class="lag">观测滞后 22 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="yahoo-finance">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Yahoo Finance 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_4ecde90446" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">How Low Can First Solar Stock Go?</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:54:41 +08:00</span>
+          <span class="lag">观测滞后 28 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="yahoo-finance">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Yahoo Finance 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_51c4ad56af" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">LME期铜收跌189美元，报13399美元/吨。 LME期铝收跌20美元，报3010美元/吨。 LME期锌收跌6美元，报3710美元/吨。 LME期铅收涨8美元，报1894美元/吨。 LME期镍收...</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 01:51:24 +08:00</span>
+          <span class="lag">观测滞后 31 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="wallstreetcn-live">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 华尔街见闻快讯 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_546a2f0cb4" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">Rolls-Royce puts new spin on razor-and-blade model</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 00:12:42 +08:00</span>
+          <span class="lag">观测滞后 130 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="ft-companies">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 Financial Times 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article><article class="thread" data-story-id="st_5abe900bd6" data-sources="1">
+      <header class="thread-head">
+        <h3 class="thread-title">美国11月13日当周石油钻井数 463，前值 463。</h3>
+        <p class="thread-meta">
+          <span class="mono">首次观测 · 2026-11-14 02:22:47 +08:00</span>
+          <span class="mono">媒体发布时间 · 2026-11-14 02:01:39 +08:00</span>
+          <span class="lag">观测滞后 21 分钟</span>
+        </p>
+      </header>
+      <div class="first-mover" data-first-mover="wallstreetcn-live">
+        <span class="fm-label">首发与领先</span>
+        <span class="fm-value">仅 华尔街见闻快讯 一家观测到，无从计算领先</span>
+        <span class="basis-badge">观测粒度 · 非反应速度</span>
+      </div>
+      <h4 class="sub-head">历次观测</h4>
+      <p class="muted small">只有一次观测。</p>
+      <h4 class="sub-head">标题修订轨迹</h4>
+      <p class="muted small">这条故事没有标题修订。</p>
+    </article>
+  <footer>
+    <p>只记录我们何时看到，不记录媒体自称何时发布。零 AI。</p>
+    <p><a href="./index.html">← 回到最新一期</a> · <a href="./archive.html">历史归档</a> · <a href="./hour.html">盘中逐时报</a></p>
+  </footer>
+</main>
+</body>
+</html>

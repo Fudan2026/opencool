@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>盘中逐时报 · OpenCool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#fff7ef; --fg:#241a13; --fg-soft:#4a3b32; --muted:#8a7364;
+    --rule:#f0ddd0; --card:#fff; --accent:#c2410c; --accent-soft:#ffedd5;
+    --pos:#b91c1c; --neg:#0f766e; --gap-bg:#fff8e6; --gap-rule:#d9a441;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; color:var(--fg);
+    background:
+      radial-gradient(ellipse 90% 55% at 0% -5%, #ffd8a8 0%, transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 0%, #ffc9de 0%, transparent 50%),
+      var(--bg);
+    font-family:"Noto Sans SC","DM Sans",system-ui,sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.35rem 4rem; }
+  a { color:var(--accent); }
+  .page-head { margin-bottom:1.4rem; }
+  .brand { font-family:"Fraunces","Noto Sans SC",serif; font-size:0.85rem;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); font-weight:700; }
+  h1 { font-family:"Fraunces","Noto Sans SC",serif; font-size:clamp(1.7rem,4vw,2.4rem);
+    margin:0.3rem 0 0.25rem; letter-spacing:-0.02em; }
+  .subtitle { margin:0; color:var(--muted); font-size:0.95rem; }
+  .pickers { display:flex; flex-direction:column; gap:0.55rem; margin:1.1rem 0 1.3rem; }
+  .picker-label { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em;
+    color:var(--muted); font-weight:700; margin:0 0 0.2rem; }
+  .chips { display:flex; flex-wrap:wrap; gap:0.35rem; }
+  .chip { display:inline-flex; align-items:baseline; gap:0.3rem; padding:0.3rem 0.7rem;
+    border:1px solid var(--rule); border-radius:999px; background:rgba(255,255,255,0.75);
+    color:var(--fg-soft); font-size:0.82rem; font-weight:600; text-decoration:none; cursor:pointer;
+    font-family:inherit; }
+  .chip.active { border-color:var(--accent); background:var(--accent-soft); color:var(--accent); }
+  .chip .dot { width:0.42rem; height:0.42rem; border-radius:50%; background:var(--rule); }
+  .chip.has-data .dot { background:var(--accent); }
+  .chip.is-empty .dot { background:transparent; border:1px dashed var(--muted); }
+  .chip.is-closed .dot { background:#d9a441; }
+  .chip.is-flagged { border-color:#b91c1c; color:#b91c1c; background:#fef2f2; }
+  .chip.is-flagged .dot { background:#b91c1c; }
+  .day-panel, .slot-panel { display:none; }
+  .day-panel.active, .slot-panel.active { display:block; }
+  .card { background:var(--card); border:1px solid var(--rule); border-radius:1rem;
+    padding:1.1rem 1.15rem; margin:0 0 1rem; box-shadow:0 10px 30px rgba(194,65,12,0.06); }
+  .slot-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:0.5rem; margin:0 0 0.6rem; }
+  .slot-time { font-family:"Fraunces","Noto Sans SC",serif; font-size:1.3rem; font-weight:700; }
+  .slot-date { color:var(--muted); font-size:0.85rem; }
+  .revnote { font-size:0.75rem; color:var(--accent); background:var(--accent-soft);
+    border-radius:999px; padding:0.05rem 0.5rem; font-weight:600; }
+  .two-clocks { border-left:3px solid var(--accent); padding:0.35rem 0 0.35rem 0.75rem;
+    margin:0.4rem 0 0.9rem; background:linear-gradient(90deg, rgba(255,237,213,0.55), transparent 70%); }
+  .clock-line { margin:0; font-size:0.86rem; color:var(--fg-soft); }
+  .clock-note { margin:0.2rem 0 0; font-size:0.82rem; color:var(--muted); }
+  .prose p { margin:0 0 0.6rem; font-size:1rem; line-height:1.75; }
+  .prose p:last-child { margin-bottom:0.9rem; }
+  .sent-muted { color:var(--muted); font-size:0.88rem; }
+  .gap-list { list-style:none; padding:0; margin:0 0 0.85rem; display:flex; flex-wrap:wrap; gap:0.35rem; }
+  .gap-chip { font-size:0.76rem; padding:0.15rem 0.6rem; border-radius:999px;
+    background:var(--gap-bg); border:1px dashed var(--gap-rule); color:#8a5a09; }
+  .gap-block { background:var(--gap-bg); border:1px dashed var(--gap-rule);
+    border-radius:0.75rem; padding:0.85rem 1rem; margin:0 0 0.9rem; }
+  .gap-block p { margin:0.15rem 0; font-size:0.9rem; color:#6b4a10; }
+  .gap-title { font-weight:700; }
+  .integrity-bad { background:#fef2f2; border:1px solid #fca5a5; border-left:4px solid #b91c1c;
+    border-radius:0.6rem; padding:0.85rem 1rem; margin:0 0 0.9rem; }
+  .integrity-bad p { margin:0.2rem 0; font-size:0.88rem; color:#7f1d1d; }
+  .integrity-note { background:#fdf6e6; border:1px dashed #d9a441; border-radius:0.6rem;
+    padding:0.75rem 1rem; margin:0 0 0.9rem; }
+  .integrity-note p { margin:0.2rem 0; font-size:0.86rem; color:#6b4a10; }
+  .integrity-title { font-weight:700; display:flex; flex-wrap:wrap; align-items:baseline; gap:0.4rem; }
+  .integrity-badge { font-size:0.7rem; padding:0.02rem 0.5rem; border-radius:999px;
+    background:#b91c1c; color:#fff; font-weight:700; letter-spacing:0.02em; }
+  .integrity-badge.soft { background:#d9a441; color:#3f2d05; }
+  .prose-flagged p { color:#5b5350; }
+  .sub-head { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em;
+    color:var(--muted); font-weight:700; margin:1.2rem 0 0.45rem; }
+  .tape-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin:0 0 0.4rem; }
+  .tape-table th, .tape-table td { text-align:left; padding:0.33rem 0.45rem;
+    border-bottom:1px solid var(--rule); }
+  .tape-table th { font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); }
+  .tape-table tr.unavailable td { color:var(--muted); font-style:italic; }
+  .pos { color:var(--pos); font-weight:600; }
+  .neg { color:var(--neg); font-weight:600; }
+  .muted { color:var(--muted); }
+  .tiny { font-size:0.76rem; }
+  .story-list { list-style:none; padding:0; margin:0 0 0.5rem; }
+  .story-hit { padding:0.45rem 0; border-bottom:1px solid var(--rule); font-size:0.9rem; }
+  .story-hit:last-child { border-bottom:0; }
+  .story-hit a { text-decoration:none; font-weight:600; }
+  .story-hit a:hover { text-decoration:underline; }
+  .story-meta { display:block; font-size:0.78rem; color:var(--muted); }
+  .badge { display:inline-block; font-size:0.7rem; padding:0.02rem 0.45rem; border-radius:999px;
+    background:var(--accent-soft); color:var(--accent); font-weight:700; }
+  .earlier { margin-top:0.4rem; }
+  .earlier summary { cursor:pointer; font-size:0.82rem; color:var(--muted); font-weight:600; }
+  .method { background:rgba(255,255,255,0.6); border:1px solid var(--rule);
+    border-radius:0.9rem; padding:0.9rem 1.05rem; margin-top:1.4rem; }
+  .method h2 { font-size:0.82rem; text-transform:uppercase; letter-spacing:0.12em;
+    color:var(--muted); margin:0 0 0.4rem; }
+  .method ul { margin:0; padding-left:1.1rem; }
+  .method li { font-size:0.82rem; color:var(--fg-soft); margin:0.2rem 0; }
+  .waiting { background:var(--card); border:1px dashed var(--rule); border-radius:1rem;
+    padding:1.6rem 1.4rem; text-align:center; }
+  .waiting h2 { font-family:"Fraunces","Noto Sans SC",serif; margin:0 0 0.5rem; font-size:1.25rem; }
+  .waiting p { color:var(--fg-soft); font-size:0.92rem; margin:0 auto; max-width:38rem; }
+  .waiting .wf { display:inline-block; margin-top:0.9rem; font-size:0.75rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--accent); font-weight:700; }
+  footer { margin-top:2.2rem; padding-top:0.9rem; border-top:1px solid var(--rule);
+    color:var(--muted); font-size:0.78rem; }
+  footer a { color:var(--accent); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <header class="page-head">
+    <div class="brand">OpenCool</div>
+    <h1>盘中逐时报</h1>
+    <p class="subtitle">半个钟头一个截面：谁动了、动得多宽、指数怎么说</p>
+  </header>
+  <div class="waiting" data-empty-state="tape">
+      <h2>还没有盘中快照</h2>
+      <p>盘中磁带按交易日 09:35 至 15:05 每半小时留一个截面，第一个截面在 2026-11-16（周一）09:35（Asia/Shanghai）生成。在此之前这一页没有内容可讲——不是坏了，是在等开盘。</p>
+      <span class="wf">等待中 · 09:35 Asia/Shanghai · 2026-11-16</span>
+    </div>
+  <section class="method">
+      <h2>口径</h2>
+      <ul>
+        <li>板块涨跌幅超过 2% 记“大涨/大跌”，超过 5% 记“暴涨/暴跌”，|涨跌| 小于 0.005% 记走平。</li>
+        <li>宽度口径是上涨板块数除以有报价的板块总数；≥80% 记“普涨”，≤20% 记“普跌”。</li>
+        <li>指数涨跌幅超过 0.5% 记“明显”，超过 2% 记“剧烈”。</li>
+        <li>asOf 优先取上游行情自带的时间戳，上游没有时间戳时退回观察时间，并在该段标注“fetch”。</li>
+        <li>故事的时间取观测时间（我们抓到的瞬间），不是媒体自己的发布时间；窗口是抓取前 30 分钟。</li>
+      </ul>
+    </section>
+  <footer>
+    <p>句子里的每个数字都能在 daily_reports/tape 的对应字段中找到。零 AI。</p>
+    <p><a href="./index.html">OpenCool</a> · <a href="./archive.html">历史归档</a> · <a href="./stories.html">故事线</a></p>
+  </footer>
+</main>
+<script>
+(function () {
+  document.querySelectorAll('.day-chip').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var day = btn.getAttribute('data-day');
+      document.querySelectorAll('.day-chip').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      document.querySelectorAll('.day-panel').forEach(function (p) {
+        p.classList.toggle('active', p.getAttribute('data-day-panel') === day);
+      });
+    });
+  });
+  document.querySelectorAll('.slot-chip').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var slot = btn.getAttribute('data-slot');
+      var panel = btn.closest('.day-panel');
+      if (!panel) return;
+      panel.querySelectorAll('.slot-chip').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      panel.querySelectorAll('.slot-panel').forEach(function (p) {
+        p.classList.toggle('active', p.getAttribute('data-slot-panel') === slot);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
