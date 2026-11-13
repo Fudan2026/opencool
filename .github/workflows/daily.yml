@@ -27,6 +27,13 @@ on:
   schedule:
     - cron: '7 * * * *'
     - cron: '37 * * * *'
+  # Owner directive: a merge to main goes live. Publishing uses
+  # peaceiris/actions-gh-pages, which pushes to the gh-pages branch — not
+  # main — so `branches: [main]` cannot self-trigger this workflow. (Pushes
+  # made with the default GITHUB_TOKEN don't start new workflow runs anyway,
+  # but the branch filter is what actually guarantees no recursion.)
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -73,8 +80,11 @@ jobs:
             printf '%02d' "$1"
           }
 
-          # Manual: pick latest due slot (or first if before all)
-          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+          # Manual dispatch and merge-to-main pushes publish right away: pick
+          # the latest slot already due today, or the first slot when the
+          # event lands before all of them. Scheduled runs keep the exact-hour
+          # and catchup paths below untouched.
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] || [ "$EVENT_NAME" = "push" ]; then
             chosen="${HLIST[0]// /}"
             for h in "${HLIST[@]}"; do
               h_trim="${h// /}"
@@ -83,7 +93,7 @@ jobs:
               fi
             done
             SLOT=$(pad2 "$chosen")
-            echo "Manual trigger — edition slot $SLOT"
+            echo "Event '$EVENT_NAME' — latest due edition slot $SLOT"
             echo "should-run=true" >> "$GITHUB_OUTPUT"
             echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
             echo "edition-date=$TODAY" >> "$GITHUB_OUTPUT"
