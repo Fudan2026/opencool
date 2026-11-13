@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-14T03:49:41+08:00",
+  "generatedAt": "2026-11-14T03:53:35+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -32,21 +32,21 @@
       "hours": 1,
       "measured": 0,
       "pending": 2000,
-      "available": false
+      "available": true
     },
     {
       "key": "1d",
       "hours": 24,
       "measured": 0,
       "pending": 2000,
-      "available": false
+      "available": true
     },
     {
       "key": "5d",
       "hours": 120,
       "measured": 0,
       "pending": 2000,
-      "available": false
+      "available": true
     }
   ],
   "gaps": [],

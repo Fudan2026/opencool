@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-14T03:49:41+08:00",
+  "generatedAt": "2026-11-14T03:53:35+08:00",
   "timezone": "Asia/Shanghai",
   "endpoints": [
     {
@@ -31,6 +31,13 @@
       "version": 1,
       "available": true,
       "description": "Theme board heat re-exported under the frozen path: board code/name, board move, advancing/declining counts, article hits, constituents."
+    },
+    {
+      "id": "reactions",
+      "path": "/v1/reactions.json",
+      "version": 1,
+      "available": true,
+      "description": "News-to-price reaction library (+1h/+1d/+5d). Advertised only once daily_reports/reactions.json exists at build time; omitted entirely until then rather than served empty."
     }
   ],
   "snapshots": {
