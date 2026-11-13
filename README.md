@@ -67,7 +67,8 @@ Workflow 的 build job **固定 `LLM_MODE=off`**：**零 AI · 零 Token 不是"
 | `/llms.txt` | Agent-discoverable index |
 
 Full reference: [`docs/DATA-CONTRACT.md`](docs/DATA-CONTRACT.md) ·
-中文版：[`docs/DATA-CONTRACT.zh-CN.md`](docs/DATA-CONTRACT.zh-CN.md)。
+中文版：[`docs/DATA-CONTRACT.zh-CN.md`](docs/DATA-CONTRACT.zh-CN.md) ·
+定位：[`docs/data-source-strategy.md`](docs/data-source-strategy.md)（数据源战略：比历史完整性，不比延迟）
 
 ---
 
