@@ -256,6 +256,52 @@ jobs:
       - name: Bake theme heat
         run: npm run themes:bake
 
+      # Story ledger: folds this edition into daily_reports/stories.json, which
+      # the gh-pages restore above brought in and the publish step below sends
+      # back. That round trip IS the persistence — no new store, no database.
+      # Fail-open: a corrupt ledger falls back to replaying the retained
+      # sidecars, and the script exits 0 even if that fails.
+      #
+      # REPORT_TZ is load-bearing here, not cosmetic: `firstSeenAt` is written
+      # as an ISO instant carrying the report timezone's offset, and this step
+      # has no job-level REPORT_TZ. Without it the very first published ledger
+      # shipped `timezone: "system"` and every `firstSeenAt` at `+00:00` — a
+      # point-in-time record stamped in the runner's clock. The assert below
+      # exists because that regression was invisible: the run stayed green.
+      - name: Bake story ledger
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+        run: npm run stories:bake
+
+      # Guard: a ledger whose instants are not in the report timezone cannot
+      # support the point-in-time claim (increments 4/5/7 read these). Fail the
+      # run rather than publish it — the same lesson as the theme-board assert.
+      - name: Assert story ledger timezone
+        run: |
+          node -e '
+            const s = require("./daily_reports/stories.json");
+            const expected = process.env.REPORT_TZ || "Asia/Shanghai";
+            const sample = s.stories.slice(0, 50).map((x) => x.firstSeenAt);
+            const off = sample.map((iso) => (String(iso).match(/([+-]\d{2}:\d{2}|Z)$/) || [])[0]);
+            const bad = off.filter((o) => !o || o === "Z" || o === "+00:00");
+            const lead = s.firstMover && s.firstMover.leadBasis;
+            console.log(`[stories] timezone=${s.timezone} stories=${s.stories.length} offsets=${[...new Set(off)].join("/")} leadBasis=${lead}`);
+            if (s.timezone !== expected) {
+              console.error(`::error::stories.json timezone is "${s.timezone}", expected "${expected}" — REPORT_TZ missing from the bake step`);
+              process.exit(1);
+            }
+            if (bad.length) {
+              console.error(`::error::${bad.length}/${sample.length} firstSeenAt values are not offset-stamped (${[...new Set(bad)].join("/")})`);
+              process.exit(1);
+            }
+            if (s.stories.length > 0 && lead !== "observed") {
+              console.error(`::error::firstMover.leadBasis is "${lead}", expected "observed"`);
+              process.exit(1);
+            }
+          '
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+
       # Guard: theme board heat silently shipped `boards=0` from 2026-11-11 to
       # 2026-11-13 while CI stayed green. Fail the run instead of publishing a
       # themes.json where no theme resolved a board.

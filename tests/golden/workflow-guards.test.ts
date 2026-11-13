@@ -192,6 +192,52 @@ test("golden: daily.yml stays parseable — no inline multi-line scripts", async
   });
 });
 
+test("golden: the story ledger bake is wired into the build job", async (t) => {
+  const job = buildJobSource();
+  const names = stepNames(job);
+
+  await t.test("the step exists and runs the npm script", () => {
+    assert.ok(names.includes("Bake story ledger"), "missing story ledger bake step");
+    assert.match(stepSource(job, "Bake story ledger"), /npm run stories:bake/);
+  });
+
+  await t.test("it runs before the publish step, so stories.json ships", () => {
+    const bakeAt = names.indexOf("Bake story ledger");
+    const publishAt = names.indexOf("Publish to gh-pages");
+    assert.ok(bakeAt >= 0 && publishAt >= 0);
+    assert.ok(bakeAt < publishAt, "the ledger must be written before publishing");
+  });
+
+  await t.test("it runs after the gh-pages restore, so the prior ledger is available", () => {
+    const restoreAt = names.indexOf("Restore existing reports from gh-pages");
+    const bakeAt = names.indexOf("Bake story ledger");
+    assert.ok(restoreAt >= 0);
+    assert.ok(
+      restoreAt < bakeAt,
+      "without the restore the ledger would restart from empty on every edition",
+    );
+  });
+
+  await t.test("the bake step receives the report timezone", () => {
+    // This is the regression that shipped: without REPORT_TZ the bake wrote
+    // `timezone: "system"` and `+00:00` instants, and the run stayed green.
+    const step = stepSource(job, "Bake story ledger");
+    assert.match(step, /REPORT_TZ:/, "stories:bake must get REPORT_TZ");
+    assert.match(step, /vars\.REPORT_TZ \|\| 'Asia\/Shanghai'/);
+  });
+
+  await t.test("an assert rejects a mis-stamped ledger before it publishes", () => {
+    assert.ok(names.includes("Assert story ledger timezone"), "missing ledger timezone assert");
+    const step = stepSource(job, "Assert story ledger timezone");
+    assert.match(step, /daily_reports\/stories\.json/);
+    assert.match(step, /process\.exit\(1\)/, "the assert must fail the run, not warn");
+    assert.match(step, /REPORT_TZ:/);
+    const assertAt = names.indexOf("Assert story ledger timezone");
+    const publishAt = names.indexOf("Publish to gh-pages");
+    assert.ok(assertAt < publishAt, "a bad ledger must not reach gh-pages");
+  });
+});
+
 test("golden: a missing llm-calls.jsonl is the documented pass case", () => {
   const src = fs.readFileSync(
     path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../scripts/assert-zero-llm.mjs"),

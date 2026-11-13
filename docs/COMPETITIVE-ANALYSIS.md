@@ -208,3 +208,9 @@ verbatim-anchored), a site-wide entry badge, and nav links. The
 reciprocal backlink (supro.si /news → OpenCool) is requested from the
 SuPro team via issue — one ecosystem, two surfaces, recommendability
 earned on both.
+
+---
+
+**Data-source positioning** (point-in-time history, not latency): the vendor
+comparison, the contract we commit to and our own gap table live in
+[`data-source-strategy.md`](./data-source-strategy.md).
