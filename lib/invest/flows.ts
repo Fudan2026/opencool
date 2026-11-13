@@ -3,6 +3,8 @@
  * Failures return null — never fatal. Label as unofficial / delayed.
  */
 
+import { fetchJson } from "./http-json";
+
 export interface SectorFlow {
   name: string;
   changePct: number;
@@ -27,51 +29,37 @@ const NOTE =
   "东方财富公开延时板块资金流 · 非官方 · 非实时 · 仅供参考 · 不构成投资建议";
 
 async function fetchClist(fs: string): Promise<SectorFlow[] | null> {
-  const hosts = [
+  const urls = [
     "https://push2.eastmoney.com",
     "https://push2delay.eastmoney.com",
-  ];
-  for (const host of hosts) {
-    try {
-      const url =
-        `${host}/api/qt/clist/get` +
-        `?pn=1&pz=12&po=1&np=1&fltt=2&invt=2` +
-        `&fid=f62&fs=${encodeURIComponent(fs)}` +
-        `&fields=f12,f14,f3,f62`;
-      const res = await fetch(url, {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (compatible; OpenCool/1.0; +https://github.com/Fudan2026/opencool)",
-          Referer: "https://data.eastmoney.com/bkzj/hy.html",
-          Accept: "application/json,text/plain,*/*",
-        },
-        signal: AbortSignal.timeout(10_000),
-      });
-      if (!res.ok) continue;
-      const text = await res.text();
-      let j: { data?: { diff?: EmBoardRow[] } };
-      try {
-        j = JSON.parse(text) as { data?: { diff?: EmBoardRow[] } };
-      } catch {
-        continue;
-      }
-      const rows = j.data?.diff;
-      if (!rows?.length) continue;
-      const sectors: SectorFlow[] = [];
-      for (const r of rows) {
-        if (!r.f14 || r.f3 == null || r.f62 == null) continue;
-        sectors.push({
-          name: String(r.f14),
-          changePct: Number(r.f3) || 0,
-          netInflowYi: (Number(r.f62) || 0) / 1e8,
-        });
-      }
-      if (sectors.length) return sectors;
-    } catch {
-      /* try next host */
-    }
+  ].map(
+    (host) =>
+      `${host}/api/qt/clist/get` +
+      `?pn=1&pz=12&po=1&np=1&fltt=2&invt=2` +
+      `&fid=f62&fs=${encodeURIComponent(fs)}` +
+      `&fields=f12,f14,f3,f62`,
+  );
+
+  const j = await fetchJson<{ data?: { diff?: EmBoardRow[] } }>(urls, {
+    headers: {
+      Referer: "https://data.eastmoney.com/bkzj/hy.html",
+      Accept: "application/json,text/plain,*/*",
+    },
+    timeoutMs: 10_000,
+  });
+  const rows = j?.data?.diff;
+  if (!rows?.length) return null;
+
+  const sectors: SectorFlow[] = [];
+  for (const r of rows) {
+    if (!r.f14 || r.f3 == null || r.f62 == null) continue;
+    sectors.push({
+      name: String(r.f14),
+      changePct: Number(r.f3) || 0,
+      netInflowYi: (Number(r.f62) || 0) / 1e8,
+    });
   }
-  return null;
+  return sectors.length ? sectors : null;
 }
 
 /**

@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "esModuleInterop": true,
@@ -10,6 +12,13 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["lib/**/*.ts", "scripts/**/*.ts", "scripts/**/*.mjs"],
-  "exclude": ["node_modules"]
+  "include": [
+    "lib/**/*.ts",
+    "scripts/**/*.ts",
+    "scripts/**/*.mjs",
+    "tests/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

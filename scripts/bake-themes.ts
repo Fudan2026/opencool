@@ -16,15 +16,25 @@ import {
   loadThemeCatalog,
   type ThemeDef,
 } from "../lib/themes/catalog";
+import { fetchJson as fetchJsonShared } from "../lib/invest/http-json";
 
 const ROOT = "daily_reports";
 const OUT = path.join(ROOT, "themes.json");
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+/** Eastmoney serves the same clist payload from both hosts; either can fail. */
+const EM_HOSTS = [
+  "https://push2.eastmoney.com",
+  "https://push2delay.eastmoney.com",
+];
 const BOARD_LIST_URL = (pn: number) =>
-  `https://push2.eastmoney.com/api/qt/clist/get?pn=${pn}&pz=100&po=1&np=1&fltt=2&invt=2&fid=f3&fs=m:90+t:3&fields=f12,f14,f3`;
+  EM_HOSTS.map(
+    (h) =>
+      `${h}/api/qt/clist/get?pn=${pn}&pz=100&po=1&np=1&fltt=2&invt=2&fid=f3&fs=m:90+t:3&fields=f12,f14,f3`,
+  );
 const CONSTITUENTS_URL = (bk: string) =>
-  `https://push2.eastmoney.com/api/qt/clist/get?pn=1&pz=8&po=1&np=1&fltt=2&invt=2&fid=f3&fs=b:${bk}&fields=f12,f14,f3`;
+  EM_HOSTS.map(
+    (h) =>
+      `${h}/api/qt/clist/get?pn=1&pz=8&po=1&np=1&fltt=2&invt=2&fid=f3&fs=b:${bk}&fields=f12,f14,f3`,
+  );
 
 interface BoardRow {
   code: string;
@@ -32,17 +42,8 @@ interface BoardRow {
   changePct: number;
 }
 
-async function fetchJson<T>(url: string): Promise<T | null> {
-  try {
-    const res = await fetch(url, {
-      headers: { "user-agent": UA },
-      signal: AbortSignal.timeout(15_000),
-    });
-    if (!res.ok) return null;
-    return (await res.json()) as T;
-  } catch {
-    return null;
-  }
+async function fetchJson<T>(url: string[]): Promise<T | null> {
+  return fetchJsonShared<T>(url, { timeoutMs: 15_000 });
 }
 
 async function fetchBoards(): Promise<BoardRow[]> {

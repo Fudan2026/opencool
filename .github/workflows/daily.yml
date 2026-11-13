@@ -205,8 +205,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Quality gate: tests + source-config validation block the publish.
-      # A regression must never reach gh-pages (fifth-wave mandate).
+      # Quality gate: typecheck + tests + source-config validation block the
+      # publish. A regression must never reach gh-pages (fifth-wave mandate).
+      # Typecheck runs first: `tsx` strips types without checking them, so
+      # without this step type regressions ship to Pages silently.
+      - name: Typecheck
+        run: npm run typecheck
+
       - name: Test suite (quality gate)
         run: npm test
 
