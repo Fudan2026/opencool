@@ -72,7 +72,9 @@ function main(): void {
 
   const c = payload.counts;
   console.log(
-    `[reactions:bake] stories=${c.stories} attributed=${c.attributed.entity}/${c.attributed.topic}/${c.attributed.market} unmapped=${c.attributed.unmapped}`,
+    `[reactions:bake] stories=${c.stories} ` +
+      `attributed=${c.attributed.entity}/${c.attributed.topic}/${c.attributed.market} ` +
+      `pending=${c.attributed.pending} unmapped=${c.attributed.unmapped}`,
   );
   console.log(
     `[reactions:bake] horizons ${Object.entries(c.horizons)

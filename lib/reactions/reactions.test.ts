@@ -655,7 +655,7 @@ test("no lookahead — nothing is measured from before the story or before the h
     assert.equal(store.themeBoards.has("ai"), false, "an unquoted board must not become a target");
     const attr = attributeStory(
       { id: "s", firstSeenAt: "2026-11-16T09:00:00+08:00", firstEdition: "e", topic: "tech-ai", entities: [] },
-      { themeBoards: store.themeBoards, hasIndex: () => true },
+      { themeBoards: store.themeBoards, tapeStarted: true, hasIndex: () => true },
     );
     assert.notEqual(attr.target, "board:BK0800");
   });
@@ -915,13 +915,96 @@ test("degradation — a bad tape is a named gap, never a throw", async (t) => {
 /* Attribution                                                         */
 /* ------------------------------------------------------------------ */
 
+test("attribution counts — a cold tape is pending, a warm tape distinguishes entity from market", async (t) => {
+  await t.test("no tape: every story is pending, market and unmapped are zero", () => {
+    // The live defect, reproduced at the payload level: 2,000 stories with no
+    // tape reported `market: 2000`. They must be `pending: 2000`.
+    const store = loadTape(path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rc-cold-")), "none"));
+    const payload = buildReactions(store, {
+      stories: [
+        { id: "st_a", firstSeenAt: "2026-11-13T09:00:00+08:00", topic: "tech-ai", entities: ["nvidia"] },
+        { id: "st_b", firstSeenAt: "2026-11-13T09:10:00+08:00", topic: "world", entities: [] },
+        { id: "st_c", firstSeenAt: "2026-11-13T09:20:00+08:00", topic: "policy", entities: ["trump"] },
+      ],
+      maxStories: 2000,
+    });
+    assert.equal(payload.counts.attributed.pending, 3);
+    assert.equal(payload.counts.attributed.market, 0, "a cold tape must never claim a market finding");
+    assert.equal(payload.counts.attributed.unmapped, 0, "pending is not unmapped either");
+    assert.equal(payload.counts.attributed.entity, 0);
+    for (const o of payload.observations) {
+      assert.equal(o.attribution, "pending");
+      assert.equal(o.attributionPending, true);
+      assert.equal(o.target, null);
+    }
+    // …and the gap list says so, so nobody reads the counts as a finding.
+    const gap = payload.gaps.find((g) => g.kind === "attribution-pending");
+    assert.ok(gap, "a pending attribution must be named in gaps");
+    assert.equal(gap?.count, 3);
+  });
+
+  await t.test("warm tape: the entity's board resolves, only the linkless story is market", () => {
+    // Two boards in the quote batch: the entity's theme board and an unrelated
+    // industry. `nvidia` → ai-compute resolves; the policy story has no link and
+    // falls to the index, which the tape did quote.
+    const boardsMap: Record<string, number> = { BK1134: 2, BK0001: 1 };
+    for (let i = 10; i < 120; i++) boardsMap[`BK${String(i).padStart(4, "0")}`] = 1;
+    const root = writeTape([
+      {
+        date: "2026-11-16",
+        slots: ["09:35", "10:35"],
+        boards: boardsMap,
+        boardsBySlot: {
+          "09:35": Object.fromEntries(Object.keys(boardsMap).map((k) => [k, 0])),
+          "10:35": boardsMap,
+        },
+        indices: { "000001": 1 },
+        indicesBySlot: { "09:35": { "000001": 0 }, "10:35": { "000001": 1 } },
+      },
+    ]);
+    const store = loadTape(root);
+    store.themeBoards.set("ai-compute", { code: "BK1134", name: "算力" });
+    const payload = buildReactions(store, {
+      stories: [
+        { id: "st_nv", firstSeenAt: "2026-11-16T09:00:00+08:00", topic: "tech-ai", entities: ["nvidia"] },
+        { id: "st_pol", firstSeenAt: "2026-11-16T09:00:00+08:00", topic: "policy", entities: [] },
+      ],
+    });
+    assert.equal(payload.counts.attributed.entity, 1);
+    assert.equal(payload.counts.attributed.market, 1);
+    assert.equal(payload.counts.attributed.pending, 0, "a warm tape has nothing pending");
+
+    const nv = payload.observations.find((o) => o.id === "st_nv");
+    const pol = payload.observations.find((o) => o.id === "st_pol");
+    assert.equal(nv?.attribution, "entity");
+    assert.equal(nv?.target, "board:BK1134");
+    assert.equal(pol?.attribution, "market");
+    assert.equal(pol?.target, "index:000001");
+    assert.equal(payload.gaps.some((g) => g.kind === "attribution-pending"), false);
+  });
+
+  await t.test("counts always sum to the story total", () => {
+    const store = loadTape(path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rc-sum-")), "none"));
+    const payload = buildReactions(store, {
+      stories: Array.from({ length: 7 }, (_, i) => ({
+        id: `st_${i}`,
+        firstSeenAt: "2026-11-13T09:00:00+08:00",
+        topic: i % 2 ? "tech-ai" : "world",
+        entities: [],
+      })),
+    });
+    const a = payload.counts.attributed;
+    assert.equal(a.entity + a.topic + a.market + a.pending + a.unmapped, payload.counts.stories);
+  });
+});
+
 test("attribution — explicit, weak by design, and counted when absent", async (t) => {
   const themeBoards = new Map([
     ["ai", { code: "BK0800", name: "人工智能" }],
     ["ai-compute", { code: "BK1134", name: "算力" }],
     ["oil", { code: "BK0437", name: "油气开采" }],
   ]);
-  const ctx = { themeBoards, hasIndex: () => true };
+  const ctx = { themeBoards, tapeStarted: true, hasIndex: () => true };
 
   await t.test("an entity link wins and records which entity selected the board", () => {
     const a = attributeStory(
@@ -957,7 +1040,7 @@ test("attribution — explicit, weak by design, and counted when absent", async 
   await t.test("nothing measurable is null, and it is counted not dropped", () => {
     const a = attributeStory(
       { id: "s", firstSeenAt: "2026-11-16T09:00:00+08:00", firstEdition: "e", topic: "policy", entities: [] },
-      { themeBoards, hasIndex: () => false },
+      { themeBoards, tapeStarted: true, hasIndex: () => false },
     );
     assert.equal(a.attribution, null);
     assert.equal(a.target, null);
@@ -972,6 +1055,60 @@ test("attribution — explicit, weak by design, and counted when absent", async 
     );
     assert.notEqual(a.target, "board:BK0800");
     assert.equal(a.attribution, "market");
+  });
+
+  await t.test("a tape that has not started yields pending, never market", () => {
+    // THE regression this state exists for: with no tape, `themeBoards` is empty
+    // and the index was never quoted, so nothing could be attributed. Reporting
+    // `market` here claimed "we decided these stories have no sector", when the
+    // truth was "we could not check any of them yet".
+    const cold = { themeBoards: new Map(), tapeStarted: false, hasIndex: () => false };
+    for (const entities of [[], ["nvidia"], ["trump"]]) {
+      const a = attributeStory(
+        { id: "s", firstSeenAt: "2026-11-16T09:00:00+08:00", firstEdition: "e", topic: "tech-ai", entities },
+        cold,
+      );
+      assert.equal(a.attribution, "pending", `entities=${entities.join(",")} must be pending`);
+      assert.equal(a.target, null, "nothing can be a target before the tape exists");
+      assert.equal(a.entity, null, "no target was selected, so no entity selected one");
+      assert.equal(a.attributionPending, true);
+      assert.match(a.attributionReason, /tape has not started/);
+      assert.match(a.attributionReason, /not a market fallback/);
+    }
+  });
+
+  await t.test("a pending attribution names the entity it could not resolve", () => {
+    const a = attributeStory(
+      { id: "s", firstSeenAt: "2026-11-16T09:00:00+08:00", firstEdition: "e", topic: "tech-ai", entities: ["nvidia"] },
+      { themeBoards: new Map(), tapeStarted: false, hasIndex: () => false },
+    );
+    assert.equal(a.attribution, "pending");
+    assert.match(a.attributionReason, /nvidia/);
+  });
+
+  await t.test("pending is distinct from unmapped", () => {
+    // `null` means the tape ran and found nothing; "pending" means it never ran.
+    const pending = attributeStory(
+      { id: "s", firstSeenAt: "2026-11-16T09:00:00+08:00", firstEdition: "e", topic: "policy", entities: [] },
+      { themeBoards: new Map(), tapeStarted: false, hasIndex: () => true },
+    );
+    const unmapped = attributeStory(
+      { id: "s", firstSeenAt: "2026-11-16T09:00:00+08:00", firstEdition: "e", topic: "policy", entities: [] },
+      { themeBoards: new Map(), tapeStarted: true, hasIndex: () => false },
+    );
+    assert.equal(pending.attribution, "pending");
+    assert.equal(unmapped.attribution, null);
+    assert.notEqual(pending.attribution, unmapped.attribution);
+  });
+
+  await t.test("market is reserved for a started tape that genuinely has no link", () => {
+    // Same story, same context except `tapeStarted`: only the started tape is
+    // allowed to conclude "market".
+    const storyInput = { id: "s", firstSeenAt: "2026-11-16T09:00:00+08:00", firstEdition: "e", topic: "policy", entities: [] };
+    const warm = attributeStory(storyInput, { themeBoards, tapeStarted: true, hasIndex: () => true });
+    const cold = attributeStory(storyInput, { themeBoards, tapeStarted: false, hasIndex: () => true });
+    assert.equal(warm.attribution, "market");
+    assert.equal(cold.attribution, "pending");
   });
 
   await t.test("every declared link names a real entity and a real theme", () => {

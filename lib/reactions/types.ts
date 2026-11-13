@@ -74,8 +74,30 @@ export const HEADLINE_REASON =
   "published alongside for every sample, but the trailing baseline needs a full " +
   "prior window of tape and is therefore null through the early history.";
 
-/** How a story was attached to the sector it is measured on. */
-export type AttributionKind = "entity" | "topic" | "market";
+/**
+ * How a story was attached to the sector it is measured on.
+ *
+ * `"pending"` is a fourth, *non-null* state and it is not a synonym for
+ * `null`. The distinction is the whole point of this type:
+ *
+ *   "entity" / "topic"  a sector board was resolved and the tape quoted it.
+ *   "market"            the tape HAS started, the index is quoted, and this
+ *                       story genuinely has no entity or topic link — a real
+ *                       finding about the story.
+ *   "pending"           the tape has not started, so no board has ever been
+ *                       quoted and nothing could be attributed either way. This
+ *                       is "we could not check yet", not "we checked and there
+ *                       is no sector".
+ *   null                the tape has started but neither a sector board nor the
+ *                       index was quoted — counted as unmapped, never dropped.
+ *
+ * Collapsing `"pending"` into `"market"` (which is what this file used to do)
+ * reports ~2,000 stories as "no sector", and then silently redistributes them
+ * the first day the tape exists. That is a measurement artifact presented as a
+ * measurement, the same class of defect as reading a `null` `changePct` as
+ * "the board did not move".
+ */
+export type AttributionKind = "entity" | "topic" | "market" | "pending";
 
 export type HorizonStatus = "ok" | "pending" | "gap";
 
@@ -91,6 +113,12 @@ export interface AttributedStory {
   attribution: AttributionKind | null;
   /** The `entities[]` entry that selected the target, when attribution is entity/market. */
   entity: string | null;
+  /**
+   * True when this attribution is provisional because the tape has not started.
+   * Mirrors `attribution === "pending"` and exists so a consumer that only
+   * branches on truthiness cannot mistake it for a finding.
+   */
+  attributionPending?: true;
   /** Why this target — short, human-readable, and stable. */
   attributionReason: string;
 }
@@ -203,7 +231,7 @@ export interface ReactionsPayload {
   ledger: LedgerSummary;
   counts: {
     stories: number;
-    attributed: { entity: number; topic: number; market: number; unmapped: number };
+    attributed: { entity: number; topic: number; market: number; pending: number; unmapped: number };
     horizons: Record<HorizonKey, { ok: number; pending: number; gap: number }>;
     aggregates: { byTopic: number; byEntity: number };
     observationsTotal: number;

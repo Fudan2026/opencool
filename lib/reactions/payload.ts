@@ -150,15 +150,16 @@ export function buildReactions(
   }
 
   const themes = loadThemeCatalog();
-  // With an empty tape nothing has been quoted yet, which is not the same as
-  // "the index will never be quoted": treating it as absent would label every
-  // story `unmapped` on day one, when the honest answer is that the window is
-  // still pending. Only a tape that exists and lacks the index is a real gap.
+  // Whether the tape has started is passed through explicitly. Do NOT infer it
+  // from `themeBoards.size === 0`: that is ambiguous between "no capture yet"
+  // and "captured, but this theme's board was not quoted", and treating the
+  // first as a market fallback is what reported 2,000 stories as sectorless.
   const tapeStarted = store.points.length > 0;
   const ctx: AttributionContext = {
     themeBoards: store.themeBoards,
     themes,
-    hasIndex: (code) => !tapeStarted || series.has(indexSeriesKey(code)),
+    tapeStarted,
+    hasIndex: (code) => series.has(indexSeriesKey(code)),
   };
 
   const attributed: AttributedStory[] = ledgerStories.map((s) =>
@@ -174,12 +175,24 @@ export function buildReactions(
     ),
   );
 
-  const attributedCounts = { entity: 0, topic: 0, market: 0, unmapped: 0 };
+  const attributedCounts = { entity: 0, topic: 0, market: 0, pending: 0, unmapped: 0 };
   for (const a of attributed) {
     if (a.attribution === "entity") attributedCounts.entity++;
     else if (a.attribution === "topic") attributedCounts.topic++;
     else if (a.attribution === "market") attributedCounts.market++;
+    else if (a.attribution === "pending") attributedCounts.pending++;
     else attributedCounts.unmapped++;
+  }
+  // Named in `gaps` as well as in the counts, so a reader skimming the gap list
+  // learns that the attribution block is provisional rather than empty.
+  if (attributedCounts.pending > 0) {
+    gaps.push({
+      kind: "attribution-pending",
+      detail:
+        "tape has not started, so no sector board has ever been quoted and no story can be attributed yet — " +
+        "these stories are NOT a market fallback and NOT unmapped; they are unattributable so far",
+      count: attributedCounts.pending,
+    });
   }
 
   // A gap the arithmetic cannot fix: the ledger's retention window decides how
@@ -294,6 +307,12 @@ export function buildReactions(
         "level(t) = base(day) x (1 + changePct/100), base chained from each day's close; a missing close starts a new segment and a window spanning it is a gap, never interpolated",
       attribution:
         "entity -> theme table (reviewable, in lib/reactions/attribution.ts) first, then topic, then 上证指数 as a market fallback; nothing is inferred",
+      attributionStates:
+        "entity = a sector board resolved and the tape quoted it; topic = the topic's broad board resolved; " +
+        "market = the tape HAS started, the index is quoted, and the story genuinely has no entity or topic link; " +
+        "pending = the tape has not started, so no board has ever been quoted and nothing can be attributed either way " +
+        "— 'we could not check yet', counted in attributed.pending, never rolled into market; " +
+        "null = the tape started but neither a sector board nor the index was quoted (attributed.unmapped)",
       aggregateUniverse:
         "topic rows hold entity- and topic-attributed samples only; market-attributed stories are measured on the index and are reported in counts.attributed instead, never as a sector reaction",
       minimumSample:
