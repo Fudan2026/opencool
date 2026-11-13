@@ -313,11 +313,24 @@ export interface LedgerOptions {
   now?: Date;
 }
 
+/**
+ * The zone the ledger's offsets describe. `REPORT_TZ` when set; otherwise the
+ * host's resolved zone — never the literal string "system", which would tell a
+ * consumer nothing and is what shipped once before this was tightened.
+ */
+export function ledgerTimezone(): string {
+  return (
+    getReportTz() ??
+    Intl.DateTimeFormat().resolvedOptions().timeZone ??
+    "UTC"
+  );
+}
+
 export function emptyLedger(opts: LedgerOptions = {}): StoryLedger {
   const now = opts.now ?? new Date();
   return {
     version: LEDGER_VERSION,
-    timezone: getReportTz() ?? "system",
+    timezone: ledgerTimezone(),
     retentionDays: opts.retentionDays ?? DEFAULT_RETENTION_DAYS,
     maxStories: opts.maxStories ?? DEFAULT_MAX_STORIES,
     updatedAt: isoWithOffset(now),
@@ -534,13 +547,16 @@ export function reviveLedger(
   let skipped = 0;
   for (const item of list) {
     const story = readStory(item);
-    if (story) stories.push(story);
+    if (story) stories.push(restamp(story));
     else skipped++;
   }
   return {
     ledger: {
       ...base,
-      timezone: typeof r.timezone === "string" && r.timezone ? r.timezone : base.timezone,
+      // The file's own `timezone` is deliberately NOT inherited: it names the
+      // zone the *previous* run rendered offsets in. Instants are re-stamped
+      // into the active zone below, so declaring the stale zone would be a lie
+      // and would pin every future edition to a runner's clock.
       retentionDays:
         typeof r.retentionDays === "number" && r.retentionDays >= 0
           ? r.retentionDays
@@ -556,6 +572,27 @@ export function reviveLedger(
     },
     skipped,
   };
+}
+
+/**
+ * Re-render every instant in a record into the active timezone.
+ *
+ * Self-healing on purpose: the ledger's instants are absolute, so the offset
+ * they are *written* with is presentation. A file stamped in a runner's UTC
+ * (`+00:00`) is corrected the next time it is revived under `REPORT_TZ`, which
+ * is how the one mis-stamped publication repaired itself instead of needing a
+ * hand edit of published history.
+ */
+function restamp(story: StoryRecord): StoryRecord {
+  const fix = (iso: string): string => {
+    const at = parseInstant(iso);
+    return at ? isoWithOffset(at) : iso;
+  };
+  story.firstSeenAt = fix(story.firstSeenAt);
+  story.lastSeenAt = fix(story.lastSeenAt);
+  for (const s of story.sightings) s.observedAt = fix(s.observedAt);
+  for (const r of story.headlineRevisions) r.at = fix(r.at);
+  return recomputeDerived(story);
 }
 
 // ---------------------------------------------------------------------------

@@ -235,5 +235,31 @@ test("golden: bake-stories writes a point-in-time ledger", async (t) => {
     assert.equal(rebuilt.counts.editions, 3, "all retained sidecars were replayed");
   });
 
+  await t.test("a ledger stamped in a runner's clock is re-rendered into REPORT_TZ", () => {
+    // The exact shipped defect: a previous run baked with no REPORT_TZ wrote
+    // `timezone: "system"` and `+00:00` instants. A later run must repair it
+    // rather than inherit it, so one bad edition cannot poison the ledger.
+    const wrong = readLedger(tmp) as {
+      timezone: string;
+      stories: Array<{ firstSeenAt: string; lastSeenAt: string }>;
+    };
+    wrong.timezone = "system";
+    for (const s of wrong.stories) {
+      s.firstSeenAt = new Date(s.firstSeenAt).toISOString().replace(".000Z", "+00:00");
+      s.lastSeenAt = new Date(s.lastSeenAt).toISOString().replace(".000Z", "+00:00");
+    }
+    fs.writeFileSync(path.join(R, "stories.json"), JSON.stringify(wrong), "utf8");
+
+    bake(tmp);
+    const healed = readLedger(tmp) as {
+      timezone: string;
+      stories: Array<{ firstSeenAt: string }>;
+    };
+    assert.equal(healed.timezone, "Asia/Shanghai");
+    for (const s of healed.stories) {
+      assert.match(s.firstSeenAt, /\+08:00$/, `not repaired: ${s.firstSeenAt}`);
+    }
+  });
+
   fs.rmSync(tmp, { recursive: true, force: true });
 });

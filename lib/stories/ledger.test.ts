@@ -680,6 +680,59 @@ test("story ledger: published payload", async (t) => {
   });
 });
 
+test("story ledger: report timezone is structural", async (t) => {
+  await t.test("the timezone is never the literal 'system'", () => {
+    // The first published ledger shipped `timezone: "system"` and every
+    // firstSeenAt at `+00:00`, because the CI bake step had no REPORT_TZ. The
+    // run stayed green, so only an assert (and this test) could catch it.
+    const saved = process.env.REPORT_TZ;
+    delete process.env.REPORT_TZ;
+    try {
+      const ledger = emptyLedger();
+      assert.notEqual(ledger.timezone, "system");
+      assert.ok(ledger.timezone.length > 0, "timezone must name a zone");
+      assert.match(
+        ledger.timezone,
+        /^[A-Za-z][A-Za-z0-9_+\-/]*$/,
+        `expected an IANA zone name, got "${ledger.timezone}"`,
+      );
+    } finally {
+      if (saved === undefined) delete process.env.REPORT_TZ;
+      else process.env.REPORT_TZ = saved;
+    }
+  });
+
+  await t.test("a revived ledger is re-stamped into the active timezone", () => {
+    // The CI warm path, and the self-heal for the one file that shipped with
+    // `+00:00` offsets: the restored ledger names one zone, this run renders
+    // under another. Both the declared zone and every instant must follow.
+    const ledger = emptyLedger();
+    ingestEdition(
+      ledger,
+      edition("2026-11-13", "06", "2026-11-12T22:00:00Z", [
+        art({ sourceId: "reuters", title: "Nvidia board weighs replacing Jensen Huang" }),
+      ]),
+    );
+    const stale = JSON.parse(JSON.stringify(ledger)) as Record<string, unknown>;
+    stale.timezone = "system";
+    const raw = (stale.stories as Array<Record<string, unknown>>)[0];
+    raw.firstSeenAt = "2026-11-12T22:00:00+00:00";
+    raw.lastSeenAt = "2026-11-12T22:00:00+00:00";
+
+    const revived = reviveLedger(stale, { now: new Date("2026-11-13T12:00:00Z") });
+    assert.equal(revived.skipped, 0);
+    assert.notEqual(revived.ledger.timezone, "system");
+    assert.equal(revived.ledger.timezone, TZ);
+    // The instant is the same moment, re-rendered in the report timezone.
+    assert.equal(revived.ledger.stories[0].firstSeenAt, "2026-11-13T06:00:00+08:00");
+    assert.equal(
+      parseInstant(revived.ledger.stories[0].firstSeenAt)?.toISOString(),
+      "2026-11-12T22:00:00.000Z",
+      "re-stamping must not move the moment",
+    );
+  });
+});
+
 test("story ledger: time helpers", async (t) => {
   await t.test("offsetMinutes handles west-of-UTC offsets too", () => {
     const d = new Date("2026-11-13T12:00:00Z");
