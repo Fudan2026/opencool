@@ -425,6 +425,49 @@ test("golden: reading pages publish even when no edition is due", async (t) => {
     assert.equal(/exclude_assets:/.test(publish), false);
   });
 
+  await t.test("the reaction bake lives in this job, after the restore and before publish", () => {
+    // Same defect class as `/v1` and `/integrity.html` above: `/reactions.json`
+    // was baked only inside `build`, so a run with the gate answering
+    // `all-published` simply never published the file.
+    const names = stepNames(job);
+    assert.ok(names.includes("Bake reaction windows"), "missing reaction bake in the pages job");
+    assert.match(
+      stepSource(job, "Bake reaction windows"),
+      /npm run reactions:bake/,
+      "the pages job must run the real bake, not a copy of it",
+    );
+
+    const restoreAt = names.indexOf("Restore tape and ledger from gh-pages");
+    const bakeAt = names.indexOf("Bake reaction windows");
+    const assertAt = names.indexOf("Assert reaction windows are honest");
+    const v1At = names.indexOf("Bake v1 namespace and integrity page");
+    const publishAt = names.indexOf("Publish reading pages and tape");
+    assert.ok(restoreAt >= 0 && publishAt >= 0 && v1At >= 0);
+    assert.ok(
+      restoreAt < bakeAt,
+      "the bake reads tape/ and stories.json, which the restore supplies",
+    );
+    assert.ok(assertAt > bakeAt, "the honesty assert must check what the bake wrote");
+    assert.ok(assertAt < publishAt, "an unmeasurable mean must not reach gh-pages");
+    assert.ok(
+      bakeAt < v1At,
+      "the v1 manifest re-exports reactions.json, so it must exist before the v1 bake runs",
+    );
+  });
+
+  await t.test("the reaction bake gets the report timezone and no provider key", () => {
+    const step = stepSource(job, "Bake reaction windows");
+    assert.match(step, /REPORT_TZ:/, "reaction instants are compared against market clocks");
+    assert.match(step, /vars\.REPORT_TZ \|\| 'Asia\/Shanghai'/);
+    assert.equal(/API_KEY:\s*\$\{\{/.test(step), false, "the bake is arithmetic over local files");
+    assert.equal(/LLM_MODE:\s*'auto'/.test(step), false);
+  });
+
+  await t.test("the honesty assert runs a real script before publishing", () => {
+    const step = stepSource(job, "Assert reaction windows are honest");
+    assert.match(step, /node scripts\/assert-reactions\.mjs/);
+  });
+
   await t.test("it restores the tape and ledger it renders", () => {
     const step = stepSource(job, "Restore tape and ledger from gh-pages");
     assert.match(step, /checkout origin\/gh-pages -- tape/);
