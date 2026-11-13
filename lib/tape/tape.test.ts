@@ -271,10 +271,89 @@ test("tape snapshot — every record round-trips with both clocks", async (t) =>
   });
 });
 
+test("tape snapshot — theme rows survive a flaky quote host", async (t) => {
+  // The quote host 502s in bursts. A single failed request used to drop all 24
+  // theme rows at once, because they arrive as one batch. The theme pass is
+  // retried, so a burst costs a retry, not the product's data.
+  await t.test("a first-request failure is retried and the themes still quote", async () => {
+    let boardCalls = 0;
+    const flaky = (async (input: string | URL | Request) => {
+      const url = String(input);
+      if (url.includes("reportName=RPT_EM_BOARD")) {
+        return new Response(
+          JSON.stringify({
+            result: {
+              pages: 1,
+              data: BOARD_ROWS.map((b) => ({
+                NEW_BOARD_CODE: b.code,
+                BOARD_NAME: b.name,
+                BOARD_TYPE_NEW: String(b.type),
+                IS_VALID: "1",
+              })),
+            },
+          }),
+          { status: 200, headers: { "content-type": "application/json" } },
+        );
+      }
+      if (url.includes("qt/ulist.np/get")) {
+        // Fail the first two requests (the theme batch), then answer.
+        boardCalls += 1;
+        if (boardCalls <= 2) return new Response("502 Bad Gateway", { status: 502 });
+        return new Response(JSON.stringify(url.includes("f62") ? FLOW_PAYLOAD : QUOTE_PAYLOAD), {
+          status: 200,
+          headers: { "content-type": "application/json" },
+        });
+      }
+      if (url.includes("qt/stock/get")) {
+        return new Response(JSON.stringify(INDEX_PAYLOAD), {
+          status: 200,
+          headers: { "content-type": "application/json" },
+        });
+      }
+      return new Response(JSON.stringify(LIMIT_PAYLOAD), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      });
+    }) as unknown as typeof fetch;
+
+    const snap = await snapshotFixture({ fetchImpl: flaky, sleepImpl: () => Promise.resolve() });
+    const quoted = snap.themes.records.filter((r) => typeof r.changePct === "number").length;
+    assert.ok(quoted > 0, "the retried theme batch must still produce quotes");
+  });
+
+  await t.test("an exhausted theme pass is visible in meta, not silently null", async () => {
+    const alwaysDown = (async (input: string | URL | Request) => {
+      const url = String(input);
+      if (url.includes("reportName=RPT_EM_BOARD")) {
+        return new Response(
+          JSON.stringify({
+            result: {
+              pages: 1,
+              data: BOARD_ROWS.map((b) => ({
+                NEW_BOARD_CODE: b.code,
+                BOARD_NAME: b.name,
+                BOARD_TYPE_NEW: String(b.type),
+                IS_VALID: "1",
+              })),
+            },
+          }),
+          { status: 200, headers: { "content-type": "application/json" } },
+        );
+      }
+      return new Response("502 Bad Gateway", { status: 502 });
+    }) as unknown as typeof fetch;
+
+    const snap = await snapshotFixture({ fetchImpl: alwaysDown, sleepImpl: () => Promise.resolve() });
+    // Nothing quoted: the section says so rather than shipping 24 nulls that
+    // read as "no theme moved".
+    assert.equal(snap.themes.unavailable, true);
+    assert.match(snap.themes.reason ?? "", /no board quote/);
+  });
+});
+
 /* ------------------------------------------------------------------ */
 /* (b) append-only                                                     */
 /* ------------------------------------------------------------------ */
-
 test("tape store — a second capture of the same slot never overwrites", async (t) => {
   const root = tmpRoot();
   const first = await snapshotFixture();

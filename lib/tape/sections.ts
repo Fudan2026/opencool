@@ -272,21 +272,30 @@ function errText(e: unknown): string {
   return (e instanceof Error ? e.message : String(e)).slice(0, 200);
 }
 
+/** Attempts for the small theme-board quote request (one secid batch). */
+const THEME_QUOTE_ATTEMPTS = 4;
+
 /**
  * One batched quote pass shared by the industry and theme sections, so a theme's
  * number and its board's number come from the same upstream response and the
  * same instant.
  *
- * Which boards get quoted matters for cost. The industry section publishes every
- * industry board (type 2 — ~500 of them), but a theme resolves to a CONCEPT
- * board (type 3 — ~430 of them), of which we only ever publish the ~24 the
- * catalog resolves. Quoting the whole concept registry to serve 24 rows doubled
- * the capture's request count while the quote host was 502-bursting, so the
- * theme boards are resolved first and only those secids are requested.
+ * Which boards get quoted, and in what order, matters twice over:
  *
- * The earlier version quoted industry boards only, which left every theme row
- * with `changePct: null` — that reads as "the theme did not move" rather than
- * "we never asked", and it survived every clock assertion.
+ *  - **Coverage.** A theme resolves to a CONCEPT board (人工智能 → 90.BK0800,
+ *    type 3), not an industry one. An earlier version quoted industries only
+ *    and every theme row came back `changePct: null` — which reads as "the
+ *    theme did not move" rather than "we never asked", and it survived every
+ *    clock assertion because the two-clock guarantee is about timestamps, not
+ *    coverage.
+ *  - **Starvation.** Quoting the whole ~430-board concept registry would add
+ *    ~14 requests to serve ~24 rows, and the quote host 502s in bursts: one
+ *    failed chunk silently drops every board in it. A live run lost 8 of 24
+ *    themes that way, all of them in the tail chunk. So the theme boards get
+ *    their own small first pass (24 secids = one request), and only then does
+ *    the bulk industry pass run. A burst can still cost industry tail rows —
+ *    those are 496 interchangeable leaderboard entries — but it can no longer
+ *    cost the 24 rows the product is built around.
  */
 export async function captureBoardQuotes(
   boards: readonly BoardEntry[] | null,
@@ -300,35 +309,59 @@ export async function captureBoardQuotes(
   const industries = boards.filter((b) => b.type === 2);
   const themes = options.themes ?? [];
 
-  // Industry boards in registry order, then the distinct boards the theme
-  // catalog resolves to. De-duplicated by code so a theme board that is also an
-  // industry board is requested once.
-  const byCode = new Map<string, BoardEntry>();
-  for (const board of industries) byCode.set(board.code, board);
+  const themeBoards: BoardEntry[] = [];
+  const seen = new Set<string>();
   for (const theme of themes) {
     const board = resolveBoard(theme, boards as BoardEntry[]);
-    if (board && !byCode.has(board.code)) byCode.set(board.code, board);
-  }
-  const quotable = [...byCode.values()];
-  if (!quotable.length) return { map: null, asOf: null };
-
-  try {
-    const map = await fetchBoardQuotes(quotable, {
-      fetchImpl: options.fetchImpl,
-      sleepImpl: options.sleepImpl,
-    });
-    if (!map.size) return { map: null, asOf: null };
-    // Every row of one batch carries the same `f124`; take the latest so a
-    // partially-updated batch reports the newest market clock it contains.
-    let stamp = 0;
-    for (const q of map.values()) {
-      const n = Number(q.quoteStamp);
-      if (Number.isFinite(n) && n > stamp) stamp = n;
+    if (board && !seen.has(board.code)) {
+      seen.add(board.code);
+      themeBoards.push(board);
     }
-    return { map, asOf: epochSecondsToIso(stamp || null, tz) };
-  } catch {
-    return { map: null, asOf: null };
   }
+
+  const map = new Map<string, BoardQuote>();
+  const mergeQuotes = async (list: readonly BoardEntry[]) => {
+    if (!list.length) return;
+    try {
+      const got = await fetchBoardQuotes(list, {
+        fetchImpl: options.fetchImpl,
+        sleepImpl: options.sleepImpl,
+      });
+      for (const [code, q] of got) map.set(code, q);
+    } catch {
+      // Batch failure: keep whatever the other pass produced.
+    }
+  };
+
+  // Themes first — one request for the rows that matter most, retried a bounded
+  // number of times because the quote host 502s in bursts: a single failed
+  // request would otherwise drop all 24 rows, which is 24/24 of the data the
+  // product is built around. Each retry asks only for the boards still missing,
+  // so a partly-successful pass costs nothing extra.
+  const sleep = options.sleepImpl ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
+  for (let attempt = 1; attempt <= THEME_QUOTE_ATTEMPTS; attempt++) {
+    const missing = themeBoards.filter((b) => !map.has(b.code));
+    if (!missing.length) break;
+    await mergeQuotes(missing);
+    if (themeBoards.every((b) => map.has(b.code))) break;
+    if (attempt < THEME_QUOTE_ATTEMPTS) await sleep(300 * attempt);
+  }
+
+  // Then the industry bulk. `fetchBoardQuotes` chunks internally; a board that
+  // is both an industry and a theme board keeps the value the theme pass gave
+  // it, so the two sections can never disagree.
+  const themeCodes = new Set(themeBoards.map((b) => b.code));
+  await mergeQuotes(industries.filter((b) => !themeCodes.has(b.code)));
+
+  if (!map.size) return { map: null, asOf: null };
+  // Every row of one batch carries the same `f124`; take the latest so a
+  // partially-updated map reports the newest market clock it contains.
+  let stamp = 0;
+  for (const q of map.values()) {
+    const n = Number(q.quoteStamp);
+    if (Number.isFinite(n) && n > stamp) stamp = n;
+  }
+  return { map, asOf: epochSecondsToIso(stamp || null, tz) };
 }
 
 async function buildIndices(
@@ -430,6 +463,7 @@ function buildThemes(
   }
   const records: ThemeRecord[] = [];
   let resolved = 0;
+  let quoted = 0;
   if (!quotes.map) {
     return unavailableSection<ThemeRecord>(observedAt, "no board quote available for any theme", {
       themes: themes.length,
@@ -439,6 +473,7 @@ function buildThemes(
     const board = resolveBoard(theme, boards as BoardEntry[]);
     if (board) resolved++;
     const q = board ? quotes.map.get(board.code) : undefined;
+    if (q) quoted++;
     records.push({
       key: theme.key,
       name: theme.name,
@@ -460,6 +495,7 @@ function buildThemes(
   return buildSection(records, observedAt, quotes.asOf, {
     themes: themes.length,
     resolved,
+    quoted,
   });
 }
 
