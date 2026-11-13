@@ -23,7 +23,7 @@ export const THEME_CATALOG: readonly ThemeDef[] = [
   { key: "ai", name: "人工智能", aliases: ["人工智能", "AI", "大模型", "ChatGPT"], boardHints: ["人工智能"] },
   { key: "ai-compute", name: "算力", aliases: ["算力", "数据中心", "GPU", "英伟达"], boardHints: ["算力"] },
   { key: "semiconductor", name: "半导体", aliases: ["半导体", "芯片", "晶圆", "光刻"], boardHints: ["半导体"] },
-  { key: "ev", name: "新能源车", aliases: ["新能源车", "电动汽车", "锂电", "宁德"], boardHints: ["新能源汽车"] },
+  { key: "ev", name: "新能源车", aliases: ["新能源车", "电动汽车", "锂电", "宁德"], boardHints: ["新能源车", "新能源汽车"] },
   { key: "solar", name: "光伏", aliases: ["光伏", "硅片", "组件"], boardHints: ["光伏"] },
   { key: "pharma", name: "创新药", aliases: ["创新药", "医药", "临床试验", "CXO"], boardHints: ["创新药"] },
   { key: "liquor", name: "白酒", aliases: ["白酒", "茅台", "五粮液"], boardHints: ["白酒"] },

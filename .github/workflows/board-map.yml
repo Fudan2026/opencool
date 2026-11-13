@@ -1,0 +1,60 @@
+name: Board map refresh
+
+# Refreshes `lib/themes/board-map.json`, the committed Eastmoney board
+# registry that `bake-themes` falls back to when the live registry is
+# unreachable.
+#
+# Why a separate low-frequency job: board codes and names are near-static
+# metadata (a handful of additions a month). Theming only needs today's
+# *quotes*, which `themes:bake` already fetches live. Refreshing this snapshot
+# weekly keeps the fallback fresh without spending a pipeline request per
+# edition, and without making the published edition depend on the registry
+# service being up at 06:00 / 13:00 / 19:00.
+#
+# Runs `workflow_dispatch` too, so a board rename can be folded in immediately.
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    name: Refresh board registry snapshot
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh snapshot
+        run: npm run board-map:bake
+
+      - name: Typecheck and test
+        run: |
+          npm run typecheck
+          npm test
+
+      - name: Commit when the registry moved
+        run: |
+          if git diff --quiet -- lib/themes/board-map.json; then
+            echo "board map unchanged — nothing to commit"
+            exit 0
+          fi
+          before=$(git show HEAD:lib/themes/board-map.json | grep -c '"code"' || true)
+          after=$(grep -c '"code"' lib/themes/board-map.json || true)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lib/themes/board-map.json
+          git commit -m "chore(themes): refresh Eastmoney board map (${before} -> ${after} boards)"
+          git push

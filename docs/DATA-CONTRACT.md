@@ -47,6 +47,7 @@ sidecar to distinguish real editions.
 | `sentiment-history.json` | build-site | `{generatedAt,cap:60,count,items:[{date,hour,score,label,posHits,negHits,scanned,percentile}]}` — chronological, newest last |
 | `keywords.json` | `npm run keywords:bake` | `{generatedAt,windowDays:7,editions,items:[{term,count,firstSeen,lastSeen}]}` — top 40 |
 | `weekly.json` + `weekly.html` | `npm run weekly:bake` | 7-day review: `{daysCovered,editions,avgSentiment,sentimentCurve,sectorAvg,topEvents,keywords,indexRows}` (baked when ≥5 days) |
+| `themes.json` | `npm run themes:bake` | 24 curated themes: `{key,name,boardCode,boardName,boardChangePct,boardUp,boardDown,articleHits,matchedAliases,constituents:[{symbol,name,changePct}]}`. Top-level `{generatedAt,source,status:`ok`\|`degraded`\|`failed`,registry:`live`\|`snapshot`\|`none`,edition,themes}`. `boardUp`/`boardDown` are advancing/declining member counts. `status:"failed"` means zero themes resolved a board while a committed board map existed — treat board fields as absent. |
 | `feed.xml` | build-site | RSS 2.0, newest 30 **real** editions |
 | `status.html` | build-site | Publish matrix (14d) + source-health + sentiment trend |
 | `source-overlay.json` | build-site | `{disabled:[{id,reason,since}]}` — present only when sources fail ≥3 straight days |

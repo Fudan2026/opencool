@@ -266,6 +266,23 @@ jobs:
       - name: Bake theme heat
         run: npm run themes:bake
 
+      # Guard: theme board heat silently shipped `boards=0` from 2026-11-11 to
+      # 2026-11-13 while CI stayed green. Fail the run instead of publishing a
+      # themes.json where no theme resolved a board.
+      - name: Assert theme boards resolved
+        run: |
+          node -e '
+            const t = require("./daily_reports/themes.json");
+            const boards = t.themes.filter((x) => x.boardCode).length;
+            const moved = t.themes.filter((x) => typeof x.boardChangePct === "number").length;
+            const members = t.themes.filter((x) => (x.constituents ?? []).length > 0).length;
+            console.log(`themes=${t.themes.length} boards=${boards} quoted=${moved} withConstituents=${members} status=${t.status} registry=${t.registry}`);
+            if (boards < 15) {
+              console.error(`::error::only ${boards}/${t.themes.length} themes resolved a board (need >= 15) — board resolution is broken`);
+              process.exit(1);
+            }
+          '
+
       - name: Bake trend periods
         run: npm run periods:bake
 
