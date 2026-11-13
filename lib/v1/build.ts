@@ -1008,13 +1008,27 @@ export interface WriteReport {
 }
 
 /**
- * Write the payloads under `<root>/v1/`, and remove v1 files this build no
- * longer produces.
+ * Write the payloads under `<root>/v1/`, and remove v1 files a previous run in
+ * this same tree produced but this one does not.
  *
  * Cleanup is scoped to `v1/reactions.json` and `v1/asof/*.json`: those are the
- * only paths whose existence depends on an input, so a stale copy would
- * otherwise survive a restore-and-republish and advertise data that is gone.
- * Nothing outside `v1/` is touched.
+ * only paths whose existence depends on an input, so a stale local copy would
+ * otherwise be carried into the publish tree. Nothing outside `v1/` is touched.
+ *
+ * **What this cannot do, stated plainly.** The publish step is
+ * `peaceiris/actions-gh-pages` with `keep_files: true`, which clones gh-pages
+ * and copies the top-level entries of `publish_dir` over the clone without ever
+ * running `git rm`. So this prune removes files from *this build's* working
+ * tree; it cannot delete a file that is already on the branch. A `v1/asof/…`
+ * file or `v1/reactions.json` that stops being produced therefore lingers on
+ * gh-pages until a `keep_files: false` publish (the `build` job) rewrites the
+ * whole tree.
+ *
+ * That residue is a staleness window, not a correctness hole: the manifest is
+ * rewritten every run and names exactly what is real, so a consumer should read
+ * the manifest rather than guess at paths. Fixing it properly means a dedicated
+ * `keep_files: false` v1 publish, which would also delete every edition — so it
+ * is deliberately not done here.
  */
 export function writeV1(build: V1Build, options: { root?: string } = {}): WriteReport {
   const root = options.root ?? path.resolve("daily_reports");

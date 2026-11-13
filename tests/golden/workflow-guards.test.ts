@@ -321,7 +321,17 @@ test("golden: reading pages publish even when no edition is due", async (t) => {
   const job = next >= 0 ? rest.slice(0, next) : rest;
 
   await t.test("the job exists and is not gated on should-run or a tape capture", () => {
-    assert.match(job, /^ {4}if: always\(\) && !cancelled\(\)$/m, "pages must run unconditionally");
+    const ifLine = /^ {4}if: (.+)$/m.exec(job);
+    assert.ok(ifLine, "the pages job must declare an if:");
+    assert.equal(ifLine[1].trim(), "always() && !cancelled()", "pages must run unconditionally");
+    // Belt and braces: neither the `if:` expression nor the job body may consult
+    // a gating output. The v1 namespace now lives here too, so a re-gate would
+    // take the integrity surface offline with it.
+    assert.equal(
+      /needs\.gate\.outputs\./.test(ifLine[1]),
+      false,
+      "the pages if: must not consult a gate output",
+    );
     assert.equal(
       /needs\.gate\.outputs\.(should-run|tape-should-run)/.test(job),
       false,
@@ -348,8 +358,71 @@ test("golden: reading pages publish even when no edition is due", async (t) => {
     );
   });
 
+  /**
+   * The `/v1` namespace and `/integrity.html` hit the identical failure: they
+   * shipped inside `build`, the first post-merge run was a Saturday, the gate
+   * answered `all-published`, and every URL 404'd while the suite was green.
+   * A coverage surface that only publishes when an edition happens to build
+   * cannot report its own gaps, so its publication must be unconditional too.
+   */
+  await t.test("the v1 bake lives in this job, before the publish step", () => {
+    const names = stepNames(job);
+    assert.ok(names.includes("Bake v1 namespace and integrity page"), "missing v1 bake step");
+    assert.match(
+      stepSource(job, "Bake v1 namespace and integrity page"),
+      /npm run v1:bake/,
+      "the pages job must run the v1 bake, not a copy of it",
+    );
+    assert.ok(names.includes("Assert v1 contract"), "missing v1 contract assert");
+    assert.match(stepSource(job, "Assert v1 contract"), /npm run assert:v1/);
+
+    const bakeAt = names.indexOf("Bake v1 namespace and integrity page");
+    const assertAt = names.indexOf("Assert v1 contract");
+    const publishAt = names.indexOf("Publish reading pages and tape");
+    assert.ok(publishAt >= 0);
+    assert.ok(bakeAt < assertAt, "the assert must check what the bake wrote");
+    assert.ok(assertAt < publishAt, "a broken v1 file must not reach gh-pages");
+  });
+
+  await t.test("the v1 bake gets the report timezone and no provider key", () => {
+    const step = stepSource(job, "Bake v1 namespace and integrity page");
+    assert.match(step, /REPORT_TZ:/, "v1 clocks carry the market offset");
+    assert.equal(/API_KEY:\s*\$\{\{/.test(step), false, "the v1 bake is arithmetic over local files");
+    assert.equal(/LLM_MODE:\s*'auto'/.test(step), false);
+  });
+
+  await t.test("it restores every input the v1 re-exports read", () => {
+    const step = stepSource(job, "Restore tape and ledger from gh-pages");
+    // stories.json and themes.json are re-exported verbatim; reactions.json is
+    // optional (absent until its own bake ships) so its restore is `|| true`.
+    // Only inputs are restored — restoring the previous `v1/` tree would be
+    // pointless: `keep_files: true` merges directories on the remote, so a
+    // locally pruned file cannot be removed from gh-pages from here anyway.
+    assert.match(step, /checkout origin\/gh-pages -- stories\.json/);
+    assert.match(step, /checkout origin\/gh-pages -- themes\.json/);
+    assert.match(step, /checkout origin\/gh-pages -- reactions\.json \|\| true/);
+  });
+
   await t.test("it publishes only additively, so it cannot delete an edition", () => {
-    assert.match(stepSource(job, "Publish reading pages and tape"), /keep_files: true/);
+    // `keep_files: true` makes peaceiris clone gh-pages and SKIP its `git rm`
+    // before copying the top-level entries of publish_dir over the clone. The
+    // job's tree now also carries `v1/` and `integrity.html`, which are files
+    // and a directory the clone does not have — additions, never deletions.
+    // Verified against the action source (src/git-utils.ts `setRepo`) and
+    // reproduced locally: an edition directory present only on gh-pages
+    // survives a pages-only publish.
+    const publish = stepSource(job, "Publish reading pages and tape");
+    assert.match(publish, /keep_files: true/);
+    assert.match(publish, /publish_dir: \.\/daily_reports/);
+    assert.equal(
+      /keep_files: false/.test(publish),
+      false,
+      "keep_files: false here would wipe every edition on gh-pages",
+    );
+    // No destination_dir: the whole tree merges at the branch root, so `v1/`
+    // and `integrity.html` land where the URLs expect them.
+    assert.equal(/destination_dir:/.test(publish), false);
+    assert.equal(/exclude_assets:/.test(publish), false);
   });
 
   await t.test("it restores the tape and ledger it renders", () => {

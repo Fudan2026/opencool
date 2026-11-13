@@ -656,7 +656,9 @@ jobs:
 
       # The pages are derived artifacts: they must be built from what is
       # actually published, not from a fresh empty tree. `tape/` and
-      # `stories.json` are the only inputs.
+      # `stories.json` feed the reading pages; `themes.json` and `reactions.json`
+      # feed the /v1 re-exports (the latter only exists once its own bake has
+      # shipped, so its restore is allowed to fail).
       - name: Restore tape and ledger from gh-pages
         run: |
           mkdir -p daily_reports
@@ -664,7 +666,10 @@ jobs:
             git fetch origin gh-pages --depth=1
             git --work-tree=daily_reports checkout origin/gh-pages -- tape || true
             git --work-tree=daily_reports checkout origin/gh-pages -- stories.json || true
+            git --work-tree=daily_reports checkout origin/gh-pages -- themes.json || true
+            git --work-tree=daily_reports checkout origin/gh-pages -- reactions.json || true
             echo "Restored $(find daily_reports/tape -name '*.json' 2>/dev/null | wc -l) tape file(s)"
+            echo "Restored ledger=$(test -f daily_reports/stories.json && echo yes || echo no) themes=$(test -f daily_reports/themes.json && echo yes || echo no) reactions=$(test -f daily_reports/reactions.json && echo yes || echo no)"
           else
             echo "gh-pages doesn't exist yet — the pages will render their waiting state"
           fi
@@ -692,6 +697,28 @@ jobs:
           node scripts/assert-reading-pages.mjs
           --dir daily_reports
 
+      # The versioned /v1 namespace + /integrity.html. This job is the one that
+      # GUARANTEES publication: the same steps also live in `build`, but `build`
+      # is skipped whenever no edition is due — which is most of the day and all
+      # of a weekend. Shipping this surface only in `build` meant the namespace
+      # 404'd while every local test passed, which is exactly the failure the
+      # integrity page exists to make impossible.
+      #
+      # Inputs are all restored above or absent-by-design: the bake names a gap
+      # and exits 0 rather than failing, so a missing ledger costs a gap row,
+      # never the surface.
+      - name: Bake v1 namespace and integrity page
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+        run: npm run v1:bake
+
+      # Guard: a v1 file whose shape regressed, or a manifest advertising an
+      # endpoint with no file behind it, must not reach gh-pages. The baker
+      # checks its own payloads before writing; this re-checks what is on disk,
+      # because disk is what gets published.
+      - name: Assert v1 contract
+        run: npm run assert:v1
+
       - name: Publish reading pages and tape
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -699,7 +726,7 @@ jobs:
           publish_dir: ./daily_reports
           publish_branch: gh-pages
           keep_files: true
-          commit_message: 'pages: reading pages for ${{ github.run_id }}'
+          commit_message: 'pages: reading pages + v1 for ${{ github.run_id }}'
 
       - name: Alert on pages failure
         if: failure() || cancelled()
