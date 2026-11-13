@@ -35,6 +35,7 @@ import { todayKey, editionHourKey, parseReportHours, editionKind } from "../lib/
 import { buildQuantSection } from "../lib/invest/quant";
 import { scoreSentiment, MIN_HISTORY_SAMPLES } from "../lib/nlp/sentiment";
 import { cleanKeywords } from "../lib/nlp/keywords";
+import { loadLeadConfig, applyLead } from "../lib/editorial/lead";
 import { THEME_CATALOG, themeArticleHits } from "../lib/themes/catalog";
 import type { MorningBrief } from "../lib/ai/pipeline";
 import type { QuantSection } from "../lib/invest/types";
@@ -640,6 +641,23 @@ async function main() {
   const sentimentTrend = loadSentimentTrend();
   const sentimentHistory = sentimentTrend.map((t) => t.score);
   report.sentiment = scoreSentiment(articles, sentimentHistory);
+  // Editorial lead: editor-pinned headline, refused unless today's own
+  // sources ground it (lib/editorial/lead.ts). Zero fabrication.
+  try {
+    const lead = loadLeadConfig("data/lead.json", (f) => fs.readFileSync(f, "utf8"));
+    if (lead) {
+      const applied = applyLead(articles, lead, date, hour);
+      if (applied) {
+        report.editorial_lead = applied;
+        report.hero_headline = applied.title;
+        console.log(`[daily] editorial lead applied: ${applied.title} (grounded by: ${applied.groundedBy.slice(0, 40)})`);
+      } else {
+        console.log(`[daily] editorial lead skipped — not grounded in today's sources`);
+      }
+    }
+  } catch (e) {
+    console.warn(`[daily] editorial lead failed (non-fatal): ${e instanceof Error ? e.message : e}`);
+  }
   // Theme article hits — pure catalog matching over all article titles
   // (zero network; board heat merges in bake-themes at publish time).
   report.themes = THEME_CATALOG

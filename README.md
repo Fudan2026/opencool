@@ -66,6 +66,12 @@ Full reference: [`docs/DATA-CONTRACT.md`](docs/DATA-CONTRACT.md) ·
 
 ---
 
+## 编辑定调头条（Wave 14）
+
+`data/lead.json` 允许编辑为某日指定头条：`date`（必填）、`groundOn`（必须出现在当日信源标题中的锚点词）、`title`（定调标题）、`url/source`（信源署名）。铁律：**锚点词在当日信源中查无实据时，定调被拒绝，头条保持启发式结果**——零虚构。见 `data/lead.json` 的真实示例（2026-11-13：黄仁勋辞职，信源 DW 中文）。
+
+---
+
 ## 用户订阅（前端地基）
 
 `subscribe.html` 提供邮箱与订阅档位输入。当前**只把订阅意向保存到本机 localStorage，不发送邮件、不上传服务器**；支持导出意向 JSON。未来后端就绪时，通过 `SUBSCRIBE_ENDPOINT` 显式配置提交地址即可接入，无需改页面。现在也可以直接用 [`feed.xml`](feed.xml) 的 RSS 订阅。
