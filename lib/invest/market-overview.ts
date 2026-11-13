@@ -3,6 +3,8 @@
  * Failures return null — never fatal.
  */
 
+import { fetchJson } from "./http-json";
+
 export interface IndexSnap {
   code: string;
   name: string;
@@ -17,27 +19,25 @@ export interface MarketOverview {
 }
 
 async function fetchEmIndex(secid: string): Promise<IndexSnap | null> {
-  try {
-    const url = `https://push2.eastmoney.com/api/qt/stock/get?secid=${secid}&fields=f57,f58,f43,f169,f170,f46,f44,f45,f168,f47,f48,f60`;
-    const res = await fetch(url, {
-      headers: { "User-Agent": "OpenCool/1.0", Referer: "https://quote.eastmoney.com/" },
-      signal: AbortSignal.timeout(10_000),
-    });
-    if (!res.ok) return null;
-    const j = (await res.json()) as {
-      data?: { f57?: string; f58?: string; f43?: number; f170?: number };
-    };
-    const d = j.data;
-    if (!d?.f58 || d.f43 == null) return null;
-    return {
-      code: String(d.f57 ?? secid),
-      name: d.f58,
-      price: d.f43 / 100,
-      changePct: (d.f170 ?? 0) / 100,
-    };
-  } catch {
-    return null;
-  }
+  const fields = "f57,f58,f43,f169,f170,f46,f44,f45,f168,f47,f48,f60";
+  const urls = [
+    `https://push2.eastmoney.com/api/qt/stock/get?secid=${secid}&fields=${fields}`,
+    `https://push2delay.eastmoney.com/api/qt/stock/get?secid=${secid}&fields=${fields}`,
+  ];
+  const j = await fetchJson<{
+    data?: { f57?: string; f58?: string; f43?: number; f170?: number };
+  }>(urls, {
+    headers: { Referer: "https://quote.eastmoney.com/" },
+    timeoutMs: 10_000,
+  });
+  const d = j?.data;
+  if (!d?.f58 || d.f43 == null) return null;
+  return {
+    code: String(d.f57 ?? secid),
+    name: d.f58,
+    price: d.f43 / 100,
+    changePct: (d.f170 ?? 0) / 100,
+  };
 }
 
 /** 1.000001 上证 · 0.399001 深成指 · 0.399006 创业板 */
