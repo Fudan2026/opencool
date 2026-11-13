@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T18:23:00.228Z",
+  "generatedAt": "2026-11-13T18:26:41.892Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 9,
@@ -132,8 +132,8 @@
     {
       "key": "china-equity",
       "label": "中概港股",
-      "avg": 54.2,
-      "editions": 6
+      "avg": 47.6,
+      "editions": 5
     },
     {
       "key": "macro",
@@ -162,7 +162,7 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -11.5,
+      "avg": -11.4,
       "editions": 23
     },
     {
@@ -209,13 +209,6 @@
       "count": 11
     },
     {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "Anthropic斥资34亿美元接手发电设备",
-      "url": "https://www.ftchinese.com/story/001111311",
-      "count": 10
-    },
-    {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
@@ -227,6 +220,13 @@
       "displayName": "Nvidia",
       "title": "Nvidia opens investigation after report CEO Jensen Huang was target of foreign intelligence",
       "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation",
+      "count": 9
+    },
+    {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "Anthropic斥资34亿美元接手发电设备",
+      "url": "https://www.ftchinese.com/story/001111311",
       "count": 9
     },
     {
@@ -370,12 +370,12 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 119
+      "totalHits": 118
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 85
+      "totalHits": 82
     },
     {
       "key": "bank",
@@ -383,13 +383,13 @@
       "totalHits": 71
     },
     {
-      "key": "metals",
-      "name": "有色金属",
-      "totalHits": 62
-    },
-    {
       "key": "semiconductor",
       "name": "半导体",
+      "totalHits": 61
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
       "totalHits": 61
     },
     {
@@ -403,14 +403,14 @@
       "totalHits": 30
     },
     {
-      "key": "robotics",
-      "name": "机器人",
-      "totalHits": 27
-    },
-    {
       "key": "brokerage",
       "name": "券商",
       "totalHits": 27
+    },
+    {
+      "key": "robotics",
+      "name": "机器人",
+      "totalHits": 25
     },
     {
       "key": "media",
