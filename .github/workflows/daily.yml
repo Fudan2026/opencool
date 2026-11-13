@@ -1,6 +1,7 @@
 name: Daily Brief
 
-# OpenCool triple brief (06 / 13 / 19 Asia/Shanghai) — LLM_MODE=auto.
+# OpenCool triple brief (06 / 13 / 19 Asia/Shanghai) — scheduled builds are
+# pinned to LLM_MODE=off (zero tokens), asserted after every build.
 #
 # One-time setup:
 #   1. Settings → Actions → General → Workflow permissions: Read and write
@@ -9,16 +10,18 @@ name: Daily Brief
 #        REPORT_TZ=Asia/Shanghai
 #        REPORT_HOUR=6,13,19
 #        REPORT_LOCALE=zh
-#        LLM_MODE=auto  (zero-AI unless a free ZHIPU_API_KEY secret is set)
-#   4. Optional zero-cost enhancement: add secret ZHIPU_API_KEY (free
-#      GLM-4-Flash tier, https://open.bigmodel.cn) — auto turns enrichment
-#      on automatically. Unset = pure heuristic mode. Do NOT add DeepSeek /
-#      paid LLM secrets for this fork's default path.
-#   5. Optional: secret/var ALERT_WEBHOOK_URL for missing-edition / failure pings
-#      (scripts/notify-failure.mjs no-ops when unset).
+#        REPORT_LOOKBACK_DAYS=1   (gate rescans this many past days)
+#        PUBLISH_LAG_LIMIT_MIN=20 (publish-lag assertion tolerance)
+#      The workflow does NOT read LLM_MODE from vars/secrets: the build job
+#      pins LLM_MODE=off, forwards no provider key, and fails the run if
+#      logs/llm-calls.jsonl records a single call. Zero tokens is structural,
+#      not a "secret happens to be unset" accident — do not add an LLM key to
+#      this repo's Actions secrets expecting enrichment to light up.
+#   4. Optional: secret/var ALERT_WEBHOOK_URL for missing-edition / failure /
+#      publish-lag pings (scripts/notify-failure.mjs no-ops when unset).
 #      Optional push: secrets TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (Telegram)
 #      or variable NTFY_TOPIC (ntfy.sh) — new editions get pushed; no-op unset.
-#   6. Actions → Daily Brief → Run workflow once to seed.
+#   5. Actions → Daily Brief → Run workflow once to seed.
 #
 # Live: https://<user>.github.io/<repo>/
 # Archive listing norm starts 2026-09-16 (06 + 13 + 19).
@@ -66,6 +69,7 @@ jobs:
       edition-hour: ${{ steps.check.outputs.edition-hour }}
       edition-date: ${{ steps.check.outputs.edition-date }}
       backfill: ${{ steps.check.outputs.backfill }}
+      reason: ${{ steps.check.outputs.reason }}
     steps:
       - name: Checkout gate script
         uses: actions/checkout@v4
@@ -107,6 +111,15 @@ jobs:
     concurrency:
       group: daily-brief-build
       cancel-in-progress: true
+    # ZERO-TOKEN GUARD (owner directive, non-negotiable): the scheduled / CI
+    # pipeline must never spend a token, and that must not depend on a secret
+    # being absent. The mode is pinned at JOB level and no provider key is
+    # forwarded to any step, so `LLM_MODE=auto`'s "a key exists → light up
+    # enrichment" path is unreachable here. lib/ai/llm.ts additionally throws
+    # LlmDisabledError before dispatch in off mode, and the
+    # "Assert zero LLM calls" step fails the run if any call is ever logged.
+    env:
+      LLM_MODE: 'off'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -119,6 +132,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      # Scope for the zero-token assertion at the end of the job: it only
+      # counts calls recorded at/after this instant, so the check means "this
+      # run spent nothing", not "somebody's log happens to be empty".
+      - name: Record run start
+        run: echo "LLM_LOG_SINCE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
 
       # Quality gate: typecheck + tests + source-config validation block the
       # publish. A regression must never reach gh-pages (fifth-wave mandate).
@@ -145,6 +164,21 @@ jobs:
             echo "gh-pages doesn't exist yet — first run"
           fi
 
+      # A gate probe that saw 403/429/000 rebuilds a slot that may in fact be
+      # live. Capture that BEFORE `npm run daily` overwrites the sidecar, so
+      # the lag assertion can tell a republish (slot was met earlier) from a
+      # genuinely late first publish.
+      - name: Note whether this edition was already live
+        run: |
+          SIDE="daily_reports/${{ needs.gate.outputs.edition-date }}/${{ needs.gate.outputs.edition-hour }}.json"
+          if [ -s "$SIDE" ]; then
+            echo "ALREADY_PUBLISHED=true" >> "$GITHUB_ENV"
+            echo "already live: $SIDE (rebuild, not a first publish)"
+          else
+            echo "ALREADY_PUBLISHED=false" >> "$GITHUB_ENV"
+            echo "not yet published: $SIDE"
+          fi
+
       - name: Bake pre-market tips
         run: npm run calendar:bake
 
@@ -153,13 +187,11 @@ jobs:
 
       - name: Generate edition report
         env:
-          # OpenCool: auto = stays zero-AI unless the FREE ZHIPU_API_KEY
-          # secret is configured — then GLM-4-Flash enrichment activates
-          # at no cost. No paid LLM ever (README 明确不做).
-          LLM_MODE: ${{ vars.LLM_MODE || 'auto' }}
-          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
-          ZHIPU_BASE_URL: ${{ vars.ZHIPU_BASE_URL }}
-          LLM_MODEL: ${{ vars.LLM_MODEL }}
+          # Zero-token mode is pinned at job level (see `env:` on the job).
+          # Re-stated here so a future edit that adds a step-level env cannot
+          # silently re-enable the LLM path, and so the value is visible in the
+          # step's environment listing in the run log.
+          LLM_MODE: 'off'
           REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
           REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,13,19' }}
@@ -212,6 +244,15 @@ jobs:
       - name: Build static site (index + archive)
         run: npm run build-site
 
+      # ZERO-TOKEN ASSERT (owner directive): machine-checkable proof that this
+      # run spent no LLM call — no human or agent has to read the log.
+      # `logs/llm-calls.jsonl` absent is the expected zero-call case and
+      # passes; ANY entry at/after LLM_LOG_SINCE fails the run BEFORE it can
+      # publish. Deliberately after the last generating step (build-site) so a
+      # bake that ever grows an LLM call is caught too.
+      - name: Assert zero LLM calls
+        run: node scripts/assert-zero-llm.mjs --since "$LLM_LOG_SINCE"
+
       - name: Alert if edition HTML missing or empty
         if: always()
         env:
@@ -230,6 +271,31 @@ jobs:
           keep_files: false
           commit_message: 'brief: ${{ needs.gate.outputs.edition-date }}/${{ needs.gate.outputs.edition-hour }} for ${{ github.run_id }}'
 
+      # PUBLISH-LAG ASSERT (owner directive): "did it publish on time" is a
+      # machine check, not something a human or agent watches.
+      #
+      # Deliberately AFTER the publish step: a late edition must still go
+      # live, then turn the run red. Failing before publish would drop the
+      # edition again, the gate would rebuild it even later, and the slot
+      # could never recover.
+      #
+      # Lag = the instant this step runs (immediately after the gh-pages push,
+      # so it IS the publish moment) minus the slot time in Asia/Shanghai.
+      # > PUBLISH_LAG_LIMIT_MIN (default 20) fails the run and calls
+      # scripts/notify-failure.mjs. A backfilled (补发) edition reports its lag
+      # and stays green — it is a recovery, not a breach.
+      - name: Assert publish lag
+        id: publish-lag
+        env:
+          EDITION_DATE: ${{ needs.gate.outputs.edition-date }}
+          EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
+          EDITION_TRIGGER: ${{ needs.gate.outputs.reason }}
+          # ALREADY_PUBLISHED arrives via $GITHUB_ENV from the step above.
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          PUBLISH_LAG_LIMIT_MIN: ${{ vars.PUBLISH_LAG_LIMIT_MIN || '20' }}
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
+        run: node scripts/assert-publish-lag.mjs
+
       - name: Push new edition (opt-in)
         if: success()
         env:
@@ -244,7 +310,9 @@ jobs:
       - name: Alert on job failure
         # cancelled() too: a timeout/hung build is cancelled, not failure —
         # without this branch the alert step is silently skipped.
-        if: failure() || cancelled()
+        # PUBLISH_LAG_NOTIFIED: the lag assertion already paged with the real
+        # lag numbers, so do not page twice for one late edition.
+        if: (failure() || cancelled()) && env.PUBLISH_LAG_NOTIFIED != 'true'
         env:
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}

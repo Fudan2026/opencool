@@ -28,10 +28,12 @@ REPORT_TZ=Asia/Shanghai
 REPORT_HOUR=6,13,19
 REPORT_LOOKBACK_DAYS=2   # 门控回看天数：漏发的档期最多补这么久
 REPORT_LOCALE=zh
-LLM_MODE=auto   # 无任何 key 时等同 off；配置免费 ZHIPU_API_KEY 后自动点亮 GLM-4-Flash 导读
+LLM_MODE=auto   # 本地默认：无任何 key 时等同 off；配置免费 ZHIPU_API_KEY 后自动点亮 GLM-4-Flash 导读
 ```
 
-Workflow 默认 `LLM_MODE=auto`：**零 AI · 零 Token 是默认态**。只有显式配置免费的智谱 GLM-4-Flash key（https://open.bigmodel.cn ）才会激活 LLM 导读；任何付费 LLM 均不接入。
+Workflow 的 build job **固定 `LLM_MODE=off`**：**零 AI · 零 Token 不是"secret 恰好没配"的偶然，而是结构性保证**。build job 不向任何步骤转发 provider key，`lib/ai/llm.ts` 在 off 模式下于派发前抛 `LlmDisabledError`，并且每次跑完都会执行 `scripts/assert-zero-llm.mjs` —— `logs/llm-calls.jsonl` 里只要出现本次运行的一条记录，run 直接失败（文件不存在 = 零调用，属正常通过）。因此往这个仓库的 Actions secrets 里加 LLM key 也不会点亮 enrichment。
+
+**发布时效断言**：build job 推送到 gh-pages 后执行 `scripts/assert-publish-lag.mjs`，以 Asia/Shanghai 计算该档期的实际发布时刻与档期时间之差；超过 `PUBLISH_LAG_LIMIT_MIN`（默认 20 分钟）就让 run 变红并触发 `scripts/notify-failure.mjs` 的告警 webhook。补发（sidecar 标记 `backfilled`，页面标注「补发」）只记录 lag、不判失败——它是恢复，不是破约。
 
 ---
 

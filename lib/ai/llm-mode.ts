@@ -1,7 +1,9 @@
 /**
  * LLM_MODE controls whether the daily pipeline calls an LLM.
  *
- *   LLM_MODE=off   — fetch + heuristic digest + markets data only (no API key)
+ *   LLM_MODE=off   — fetch + heuristic digest + markets data only (no API key).
+ *                    `runLlm()` throws LlmDisabledError before dispatch, so off
+ *                    mode is structurally zero-token, not merely "no key set".
  *   LLM_MODE=on    — full enrichment / digest / trading commentary
  *   LLM_MODE=auto  — "on" if any provider key is present, else "off".
  *                    Free-first resolution: zhipu (GLM-4-Flash, free tier)
@@ -9,10 +11,9 @@
  *                    unset so runLlm() targets the resolved provider.
  *   unset          — treated as "on" (local claude-cli default)
  *
- * GitHub Actions sets LLM_MODE=auto: the pipeline stays zero-AI / zero-token
- * unless a ZHIPU_API_KEY secret is configured — then free GLM-4-Flash
- * enrichment lights up at no cost. The repo's "no paid LLM" promise holds
- * in every state.
+ * GitHub Actions pins `LLM_MODE=off` for the build job and asserts afterwards
+ * that `logs/llm-calls.jsonl` holds no entry for the run, so CI spends zero
+ * tokens no matter which secrets exist. `auto` is a local convenience.
  */
 
 /** Provider-specific key env per backend, in auto-resolution priority order. */

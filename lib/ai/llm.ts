@@ -90,7 +90,27 @@ export function getModelTag(): string {
   return `${backend}-${getActiveModel(backend)}`;
 }
 
+/**
+ * Thrown when a call reaches `runLlm()` while `LLM_MODE` is off.
+ *
+ * This is the structural zero-token guarantee: off mode does not "choose" a
+ * heuristic path at each call site, it makes the backend unreachable. CI sets
+ * `LLM_MODE=off` for the build job, so no secret, variable or future code path
+ * can spend a token there; a call that slips past its `isLlmOff()` branch fails
+ * loudly here instead of being silently billed.
+ */
+export class LlmDisabledError extends Error {
+  constructor() {
+    super(
+      "LLM_MODE=off — refusing to call any LLM backend (zero-token mode). " +
+        "Callers must branch on isLlmOff() before requesting a completion.",
+    );
+    this.name = "LlmDisabledError";
+  }
+}
+
 export async function runLlm(opts: LlmRunOptions): Promise<LlmRunResult> {
+  if (isLlmOff()) throw new LlmDisabledError();
   const backend = getBackend();
   switch (backend) {
     case "claude-cli":
