@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-13T14:43:39.254Z",
+  "generatedAt": "2026-11-13T14:54:10.350Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 22,
-  "avgSentiment": -4.3,
+  "avgSentiment": -4.4,
   "sentimentCurve": [
     {
       "date": "2026-11-06",
@@ -114,7 +114,7 @@
     {
       "date": "2026-11-13",
       "hour": "19",
-      "score": -4
+      "score": -6
     }
   ],
   "sectorAvg": [
@@ -133,19 +133,19 @@
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": 26,
-      "editions": 12
+      "avg": 24.2,
+      "editions": 11
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -24.1,
+      "avg": -23.7,
       "editions": 22
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -17.9,
+      "avg": -20,
       "editions": 22
     },
     {
@@ -157,13 +157,13 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -12.4,
-      "editions": 22
+      "avg": -12,
+      "editions": 21
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -3,
+      "avg": -3.1,
       "editions": 22
     }
   ],
@@ -211,13 +211,6 @@
       "count": 9
     },
     {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "Anthropic斥资34亿美元接手发电设备",
-      "url": "https://www.ftchinese.com/story/001111311",
-      "count": 9
-    },
-    {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
@@ -237,17 +230,18 @@
       "title": "交易所逾60亿美元加密资产遭窃 FBI：朝鲜应对此负责",
       "url": "https://www.dw.com/zh/交易所逾60亿美元加密资产遭窃-fbi：朝鲜应对此负责/a-79821894?maca=chi-rss-chi-all-1127-rdf",
       "count": 8
+    },
+    {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "Anthropic斥资34亿美元接手发电设备",
+      "url": "https://www.ftchinese.com/story/001111311",
+      "count": 8
     }
   ],
   "keywords": [
     {
-      "term": "1月",
-      "count": 3,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
-    },
-    {
-      "term": "月1",
+      "term": "伟达",
       "count": 3,
       "firstSeen": "2026-11-12",
       "lastSeen": "2026-11-13"
@@ -259,13 +253,7 @@
       "lastSeen": "2026-11-11"
     },
     {
-      "term": "联社",
-      "count": 3,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
-    },
-    {
-      "term": "财联",
+      "term": "英伟",
       "count": 3,
       "firstSeen": "2026-11-12",
       "lastSeen": "2026-11-13"
@@ -275,6 +263,12 @@
       "count": 2,
       "firstSeen": "2026-11-08",
       "lastSeen": "2026-11-08"
+    },
+    {
+      "term": "1月",
+      "count": 2,
+      "firstSeen": "2026-11-12",
+      "lastSeen": "2026-11-13"
     },
     {
       "term": "huang",
@@ -313,9 +307,9 @@
       "lastSeen": "2026-11-08"
     },
     {
-      "term": "伟达",
+      "term": "仁勋",
       "count": 2,
-      "firstSeen": "2026-11-12",
+      "firstSeen": "2026-11-13",
       "lastSeen": "2026-11-13"
     },
     {
@@ -325,21 +319,39 @@
       "lastSeen": "2026-11-08"
     },
     {
+      "term": "月1",
+      "count": 2,
+      "firstSeen": "2026-11-12",
+      "lastSeen": "2026-11-13"
+    },
+    {
+      "term": "盘中市值跌破4万亿美元",
+      "count": 2,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-13"
+    },
+    {
       "term": "美股",
       "count": 2,
       "firstSeen": "2026-11-06",
       "lastSeen": "2026-11-07"
     },
     {
-      "term": "英伟",
+      "term": "联社",
       "count": 2,
       "firstSeen": "2026-11-12",
       "lastSeen": "2026-11-13"
     },
     {
-      "term": "财联社11月13日电",
+      "term": "英伟达ceo换人",
       "count": 2,
       "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-13"
+    },
+    {
+      "term": "财联",
+      "count": 2,
+      "firstSeen": "2026-11-12",
       "lastSeen": "2026-11-13"
     },
     {
@@ -347,25 +359,13 @@
       "count": 2,
       "firstSeen": "2026-11-08",
       "lastSeen": "2026-11-08"
-    },
-    {
-      "term": "高盛时隔两个月再度大砍黄金目标",
-      "count": 2,
-      "firstSeen": "2026-11-08",
-      "lastSeen": "2026-11-08"
-    },
-    {
-      "term": "12月加息25个基点的概率升至85",
-      "count": 1,
-      "firstSeen": "2026-11-11",
-      "lastSeen": "2026-11-11"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 112
+      "totalHits": 110
     },
     {
       "key": "ai",
@@ -380,17 +380,17 @@
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 60
+      "totalHits": 58
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 58
+      "totalHits": 55
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 41
+      "totalHits": 39
     },
     {
       "key": "defense",
@@ -405,7 +405,7 @@
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 24
+      "totalHits": 23
     },
     {
       "key": "media",
@@ -415,7 +415,7 @@
     {
       "key": "comms",
       "name": "通信",
-      "totalHits": 12
+      "totalHits": 11
     },
     {
       "key": "infra",

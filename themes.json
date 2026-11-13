@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T14:44:10.553Z",
+  "generatedAt": "2026-11-13T14:54:37.156Z",
   "source": "eastmoney-concept-boards",
   "status": "ok",
   "edition": "2026-11-13/19",
@@ -10,7 +10,7 @@
       "boardCode": "BK1792",
       "boardName": "算力租赁",
       "boardChangePct": -1.29,
-      "articleHits": 2,
+      "articleHits": 3,
       "matchedAliases": [
         "英伟达"
       ],
@@ -111,108 +111,55 @@
       ]
     },
     {
-      "key": "pharma",
-      "name": "创新药",
-      "boardCode": "BK1106",
-      "boardName": "创新药",
-      "boardChangePct": -2.7,
+      "key": "brokerage",
+      "name": "券商",
+      "boardCode": "BK1685",
+      "boardName": "保险重仓",
+      "boardChangePct": -0.31,
       "articleHits": 1,
       "matchedAliases": [
-        "医药"
+        "券商"
       ],
       "constituents": [
         {
-          "symbol": "000766",
-          "name": "通化金马",
-          "changePct": 10
+          "symbol": "000802",
+          "name": "北京文化",
+          "changePct": 6.58
         },
         {
-          "symbol": "688765",
-          "name": "禾元生物-U",
-          "changePct": 8.76
+          "symbol": "600066",
+          "name": "宇通客车",
+          "changePct": 3.59
         },
         {
-          "symbol": "300683",
-          "name": "海特生物",
-          "changePct": 3.42
+          "symbol": "000333",
+          "name": "美的集团",
+          "changePct": 2.91
         },
         {
-          "symbol": "603336",
-          "name": "宏辉果蔬",
-          "changePct": 2.98
+          "symbol": "600941",
+          "name": "中国移动",
+          "changePct": 2.8
         },
         {
-          "symbol": "002262",
-          "name": "恩华药业",
-          "changePct": 2.35
+          "symbol": "600483",
+          "name": "福能股份",
+          "changePct": 2.55
         },
         {
-          "symbol": "000999",
-          "name": "华润三九",
-          "changePct": 1.64
+          "symbol": "600887",
+          "name": "伊利股份",
+          "changePct": 2.39
         },
         {
-          "symbol": "600285",
-          "name": "羚锐制药",
-          "changePct": 1.61
+          "symbol": "000001",
+          "name": "平安银行",
+          "changePct": 2.37
         },
         {
-          "symbol": "300012",
-          "name": "华测检测",
-          "changePct": 0.71
-        }
-      ]
-    },
-    {
-      "key": "ai",
-      "name": "人工智能",
-      "boardCode": "BK0800",
-      "boardName": "人工智能",
-      "boardChangePct": -1.78,
-      "articleHits": 1,
-      "matchedAliases": [
-        "人工智能"
-      ],
-      "constituents": [
-        {
-          "symbol": "301218",
-          "name": "华是科技",
-          "changePct": 15.31
-        },
-        {
-          "symbol": "301077",
-          "name": "星华新材",
-          "changePct": 10.43
-        },
-        {
-          "symbol": "603686",
-          "name": "福龙马",
-          "changePct": 10.03
-        },
-        {
-          "symbol": "600977",
-          "name": "中国电影",
-          "changePct": 10
-        },
-        {
-          "symbol": "600410",
-          "name": "华胜天成",
-          "changePct": 10
-        },
-        {
-          "symbol": "002425",
-          "name": "凯撒文化",
-          "changePct": 10
-        },
-        {
-          "symbol": "002819",
-          "name": "东方中科",
-          "changePct": 9.98
-        },
-        {
-          "symbol": "603636",
-          "name": "南威软件",
-          "changePct": 9.95
+          "symbol": "601825",
+          "name": "沪农商行",
+          "changePct": 2.18
         }
       ]
     },
@@ -315,6 +262,57 @@
           "symbol": "000816",
           "name": "智慧农业",
           "changePct": -0.36
+        }
+      ]
+    },
+    {
+      "key": "pharma",
+      "name": "创新药",
+      "boardCode": "BK1106",
+      "boardName": "创新药",
+      "boardChangePct": -2.7,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000766",
+          "name": "通化金马",
+          "changePct": 10
+        },
+        {
+          "symbol": "688765",
+          "name": "禾元生物-U",
+          "changePct": 8.76
+        },
+        {
+          "symbol": "300683",
+          "name": "海特生物",
+          "changePct": 3.42
+        },
+        {
+          "symbol": "603336",
+          "name": "宏辉果蔬",
+          "changePct": 2.98
+        },
+        {
+          "symbol": "002262",
+          "name": "恩华药业",
+          "changePct": 2.35
+        },
+        {
+          "symbol": "000999",
+          "name": "华润三九",
+          "changePct": 1.64
+        },
+        {
+          "symbol": "600285",
+          "name": "羚锐制药",
+          "changePct": 1.61
+        },
+        {
+          "symbol": "300012",
+          "name": "华测检测",
+          "changePct": 0.71
         }
       ]
     },
@@ -428,7 +426,99 @@
       "boardChangePct": -1.95,
       "articleHits": 0,
       "matchedAliases": [],
-      "constituents": []
+      "constituents": [
+        {
+          "symbol": "301077",
+          "name": "星华新材",
+          "changePct": 10.43
+        },
+        {
+          "symbol": "002819",
+          "name": "东方中科",
+          "changePct": 9.98
+        },
+        {
+          "symbol": "000066",
+          "name": "中国长城",
+          "changePct": 3.65
+        },
+        {
+          "symbol": "688826",
+          "name": "频准激光",
+          "changePct": 3.51
+        },
+        {
+          "symbol": "688171",
+          "name": "纬德信息",
+          "changePct": 3.3
+        },
+        {
+          "symbol": "600050",
+          "name": "中国联通",
+          "changePct": 0.95
+        },
+        {
+          "symbol": "601728",
+          "name": "中国电信",
+          "changePct": 0.91
+        },
+        {
+          "symbol": "688041",
+          "name": "海光信息",
+          "changePct": 0.46
+        }
+      ]
+    },
+    {
+      "key": "ai",
+      "name": "人工智能",
+      "boardCode": "BK0800",
+      "boardName": "人工智能",
+      "boardChangePct": -1.78,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "301218",
+          "name": "华是科技",
+          "changePct": 15.31
+        },
+        {
+          "symbol": "301077",
+          "name": "星华新材",
+          "changePct": 10.43
+        },
+        {
+          "symbol": "603686",
+          "name": "福龙马",
+          "changePct": 10.03
+        },
+        {
+          "symbol": "600977",
+          "name": "中国电影",
+          "changePct": 10
+        },
+        {
+          "symbol": "600410",
+          "name": "华胜天成",
+          "changePct": 10
+        },
+        {
+          "symbol": "002425",
+          "name": "凯撒文化",
+          "changePct": 10
+        },
+        {
+          "symbol": "002819",
+          "name": "东方中科",
+          "changePct": 9.98
+        },
+        {
+          "symbol": "603636",
+          "name": "南威软件",
+          "changePct": 9.95
+        }
+      ]
     },
     {
       "key": "bank",
@@ -590,57 +680,6 @@
           "symbol": "603198",
           "name": "迎驾贡酒",
           "changePct": 1.93
-        }
-      ]
-    },
-    {
-      "key": "brokerage",
-      "name": "券商",
-      "boardCode": "BK1685",
-      "boardName": "保险重仓",
-      "boardChangePct": -0.31,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "000802",
-          "name": "北京文化",
-          "changePct": 6.58
-        },
-        {
-          "symbol": "600066",
-          "name": "宇通客车",
-          "changePct": 3.59
-        },
-        {
-          "symbol": "000333",
-          "name": "美的集团",
-          "changePct": 2.91
-        },
-        {
-          "symbol": "600941",
-          "name": "中国移动",
-          "changePct": 2.8
-        },
-        {
-          "symbol": "600483",
-          "name": "福能股份",
-          "changePct": 2.55
-        },
-        {
-          "symbol": "600887",
-          "name": "伊利股份",
-          "changePct": 2.39
-        },
-        {
-          "symbol": "000001",
-          "name": "平安银行",
-          "changePct": 2.37
-        },
-        {
-          "symbol": "601825",
-          "name": "沪农商行",
-          "changePct": 2.18
         }
       ]
     },
