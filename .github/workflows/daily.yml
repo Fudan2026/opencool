@@ -697,6 +697,43 @@ jobs:
           node scripts/assert-reading-pages.mjs
           --dir daily_reports
 
+      # `/reactions.json` shipped only inside `build`, so it would stay
+      # unpublished for as long as no edition is due — the first post-merge run
+      # was a Saturday, the gate answered `all-published`, `build` was skipped,
+      # and the file simply never landed. An artifact that can only publish when
+      # an edition happens to build is not a reliable surface for the gap
+      # accounting it exists to carry, so its publication moves here with the
+      # reading pages and the v1 namespace.
+      #
+      # It runs HERE — after the gh-pages restore above (which brings back
+      # `tape/` and `stories.json`, the bake's only two inputs) and BEFORE the v1
+      # bake below, so the v1 manifest can re-export the file on the same run
+      # instead of a run later. The v1 worker already added
+      # `reactions.json || true` to that restore, which is what makes the
+      # re-export chain work end to end.
+      #
+      # Note this does NOT regenerate `index.html` / `archive.html` / `llms.txt`
+      # — the pages job deliberately does not run `build-site` (an index built
+      # from a partial restore would list zero editions). The catalogue picks up
+      # the new line on the next real edition build, which is fine because the
+      # file is already in the tree by then.
+      #
+      # Zero LLM, zero network, fail-open: with no tape history it writes the
+      # honest day-one payload (every horizon `pending`, every aggregate
+      # `insufficient` with counts) and exits 0.
+      - name: Bake reaction windows
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+        run: npm run reactions:bake
+
+      # The same honesty rules the bake asserts in-process, re-checked against
+      # the file that is about to publish: no distribution below MIN_SAMPLE, no
+      # return on a `pending` horizon, no excess from a cross-section under the
+      # floor. A green run publishing an unmeasurable mean is the failure mode
+      # this whole artifact has to be trusted against.
+      - name: Assert reaction windows are honest
+        run: node scripts/assert-reactions.mjs
+
       # The versioned /v1 namespace + /integrity.html. This job is the one that
       # GUARANTEES publication: the same steps also live in `build`, but `build`
       # is skipped whenever no edition is due — which is most of the day and all
