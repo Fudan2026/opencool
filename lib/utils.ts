@@ -12,7 +12,66 @@ export function getReportTz(): string | undefined {
   return process.env.REPORT_TZ?.trim() || undefined;
 }
 
+const DATE_KEY_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+/** True only for a real calendar date written as `YYYY-MM-DD`. */
+export function isValidDateKey(value: unknown): value is string {
+  if (typeof value !== "string" || !DATE_KEY_RE.test(value)) return false;
+  const [y, m, d] = value.split("-").map(Number);
+  const probe = new Date(Date.UTC(y, m - 1, d));
+  return (
+    probe.getUTCFullYear() === y &&
+    probe.getUTCMonth() === m - 1 &&
+    probe.getUTCDate() === d
+  );
+}
+
+/**
+ * Resolve the edition date key.
+ *
+ * `EDITION_DATE` (validated `YYYY-MM-DD`) lets the Actions gate backfill a
+ * PAST edition — the pipeline could never build one before, because
+ * `todayKey()` only ever answered "now". It is deliberately narrow:
+ *
+ *   - unset / empty  → plain timezone-local today (the normal path, untouched);
+ *   - malformed or impossible (2026-13-01, 2026-02-30, "tomorrow") → THROW.
+ *     Silently falling back to today would publish yesterday's date folder
+ *     under today's name, which is exactly the drift this exists to avoid;
+ *   - a date in the future → THROW. There is no such edition to backfill.
+ *
+ * `today` here is the caller's civil date in REPORT_TZ, so the comparison
+ * stays consistent with the gate's clock rather than the runner's UTC.
+ */
+export function resolveEditionDate(
+  today: string,
+  raw: string | undefined = process.env.EDITION_DATE,
+): string {
+  const override = raw?.trim();
+  if (!override) return today;
+  if (!isValidDateKey(override)) {
+    throw new Error(
+      `EDITION_DATE must be a real YYYY-MM-DD date, got "${raw}" — refusing to publish`,
+    );
+  }
+  if (override > today) {
+    throw new Error(
+      `EDITION_DATE ${override} is in the future (today is ${today}) — refusing to publish`,
+    );
+  }
+  return override;
+}
+
+/** `EDITION_DATE`-aware date key: the backfill override when set, else today. */
 export function todayKey(d: Date = new Date()): string {
+  return resolveEditionDate(naturalTodayKey(d));
+}
+
+/**
+ * The un-overridden civil date in REPORT_TZ — what `todayKey()` would return
+ * with `EDITION_DATE` unset. `daily.ts` uses it to tell a genuine edition
+ * from a backfill (which fetches *now* for a past date folder).
+ */
+export function naturalTodayKey(d: Date = new Date()): string {
   const fmt = new Intl.DateTimeFormat("en-CA", {
     timeZone: getReportTz(),
     year: "numeric",

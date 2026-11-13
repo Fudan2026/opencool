@@ -45,7 +45,7 @@ sources.config.json   # SINGLE SOURCE OF TRUTH for the source registry
 
 2. **LLM calls go through `lib/ai/llm.ts` `runLlm()`.** Five backends behind `LLM_BACKEND` env var: `claude-cli` (default), `anthropic`, `openai`, `deepseek`, `minimax`. Never import a specific backend directly — that defeats the switch.
 
-3. **Date keying uses `lib/utils.ts` `todayKey()`.** Honors `REPORT_TZ` env var; defaults to system local TZ. Don't hardcode `Asia/Shanghai` or `UTC` anywhere.
+3. **Date keying uses `lib/utils.ts` `todayKey()`.** Honors `REPORT_TZ` env var; defaults to system local TZ. Don't hardcode `Asia/Shanghai` or `UTC` anywhere. `EDITION_DATE` (`YYYY-MM-DD`, validated — malformed or future dates throw) overrides it **only** so the Actions gate can backfill a past slot; leave it unset for every normal run.
 
 4. **Theme customization via `themes.custom.json`** (optional): user entries merge with `lib/themes/catalog.ts` `loadThemeCatalog()` — new keys append, same-key entries replace built-ins; invalid shape throws loudly. Never hardcode user themes in TS. The file is optional and ignored when absent; `THEMES_EXTRA_FILE` can override the path.
 

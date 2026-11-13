@@ -137,6 +137,26 @@ test("golden: report page structure", async (t) => {
   });
 });
 
+test("golden: backfilled edition is labelled, normal edition is not", async (t) => {
+  const opts = { editionHour: "19", siblingHours: ["06", "13", "19"] };
+  const normal = renderHtml(reportFixture(), rawNews(), "2026-11-11", opts);
+  const backfill = renderHtml(reportFixture(), rawNews(), "2026-11-11", {
+    ...opts,
+    backfilled: true,
+  });
+
+  await t.test("a normal edition carries no backfill badge", () => {
+    // The token also appears in the inlined stylesheet, so assert on the
+    // badge markup, not the bare class name.
+    assert.ok(!normal.includes('class="ed-badge ed-backfill"'));
+  });
+
+  await t.test("a backfilled edition is visibly marked", () => {
+    assert.ok(backfill.includes('class="ed-badge ed-backfill"'));
+    assert.ok(backfill.includes("补发"));
+  });
+});
+
 /**
  * Backward compatibility: an OLD sidecar-shaped report (no sentiment,
  * no morning_brief, no quant/trading — pre-wave-2 shape) must render

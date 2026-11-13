@@ -51,6 +51,7 @@ const TEXTS_ZH = {
   editionNoon: "午报",
   editionEvening: "晚报",
   editionGeneric: "简报",
+  backfillBadge: "补发",
   catTech: "技术动态",
   catFinance: "中文财经",
   catPolitics: "时政观察",
@@ -146,6 +147,7 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   editionNoon: "Noon",
   editionEvening: "Evening",
   editionGeneric: "Brief",
+  backfillBadge: "Backfill",
   catTech: "Tech",
   catFinance: "CN Finance",
   catPolitics: "World",
@@ -1003,6 +1005,11 @@ export type RenderHtmlOptions = {
   editionHour?: string;
   siblingHours?: string[];
   sentimentContext?: SentimentPanelContext;
+  /**
+   * This edition is a catch-up build for a past date: the articles in it were
+   * fetched NOW, not on that date. Marking it keeps the archive honest.
+   */
+  backfilled?: boolean;
 };
 
 function editionLabelFor(hour?: string): string {
@@ -1140,6 +1147,11 @@ export function renderHtml(
     </div>
     <div class="hero-meta">
       <span class="ed-badge">${editionLabel}</span>
+      ${
+        opts.backfilled
+          ? `<span class="ed-badge ed-backfill" title="${escapeHtml(STR.backfillBadge)}">${escapeHtml(STR.backfillBadge)}</span>`
+          : ""
+      }
       <span class="hero-date">${date}${editionHour ? ` · ${editionHour}:00` : ""} · ${tz}</span>
     </div>
     ${
@@ -1256,6 +1268,11 @@ export function renderHtml(
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.04em;
+  }
+  .ed-badge.ed-backfill {
+    background: transparent;
+    color: var(--muted);
+    border: 1px dashed var(--muted);
   }
   .hero-date { color: var(--muted); font-size: 0.86rem; }
   .hero-headline {

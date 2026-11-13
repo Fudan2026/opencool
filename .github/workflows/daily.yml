@@ -24,9 +24,15 @@ name: Daily Brief
 # Archive listing norm starts 2026-09-16 (06 + 13 + 19).
 
 on:
+  # Every 15 minutes instead of twice an hour. GitHub silently drops
+  # scheduled triggers under load; with only two chances an hour a drop cost
+  # the whole edition (11-04, 11-09, 11-11 lost 19 entirely; several landed
+  # 2-5h late). Each tick is a cheap no-op when everything is published.
+  #
+  # Offsets 4/19/34/49 avoid the top-of-hour crush where drops cluster the
+  # most (every other repo's cron fires at :00).
   schedule:
-    - cron: '7 * * * *'
-    - cron: '37 * * * *'
+    - cron: '4,19,34,49 * * * *'
   # Owner directive: a merge to main goes live. Publishing uses
   # peaceiris/actions-gh-pages, which pushes to the gh-pages branch — not
   # main — so `branches: [main]` cannot self-trigger this workflow. (Pushes
@@ -38,144 +44,52 @@ on:
 
 permissions:
   contents: write
+  # The gate's in-flight guard reads workflow runs/jobs to avoid stacking a
+  # second build (and thrashing a slow one via cancel-in-progress). Without
+  # this scope that API returns 403 and the guard fails open.
+  actions: read
 
 # NOTE: no workflow-level concurrency — a hung build must never queue-block
-# the 7s gate runs. The build job carries its own concurrency group below.
+# the cheap gate runs. The build job carries its own concurrency group below.
 
 jobs:
   gate:
     name: Time gate
     runs-on: ubuntu-latest
+    # Cheap by construction: a sparse checkout of one file, no setup-node, no
+    # npm ci, no build. A tick is job startup plus a handful of Contents API
+    # probes — billed as ~1 runner-minute, and this repo is public, where
+    # standard GitHub-hosted runners don't consume the paid minute quota.
+    timeout-minutes: 5
     outputs:
       should-run: ${{ steps.check.outputs.should-run }}
       edition-hour: ${{ steps.check.outputs.edition-hour }}
       edition-date: ${{ steps.check.outputs.edition-date }}
+      backfill: ${{ steps.check.outputs.backfill }}
     steps:
+      - name: Checkout gate script
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/gate.mjs
+          sparse-checkout-cone-mode: false
+
       - name: Check schedule
         id: check
         env:
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
           REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,13,19' }}
           REPORT_DAYS: ${{ vars.REPORT_DAYS }}
-          EVENT_NAME: ${{ github.event_name }}
+          # How many past days to rescan for a missing sidecar. 1 covers the
+          # midnight rollover this gate exists to fix. Raise it deliberately
+          # to heal a longer outage — but note a backfill re-fetches the feeds
+          # now, so a slot recovered N days late files current news under an
+          # older date. Each extra day costs 3 more API probes per tick.
+          REPORT_LOOKBACK_DAYS: ${{ vars.REPORT_LOOKBACK_DAYS || '1' }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
+        run: node scripts/gate.mjs
 
-          TZ_VAL="${REPORT_TZ:-Asia/Shanghai}"
-          HOURS_VAL="${REPORT_HOUR:-6,13,19}"
-          DAYS_VAL="${REPORT_DAYS:-*}"
-
-          NOW_HOUR=$(TZ="$TZ_VAL" date +%-H)
-          NOW_DOW=$(TZ="$TZ_VAL" date +%w)
-          TODAY=$(TZ="$TZ_VAL" date +%Y-%m-%d)
-          NOW_PRINT=$(TZ="$TZ_VAL" date '+%Y-%m-%d %H:%M %Z')
-
-          echo "Now in $TZ_VAL: $NOW_PRINT (hour=$NOW_HOUR, dow=$NOW_DOW)"
-          echo "Configured REPORT_HOUR='$HOURS_VAL', REPORT_DAYS='$DAYS_VAL'"
-
-          IFS=',' read -ra HLIST <<< "$HOURS_VAL"
-
-          pad2() {
-            printf '%02d' "$1"
-          }
-
-          # Manual dispatch and merge-to-main pushes publish right away: pick
-          # the latest slot already due today, or the first slot when the
-          # event lands before all of them. Scheduled runs keep the exact-hour
-          # and catchup paths below untouched.
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] || [ "$EVENT_NAME" = "push" ]; then
-            chosen="${HLIST[0]// /}"
-            for h in "${HLIST[@]}"; do
-              h_trim="${h// /}"
-              if [ "$NOW_HOUR" -ge "$h_trim" ]; then
-                chosen="$h_trim"
-              fi
-            done
-            SLOT=$(pad2 "$chosen")
-            echo "Event '$EVENT_NAME' — latest due edition slot $SLOT"
-            echo "should-run=true" >> "$GITHUB_OUTPUT"
-            echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
-            echo "edition-date=$TODAY" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          day_match=false
-          if [ "$DAYS_VAL" = "*" ]; then
-            day_match=true
-          else
-            IFS=',' read -ra DLIST <<< "$DAYS_VAL"
-            for d in "${DLIST[@]}"; do
-              d_trim="${d// /}"
-              if [[ "$d_trim" == *-* ]]; then
-                start="${d_trim%-*}"
-                end="${d_trim#*-}"
-                if [ "$NOW_DOW" -ge "$start" ] && [ "$NOW_DOW" -le "$end" ]; then
-                  day_match=true
-                  break
-                fi
-              else
-                if [ "$NOW_DOW" = "$d_trim" ]; then
-                  day_match=true
-                  break
-                fi
-              fi
-            done
-          fi
-
-          if [ "$day_match" != "true" ]; then
-            echo "✗ Day filter miss"
-            echo "should-run=false" >> "$GITHUB_OUTPUT"
-            echo "edition-hour=" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          # Exact hour match → that slot
-          for h in "${HLIST[@]}"; do
-            h_trim="${h// /}"
-            if [ "$NOW_HOUR" = "$h_trim" ]; then
-              SLOT=$(pad2 "$h_trim")
-              echo "✓ Exact hour match — slot $SLOT"
-              echo "should-run=true" >> "$GITHUB_OUTPUT"
-              echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
-            echo "edition-date=$TODAY" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-          done
-
-          # Catchup: earliest due slot still missing on gh-pages.
-          # Check the JSON sidecar, NOT the HTML: build-site publishes a
-          # friendly placeholder <slot>.html for future slots, so HTML
-          # existence can't distinguish a real edition from a placeholder.
-          # Real editions always write <slot>.json; placeholders never do.
-          for h in "${HLIST[@]}"; do
-            h_trim="${h// /}"
-            if [ "$NOW_HOUR" -lt "$h_trim" ]; then
-              continue
-            fi
-            SLOT=$(pad2 "$h_trim")
-            CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/${TODAY}/${SLOT}.json?ref=gh-pages"
-            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
-              -H "Authorization: Bearer ${GH_TOKEN}" \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2022-11-28" \
-              "$CHECK_URL" || echo "000")
-            # Anything other than a clean 200 (404 missing, 403/429 rate
-            # limit, 000 network flake) → rebuild. A redundant build is
-            # bounded and harmless; a silently skipped edition is not.
-            if [ "$HTTP_CODE" != "200" ]; then
-              echo "↻ Catchup: ${TODAY}/${SLOT}.json not confirmed (HTTP $HTTP_CODE) — recovering"
-              echo "should-run=true" >> "$GITHUB_OUTPUT"
-              echo "edition-hour=$SLOT" >> "$GITHUB_OUTPUT"
-            echo "edition-date=$TODAY" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-            echo "Slot $SLOT published (HTTP $HTTP_CODE)"
-          done
-
-          echo "✗ No match / nothing to catch up"
-          echo "should-run=false" >> "$GITHUB_OUTPUT"
-          echo "edition-hour=" >> "$GITHUB_OUTPUT"
 
   build:
     name: Build & publish
@@ -187,8 +101,9 @@ jobs:
     # before it can starve later editions.
     timeout-minutes: 25
     # Job-level group: overlapping builds queue/cancel here only — gates
-    # always run. A newer dispatch cancels a hung older build; the missing
-    # slot is then recovered by the next hourly catchup.
+    # always run. A newer dispatch cancels a hung older build; the gate's
+    # in-flight guard means a slow build is not restarted on every tick, and
+    # the missing slot is recovered by the next scheduled catchup.
     concurrency:
       group: daily-brief-build
       cancel-in-progress: true
@@ -249,6 +164,11 @@ jobs:
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
           REPORT_HOUR: ${{ vars.REPORT_HOUR || '6,13,19' }}
           EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
+          # Both outputs are always set by the gate; when the gate picked a
+          # past date this is the only way the pipeline can write that
+          # folder at all (todayKey() honours it, and rejects anything that
+          # is not a real YYYY-MM-DD / not in the future).
+          EDITION_DATE: ${{ needs.gate.outputs.edition-date }}
           DISABLE_SOURCE_IDS: ${{ vars.DISABLE_SOURCE_IDS || 'linuxdo' }}
           DAILYHOT_API_BASE: ${{ vars.DAILYHOT_API_BASE }}
           WEB_MODE: 'true'
@@ -280,6 +200,7 @@ jobs:
         env:
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          EDITION_DATE: ${{ needs.gate.outputs.edition-date }}
           EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
         run: node scripts/notify-failure.mjs --missing-html
 
@@ -290,7 +211,7 @@ jobs:
           publish_dir: ./daily_reports
           publish_branch: gh-pages
           keep_files: false
-          commit_message: 'brief: ${{ needs.gate.outputs.edition-hour }} for ${{ github.run_id }}'
+          commit_message: 'brief: ${{ needs.gate.outputs.edition-date }}/${{ needs.gate.outputs.edition-hour }} for ${{ github.run_id }}'
 
       - name: Push new edition (opt-in)
         if: success()
@@ -310,5 +231,6 @@ jobs:
         env:
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL || vars.ALERT_WEBHOOK_URL }}
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          EDITION_DATE: ${{ needs.gate.outputs.edition-date }}
           EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
         run: node scripts/notify-failure.mjs --failure --reason "build job failed"

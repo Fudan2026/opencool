@@ -36,7 +36,9 @@ docker run --rm -v "$PWD/daily_reports:/app/daily_reports" opencool:local
 |---|---|---|
 | `LLM_MODE` | `off` | 保持零 AI；如需 LLM 另配后端和 key |
 | `REPORT_TZ` | `Asia/Shanghai` | 档期时区 |
-| `REPORT_HOUR` | `6,13,19` | 每日档期小时 |
+| `REPORT_HOUR` | `6,13,19` | 每日期次小时 |
+| `REPORT_LOOKBACK_DAYS` | `1` | 门控回看天数（跨零点补发漏掉的期次） |
+| `EDITION_DATE` | 未设 | `YYYY-MM-DD`，仅供门控补发历史档期；格式非法或未来日期会直接报错 |
 | `REPORT_LOCALE` | `zh` | 界面语言（zh/en） |
 | `LOOP_MINUTES` | `30` | 调度检查间隔（分钟） |
 | `DAILY_ONCE` | 未设 | 设 `1` 时只评估一次并退出（冒烟测试） |

@@ -79,7 +79,7 @@ async function main() {
   const base = path.join(dateDir, hour);
   fs.writeFileSync(
     `${base}.html`,
-    renderHtml(report, raw, date, { editionHour: hour, siblingHours }),
+    renderHtml(report, raw, date, { editionHour: hour, siblingHours, backfilled: report.backfilled }),
     "utf8",
   );
   if (process.env.OUTPUT_MARKDOWN === "true") {
