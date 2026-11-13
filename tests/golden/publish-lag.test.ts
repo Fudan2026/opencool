@@ -19,9 +19,11 @@ import {
   formatLagLine,
   isBackfilledSidecar,
   minutesBetween,
+  readSidecarGeneratedAt,
   resolvePublishedAt,
   zonedWallToInstant,
 } from "../../scripts/assert-publish-lag.mjs";
+import { judgeSidecarFreshness, PREMATURE_TOLERANCE_MIN } from "../../scripts/gate.mjs";
 
 const SH = "Asia/Shanghai";
 
@@ -300,6 +302,158 @@ test("publish-lag: publishing EARLY is a breach, not a republish", async (t) => 
   });
 });
 
+test("publish-lag: the gate and this assert agree on what PREMATURE means", async (t) => {
+  /**
+   * Two thresholds, one definition. The gate judges the FILE it finds (its own
+   * `generated_at`, tolerance PREMATURE_TOLERANCE_MIN = 2m) because a stale file
+   * silently blocks the real slot; this assert judges the PUBLISH instant
+   * (limit 20m). They must never disagree in the harmful direction: publishing
+   * always follows generating, so a publish-instant breach is always a gate
+   * breach too.
+   */
+  const date = "2026-11-14";
+  const hour = "06";
+
+  await t.test("both use the gate's freshness verdict for generated_at", () => {
+    const stale = evaluatePublishLag({
+      date,
+      hour,
+      tz: SH,
+      // Publish instant looks fine (06:01 SH) but the FILE is the 02:26 one.
+      publishedAt: new Date("2026-11-13T22:01:00Z"),
+      alreadyPublished: true,
+      trigger: "push",
+      generatedAt: "2026-11-13T18:26:22.326Z",
+    });
+    assert.equal(stale.freshness, "premature");
+    assert.equal(stale.premature, true);
+    assert.equal(stale.ok, false, "a stale file must breach even when the publish looked on time");
+    assert.match(stale.verdict, /sidecar fetched 214m before its slot/);
+  });
+
+  await t.test("an honest file and an on-time publish are both green", () => {
+    const r = evaluatePublishLag({
+      date,
+      hour,
+      tz: SH,
+      publishedAt: new Date("2026-11-13T22:04:00Z"),
+      trigger: "exact",
+      generatedAt: "2026-11-13T22:02:30Z",
+    });
+    assert.equal(r.freshness, "honest");
+    assert.equal(r.ok, true);
+  });
+
+  await t.test("an absent/unreadable generated_at never breaches (frozen archive)", () => {
+    for (const generatedAt of [null, undefined, "", "garbage"]) {
+      const r = evaluatePublishLag({
+        date,
+        hour,
+        tz: SH,
+        publishedAt: new Date("2026-11-13T22:04:00Z"),
+        trigger: "exact",
+        generatedAt: generatedAt as string | null,
+      });
+      assert.equal(r.freshness, "unknown");
+      assert.equal(r.ok, true);
+      assert.equal(r.premature, false);
+    }
+  });
+
+  await t.test("every publish-instant breach is ALSO a gate breach (dominance)", () => {
+    // Publishing follows generating: generated_at <= publishedAt, so a publish
+    // more than the assert's limit early is always a file the stricter gate
+    // rejects. The converse does NOT hold by design — the gate flags 3m early,
+    // the assert does not — which is the safe direction.
+    const slot = Date.parse("2026-11-13T22:00:00Z"); // 2026-11-14 06:00 SH
+    for (const earlyMin of [21, 25, 213, 600]) {
+      const publishedAt = new Date(slot - earlyMin * 60_000);
+      const lag = evaluatePublishLag({ date, hour, tz: SH, publishedAt, trigger: "push" });
+      assert.equal(lag.premature, true, `${earlyMin}m early must breach here`);
+      const gate = judgeSidecarFreshness({
+        generatedAt: publishedAt.toISOString(),
+        date,
+        slot: hour,
+      });
+      assert.equal(gate.verdict, "premature", `${earlyMin}m early must breach at the gate`);
+    }
+
+    // The gate's extra strictness, shown explicitly: 3m early is a rebuild for
+    // the gate and still an acceptable publish lag for the assert.
+    const threeEarly = new Date(slot - 3 * 60_000);
+    assert.equal(judgeSidecarFreshness({ generatedAt: threeEarly.toISOString(), date, slot: hour }).verdict, "premature");
+    assert.equal(
+      evaluatePublishLag({ date, hour, tz: SH, publishedAt: threeEarly, trigger: "push" }).premature,
+      false,
+    );
+  });
+
+  await t.test("the documented thresholds are 2m (gate) and 20m (assert)", () => {
+    assert.equal(PREMATURE_TOLERANCE_MIN, 2);
+    assert.equal(DEFAULT_LAG_LIMIT_MIN, 20);
+    // The gate is the stricter one, on purpose: a stale file blocks a slot.
+    assert.ok(PREMATURE_TOLERANCE_MIN < DEFAULT_LAG_LIMIT_MIN);
+  });
+
+  await t.test("a rebuild caused by a premature predecessor is judged as a first publish", () => {
+    // The gate reason for this run is `premature`: the file it found was
+    // premature, so the slot was NOT met earlier and this is its first honest
+    // publish. It must not be laundered as "REPUBLISH — slot was met earlier",
+    // and lateness must still count against it.
+    const onTime = evaluatePublishLag({
+      date,
+      hour,
+      tz: SH,
+      publishedAt: new Date("2026-11-13T22:04:00Z"),
+      alreadyPublished: true,
+      trigger: "premature",
+      generatedAt: "2026-11-13T22:02:30Z",
+    });
+    assert.equal(onTime.ok, true);
+    assert.match(onTime.verdict, /slot was not met earlier/);
+    assert.equal(onTime.verdict.includes("REPUBLISH"), false);
+
+    const lateRebuild = evaluatePublishLag({
+      date,
+      hour,
+      tz: SH,
+      publishedAt: new Date("2026-11-13T22:40:00Z"), // 40m after the slot
+      alreadyPublished: true,
+      trigger: "premature",
+      generatedAt: "2026-11-13T22:39:30Z",
+    });
+    assert.equal(lateRebuild.ok, false, "a late rebuild is still late");
+    assert.match(lateRebuild.verdict, /never honestly met/);
+
+    // An ordinary republish keeps the old wording.
+    const ordinary = evaluatePublishLag({
+      date,
+      hour,
+      tz: SH,
+      publishedAt: new Date("2026-11-13T22:40:00Z"),
+      alreadyPublished: true,
+      trigger: "catchup",
+      generatedAt: "2026-11-13T22:39:30Z",
+    });
+    assert.match(ordinary.verdict, /REPUBLISH/);
+    assert.equal(ordinary.ok, true);
+  });
+
+  await t.test("a backfilled (补发) edition stays green in both readings", () => {
+    const r = evaluatePublishLag({
+      date,
+      hour,
+      tz: SH,
+      publishedAt: new Date("2026-11-13T18:27:00Z"),
+      backfilled: true,
+      generatedAt: "2026-11-13T18:26:22.326Z",
+    });
+    assert.equal(r.ok, true);
+    assert.equal(r.premature, false);
+    assert.match(r.verdict, /BACKFILL/);
+  });
+});
+
 test("publish-lag: the single log line carries every field", () => {
   const r = evaluatePublishLag({
     date: "2026-11-13",
@@ -358,6 +512,32 @@ test("publish-lag: sidecar 补发 flag is read from the written edition", async 
     await t.test("unparseable sidecar does not crash the check", () => {
       fs.writeFileSync(path.join(dir, "2026-11-13", "06.json"), "{not json");
       assert.equal(isBackfilledSidecar("2026-11-13", "06", dir), false);
+    });
+
+    await t.test("readSidecarGeneratedAt reads the written fetch instant", () => {
+      fs.writeFileSync(
+        path.join(dir, "2026-11-13", "06.json"),
+        JSON.stringify({ fetch_health: { generated_at: "2026-11-12T22:04:11.086Z" } }),
+      );
+      assert.equal(
+        readSidecarGeneratedAt("2026-11-13", "06", dir),
+        "2026-11-12T22:04:11.086Z",
+      );
+    });
+
+    await t.test("readSidecarGeneratedAt is null when it cannot tell", () => {
+      // Missing file, no fetch_health, a non-string value, unparseable JSON:
+      // all mean "unknown", which the assert treats as not-premature.
+      assert.equal(readSidecarGeneratedAt("2026-11-13", "19", dir), null);
+      fs.writeFileSync(path.join(dir, "2026-11-13", "06.json"), JSON.stringify({ a: 1 }));
+      assert.equal(readSidecarGeneratedAt("2026-11-13", "06", dir), null);
+      fs.writeFileSync(
+        path.join(dir, "2026-11-13", "06.json"),
+        JSON.stringify({ fetch_health: { generated_at: 42 } }),
+      );
+      assert.equal(readSidecarGeneratedAt("2026-11-13", "06", dir), null);
+      fs.writeFileSync(path.join(dir, "2026-11-13", "06.json"), "{not json");
+      assert.equal(readSidecarGeneratedAt("2026-11-13", "06", dir), null);
     });
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });

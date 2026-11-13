@@ -18,6 +18,22 @@
  *   - workflow_dispatch and push publish the latest due slot right away.
  *
  * New here:
+ *   - a 200 is not enough: the sidecar must also be HONEST about when it was
+ *     fetched. `fetch_health.generated_at` — the instant that edition actually
+ *     pulled the feeds — must land at or after its own slot's due instant
+ *     (`date` + `hour` in REPORT_TZ), within PREMATURE_TOLERANCE_MIN of clock
+ *     skew. A file that exists but was fetched BEFORE its slot is PREMATURE:
+ *     it describes earlier market data under a later label, and treating it as
+ *     met meant the real slot never ran. That is not hypothetical: run
+ *     43481490148 published `2026-11-14/06.json` with
+ *     `generated_at=2026-11-13T18:26:22Z` at 02:26 SH, 3h34m early, and every
+ *     later 06:00 tick answered "all-published" (#56 fixed which slot that run
+ *     chose; it could not un-publish the file). A premature verdict is reason
+ *     `premature` and rebuilds the slot. Unreadable/unparseable generated_at →
+ *     treated as published: a probe we cannot interpret must never rewrite the
+ *     archive. The lookback window still bounds which past dates are rescanned.
+ *
+ * Not new, still true:
  *   - the scan walks a REPORT_LOOKBACK_DAYS window oldest→newest and returns
  *     the OLDEST missing due slot (emitting edition-date AND edition-hour), so
  *     a rollover can no longer strand a slot permanently;
@@ -42,6 +58,17 @@ const DEFAULT_HOURS = [6, 13, 19];
  */
 const DEFAULT_LOOKBACK_DAYS = 1;
 const CONTENT_REF = "gh-pages";
+const DEFAULT_TZ = "Asia/Shanghai";
+
+/**
+ * Clock skew allowed between a sidecar's own `fetch_health.generated_at` and
+ * its slot's due instant. Two minutes: enough for a build that starts a few
+ * seconds before the hour (scheduler jitter, a gate tick landing at 05:59:58)
+ * to be honest, far too little for a 3h34m early file to pass (run
+ * 43481490148). Anything generated earlier than `due - tolerance` is
+ * PREMATURE and gets rebuilt.
+ */
+export const PREMATURE_TOLERANCE_MIN = 2;
 
 /**
  * Tape capture slots — half-hourly during the two A-share sessions, Shanghai,
@@ -145,18 +172,138 @@ export function civilNow(now, tz) {
 }
 
 /**
+ * Wall clock for an instant in `tz`, seconds included — the precision needed
+ * to compare a sidecar's `generated_at` against a slot's nominal minute.
+ */
+function civilInstant(instant, tz) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(instant);
+  const p = {};
+  for (const part of parts) p[part.type] = part.value;
+  return {
+    date: `${p.year}-${p.month}-${p.day}`,
+    hour: Number(p.hour),
+    minute: Number(p.minute),
+    second: Number(p.second),
+  };
+}
+
+/** A civil wall clock as a monotonic minute counter (no timezone math). */
+function civilMinuteIndex(dateKey, hour, minute) {
+  const [y, m, d] = String(dateKey).split("-").map(Number);
+  if (!Number.isFinite(y) || !Number.isFinite(m) || !Number.isFinite(d)) return NaN;
+  return Math.floor(Date.UTC(y, m - 1, d) / 60_000) + hour * 60 + minute;
+}
+
+/** `2026-11-14 06:00` — the slot instant as a reader would say it. */
+export function slotLabel(dateKey, slot, tz = DEFAULT_TZ) {
+  return `${dateKey} ${pad2(slot)}:00 ${tz}`;
+}
+
+/**
+ * Is this sidecar HONEST about its slot?
+ *
+ * A sidecar is published only when it exists AND its own
+ * `fetch_health.generated_at` — the instant that edition actually pulled the
+ * feeds — lands at or after its slot's due wall clock, within
+ * PREMATURE_TOLERANCE_MIN of clock skew. Both instants are compared as wall
+ * clocks in REPORT_TZ, so no offset arithmetic is involved and the rule is
+ * DST-safe.
+ *
+ * Verdicts:
+ *   - `honest`    generated at/after the slot (or inside the tolerance);
+ *   - `premature` generated BEFORE the slot — the file describes earlier
+ *                 market data under a later label, and treating it as met is
+ *                 what made a 02:26 publish block the real 06:00 edition;
+ *   - `unknown`   no generated_at, or it cannot be parsed. Treated as
+ *                 published: a probe we cannot interpret must never rewrite
+ *                 the archive.
+ *
+ * The caller decides what an `unknown`/`premature` verdict means for its date;
+ * this function only judges one file against its own slot.
+ *
+ * @param {{generatedAt?: string|null, date: string, slot: string,
+ *   tz?: string, toleranceMin?: number}} input
+ * @returns {{verdict: "honest"|"premature"|"unknown", honest: boolean,
+ *   generatedAt: string|null, generatedSh: string|null, dueSh: string,
+ *   earlyMinutes: number|null}}
+ */
+export function judgeSidecarFreshness({
+  generatedAt,
+  date,
+  slot,
+  tz = DEFAULT_TZ,
+  toleranceMin = PREMATURE_TOLERANCE_MIN,
+}) {
+  const raw = typeof generatedAt === "string" ? generatedAt.trim() : "";
+  const dueSh = slotLabel(date, slot, tz);
+  const base = {
+    generatedAt: raw || null,
+    generatedSh: null,
+    dueSh,
+    earlyMinutes: null,
+  };
+  if (!raw) return { ...base, verdict: "unknown", honest: true };
+
+  const instant = new Date(raw);
+  if (Number.isNaN(instant.getTime())) return { ...base, verdict: "unknown", honest: true };
+
+  const civil = civilInstant(instant, tz);
+  const generatedIndex = civilMinuteIndex(civil.date, civil.hour, civil.minute);
+  const dueIndex = civilMinuteIndex(date, Number(slot), 0);
+  if (!Number.isFinite(generatedIndex) || !Number.isFinite(dueIndex)) {
+    return { ...base, verdict: "unknown", honest: true };
+  }
+
+  // Signed minutes from the sidecar's fetch instant to its slot (negative =
+  // fetched before the slot). Seconds are kept so a 05:59:50 fetch reads as
+  // 0.17m early rather than a suspicious 1m.
+  const earlyMinutes = (dueIndex * 60 - (generatedIndex * 60 + civil.second)) / 60;
+  const tolerance = Math.max(0, Number(toleranceMin) || 0);
+  const honest = earlyMinutes <= tolerance;
+  return {
+    ...base,
+    generatedSh: `${civil.date} ${pad2(civil.hour)}:${pad2(civil.minute)} ${tz}`,
+    earlyMinutes,
+    verdict: honest ? "honest" : "premature",
+    honest,
+  };
+}
+
+/**
  * Core decision. Pure apart from the injected `probe(date, slot)`, which
- * returns an HTTP status (anything but 200 counts as missing).
+ * returns an HTTP status (anything but 200 counts as missing) or, when the
+ * probe can read the file, `{status, generatedAt}` so the honesty rule above
+ * can be applied.
  *
  * Scans [today - lookbackDays … today], oldest date first and, inside a date,
  * lowest slot first, and returns the first missing due slot. That is the
  * OLDEST missing slot, which is what makes a cross-midnight recovery possible.
  *
  * @returns {Promise<{shouldRun: boolean, date: string, hour: string,
- *   reason: "exact"|"catchup"|"backfill"|"all-published",
- *   checks: Array<{date: string, slot: string, status: number|null, skipped?: string}>}>}
+ *   reason: "exact"|"catchup"|"backfill"|"premature"|"all-published",
+ *   dueSh?: string,
+ *   checks: Array<{date: string, slot: string, status: number|null, skipped?: string,
+ *     premature?: boolean, generatedAt?: string|null, generatedSh?: string|null,
+ *     earlyMinutes?: number|null}>}>}
  */
-export async function decideEdition({ now, hours, lookbackDays, daysSpec, probe }) {
+export async function decideEdition({
+  now,
+  hours,
+  lookbackDays,
+  daysSpec,
+  probe,
+  tz = DEFAULT_TZ,
+  toleranceMin = PREMATURE_TOLERANCE_MIN,
+}) {
   const checks = [];
   const span = Math.max(0, Math.trunc(Number(lookbackDays) || 0));
   const earliest = addDays(now.date, -span);
@@ -167,18 +314,66 @@ export async function decideEdition({ now, hours, lookbackDays, daysSpec, probe 
       continue;
     }
     for (const slot of dueSlots(now, cursor, hours)) {
-      let status;
+      let probed;
       try {
-        status = await probe(cursor, slot);
+        probed = await probe(cursor, slot);
       } catch {
-        status = 0;
+        probed = 0;
       }
-      if (typeof status !== "number") status = 0;
-      checks.push({ date: cursor, slot, status });
+      // A probe may answer with a bare status (the tape-style contract) or,
+      // when it could read the file, `{status, generatedAt}` so the honesty
+      // rule can see when that edition was actually fetched.
+      const status =
+        typeof probed === "number"
+          ? probed
+          : typeof probed?.status === "number"
+            ? probed.status
+            : 0;
+      const generatedAt =
+        typeof probed === "object" && probed !== null && "generatedAt" in probed
+          ? probed.generatedAt
+          : null;
+
       if (status !== 200) {
+        checks.push({ date: cursor, slot, status });
         const reason =
           cursor < now.date ? "backfill" : Number(slot) === now.hour ? "exact" : "catchup";
         return { shouldRun: true, date: cursor, hour: slot, reason, checks };
+      }
+
+      // A 200 only says a file is there. It must also be honest about its
+      // slot: `fetch_health.generated_at` at/after the due instant, within
+      // the documented clock-skew tolerance. An existing-but-premature file
+      // is treated as missing so the slot is rebuilt properly.
+      const freshness = judgeSidecarFreshness({
+        generatedAt,
+        date: cursor,
+        slot,
+        tz,
+        toleranceMin,
+      });
+      checks.push({
+        date: cursor,
+        slot,
+        status,
+        generatedAt: freshness.generatedAt,
+        generatedSh: freshness.generatedSh,
+        earlyMinutes: freshness.earlyMinutes,
+        premature: freshness.verdict === "premature",
+        freshness: freshness.verdict,
+      });
+      if (freshness.verdict === "premature") {
+        // Reason is `premature` wherever the slot sits, including a past date
+        // inside the lookback window: the file is dishonest, not merely late,
+        // and the log line must say why the slot is being rebuilt.
+        return {
+          shouldRun: true,
+          date: cursor,
+          hour: slot,
+          reason: "premature",
+          dueSh: freshness.dueSh,
+          checks,
+        };
       }
     }
   }
@@ -221,10 +416,69 @@ async function getJson(url, token, fetchImpl) {
   return { status: 200, body: await res.json().catch(() => null) };
 }
 
-/** `<date>/<slot>.json` on gh-pages → HTTP status. Network failure → 0. */
+/**
+ * `<date>/<slot>.json` on gh-pages → `{status, generatedAt}` (0 on failure).
+ *
+ * The status keeps the old 200-only rule; `generatedAt` is that sidecar's own
+ * `fetch_health.generated_at`, which is what lets the gate tell an honest
+ * publication from a file that exists but was fetched BEFORE its slot. The
+ * probe stays conservative: a body it cannot read (unparseable, oversized for
+ * the Contents API, no `fetch_health`) yields `generatedAt: null`, and the
+ * caller then treats the slot as published rather than rewriting the archive.
+ */
 export function makeContentsProbe({ repo, token, fetchImpl = fetch }) {
-  const probePath = makePathProbe({ repo, token, fetchImpl });
-  return async (date, slot) => probePath(`${date}/${slot}.json`);
+  return async (date, slot) => {
+    if (!repo || !token) return 0;
+    const relPath = `${date}/${slot}.json`;
+    const url = `${API_BASE}/repos/${repo}/contents/${relPath}?ref=${CONTENT_REF}`;
+    let res;
+    try {
+      res = await fetchImpl(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28",
+          "User-Agent": "opencool-edition-gate",
+        },
+        signal: AbortSignal.timeout(15_000),
+      });
+    } catch (e) {
+      console.warn(`[gate] probe ${relPath} failed: ${e?.message ?? e}`);
+      return 0;
+    }
+    if (res.status !== 200) return res.status;
+    const generatedAt = await readGeneratedAt(res, relPath);
+    return { status: 200, generatedAt };
+  };
+}
+
+/**
+ * `fetch_health.generated_at` out of a Contents API response, or null.
+ *
+ * Null is the "cannot tell" answer and is deliberately not an error: the gate
+ * treats it as published. Large files (>1MB, where the Contents API omits
+ * `content`) hit the same branch.
+ */
+async function readGeneratedAt(res, relPath) {
+  try {
+    const body = typeof res.json === "function" ? await res.json() : null;
+    if (!body) return null;
+    let text;
+    if (typeof body.content === "string" && body.content.length) {
+      text = Buffer.from(body.content, body.encoding === "base64" ? "base64" : "utf8").toString("utf8");
+    } else if (typeof body === "string") {
+      text = body;
+    } else {
+      return null;
+    }
+    const parsed = JSON.parse(text);
+    const raw = parsed?.fetch_health?.generated_at;
+    return typeof raw === "string" && raw.trim() ? raw.trim() : null;
+  } catch (e) {
+    console.warn(`[gate] probe ${relPath}: unreadable sidecar (${e?.message ?? e}) — treating as published`);
+    return null;
+  }
 }
 
 /**
@@ -539,11 +793,14 @@ function writeOutputs(result) {
   const summary = process.env.GITHUB_STEP_SUMMARY;
   if (summary) {
     const rows = (result.checks || [])
-      .map((c) =>
-        c.skipped
-          ? `| ${c.date} | — | skipped (${c.skipped}) |`
-          : `| ${c.date} | ${c.slot} | ${c.status === 200 ? "published" : `MISSING (HTTP ${c.status})`} |`,
-      )
+      .map((c) => {
+        if (c.skipped) return `| ${c.date} | — | skipped (${c.skipped}) |`;
+        if (c.status !== 200) return `| ${c.date} | ${c.slot} | MISSING (HTTP ${c.status}) |`;
+        if (c.premature) {
+          return `| ${c.date} | ${c.slot} | PREMATURE (generated ${c.generatedSh ?? "?"}, due ${slotLabel(c.date, c.slot)}) |`;
+        }
+        return `| ${c.date} | ${c.slot} | published${c.generatedSh ? ` (generated ${c.generatedSh})` : ""} |`;
+      })
       .join("\n");
     fs.appendFileSync(
       summary,
@@ -578,20 +835,118 @@ function writeOutputs(result) {
  * Exported so the replays in `tests/golden/gate.test.ts` drive the real decision
  * rather than a copy of it.
  */
-export async function decideTriggered({ now, hours, lookbackDays, daysSpec, probe, eventName }) {
+/**
+ * Decision for a `push` / `workflow_dispatch` event.
+ *
+ * A push or a dispatch has no slot of its own — it only means "somebody just
+ * changed something, publish what is due". So:
+ *
+ *   - a slot is already due today → publish the latest one (the historical
+ *     behaviour, and the reason a merge goes live);
+ *   - NOTHING is due yet (`latestDueSlot` → null, i.e. before `hours[0]`) →
+ *     fall through to the catchup scan instead of publishing the day's first
+ *     slot early. That fall-through still heals a genuinely missing past slot;
+ *     at 02:25 with everything published it yields `should-run=false`.
+ *
+ * Returning early with `hours[0]` here is what published `2026-11-14/06.json`
+ * at 02:26 SH (run 43481490148) and permanently blocked the real 06:00 edition.
+ *
+ * When a due slot IS chosen, one extra probe classifies WHY: if the file on
+ * gh-pages for that slot is premature, the reason says `premature` (the run
+ * then rebuilds a slot that was never honestly met). The DECISION is identical
+ * either way — a push with a due slot always publishes — so a flaky probe can
+ * only mislabel the reason, never suppress or delay the publish.
+ *
+ * Exported so the replays in `tests/golden/gate.test.ts` drive the real decision
+ * rather than a copy of it.
+ */
+export async function decideTriggered({
+  now,
+  hours,
+  lookbackDays,
+  daysSpec,
+  probe,
+  eventName,
+  tz = DEFAULT_TZ,
+  toleranceMin = PREMATURE_TOLERANCE_MIN,
+}) {
   const hour = latestDueSlot(now, hours);
   if (hour !== null) {
+    const checks = [];
+    let reason = eventName === "push" ? "push" : "manual";
+    const freshness = await probeDueSlotFreshness({ probe, date: now.date, slot: hour, tz, toleranceMin });
+    if (freshness) {
+      checks.push(freshness.check);
+      if (freshness.premature) reason = "premature";
+    }
     return {
       shouldRun: true,
       date: now.date,
       hour,
-      reason: eventName === "push" ? "push" : "manual",
-      checks: [],
+      reason,
+      checks,
       dueYet: true,
+      dueSh: slotLabel(now.date, hour, tz),
     };
   }
-  const caught = await decideEdition({ now, hours, lookbackDays, daysSpec, probe });
+  const caught = await decideEdition({ now, hours, lookbackDays, daysSpec, probe, tz, toleranceMin });
   return { ...caught, dueYet: false };
+}
+
+/**
+ * Probe one already-due slot and report whether the file on gh-pages for it is
+ * premature. Never throws and never returns a verdict it cannot support: a
+ * non-200, a flake or an unreadable body yields `null` ("nothing to say").
+ */
+async function probeDueSlotFreshness({ probe, date, slot, tz, toleranceMin }) {
+  let probed;
+  try {
+    probed = await probe(date, slot);
+  } catch {
+    return null;
+  }
+  const status =
+    typeof probed === "number" ? probed : typeof probed?.status === "number" ? probed.status : 0;
+  if (status !== 200) return null;
+  const generatedAt =
+    typeof probed === "object" && probed !== null && "generatedAt" in probed
+      ? probed.generatedAt
+      : null;
+  const freshness = judgeSidecarFreshness({ generatedAt, date, slot, tz, toleranceMin });
+  return {
+    premature: freshness.verdict === "premature",
+    check: {
+      date,
+      slot,
+      status,
+      generatedAt: freshness.generatedAt,
+      generatedSh: freshness.generatedSh,
+      earlyMinutes: freshness.earlyMinutes,
+      premature: freshness.verdict === "premature",
+      freshness: freshness.verdict,
+    },
+  };
+}
+
+/**
+ * One plain line naming the slot, the file's own fetch instant and the instant
+ * it was due — so the next reader of the log can see WHY a slot that already
+ * had a file was rebuilt instead of trusting an unexplained "premature".
+ */
+function logPremature(result) {
+  if (result.reason !== "premature") return;
+  const check = (result.checks || []).find((c) => c.premature);
+  const generatedSh = check?.generatedSh ?? "unknown";
+  const generatedAt = check?.generatedAt ?? "unknown";
+  const dueSh = result.dueSh ?? slotLabel(result.date, result.hour);
+  const earlyMin =
+    typeof check?.earlyMinutes === "number" ? Math.round(check.earlyMinutes) : null;
+  console.log(
+    `[gate] PREMATURE ${result.date}/${result.hour}: sidecar exists but was fetched ${generatedAt} ` +
+      `(${generatedSh}), BEFORE its due instant ${dueSh}` +
+      (earlyMin !== null ? ` by ${earlyMin}m` : "") +
+      ` — treating it as missing and rebuilding the slot`,
+  );
 }
 
 async function main() {
@@ -622,12 +977,13 @@ async function main() {
   let result;
 
   if (eventName === "workflow_dispatch" || eventName === "push") {
-    result = await decideTriggered({ now, hours, lookbackDays, daysSpec, probe, eventName });
+    result = await decideTriggered({ now, hours, lookbackDays, daysSpec, probe, eventName, tz });
     if (result.dueYet) {
       // Unchanged from before this fix: a push/dispatch with a due slot
       // publishes it straight away and does NOT consult the in-flight guard.
       // A merge to main going live must never be suppressed by a concurrent
       // build; keep that behaviour exactly.
+      logPremature(result);
       console.log(`[gate] ${eventName} → latest due slot ${result.date}/${result.hour}`);
       writeOutputs(result);
       return;
@@ -644,8 +1000,10 @@ async function main() {
         `— nothing is due yet; used the catchup scan (${result.reason})`,
     );
   } else {
-    result = await decideEdition({ now, hours, lookbackDays, daysSpec, probe });
+    result = await decideEdition({ now, hours, lookbackDays, daysSpec, probe, tz });
   }
+
+  logPremature(result);
 
   if (result.shouldRun) {
     const guard = await hasBuildInFlight({ repo, token, selfRunId });

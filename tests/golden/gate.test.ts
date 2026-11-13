@@ -9,6 +9,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 
 import {
   addDays,
@@ -21,9 +22,11 @@ import {
   dueSlots,
   hasBuildInFlight,
   isTradingWeekday,
+  judgeSidecarFreshness,
   latestDueSlot,
   makeContentsProbe,
   parseHours,
+  PREMATURE_TOLERANCE_MIN,
   TAPE_SLOTS,
 } from "../../scripts/gate.mjs";
 import {
@@ -287,10 +290,20 @@ test("gate — helpers", async (t) => {
 
   await t.test("contents probe: exact path on gh-pages, network error → 0", async () => {
     const seen: Array<{ url: string; auth: string | undefined }> = [];
+    const sidecar = {
+      fetch_health: { generated_at: "2026-11-12T13:02:11.000Z", entries: [] },
+    };
     const fakeFetch = (async (url: string | URL | Request, init?: RequestInit) => {
       const headers = (init?.headers ?? {}) as Record<string, string>;
       seen.push({ url: String(url), auth: headers.Authorization });
-      return { status: 200 } as Response;
+      return {
+        status: 200,
+        json: async () => ({
+          type: "file",
+          encoding: "base64",
+          content: Buffer.from(JSON.stringify(sidecar)).toString("base64"),
+        }),
+      } as unknown as Response;
     }) as unknown as typeof fetch;
 
     const ok = makeContentsProbe({
@@ -298,12 +311,32 @@ test("gate — helpers", async (t) => {
       token: "t",
       fetchImpl: fakeFetch,
     });
-    assert.equal(await ok("2026-11-12", "19"), 200);
+    assert.deepEqual(await ok("2026-11-12", "19"), {
+      status: 200,
+      generatedAt: "2026-11-12T13:02:11.000Z",
+    });
     assert.match(
       seen[0].url,
       /^https:\/\/api\.github\.com\/repos\/Fudan2026\/opencool\/contents\/2026-11-12\/19\.json\?ref=gh-pages$/,
     );
     assert.equal(seen[0].auth, "Bearer t");
+
+    // A body without fetch_health is still published — generatedAt is null and
+    // the caller treats that as "published, cannot tell" (never a rebuild).
+    const bare = makeContentsProbe({
+      repo: "Fudan2026/opencool",
+      token: "t",
+      fetchImpl: (async () =>
+        ({
+          status: 200,
+          json: async () => ({
+            type: "file",
+            encoding: "base64",
+            content: Buffer.from(JSON.stringify({ hello: 1 })).toString("base64"),
+          }),
+        }) as unknown as Response) as unknown as typeof fetch,
+    });
+    assert.deepEqual(await bare("2026-11-12", "19"), { status: 200, generatedAt: null });
 
     const broken = makeContentsProbe({
       repo: "Fudan2026/opencool",
@@ -616,6 +649,336 @@ test("gate — push / dispatch before the first slot must not publish early", as
     });
     assert.equal(r.shouldRun, false);
     assert.equal(r.reason, "all-published");
+  });
+});
+
+test("gate — a sidecar must be honest about its slot, not merely present", async (t) => {
+  /**
+   * #56 fixed WHICH slot a pre-slot push picks, but the file it had already
+   * published stayed on gh-pages: `2026-11-14/06.json` with
+   * `fetch_health.generated_at=2026-11-13T18:26:22Z` (02:26 SH), 3h34m before
+   * its 06:00 slot. Every later tick probed `06.json`, got a 200 and answered
+   * all-published, so the real morning edition could never be built.
+   *
+   * The rule these tests pin: a 200 is necessary, not sufficient. The file's
+   * own fetch instant must be at/after its due instant within
+   * PREMATURE_TOLERANCE_MIN. Conservative by construction — an unreadable or
+   * absent generated_at counts as published, and the lookback window still
+   * bounds which past dates may be rebuilt at all.
+   */
+  type Sidecar = { generatedAt?: string | null; status?: number };
+  const probeOf = (files: Record<string, Sidecar>) => {
+    const calls: string[] = [];
+    const fn = async (date: string, slot: string) => {
+      calls.push(`${date}/${slot}`);
+      const f = files[`${date}/${slot}`];
+      if (!f) return 404;
+      if (f.status !== undefined && f.status !== 200) return f.status;
+      return { status: 200, generatedAt: f.generatedAt ?? null };
+    };
+    return Object.assign(fn, { calls });
+  };
+
+  await t.test("the freshness rule itself, per file", () => {
+    // 06:00 SH on 2026-11-14 == 2026-11-13T22:00:00Z.
+    const due = { date: "2026-11-14", slot: "06" };
+
+    const early = judgeSidecarFreshness({
+      ...due,
+      generatedAt: "2026-11-13T18:26:22.326Z", // the real published stale file
+    });
+    assert.equal(early.verdict, "premature");
+    assert.equal(early.honest, false);
+    assert.ok(
+      (early.earlyMinutes ?? 0) > 200,
+      `expected ~214m early, got ${early.earlyMinutes}`,
+    );
+
+    const onTime = judgeSidecarFreshness({ ...due, generatedAt: "2026-11-13T22:00:04Z" });
+    assert.equal(onTime.verdict, "honest");
+    assert.equal(onTime.honest, true);
+
+    // Inside the documented skew tolerance is still honest.
+    const skewed = judgeSidecarFreshness({ ...due, generatedAt: "2026-11-13T21:59:00Z" });
+    assert.equal(skewed.verdict, "honest");
+    assert.equal(skewed.honest, true);
+
+    // One minute beyond the tolerance is premature.
+    const justEarly = judgeSidecarFreshness({
+      ...due,
+      generatedAt: new Date(
+        Date.parse("2026-11-13T22:00:00Z") - (PREMATURE_TOLERANCE_MIN + 1) * 60_000,
+      ).toISOString(),
+    });
+    assert.equal(justEarly.verdict, "premature");
+
+    for (const missing of [undefined, null, "", "   ", "yesterday", "2026-13-45T99:99:99Z"]) {
+      const r = judgeSidecarFreshness({ ...due, generatedAt: missing as string | null });
+      assert.equal(r.verdict, "unknown", `generated_at=${String(missing)} must be unjudgeable`);
+      assert.equal(r.honest, true, "an unreadable probe must never rewrite the archive");
+    }
+  });
+
+  await t.test("a file generated BEFORE its slot is rebuilt (reason=premature)", async () => {
+    // Replay of the real 06:05 SH tick on 2026-11-14: yesterday's three slots
+    // are honest; today's 06 exists but carries the 02:26 fetch from run
+    // 43481490148. Before this rule the gate answered all-published here. Same
+    // instant as scheduled run 43506663207's failing tick, three hours later.
+    const now = nowAt("2026-11-13T22:05:00Z");
+    assert.equal(now.date, "2026-11-14");
+    assert.equal(now.hour, 6);
+    const probe = probeOf({
+      "2026-11-13/06": { generatedAt: "2026-11-13T00:44:11.086Z" }, // 08:44 SH
+      "2026-11-13/13": { generatedAt: "2026-11-13T09:57:02.959Z" }, // 17:57 SH
+      "2026-11-13/19": { generatedAt: "2026-11-13T15:48:55.004Z" }, // 23:48 SH
+      "2026-11-14/06": { generatedAt: "2026-11-13T18:26:22.326Z" }, // 02:26 SH — early
+    });
+    const r = await decideEdition({ now, hours: HOURS, lookbackDays: 1, daysSpec: "*", probe });
+    assert.equal(r.shouldRun, true);
+    assert.equal(r.date, "2026-11-14");
+    assert.equal(r.hour, "06");
+    assert.equal(r.reason, "premature", "premature must be its own machine-readable reason");
+    const bad = r.checks.find((c) => c.premature);
+    assert.equal(bad?.generatedAt, "2026-11-13T18:26:22.326Z");
+    assert.match(String(bad?.generatedSh), /2026-11-14 02:26/);
+    assert.equal(r.dueSh, "2026-11-14 06:00 Asia/Shanghai");
+  });
+
+  await t.test("a file generated AFTER its slot is left alone", async () => {
+    const now = nowAt("2026-11-13T22:05:00Z"); // 06:05 SH on 11-14 — 06 is due
+    const r = await decideEdition({
+      now,
+      hours: HOURS,
+      lookbackDays: 1,
+      daysSpec: "*",
+      probe: probeOf({
+        "2026-11-13/06": { generatedAt: "2026-11-13T00:44:11.086Z" },
+        "2026-11-13/13": { generatedAt: "2026-11-13T09:57:02.959Z" },
+        "2026-11-13/19": { generatedAt: "2026-11-13T15:48:55.004Z" },
+        // 06:12 SH fetch — a late, but honest, 06.
+        "2026-11-14/06": { generatedAt: "2026-11-13T22:12:00.000Z" },
+      }),
+    });
+    assert.equal(r.shouldRun, false);
+    assert.equal(r.reason, "all-published");
+  });
+
+  await t.test("a missing generated_at is NOT a rebuild (archive stays frozen)", async () => {
+    const now = nowAt("2026-11-13T22:05:00Z"); // 06:05 SH on 11-14 — 06 is due
+    for (const absent of [null, undefined, "", "not-a-date"]) {
+      const r = await decideEdition({
+        now,
+        hours: HOURS,
+        lookbackDays: 1,
+        daysSpec: "*",
+        probe: probeOf({
+          "2026-11-13/06": { generatedAt: "2026-11-13T00:44:11.086Z" },
+          "2026-11-13/13": { generatedAt: "2026-11-13T09:57:02.959Z" },
+          "2026-11-13/19": { generatedAt: "2026-11-13T15:48:55.004Z" },
+          "2026-11-14/06": { generatedAt: absent as string | null },
+        }),
+      });
+      assert.equal(r.shouldRun, false, `generated_at=${String(absent)} must count as published`);
+      assert.equal(r.reason, "all-published");
+    }
+  });
+
+  await t.test("a bare status from the probe still means published (tape-style contract)", async () => {
+    const now = nowAt("2026-11-13T22:05:00Z"); // 06:05 SH on 11-14 — 06 is due
+    const r = await decideEdition({
+      now,
+      hours: HOURS,
+      lookbackDays: 1,
+      daysSpec: "*",
+      probe: async () => 200,
+    });
+    assert.equal(r.shouldRun, false);
+    assert.equal(r.reason, "all-published");
+  });
+
+  await t.test("a premature file on a PAST date outside the lookback is not rebuilt", async () => {
+    // 11-06/06 carries a genuinely premature fetch (measured: 5h50m early).
+    // It is far outside a 1-day window, so the frozen archive wins.
+    const now = nowAt("2026-11-13T22:05:00Z"); // 06:05 SH on 11-14 — 06 is due
+    const probe = probeOf({
+      "2026-11-06/06": { generatedAt: "2026-11-05T16:09:11.537Z" },
+      "2026-11-13/06": { generatedAt: "2026-11-13T00:44:11.086Z" },
+      "2026-11-13/13": { generatedAt: "2026-11-13T09:57:02.959Z" },
+      "2026-11-13/19": { generatedAt: "2026-11-13T15:48:55.004Z" },
+      "2026-11-14/06": { generatedAt: "2026-11-13T22:02:00.000Z" },
+    });
+    const r = await decideEdition({ now, hours: HOURS, lookbackDays: 1, daysSpec: "*", probe });
+    assert.equal(r.shouldRun, false);
+    assert.ok(
+      r.checks.every((c) => c.date !== "2026-11-06"),
+      "a date older than the lookback window is never probed",
+    );
+  });
+
+  await t.test("a premature file INSIDE the window still wins over a missing newer slot", async () => {
+    // Oldest missing due slot first: a premature 11-13/19 (inside a 1-day
+    // window) is the oldest lie and must be rebuilt before today's 06.
+    const now = nowAt("2026-11-13T22:30:00Z"); // 06:30 SH on 11-14
+    const r = await decideEdition({
+      now,
+      hours: HOURS,
+      lookbackDays: 1,
+      daysSpec: "*",
+      probe: probeOf({
+        "2026-11-13/06": { generatedAt: "2026-11-13T00:44:11.086Z" },
+        "2026-11-13/13": { generatedAt: "2026-11-13T09:57:02.959Z" },
+        // 19 claimed 19:00 but was fetched at 15:48 SH — 3h12m early.
+        "2026-11-13/19": { generatedAt: "2026-11-13T07:48:55.004Z" },
+        "2026-11-14/06": { generatedAt: "2026-11-13T22:12:00.000Z" },
+      }),
+    });
+    assert.equal(r.shouldRun, true);
+    assert.equal(r.date, "2026-11-13");
+    assert.equal(r.hour, "19");
+    assert.equal(r.reason, "premature");
+  });
+
+  await t.test("a 404/403 is still just missing — the premature rule is additive", async () => {
+    const now = nowAt("2026-11-13T22:05:00Z"); // 06:05 SH on 11-14 — 06 is due
+    for (const status of [404, 403, 429, 500, 0]) {
+      const r = await decideEdition({
+        now,
+        hours: HOURS,
+        lookbackDays: 0,
+        daysSpec: "*",
+        probe: async () => status,
+      });
+      assert.equal(r.shouldRun, true);
+      assert.equal(r.reason, "exact");
+      assert.equal(r.hour, "06");
+    }
+  });
+
+  await t.test("the push path is unchanged: before the first slot it still holds", async () => {
+    // 02:25 SH — nothing due. Even with a premature 06 on the tree, a push
+    // must not pick a slot that is not due (that is what #56 fixed), and the
+    // catchup scan finds yesterday honest.
+    const now = nowAt("2026-11-13T18:25:00Z");
+    const r = await decideTriggered({
+      now,
+      hours: HOURS,
+      lookbackDays: 1,
+      daysSpec: "*",
+      eventName: "push",
+      probe: probeOf({
+        "2026-11-13/06": { generatedAt: "2026-11-13T00:44:11.086Z" },
+        "2026-11-13/13": { generatedAt: "2026-11-13T09:57:02.959Z" },
+        "2026-11-13/19": { generatedAt: "2026-11-13T15:48:55.004Z" },
+        "2026-11-14/06": { generatedAt: "2026-11-13T18:26:22.326Z" },
+      }),
+    });
+    assert.equal(r.dueYet, false);
+    assert.equal(r.shouldRun, false);
+    assert.equal(r.reason, "all-published");
+  });
+
+  await t.test("a premature file for a slot that is NOT yet due is never selected", async () => {
+    // The safety property that makes this rule unable to re-create the original
+    // bug: rebuilding publishes a new fetch instant, so selecting a slot that
+    // is not due yet would publish it early AGAIN. `dueSlots` excludes it, so a
+    // premature `06` at 02:25 is invisible to the scan — exactly the #56 shape.
+    const now = nowAt("2026-11-13T18:25:00Z"); // 02:25 SH on 11-14
+    assert.deepEqual(dueSlots(now, "2026-11-14", HOURS), []);
+    const probe = probeOf({
+      "2026-11-12/06": { generatedAt: "2026-11-12T00:46:37.618Z" },
+      "2026-11-12/13": { generatedAt: "2026-11-12T09:42:49.271Z" },
+      "2026-11-12/19": { generatedAt: "2026-11-12T13:13:56.751Z" },
+      "2026-11-13/06": { generatedAt: "2026-11-13T00:44:11.086Z" },
+      "2026-11-13/13": { generatedAt: "2026-11-13T09:57:02.959Z" },
+      "2026-11-13/19": { generatedAt: "2026-11-13T15:48:55.004Z" },
+      "2026-11-14/06": { generatedAt: "2026-11-13T18:26:22.326Z" }, // the premature one
+    });
+    const r = await decideEdition({ now, hours: HOURS, lookbackDays: 1, daysSpec: "*", probe });
+    assert.equal(r.shouldRun, false);
+    assert.equal(r.reason, "all-published");
+    assert.ok(
+      r.checks.every((c) => c.date !== "2026-11-14"),
+      "a slot that is not due yet is never probed, so it can never be rebuilt early",
+    );
+  });
+
+  await t.test("a push with a due slot publishes and names the premature reason", async () => {
+    // The post-merge shape: 06:26 SH on 11-14, slot 06 due, its file on
+    // gh-pages is the 02:26 one. The publish happens either way — only the
+    // reason (and so the lag assert's wording) says why it is a rebuild.
+    const now = nowAt("2026-11-13T22:26:00Z");
+    const probe = probeOf({ "2026-11-14/06": { generatedAt: "2026-11-13T18:26:22.326Z" } });
+    const r = await decideTriggered({
+      now,
+      hours: HOURS,
+      lookbackDays: 1,
+      daysSpec: "*",
+      eventName: "push",
+      probe,
+    });
+    assert.equal(r.shouldRun, true);
+    assert.equal(r.dueYet, true);
+    assert.equal(r.hour, "06");
+    assert.equal(r.reason, "premature");
+    assert.equal(r.dueSh, "2026-11-14 06:00 Asia/Shanghai");
+    assert.equal(r.checks[0]?.premature, true);
+    assert.deepEqual(probe.calls, ["2026-11-14/06"], "only the chosen slot is probed");
+  });
+
+  await t.test("an honest or unknown due slot keeps the plain push reason", async () => {
+    const now = nowAt("2026-11-13T22:26:00Z");
+    for (const generatedAt of ["2026-11-13T22:04:00.000Z", null, undefined, "junk"]) {
+      const r = await decideTriggered({
+        now,
+        hours: HOURS,
+        lookbackDays: 1,
+        daysSpec: "*",
+        eventName: "push",
+        probe: probeOf({ "2026-11-14/06": { generatedAt: generatedAt as string | null } }),
+      });
+      assert.equal(r.shouldRun, true);
+      assert.equal(r.reason, "push", `generated_at=${String(generatedAt)} must not relabel the push`);
+    }
+  });
+
+  await t.test("a flaky probe cannot suppress a due push", async () => {
+    const now = nowAt("2026-11-13T22:26:00Z");
+    for (const probe of [
+      async () => 0,
+      async () => 403,
+      async () => {
+        throw new Error("ETIMEDOUT");
+      },
+      async () => ({ status: "weird" }),
+    ]) {
+      const r = await decideTriggered({
+        now,
+        hours: HOURS,
+        lookbackDays: 1,
+        daysSpec: "*",
+        eventName: "push",
+        probe: probe as never,
+      });
+      assert.equal(r.shouldRun, true, "a failed freshness probe must never block a due publish");
+      assert.equal(r.reason, "push");
+    }
+  });
+
+  await t.test("tape mode is untouched: same decision with and without the rule", async () => {
+    // The tape asks only "is this snapshot present?"; its probe returns a bare
+    // status and decideTape has no generated_at notion at all.
+    const captured = await decideTape({ now: nowAt("2026-11-13T01:35:00Z"), probe: async () => 200 });
+    assert.equal(captured.reason, "already-captured");
+    const missing = await decideTape({ now: nowAt("2026-11-13T01:35:00Z"), probe: async () => 404 });
+    assert.equal(missing.reason, "capture");
+    const tapeSrc = fs.readFileSync(new URL("../../scripts/gate.mjs", import.meta.url), "utf8");
+    const tapeFn = tapeSrc.slice(tapeSrc.indexOf("export async function decideTape"));
+    const body = tapeFn.slice(0, tapeFn.indexOf("\nfunction writeTapeOutputs"));
+    assert.equal(
+      body.includes("judgeSidecarFreshness"),
+      false,
+      "the tape decision must not consult the edition freshness rule",
+    );
   });
 });
 

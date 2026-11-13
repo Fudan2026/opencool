@@ -29,11 +29,25 @@
  * a past date, not a breach: its lag is still printed so the number is on
  * record, but it does not fail the run.
  *
+ * PREMATURE, and how it relates to the gate (scripts/gate.mjs): this file calls
+ * a publication premature when the PUBLISH instant is more than `limitMin`
+ * (default 20m) before its slot. The gate applies the same idea to the FILE it
+ * finds on gh-pages — its own `fetch_health.generated_at` must not precede the
+ * slot by more than PREMATURE_TOLERANCE_MIN (2m), and a violation is rebuilt.
+ * The two thresholds differ on purpose (the gate is stricter, because a stale
+ * file silently blocks the real slot while a late publish is only late), but
+ * they can never contradict each other in the harmful direction: publishing
+ * happens after generating, so `generated_at <= publishedAt`, and therefore
+ * every publication this file calls premature is also premature to the gate.
+ * `tests/golden/publish-lag.test.ts` pins that dominance.
+ *
  * Exit codes: 0 on time / not a breach, 1 on a lag breach, 2 on bad input.
  */
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+
+import { PREMATURE_TOLERANCE_MIN, judgeSidecarFreshness } from "./gate.mjs";
 
 export const DEFAULT_LAG_LIMIT_MIN = 20;
 export const DEFAULT_TZ = "Asia/Shanghai";
@@ -121,28 +135,39 @@ export function minutesBetween(from, to) {
  * Enforcement rules, in order:
  *   - backfilled (补发) → lag reported, green: a past date recovered late is a
  *     recovery, not a missed slot;
- *   - PREMATURE → published more than `limitMin` BEFORE its slot, and not a
- *     backfill → a breach that fails the run. Being early is not "on time": a
- *     file published at 02:26 under a `06` label describes 02:26 market data
- *     while claiming 06:00, and because the gate then sees a 200 at 06:00 the
- *     real slot never runs. That is a permanent vintage error in the one field
- *     that carries the claim, so it must be as loud as lateness (run
- *     43481490148 printed `lag=-213m verdict=REPUBLISH` and stayed green);
+ *   - PREMATURE → either the publish instant is more than `limitMin` BEFORE its
+ *     slot, or the sidecar's own `generated_at` would fail the gate's freshness
+ *     rule (fetched more than PREMATURE_TOLERANCE_MIN before the slot) — both
+ *     are breaches that fail the run. Being early is not "on time": a file
+ *     published at 02:26 under a `06` label describes 02:26 market data while
+ *     claiming 06:00, and because the gate then sees a 200 at 06:00 the real
+ *     slot never runs. That is a permanent vintage error in the one field that
+ *     carries the claim, so it must be as loud as lateness (run 43481490148
+ *     printed `lag=-213m verdict=REPUBLISH` and stayed green);
  *   - already live before this run, lag within limits → REPUBLISH, green: the
  *     slot was met by an earlier run and this build merely rewrote it. An early
  *     publish BEYOND the limit is the premature breach above, even if a file
  *     existed — a premature file is exactly what would make `alreadyPublished`
  *     true;
+ *   - gate reason `premature` (the file it found was premature) → NOT a
+ *     republish: that slot was never honestly met, so this run is judged as its
+ *     FIRST publish — ON TIME inside the limit, LATE BREACH beyond it;
  *   - otherwise → the lag limit applies. That includes a push/dispatch build
  *     that is the FIRST publish of a due slot: the edition was late, whoever
  *     happened to publish it.
  *
+ * The `generatedAt` leg is the gate's own rule, not a second opinion: it calls
+ * `judgeSidecarFreshness` from scripts/gate.mjs. Publishing never precedes
+ * generating, so every publish-instant breach is also a gate breach; the extra
+ * leg catches the remaining case where the publish looked on time but the file
+ * it published was stale (a rebuild that did not actually re-fetch).
+ *
  * @param {{date: string, hour: string, publishedAt: Date, tz?: string,
  *   limitMin?: number, backfilled?: boolean, alreadyPublished?: boolean,
- *   trigger?: string}} input
+ *   trigger?: string, generatedAt?: string|null}} input
  * @returns {{date: string, slot: string, slotInstant: Date, publishedAt: Date,
  *   publishedSh: string, lagMinutes: number, verdict: string, ok: boolean,
- *   premature: boolean, notified: boolean}}
+ *   premature: boolean, freshness: string, notified: boolean}}
  */
 export function evaluatePublishLag(input) {
   const tz = input.tz || DEFAULT_TZ;
@@ -156,21 +181,43 @@ export function evaluatePublishLag(input) {
   const early = lagMinutes < -limitMin;
   const trigger = String(input.trigger ?? "").trim().toLowerCase();
 
+  // Same function the gate uses on the file it finds on gh-pages, so the two
+  // cannot drift on what "premature" means. `unknown` (no/unreadable
+  // generated_at) never breaches, matching the gate's frozen-archive rule.
+  const freshness = judgeSidecarFreshness({
+    generatedAt: input.generatedAt ?? null,
+    date: input.date,
+    slot: slotHour,
+    tz,
+  });
+  const staleFile = freshness.verdict === "premature";
+
   let verdict;
   let ok;
   let premature = false;
   if (input.backfilled) {
     verdict = "BACKFILL (补发 — recovery of a past date, not a breach)";
     ok = true;
-  } else if (early) {
+  } else if (early || staleFile) {
     premature = true;
-    verdict = `PREMATURE BREACH (published ${-lagMinutes}m early, limit ${limitMin}m)`;
+    verdict = early
+      ? `PREMATURE BREACH (published ${-lagMinutes}m early, limit ${limitMin}m)`
+      : `PREMATURE BREACH (sidecar fetched ${Math.round(freshness.earlyMinutes ?? 0)}m before its slot, gate tolerance ${PREMATURE_TOLERANCE_MIN}m)`;
     ok = false;
-  } else if (input.alreadyPublished) {
+  } else if (input.alreadyPublished && trigger !== "premature") {
     verdict = "REPUBLISH (edition was already live; slot was met earlier)";
     ok = true;
+  } else if (trigger === "premature" && !late) {
+    // The gate found a premature sidecar and rebuilt it. This is the slot's
+    // FIRST honest publish, so it is judged like one — not laundered as a
+    // republish of a slot that was never met.
+    verdict = "ON TIME (premature sidecar replaced — the slot was not met earlier)";
+    ok = true;
   } else if (late) {
-    verdict = `LATE BREACH (limit ${limitMin}m)`;
+    verdict =
+      trigger === "premature"
+        ? `LATE BREACH (limit ${limitMin}m — the slot was never honestly met; this is its first honest publish)`
+        : `LATE BREACH (limit ${limitMin}m)`;
     ok = false;
   } else if (trigger === "push" || trigger === "manual") {
     verdict = `ON TIME (${trigger} publish of a due slot)`;
@@ -190,6 +237,7 @@ export function evaluatePublishLag(input) {
     verdict,
     ok,
     premature,
+    freshness: freshness.verdict,
     notified: false,
   };
 }
@@ -203,6 +251,23 @@ export function isBackfilledSidecar(date, hour, root = "daily_reports") {
     return parsed?.backfilled === true;
   } catch {
     return false;
+  }
+}
+
+/**
+ * The `fetch_health.generated_at` of the sidecar this run just wrote, or null
+ * when there is no sidecar / no readable instant. Null means "cannot tell", and
+ * `evaluatePublishLag` then judges only the publish instant.
+ */
+export function readSidecarGeneratedAt(date, hour, root = "daily_reports") {
+  const sidecar = path.join(root, date, `${hour}.json`);
+  if (!fs.existsSync(sidecar)) return null;
+  try {
+    const parsed = JSON.parse(fs.readFileSync(sidecar, "utf8"));
+    const raw = parsed?.fetch_health?.generated_at;
+    return typeof raw === "string" && raw.trim() ? raw.trim() : null;
+  } catch {
+    return null;
   }
 }
 
@@ -246,7 +311,9 @@ function envFlag(name) {
 
 function notifyBreach(result, detail) {
   const reason = result.premature
-    ? `published ${-result.lagMinutes}m EARLY (slot ${result.date} ${result.slot} SH, published ${result.publishedSh} SH) — the file claims a slot it does not describe, and the real slot will never run`
+    ? result.verdict.includes("sidecar fetched")
+      ? `sidecar for ${result.date} ${result.slot} SH was fetched BEFORE its slot — the file claims a slot it does not describe, and the gate will rebuild it`
+      : `published ${-result.lagMinutes}m EARLY (slot ${result.date} ${result.slot} SH, published ${result.publishedSh} SH) — the file claims a slot it does not describe, and the real slot will never run`
     : `published ${result.lagMinutes}m late (slot ${result.date} ${result.slot} SH, published ${result.publishedSh} SH)`;
   // Mark the breach so the generic "Alert on job failure" step does not page
   // a second time for the same late/premature edition.
@@ -311,6 +378,7 @@ function main() {
     backfilled: isBackfilledSidecar(date, slotHour),
     alreadyPublished: envFlag("ALREADY_PUBLISHED"),
     trigger: process.env.EDITION_TRIGGER,
+    generatedAt: readSidecarGeneratedAt(date, slotHour),
   });
 
   console.log(formatLagLine(result));
@@ -326,8 +394,11 @@ function main() {
 
   if (result.premature) {
     console.error(
-      `::error::edition ${result.date}/${result.slot} published ${-result.lagMinutes}m BEFORE its slot (limit ${limitMin}m) — ` +
-        `a premature file describes earlier market data under a later label, and the gate will treat the slot as met`,
+      result.verdict.includes("sidecar fetched")
+        ? `::error::edition ${result.date}/${result.slot} sidecar was fetched before its own slot — ` +
+            `a premature file describes earlier market data under a later label, and the gate will treat the slot as met`
+        : `::error::edition ${result.date}/${result.slot} published ${-result.lagMinutes}m BEFORE its slot (limit ${limitMin}m) — ` +
+            `a premature file describes earlier market data under a later label, and the gate will treat the slot as met`,
     );
   } else {
     console.error(
