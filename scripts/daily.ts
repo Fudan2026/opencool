@@ -25,7 +25,7 @@ import { fetchCryptoFearGreed } from "../lib/trading/fear-greed";
 import { fetchCryptoGlobal } from "../lib/trading/coingecko";
 import { generateTradingCommentary } from "../lib/ai/trading-commentary";
 import type { TradingSection } from "../lib/ai/pipeline";
-import { todayKey, editionHourKey, parseReportHours, editionKind } from "../lib/utils";
+import { todayKey, naturalTodayKey, editionHourKey, parseReportHours, editionKind } from "../lib/utils";
 import { buildQuantSection } from "../lib/invest/quant";
 import { scoreSentiment, MIN_HISTORY_SAMPLES } from "../lib/nlp/sentiment";
 import { cleanKeywords } from "../lib/nlp/keywords";
@@ -625,6 +625,15 @@ async function main() {
   const date = todayKey();
   const hour = editionHourKey();
   const siblingHours = parseReportHours().map((h) => String(h).padStart(2, "0"));
+  // A backfill builds a PAST date folder with articles fetched right now.
+  // Flag it so the page says so instead of implying the archive always held it.
+  const isBackfill = date < naturalTodayKey();
+  if (process.env.EDITION_DATE?.trim()) {
+    console.log(
+      `[daily] EDITION_DATE=${date} override in effect` +
+        (isBackfill ? ` — backfilling ${date}/${hour} (not today's edition)` : ""),
+    );
+  }
   console.log(`[daily] ${date} edition ${hour} — fetching sources…\n`);
   stage("sources");
   const { articles, health } = await fetchAll();
@@ -735,6 +744,7 @@ async function main() {
       `)`,
   );
   report.fetch_health = health;
+  if (isBackfill) report.backfilled = true;
   if (isMorning) {
     try {
       const base = loadYesterdayEdition(date);
@@ -797,6 +807,7 @@ async function main() {
     renderHtml(report, raw, date, {
       editionHour: hour,
       siblingHours,
+      backfilled: isBackfill,
       sentimentContext: {
         trendScores: sentimentHistory.slice(-20),
         trendAccumulated: sentimentHistory.length,

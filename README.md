@@ -19,11 +19,14 @@
 
 未到点或尚未生成的档期会显示**友好占位页**（不再 404）。首页永远指向最新**真实**一期。
 
+**补发机制（防止整期丢失）**：调度门每 15 分钟触发一次（`4,19,34,49 * * * *`），用 gh-pages 上 `<date>/<slot>.json` 是否存在（只有干净的 HTTP 200 才算存在）来判断档期是否已发布；一旦发现缺失，就**从最旧的缺失档期开始补**，并回看 `REPORT_LOOKBACK_DAYS` 天（默认 2 天），因此跨过零点也不会把前一天的档期永久丢在无人区。补发出来的一期会在页眉标注「补发」——它的正文是补发当刻抓取的，不会假装是当日快照。
+
 **可选推送**：配置 secrets `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID`（Telegram 频道）或变量 `NTFY_TOPIC`（ntfy.sh 主题）后，每期发布会自动推送；未配置则为干净 no-op。
 
 ```text
 REPORT_TZ=Asia/Shanghai
 REPORT_HOUR=6,13,19
+REPORT_LOOKBACK_DAYS=2   # 门控回看天数：漏发的档期最多补这么久
 REPORT_LOCALE=zh
 LLM_MODE=auto   # 无任何 key 时等同 off；配置免费 ZHIPU_API_KEY 后自动点亮 GLM-4-Flash 导读
 ```

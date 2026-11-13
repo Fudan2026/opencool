@@ -52,6 +52,12 @@ export interface DailyReport {
   editorial_lead?: { title: string; url?: string; source?: string; note?: string; groundedBy: string };
   /** Per-source fetch telemetry attached by scripts/daily.ts. */
   fetch_health?: FetchHealth;
+  /**
+   * This edition was built as a catch-up for a past date, so its articles
+   * were fetched at build time rather than on that date. Persisted so a
+   * `npm run render` from the cached sidecar keeps the label.
+   */
+  backfilled?: boolean;
 }
 
 export interface ThemeHit {
