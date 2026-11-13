@@ -48,6 +48,8 @@ export interface DailyReport {
   themes?: ThemeHit[];
   /** 06:00-only overnight digest vs the previous day's last edition. */
   morning_brief?: MorningBrief;
+  /** Editor-pinned lead (sourced; see lib/editorial/lead.ts). */
+  editorial_lead?: { title: string; url?: string; source?: string; note?: string; groundedBy: string };
   /** Per-source fetch telemetry attached by scripts/daily.ts. */
   fetch_health?: FetchHealth;
 }

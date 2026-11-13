@@ -49,6 +49,8 @@ test("golden: report page structure", async (t) => {
   });
 
   await t.test("morning brief card renders in hero", () => {
+    assert.ok(html.includes('class="lead-badge"'));
+    assert.ok(html.includes("编辑定调 · DW 中文"));
     assert.ok(html.includes('class="hero-morning"'));
     assert.ok(html.includes("2026-10-26/19"));
     assert.ok(html.includes("+8"));
@@ -103,6 +105,7 @@ test("golden: legacy report renders (no new fields)", async (t) => {
   const legacy = reportFixture({
     sentiment: undefined,
     morning_brief: undefined,
+    editorial_lead: undefined,
   });
   const html = renderHtml(legacy, rawByCategory(), "2026-10-26", {
     editionHour: "19",

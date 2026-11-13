@@ -56,6 +56,7 @@ const TEXTS_ZH = {
   catKnowledge: "知识库",
   catMcp: "开放 MCP",
   catSentiment: "市场情绪计",
+  leadBadge: "编辑定调",
   morningTitle: "晨会速览",
   morningSentiment: "情绪",
   morningOvernight: "隔夜",
@@ -137,6 +138,7 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   catKnowledge: "Knowledge",
   catMcp: "Open MCP",
   catSentiment: "Sentiment",
+  leadBadge: "Editor's pick",
   morningTitle: "Morning brief",
   morningSentiment: "sentiment",
   morningOvernight: "overnight",
@@ -787,6 +789,7 @@ export function renderHtml(
         ? `<h1 class="hero-headline">${escapeHtml(report.hero_headline)}</h1>`
         : `<h1 class="hero-headline">${editionLabel} · ${date}</h1>`
     }
+    ${report.editorial_lead ? `<p class="lead-badge"><a href="${escapeHtml(report.editorial_lead.url || "#")}" target="_blank" rel="noopener">${STR.leadBadge} · ${escapeHtml(report.editorial_lead.source || "信源")}</a></p>` : ""}
     ${
       report.daily_overview
         ? `<p class="hero-overview"><span class="ov-label">${STR.heroOverview}</span>${escapeHtml(report.daily_overview)}</p>`
@@ -905,6 +908,7 @@ export function renderHtml(
     line-height: 1.35;
     letter-spacing: -0.02em;
   }
+  .lead-badge { margin:.35rem 0 0; font-size:.8rem; }
   .hero-morning { margin:.9rem 0 .2rem; padding:.75rem 1rem; background:var(--card);
     border:1px solid var(--rule); border-radius:.75rem; }
   .hero-morning .mb-title { margin:0 0 .3rem; font-weight:700; }

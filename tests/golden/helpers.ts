@@ -128,6 +128,12 @@ export function reportFixture(over: Partial<DailyReport> = {}): DailyReport {
     keywords: ["MLF", "央行", "流动性"],
     sentiment: sentimentFixture(),
     morning_brief: morningBriefFixture(),
+    editorial_lead: {
+      title: "黄仁勋辞职 中企忧美收紧监管 忙抢租海外英伟达算力",
+      url: "https://example.com/dw",
+      source: "DW 中文",
+      groundedBy: "黄仁勋辞职 中企忧美收紧监管",
+    },
     themes: [
       { key: "semiconductor", name: "半导体", articleHits: 4 },
       { key: "ai", name: "人工智能", articleHits: 3 },
