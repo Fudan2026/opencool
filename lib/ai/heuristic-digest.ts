@@ -10,6 +10,7 @@ import { REPORT_LOCALE } from "../sources/registry";
 import type { Category } from "../sources/types";
 import { hasCjk } from "../sources/title-filters";
 import { cleanKeyword } from "../nlp/keywords";
+import { tokenizeTitle, jaccard } from "../nlp/tokenize-title";
 import type { ArticleInput, BriefItem, DailyReport } from "./pipeline";
 
 const BRIEF_LIMITS: Record<Category, number> = {
@@ -40,34 +41,13 @@ const CN_SOURCE_IDS = new Set([
   "baidu-hot",
 ]);
 
-function normalizeTitle(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/https?:\/\/\S+/g, "")
-    .replace(/[^\p{L}\p{N}\s]/gu, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function tokenize(title: string): Set<string> {
-  const norm = normalizeTitle(title);
-  const parts = norm.split(" ").filter((t) => t.length >= 2);
-  // CJK: also emit overlapping bigrams so short Chinese titles can match.
-  const cjk = norm.replace(/\s+/g, "");
-  if (/[\u4e00-\u9fff]/.test(cjk) && cjk.length >= 4) {
-    for (let i = 0; i < cjk.length - 1; i++) {
-      parts.push(cjk.slice(i, i + 2));
-    }
-  }
-  return new Set(parts);
-}
-
-function jaccard(a: Set<string>, b: Set<string>): number {
-  if (a.size === 0 || b.size === 0) return 0;
-  let inter = 0;
-  for (const t of a) if (b.has(t)) inter++;
-  const union = a.size + b.size - inter;
-  return union === 0 ? 0 : inter / union;
+/**
+ * Tokenisation and similarity come from `lib/nlp/tokenize-title.ts`, shared
+ * with the panel dedupe pass. Keeping one implementation is what stops the two
+ * from drifting apart and silently changing what counts as "the same story".
+ */
+function normalizedTokens(title: string): Set<string> {
+  return tokenizeTitle(title);
 }
 
 type Cluster = {
@@ -80,7 +60,7 @@ type Cluster = {
 function clusterArticles(items: ArticleInput[], threshold = 0.45): Cluster[] {
   const clusters: Cluster[] = [];
   for (const item of items) {
-    const tokens = tokenize(item.title);
+    const tokens = normalizedTokens(item.title);
     let best: Cluster | null = null;
     let bestScore = 0;
     for (const c of clusters) {
@@ -191,7 +171,7 @@ function pickLead(
 function topKeywords(briefs: BriefItem[], n = 6): string[] {
   const counts = new Map<string, number>();
   for (const b of briefs) {
-    for (const t of tokenize(b.title)) {
+    for (const t of normalizedTokens(b.title)) {
       const c = cleanKeyword(t);
       if (!c) continue;
       counts.set(c, (counts.get(c) ?? 0) + 1);

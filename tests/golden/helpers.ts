@@ -8,7 +8,8 @@ import type {
   DailyReport,
   MorningBrief,
 } from "../../lib/ai/pipeline";
-import type { RawByCategory, SubGroup } from "../../lib/output/render";
+import type { RawByCategory, RawNews, SubGroup, LaneView } from "../../lib/output/render";
+import type { TopicKey } from "../../lib/topics/taxonomy";
 
 export function article(over: Partial<ArticleInput> = {}): ArticleInput {
   return {
@@ -37,6 +38,119 @@ export function rawByCategory(): RawByCategory {
     ],
   });
   return { finance: [group("finance")], tech: [group("tech")], politics: [group("politics")] };
+}
+
+/**
+ * Lane-view fixture mirroring what `groupRaw` produces from a real sidecar.
+ *
+ * Built by hand rather than by running the classifier so the render golden stays
+ * a test of *rendering*: if a taxonomy change alters routing, the routing tests
+ * fail, and this fixture keeps asserting that the markup contract holds.
+ */
+export function rawNews(over: Partial<RawNews> = {}): RawNews {
+  const lane = (
+    key: "zh" | "external",
+    label: string,
+    topics: Array<{ topic: TopicKey; label: string; n: number }>,
+  ): LaneView => {
+    const sections = topics.map((t) => ({
+      topic: t.topic,
+      label: t.label,
+      available: t.n + 4,
+      items: Array.from({ length: t.n }, (_, i) =>
+        article({
+          sourceId: i % 2 === 0 ? "test-src" : "test-src2",
+          source: i % 2 === 0 ? "测试源" : "测试源二",
+          category: "finance",
+          title: `${t.label}示例标题 ${i + 1}`,
+          url: `https://example.com/${key}/${t.topic}/${i + 1}`,
+        }),
+      ),
+    }));
+    return {
+      lane: key,
+      label,
+      count: sections.reduce((n, s) => n + s.items.length, 0),
+      sections,
+      bySource: [
+        {
+          id: `finance:cn-news`,
+          name: "中文财经",
+          sources: [
+            {
+              sourceId: "test-src",
+              sourceName: "测试源",
+              items: sections.flatMap((s) => s.items.slice(0, 1)),
+              merged: true,
+            },
+          ],
+        },
+      ],
+      omitted: [],
+    };
+  };
+
+  return {
+    lanes: [
+      lane("zh", "中文财经", [
+        { topic: "global-markets", label: "全球市场", n: 3 },
+        { topic: "world", label: "国际时政", n: 3 },
+        { topic: "tech-ai", label: "科技AI", n: 3 },
+        { topic: "policy", label: "政策政务", n: 3 },
+        { topic: "filings", label: "公司公告", n: 3 },
+        { topic: "opinion", label: "观点解读", n: 3 },
+      ]),
+      lane("external", "外电原文", [
+        { topic: "global-markets", label: "全球市场", n: 3 },
+        { topic: "world", label: "国际时政", n: 3 },
+        { topic: "tech-ai", label: "科技AI", n: 3 },
+      ]),
+    ],
+    legacy: {
+      finance: [
+        {
+          id: "cn-news",
+          name: "中文财经",
+          sources: [
+            {
+              sourceId: "test-src",
+              sourceName: "测试源",
+              items: [article({ category: "finance" })],
+              merged: true,
+            },
+          ],
+        },
+      ],
+      tech: [
+        {
+          id: "github-trending",
+          name: "GitHub Trending",
+          sources: [
+            {
+              sourceId: "test-gh",
+              sourceName: "GitHub",
+              items: [article({ category: "tech", title: "repo/name 项目" })],
+            },
+          ],
+        },
+      ],
+      politics: [
+        {
+          id: "world",
+          name: "国际要闻",
+          sources: [
+            {
+              sourceId: "test-src",
+              sourceName: "测试源",
+              items: [article({ category: "politics" })],
+              merged: true,
+            },
+          ],
+        },
+      ],
+    },
+    ...over,
+  };
 }
 
 export function sentimentFixture() {

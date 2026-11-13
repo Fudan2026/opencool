@@ -38,8 +38,8 @@ Field reference:
 | `name` | ✓ | Display name in the UI |
 | `type` | ✓ | `rss` / `api` / `scrape` |
 | `url` | ✓ | Feed URL or API endpoint |
-| `category` | ✓ | `tech` / `finance` / `politics` — drives the L1 tab |
-| `subcategory` |  | L2 grouping; see `SUBCATEGORY_ORDER` in `lib/output/render.ts` |
+| `category` | ✓ | `tech` / `finance` / `politics` — the fetch-time bucket, and the fallback topic tier |
+| `subcategory` |  | L2 grouping for the 按来源 view; see `SUBCATEGORY_ORDER` in `lib/output/render.ts` |
 | `enabled` |  | Default `true`; set `false` to skip without deleting |
 | `useCurl` |  | `true` if the host blocks Node's TLS fingerprint (Cloudflare) — fetcher shells out to curl |
 | `lang` |  | `zh` means the source is already Chinese — enrich skips it when `REPORT_LOCALE=zh` |
@@ -54,19 +54,32 @@ Workflow:
 
 For **non-RSS source types** (custom JSON API, scraping), create a new file in `lib/sources/`, export a `fetchXxx(sourceId)` function returning `RawArticle[]`, then add a branch in [`lib/sources/dispatch.ts`](lib/sources/dispatch.ts) so `type: "api"` or `type: "scrape"` entries route there.
 
-## Rename L1 tabs / change order
+## Rename the news lanes / change topic order
 
-[`lib/output/render.ts`](lib/output/render.ts):
+The news block is routed by **language lane × topic**, not by the source
+`category` column:
 
-```ts
-const CATEGORY_LABELS: Record<Category, string> = {
-  tech: "技术动态",        // ← rename here
-  finance: "财经要点",
-  politics: "时政观察",
-};
-```
+- lanes: `zh` (中文财经 — Chinese-language copy) and `external` (外电原文)
+- topics: 全球市场 · 国际时政 · 科技AI · 政策政务 · 公司公告 · 观点解读
 
-L1 panel order is hardcoded in `renderHtml()` (search for `<nav class="tabs">`). Reorder the `<button>` lines.
+Both live in [`lib/topics/taxonomy.ts`](lib/topics/taxonomy.ts) — keys, bilingual
+labels and the declared order. Labels shown on the page come from the `STR`
+pairs in [`lib/output/render.ts`](lib/output/render.ts) (`topicGlobalMarkets`,
+`topicWorld`, …, `laneZh`, `laneExternal`); change both to rename a section in
+one locale, or neither to rename every occurrence.
+
+Per-topic slot caps, the 40% per-source share and the ≤2-per-story-cluster rule
+are in `SECTION_LIMITS` / `CLUSTER_CAP_PER_SECTION` in
+[`lib/topics/routing.ts`](lib/topics/routing.ts). Story clusters are keyed by the
+entity table in [`lib/topics/entities.ts`](lib/topics/entities.ts) — add an alias
+there when a new company starts flooding the wire.
+
+`npm run topics:report -- <date> <hour>` prints the before/after composition of a
+baked edition, which is the fastest way to see the effect of a cap change.
+
+The tech/community panels and the 按来源 view still use
+`SUBCATEGORY_ORDER` / `SOURCE_DISPLAY_LIMITS` / `MERGED_SUBGROUP_LIMITS` exactly
+as before.
 
 ## Add a new L2 subcategory under tech
 
@@ -77,6 +90,11 @@ L1 panel order is hardcoded in `renderHtml()` (search for `<nav class="tabs">`).
    - Add to `TECH_MAIN_SUBS` (or `TECH_COMMUNITY_SUBS` for community panel) — controls which L1 panel renders it
    - Optionally: `SOURCE_DISPLAY_LIMITS["tech:my-new-sub"]` for per-source cap
    - Optionally: `MERGED_SUBGROUP_LIMITS["tech:my-new-sub"]` to merge sources into single time-sorted list
+
+   This only affects the tech/community panels and the 按来源 view. The news
+   lanes ignore `subcategory`; if the new content is news, route it by adding
+   vocabulary to the matching topic table in
+   [`lib/topics/classify.ts`](lib/topics/classify.ts) instead.
 
 ## Add Chinese summary enrichment for a new subcategory
 
