@@ -273,21 +273,47 @@ function errText(e: unknown): string {
 }
 
 /**
- * One batched quote pass over the industry boards, shared by the industry and
- * theme sections so a theme's number and its board's number come from the same
- * upstream response and the same instant.
+ * One batched quote pass shared by the industry and theme sections, so a theme's
+ * number and its board's number come from the same upstream response and the
+ * same instant.
+ *
+ * Which boards get quoted matters for cost. The industry section publishes every
+ * industry board (type 2 — ~500 of them), but a theme resolves to a CONCEPT
+ * board (type 3 — ~430 of them), of which we only ever publish the ~24 the
+ * catalog resolves. Quoting the whole concept registry to serve 24 rows doubled
+ * the capture's request count while the quote host was 502-bursting, so the
+ * theme boards are resolved first and only those secids are requested.
+ *
+ * The earlier version quoted industry boards only, which left every theme row
+ * with `changePct: null` — that reads as "the theme did not move" rather than
+ * "we never asked", and it survived every clock assertion.
  */
 export async function captureBoardQuotes(
   boards: readonly BoardEntry[] | null,
   observedAt: string,
   tz: string,
-  options: Pick<CaptureOptions, "fetchImpl" | "sleepImpl">,
+  options: Pick<CaptureOptions, "fetchImpl" | "sleepImpl"> & {
+    themes?: readonly ThemeDef[];
+  },
 ): Promise<BoardQuotes> {
   if (!boards?.length) return { map: null, asOf: null };
   const industries = boards.filter((b) => b.type === 2);
-  if (!industries.length) return { map: null, asOf: null };
+  const themes = options.themes ?? [];
+
+  // Industry boards in registry order, then the distinct boards the theme
+  // catalog resolves to. De-duplicated by code so a theme board that is also an
+  // industry board is requested once.
+  const byCode = new Map<string, BoardEntry>();
+  for (const board of industries) byCode.set(board.code, board);
+  for (const theme of themes) {
+    const board = resolveBoard(theme, boards as BoardEntry[]);
+    if (board && !byCode.has(board.code)) byCode.set(board.code, board);
+  }
+  const quotable = [...byCode.values()];
+  if (!quotable.length) return { map: null, asOf: null };
+
   try {
-    const map = await fetchBoardQuotes(industries, {
+    const map = await fetchBoardQuotes(quotable, {
       fetchImpl: options.fetchImpl,
       sleepImpl: options.sleepImpl,
     });
@@ -404,10 +430,15 @@ function buildThemes(
   }
   const records: ThemeRecord[] = [];
   let resolved = 0;
+  if (!quotes.map) {
+    return unavailableSection<ThemeRecord>(observedAt, "no board quote available for any theme", {
+      themes: themes.length,
+    });
+  }
   for (const theme of themes) {
     const board = resolveBoard(theme, boards as BoardEntry[]);
     if (board) resolved++;
-    const q = board ? quotes.map?.get(board.code) : undefined;
+    const q = board ? quotes.map.get(board.code) : undefined;
     records.push({
       key: theme.key,
       name: theme.name,

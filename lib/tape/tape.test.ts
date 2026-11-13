@@ -223,6 +223,18 @@ test("tape snapshot — every record round-trips with both clocks", async (t) =>
     assert.ok(snap.limitPool.records.every((r) => r.asOf === r.observedAt));
   });
 
+  await t.test("theme rows carry a real change percent for concept boards", () => {
+    // Regression: quoting only industry (type 2) boards left every theme with
+    // changePct: null, because a theme resolves to a CONCEPT board
+    // (人工智能 → 90.BK0800). Null there reads as "the theme did not move"
+    // rather than "we never asked", and it survived every clock assertion.
+    const ai = snap.themes.records.find((r) => r.key === "ai");
+    assert.ok(ai, "the ai theme must be present");
+    assert.equal(ai.boardCode, "BK0800");
+    assert.equal(typeof ai.changePct, "number", "a resolved theme board must carry its quote");
+    assert.equal(ai.changePct, -1.78);
+  });
+
   await t.test("asOf and observedAt are allowed to differ, and do when upstream has one", () => {
     assert.notEqual(snap.industries.asOf, snap.industries.observedAt);
     assert.ok(
