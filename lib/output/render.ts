@@ -138,6 +138,127 @@ const TEXTS_ZH = {
   viewByTopic: "按话题",
   viewBySource: "按来源",
   laneEmpty: "今日该栏目无内容。",
+  // Reading pages (increment 7): /hour.html and /stories.html. These are prose
+  // surfaces — the sentence leads and the number follows — so the strings below
+  // are written as sentence frames with placeholders rather than labels.
+  navHour: "盘中逐时报",
+  navStories: "故事线",
+  navHome: "回到最新一期",
+  hourTitle: "盘中逐时报",
+  hourSubtitle: "半个钟头一个截面：谁动了、动得多宽、指数怎么说",
+  hourDayPicker: "交易日",
+  hourSlotNav: "盘面时点",
+  hourEmptyTitle: "还没有盘中快照",
+  hourEmptyBody:
+    "盘中磁带按交易日 09:35 至 15:05 每半小时留一个截面，第一个截面在 2026-11-16（周一）09:35（Asia/Shanghai）生成。在此之前这一页没有内容可讲——不是坏了，是在等开盘。",
+  hourEmptyWaitingFor: "等待中",
+  hourDayGapTitle: "这一天没有盘中快照",
+  hourDayGapBody: "磁带里没有 {date} 的任何截面，因此没有句子可写。",
+  hourSlotGapTitle: "{time} 这个时点没有截面",
+  hourSlotGapBody:
+    "本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。",
+  hourSectionGap: "缺：{section}（{reason}）",
+  hourMissingSlots: "这一天共 {total} 个盘面时点，缺 {missing} 个：{slots}。缺失的时点在上面的时点条里逐个标出。",
+  hourSectionGapHint: "该段不可用，下面的句子不会替它说话。",
+  hourClockLine:
+    "两个时钟：行情时间 asOf {asOf} 是数据描述的市场时刻，观察时间 observedAt {observedAt} 是我们抓取的瞬间。",
+  hourClockDrift:
+    "两者相差 {minutes} 分钟——这一档的数字描述的是更早的市场状态，不是抓取那一刻。",
+  hourClockSame: "两者基本重合，这一档就是当下的盘面。",
+  hourSentenceIndex:
+    "上证指数收于 {shPrice} 点，{shMove}；深证成指{szMove}，创业板指{cybMove}。",
+  hourSentenceBreadth:
+    "行业层面 {total} 个板块中 {up} 个上涨、{down} 个下跌、{flat} 个基本走平，上涨家数占比 {upShare}——{breadthWord}。",
+  hourSentenceExtremes:
+    "领涨的是{bestName}（{bestPct}），领跌的是{worstName}（{worstPct}）；涨幅超过 2% 的板块 {upBig} 个，跌幅超过 2% 的 {downBig} 个。",
+  hourSentenceSevere: "其中涨逾 5% 的 {upSevere} 个、跌逾 5% 的 {downSevere} 个。",
+  /**
+   * Separator between two sentences that are concatenated into one paragraph.
+   * Chinese needs nothing (the full stop closes the sentence); English needs a
+   * space. Kept in the table so the join rule is localized rather than guessed.
+   */
+  hourSentenceJoin: "",
+  hourSentenceFlows:
+    "资金面上，{bestName} 净流入 {bestYi} 亿，{worstName} 净流出 {worstYi} 亿。",
+  hourSentenceThemes:
+    "{total} 个主题板块中 {quoted} 个拿到报价、{up} 个上涨，最强的是{bestName}（{bestPct}），最弱的是{worstName}（{worstPct}）。",
+  hourSentenceLimits: "全市场涨停 {up} 家、跌停 {down} 家。",
+  hourSentenceStories:
+    "同一时间窗（前 30 分钟）里，账本新收录 {count} 条故事，最早一条来自 {sourceName}，观测于 {time}：{title}。",
+  hourStoriesNone: "这一档的时间窗内账本没有新故事；盘中是行情时间，不是消息时间。",
+  hourStoriesEarlier: "更早的故事（作背景，不属于这一档）",
+  hourStoriesGap: "故事账本不可用（{reason}），这一页只讲盘面。",
+  hourLedgerAttribution: "来源 {sourceName} · 首次观测 {time}",
+  hourContestedBadge: "多源跟进",
+  hourSectionIndices: "指数",
+  hourSectionIndustries: "行业板块",
+  hourSectionThemes: "主题板块",
+  hourSectionFundFlows: "板块资金",
+  hourSectionLimitPool: "涨跌停池",
+  hourSectionClocks: "分段时钟",
+  hourMethodTitle: "口径",
+  hourMethodBoard: "板块涨跌幅超过 2% 记“大涨/大跌”，超过 5% 记“暴涨/暴跌”，|涨跌| 小于 0.005% 记走平。",
+  hourMethodBreadth: "宽度口径是上涨板块数除以有报价的板块总数；≥80% 记“普涨”，≤20% 记“普跌”。",
+  hourMethodIndex: "指数涨跌幅超过 0.5% 记“明显”，超过 2% 记“剧烈”。",
+  hourMethodStories:
+    "故事的时间取观测时间（我们抓到的瞬间），不是媒体自己的发布时间；窗口是抓取前 30 分钟。",
+  hourMethodClock:
+    "asOf 优先取上游行情自带的时间戳，上游没有时间戳时退回观察时间，并在该段标注“fetch”。",
+  hourMoveSevUp: "涨势剧烈",
+  hourMoveBigUp: "明显上涨",
+  hourMoveUp: "小幅上涨",
+  hourMoveFlat: "基本走平",
+  hourMoveDown: "小幅下跌",
+  hourMoveBigDown: "明显下跌",
+  hourMoveSevDown: "跌势剧烈",
+  hourBreadthStrongUp: "普涨",
+  hourBreadthLeanUp: "偏强",
+  hourBreadthMixed: "分化",
+  hourBreadthLeanDown: "偏弱",
+  hourBreadthStrongDown: "普跌",
+  hourRevisionNote: "本档为第 {n} 次补抓，原始截面仍在。",
+  hourFooter: "句子里的每个数字都能在 daily_reports/tape 的对应字段中找到。零 AI。",
+  storiesTitle: "故事线",
+  storiesSubtitle: "同一件事的历次观测、标题修订与首发归属",
+  storiesEmptyTitle: "故事账本还是空的",
+  storiesEmptyBody:
+    "账本从 2026-11-13 起逐期累积，每个版次把当次的稿件折进来。还没有任何观测时这一页只说明在等什么：等第一份版次 sidecar 落盘。",
+  storiesGap: "故事账本不可用（{reason}），因此没有线程可讲。",
+  storiesCounts: "账本内 {stories} 条故事、{sightings} 条观测、{revised} 条故事含标题修订（共 {revisions} 次修订）。",
+  storiesFirstMoverTitle: "谁最先报道",
+  storiesFirstMoverNote:
+    "领先时间是观测粒度，不是反应速度：我们每期抓一次，所以“领先 900 分钟”意味着“早报就拿到了、对手晚报才出现”，而不是 900 分钟内跑赢了谁。",
+  storiesRankBasis: "排序按“有争议首发”：最早观测且随后确有另一家跟进；只被一家报道的故事不计入。",
+  storiesRankWire: "来源",
+  storiesRankContested: "有争议首发",
+  storiesRankSole: "总首发",
+  storiesRankCo: "并列首发",
+  storiesRankStories: "涉及故事",
+  storiesRankMedianLead: "领先中位（分钟）",
+  storiesRankSamples: "样本",
+  storiesRankEmpty: "窗口内还没有“最早且被跟进”的故事，排名表因此为空——这不是零分，是没有样本。",
+  storiesThreadEmpty: "账本里还没有故事。",
+  storiesFirstSeen: "首次观测",
+  storiesPublished: "媒体发布时间",
+  storiesPublishLag: "观测滞后 {minutes} 分钟",
+  storiesSightings: "历次观测",
+  storiesNoSightings: "只有一次观测。",
+  storiesRevisionTrail: "标题修订轨迹",
+  storiesNoRevisions: "这条故事没有标题修订。",
+  storiesRevisionTrailHeading: "改动最多的话题",
+  storiesRevisionFrom: "原",
+  storiesRevisionTo: "改",
+  storiesFirstMoverCol: "首发与领先",
+  storiesFirstMoverSole: "首发 {sourceName}，领先 {minutes} 分钟于 {runnerUp}",
+  storiesFirstMoverTied: "并列首发：{sources}",
+  storiesFirstMoverAlone: "仅 {sourceName} 一家观测到，无从计算领先",
+  storiesLeadBasisBadge: "观测粒度 · 非反应速度",
+  storiesSourceCol: "来源",
+  storiesObservedCol: "观测时间",
+  storiesHeadlineCol: "当时标题",
+  storiesThreadHeading: "全部故事线",
+  storiesWindow: "账本窗口 {from} 至 {to} · {days} 天",
+  storiesFooter: "只记录我们何时看到，不记录媒体自称何时发布。零 AI。",
 };
 
 const TEXTS_EN: typeof TEXTS_ZH = {
@@ -233,9 +354,140 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   viewByTopic: "By topic",
   viewBySource: "By source",
   laneEmpty: "Nothing in this lane today.",
+  navHour: "Intraday tape",
+  navStories: "Story threads",
+  navHome: "Latest edition",
+  hourTitle: "Intraday tape",
+  hourSubtitle: "One cross-section every half hour: who moved, how broadly, what the index said",
+  hourDayPicker: "Trading day",
+  hourSlotNav: "Session slot",
+  hourEmptyTitle: "No intraday snapshot yet",
+  hourEmptyBody:
+    "The tape keeps one cross-section per half-hour slot between 09:35 and 15:05 on trading days. The first snapshot is written at 09:35 Asia/Shanghai on Monday 2026-11-16. Before that there is nothing to describe here — this page is waiting for the opening bell, not broken.",
+  hourEmptyWaitingFor: "Waiting for",
+  hourDayGapTitle: "No snapshot for this day",
+  hourDayGapBody: "The tape holds no cross-section at all for {date}, so there is no sentence to write.",
+  hourSlotGapTitle: "No cross-section at {time}",
+  hourSlotGapBody:
+    "A capture should have landed within 20 minutes of this slot, but no file exists. The gap is part of the record; the page will not borrow the nearest number to fill it.",
+  hourSectionGap: "Missing: {section} ({reason})",
+  hourMissingSlots:
+    "{missing} of this day's {total} session slots have no capture: {slots}. Each one is marked on the slot row above.",
+  hourSectionGapHint: "This section is unavailable — the sentences below will not speak for it.",
+  hourClockLine:
+    "Two clocks: the market clock asOf {asOf} is the moment the data describes; the observation clock observedAt {observedAt} is when we fetched it.",
+  hourClockDrift:
+    "They differ by {minutes} minutes — this slot describes an earlier market state, not the instant we looked.",
+  hourClockSame: "They essentially coincide, so this slot is the market as of now.",
+  hourSentenceIndex:
+    "The Shanghai Composite closed at {shPrice}, {shMove}; the Shenzhen Component {szMove}, the ChiNext Index {cybMove}.",
+  hourSentenceBreadth:
+    "Across {total} industry boards, {up} advanced, {down} declined and {flat} were essentially flat — an advance share of {upShare}, {breadthWord}.",
+  hourSentenceExtremes:
+    "The strongest board was {bestName} ({bestPct}), the weakest {worstName} ({worstPct}); {upBig} boards gained more than 2% and {downBig} lost more than 2%.",
+  hourSentenceSevere: "Of those, {upSevere} gained more than 5% and {downSevere} lost more than 5%.",
+  hourSentenceJoin: " ",
+  hourSentenceFlows:
+    "On flows, {bestName} took in {bestYi} hundred million yuan while {worstName} shed {worstYi} hundred million.",
+  hourSentenceThemes:
+    "Of the {total} theme boards, {quoted} carried a quote and {up} rose; the strongest was {bestName} ({bestPct}), the weakest {worstName} ({worstPct}).",
+  hourSentenceLimits: "Across the whole market {up} stocks hit the limit up and {down} the limit down.",
+  hourSentenceStories:
+    "In the same window (the previous 30 minutes) the ledger recorded {count} new stories; the earliest came from {sourceName}, observed at {time}: {title}.",
+  hourStoriesNone: "No new stories entered the ledger in this slot's window; the tape keeps market time, not headline time.",
+  hourStoriesEarlier: "Earlier stories (context, not this slot)",
+  hourStoriesGap: "The story ledger is unavailable ({reason}), so this page covers the market only.",
+  hourLedgerAttribution: "Source {sourceName} · first observed {time}",
+  hourContestedBadge: "Multi-wire",
+  hourSectionIndices: "Indices",
+  hourSectionIndustries: "Industry boards",
+  hourSectionThemes: "Theme boards",
+  hourSectionFundFlows: "Board flows",
+  hourSectionLimitPool: "Limit pool",
+  hourSectionClocks: "Per-section clocks",
+  hourMethodTitle: "Yardsticks",
+  hourMethodBoard:
+    "A board move beyond 2% is called large, beyond 5% severe, and under 0.005% in absolute value is called flat.",
+  hourMethodBreadth:
+    "Breadth is advancing boards over quoted boards; 80% or more reads as broad strength, 20% or less as broad weakness.",
+  hourMethodIndex:
+    "An index move beyond 0.5% is called notable, beyond 2% violent.",
+  hourMethodStories:
+    "Story times are observation times (when we fetched), never the publisher's own stamp; the window is the 30 minutes before the capture.",
+  hourMethodClock:
+    "asOf prefers the upstream quote timestamp; when the payload carries none it falls back to the fetch instant and the section says \"fetch\".",
+  hourMoveSevUp: "sharply higher",
+  hourMoveBigUp: "clearly higher",
+  hourMoveUp: "modestly higher",
+  hourMoveFlat: "essentially flat",
+  hourMoveDown: "modestly lower",
+  hourMoveBigDown: "clearly lower",
+  hourMoveSevDown: "sharply lower",
+  hourBreadthStrongUp: "broad strength",
+  hourBreadthLeanUp: "leaning stronger",
+  hourBreadthMixed: "mixed",
+  hourBreadthLeanDown: "leaning weaker",
+  hourBreadthStrongDown: "broad weakness",
+  hourRevisionNote: "This is re-capture #{n}; the original cross-section is still on disk.",
+  hourFooter: "Every figure in these sentences maps to a field under daily_reports/tape. Zero AI.",
+  storiesTitle: "Story threads",
+  storiesSubtitle: "Every observation of a story, its headline revisions, and who had it first",
+  storiesEmptyTitle: "The story ledger is still empty",
+  storiesEmptyBody:
+    "The ledger accumulates edition by edition, folding each edition's copy into persistent story records. With no observations yet, this page simply states what it is waiting for: the first edition sidecar on disk.",
+  storiesGap: "The story ledger is unavailable ({reason}), so there are no threads to show.",
+  storiesCounts: "{stories} stories, {sightings} observations, and {revised} stories with headline revisions ({revisions} revisions in total).",
+  storiesFirstMoverTitle: "Who reported first",
+  storiesFirstMoverNote:
+    "Leads are edition-cadence granularity, not reaction latency: we fetch once per edition, so \"led ahead by 900 minutes\" means the morning fetch had it while the runner-up only surfaced at the evening one.",
+  storiesRankBasis: "Ranked on contested firsts: earliest observation AND later followed by another wire. Single-wire stories are excluded.",
+  storiesRankWire: "Wire",
+  storiesRankContested: "Contested firsts",
+  storiesRankSole: "All firsts",
+  storiesRankCo: "Co-firsts",
+  storiesRankStories: "Stories",
+  storiesRankMedianLead: "Median lead (min)",
+  storiesRankSamples: "Samples",
+  storiesRankEmpty: "No story in the window was both earliest and followed, so the table is empty — that is no sample, not a zero score.",
+  storiesThreadEmpty: "The ledger holds no stories yet.",
+  storiesFirstSeen: "First seen",
+  storiesPublished: "Wire timestamp",
+  storiesPublishLag: "observed {minutes} minutes later",
+  storiesSightings: "Observations",
+  storiesNoSightings: "Observed once only.",
+  storiesRevisionTrail: "Headline revisions",
+  storiesNoRevisions: "No headline revisions for this story.",
+  storiesRevisionTrailHeading: "Most-rewritten stories",
+  storiesRevisionFrom: "from",
+  storiesRevisionTo: "to",
+  storiesFirstMoverCol: "First mover & lead",
+  storiesFirstMoverSole: "{sourceName} first, leading {runnerUp} by {minutes} minutes",
+  storiesFirstMoverTied: "Co-first: {sources}",
+  storiesFirstMoverAlone: "Only {sourceName} observed it, so no lead can be measured",
+  storiesLeadBasisBadge: "observed granularity · not reaction latency",
+  storiesSourceCol: "Source",
+  storiesObservedCol: "Observed",
+  storiesHeadlineCol: "Headline then",
+  storiesThreadHeading: "All story threads",
+  storiesWindow: "Ledger window {from} to {to} · {days} days",
+  storiesFooter: "We record when we saw it, never when the publisher claims it appeared. Zero AI.",
 };
 
 const STR = REPORT_LOCALE === "en" ? TEXTS_EN : TEXTS_ZH;
+/**
+ * The string table itself, for the reading pages (`/hour.html`,
+ * `/stories.html`). Exported as `STR` so those renderers read the *same*
+ * table as the report instead of keeping a parallel copy that could drift —
+ * `i18n-parity.test.ts` only parses `render.ts`, so a key that lives here is
+ * by construction paired.
+ */
+export const STRINGS = STR;
+export function fill(template: string, vars: Record<string, string | number>): string {
+  return template.replace(/\{(\w+)\}/g, (m, k: string) =>
+    k in vars ? String(vars[k]) : m,
+  );
+}
+
 const ASSET_GROUP_LABELS_LOCALIZED = getAssetGroupLabels(REPORT_LOCALE);
 
 // ----- types -----
@@ -747,6 +999,25 @@ function laneViewBySource(
 
 // ----- HTML helpers -----
 
+/** Shared escaping for the reading pages (same rules as the report body). */
+export function esc(s: string): string {
+  return escapeHtml(s);
+}
+
+/**
+ * The site nav row, shown in WEB_MODE builds. Archive is the historical entry
+ * point and keeps its place; the two reading pages are peers of it, and the
+ * paths are relative to `daily_reports/<date>/<hour>.html`, which is where an
+ * edition page lives. build-site rewrites them for the homepage copy.
+ */
+export function siteNavLinks(): string {
+  return [
+    `<a href="../archive.html">${STR.archiveLink}</a>`,
+    `<a href="../hour.html">${STR.navHour}</a>`,
+    `<a href="../stories.html">${STR.navStories}</a>`,
+  ].join("");
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
@@ -1177,7 +1448,7 @@ export function renderHtml(
     </div>
     ${
       process.env.WEB_MODE === "true"
-        ? `<a class="archive-link" href="../archive.html">${STR.archiveLink}</a>`
+        ? `<nav class="site-nav" aria-label="site">${siteNavLinks()}</nav>`
         : ""
     }
   </section>`;
@@ -1343,6 +1614,31 @@ export function renderHtml(
     font-weight: 600;
   }
   .archive-link:hover { text-decoration: underline; }
+
+  /* Site nav: the reading pages sit beside the archive as peer entry points,
+     not as a floating badge — same row, same weight, same chip geometry. */
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.9rem;
+  }
+  .site-nav a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .site-nav a:hover { border-color: var(--accent); }
+  .site-nav a span { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
 
   .eyebrow {
     font-size: 0.72rem;
