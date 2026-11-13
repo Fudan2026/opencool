@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-13T13:13:21.880Z",
+  "generatedAt": "2026-11-13T14:16:49.764Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 22,
-  "avgSentiment": -4.4,
+  "avgSentiment": -4.3,
   "sentimentCurve": [
     {
       "date": "2026-11-06",
@@ -114,7 +114,7 @@
     {
       "date": "2026-11-13",
       "hour": "19",
-      "score": -5
+      "score": -3
     }
   ],
   "sectorAvg": [
@@ -139,7 +139,7 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -24.5,
+      "avg": -23.7,
       "editions": 22
     },
     {
@@ -157,7 +157,7 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -13.2,
+      "avg": -12.5,
       "editions": 22
     },
     {
@@ -192,6 +192,20 @@
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
+      "title": "Zoe Kleinman: Nvidia CEO's affair will cause ripples across US and beyond",
+      "url": "https://www.bbc.co.uk/news/articles/cj3vqv3nee72o?at_medium=RSS&at_campaign=rss",
+      "count": 10
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Nvidia shares tumble over investigation into Huang's affair with alleged Chinese spy",
+      "url": "https://www.bbc.co.uk/news/articles/c6zxjx01vyleo?at_medium=RSS&at_campaign=rss",
+      "count": 10
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
       "title": "Nvidia opens investigation after report CEO Jensen Huang was target of foreign intelligence",
       "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation",
       "count": 9
@@ -201,20 +215,6 @@
       "displayName": "美元 / 人民币",
       "title": "Anthropic斥资34亿美元接手发电设备",
       "url": "https://www.ftchinese.com/story/001111311",
-      "count": 9
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Zoe Kleinman: Nvidia CEO's affair will cause ripples across US and beyond",
-      "url": "https://www.bbc.co.uk/news/articles/cj3vqv3nee72o?at_medium=RSS&at_campaign=rss",
-      "count": 9
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Nvidia shares tumble over investigation into Huang's affair with alleged Chinese spy",
-      "url": "https://www.bbc.co.uk/news/articles/c6zxjx01vyleo?at_medium=RSS&at_campaign=rss",
       "count": 9
     },
     {
@@ -349,28 +349,28 @@
       "lastSeen": "2026-11-08"
     },
     {
+      "term": "预期",
+      "count": 2,
+      "firstSeen": "2026-11-06",
+      "lastSeen": "2026-11-13"
+    },
+    {
       "term": "高盛时隔两个月再度大砍黄金目标",
       "count": 2,
       "firstSeen": "2026-11-08",
       "lastSeen": "2026-11-08"
-    },
-    {
-      "term": "黄仁",
-      "count": 2,
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 114
+      "totalHits": 112
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 72
+      "totalHits": 71
     },
     {
       "key": "bank",
@@ -390,7 +390,7 @@
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 44
+      "totalHits": 41
     },
     {
       "key": "defense",
@@ -398,24 +398,24 @@
       "totalHits": 28
     },
     {
-      "key": "brokerage",
-      "name": "券商",
-      "totalHits": 26
-    },
-    {
       "key": "robotics",
       "name": "机器人",
       "totalHits": 25
     },
     {
+      "key": "brokerage",
+      "name": "券商",
+      "totalHits": 24
+    },
+    {
       "key": "media",
       "name": "传媒",
-      "totalHits": 20
+      "totalHits": 21
     },
     {
       "key": "comms",
       "name": "通信",
-      "totalHits": 11
+      "totalHits": 12
     },
     {
       "key": "infra",
@@ -426,18 +426,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.48,
-      "editions": 20
+      "avgChangePct": -0.47,
+      "editions": 19
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.21,
-      "editions": 21
+      "avgChangePct": -1.17,
+      "editions": 20
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.68,
-      "editions": 20
+      "avgChangePct": -1.6,
+      "editions": 19
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
