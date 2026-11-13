@@ -37,7 +37,7 @@ import { scoreSentiment, MIN_HISTORY_SAMPLES } from "../lib/nlp/sentiment";
 import { cleanKeywords } from "../lib/nlp/keywords";
 import { loadLeadConfig, applyLead } from "../lib/editorial/lead";
 import { THEME_CATALOG, themeArticleHits } from "../lib/themes/catalog";
-import { classifyAll } from "../lib/topics/classify";
+import { classifyAll, type TopicTag } from "../lib/topics/classify";
 import type { SourceDef } from "../lib/sources/types";
 import type { MorningBrief } from "../lib/ai/pipeline";
 import type { QuantSection } from "../lib/invest/types";
@@ -45,28 +45,39 @@ import type { QuantSection } from "../lib/invest/types";
 const OUTPUT_DIR = "daily_reports";
 
 /**
- * Attach shadow-mode topic tags to the articles written to the sidecar.
+ * Attach shadow-mode two-axis tags to the articles written to the sidecar.
  *
- * Increment 1 of the IA redesign: additive only. The returned array is used
- * solely for `${base}-articles.json`; the in-memory `articles` feeding
+ * Increment 1 of the IA redesign: additive only. Each article gains `lane`,
+ * `laneConfidence`, `topic`, `topicConfidence`, `domestic` and
+ * `domesticConfidence`. The returned array is used solely for
+ * `${base}-articles.json`; the in-memory `articles` feeding
  * `groupRaw`/`renderHtml` is never mutated, which is what keeps the rendered
- * HTML byte-identical. Non-fatal by construction — `classifyAll` never
- * throws, and any surprise here degrades to the untagged list.
+ * HTML byte-identical. Non-fatal by construction — `classifyAll` never throws,
+ * and any surprise here degrades to the untagged list.
  */
 function withTopics(
   articles: ArticleInput[],
   registry: SourceDef[],
-): Array<ArticleInput & { topic?: string; topicConfidence?: number }> {
+): Array<ArticleInput & Partial<TopicTag>> {
   try {
     const subcategoryOf = new Map(registry.map((s) => [s.id, s.subcategory]));
     const tagged = classifyAll(articles, (a) => subcategoryOf.get(a.sourceId));
-    const counts = new Map<string, number>();
-    for (const a of tagged) counts.set(a.topic, (counts.get(a.topic) ?? 0) + 1);
-    const summary = [...counts.entries()]
+    const lanes = { zh: 0, external: 0 };
+    const topics = new Map<string, number>();
+    let domestic = 0;
+    for (const a of tagged) {
+      lanes[a.lane] += 1;
+      topics.set(a.topic, (topics.get(a.topic) ?? 0) + 1);
+      if (a.domestic) domestic += 1;
+    }
+    const topicSummary = [...topics.entries()]
       .sort((a, b) => b[1] - a[1])
       .map(([t, n]) => `${t}×${n}`)
       .join(", ");
-    console.log(`[daily] topics (shadow): ${summary}`);
+    console.log(
+      `[daily] topics (shadow): zh×${lanes.zh} external×${lanes.external} | ` +
+        `${topicSummary} | domestic×${domestic}`,
+    );
     return tagged;
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
