@@ -228,6 +228,17 @@ export interface SlotReading {
   observedAt: string;
   /** observedAt − asOf, in minutes; null when either is unreadable. */
   driftMinutes: number | null;
+  /**
+   * Whether the slot's label agrees with what the snapshot describes.
+   *
+   * The page must not present a mislabelled capture as a normal session reading
+   * — that is how `2026-11-14/06.json` became a permanent lie in the archive
+   * (built 02:26 SH, labelled 06:00). But a capture taken while the market is
+   * closed legitimately describes an older close, and calling that a defect
+   * would flag every weekend and holiday run for doing the right thing. So the
+   * classification is explicit, and only `mislabelled` is an error.
+   */
+  integrity: SlotIntegrity;
   clocks: SectionClock[];
   gaps: SectionGap[];
   index: IndexLine[] | null;
@@ -237,6 +248,34 @@ export interface SlotReading {
   themes: ThemeSummary | null;
   limits: { up: number; down: number } | null;
   stories: StoryWindow | null;
+}
+
+/**
+ * How a snapshot's content relates to the slot it is filed under.
+ *
+ *   ok            the market clock is within tolerance of the slot, and the
+ *                 capture happened at or soon after it: an ordinary reading.
+ *   market-closed the capture was taken when the exchange was not trading
+ *                 (weekend, holiday, or outside the session), so it describes
+ *                 the last close. Expected, disclosed, not a defect.
+ *   mislabelled   the capture happened inside trading hours but the market
+ *                 clock is far from the slot: the file's label does not
+ *                 describe its content — a premature or misfiled edition.
+ *   unresolved    not enough readable clocks to decide. Says so rather than
+ *                 guessing either way.
+ */
+export type SlotIntegrityKind = "ok" | "market-closed" | "mislabelled" | "unresolved";
+
+export interface SlotIntegrity {
+  kind: SlotIntegrityKind;
+  /** Slot as minutes since midnight, for display. */
+  slotMinutes: number;
+  /** Market clock minus slot time, in minutes (negative = older than the slot). */
+  marketLagMinutes: number | null;
+  /** Capture instant minus slot time, in minutes (negative = early capture). */
+  captureLeadMinutes: number | null;
+  /** Short human reason, for the log and the named note. */
+  reason: string;
 }
 
 export interface TapeSlotView {
@@ -636,6 +675,7 @@ export function buildSlotReading(
     asOf,
     observedAt,
     driftMinutes,
+    integrity: classifySlot(snapshot, asOf),
     clocks,
     gaps: gapsOf(snapshot),
     index: indexLines(snapshot),
@@ -648,7 +688,222 @@ export function buildSlotReading(
   };
 }
 
-/** True when a day carries at least one usable capture. */
+/** True when a `HH:MM` slot is inside either A-share continuous session. */
+function inSessionMinutes(minutes: number): boolean {
+  const morning = minutes >= 9 * 60 + 30 && minutes <= 11 * 60 + 30;
+  const afternoon = minutes >= 13 * 60 && minutes <= 15 * 60;
+  return morning || afternoon;
+}
+
+/** Day of week for a `YYYY-MM-DD` key, 0 = Sunday. */
+function weekdayOf(dateKey: string): number {
+  const probe = new Date(`${dateKey}T00:00:00Z`);
+  return Number.isNaN(probe.getTime()) ? -1 : probe.getUTCDay();
+}
+
+/** Minutes since midnight of an instant, in the report zone. */
+function instantMinutesOf(iso: string, tz: string): number | null {
+  const at = parseInstant(iso);
+  if (!at) return null;
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz,
+    hourCycle: "h23",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).formatToParts(at);
+  const h = Number(parts.find((p) => p.type === "hour")?.value);
+  const m = Number(parts.find((p) => p.type === "minute")?.value);
+  if (!Number.isFinite(h) || !Number.isFinite(m)) return null;
+  return h * 60 + m;
+}
+
+/** Civil date of an instant in a zone, `YYYY-MM-DD`. */
+function instantDateOf(iso: string, tz: string): string | null {
+  const at = parseInstant(iso);
+  if (!at) return null;
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(at);
+}
+
+/**
+ * Did we capture this while the exchange was trading?
+ *
+ * This is the question that separates the two cases, and it has to be asked of
+ * the CAPTURE instant, not of the market clock: a forced weekend capture and a
+ * misfiled session capture both show a stale `asOf`, and the only difference is
+ * whether anyone could have been quoting at the time we looked.
+ */
+function capturedDuringSession(observedAt: string, tz: string): boolean | null {
+  const date = instantDateOf(observedAt, tz);
+  const minutes = instantMinutesOf(observedAt, tz);
+  if (!date || minutes === null) return null;
+  const dow = weekdayOf(date);
+  if (dow < 1 || dow > 5) return false;
+  return inSessionMinutes(minutes);
+}
+
+/**
+ * Classify one snapshot's slot label against its content.
+ *
+ * `MAX_LABEL_LAG_MINUTES` is the tolerance in both directions: a capture a few
+ * minutes after its slot legitimately carries a market clock a few minutes
+ * behind it, and the tape's whole design is "capture just after the bell".
+ * Beyond 90 minutes the file is describing a materially different moment than
+ * its name claims.
+ */
+export const MAX_LABEL_LAG_MINUTES = 90;
+
+export function classifySlot(
+  snapshot: Pick<TapeSnapshot, "slot" | "date" | "observedAt" | "timezone">,
+  marketAsOf: string,
+): SlotIntegrity {
+  const tz = snapshot.timezone || "UTC";
+  const slotMinutes = slotMinutesOf(String(snapshot.slot ?? ""));
+  const asOfAt = parseInstant(marketAsOf);
+  const obsAt = parseInstant(String(snapshot.observedAt ?? ""));
+
+  // The instant the slot's LABEL names. Both comparisons are against it: is the
+  // content close to the label, and was the capture taken near it.
+  const slotInstant = slotMidnightAt(String(snapshot.date ?? ""), String(snapshot.slot ?? ""), tz);
+  const marketLagMinutes =
+    asOfAt && slotInstant ? minutesBetween(asOfAt, slotInstant) : null;
+  const captureLeadMinutes =
+    obsAt && slotInstant ? minutesBetween(obsAt, slotInstant) : null;
+
+  if (marketLagMinutes === null || slotMinutes === null) {
+    return {
+      kind: "unresolved",
+      slotMinutes: slotMinutes ?? -1,
+      marketLagMinutes,
+      captureLeadMinutes,
+      reason: "market clock or slot unreadable",
+    };
+  }
+
+  const traded = capturedDuringSession(String(snapshot.observedAt ?? ""), tz);
+  const lag = Math.abs(marketLagMinutes);
+
+  // A market clock that lands AFTER the file's own date cannot be a legitimate
+  // closed-market capture: a file dated 11-09 cannot describe a 11-16 session.
+  // That shape only comes from a backfill writing today's quotes into a past
+  // slot's folder, and it has to be caught before the closed-market branch
+  // below would wave it through on a weekend run.
+  const asOfDate = instantDateOf(marketAsOf, tz);
+  const statedDate = /^\d{4}-\d{2}-\d{2}$/.test(String(snapshot.date ?? ""))
+    ? String(snapshot.date)
+    : null;
+  if (asOfDate && statedDate && asOfDate > statedDate) {
+    return {
+      kind: "mislabelled",
+      slotMinutes,
+      marketLagMinutes,
+      captureLeadMinutes,
+      reason: `market clock ${asOfDate} is after the file's own date ${statedDate}`,
+    };
+  }
+
+  if (traded === false) {
+    // Captured while the exchange was shut: an older close is the correct
+    // content, and the page should say "market closed" rather than alarm.
+    return {
+      kind: "market-closed",
+      slotMinutes,
+      marketLagMinutes,
+      captureLeadMinutes,
+      reason: lag > MAX_LABEL_LAG_MINUTES
+        ? `captured while the market was closed; describes the last close ${Math.round(lag)}min from this slot`
+        : "captured while the market was closed",
+    };
+  }
+
+  if (lag <= MAX_LABEL_LAG_MINUTES) {
+    return {
+      kind: "ok",
+      slotMinutes,
+      marketLagMinutes,
+      captureLeadMinutes,
+      reason: "market clock within tolerance of the slot",
+    };
+  }
+
+  // Captured during trading hours but the content is far from the label. Two
+  // causes produce this shape and the page treats them the same way, because
+  // the reader's conclusion is identical in both: this file does not describe
+  // the moment its name claims. Either the capture was misfiled (a backfill
+  // writing today's tape into a past slot's folder) or the upstream quote was
+  // dead and returned a stale value.
+  return {
+    kind: "mislabelled",
+    slotMinutes,
+    marketLagMinutes,
+    captureLeadMinutes,
+    reason: `captured during the session, but the market clock it carries is ${Math.round(
+      lag,
+    )}min from this slot`,
+  };
+}
+
+/** Minutes since midnight for a `HH:MM` slot; null when unparseable. */
+function slotMinutesOf(slot: string): number | null {
+  const m = /^(\d{1,2}):(\d{2})$/.exec(slot.trim());
+  if (!m) return null;
+  const h = Number(m[1]);
+  const min = Number(m[2]);
+  if (!Number.isFinite(h) || !Number.isFinite(min) || h > 23 || min > 59) return null;
+  return h * 60 + min;
+}
+
+/**
+ * The instant a `date` + `HH:MM` slot nominally names, in `tz`.
+ *
+ * Derived through Intl rather than by assuming a fixed offset, so a fork in a
+ * DST zone still gets the right instant. Two passes: guess with the zone's
+ * offset at the naive UTC reading, then correct once — sufficient because the
+ * guess is within an offset of the answer and no A-share slot is near a
+ * DST transition (Shanghai has none at all).
+ */
+function slotMidnightAt(date: string, slot: string, tz: string): Date | null {
+  const minutes = slotMinutesOf(slot);
+  if (minutes === null) return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date);
+  if (!m) return null;
+  const naiveMs = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])) + minutes * 60_000;
+  let guess = new Date(naiveMs);
+  for (let i = 0; i < 2; i++) {
+    const offset = tzOffsetMinutesLocal(guess, tz);
+    guess = new Date(naiveMs - offset * 60_000);
+  }
+  return guess;
+}
+
+/** Offset of `tz` east of UTC at `d`, in minutes. */
+function tzOffsetMinutesLocal(d: Date, tz: string): number {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz,
+    hourCycle: "h23",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).formatToParts(d);
+  const p: Record<string, string> = {};
+  for (const part of parts) p[part.type] = part.value;
+  const asUtc = Date.UTC(
+    Number(p.year),
+    Number(p.month) - 1,
+    Number(p.day),
+    Number(p.hour),
+    Number(p.minute),
+    Number(p.second),
+  );
+  return Math.round((asUtc - Math.floor(d.getTime() / 1000) * 1000) / 60_000);
+}
 export function dayHasTape(day: TapeDayView): boolean {
   return day.slots.some((s) => s.snapshot !== null);
 }

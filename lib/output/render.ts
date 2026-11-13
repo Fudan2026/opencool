@@ -218,6 +218,15 @@ const TEXTS_ZH = {
   hourBreadthLeanDown: "偏弱",
   hourBreadthStrongDown: "普跌",
   hourRevisionNote: "本档为第 {n} 次补抓，原始截面仍在。",
+  hourIntegrityMislabelTitle: "这一档的标签与内容对不上",
+  hourIntegrityMislabelBody:
+    "文件落在 {slot} 这个时点，但它的行情时间是 {asOf}，与标签相差 {minutes} 分钟，而且是在交易时段内抓的。也就是说：这份截面描述的不是 {slot}，不应该当成正常盘中读数来读。原始文件保留在磁带里，作为记录而非修正。",
+  hourIntegrityClosedTitle: "抓取时休市，这一档描述的是最近一次收盘",
+  hourIntegrityClosedBody:
+    "观察时间 {observedAt} 不在交易时段内（周末、节假日或盘外），因此行情时间 {asOf} 是上一个收盘价，与 {slot} 相差 {minutes} 分钟。这不是缺陷，是休市时的正常结果——页面照实说明，不把它当作盘中变动。",
+  hourIntegrityUnresolved: "无法判定这一档的时间关系（缺少可读的行情时间）。",
+  hourIntegrityBadgeMislabel: "标签不符",
+  hourIntegrityBadgeClosed: "休市抓取",
   hourFooter: "句子里的每个数字都能在 daily_reports/tape 的对应字段中找到。零 AI。",
   storiesTitle: "故事线",
   storiesSubtitle: "同一件事的历次观测、标题修订与首发归属",
@@ -526,6 +535,15 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   hourBreadthLeanDown: "leaning weaker",
   hourBreadthStrongDown: "broad weakness",
   hourRevisionNote: "This is re-capture #{n}; the original cross-section is still on disk.",
+  hourIntegrityMislabelTitle: "This slot's label disagrees with its content",
+  hourIntegrityMislabelBody:
+    "The file is filed under {slot}, but its market clock is {asOf} — {minutes} minutes away from the label — and it was captured during trading hours. In other words, this cross-section does not describe {slot} and must not be read as an ordinary session reading. The original file stays in the tape as a record, not as a correction.",
+  hourIntegrityClosedTitle: "Captured while the market was closed, so this describes the last close",
+  hourIntegrityClosedBody:
+    "The observation time {observedAt} falls outside the trading session (weekend, holiday, or after hours), so the market clock {asOf} is the previous close, {minutes} minutes away from {slot}. That is not a defect — it is what a closed market looks like — and the page says so rather than presenting it as intraday movement.",
+  hourIntegrityUnresolved: "Could not determine how this slot's clocks relate (no readable market clock).",
+  hourIntegrityBadgeMislabel: "Label mismatch",
+  hourIntegrityBadgeClosed: "Closed-market capture",
   hourFooter: "Every figure in these sentences maps to a field under daily_reports/tape. Zero AI.",
   storiesTitle: "Story threads",
   storiesSubtitle: "Every observation of a story, its headline revisions, and who had it first",

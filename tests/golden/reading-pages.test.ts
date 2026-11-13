@@ -24,8 +24,10 @@ import assert from "node:assert/strict";
 import { renderHourPage } from "../../lib/output/hour-page";
 import { renderStoriesPage } from "../../lib/output/stories-page";
 import {
+  MAX_LABEL_LAG_MINUTES,
   MOVE_THRESHOLDS,
   buildSlotReading,
+  classifySlot,
   dayHasTape,
   readTapeDays,
   type SlotReading,
@@ -726,6 +728,161 @@ test("golden: /stories.html normalizes wire timestamps into the ledger zone", as
   const html = renderStoriesPage({ payload: p, sourceNames: NAMES });
   assert.ok(!html.includes(".000Z"), "raw UTC stamps must not reach the page");
   assert.ok(html.includes("2026-11-16 13:00:00 +08:00"), "the wire stamp renders in the ledger zone");
+});
+
+test("golden: a slot whose label disagrees with its content is flagged", async (t) => {
+  await t.test("an ordinary session slot classifies ok", () => {
+    const r = classifySlot(
+      { date: "2026-11-13", slot: "14:35", observedAt: clock(new Date("2026-11-13T06:35:30Z")), timezone: TZ },
+      clock(new Date("2026-11-13T06:35:10Z")),
+    );
+    assert.equal(r.kind, "ok");
+    assert.ok(Math.abs(r.marketLagMinutes ?? 999) < 5);
+  });
+
+  await t.test("a weekend forced capture is market-closed, not a defect", () => {
+    // This is the shape of `TAPE_SLOT=1435 npm run tape:bake` on a Saturday:
+    // the capture is honest about describing Friday's close, and flagging it as
+    // an error would condemn every weekend and holiday run for being correct.
+    const r = classifySlot(
+      {
+        date: "2026-11-13",
+        slot: "14:35",
+        observedAt: clock(new Date("2026-11-14T03:40:32Z")),
+        timezone: TZ,
+      },
+      clock(new Date("2026-11-13T08:11:57Z")),
+    );
+    assert.equal(r.kind, "market-closed");
+    assert.ok(r.reason.includes("market was closed"));
+  });
+
+  await t.test("a quote older than 90 minutes inside the session is flagged", () => {
+    // Captured at 14:40 on a trading day, content struck at 09:58 — the file
+    // does not describe its slot.
+    const r = classifySlot(
+      {
+        date: "2026-11-13",
+        slot: "14:35",
+        observedAt: clock(new Date("2026-11-13T06:40:00Z")),
+        timezone: TZ,
+      },
+      clock(new Date("2026-11-13T01:58:00Z")),
+    );
+    assert.equal(r.kind, "mislabelled");
+    assert.ok(Math.abs(r.marketLagMinutes ?? 0) > MAX_LABEL_LAG_MINUTES);
+  });
+
+  await t.test("a market clock after the file's own date is flagged even on a weekend", () => {
+    // The hole this closes: a backfill run on a Saturday writes today's quotes
+    // into a past date's folder, and the capture instant alone would read as
+    // "market closed". Content dated after the file cannot be a closed market.
+    const r = classifySlot(
+      {
+        date: "2026-11-08",
+        slot: "09:35",
+        observedAt: clock(new Date("2026-11-14T03:00:00Z")),
+        timezone: TZ,
+      },
+      clock(new Date("2026-11-14T02:55:00Z")),
+    );
+    assert.equal(r.kind, "mislabelled");
+    assert.ok(r.reason.includes("after the file's own date"));
+  });
+
+  await t.test("the tolerance is 90 minutes and is exported", () => {
+    assert.equal(MAX_LABEL_LAG_MINUTES, 90);
+  });
+});
+
+test("golden: the hour page renders a label mismatch as an error, not a reading", async (t) => {
+  const bad = snapshot();
+  // Re-date the fixture: a capture taken during Monday trading but filed under
+  // the previous Friday's 13:05 slot.
+  const raw = bad as unknown as Record<string, unknown>;
+  raw.date = "2026-11-13";
+  raw.observedAt = clock(new Date("2026-11-16T05:10:00Z"));
+  for (const name of ["indices", "industries", "themes", "fundFlows"]) {
+    raw[name] = { ...(raw[name] as Record<string, unknown>), observedAt: clock(new Date("2026-11-16T05:10:00Z")) };
+  }
+  const reading = buildSlotReading(bad);
+  assert.equal(reading.integrity.kind, "mislabelled");
+
+  const html = renderHourPage({
+    days: [
+      {
+        date: "2026-11-13",
+        slots: TAPE_SLOTS.map((time) => ({
+          time,
+          snapshot: time === "13:05" ? bad : null,
+          revision: 0,
+          gap: time === "13:05" ? null : "missing",
+        })),
+        missing: [],
+      },
+    ],
+    readings: new Map([["2026-11-13/13:05", reading]]),
+    timezone: TZ,
+    expectedSlots: TAPE_SLOTS,
+    empty: false,
+  });
+
+  await t.test("the banner names the defect and the gap in minutes", () => {
+    assert.ok(html.includes('data-integrity="mislabelled"'));
+    assert.ok(html.includes("标签不符"));
+    assert.ok(html.includes("这一档的标签与内容对不上"));
+    assert.ok(html.includes("不应该当成正常盘中读数来读"));
+  });
+
+  await t.test("the prose is de-emphasised but not deleted", () => {
+    assert.ok(html.includes("prose-flagged"), "flagged slots must look different");
+    // The numbers stay: hiding a bad file would be worse than labelling it.
+    assert.ok(html.includes("上证指数收于"));
+  });
+
+  await t.test("the slot's nav chip carries the flag before it is opened", () => {
+    assert.ok(html.includes("is-flagged"));
+    assert.ok(html.includes('title="标签不符"'));
+  });
+});
+
+test("golden: a closed-market capture is labelled without being called a defect", async (t) => {
+  const weekend = snapshot();
+  const raw = weekend as unknown as Record<string, unknown>;
+  // Captured Saturday 03:40 SH; market clock is Friday's close.
+  raw.observedAt = clock(new Date("2026-11-13T19:40:32Z"));
+  for (const name of ["indices", "industries", "themes", "fundFlows"]) {
+    raw[name] = { ...(raw[name] as Record<string, unknown>), observedAt: clock(new Date("2026-11-13T19:40:32Z")) };
+  }
+  const reading = buildSlotReading(weekend);
+  assert.equal(reading.integrity.kind, "market-closed");
+
+  const html = renderHourPage({
+    days: [
+      {
+        date: "2026-11-13",
+        slots: [{ time: "13:05", snapshot: weekend, revision: 0, gap: null }],
+        missing: TAPE_SLOTS.filter((s) => s !== "13:05"),
+      },
+    ],
+    readings: new Map([["2026-11-13/13:05", reading]]),
+    timezone: TZ,
+    expectedSlots: TAPE_SLOTS,
+    empty: false,
+  });
+
+  await t.test("it says the market was closed and what the number describes", () => {
+    assert.ok(html.includes('data-integrity="market-closed"'));
+    assert.ok(html.includes("休市抓取"));
+    assert.ok(html.includes("这一档描述的是最近一次收盘"));
+    assert.ok(html.includes("这不是缺陷"));
+  });
+
+  await t.test("it does not use the error styling or the error wording", () => {
+    assert.ok(!html.includes('data-integrity="mislabelled"'));
+    assert.ok(!html.includes("标签不符"));
+    assert.ok(!html.includes("不应该当成正常盘中读数来读"));
+  });
 });
 
 test("golden: thresholds are declared once and printed to the reader", async (t) => {

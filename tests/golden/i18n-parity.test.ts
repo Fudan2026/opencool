@@ -196,6 +196,24 @@ test("i18n: the reading pages' strings are paired and complete", async (t) => {
     }
   });
 
+  await t.test("the slot-integrity strings exist in both locales", () => {
+    // These carry the difference between "the market was closed" (ordinary) and
+    // "this file's label is wrong" (a defect) — a missing translation would drop
+    // that distinction in one locale only.
+    for (const key of [
+      "hourIntegrityMislabelTitle",
+      "hourIntegrityMislabelBody",
+      "hourIntegrityClosedTitle",
+      "hourIntegrityClosedBody",
+      "hourIntegrityUnresolved",
+      "hourIntegrityBadgeMislabel",
+      "hourIntegrityBadgeClosed",
+    ]) {
+      assert.ok(zh.includes(key), `TEXTS_ZH missing ${key}`);
+      assert.ok(en.includes(key), `TEXTS_EN missing ${key}`);
+    }
+  });
+
   await t.test("placeholders match across locales", () => {
     const src = fs.readFileSync(RENDER, "utf8");
     /**
