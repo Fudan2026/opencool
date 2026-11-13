@@ -153,6 +153,33 @@ test("golden: publish-lag assertion is wired and cannot deadlock the slot", asyn
   });
 });
 
+test("golden: the story ledger bake is wired into the build job", async (t) => {
+  const job = buildJobSource();
+  const names = stepNames(job);
+
+  await t.test("the step exists and runs the npm script", () => {
+    assert.ok(names.includes("Bake story ledger"), "missing story ledger bake step");
+    assert.match(stepSource(job, "Bake story ledger"), /npm run stories:bake/);
+  });
+
+  await t.test("it runs before the publish step, so stories.json ships", () => {
+    const bakeAt = names.indexOf("Bake story ledger");
+    const publishAt = names.indexOf("Publish to gh-pages");
+    assert.ok(bakeAt >= 0 && publishAt >= 0);
+    assert.ok(bakeAt < publishAt, "the ledger must be written before publishing");
+  });
+
+  await t.test("it runs after the gh-pages restore, so the prior ledger is available", () => {
+    const restoreAt = names.indexOf("Restore existing reports from gh-pages");
+    const bakeAt = names.indexOf("Bake story ledger");
+    assert.ok(restoreAt >= 0);
+    assert.ok(
+      restoreAt < bakeAt,
+      "without the restore the ledger would restart from empty on every edition",
+    );
+  });
+});
+
 test("golden: a missing llm-calls.jsonl is the documented pass case", () => {
   const src = fs.readFileSync(
     path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../scripts/assert-zero-llm.mjs"),

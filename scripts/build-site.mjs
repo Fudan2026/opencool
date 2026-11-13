@@ -1646,6 +1646,11 @@ No LLM behind any endpoint.
   search_editions
 - Theme heat: /themes.json — 24 curated themes: board heat + top
   constituents + per-edition article hits
+- Story ledger: /stories.json — point-in-time story records with a stable id,
+  firstSeenAt (when WE observed it, not the feed's pubDate), every later
+  sighting, headline revision trails, and a per-wire first-mover ranking
+  (contestedFirsts = earliest AND followed; leads are measured between our
+  fetches, so the granularity is the edition cadence)
 - Dragon-tiger list: /lhb.json — top movers by net amount (previous
   trading day)
 - MCP desk: /mcp-desk.html — operator-baked institutional snapshot

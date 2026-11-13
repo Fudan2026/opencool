@@ -24,6 +24,7 @@
     "lhb:bake": "tsx scripts/bake-lhb.ts",
     "periods:bake": "tsx scripts/bake-periods.ts",
     "themes:bake": "tsx scripts/bake-themes.ts",
+    "stories:bake": "tsx scripts/bake-stories.ts",
     "board-map:bake": "tsx scripts/bake-board-map.ts",
     "mcp:sync-watchlist": "tsx scripts/sync-mcp-watchlist.ts",
     "open": "node scripts/open-report.mjs",

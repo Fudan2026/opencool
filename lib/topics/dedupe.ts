@@ -146,10 +146,21 @@ const ASCII_START = /^[A-Za-z]/;
  * `metadata` and `huang` does not fire inside `shanghai`. Short aliases that
  * are common English words (`eu`) are word-bounded for the same reason.
  */
-export function firstStoryEntity(title: string): string | null {
+/**
+ * Every tracked entity named in the title, in `STORY_ENTITIES` declaration
+ * order (which is priority order — see the module note on Nvidia/Lutnick).
+ *
+ * `firstStoryEntity` is this function's head, so the matcher exists once. The
+ * story ledger needs the whole set, not just the first: its stable id hashes
+ * "the entity set at first sighting", so a headline naming 英伟达 and 台积电 must
+ * be distinguishable from one naming only 英伟达.
+ */
+export function storyEntities(title: string): string[] {
   const hay = normalizeTitle(title ?? "").toLowerCase();
-  if (!hay) return null;
+  if (!hay) return [];
+  const found = new Set<string>();
   for (const entity of STORY_ENTITIES) {
+    if (found.has(entity.id)) continue;
     for (const alias of entity.aliases) {
       if (ASCII_START.test(alias)) {
         let from = 0;
@@ -160,15 +171,23 @@ export function firstStoryEntity(title: string): string | null {
           const after = hay[idx + alias.length];
           const okBefore = before === undefined || !/[a-z0-9]/.test(before);
           const okAfter = after === undefined || !/[a-z0-9]/.test(after);
-          if (okBefore && okAfter) return entity.id;
+          if (okBefore && okAfter) {
+            found.add(entity.id);
+            break;
+          }
           from = idx + alias.length;
         }
       } else if (hay.includes(alias.toLowerCase())) {
-        return entity.id;
+        found.add(entity.id);
+        break;
       }
     }
   }
-  return null;
+  return STORY_ENTITIES.filter((e) => found.has(e.id)).map((e) => e.id);
+}
+
+export function firstStoryEntity(title: string): string | null {
+  return storyEntities(title)[0] ?? null;
 }
 
 /**
