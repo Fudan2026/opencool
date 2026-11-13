@@ -1,14 +1,55 @@
+import http from "node:http";
+import https from "node:https";
+
 import Parser from "rss-parser";
 import { curlFetch } from "./curl-fetch";
 import type { Category, RawArticle } from "./types";
 
-const parser = new Parser({
+const PARSER_OPTIONS = {
   timeout: 10000,
   headers: {
     "User-Agent":
       "Mozilla/5.0 (compatible; DailyBriefBot/1.0; +https://github.com/)",
   },
-});
+} as const;
+
+const parser = new Parser(PARSER_OPTIONS);
+
+/**
+ * `rss-parser` rejects on timeout/error without destroying the underlying
+ * request, so the socket it opened stays referenced and the whole pipeline
+ * process refuses to exit after "[daily] done." (measured: ~6m15s of idle
+ * hang per run, enough to eat a CI job's budget). Give each parse a private
+ * agent and destroy it once the parse settles — that closes the abandoned
+ * socket and drops the last ref'd handle.
+ */
+function newAgentFor(url: string): http.Agent {
+  const Ctor = url.startsWith("https") ? https.Agent : http.Agent;
+  return new Ctor({ keepAlive: false });
+}
+
+/**
+ * Parse a feed URL with an agent that is always destroyed afterwards, even
+ * when the parse rejects (timeout, DNS failure, TLS error). Exported so the
+ * regression guard can exercise the timeout path against a local server that
+ * never answers.
+ */
+export async function parseUrlWithCleanup(
+  url: string,
+  timeoutMs: number = PARSER_OPTIONS.timeout,
+): Promise<Awaited<ReturnType<Parser["parseURL"]>>> {
+  const agent = newAgentFor(url);
+  const scoped = new Parser({
+    ...PARSER_OPTIONS,
+    timeout: timeoutMs,
+    requestOptions: { agent },
+  });
+  try {
+    return await scoped.parseURL(url);
+  } finally {
+    agent.destroy();
+  }
+}
 
 const CURL_HEADERS: Record<string, string> = {
   "User-Agent":
@@ -48,7 +89,7 @@ export async function fetchRss(
       feed =
         options.useCurl === true
           ? await parser.parseString(await curlFetch(u, CURL_HEADERS))
-          : await parser.parseURL(u);
+          : await parseUrlWithCleanup(u);
       served = u;
       break;
     } catch (e) {
