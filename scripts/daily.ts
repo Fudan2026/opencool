@@ -628,10 +628,11 @@ async function main() {
   // A backfill builds a PAST date folder with articles fetched right now.
   // Flag it so the page says so instead of implying the archive always held it.
   const isBackfill = date < naturalTodayKey();
-  if (process.env.EDITION_DATE?.trim()) {
+  // The workflow always forwards the gate's date, which on a normal run IS
+  // today — only a date that disagrees with the clock is a real backfill.
+  if (isBackfill) {
     console.log(
-      `[daily] EDITION_DATE=${date} override in effect` +
-        (isBackfill ? ` — backfilling ${date}/${hour} (not today's edition)` : ""),
+      `[daily] backfilling ${date}/${hour} — EDITION_DATE overrides today (${naturalTodayKey()}); articles are fetched now`,
     );
   }
   console.log(`[daily] ${date} edition ${hour} — fetching sources…\n`);
