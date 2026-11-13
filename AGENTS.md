@@ -59,6 +59,13 @@ sources.config.json   # SINGLE SOURCE OF TRUTH for the source registry
 
 7. **Theme board data never comes from `clist/get`.** `push2.eastmoney.com/api/qt/clist/get` 502s for our clients for hours at a time (measured 0/40 from a VM, and CI logged `boards=0` on every edition from 2026-11-11 to 2026-11-13 while tests stayed green). `bake-themes` therefore reads the registry from `datacenter-web.eastmoney.com` (`RPT_EM_BOARD`, with `lib/themes/board-map.json` as the committed fallback refreshed weekly by the `board-map` workflow) and quotes from `api/qt/ulist.np/get`, which stays healthy on the same host and accepts a comma list of `90.BKxxxx` secids. Constituents come from `RPT_BOARD_CONSTITUENT` on the same registry host. See `lib/invest/board-registry.ts`. Never reintroduce a `clist/get` dependency for boards: `daily.yml` fails the run when fewer than 15 of 24 themes resolve a board, and `lib/invest/board-registry.test.ts` fails on a silently-empty parse.
 
+8. **Reaction windows (`lib/reactions/`, `scripts/bake-reactions.ts`) are the only place a news→sector return is computed.** It joins the tape with the ledger and publishes `daily_reports/reactions.json`. Four rules make the number defensible, and each has a test that fails if broken:
+   - **`changePct` is day-relative.** A board's move over a multi-day window is the ratio of *chained* levels (`lib/reactions/tape-read.ts` `buildSeries`), never the difference of two `changePct` values. `+2%` then `+3%` is ~5.06%, not 1%. A missing close starts a new chain segment and a window spanning it is a `gap`, never bridged.
+   - **Abnormal return, per horizon.** `rawReturnPct` is published, but the headline (`headlineMetric`) is `marketExcessPct` — raw minus the cross-sectional mean of *industry* boards over the identical window. `sectorExcessPct` (vs the board's own trailing drift) is null until a full prior window exists.
+   - **No lookahead and no zero-length windows.** Entry is the earliest snapshot at/after `firstSeenAt`, exit the earliest at/after `firstSeenAt + horizon`. No snapshot ⇒ `pending`, never extrapolated. A window under `MIN_WINDOW_FRACTION` of the horizon is also `pending`: with a single capture entry and exit coincide and the return would be 0% by construction.
+   - **`MIN_SAMPLE` (20) guards every aggregate.** Below it the row carries `n` and `status: "insufficient"` with no mean/median/percentiles at all. `marketExcessPct` needs a cross-section of `MIN_CROSS_SECTION` (50) boards.
+   Attribution is an explicit reviewable table (`lib/reactions/attribution.ts`, entity→theme, then topic, then 上证指数 as a labelled market fallback). `scripts/assert-reactions.mjs` re-checks all of the above against the file before it publishes — extend it, not just the tests, when adding a rule.
+
 ## Commands
 
 | Task | Command | Cost |
@@ -70,6 +77,8 @@ sources.config.json   # SINGLE SOURCE OF TRUTH for the source registry
 | Top up missing summaries | `npm run regen-enrich <cat:sub> [date]` | ~30s, 1 LLM call |
 | Bake theme board heat | `npm run themes:bake` | ~1-2 min, no LLM |
 | Refresh board registry snapshot | `npm run board-map:bake` | ~15s, weekly in CI |
+| Bake story ledger | `npm run stories:bake` | ~1-2s, no LLM |
+| Bake reaction windows | `npm run reactions:bake` | ~1s, no LLM, no network |
 | Static-site generator | `npm run build-site` | <1s |
 | List sources by status | `npm run sources` | instant |
 | Validate sources.config.json | `npm run sources:check` | instant |

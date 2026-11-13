@@ -302,6 +302,24 @@ jobs:
         env:
           REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
 
+      # Reaction windows: joins the tape above with the story ledger and
+      # measures the sector's move at +1h/+1d/+5d after each first sighting,
+      # net of the market. Zero LLM, zero network — it reads the two files this
+      # job already wrote and emits `daily_reports/reactions.json`, which the
+      # publish step below sends to gh-pages with everything else.
+      #
+      # Deliberately AFTER the ledger bake (it reads stories.json) and BEFORE
+      # the zero-LLM assert (so a bake that ever grew a model call is caught).
+      - name: Bake reaction windows
+        run: npm run reactions:bake
+
+      # Guard: the reaction file must be self-describing and must never publish
+      # a mean off a sample below the floor. An empty tape is a legitimate
+      # day-one state (`insufficient` with counts), so this asserts the shape
+      # and the honesty rules, not that there is data.
+      - name: Assert reaction windows are honest
+        run: node scripts/assert-reactions.mjs
+
       # Guard: theme board heat silently shipped `boards=0` from 2026-11-11 to
       # 2026-11-13 while CI stayed green. Fail the run instead of publishing a
       # themes.json where no theme resolved a board.

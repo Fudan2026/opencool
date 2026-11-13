@@ -238,6 +238,68 @@ test("golden: the story ledger bake is wired into the build job", async (t) => {
   });
 });
 
+/**
+ * The reaction bake joins the tape and the ledger and publishes a number whose
+ * whole value is that it can be trusted. Its wiring is therefore asserted
+ * structurally: it must sit after both inputs exist, before the publish, and
+ * before the zero-token assert — and it must be guarded by the honesty check,
+ * because a green run publishing an unmeasurable mean is the exact failure this
+ * repo has shipped twice.
+ */
+test("golden: reaction windows bake is wired between the ledger and the guards", async (t) => {
+  const job = buildJobSource();
+  const names = stepNames(job);
+
+  await t.test("the bake step exists and runs the npm script", () => {
+    assert.ok(names.includes("Bake reaction windows"), "missing reaction bake step");
+    assert.match(stepSource(job, "Bake reaction windows"), /npm run reactions:bake/);
+  });
+
+  await t.test("it runs after the story ledger it reads", () => {
+    const ledgerAt = names.indexOf("Bake story ledger");
+    const bakeAt = names.indexOf("Bake reaction windows");
+    assert.ok(ledgerAt >= 0 && bakeAt >= 0);
+    assert.ok(ledgerAt < bakeAt, "reactions read stories.json, so the ledger must be baked first");
+  });
+
+  await t.test("it runs after the gh-pages restore, so prior tape history is on disk", () => {
+    const restoreAt = names.indexOf("Restore existing reports from gh-pages");
+    const bakeAt = names.indexOf("Bake reaction windows");
+    assert.ok(restoreAt >= 0 && restoreAt < bakeAt);
+  });
+
+  await t.test("it runs before the zero-token assert", () => {
+    const bakeAt = names.indexOf("Bake reaction windows");
+    const assertAt = names.indexOf("Assert zero LLM calls");
+    assert.ok(bakeAt >= 0 && assertAt >= 0 && bakeAt < assertAt);
+  });
+
+  await t.test("it runs before publishing, so reactions.json ships", () => {
+    const bakeAt = names.indexOf("Bake reaction windows");
+    const publishAt = names.indexOf("Publish to gh-pages");
+    assert.ok(bakeAt < publishAt);
+  });
+
+  await t.test("an honesty assert runs a real script, before publishing", () => {
+    assert.ok(names.includes("Assert reaction windows are honest"), "missing reactions honesty assert");
+    const step = stepSource(job, "Assert reaction windows are honest");
+    assert.match(step, /node scripts\/assert-reactions\.mjs/);
+    assert.ok(
+      names.indexOf("Assert reaction windows are honest") < names.indexOf("Publish to gh-pages"),
+      "a dishonest reactions.json must not reach gh-pages",
+    );
+  });
+
+  await t.test("the bake is zero-token by construction", () => {
+    // The job-level pin covers it, and the bake may not opt out of it.
+    assert.equal(
+      /LLM_MODE:\s*(?!'off')/.test(stepSource(job, "Bake reaction windows")),
+      false,
+      "the reaction bake must not set any LLM_MODE other than off",
+    );
+  });
+});
+
 test("golden: a missing llm-calls.jsonl is the documented pass case", () => {
   const src = fs.readFileSync(
     path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../scripts/assert-zero-llm.mjs"),
