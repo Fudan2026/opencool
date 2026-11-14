@@ -64,7 +64,17 @@ function makeSidecar(
   );
   fs.writeFileSync(
     path.join(dir, date, `${hour}.html`),
-    `<html><head><title>t</title></head><body><main><h1>${date} ${hour}</h1></main><footer>f</footer></body></html>`,
+    // The synthetic edition mirrors the WEB_MODE nav row render.ts emits, so
+    // build-site's ../ → ./ rewrites and its missing-page stripping are
+    // exercised over the same anchor shapes the real pages carry.
+    `<html><head><title>t</title></head><body><main><h1>${date} ${hour}</h1>` +
+      `<nav class="site-nav">` +
+      `<a href="../archive.html">历史归档</a>` +
+      `<a href="../hour.html">盘中逐时报</a>` +
+      `<a href="../stories.html">故事线</a>` +
+      `<a data-nav="integrity" href="../integrity.html">数据完整性</a>` +
+      `<a data-nav="supro" href="../supro.html">量化实操·SuPro</a>` +
+      `</nav></main><footer>f</footer></body></html>`,
     "utf8",
   );
 }
@@ -172,6 +182,67 @@ test("golden: build-site end-to-end", async (t) => {
     const home = read("index.html");
     assert.ok(home.includes("utm_content=badge"));
     assert.ok(home.includes("量化实操·苏坡"));
+  });
+
+  await t.test("funnel: supro.html landing wires the siblings this tree carries", () => {
+    const supro = read("supro.html");
+    // The v1 bake ran in this fixture, so the integrity link must be present…
+    assert.ok(supro.includes('href="./integrity.html"'));
+    // …while hour/stories were NOT built (no reading:pages pass), so the landing
+    // must strip those links rather than ship 404s off the funnel page itself.
+    assert.ok(!supro.includes('href="./hour.html"'));
+    assert.ok(!supro.includes('href="./stories.html"'));
+    // Same 404 rule for the (not-baked) mcp desk.
+    assert.ok(!supro.includes('href="./mcp-desk.html"'));
+  });
+
+  await t.test("funnel: archive + status carry distinct SuPro entry points", () => {
+    const arch = read("archive.html");
+    // The archive keeps its internal landing link AND gains a direct, separately
+    // measurable entry (utm_content=archive) for the returning-reader surface.
+    assert.ok(arch.includes('href="./supro.html"'));
+    assert.ok(arch.includes("https://supro.si/?"));
+    assert.ok(arch.includes("utm_content=archive"));
+    const status = read("status.html");
+    assert.ok(status.includes('href="./supro.html"'));
+  });
+
+  await t.test("funnel: the edition nav keeps the supro link (index rewrite)", () => {
+    const home = read("index.html");
+    // render.ts emits ../supro.html; build-site rewrites it for the root copy.
+    assert.ok(home.includes('href="./supro.html"'));
+    assert.ok(!home.includes('href="../supro.html"'));
+  });
+
+  await t.test("funnel: integrity page carries the contextual SuPro chain", () => {
+    const html = read("integrity.html");
+    assert.ok(html.includes("https://supro.si/paper?"));
+    assert.ok(html.includes("utm_content=integrity"));
+    // The honesty page links the sibling surfaces it shares a tree with…
+    assert.ok(html.includes('href="./supro.html"'));
+    // …and strips the reading pages this fixture never built.
+    assert.ok(!html.includes('href="./hour.html"'));
+    assert.ok(!html.includes('href="./stories.html"'));
+  });
+
+  await t.test("llms.txt documents the shared funnel UTM scheme", () => {
+    const llms = read("llms.txt");
+    assert.ok(llms.includes("utm_campaign=news_to_practice"));
+    // one value per entry point is the measurability contract
+    for (const content of [
+      "landing",
+      "badge",
+      "archive",
+      "edition-themes",
+      "edition-flows",
+      "hour-tape",
+      "hour-timing",
+      "story-act",
+      "story-signals",
+      "integrity",
+    ]) {
+      assert.ok(llms.includes(content), `llms.txt missing utm_content value ${content}`);
+    }
   });
 
   await t.test("status matrix: real vs placeholder vs missing", () => {

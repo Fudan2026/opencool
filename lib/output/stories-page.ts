@@ -27,6 +27,7 @@ import { REPORT_LOCALE } from "../sources/registry";
 import { isoWithOffset } from "../stories/time";
 import { getReportTz } from "../utils";
 import { esc, fill, STRINGS as R } from "./render";
+import { suproUrl, SUPRO_LINK_ATTRS } from "./supro";
 
 export interface StoriesPageOptions {
   /** `null` when `daily_reports/stories.json` is missing or unparseable. */
@@ -152,6 +153,10 @@ function thread(
         <span class="fm-value">${esc(lead)}</span>
         <span class="basis-badge">${esc(S.storiesLeadBasisBadge)}</span>
       </div>
+      <p class="supro-act" data-funnel="supro-story"><a href="${suproUrl(
+        "paper",
+        "story-act",
+      )}" ${SUPRO_LINK_ATTRS}>${esc(S.storiesSuproAct)} ↗</a></p>
       <h4 class="sub-head">${esc(S.storiesSightings)}</h4>
       ${sightings}
       <h4 class="sub-head">${esc(S.storiesRevisionTrail)}</h4>
@@ -304,6 +309,9 @@ const CSS = `
   footer { margin-top:2.2rem; padding-top:0.9rem; border-top:1px solid var(--rule);
     color:var(--muted); font-size:0.78rem; }
   footer a { color:var(--accent); text-decoration:none; font-weight:600; }
+  .supro-act { margin:0 0 0.8rem; font-size:0.84rem; }
+  .supro-act a { font-weight:600; text-decoration:none; }
+  .supro-act a:hover { text-decoration:underline; }
 `;
 
 export function renderStoriesPage(opts: StoriesPageOptions): string {
@@ -336,6 +344,12 @@ export function renderStoriesPage(opts: StoriesPageOptions): string {
         <br>${esc(S.storiesRankBasis)}
       </section>
       ${rankingTable(payload, names)}
+      <p class="supro-act" data-funnel="supro-stories-page">${esc(
+        S.storiesSuproRankLead,
+      )} <a href="${suproUrl("signals", "story-signals")}" ${SUPRO_LINK_ATTRS}>${esc(
+        S.suproSignals,
+      )} ↗</a></p>
+      <p class="muted small">${esc(S.suproDisclaimer)}</p>
       <h2 class="sub-head" style="margin-top:1.4rem">${esc(S.storiesRevisionTrailHeading)}</h2>
       ${revisionSection(payload, tz)}
       <h2 class="sub-head" style="margin-top:1.4rem">${esc(S.storiesThreadHeading)}</h2>
@@ -376,7 +390,9 @@ export function renderStoriesPage(opts: StoriesPageOptions): string {
     <p>${esc(S.storiesFooter)}</p>
     <p><a href="./index.html">← ${esc(S.navHome)}</a> · <a href="./archive.html">${esc(
       S.archiveLink,
-    )}</a> · <a href="./hour.html">${esc(S.navHour)}</a></p>
+    )}</a> · <a href="./hour.html">${esc(S.navHour)}</a> · <a href="./integrity.html">${esc(
+      S.navIntegrity,
+    )}</a> · <a href="./supro.html">${esc(S.navSupro)}</a></p>
   </footer>
 </main>
 </body>

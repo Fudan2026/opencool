@@ -30,6 +30,7 @@ import {
 } from "../tape/reading";
 import { REPORT_LOCALE } from "../sources/registry";
 import { esc, fill, STRINGS as S } from "./render";
+import { suproUrl, SUPRO_LINK_ATTRS } from "./supro";
 
 function pct(n: number): string {
   return `${n >= 0 ? "+" : ""}${n.toFixed(2)}%`;
@@ -372,7 +373,11 @@ function slotBody(r: SlotReading): string {
     <h3 class="sub-head">${esc(S.hourSectionClocks)}</h3>
     ${clocks}
     <h3 class="sub-head">${esc(S.navStories)}</h3>
-    ${storyItems(r)}`;
+    ${storyItems(r)}
+    <p class="supro-ctx" data-funnel="supro-hour"><a href="${suproUrl(
+      "paper",
+      "hour-tape",
+    )}" ${SUPRO_LINK_ATTRS}>${esc(S.hourSuproAct)} ↗</a></p>`;
 }
 
 function slotGapBody(time: string): string {
@@ -503,6 +508,11 @@ const CSS = `
   footer { margin-top:2.2rem; padding-top:0.9rem; border-top:1px solid var(--rule);
     color:var(--muted); font-size:0.78rem; }
   footer a { color:var(--accent); text-decoration:none; font-weight:600; }
+  .supro-ctx { margin:0.6rem 0 0; font-size:0.88rem; }
+  .supro-ctx a { font-weight:600; }
+  .supro-ctx-card p { margin:0.2rem 0; font-size:0.9rem; color:var(--fg-soft); }
+  .supro-ctx-card a { font-weight:600; }
+  .supro-note { color:var(--muted); font-size:0.78rem; }
 `;
 
 const SCRIPT = `
@@ -655,6 +665,18 @@ export function renderHourPage(opts: HourPageOptions): string {
       </ul>
     </section>`;
 
+  // Page-level funnel entry: the tape is description, not positioning — the
+  // matching practice surface for "where are we" is SuPro's timing page. Rendered
+  // in both the empty and the data state: the guidance is just as true before
+  // the first snapshot lands.
+  const suproBlock = `<section class="method supro-ctx-card" data-funnel="supro-hour-page">
+      <p>${esc(S.hourSuproTimingLead)} <a href="${suproUrl(
+        "timing",
+        "hour-timing",
+      )}" ${SUPRO_LINK_ATTRS}>${esc(S.suproTiming)} ↗</a></p>
+      <p class="supro-note">${esc(S.suproDisclaimer)}</p>
+    </section>`;
+
   return `<!doctype html>
 <html lang="${REPORT_LOCALE === "en" ? "en" : "zh-CN"}">
 <head>
@@ -682,11 +704,14 @@ export function renderHourPage(opts: HourPageOptions): string {
         ${dayPanels}`
   }
   ${method}
+  ${suproBlock}
   <footer>
     <p>${esc(S.hourFooter)}</p>
     <p><a href="./index.html">${esc(S.siteTitle)}</a> · <a href="./archive.html">${esc(
       S.archiveLink,
-    )}</a> · <a href="./stories.html">${esc(S.navStories)}</a></p>
+    )}</a> · <a href="./stories.html">${esc(S.navStories)}</a> · <a href="./integrity.html">${esc(
+      S.navIntegrity,
+    )}</a> · <a href="./supro.html">${esc(S.navSupro)}</a></p>
   </footer>
 </main>
 <script>${SCRIPT}</script>

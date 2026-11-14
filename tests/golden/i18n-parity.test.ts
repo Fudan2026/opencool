@@ -153,6 +153,18 @@ test("i18n: the topic and integrity blocks' strings exist in both locales", asyn
       "integrityNotPromiseRevisionHistory",
       "integrityNotPromiseArchiveEdits",
       "integrityNotPromiseSla",
+      // News → practice funnel (supro.si). Shared link labels + the
+      // context-matched leads; the hour*/stories* leads are swept by the
+      // reading-pages prefix test below, but the supro*/integrity* keys are
+      // not, so they are listed here.
+      "navSupro",
+      "suproTiming",
+      "suproSignals",
+      "suproPaper",
+      "suproDisclaimer",
+      "suproThemesLead",
+      "suproFlowsLead",
+      "integritySuproLead",
     ]) {
       assert.ok(zh.includes(key), `TEXTS_ZH missing ${key}`);
       assert.ok(en.includes(key), `TEXTS_EN missing ${key}`);
