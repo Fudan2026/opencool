@@ -314,6 +314,133 @@ test("story ledger: headline revisions", async (t) => {
   });
 });
 
+test("story ledger: v2 identity discipline (gated cluster keys)", async (t) => {
+  await t.test("different stories about one entity on different days are two records", () => {
+    // The v1 failure this exists to prevent: `entity:huawei` absorbed nine
+    // unrelated stories over ten days because any headline naming the entity
+    // attached to the newest record.
+    const ledger = emptyLedger();
+    ingestAll(ledger, [
+      edition("2026-11-05", "06", "2026-11-04T22:44:11Z", [
+        art({ sourceId: "wallstreetcn", title: "华为智驾之外，车企给出“Plan B”" }),
+      ]),
+      edition("2026-11-13", "06", "2026-11-12T22:44:11Z", [
+        art({ sourceId: "cls-telegraph", title: "华为云即将于本月中旬更新上线盘古模型开源版本" }),
+      ]),
+    ]);
+    assert.equal(ledger.stories.length, 2, "one entity, two stories");
+    for (const s of ledger.stories) assert.equal(s.sightings.length, 0);
+  });
+
+  await t.test("different stories about one entity on the SAME day are two records", () => {
+    const ledger = emptyLedger();
+    ingestEdition(ledger, edition("2026-11-13", "13", "2026-11-13T05:04:00Z", [
+      art({ sourceId: "a", title: "Nvidia scandal draws in Commerce Secretary Lutnick" }),
+      art({ sourceId: "b", title: "Nvidia announces partnership with Japanese automakers on self-driving chips" }),
+    ]));
+    assert.equal(ledger.stories.length, 2, "shared entity alone is not identity");
+  });
+
+  await t.test("same story, reworded, still joins its record", () => {
+    const ledger = emptyLedger();
+    ingestAll(ledger, [
+      edition("2026-11-13", "06", "2026-11-12T22:44:11Z", [
+        art({ sourceId: "reuters", title: "OPEC+ Leaves Oil Output Targets Unchanged for December" }),
+      ]),
+      edition("2026-11-13", "13", "2026-11-13T05:04:00Z", [
+        art({ sourceId: "bloomberg", title: "OPEC+ Sticks With Plan for Steady Oil Output Quotas in December" }),
+      ]),
+    ]);
+    assert.equal(ledger.stories.length, 1, "reworded coverage of the same decision joins");
+    assert.equal(ledger.stories[0].sightings.length, 1);
+  });
+
+  await t.test("a reworded repeat that drops its entity mention still joins", () => {
+    // v1 split this class: the second headline names no tracked entity, so its
+    // cluster key differs and no candidate was ever compared.
+    const ledger = emptyLedger();
+    ingestAll(ledger, [
+      edition("2026-11-13", "06", "2026-11-12T22:44:11Z", [
+        art({ sourceId: "bbc-sport", title: "Man United sack head coach Michael Carrick after dismal run of results" }),
+      ]),
+      edition("2026-11-13", "13", "2026-11-13T05:04:00Z", [
+        art({ sourceId: "skysport", title: "Manchester United sack Michael Carrick as manager" }),
+      ]),
+    ]);
+    assert.equal(ledger.stories.length, 1, "the reworded repeat found its record");
+    assert.equal(ledger.stories[0].sources.length, 2);
+  });
+
+  await t.test("a wire repeating its unchanged headline under NEW urls adds no sighting", () => {
+    // Yahoo's daily column and 财联社's `早间新闻精选` repeat the same surface
+    // under a fresh url every edition; v1's url-history guard never fired.
+    const ledger = emptyLedger();
+    ingestAll(ledger, [
+      edition("2026-11-12", "13", "2026-11-12T05:04:00Z", [
+        art({ sourceId: "cls-telegraph", title: "财联社11月12日早间新闻精选", url: "https://cls.cn/morning/11-12" }),
+      ]),
+      edition("2026-11-13", "06", "2026-11-12T22:44:11Z", [
+        art({ sourceId: "cls-telegraph", title: "财联社11月13日早间新闻精选", url: "https://cls.cn/morning/11-13" }),
+      ]),
+      edition("2026-11-13", "13", "2026-11-13T05:04:00Z", [
+        art({
+          sourceId: "yahoo-finance",
+          title: "Stock Market: Will S&P 500 Open Up or Down Today?",
+          url: "https://finance.yahoo.com/columns/nov-13",
+        }),
+        art({
+          sourceId: "yahoo-finance",
+          title: "Stock Market: Will S&P 500 Open Up or Down Today?",
+          url: "https://finance.yahoo.com/columns/nov-13-morning",
+        }),
+      ]),
+    ]);
+    const morning = ledger.stories.find((s) => s.title.includes("早间新闻精选"))!;
+    assert.ok(morning, "the column exists");
+    assert.equal(morning.sightings.length, 0, "the same column resurfacing is not a new observation");
+    const column = ledger.stories.find((s) => s.title.includes("S&P 500 Open Up or Down"))!;
+    assert.ok(column);
+    assert.equal(column.sightings.length, 0, "second same-day print of the column is not a sighting");
+  });
+
+  await t.test("a wire rewriting its own headline under a new url is a genuine follow-up", () => {
+    const ledger = emptyLedger();
+    ingestAll(ledger, [
+      edition("2026-11-13", "06", "2026-11-12T22:44:11Z", [
+        art({ sourceId: "bloomberg", title: "Nvidia Shares Gain After Shakeup", url: "https://bloom.bg/x/1" }),
+      ]),
+      edition("2026-11-13", "13", "2026-11-13T05:04:00Z", [
+        art({ sourceId: "bloomberg", title: "Nvidia Stock Drifts Before Inflation Test", url: "https://bloom.bg/x/2" }),
+      ]),
+    ]);
+    assert.equal(ledger.stories.length, 1, "changed headline = same story, new observation");
+    assert.equal(ledger.stories[0].sightings.length, 1, "the follow-up is kept as a sighting");
+  });
+
+  await t.test("a v1 mega-record does not absorb every new same-entity headline", () => {
+    // Revive the shape v1 actually produced — one record whose sightings are
+    // nine different stories — and prove v2 stops feeding it: only a follow-up
+    // of its *current* anchor joins; a different story starts a new record.
+    const seed = emptyLedger();
+    ingestEdition(seed, edition("2026-11-05", "06", "2026-11-04T22:44:11Z", [
+      art({ sourceId: "wallstreetcn", title: "华为、阿里等20家单位共建智能体互联基础设施" }),
+    ]));
+    ingestAll(seed, [
+      edition("2026-11-13", "13", "2026-11-13T05:04:00Z", [
+        art({ sourceId: "yicai", title: "华为和赛力斯新合作模式，尘埃落定了" }),
+      ]),
+      edition("2026-11-14", "13", "2026-11-14T05:04:00Z", [
+        art({ sourceId: "cls-telegraph", title: "华为云宣布首款昇腾原生具身世界模型来了" }),
+      ]),
+    ]);
+    assert.equal(seed.stories.length, 3, "each story kept its own record");
+    const infra = seed.stories.find((s) => s.title.includes("智能体互联"))!;
+    assert.equal(infra.sightings.length, 0, "none of the others were folded into it");
+    assert.ok(seed.stories.some((s) => s.title.includes("赛力斯")));
+    assert.ok(seed.stories.some((s) => s.title.includes("昇腾")));
+  });
+});
+
 test("story ledger: first-mover ranking", async (t) => {
   await t.test("(d) the earliest distinct wire ranks first with a sane lead", () => {
     const ledger = emptyLedger();

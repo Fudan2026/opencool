@@ -94,7 +94,9 @@ test("dedupe: exact cross-source duplicates collapse to one survivor", async (t)
   });
 
   await t.test("threshold is the documented constant", () => {
-    assert.equal(NEAR_DUPLICATE_THRESHOLD, 0.6);
+    // 0.65 on the weighted-affinity scale: same-template different-digit
+    // flashes (0.625) stay below it, true reprints above.
+    assert.equal(NEAR_DUPLICATE_THRESHOLD, 0.65);
   });
 });
 

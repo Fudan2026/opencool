@@ -40,15 +40,25 @@
  * story about itself.
  *
  * ─────────────────────────────────────────────────────────────────────────
- * Clustering: nothing new is invented here
+ * Clustering: the primitives are shared, the verdict is gated (v2)
  * ─────────────────────────────────────────────────────────────────────────
  *
- * The cluster primitive is `storyCluster()` from `lib/topics/dedupe.ts` —
- * entity-first (`entity:nvidia`), exact-title fallback (`title:…`). That is
- * deliberate: the same `entity:nvidia` bucket the router caps on is the same
- * bucket that, on 2026-11-13, held 81 legitimate sentences about one event
- * across 17 wires. One event, one story record, 17 sightings — that is the
- * shape the first-mover ranking needs.
+ * The cluster primitive is still `storyCluster()` from `lib/topics/dedupe.ts`
+ * — entity-first (`entity:nvidia`), exact-title fallback (`title:…`) — and it
+ * stays the routing density cap's key, so one event, one budget, across
+ * language lanes. What v2 changed is what a cluster key *proves* at ingest:
+ *
+ *   - a cluster key is a CANDIDATE, not a verdict. `entity:trump` had
+ *     accumulated 500 sightings of unrelated stories under v1 (any headline
+ *     naming the entity attached to the newest record); a candidate only
+ *     wins if its current anchors (original + latest observed headline)
+ *     still carry the incoming headline under the gated `sameStoryHeadlines`
+ *     affinity. Otherwise the article is a new story that shares an entity,
+ *     and it gets its own record.
+ *   - a reworded repeat that drops or swaps its entity mention ("Man United
+ *     sack…" vs "Manchester United sack…") now finds its record through the
+ *     same affinity gate over recently-seen records, instead of being split
+ *     by its different cluster key.
  *
  * `dedupeStories()` is used for its own job — counting exact/near duplicates
  * per edition — but duplicates are *not* dropped from `sightings`: two wires
@@ -64,20 +74,31 @@
  *     changes completely; trusting the url filed "Oil price falls" as a
  *     revision of an Nvidia headline.
  *   - a **wire repeating its own unchanged headline** on a later edition is
- *     the feed resurfacing, not a new observation. Keeping those inflated one
- *     wire's trail and made the first-mover table measure archive size.
+ *     the feed resurfacing, not a new observation. v2 widened this from
+ *     url-history to *any* observed surface: real wires repeat unchanged
+ *     under new urls too (Yahoo's daily "Stock Market: Will S&P 500 Open Up
+ *     or Down Today?", 财联社's `早间新闻精选`), which v1 let through and one
+ *     wire's trail inflated by one sighting per edition.
  *
  * Identity across runs: a record's `id` is a hash of the earliest entity set
  * plus the normalized title tokens, computed **once** at creation and then
  * persisted. A cluster never changes id when a new wire joins it, because the
- * id is data, not a derived value.
+ * id is data, not a derived value. A cluster may now hold several records
+ * (one per story about that entity); each keeps its own frozen id and trail,
+ * and the gates above decide which one a new headline joins.
  */
 
 import { createHash } from "node:crypto";
 
 import { tokenizeTitle } from "../nlp/tokenize-title";
 import { classifyArticle, normalizeTitle } from "../topics/classify";
-import { exactStoryKey, storyCluster, storyEntities, dedupeStories } from "../topics/dedupe";
+import {
+  exactStoryKey,
+  storyCluster,
+  storyEntities,
+  dedupeStories,
+  sameStoryHeadlines,
+} from "../topics/dedupe";
 import type { LaneKey, TopicKey } from "../topics/taxonomy";
 import { getReportTz } from "../utils";
 import { civilDate, isoWithOffset, minutesBetween, parseInstant, shiftDateKey } from "./time";
@@ -90,6 +111,14 @@ export const DEFAULT_RETENTION_DAYS = 30;
 export const DEFAULT_MAX_STORIES = 2000;
 /** Rolling window the first-mover ranking aggregates over. */
 export const DEFAULT_WINDOW_DAYS = 30;
+
+/**
+ * Days around the current edition in which a reworded repeat may find its
+ * record under a *different* cluster key (the wire dropped or swapped its
+ * entity mention). A same-cycle phenomenon: reworded repeats do not resurface
+ * a week later.
+ */
+export const REWORDED_REPEAT_WINDOW_DAYS = 2;
 
 // ---------------------------------------------------------------------------
 // Record shapes
@@ -671,6 +700,102 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
   if (!observedAt) return stats;
   const editionTag = editionKey(edition.date, edition.hour);
 
+  // ---- v2 identity helpers (see `lib/topics/dedupe.ts` for the rules) ----
+  /** Calendar days between two `YYYY-MM-DD` keys. */
+  const dayGap = (fromDay: string, toDay: string): number =>
+    Math.round(
+      (Date.parse(`${toDay}T00:00:00Z`) - Date.parse(`${fromDay}T00:00:00Z`)) / 86_400_000,
+    );
+
+  /** An observed headline that can vouch for the record's identity. */
+  interface Anchor {
+    title: string;
+    day: string;
+  }
+
+  /**
+   * Does the record currently carry this headline as its story? A repeat must
+   * look like the record's *current* surface or its original headline — not
+   * any of the intermediate titles the v1 mega-merge once folded in. (Comparing
+   * against every historical title is how entity buckets like `entity:trump`
+   * (500 sightings) absorbed everything.)
+   */
+  const carriesHeadline = (story: StoryRecord, title: string): boolean =>
+    // A byte-identical reprint of any observed surface attaches even when the
+    // current anchor has moved on (v1 semantics: exact surface = same story).
+    exactRepeatCarried(story, title) ||
+    // Otherwise the current anchors must vouch under the v2 gates.
+    anchorsOf(story).some((anchor) =>
+      sameStoryHeadlines(anchor.title, title, dayGap(anchor.day, edition.date)),
+    );
+
+  /** Any observed surface of this record is byte-identical to `title`. */
+  const exactRepeatCarried = (story: StoryRecord, title: string): boolean =>
+    [story.title, ...story.sightings.map((s) => s.title), ...story.headlineRevisions.map((r) => r.to)]
+      .some((t) => exactStoryKey(t) === exactStoryKey(title));
+
+  /** Newest-first order shared by both candidate searches. */
+  const newestFirst = (a: StoryRecord, b: StoryRecord): number =>
+    (parseInstant(b.lastSeenAt)?.getTime() ?? 0) - (parseInstant(a.lastSeenAt)?.getTime() ?? 0) ||
+    a.id.localeCompare(b.id);
+
+  /** Civil day of a record's most recent observation (REPORT_TZ wall clock). */
+  const dayCache = new Map<string, string>();
+  const civilDateOf = (story: StoryRecord): string => {
+    const hit = dayCache.get(story.id);
+    if (hit !== undefined) return hit;
+    const at = parseInstant(story.lastSeenAt);
+    const day = at ? civilDate(at, getReportTz()) : edition.date;
+    dayCache.set(story.id, day);
+    return day;
+  };
+
+  /**
+   * Cached anchors: recomputed only when the record actually changed. The
+   * cache key embeds the mutation counters so a fresh sighting invalidates it.
+   */
+  const anchorCache = new Map<string, Anchor[]>();
+  const anchorsOf = (story: StoryRecord): Anchor[] => {
+    const key = `${story.id}|${story.sightings.length}|${story.headlineRevisions.length}|${story.lastSeenAt}`;
+    const hit = anchorCache.get(key);
+    if (hit !== undefined) return hit;
+    const computed = computeAnchors(story);
+    anchorCache.set(key, computed);
+    return computed;
+  };
+
+  function computeAnchors(story: StoryRecord): Anchor[] {
+    const out: Anchor[] = [];
+    const first = parseInstant(story.firstSeenAt);
+    out.push({
+      title: story.title,
+      day: first ? civilDate(first, getReportTz()) : edition.date,
+    });
+    const lastSighting = [...story.sightings].sort(
+      (a, b) =>
+        (parseInstant(b.observedAt)?.getTime() ?? 0) - (parseInstant(a.observedAt)?.getTime() ?? 0),
+    )[0];
+    if (lastSighting) {
+      const at = parseInstant(lastSighting.observedAt);
+      out.push({
+        title: lastSighting.title,
+        day: at ? civilDate(at, getReportTz()) : edition.date,
+      });
+    }
+    const lastRevision = [...story.headlineRevisions].sort(
+      (a, b) =>
+        (parseInstant(b.at)?.getTime() ?? 0) - (parseInstant(a.at)?.getTime() ?? 0),
+    )[0];
+    if (lastRevision) {
+      const at = parseInstant(lastRevision.at);
+      out.push({
+        title: lastRevision.to,
+        day: at ? civilDate(at, getReportTz()) : edition.date,
+      });
+    }
+    return out;
+  }
+
   const byCluster = new Map<string, StoryRecord[]>();
   const byUrl = new Map<string, StoryRecord>();
   for (const story of ledger.stories) {
@@ -726,6 +851,15 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
     stats.duplicates = 0;
   }
 
+  /**
+   * Records seen within `REWORDED_REPEAT_WINDOW_DAYS` of this edition — the
+   * cross-cluster search space for reworded repeats, newest first. Computed
+   * once; records created during this edition are appended as they appear.
+   */
+  const recentCandidates = ledger.stories
+    .filter((s) => Math.abs(dayGap(civilDateOf(s), edition.date)) <= REWORDED_REPEAT_WINDOW_DAYS)
+    .sort(newestFirst);
+
   for (const article of ordered) {
     const title = (article.title ?? "").trim();
     const url = (article.url ?? "").trim();
@@ -742,14 +876,37 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
     // revision of an Nvidia headline.
     if (story && story.cluster !== cluster) story = undefined;
     if (!story) {
+      // v2: a cluster key is a *candidate*, not a verdict. The entity
+      // mega-records taught the lesson — attach only if the record's current
+      // anchors still carry this headline (gated headline affinity; the
+      // gates live in lib/topics/dedupe.ts and are measured on the labeled
+      // corpus). Otherwise this is a new story that happens to share the
+      // entity, and it gets its own record.
       const candidates = byCluster.get(cluster);
       if (candidates?.length) {
-        // Newest record wins, then id — deterministic regardless of insert order.
-        story = [...candidates].sort(
-          (a, b) =>
-            (parseInstant(b.lastSeenAt)?.getTime() ?? 0) -
-              (parseInstant(a.lastSeenAt)?.getTime() ?? 0) || a.id.localeCompare(b.id),
-        )[0];
+        const ranked = [...candidates].sort(newestFirst);
+        for (const cand of ranked) {
+          if (carriesHeadline(cand, title)) {
+            story = cand;
+            break;
+          }
+        }
+      }
+    }
+    if (!story) {
+      // v2: the reworded-repeat channel. A wire may drop or swap its entity
+      // mention when rewording ("Man United sack…" vs "Manchester United
+      // sack…"), leaving a different cluster key for the same story. Only
+      // recently-seen records are searched — a reworded repeat is a same-news-
+      // cycle phenomenon, and the bound keeps ingest linear enough. The list
+      // is precomputed once per edition (and extended with fresh records), so
+      // each article only walks a handful of candidates.
+      for (const cand of recentCandidates) {
+        if (cand.cluster === cluster) continue; // already gated above
+        if (carriesHeadline(cand, title)) {
+          story = cand;
+          break;
+        }
       }
     }
 
@@ -800,6 +957,7 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
       recomputeDerived(created);
       ledger.stories.push(created);
       byCluster.set(cluster, [...(byCluster.get(cluster) ?? []), created]);
+      recentCandidates.unshift(created);
       if (urlKey) byUrl.set(urlKey, created);
       histories.delete(created.id);
       stats.created++;
@@ -852,10 +1010,18 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
     // from the same wire at the same url is a genuine follow-up: it is kept as
     // a sighting (so the observation clock and the first-mover view see it) and
     // the revision above already preserves what it replaced.
+    //
+    // v2: the url-history check (`previous`) only catches repeats under a url
+    // the record already saw. Real wires also repeat unchanged under *new*
+    // urls — Yahoo's daily "Stock Market: Will S&P 500 Open Up or Down
+    // Today?", 财联社's `早间新闻精选` — which inflated those trails with one
+    // sighting per edition. Any observed surface with the exact same key, from
+    // the same wire, on any url, is the feed resurfacing.
     const repeatedBySameWire =
-      previous !== undefined &&
-      exactStoryKey(previous) === exactStoryKey(title) &&
-      story.sources.includes(article.sourceId);
+      story.sources.includes(article.sourceId) &&
+      (previous !== undefined
+        ? exactStoryKey(previous) === exactStoryKey(title)
+        : exactRepeatCarried(story, title));
     if (repeatedBySameWire) continue;
 
     story.sightings.push({
