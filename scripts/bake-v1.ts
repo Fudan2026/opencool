@@ -33,6 +33,11 @@ import path from "node:path";
 import { renderIntegrityHtml } from "../lib/output/render";
 import { buildV1, writeV1 } from "../lib/v1/build";
 import { checkShape } from "../lib/v1/contract";
+import {
+  collectPublishLag,
+  injectPublishLagSection,
+  renderPublishLagSection,
+} from "../lib/v1/publish-lag";
 
 const ROOT = path.resolve("daily_reports");
 
@@ -86,7 +91,30 @@ function main(): void {
     );
   }
 
-  const html = renderIntegrityHtml(coverage, manifest);
+  let html = renderIntegrityHtml(coverage, manifest);
+
+  // Measured publish times: the slots are targets, the 14-day lag table is the
+  // promise. Computed from the same restored sidecars the rest of the bake
+  // reads; when the tree carries none at all (a partial restore in the
+  // reading-pages job) the section states that instead of faking 42 "missing"
+  // rows.
+  const lag = collectPublishLag({ root: ROOT });
+  const lagSection = renderPublishLagSection(lag);
+  const injected = injectPublishLagSection(html, lagSection);
+  if (!injected.injected) {
+    console.warn(
+      "[v1:bake] publish-lag section NOT injected: the integrity page lede anchor was not found — " +
+        "lib/v1/publish-lag.ts and lib/output/render.ts have drifted",
+    );
+  }
+  html = injected.html;
+  console.log(
+    lag.available
+      ? `[v1:bake] publish-lag table: ${lag.days}d x ${lag.slots.length} slots, onTime=${lag.counts.onTime} ` +
+        `late=${lag.counts.late} early=${lag.counts.early} missing=${lag.counts.missing} pending=${lag.counts.pending}`
+      : "[v1:bake] publish-lag table: no edition sidecars in this tree — named no-measurement state",
+  );
+
   const out = path.join(ROOT, "integrity.html");
   fs.writeFileSync(out, html, "utf8");
   console.log(`[v1:bake] wrote ${out} (${(html.length / 1024).toFixed(1)} KB)`);

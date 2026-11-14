@@ -1,0 +1,15 @@
+name = "opencool-dispatcher"
+main = "index.js"
+compatibility_date = "2026-11-01"
+
+# Cron triggers run in UTC. The Daily Brief workflow's own gate decides what
+# to do on every trigger, so firing it when nothing is due is a cheap no-op.
+[triggers]
+crons = ["*/15 * * * *"]
+
+[vars]
+GITHUB_REPO = "Fudan2026/opencool"
+WORKFLOW_FILE = "daily.yml"
+
+# DISPATCH_PAT is a secret, NOT a var. Set it after the first deploy with:
+#   npx wrangler secret put DISPATCH_PAT
