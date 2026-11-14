@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "dataThrough": "2026-11-14T16:35:58+08:00",
+  "dataThrough": "2026-11-14T16:46:09+08:00",
   "timezone": "Asia/Shanghai",
   "headlineMetric": "marketExcessPct",
   "headlineReason": "Cross-sectional excess is the standard market-factor abnormal return and is computable from exactly the two snapshots a horizon needs, so the headline is never absent for a window that is otherwise measurable. `rawReturnPct` and `sectorExcessPct` (vs the sector's own trailing drift over the same length) are published alongside for every sample, but the trailing baseline needs a full prior window of tape and is therefore null through the early history.",
@@ -54,9 +54,9 @@
     "withFirstSeen": 2000,
     "maxStories": 2000,
     "retentionDays": 30,
-    "updatedAt": "2026-11-14T16:37:16+08:00",
+    "updatedAt": "2026-11-14T16:47:00+08:00",
     "retainedFrom": "2026-10-16T06:00:00+08:00",
-    "retainedTo": "2026-11-14T16:35:58+08:00",
+    "retainedTo": "2026-11-14T16:46:09+08:00",
     "capBinding": true
   },
   "counts": {
@@ -97,6 +97,266 @@
     "byEntity": []
   },
   "observations": [
+    {
+      "id": "st_24a5c93798",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "global-markets",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
+    {
+      "id": "st_8ba4476b60",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "policy",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
+    {
+      "id": "st_8e72eebc98",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "global-markets",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
+    {
+      "id": "st_93be4f53d5",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "global-markets",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
+    {
+      "id": "st_93fc982379",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "world",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
+    {
+      "id": "st_c405a0320b",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "opinion",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
+    {
+      "id": "st_d2418ee25c",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "policy",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
+    {
+      "id": "st_f64b68aa3b",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "world",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
+    {
+      "id": "st_fb29e0c511",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "world",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
+    {
+      "id": "st_ff27b65fb8",
+      "firstSeenAt": "2026-11-14T16:46:09+08:00",
+      "firstEdition": "2026-11-14/13",
+      "topic": "global-markets",
+      "target": null,
+      "targetLabel": null,
+      "attribution": "pending",
+      "entity": null,
+      "attributionPending": true,
+      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
+        }
+      }
+    },
     {
       "id": "st_15d684cc42",
       "firstSeenAt": "2026-11-14T16:35:58+08:00",
@@ -10216,266 +10476,6 @@
       "firstSeenAt": "2026-11-13T23:48:55+08:00",
       "firstEdition": "2026-11-13/19",
       "topic": "tech-ai",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_8c8d9ad4ca",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "world",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_94b8587b3a",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "global-markets",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_9688da3f61",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "global-markets",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_969fbe61ba",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "global-markets",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_97da0085e4",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "global-markets",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_99192374b3",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "global-markets",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_9d7ac2ab3b",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "global-markets",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_a0d0cc3a85",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "tech-ai",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_a460190468",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "tech-ai",
-      "target": null,
-      "targetLabel": null,
-      "attribution": "pending",
-      "entity": null,
-      "attributionPending": true,
-      "attributionReason": "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "attribution pending: tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback"
-        }
-      }
-    },
-    {
-      "id": "st_a4e4743ee4",
-      "firstSeenAt": "2026-11-13T23:48:55+08:00",
-      "firstEdition": "2026-11-13/19",
-      "topic": "world",
       "target": null,
       "targetLabel": null,
       "attribution": "pending",

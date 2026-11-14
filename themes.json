@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T08:37:01.301Z",
+  "generatedAt": "2026-11-14T08:46:52.378Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
@@ -36,36 +36,6 @@
       ]
     },
     {
-      "key": "ai",
-      "name": "人工智能",
-      "boardCode": "BK0800",
-      "boardName": "人工智能",
-      "boardChangePct": -1.78,
-      "boardUp": 123,
-      "boardDown": 624,
-      "articleHits": 3,
-      "matchedAliases": [
-        "AI"
-      ],
-      "constituents": [
-        {
-          "symbol": "000560",
-          "name": "我爱我家",
-          "changePct": -7.9
-        },
-        {
-          "symbol": "000034",
-          "name": "神州数码",
-          "changePct": 5.36
-        },
-        {
-          "symbol": "000090",
-          "name": "天健集团",
-          "changePct": -4.79
-        }
-      ]
-    },
-    {
       "key": "ai-compute",
       "name": "算力",
       "boardCode": "BK1134",
@@ -73,9 +43,8 @@
       "boardChangePct": -1.78,
       "boardUp": 48,
       "boardDown": 204,
-      "articleHits": 3,
+      "articleHits": 1,
       "matchedAliases": [
-        "算力",
         "英伟达"
       ],
       "constituents": [
@@ -93,66 +62,6 @@
           "symbol": "000701",
           "name": "厦门信达",
           "changePct": -4.47
-        }
-      ]
-    },
-    {
-      "key": "robotics",
-      "name": "机器人",
-      "boardCode": "BK1408",
-      "boardName": "机器人",
-      "boardChangePct": -1.05,
-      "boardUp": 3,
-      "boardDown": 19,
-      "articleHits": 2,
-      "matchedAliases": [
-        "机器人"
-      ],
-      "constituents": [
-        {
-          "symbol": "603666",
-          "name": "亿嘉和",
-          "changePct": 5.04
-        },
-        {
-          "symbol": "920211",
-          "name": "新睿电子",
-          "changePct": -4.01
-        },
-        {
-          "symbol": "300607",
-          "name": "拓斯达",
-          "changePct": 3.51
-        }
-      ]
-    },
-    {
-      "key": "pharma",
-      "name": "创新药",
-      "boardCode": "BK1106",
-      "boardName": "创新药",
-      "boardChangePct": -2.7,
-      "boardUp": 17,
-      "boardDown": 206,
-      "articleHits": 1,
-      "matchedAliases": [
-        "医药"
-      ],
-      "constituents": [
-        {
-          "symbol": "000766",
-          "name": "通化金马",
-          "changePct": 10
-        },
-        {
-          "symbol": "000739",
-          "name": "普洛药业",
-          "changePct": -4.41
-        },
-        {
-          "symbol": "002019",
-          "name": "亿帆医药",
-          "changePct": -3.47
         }
       ]
     },
@@ -237,6 +146,34 @@
           "symbol": "002861",
           "name": "瀛通通讯",
           "changePct": -5.58
+        }
+      ]
+    },
+    {
+      "key": "pharma",
+      "name": "创新药",
+      "boardCode": "BK1106",
+      "boardName": "创新药",
+      "boardChangePct": -2.7,
+      "boardUp": 17,
+      "boardDown": 206,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000766",
+          "name": "通化金马",
+          "changePct": 10
+        },
+        {
+          "symbol": "000739",
+          "name": "普洛药业",
+          "changePct": -4.41
+        },
+        {
+          "symbol": "002019",
+          "name": "亿帆医药",
+          "changePct": -3.47
         }
       ]
     },
@@ -437,6 +374,34 @@
       ]
     },
     {
+      "key": "ai",
+      "name": "人工智能",
+      "boardCode": "BK0800",
+      "boardName": "人工智能",
+      "boardChangePct": -1.78,
+      "boardUp": 123,
+      "boardDown": 624,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000560",
+          "name": "我爱我家",
+          "changePct": -7.9
+        },
+        {
+          "symbol": "000034",
+          "name": "神州数码",
+          "changePct": 5.36
+        },
+        {
+          "symbol": "000090",
+          "name": "天健集团",
+          "changePct": -4.79
+        }
+      ]
+    },
+    {
       "key": "steel",
       "name": "钢铁",
       "boardCode": "BK1227",
@@ -517,6 +482,34 @@
           "symbol": "000610",
           "name": "*ST西旅",
           "changePct": 3.25
+        }
+      ]
+    },
+    {
+      "key": "robotics",
+      "name": "机器人",
+      "boardCode": "BK1408",
+      "boardName": "机器人",
+      "boardChangePct": -1.05,
+      "boardUp": 3,
+      "boardDown": 19,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "603666",
+          "name": "亿嘉和",
+          "changePct": 5.04
+        },
+        {
+          "symbol": "920211",
+          "name": "新睿电子",
+          "changePct": -4.01
+        },
+        {
+          "symbol": "300607",
+          "name": "拓斯达",
+          "changePct": 3.51
         }
       ]
     },

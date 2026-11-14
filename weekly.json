@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-14T08:36:41.130Z",
+  "generatedAt": "2026-11-14T08:46:36.495Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 21,
-  "avgSentiment": -3.8,
+  "avgSentiment": -3.9,
   "sentimentCurve": [
     {
       "date": "2026-11-07",
@@ -109,7 +109,7 @@
     {
       "date": "2026-11-14",
       "hour": "13",
-      "score": -6
+      "score": -8
     }
   ],
   "sectorAvg": [
@@ -120,10 +120,16 @@
       "editions": 1
     },
     {
+      "key": "china-equity",
+      "label": "中概港股",
+      "avg": 36.5,
+      "editions": 4
+    },
+    {
       "key": "crypto",
       "label": "加密",
-      "avg": -58,
-      "editions": 1
+      "avg": -29,
+      "editions": 2
     },
     {
       "key": "macro",
@@ -134,25 +140,19 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -21.8,
+      "avg": -22.1,
       "editions": 21
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -20.1,
+      "avg": -18.8,
       "editions": 21
-    },
-    {
-      "key": "china-equity",
-      "label": "中概港股",
-      "avg": 11.8,
-      "editions": 5
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -8,
+      "avg": -9.5,
       "editions": 21
     },
     {
@@ -199,18 +199,18 @@
       "count": 12
     },
     {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "Anthropic斥资34亿美元接手发电设备",
-      "url": "https://www.ftchinese.com/story/001111311",
-      "count": 11
-    },
-    {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
       "url": "https://www.bbc.co.uk/news/articles/c64g1gzy2vdzo?at_medium=RSS&at_campaign=rss",
       "count": 11
+    },
+    {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "Anthropic斥资34亿美元接手发电设备",
+      "url": "https://www.ftchinese.com/story/001111311",
+      "count": 10
     },
     {
       "symbol": "NVDA",
@@ -227,11 +227,11 @@
       "count": 9
     },
     {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "Anthropic寻求以1.4万亿美元估值上市",
-      "url": "https://www.ftchinese.com/story/001111328",
-      "count": 8
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "What do we know about Nvidia CEO’s affair with a suspected Chinese spy?",
+      "url": "https://www.bbc.co.uk/news/videos/cq3989nkzn3ko?at_medium=RSS&at_campaign=rss",
+      "count": 7
     }
   ],
   "keywords": [
@@ -398,14 +398,14 @@
       "totalHits": 24
     },
     {
-      "key": "media",
-      "name": "传媒",
+      "key": "brokerage",
+      "name": "券商",
       "totalHits": 21
     },
     {
-      "key": "brokerage",
-      "name": "券商",
-      "totalHits": 20
+      "key": "media",
+      "name": "传媒",
+      "totalHits": 21
     },
     {
       "key": "infra",
