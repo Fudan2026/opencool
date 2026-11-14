@@ -1,44 +1,13 @@
 {
-  "generatedAt": "2026-11-13T22:35:30.049Z",
+  "generatedAt": "2026-11-14T05:25:27.405Z",
   "source": {
     "path": "/themes.json",
     "note": "re-exported verbatim under the frozen path; the root /themes.json keeps evolving with the pipeline"
   },
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-14/06",
+  "edition": "2026-11-14/13",
   "themes": [
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": -1.78,
-      "boardUp": 48,
-      "boardDown": 204,
-      "articleHits": 4,
-      "matchedAliases": [
-        "数据中心",
-        "英伟达"
-      ],
-      "constituents": [
-        {
-          "symbol": "000665",
-          "name": "湖北广电",
-          "changePct": 10.1
-        },
-        {
-          "symbol": "002042",
-          "name": "华孚时尚",
-          "changePct": 10.03
-        },
-        {
-          "symbol": "000701",
-          "name": "厦门信达",
-          "changePct": -4.47
-        }
-      ]
-    },
     {
       "key": "semiconductor",
       "name": "半导体",
@@ -70,36 +39,6 @@
       ]
     },
     {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": -2.43,
-      "boardUp": 0,
-      "boardDown": 13,
-      "articleHits": 3,
-      "matchedAliases": [
-        "黄金"
-      ],
-      "constituents": [
-        {
-          "symbol": "000426",
-          "name": "兴业银锡",
-          "changePct": -3.55
-        },
-        {
-          "symbol": "002716",
-          "name": "湖南白银",
-          "changePct": -3.37
-        },
-        {
-          "symbol": "600988",
-          "name": "赤峰黄金",
-          "changePct": -2.83
-        }
-      ]
-    },
-    {
       "key": "ai",
       "name": "人工智能",
       "boardCode": "BK0800",
@@ -109,7 +48,7 @@
       "boardDown": 624,
       "articleHits": 3,
       "matchedAliases": [
-        "AI"
+        "人工智能"
       ],
       "constituents": [
         {
@@ -130,32 +69,32 @@
       ]
     },
     {
-      "key": "oil",
-      "name": "石油石化",
-      "boardCode": "BK1276",
-      "boardName": "油气开采Ⅱ",
-      "boardChangePct": -0.68,
-      "boardUp": 2,
-      "boardDown": 3,
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": -1.78,
+      "boardUp": 48,
+      "boardDown": 204,
       "articleHits": 1,
       "matchedAliases": [
-        "油价"
+        "英伟达"
       ],
       "constituents": [
         {
-          "symbol": "601969",
-          "name": "海南矿业",
-          "changePct": -3.05
+          "symbol": "000665",
+          "name": "湖北广电",
+          "changePct": 10.1
         },
         {
-          "symbol": "600938",
-          "name": "中国海油",
-          "changePct": 2.05
+          "symbol": "002042",
+          "name": "华孚时尚",
+          "changePct": 10.03
         },
         {
-          "symbol": "000968",
-          "name": "蓝焰控股",
-          "changePct": -1.84
+          "symbol": "000701",
+          "name": "厦门信达",
+          "changePct": -4.47
         }
       ]
     },
@@ -324,6 +263,34 @@
           "symbol": "000006",
           "name": "深振业Ａ",
           "changePct": -6.63
+        }
+      ]
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": -2.43,
+      "boardUp": 0,
+      "boardDown": 13,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000426",
+          "name": "兴业银锡",
+          "changePct": -3.55
+        },
+        {
+          "symbol": "002716",
+          "name": "湖南白银",
+          "changePct": -3.37
+        },
+        {
+          "symbol": "600988",
+          "name": "赤峰黄金",
+          "changePct": -2.83
         }
       ]
     },
@@ -576,6 +543,34 @@
           "symbol": "000712",
           "name": "锦龙股份",
           "changePct": -1.67
+        }
+      ]
+    },
+    {
+      "key": "oil",
+      "name": "石油石化",
+      "boardCode": "BK1276",
+      "boardName": "油气开采Ⅱ",
+      "boardChangePct": -0.68,
+      "boardUp": 2,
+      "boardDown": 3,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "601969",
+          "name": "海南矿业",
+          "changePct": -3.05
+        },
+        {
+          "symbol": "600938",
+          "name": "中国海油",
+          "changePct": 2.05
+        },
+        {
+          "symbol": "000968",
+          "name": "蓝焰控股",
+          "changePct": -1.84
         }
       ]
     },

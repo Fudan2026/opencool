@@ -43,6 +43,14 @@ No LLM behind any endpoint.
   nothing could be attributed — "could not check yet", NOT a market fallback),
   and unmapped (tape started, nothing quoted). Read pending, not market, as the
   "no data yet" state. Read the method block before quoting a number.
+- Intraday tape as prose: /hour.html renders the in-session cross-sections as
+  one sentence per slot with both clocks visible. Empty until the first real
+  A-share session snapshot (2026-11-16 09:35 Asia/Shanghai); before that it
+  states the wait instead of showing a blank table
+- Story threads: /stories.html ranks stories by contestedFirsts and carries
+  every sighting plus the headline revision trail. Lead times are measured
+  between our fetches, so they show observation granularity (the edition
+  cadence), not reaction speed
 - Dragon-tiger list: /lhb.json — top movers by net amount (previous
   trading day)
 - MCP desk: /mcp-desk.html — operator-baked institutional snapshot
