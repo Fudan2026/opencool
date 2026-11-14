@@ -3,7 +3,7 @@
   "timezone": "Asia/Shanghai",
   "retentionDays": 30,
   "maxStories": 2000,
-  "updatedAt": "2026-11-14T17:02:51+08:00",
+  "updatedAt": "2026-11-14T17:06:46+08:00",
   "stories": [
     {
       "id": "st_0150625be0",
@@ -12253,8 +12253,8 @@
       "firstSeenAt": "2026-11-14T02:22:47+08:00",
       "firstEdition": "2026-11-14/06",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-13T16:01:45.000Z",
-      "publishLagMinutes": 141,
+      "publishedAt": "2026-11-08T17:51:17.000Z",
+      "publishLagMinutes": 7231.5,
       "lastSeenAt": "2026-11-14T02:22:47+08:00",
       "lastEdition": "2026-11-14/06",
       "topic": "world",
@@ -12262,20 +12262,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "guardian-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-12T08:46:37+08:00",
+          "title": "Collision of two trains in Egypt kills at least seven",
+          "url": "https://www.theguardian.com/world/2026/nov/08/egypt-two-trains-deadly-collision",
+          "edition": "2026-11-12/06",
+          "publishedAt": "2026-11-08T17:51:17.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-14T02:22:47+08:00",
+        "sourceId": "guardian-world",
+        "observedAt": "2026-11-12T08:46:37+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "aljazeera"
+          "guardian-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-14T02:22:47+08:00",
+        "leadMinutes": 2496.2
       }
     },
     {
@@ -29028,8 +29038,8 @@
       "firstSeenAt": "2026-11-12T17:42:49+08:00",
       "firstEdition": "2026-11-12/13",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-12T04:41:17.000Z",
-      "publishLagMinutes": 301.5,
+      "publishedAt": "2026-11-08T16:52:42.000Z",
+      "publishLagMinutes": 5330.1,
       "lastSeenAt": "2026-11-12T17:42:49+08:00",
       "lastEdition": "2026-11-12/13",
       "topic": "world",
@@ -29037,20 +29047,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "nyt-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-10T01:11:34+08:00",
+          "title": "Saudi Aramco Tower Damaged as Yemen’s Houthis Attack Riyadh",
+          "url": "https://www.nytimes.com/2026/11/08/world/middleeast/saudi-aramco-tower-riyadh-hit.html",
+          "edition": "2026-11-10/06",
+          "publishedAt": "2026-11-08T16:52:42.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-12T17:42:49+08:00",
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-10T01:11:34+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "aljazeera"
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-12T17:42:49+08:00",
+        "leadMinutes": 3871.3
       }
     },
     {
@@ -32262,8 +32282,8 @@
       "firstSeenAt": "2026-11-12T17:42:49+08:00",
       "firstEdition": "2026-11-12/13",
       "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-12T05:12:56.000Z",
-      "publishLagMinutes": 269.9,
+      "publishedAt": "2026-11-08T17:51:17.000Z",
+      "publishLagMinutes": 5271.5,
       "lastSeenAt": "2026-11-12T17:42:49+08:00",
       "lastEdition": "2026-11-12/13",
       "topic": "global-markets",
@@ -32271,20 +32291,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bbc-world"
+        "bbc-world",
+        "guardian-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-10T01:11:34+08:00",
+          "title": "Collision of two trains in Egypt kills at least seven",
+          "url": "https://www.theguardian.com/world/2026/nov/08/egypt-two-trains-deadly-collision",
+          "edition": "2026-11-10/06",
+          "publishedAt": "2026-11-08T17:51:17.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-12T17:42:49+08:00",
+        "sourceId": "guardian-world",
+        "observedAt": "2026-11-10T01:11:34+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bbc-world"
+          "guardian-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-12T17:42:49+08:00",
+        "leadMinutes": 3871.3
       }
     },
     {
@@ -32658,8 +32688,8 @@
       "firstSeenAt": "2026-11-12T17:42:49+08:00",
       "firstEdition": "2026-11-12/13",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-12T02:03:30.000Z",
-      "publishLagMinutes": 459.3,
+      "publishedAt": "2026-11-08T09:00:35.000Z",
+      "publishLagMinutes": 5802.2,
       "lastSeenAt": "2026-11-12T17:42:49+08:00",
       "lastEdition": "2026-11-12/13",
       "topic": "global-markets",
@@ -32667,20 +32697,40 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "guardian-world",
+        "npr-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-10T01:11:34+08:00",
+          "title": "Pope’s visit to Argentina sets up showdown with ‘hyper-capitalist’ Milei",
+          "url": "https://www.theguardian.com/world/2026/nov/08/popes-visit-to-argentina-sets-up-showdown-with-hyper-capitalist-milei",
+          "edition": "2026-11-10/06",
+          "publishedAt": "2026-11-08T09:00:35.000Z"
+        },
+        {
+          "sourceId": "npr-world",
+          "observedAt": "2026-11-10T01:11:34+08:00",
+          "title": "After a successful trip to Uruguay, Pope Leo heads to Argentina",
+          "url": "https://www.npr.org/2026/11/08/nx-s1-6033992/after-a-successful-trip-to-uruguay-pope-leo-heads-to-argentina",
+          "edition": "2026-11-10/06",
+          "publishedAt": "2026-11-08T16:30:16.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-12T17:42:49+08:00",
-        "tied": false,
+        "sourceId": null,
+        "observedAt": "2026-11-10T01:11:34+08:00",
+        "tied": true,
         "coFirstSourceIds": [
-          "aljazeera"
+          "guardian-world",
+          "npr-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-12T17:42:49+08:00",
+        "leadMinutes": 3871.3
       }
     },
     {
@@ -34478,8 +34528,8 @@
       "firstSeenAt": "2026-11-12T08:46:37+08:00",
       "firstEdition": "2026-11-12/06",
       "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-11T21:43:21.000Z",
-      "publishLagMinutes": 183.3,
+      "publishedAt": "2026-11-07T19:17:22.000Z",
+      "publishLagMinutes": 6089.3,
       "lastSeenAt": "2026-11-12T08:46:37+08:00",
       "lastEdition": "2026-11-12/06",
       "topic": "global-markets",
@@ -34487,20 +34537,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bloomberg-markets"
+        "bloomberg-markets",
+        "bbc-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-10T01:11:34+08:00",
+          "title": "Paraguay's former president charged after bank collapse",
+          "url": "https://www.bbc.co.uk/news/articles/c68jzzvjgdy9o?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-10/06",
+          "publishedAt": "2026-11-07T19:17:22.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-12T08:46:37+08:00",
+        "sourceId": "bbc-world",
+        "observedAt": "2026-11-10T01:11:34+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bloomberg-markets"
+          "bbc-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bloomberg-markets",
+        "runnerUpObservedAt": "2026-11-12T08:46:37+08:00",
+        "leadMinutes": 3335.1
       }
     },
     {
@@ -35468,8 +35528,8 @@
       "firstSeenAt": "2026-11-12T08:46:37+08:00",
       "firstEdition": "2026-11-12/06",
       "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-11T12:00:05.000Z",
-      "publishLagMinutes": 766.5,
+      "publishedAt": "2026-11-08T10:01:51.000Z",
+      "publishLagMinutes": 5204.8,
       "lastSeenAt": "2026-11-12T08:46:37+08:00",
       "lastEdition": "2026-11-12/06",
       "topic": "global-markets",
@@ -35477,20 +35537,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "ft-companies"
+        "ft-companies",
+        "nyt-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-10T01:11:34+08:00",
+          "title": "A Guide to COP31 Climate Talks in Antalya, Turkey",
+          "url": "https://www.nytimes.com/2026/11/08/climate/what-is-cop31-climate.html",
+          "edition": "2026-11-10/06",
+          "publishedAt": "2026-11-08T10:01:51.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "ft-companies",
-        "observedAt": "2026-11-12T08:46:37+08:00",
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-10T01:11:34+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "ft-companies"
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "ft-companies",
+        "runnerUpObservedAt": "2026-11-12T08:46:37+08:00",
+        "leadMinutes": 3335.1
       }
     },
     {
@@ -38770,6 +38840,39 @@
       }
     },
     {
+      "id": "st_d62530def6",
+      "cluster": "title:nz election 2026 new zealand faces weeks of uncertainty with results too close to call",
+      "title": "NZ election 2026: New Zealand faces weeks of uncertainty with results ‘too close to call’",
+      "url": "https://www.theguardian.com/world/2026/nov/07/new-zealand-election-too-close-to-call-vote-count",
+      "firstSeenAt": "2026-11-12T08:46:37+08:00",
+      "firstEdition": "2026-11-12/06",
+      "firstSourceId": "guardian-world",
+      "publishedAt": "2026-11-08T01:00:48.000Z",
+      "publishLagMinutes": 5745.8,
+      "lastSeenAt": "2026-11-12T08:46:37+08:00",
+      "lastEdition": "2026-11-12/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "guardian-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "guardian-world",
+        "observedAt": "2026-11-12T08:46:37+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "guardian-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
       "id": "st_d9002d2ee3",
       "cluster": "title:prediction markets tied to clinical trials and drug approvals draw lawmakers ire",
       "title": "Prediction markets tied to clinical trials and drug approvals draw lawmakers' ire",
@@ -41965,8 +42068,8 @@
       "firstSeenAt": "2026-11-11T16:21:50+08:00",
       "firstEdition": "2026-11-11/13",
       "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-11T05:00:12.000Z",
-      "publishLagMinutes": 201.6,
+      "publishedAt": "2026-11-08T05:00:19.000Z",
+      "publishLagMinutes": 4521.5,
       "lastSeenAt": "2026-11-11T16:21:50+08:00",
       "lastEdition": "2026-11-11/13",
       "topic": "global-markets",
@@ -41976,11 +42079,20 @@
       "sources": [
         "ft-companies"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "AI is coming for managers’ headcount",
+          "url": "https://www.ft.com/content/c1af5834-e9ee-411f-ba57-9af758ac6682?syn-25a6b1a6=1",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T05:00:19.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "ft-companies",
-        "observedAt": "2026-11-11T16:21:50+08:00",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "ft-companies"
@@ -42981,6 +43093,39 @@
       }
     },
     {
+      "id": "st_25cd7b7c0d",
+      "cluster": "title:markets realise they hate america s blue wave",
+      "title": "Markets realise they hate America’s blue wave",
+      "url": "https://www.economist.com/finance-and-economics/2026/11/05/markets-realise-they-hate-americas-blue-wave",
+      "firstSeenAt": "2026-11-11T12:16:08+08:00",
+      "firstEdition": "2026-11-11/06",
+      "firstSourceId": "economist-finance",
+      "publishedAt": "2026-11-05T23:41:07.000Z",
+      "publishLagMinutes": 7475,
+      "lastSeenAt": "2026-11-11T12:16:08+08:00",
+      "lastEdition": "2026-11-11/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "economist-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "economist-finance",
+        "observedAt": "2026-11-11T12:16:08+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "economist-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
       "id": "st_26dfdc9112",
       "cluster": "title:fossil ceo says turnaround is ahead of plan as sales return to growth",
       "title": "Fossil CEO says turnaround is ahead of plan as sales return to growth",
@@ -43021,8 +43166,8 @@
       "firstSeenAt": "2026-11-11T12:16:08+08:00",
       "firstEdition": "2026-11-11/06",
       "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-11T03:20:30.000Z",
-      "publishLagMinutes": 55.6,
+      "publishedAt": "2026-11-05T14:05:00.000Z",
+      "publishLagMinutes": 8051.1,
       "lastSeenAt": "2026-11-11T12:16:08+08:00",
       "lastEdition": "2026-11-11/06",
       "topic": "world",
@@ -43030,20 +43175,30 @@
       "domestic": true,
       "entities": [],
       "sources": [
-        "bloomberg-markets"
+        "bloomberg-markets",
+        "the-diplomat"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "the-diplomat",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "The US Midterm Elections: Views From China",
+          "url": "https://thediplomat.com/2026/11/the-us-midterm-elections-views-from-china/",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-05T14:05:00.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-11T12:16:08+08:00",
+        "sourceId": "the-diplomat",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bloomberg-markets"
+          "the-diplomat"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bloomberg-markets",
+        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
+        "leadMinutes": 3157.1
       }
     },
     {
@@ -43054,8 +43209,8 @@
       "firstSeenAt": "2026-11-11T12:16:08+08:00",
       "firstEdition": "2026-11-11/06",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-11T00:24:27.000Z",
-      "publishLagMinutes": 231.7,
+      "publishedAt": "2026-11-08T10:01:50.000Z",
+      "publishLagMinutes": 3974.3,
       "lastSeenAt": "2026-11-11T12:16:08+08:00",
       "lastEdition": "2026-11-11/06",
       "topic": "global-markets",
@@ -43063,20 +43218,40 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "guardian-world",
+        "nyt-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Who’s who at Cop31: key players at the climate talks",
+          "url": "https://www.theguardian.com/environment/2026/nov/08/cop31-key-players-climate-talks",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T11:48:56.000Z"
+        },
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "A Guide to COP31 Climate Talks in Antalya, Turkey",
+          "url": "https://www.nytimes.com/2026/11/08/climate/what-is-cop31-climate.html",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T10:01:50.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
+        "sourceId": null,
+        "observedAt": "2026-11-09T07:39:02+08:00",
+        "tied": true,
         "coFirstSourceIds": [
-          "aljazeera"
+          "guardian-world",
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
+        "leadMinutes": 3157.1
       }
     },
     {
@@ -43219,8 +43394,8 @@
       "firstSeenAt": "2026-11-11T12:16:08+08:00",
       "firstEdition": "2026-11-11/06",
       "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-10T15:30:06.000Z",
-      "publishLagMinutes": 766,
+      "publishedAt": "2026-11-08T09:29:24.000Z",
+      "publishLagMinutes": 4006.7,
       "lastSeenAt": "2026-11-11T12:16:08+08:00",
       "lastEdition": "2026-11-11/06",
       "topic": "opinion",
@@ -43228,20 +43403,38 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "nyt-world"
+        "nyt-world",
+        "bbc-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "What to Know About the Mass Shooting in Krakow, Poland",
+          "url": "https://www.nytimes.com/2026/11/08/world/europe/poland-krakow-mass-shooting.html",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T13:09:09.000Z"
+        },
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-09T14:05:57+08:00",
+          "title": "How the deadly shooting in Krakow unfolded",
+          "url": "https://www.bbc.co.uk/news/videos/cq74p2zpwyjmo?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-09/13",
+          "publishedAt": "2026-11-08T09:29:24.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "nyt-world",
-        "observedAt": "2026-11-11T12:16:08+08:00",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-09T14:05:57+08:00",
+        "leadMinutes": 386.9
       }
     },
     {
@@ -44671,8 +44864,8 @@
       "firstSeenAt": "2026-11-11T12:16:08+08:00",
       "firstEdition": "2026-11-11/06",
       "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-10T14:12:02.000Z",
-      "publishLagMinutes": 844.1,
+      "publishedAt": "2026-11-08T23:50:00.000Z",
+      "publishLagMinutes": 3146.1,
       "lastSeenAt": "2026-11-11T12:16:08+08:00",
       "lastEdition": "2026-11-11/06",
       "topic": "global-markets",
@@ -44680,20 +44873,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "cnbc-topnews"
+        "cnbc-topnews",
+        "marketwatch-top"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "marketwatch-top",
+          "observedAt": "2026-11-09T14:05:57+08:00",
+          "title": "How much in Roth conversions can you do in 2027 with the new tax brackets?",
+          "url": "https://www.marketwatch.com/story/how-much-roth-conversion-can-you-do-in-2027-with-the-new-tax-brackets-a2f940c8?mod=mw_rss_topstories",
+          "edition": "2026-11-09/13",
+          "publishedAt": "2026-11-08T23:50:00.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-11T12:16:08+08:00",
+        "sourceId": "marketwatch-top",
+        "observedAt": "2026-11-09T14:05:57+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "cnbc-topnews"
+          "marketwatch-top"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "cnbc-topnews",
+        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
+        "leadMinutes": 2770.2
       }
     },
     {
@@ -46354,8 +46557,8 @@
       "firstSeenAt": "2026-11-11T12:16:08+08:00",
       "firstEdition": "2026-11-11/06",
       "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-10T23:21:31.000Z",
-      "publishLagMinutes": 294.6,
+      "publishedAt": "2026-11-07T07:27:44.000Z",
+      "publishLagMinutes": 5568.4,
       "lastSeenAt": "2026-11-11T12:16:08+08:00",
       "lastEdition": "2026-11-11/06",
       "topic": "global-markets",
@@ -46363,20 +46566,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "nyt-world"
+        "nyt-world",
+        "bbc-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Meghan's father Thomas Markle under house arrest after child sex abuse material charge",
+          "url": "https://www.bbc.co.uk/news/articles/cqgkvv8m8pgyo?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-07T07:27:44.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "nyt-world",
-        "observedAt": "2026-11-11T12:16:08+08:00",
+        "sourceId": "bbc-world",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "nyt-world"
+          "bbc-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "nyt-world",
+        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
+        "leadMinutes": 3157.1
       }
     },
     {
@@ -47938,8 +48151,8 @@
       "firstSeenAt": "2026-11-11T12:16:08+08:00",
       "firstEdition": "2026-11-11/06",
       "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-10T22:01:52.000Z",
-      "publishLagMinutes": 374.3,
+      "publishedAt": "2026-11-06T23:12:56.000Z",
+      "publishLagMinutes": 6063.2,
       "lastSeenAt": "2026-11-11T12:16:08+08:00",
       "lastEdition": "2026-11-11/06",
       "topic": "world",
@@ -47949,11 +48162,20 @@
       "sources": [
         "cnbc-topnews"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "cnbc-topnews",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Mississippi Senate: Colom increases lead over Hyde-Smith to nearly 2,500 votes",
+          "url": "https://www.cnbc.com/2026/11/05/mississippi-senate-election-scott-colom-hyde-smith.html",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-06T23:12:56.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-11T12:16:08+08:00",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "cnbc-topnews"
@@ -48829,8 +49051,8 @@
       "firstSeenAt": "2026-11-10T19:43:41+08:00",
       "firstEdition": "2026-11-10/19",
       "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-10T11:09:02.000Z",
-      "publishLagMinutes": 34.7,
+      "publishedAt": "2026-11-08T19:50:00.000Z",
+      "publishLagMinutes": 2393.7,
       "lastSeenAt": "2026-11-10T19:43:41+08:00",
       "lastEdition": "2026-11-10/19",
       "topic": "global-markets",
@@ -48840,11 +49062,20 @@
       "sources": [
         "yahoo-finance"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "This Is the Best-Performing Magnificent Seven Stock of 2026. Is It Still a Buy?",
+          "url": "https://www.fool.com/investing/2026/11/08/this-is-best-performing-magnificent-seven-stock/?.tsrc=rss",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T19:50:00.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-10T19:43:41+08:00",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "yahoo-finance"
@@ -49027,8 +49258,8 @@
       "firstSeenAt": "2026-11-10T19:43:41+08:00",
       "firstEdition": "2026-11-10/19",
       "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-10T09:32:02.000Z",
-      "publishLagMinutes": 131.7,
+      "publishedAt": "2026-11-07T17:35:00.000Z",
+      "publishLagMinutes": 3968.7,
       "lastSeenAt": "2026-11-10T19:43:41+08:00",
       "lastEdition": "2026-11-10/19",
       "topic": "global-markets",
@@ -49038,11 +49269,20 @@
       "sources": [
         "yahoo-finance"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-08T07:00:20+08:00",
+          "title": "This Dividend King Yielding 2X the S&P 500 Looks Like a Buy in November.",
+          "url": "https://www.fool.com/investing/2026/11/07/this-dividend-king-yielding-2x-the-sp-500-looks/?.tsrc=rss",
+          "edition": "2026-11-08/06",
+          "publishedAt": "2026-11-07T17:35:00.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-10T19:43:41+08:00",
+        "observedAt": "2026-11-08T07:00:20+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "yahoo-finance"
@@ -49456,8 +49696,8 @@
       "firstSeenAt": "2026-11-10T19:43:41+08:00",
       "firstEdition": "2026-11-10/19",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-10T08:49:25.000Z",
-      "publishLagMinutes": 174.3,
+      "publishedAt": "2026-11-08T11:57:05.000Z",
+      "publishLagMinutes": 2866.6,
       "lastSeenAt": "2026-11-10T19:43:41+08:00",
       "lastEdition": "2026-11-10/19",
       "topic": "world",
@@ -49467,11 +49707,20 @@
       "sources": [
         "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "Could UFC boss Dana White be next White House press secretary?",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/8/could-ufc-boss-dana-white-be-next-white-house-press-secretary?traffic_source=rss",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-08T11:57:05.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T19:43:41+08:00",
+        "observedAt": "2026-11-08T23:01:48+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "aljazeera"
@@ -51040,8 +51289,8 @@
       "firstSeenAt": "2026-11-10T19:43:41+08:00",
       "firstEdition": "2026-11-10/19",
       "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-10T10:02:53.000Z",
-      "publishLagMinutes": 100.8,
+      "publishedAt": "2026-11-08T09:00:35.000Z",
+      "publishLagMinutes": 3043.1,
       "lastSeenAt": "2026-11-10T19:43:41+08:00",
       "lastEdition": "2026-11-10/19",
       "topic": "global-markets",
@@ -51049,20 +51298,56 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "nyt-world"
+        "nyt-world",
+        "guardian-world",
+        "npr-world"
       ],
-      "sightings": [],
-      "headlineRevisions": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "In Argentina, Pope Leo to Meet Church at Odds With President Milei",
+          "url": "https://www.nytimes.com/2026/11/08/world/americas/pope-leo-argentina-milei.html",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-08T10:00:57.000Z"
+        },
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Pope’s visit to Argentina sets up showdown with ‘hyper-capitalist’ Milei",
+          "url": "https://www.theguardian.com/world/2026/nov/08/popes-visit-to-argentina-sets-up-showdown-with-hyper-capitalist-milei",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T09:00:35.000Z"
+        },
+        {
+          "sourceId": "npr-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "After a successful trip to Uruguay, Pope Leo heads to Argentina",
+          "url": "https://www.npr.org/2026/11/08/nx-s1-6033992/after-a-successful-trip-to-uruguay-pope-leo-heads-to-argentina",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T16:30:16.000Z"
+        }
+      ],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-09T07:39:02+08:00",
+          "sourceId": "nyt-world",
+          "edition": "2026-11-09/06",
+          "url": "https://www.nytimes.com/2026/11/08/world/americas/pope-leo-argentina-milei.html",
+          "from": "In Argentina, Pope Leo to Meet Church at Odds With President Milei",
+          "to": "In Argentina, Pope Leo Tells President Milei Economy Must Serve the Needy"
+        }
+      ],
       "firstMover": {
         "sourceId": "nyt-world",
-        "observedAt": "2026-11-10T19:43:41+08:00",
+        "observedAt": "2026-11-08T23:01:48+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "guardian-world",
+        "runnerUpObservedAt": "2026-11-09T07:39:02+08:00",
+        "leadMinutes": 517.2
       }
     },
     {
@@ -54009,8 +54294,8 @@
       "firstSeenAt": "2026-11-10T16:19:01+08:00",
       "firstEdition": "2026-11-10/13",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-10T06:13:00.000Z",
-      "publishLagMinutes": 126,
+      "publishedAt": "2026-11-08T11:50:15.000Z",
+      "publishLagMinutes": 2668.8,
       "lastSeenAt": "2026-11-10T16:19:01+08:00",
       "lastEdition": "2026-11-10/13",
       "topic": "world",
@@ -54018,20 +54303,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "guardian-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "Polish prosecutors open terrorism investigation into Kraków shooting",
+          "url": "https://www.theguardian.com/world/2026/nov/08/krakow-shooting-poland-terrorism-investigation",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-08T11:50:15.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T16:19:01+08:00",
+        "sourceId": "guardian-world",
+        "observedAt": "2026-11-08T23:01:48+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "aljazeera"
+          "guardian-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-10T16:19:01+08:00",
+        "leadMinutes": 2477.2
       }
     },
     {
@@ -54537,8 +54832,8 @@
       "firstSeenAt": "2026-11-10T16:19:01+08:00",
       "firstEdition": "2026-11-10/13",
       "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-10T05:38:53.000Z",
-      "publishLagMinutes": 160.1,
+      "publishedAt": "2026-11-08T22:05:12.000Z",
+      "publishLagMinutes": 2053.8,
       "lastSeenAt": "2026-11-10T16:19:01+08:00",
       "lastEdition": "2026-11-10/13",
       "topic": "world",
@@ -54548,11 +54843,20 @@
       "sources": [
         "bbc-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Doctor who treated victims of Krakow shooting speaks to the BBC",
+          "url": "https://www.bbc.co.uk/news/videos/c63elgqqz5y0o?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T22:05:12.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "bbc-world",
-        "observedAt": "2026-11-10T16:19:01+08:00",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "bbc-world"
@@ -54702,8 +55006,8 @@
       "firstSeenAt": "2026-11-10T16:19:01+08:00",
       "firstEdition": "2026-11-10/13",
       "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-09T20:50:13.000Z",
-      "publishLagMinutes": 688.8,
+      "publishedAt": "2026-11-08T01:37:55.000Z",
+      "publishLagMinutes": 3281.1,
       "lastSeenAt": "2026-11-10T16:19:01+08:00",
       "lastEdition": "2026-11-10/13",
       "topic": "global-markets",
@@ -54711,20 +55015,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "nyt-world"
+        "nyt-world",
+        "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-08T15:12:42+08:00",
+          "title": "Canary Islands’ El Hierro declares emergency amid migrant, refugee influx",
+          "url": "https://www.aljazeera.com/news/2026/11/8/canary-islands-el-hierro-declares-emergency-amid-migrant-refugee-influx?traffic_source=rss",
+          "edition": "2026-11-08/13",
+          "publishedAt": "2026-11-08T01:37:55.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "nyt-world",
-        "observedAt": "2026-11-10T16:19:01+08:00",
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-08T15:12:42+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "nyt-world"
+          "aljazeera"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "nyt-world",
+        "runnerUpObservedAt": "2026-11-10T16:19:01+08:00",
+        "leadMinutes": 2946.3
       }
     },
     {
@@ -56088,8 +56402,8 @@
       "firstSeenAt": "2026-11-10T16:19:01+08:00",
       "firstEdition": "2026-11-10/13",
       "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-09T19:09:27.000Z",
-      "publishLagMinutes": 789.6,
+      "publishedAt": "2026-11-06T05:01:17.000Z",
+      "publishLagMinutes": 5957.7,
       "lastSeenAt": "2026-11-10T16:19:01+08:00",
       "lastEdition": "2026-11-10/13",
       "topic": "global-markets",
@@ -56097,20 +56411,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bbc-world"
+        "bbc-world",
+        "nyt-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-08T07:00:20+08:00",
+          "title": "Pope Leo’s Trip to Latin America: What to Know",
+          "url": "https://www.nytimes.com/2026/11/06/world/americas/pope-leo-uruguay-argentina-peru.html",
+          "edition": "2026-11-08/06",
+          "publishedAt": "2026-11-06T05:01:17.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-10T16:19:01+08:00",
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-08T07:00:20+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bbc-world"
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-10T16:19:01+08:00",
+        "leadMinutes": 3438.7
       }
     },
     {
@@ -56946,8 +57270,8 @@
       "firstSeenAt": "2026-11-10T16:19:01+08:00",
       "firstEdition": "2026-11-10/13",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-10T06:38:57.000Z",
-      "publishLagMinutes": 100.1,
+      "publishedAt": "2026-11-07T10:13:41.000Z",
+      "publishLagMinutes": 4205.3,
       "lastSeenAt": "2026-11-10T16:19:01+08:00",
       "lastEdition": "2026-11-10/13",
       "topic": "global-markets",
@@ -56955,20 +57279,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "nyt-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-08T07:00:20+08:00",
+          "title": "Why Are There Protests in France?",
+          "url": "https://www.nytimes.com/article/france-student-protests-why.html",
+          "edition": "2026-11-08/06",
+          "publishedAt": "2026-11-07T10:13:41.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T16:19:01+08:00",
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-08T07:00:20+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "aljazeera"
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-10T16:19:01+08:00",
+        "leadMinutes": 3438.7
       }
     },
     {
@@ -57210,8 +57544,8 @@
       "firstSeenAt": "2026-11-10T01:11:34+08:00",
       "firstEdition": "2026-11-10/06",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-09T14:14:28.000Z",
-      "publishLagMinutes": 177.1,
+      "publishedAt": "2026-11-06T12:48:37.000Z",
+      "publishLagMinutes": 4583,
       "lastSeenAt": "2026-11-10T01:11:34+08:00",
       "lastEdition": "2026-11-10/06",
       "topic": "world",
@@ -57219,16 +57553,35 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "guardian-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "South Africa’s ANC suffers setback in local elections",
+          "url": "https://www.aljazeera.com/news/2026/11/8/south-africas-anc-suffers-setback-in-local-elections?traffic_source=rss",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-08T12:19:14.000Z"
+        },
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "ANC faces bruising defeat in South African local elections with 80% of ballots counted",
+          "url": "https://www.theguardian.com/world/2026/nov/06/anc-faces-defeat-south-african-local-elections",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-06T12:48:37.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T01:11:34+08:00",
-        "tied": false,
+        "sourceId": null,
+        "observedAt": "2026-11-08T23:01:48+08:00",
+        "tied": true,
         "coFirstSourceIds": [
-          "aljazeera"
+          "aljazeera",
+          "guardian-world"
         ],
         "runnerUpSourceId": null,
         "runnerUpObservedAt": null,
@@ -57401,6 +57754,39 @@
       }
     },
     {
+      "id": "st_0ec9b433ee",
+      "cluster": "title:india s rediscovery of poland the drivers and limits of a growing partnership",
+      "title": "India’s Rediscovery of Poland: The Drivers and Limits of a Growing Partnership",
+      "url": "https://thediplomat.com/2026/11/indias-rediscovery-of-poland-the-drivers-and-limits-of-a-growing-partnership/",
+      "firstSeenAt": "2026-11-10T01:11:34+08:00",
+      "firstEdition": "2026-11-10/06",
+      "firstSourceId": "the-diplomat",
+      "publishedAt": "2026-11-06T14:29:00.000Z",
+      "publishLagMinutes": 4482.6,
+      "lastSeenAt": "2026-11-10T01:11:34+08:00",
+      "lastEdition": "2026-11-10/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "the-diplomat"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "the-diplomat",
+        "observedAt": "2026-11-10T01:11:34+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "the-diplomat"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
       "id": "st_0f4359939a",
       "cluster": "title:rubio sees little hope of diplomatic breakthrough to mideast deadlock amid outrageous iranian demands",
       "title": "Rubio sees little hope of diplomatic breakthrough to Mideast deadlock amid 'outrageous' Iranian demands",
@@ -57474,8 +57860,8 @@
       "firstSeenAt": "2026-11-10T01:11:34+08:00",
       "firstEdition": "2026-11-10/06",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-09T14:42:39.000Z",
-      "publishLagMinutes": 148.9,
+      "publishedAt": "2026-11-08T15:07:15.000Z",
+      "publishLagMinutes": 1564.3,
       "lastSeenAt": "2026-11-10T01:11:34+08:00",
       "lastEdition": "2026-11-10/06",
       "topic": "world",
@@ -57483,20 +57869,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "npr-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "npr-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Russell Brand to learn sentence after being found guilty of rape and sexual assault",
+          "url": "https://www.npr.org/2026/11/08/nx-s1-6033957/russell-brand-learn-sentence-found-guilty-rape-sexual-assault",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T15:07:15.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T01:11:34+08:00",
+        "sourceId": "npr-world",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "aljazeera"
+          "npr-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-10T01:11:34+08:00",
+        "leadMinutes": 1052.5
       }
     },
     {
@@ -58028,6 +58424,39 @@
       }
     },
     {
+      "id": "st_262f4409d6",
+      "cluster": "title:长平观察 西方背弃黄之锋 也在背弃自己",
+      "title": "长平观察：西方背弃黄之锋，也在背弃自己",
+      "url": "https://www.dw.com/zh/长平观察：西方背弃黄之锋，也在背弃自己/a-79883719?maca=chi-rss-chi-all-1127-rdf",
+      "firstSeenAt": "2026-11-10T01:11:34+08:00",
+      "firstEdition": "2026-11-10/06",
+      "firstSourceId": "dw-chinese",
+      "publishedAt": "2026-11-07T09:06:00.000Z",
+      "publishLagMinutes": 3365.6,
+      "lastSeenAt": "2026-11-10T01:11:34+08:00",
+      "lastEdition": "2026-11-10/06",
+      "topic": "opinion",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "dw-chinese"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "dw-chinese",
+        "observedAt": "2026-11-10T01:11:34+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "dw-chinese"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
       "id": "st_27fb472854",
       "cluster": "title:there s more than a whiff of politics to the sudden call to slash labor s green energy subsidies",
       "title": "There’s more than a whiff of politics to the sudden call to slash Labor’s green energy subsidies",
@@ -58061,6 +58490,39 @@
       }
     },
     {
+      "id": "st_29344d0252",
+      "cluster": "title:见闻历11 11限时大促 随日历附赠千元知识礼包 送什么都不如送 搞钱的智慧",
+      "title": "见闻历11.11限时大促！随日历附赠千元知识礼包，送什么都不如送“搞钱的智慧”",
+      "url": "https://wallstreetcn.com/articles/3782813",
+      "firstSeenAt": "2026-11-10T01:11:34+08:00",
+      "firstEdition": "2026-11-10/06",
+      "firstSourceId": "wallstreetcn",
+      "publishedAt": "2026-11-09T10:06:25.000Z",
+      "publishLagMinutes": 425.2,
+      "lastSeenAt": "2026-11-10T01:11:34+08:00",
+      "lastEdition": "2026-11-10/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn",
+        "observedAt": "2026-11-10T01:11:34+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
       "id": "st_2ac5608f85",
       "cluster": "title:at least 39 die after europe bound migrant boat sinks off senegal",
       "title": "At least 39 die after Europe-bound migrant boat sinks off Senegal",
@@ -58068,8 +58530,8 @@
       "firstSeenAt": "2026-11-10T01:11:34+08:00",
       "firstEdition": "2026-11-10/06",
       "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-09T16:33:55.000Z",
-      "publishLagMinutes": 37.7,
+      "publishedAt": "2026-11-08T13:32:17.000Z",
+      "publishLagMinutes": 1659.3,
       "lastSeenAt": "2026-11-10T01:11:34+08:00",
       "lastEdition": "2026-11-10/06",
       "topic": "global-markets",
@@ -58077,20 +58539,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bbc-world"
+        "bbc-world",
+        "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "At least 21 dead as small boat sinks off Senegal",
+          "url": "https://www.aljazeera.com/news/2026/11/8/at-least-21-dead-as-small-boat-sinks-off-senegal?traffic_source=rss",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-08T13:32:17.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-10T01:11:34+08:00",
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-08T23:01:48+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bbc-world"
+          "aljazeera"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-10T01:11:34+08:00",
+        "leadMinutes": 1569.8
       }
     },
     {
@@ -58233,8 +58705,8 @@
       "firstSeenAt": "2026-11-10T01:11:34+08:00",
       "firstEdition": "2026-11-10/06",
       "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-09T11:56:25.000Z",
-      "publishLagMinutes": 315.2,
+      "publishedAt": "2026-11-07T23:36:18.000Z",
+      "publishLagMinutes": 2495.3,
       "lastSeenAt": "2026-11-10T01:11:34+08:00",
       "lastEdition": "2026-11-10/06",
       "topic": "world",
@@ -58242,20 +58714,38 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bbc-world"
+        "bbc-world",
+        "nyt-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-08T15:12:42+08:00",
+          "title": "At Least 6 Dead in Poland After Gunman Opens Fire in Krakow, Police Say",
+          "url": "https://www.nytimes.com/2026/11/07/world/europe/krakow-poland-shooting.html",
+          "edition": "2026-11-08/13",
+          "publishedAt": "2026-11-07T23:36:18.000Z"
+        },
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "How the deadly shooting in Krakow unfolded",
+          "url": "https://www.bbc.co.uk/news/videos/cq74p2zpwyjmo?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-08T09:29:24.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-10T01:11:34+08:00",
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-08T15:12:42+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bbc-world"
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-08T23:01:48+08:00",
+        "leadMinutes": 469.1
       }
     },
     {
@@ -58629,8 +59119,8 @@
       "firstSeenAt": "2026-11-10T01:11:34+08:00",
       "firstEdition": "2026-11-10/06",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-09T11:19:45.000Z",
-      "publishLagMinutes": 351.8,
+      "publishedAt": "2026-11-06T06:16:22.000Z",
+      "publishLagMinutes": 4975.2,
       "lastSeenAt": "2026-11-10T01:11:34+08:00",
       "lastEdition": "2026-11-10/06",
       "topic": "world",
@@ -58638,16 +59128,96 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "bbc-world",
+        "guardian-world",
+        "nyt-world",
+        "npr-world"
+      ],
+      "sightings": [
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-08T07:00:20+08:00",
+          "title": "Paraguay's former president charged after bank collapse",
+          "url": "https://www.bbc.co.uk/news/articles/c68jzzvjgdy9o?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-08/06",
+          "publishedAt": "2026-11-07T19:17:22.000Z"
+        },
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-08T07:00:20+08:00",
+          "title": "Paraguay’s president quits after millions of people’s savings frozen in bank crisis",
+          "url": "https://www.theguardian.com/world/2026/nov/05/paraguay-president-santiago-pena-resigns",
+          "edition": "2026-11-08/06",
+          "publishedAt": "2026-11-06T06:16:22.000Z"
+        },
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-08T07:00:20+08:00",
+          "title": "Prosecutors Charge Paraguay’s Former President With Corruption",
+          "url": "https://www.nytimes.com/2026/11/06/world/americas/paraguay-president-removed-ueno.html",
+          "edition": "2026-11-08/06",
+          "publishedAt": "2026-11-07T20:17:15.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-08T15:12:42+08:00",
+          "title": "Paraguay’s ousted president appears before prosecutors after impeachment",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/7/7-11-clip-paraguay-former-president-detained-appears?traffic_source=rss",
+          "edition": "2026-11-08/13",
+          "publishedAt": "2026-11-07T20:08:47.000Z"
+        },
+        {
+          "sourceId": "npr-world",
+          "observedAt": "2026-11-08T15:12:42+08:00",
+          "title": "Ousted Paraguayan president appears before prosecutors",
+          "url": "https://www.npr.org/2026/11/07/nx-s1-6033373/paraguay-president-ousted-bank-collapse",
+          "edition": "2026-11-08/13",
+          "publishedAt": "2026-11-07T17:14:36.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": null,
+        "observedAt": "2026-11-08T07:00:20+08:00",
+        "tied": true,
+        "coFirstSourceIds": [
+          "bbc-world",
+          "guardian-world",
+          "nyt-world"
+        ],
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-08T15:12:42+08:00",
+        "leadMinutes": 492.4
+      }
+    },
+    {
+      "id": "st_48e31be096",
+      "cluster": "title:what markets make of the midterms",
+      "title": "What markets make of the midterms",
+      "url": "https://www.economist.com/finance-and-economics/2026/11/04/what-markets-make-of-the-midterms",
+      "firstSeenAt": "2026-11-10T01:11:34+08:00",
+      "firstEdition": "2026-11-10/06",
+      "firstSourceId": "economist-finance",
+      "publishedAt": "2026-11-04T21:48:18.000Z",
+      "publishLagMinutes": 6923.3,
+      "lastSeenAt": "2026-11-10T01:11:34+08:00",
+      "lastEdition": "2026-11-10/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "economist-finance"
       ],
       "sightings": [],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
+        "sourceId": "economist-finance",
         "observedAt": "2026-11-10T01:11:34+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "aljazeera"
+          "economist-finance"
         ],
         "runnerUpSourceId": null,
         "runnerUpObservedAt": null,
@@ -58681,6 +59251,39 @@
         "tied": false,
         "coFirstSourceIds": [
           "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_4e2e89e7d4",
+      "cluster": "title:pm tells firms to publish salaries in job adverts ahead of new law",
+      "title": "PM tells firms to publish salaries in job adverts ahead of new law",
+      "url": "https://www.bbc.co.uk/news/articles/cmd9343z3zw2o?at_medium=RSS&at_campaign=rss",
+      "firstSeenAt": "2026-11-10T01:11:34+08:00",
+      "firstEdition": "2026-11-10/06",
+      "firstSourceId": "bbc-business",
+      "publishedAt": "2026-11-06T15:25:43.000Z",
+      "publishLagMinutes": 4425.9,
+      "lastSeenAt": "2026-11-10T01:11:34+08:00",
+      "lastEdition": "2026-11-10/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bbc-business"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bbc-business",
+        "observedAt": "2026-11-10T01:11:34+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bbc-business"
         ],
         "runnerUpSourceId": null,
         "runnerUpObservedAt": null,
@@ -59685,8 +60288,8 @@
       "firstSeenAt": "2026-11-10T01:11:34+08:00",
       "firstEdition": "2026-11-10/06",
       "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-09T06:22:55.000Z",
-      "publishLagMinutes": 648.7,
+      "publishedAt": "2026-11-08T13:06:23.000Z",
+      "publishLagMinutes": 1685.2,
       "lastSeenAt": "2026-11-10T01:11:34+08:00",
       "lastEdition": "2026-11-10/06",
       "topic": "global-markets",
@@ -59696,11 +60299,20 @@
       "sources": [
         "bloomberg-markets"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Poland Probes Krakow Shooting as Terrorism",
+          "url": "https://www.bloomberg.com/news/videos/2026-11-08/poland-probes-krakow-shooting-as-terrorism-video",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T13:06:23.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-10T01:11:34+08:00",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "bloomberg-markets"
@@ -60305,6 +60917,39 @@
       }
     },
     {
+      "id": "st_9808566f6d",
+      "cluster": "title:global stocks fall amid big worries over ai after democrats midterms triumph",
+      "title": "Global stocks fall amid ‘big worries over AI’ after Democrats’ midterms triumph",
+      "url": "https://www.theguardian.com/business/2026/nov/06/global-stocks-plunge-amid-ai-slowdown-fears-after-democrats-midterm-triumph",
+      "firstSeenAt": "2026-11-10T01:11:34+08:00",
+      "firstEdition": "2026-11-10/06",
+      "firstSourceId": "guardian-world",
+      "publishedAt": "2026-11-06T21:23:54.000Z",
+      "publishLagMinutes": 4067.7,
+      "lastSeenAt": "2026-11-10T01:11:34+08:00",
+      "lastEdition": "2026-11-10/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "guardian-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "guardian-world",
+        "observedAt": "2026-11-10T01:11:34+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "guardian-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
       "id": "st_991c453e08",
       "cluster": "title:how bp and shell fell out of love with the forecourt",
       "title": "How BP and Shell fell out of love with the forecourt",
@@ -60536,6 +61181,39 @@
       }
     },
     {
+      "id": "st_a5193ae367",
+      "cluster": "title:kenyan doomsday sect leader jailed for 200 years for murder of 190 children",
+      "title": "Kenyan doomsday sect leader jailed for 200 years for murder of 190 children",
+      "url": "https://www.theguardian.com/world/2026/nov/06/kenyan-doomsday-sect-leader-jailed-murders-paul-mackenzie",
+      "firstSeenAt": "2026-11-10T01:11:34+08:00",
+      "firstEdition": "2026-11-10/06",
+      "firstSourceId": "guardian-world",
+      "publishedAt": "2026-11-06T15:08:43.000Z",
+      "publishLagMinutes": 4442.9,
+      "lastSeenAt": "2026-11-10T01:11:34+08:00",
+      "lastEdition": "2026-11-10/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "guardian-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "guardian-world",
+        "observedAt": "2026-11-10T01:11:34+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "guardian-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
       "id": "st_a5c75be0da",
       "cluster": "title:首个iii期成功之后 mrna肿瘤疫苗的好戏才刚开场",
       "title": "首个III期成功之后，mRNA肿瘤疫苗的好戏才刚开场",
@@ -60595,6 +61273,39 @@
         "tied": false,
         "coFirstSourceIds": [
           "caixin"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_a85d03273c",
+      "cluster": "title:why the us midterms sparked an ai stock selloff",
+      "title": "Why the US midterms sparked an AI stock selloff",
+      "url": "https://www.bbc.co.uk/news/articles/crlykkzwwpydo?at_medium=RSS&at_campaign=rss",
+      "firstSeenAt": "2026-11-10T01:11:34+08:00",
+      "firstEdition": "2026-11-10/06",
+      "firstSourceId": "bbc-business",
+      "publishedAt": "2026-11-06T18:32:16.000Z",
+      "publishLagMinutes": 4239.3,
+      "lastSeenAt": "2026-11-10T01:11:34+08:00",
+      "lastEdition": "2026-11-10/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bbc-business"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bbc-business",
+        "observedAt": "2026-11-10T01:11:34+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bbc-business"
         ],
         "runnerUpSourceId": null,
         "runnerUpObservedAt": null,
@@ -61203,8 +61914,8 @@
       "firstSeenAt": "2026-11-10T01:11:34+08:00",
       "firstEdition": "2026-11-10/06",
       "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-09T14:53:00.000Z",
-      "publishLagMinutes": 138.6,
+      "publishedAt": "2026-11-07T21:14:10.000Z",
+      "publishLagMinutes": 2637.4,
       "lastSeenAt": "2026-11-10T01:11:34+08:00",
       "lastEdition": "2026-11-10/06",
       "topic": "filings",
@@ -61214,11 +61925,20 @@
       "sources": [
         "yahoo-finance"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-08T07:00:20+08:00",
+          "title": "Onity Group Q3 Earnings Call Highlights",
+          "url": "https://www.marketbeat.com/instant-alerts/transcript-onity-group-q3-earnings-call-highlights-2026-11-07/?utm_source=yahoofinance&utm_medium=yahoofinance&.tsrc=rss",
+          "edition": "2026-11-08/06",
+          "publishedAt": "2026-11-07T21:14:10.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-10T01:11:34+08:00",
+        "observedAt": "2026-11-08T07:00:20+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "yahoo-finance"
@@ -61302,8 +62022,8 @@
       "firstSeenAt": "2026-11-10T01:11:34+08:00",
       "firstEdition": "2026-11-10/06",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-09T16:48:34.000Z",
-      "publishLagMinutes": 23,
+      "publishedAt": "2026-11-08T19:26:38.000Z",
+      "publishLagMinutes": 1304.9,
       "lastSeenAt": "2026-11-10T01:11:34+08:00",
       "lastEdition": "2026-11-10/06",
       "topic": "world",
@@ -61313,11 +62033,20 @@
       "sources": [
         "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Al Jazeera tries Baseball5 at Youth Olympics",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/8/al-jazeera-tries-baseball5-at-youth-olympics?traffic_source=rss",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T19:26:38.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T01:11:34+08:00",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "aljazeera"
@@ -62160,8 +62889,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-09T03:09:51.000Z",
-      "publishLagMinutes": 176.1,
+      "publishedAt": "2026-11-06T12:48:37.000Z",
+      "publishLagMinutes": 3917.3,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "global-markets",
@@ -62169,20 +62898,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "guardian-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-07T07:00:20+08:00",
+          "title": "ANC faces bruising defeat in South African local elections with 80% of ballots counted",
+          "url": "https://www.theguardian.com/world/2026/nov/06/anc-faces-defeat-south-african-local-elections",
+          "edition": "2026-11-07/06",
+          "publishedAt": "2026-11-06T12:48:37.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "sourceId": "guardian-world",
+        "observedAt": "2026-11-07T07:00:20+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "aljazeera"
+          "guardian-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-09T14:05:57+08:00",
+        "leadMinutes": 3305.6
       }
     },
     {
@@ -62226,8 +62965,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-09T03:50:23.000Z",
-      "publishLagMinutes": 135.6,
+      "publishedAt": "2026-11-07T09:30:07.000Z",
+      "publishLagMinutes": 2675.8,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "global-markets",
@@ -62235,20 +62974,30 @@
       "domestic": true,
       "entities": [],
       "sources": [
-        "bloomberg-markets"
+        "bloomberg-markets",
+        "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-07T23:06:08+08:00",
+          "title": "China’s e-bikes boom as fuel prices rise",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/7/chinas-e-bikes-boom-as-fuel-prices-rise?traffic_source=rss",
+          "edition": "2026-11-07/19",
+          "publishedAt": "2026-11-07T09:30:07.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-07T23:06:08+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bloomberg-markets"
+          "aljazeera"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bloomberg-markets",
+        "runnerUpObservedAt": "2026-11-09T14:05:57+08:00",
+        "leadMinutes": 2339.8
       }
     },
     {
@@ -62358,8 +63107,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-09T04:03:02.000Z",
-      "publishLagMinutes": 122.9,
+      "publishedAt": "2026-11-05T22:17:59.000Z",
+      "publishLagMinutes": 4788,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "global-markets",
@@ -62367,20 +63116,40 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "bloomberg-markets",
+        "ft-companies"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-07T07:00:20+08:00",
+          "title": "Chip Stocks Climb After Rout, But AI Doubts Linger: Markets Wrap",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-05/stock-market-today-dow-s-p-live-updates",
+          "edition": "2026-11-07/06",
+          "publishedAt": "2026-11-05T22:17:59.000Z"
+        },
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-07T07:00:20+08:00",
+          "title": "US stocks recover after tech rout",
+          "url": "https://www.ft.com/content/642b32dc-e3a1-4df8-ae91-5c84bdeb89e0?syn-25a6b1a6=1",
+          "edition": "2026-11-07/06",
+          "publishedAt": "2026-11-06T22:22:05.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-09T14:05:57+08:00",
-        "tied": false,
+        "sourceId": null,
+        "observedAt": "2026-11-07T07:00:20+08:00",
+        "tied": true,
         "coFirstSourceIds": [
-          "aljazeera"
+          "bloomberg-markets",
+          "ft-companies"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-09T14:05:57+08:00",
+        "leadMinutes": 3305.6
       }
     },
     {
@@ -62589,8 +63358,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-09T05:00:01.000Z",
-      "publishLagMinutes": 65.9,
+      "publishedAt": "2026-11-05T19:39:19.000Z",
+      "publishLagMinutes": 4946.6,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "global-markets",
@@ -62598,20 +63367,82 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "cnbc-topnews"
+        "cnbc-topnews",
+        "npr-world",
+        "nyt-world",
+        "bbc-world",
+        "guardian-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "npr-world",
+          "observedAt": "2026-11-07T07:00:20+08:00",
+          "title": "European flights and broadcasters are targeted with another wave of bomb threats",
+          "url": "https://www.npr.org/2026/11/06/nx-s1-6032612/europe-flights-hoaxes",
+          "edition": "2026-11-07/06",
+          "publishedAt": "2026-11-06T15:21:31.000Z"
+        },
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-07T07:00:20+08:00",
+          "title": "Bomb Threats Disrupt European Flights and Rattle Passengers",
+          "url": "https://www.nytimes.com/2026/11/05/world/europe/bomb-threats-airline-passengers.html",
+          "edition": "2026-11-07/06",
+          "publishedAt": "2026-11-05T19:39:19.000Z"
+        },
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-07T07:00:20+08:00",
+          "title": "Wave of Hoax Bomb Threats to Flights in Europe Leaves Travelers Frustrated",
+          "url": "https://www.nytimes.com/2026/11/06/world/europe/bomb-threats-planes-flights-europe-travel.html",
+          "edition": "2026-11-07/06",
+          "publishedAt": "2026-11-06T16:21:25.000Z"
+        },
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-07T15:45:02+08:00",
+          "title": "New wave of bomb threats hit European airlines",
+          "url": "https://www.bbc.co.uk/news/articles/cq62yy064vjpo?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-07/13",
+          "publishedAt": "2026-11-06T15:25:35.000Z"
+        },
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-07T15:45:02+08:00",
+          "title": "Bomb threats against European flights ‘likely a coordinated campaign of disruption’, Ireland says – as it happened",
+          "url": "https://www.theguardian.com/world/live/2026/nov/06/high-alert-hoax-bomb-threats-france-air-lingus-belgium-pope-leo-europe-live",
+          "edition": "2026-11-07/13",
+          "publishedAt": "2026-11-06T16:26:17.000Z"
+        },
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-07T23:06:08+08:00",
+          "title": "Spate of bomb threats poses serious challenge to airline industry",
+          "url": "https://www.bbc.co.uk/news/articles/cv8ezz9yn6pyo?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-07/19",
+          "publishedAt": "2026-11-06T16:18:44.000Z"
+        },
+        {
+          "sourceId": "cnbc-topnews",
+          "observedAt": "2026-11-07T23:06:08+08:00",
+          "title": "Why a wave of bomb threats is proving so difficult for Europe's aviation authorities to contain",
+          "url": "https://www.cnbc.com/2026/11/07/hoax-bomb-threats-flights-europe.html",
+          "edition": "2026-11-07/19",
+          "publishedAt": "2026-11-07T09:01:57.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-09T14:05:57+08:00",
-        "tied": false,
+        "sourceId": null,
+        "observedAt": "2026-11-07T07:00:20+08:00",
+        "tied": true,
         "coFirstSourceIds": [
-          "cnbc-topnews"
+          "npr-world",
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-07T15:45:02+08:00",
+        "leadMinutes": 524.7
       }
     },
     {
@@ -62853,8 +63684,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-09T00:49:43.000Z",
-      "publishLagMinutes": 316.2,
+      "publishedAt": "2026-11-07T23:20:28.000Z",
+      "publishLagMinutes": 1845.5,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "global-markets",
@@ -62864,11 +63695,28 @@
       "sources": [
         "yahoo-finance"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "5 Worst Dow Stocks To Buy According to Analysts",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/5-worst-dow-stocks-buy-232028142.html?.tsrc=rss",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-07T23:20:28.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Forget the High-Beta Hype: 5 ‘Sleep Well at Night’ Stocks to Buy Now",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/forget-high-beta-hype-5-231024225.html?.tsrc=rss",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T23:10:24.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "observedAt": "2026-11-08T23:01:48+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "yahoo-finance"
@@ -62919,8 +63767,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "marketwatch-top",
-      "publishedAt": "2026-11-09T00:30:00.000Z",
-      "publishLagMinutes": 336,
+      "publishedAt": "2026-11-06T18:53:00.000Z",
+      "publishLagMinutes": 3553,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "global-markets",
@@ -62930,11 +63778,37 @@
       "sources": [
         "marketwatch-top"
       ],
-      "sightings": [],
-      "headlineRevisions": [],
+      "sightings": [
+        {
+          "sourceId": "marketwatch-top",
+          "observedAt": "2026-11-07T07:00:20+08:00",
+          "title": "My adviser recommended an annuity. Is it the right move in this market environment?",
+          "url": "https://www.marketwatch.com/story/my-adviser-recommended-an-annuity-is-it-the-right-move-in-this-market-environment-00edbbf6?mod=mw_rss_topstories",
+          "edition": "2026-11-07/06",
+          "publishedAt": "2026-11-06T18:53:00.000Z"
+        }
+      ],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-08T07:00:20+08:00",
+          "sourceId": "marketwatch-top",
+          "edition": "2026-11-08/06",
+          "url": "https://www.marketwatch.com/story/my-adviser-recommended-an-annuity-is-it-the-right-move-in-this-market-environment-00edbbf6?mod=mw_rss_topstories",
+          "from": "My adviser recommended an annuity. Is it the right move in this market environment?",
+          "to": "Second-guessing my adviser: Is an annuity the right move in this market?"
+        },
+        {
+          "at": "2026-11-09T14:05:57+08:00",
+          "sourceId": "marketwatch-top",
+          "edition": "2026-11-09/13",
+          "url": "https://www.marketwatch.com/story/my-adviser-recommended-an-annuity-is-it-the-right-move-in-this-market-environment-00edbbf6?mod=mw_rss_topstories",
+          "from": "Second-guessing my adviser: Is an annuity the right move in this market?",
+          "to": "I’m second-guessing my adviser: Is an annuity the right move in this market?"
+        }
+      ],
       "firstMover": {
         "sourceId": "marketwatch-top",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "observedAt": "2026-11-07T07:00:20+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "marketwatch-top"
@@ -62985,8 +63859,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-09T02:11:25.000Z",
-      "publishLagMinutes": 234.5,
+      "publishedAt": "2026-11-08T09:00:35.000Z",
+      "publishLagMinutes": 1265.4,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "global-markets",
@@ -62996,14 +63870,56 @@
       "sources": [
         "guardian-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "Pope’s visit to Argentina sets up showdown with ‘hyper-capitalist’ Milei",
+          "url": "https://www.theguardian.com/world/2026/nov/08/popes-visit-to-argentina-sets-up-showdown-with-hyper-capitalist-milei",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-08T09:00:35.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "guardian-world",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "observedAt": "2026-11-08T23:01:48+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "guardian-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_682319d383",
+      "cluster": "title:my life could be cut short i m 55 married and have a brain tumor should i splash out on a 210 000 porsche",
+      "title": "‘My life could be cut short’: I’m 55, married and have a brain tumor. Should I splash out on a $210,000 Porsche?",
+      "url": "https://www.marketwatch.com/story/my-life-could-be-cut-short-im-55-married-with-4-3-million-and-have-a-brain-tumor-should-i-buy-a-210-000-custom-porsche-ed825ada?mod=mw_rss_topstories",
+      "firstSeenAt": "2026-11-09T14:05:57+08:00",
+      "firstEdition": "2026-11-09/13",
+      "firstSourceId": "marketwatch-top",
+      "publishedAt": "2026-11-09T01:21:00.000Z",
+      "publishLagMinutes": 285,
+      "lastSeenAt": "2026-11-09T14:05:57+08:00",
+      "lastEdition": "2026-11-09/13",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "marketwatch-top"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "marketwatch-top",
+        "observedAt": "2026-11-09T14:05:57+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "marketwatch-top"
         ],
         "runnerUpSourceId": null,
         "runnerUpObservedAt": null,
@@ -63051,8 +63967,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-09T02:50:22.000Z",
-      "publishLagMinutes": 195.6,
+      "publishedAt": "2026-11-07T01:55:03.000Z",
+      "publishLagMinutes": 3130.9,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "global-markets",
@@ -63060,20 +63976,30 @@
       "domestic": true,
       "entities": [],
       "sources": [
-        "cnbc-topnews"
+        "cnbc-topnews",
+        "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-07T15:45:02+08:00",
+          "title": "CDC reports more than 5,000 measles cases, highest number in 35 years",
+          "url": "https://www.aljazeera.com/news/2026/11/7/cdc-reports-more-than-5000-measles-cases-highest-number-in-35-years?traffic_source=rss",
+          "edition": "2026-11-07/13",
+          "publishedAt": "2026-11-07T01:55:03.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-07T15:45:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "cnbc-topnews"
+          "aljazeera"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "cnbc-topnews",
+        "runnerUpObservedAt": "2026-11-09T14:05:57+08:00",
+        "leadMinutes": 2780.9
       }
     },
     {
@@ -63084,8 +64010,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-08T21:37:36.000Z",
-      "publishLagMinutes": 508.4,
+      "publishedAt": "2026-11-08T13:05:01.000Z",
+      "publishLagMinutes": 1020.9,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "world",
@@ -63093,20 +64019,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bbc-world"
+        "bbc-world",
+        "nyt-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-08T23:01:48+08:00",
+          "title": "Saudi Aramco Tower Damaged as Yemen’s Houthis Attack Riyadh",
+          "url": "https://www.nytimes.com/2026/11/08/world/middleeast/saudi-aramco-tower-riyadh-hit.html",
+          "edition": "2026-11-08/19",
+          "publishedAt": "2026-11-08T13:05:01.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-08T23:01:48+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bbc-world"
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-09T14:05:57+08:00",
+        "leadMinutes": 904.2
       }
     },
     {
@@ -63183,8 +64119,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-09T03:47:21.000Z",
-      "publishLagMinutes": 138.6,
+      "publishedAt": "2026-11-08T22:03:59.000Z",
+      "publishLagMinutes": 482,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "world",
@@ -63194,11 +64130,29 @@
       "sources": [
         "guardian-world"
       ],
-      "sightings": [],
-      "headlineRevisions": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Man charged with murder over fatal stabbing of HungryPanda delivery rider in Melbourne",
+          "url": "https://www.theguardian.com/australia-news/2026/nov/09/man-charged-fatal-stabbing-hungrypanda-delivery-driver-jianming-feng-melbourne-ntwnfb",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T22:03:59.000Z"
+        }
+      ],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-09T14:05:57+08:00",
+          "sourceId": "guardian-world",
+          "edition": "2026-11-09/13",
+          "url": "https://www.theguardian.com/australia-news/2026/nov/09/man-charged-fatal-stabbing-hungrypanda-delivery-driver-jianming-feng-melbourne-ntwnfb",
+          "from": "Man charged with murder over fatal stabbing of HungryPanda delivery rider in Melbourne",
+          "to": "Man accused of HungryPanda delivery rider’s stabbing murder yells and exposes himself in Melbourne court"
+        }
+      ],
       "firstMover": {
         "sourceId": "guardian-world",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "observedAt": "2026-11-09T07:39:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "guardian-world"
@@ -63480,8 +64434,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-09T01:44:14.000Z",
-      "publishLagMinutes": 261.7,
+      "publishedAt": "2026-11-06T05:17:05.000Z",
+      "publishLagMinutes": 4368.9,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "world",
@@ -63491,11 +64445,20 @@
       "sources": [
         "guardian-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-07T07:00:20+08:00",
+          "title": "Beau Lamarre-Condon tells double murder trial firing first shot at Jesse Baird’s shoulder was ‘the right move’",
+          "url": "https://www.theguardian.com/australia-news/2026/nov/06/beau-lamarre-condon-trial-witness-box-evidence-case-ntwnfb",
+          "edition": "2026-11-07/06",
+          "publishedAt": "2026-11-06T05:17:05.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "guardian-world",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "observedAt": "2026-11-07T07:00:20+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "guardian-world"
@@ -63513,8 +64476,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "attentionvc-ai",
-      "publishedAt": "2026-11-07T17:01:22.000Z",
-      "publishLagMinutes": 2224.6,
+      "publishedAt": "2026-11-07T15:32:55.000Z",
+      "publishLagMinutes": 2313,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "global-markets",
@@ -63522,20 +64485,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "attentionvc-ai"
+        "attentionvc-ai",
+        "bloomberg-markets"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-08T07:00:20+08:00",
+          "title": "Ken Chenault on Leadership in an Age of AI",
+          "url": "https://www.bloomberg.com/news/videos/2026-11-07/ken-chenault-on-leadership-in-an-age-of-ai-video",
+          "edition": "2026-11-08/06",
+          "publishedAt": "2026-11-07T15:32:55.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "attentionvc-ai",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "sourceId": "bloomberg-markets",
+        "observedAt": "2026-11-08T07:00:20+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "attentionvc-ai"
+          "bloomberg-markets"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "attentionvc-ai",
+        "runnerUpObservedAt": "2026-11-09T14:05:57+08:00",
+        "leadMinutes": 1865.6
       }
     },
     {
@@ -63975,8 +64948,8 @@
       "firstSeenAt": "2026-11-09T14:05:57+08:00",
       "firstEdition": "2026-11-09/13",
       "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-09T04:55:15.000Z",
-      "publishLagMinutes": 70.7,
+      "publishedAt": "2026-11-07T07:34:50.000Z",
+      "publishLagMinutes": 2791.1,
       "lastSeenAt": "2026-11-09T14:05:57+08:00",
       "lastEdition": "2026-11-09/13",
       "topic": "world",
@@ -63984,20 +64957,81 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "guardian-world"
+        "guardian-world",
+        "nyt-world",
+        "npr-world",
+        "bloomberg-markets"
       ],
-      "sightings": [],
-      "headlineRevisions": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-07T15:45:02+08:00",
+          "title": "NZ election 2026 live results: count on as National and Labour battle it out in knife-edge New Zealand poll",
+          "url": "https://www.theguardian.com/world/live/2026/nov/07/nz-general-election-2026-live-updates-results-new-zealand-polls",
+          "edition": "2026-11-07/13",
+          "publishedAt": "2026-11-07T07:34:50.000Z"
+        },
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-08T15:12:42+08:00",
+          "title": "NZ election 2026: New Zealand faces weeks of uncertainty with results ‘too close to call’",
+          "url": "https://www.theguardian.com/world/2026/nov/07/new-zealand-election-too-close-to-call-vote-count",
+          "edition": "2026-11-08/13",
+          "publishedAt": "2026-11-08T01:00:48.000Z"
+        },
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-08T15:12:42+08:00",
+          "title": "New Zealand’s Election ‘Too Close to Call’ as Voters Turn to Minor Parties",
+          "url": "https://www.nytimes.com/2026/11/06/world/asia/new-zealand-election-vote.html",
+          "edition": "2026-11-08/13",
+          "publishedAt": "2026-11-07T13:13:40.000Z"
+        },
+        {
+          "sourceId": "npr-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "No clear winner in New Zealand election, as leaders prepare for weeks of talks",
+          "url": "https://www.npr.org/2026/11/08/nx-s1-6033999/no-clear-winner-in-new-zealand-election-as-leaders-prepare-for-weeks-of-talks",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T16:46:15.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-09T14:05:57+08:00",
+          "title": "New Zealand Dollar Advances as Ruling Party Gets Election Edge",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-08/new-zealand-dollar-advances-as-ruling-party-gets-election-edge",
+          "edition": "2026-11-09/13",
+          "publishedAt": "2026-11-08T22:07:45.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-09T14:05:57+08:00",
+          "title": "Treasury Rally Gets New Boost as Election Hammers the AI Trade",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-08/treasury-rally-gets-new-boost-as-election-hammers-the-ai-trade",
+          "edition": "2026-11-09/13",
+          "publishedAt": "2026-11-08T20:00:00.000Z"
+        }
+      ],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-09T14:05:57+08:00",
+          "sourceId": "guardian-world",
+          "edition": "2026-11-09/13",
+          "url": "https://www.theguardian.com/world/live/2026/nov/07/nz-general-election-2026-live-updates-results-new-zealand-polls",
+          "from": "NZ election 2026 live results: count on as National and Labour battle it out in knife-edge New Zealand poll",
+          "to": "New Zealand election coalition talks will likely take weeks – as it happened"
+        }
+      ],
       "firstMover": {
         "sourceId": "guardian-world",
-        "observedAt": "2026-11-09T14:05:57+08:00",
+        "observedAt": "2026-11-07T15:45:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "guardian-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "nyt-world",
+        "runnerUpObservedAt": "2026-11-08T15:12:42+08:00",
+        "leadMinutes": 1407.7
       }
     },
     {
@@ -64371,8 +65405,8 @@
       "firstSeenAt": "2026-11-09T07:39:02+08:00",
       "firstEdition": "2026-11-09/06",
       "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-08T23:07:46.000Z",
-      "publishLagMinutes": 31.3,
+      "publishedAt": "2026-11-08T20:31:24.000Z",
+      "publishLagMinutes": 187.6,
       "lastSeenAt": "2026-11-09T07:39:02+08:00",
       "lastEdition": "2026-11-09/06",
       "topic": "opinion",
@@ -64382,7 +65416,16 @@
       "sources": [
         "yahoo-finance"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Sell Alert: 5 High-Profile Stocks Just Dumped by Top Analysts",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/sell-alert-5-high-profile-203124084.html?.tsrc=rss",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T20:31:24.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "yahoo-finance",
@@ -64595,399 +65638,46 @@
       }
     },
     {
-      "id": "st_26104681c8",
-      "cluster": "title:surgeon having lunch near krakow shooting undoubtedly saved officer s life colleague says",
-      "title": "Surgeon having lunch near Krakow shooting undoubtedly saved officer's life, colleague says",
-      "url": "https://www.bbc.co.uk/news/articles/c5x2vw4e1gx1o?at_medium=RSS&at_campaign=rss",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-08T23:34:18.000Z",
-      "publishLagMinutes": 4.7,
+      "id": "st_23b9a3c505",
+      "cluster": "title:eu prosecutor office investigates fatal train crash in spain",
+      "title": "EU prosecutor office investigates fatal train crash in Spain",
+      "url": "https://www.aljazeera.com/news/2026/11/7/eu-prosecutor-office-investigates-fatal-train-crash-in-spain?traffic_source=rss",
+      "firstSeenAt": "2026-11-07T15:45:02+08:00",
+      "firstEdition": "2026-11-07/13",
+      "firstSourceId": "aljazeera",
+      "publishedAt": "2026-11-07T01:33:39.000Z",
+      "publishLagMinutes": 371.4,
       "lastSeenAt": "2026-11-09T07:39:02+08:00",
       "lastEdition": "2026-11-09/06",
-      "topic": "world",
+      "topic": "global-markets",
       "lane": "external",
       "domestic": false,
       "entities": [],
       "sources": [
+        "aljazeera",
         "bbc-world"
       ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bbc-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_298d87860a",
-      "cluster": "title:here s why citi downgraded irhythm irtc despite 14 9 revenue growth",
-      "title": "Here’s Why Citi Downgraded iRhythm (IRTC) Despite 14.9% Revenue Growth",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/why-citi-downgraded-irhythm-irtc-202511900.html?.tsrc=rss",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-08T20:25:11.000Z",
-      "publishLagMinutes": 193.9,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "opinion",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "yahoo-finance"
+      "sightings": [
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Footage shows derailed carriages after fatal train crash in Egypt",
+          "url": "https://www.bbc.co.uk/news/videos/cw78p2km7d94o?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T16:05:57.000Z"
+        }
       ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yahoo-finance"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_2b05e137ad",
-      "cluster": "title:private equity firm seeks to take control of liv golf from saudi wealth fund",
-      "title": "Private equity firm seeks to take control of LIV Golf from Saudi wealth fund",
-      "url": "https://www.ft.com/content/cbab2db2-3180-40c5-8fa6-af51adc74768?syn-25a6b1a6=1",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-08T14:32:40.000Z",
-      "publishLagMinutes": 546.4,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "ft-companies"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "ft-companies",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "ft-companies"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_2f918d1230",
-      "cluster": "title:从预测市场到下一代交易所 400亿美元kalshi明年冲刺ipo",
-      "title": "从预测市场到下一代交易所：400亿美元Kalshi明年冲刺IPO？",
-      "url": "https://wallstreetcn.com/member/articles/3784927",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "wallstreetcn",
-      "publishedAt": "2026-11-08T07:45:08.000Z",
-      "publishLagMinutes": 953.9,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "filings",
-      "lane": "zh",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "wallstreetcn"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "wallstreetcn",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "wallstreetcn"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3091a56832",
-      "cluster": "title:watching wall street deadly mass shooting in poland back to work after blue wave",
-      "title": "Watching Wall Street, Deadly Mass Shooting in Poland, Back to Work After Blue Wave",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-08/bloomberg-this-weekend-11-8-2026-video",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-08T17:03:43.000Z",
-      "publishLagMinutes": 395.3,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bloomberg-markets"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bloomberg-markets"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_314e3e8e25",
-      "cluster": "title:pope leo xiv delivers homily to thousands in uruguay",
-      "title": "Pope Leo XIV delivers homily to thousands in Uruguay",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/8/pope-leo-xiv-delivers-homily-to-thousands-in-uruguay?traffic_source=rss",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-08T20:29:47.000Z",
-      "publishLagMinutes": 189.3,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "aljazeera"
-      ],
-      "sightings": [],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "aljazeera",
-        "observedAt": "2026-11-09T07:39:02+08:00",
+        "observedAt": "2026-11-07T15:45:02+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "aljazeera"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3283f3464b",
-      "cluster": "title:why winning big matters",
-      "title": "Why Winning Big Matters",
-      "url": "https://www.nytimes.com/2026/11/08/world/election-win-pete-hegseth-poland.html",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-08T20:30:01.000Z",
-      "publishLagMinutes": 189,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "nyt-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "nyt-world",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "nyt-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_335d1c77a7",
-      "cluster": "title:reeling from rare mass shooting poles ask what set off young suspect",
-      "title": "Reeling From Rare Mass Shooting, Poles Ask What Set Off Young Suspect",
-      "url": "https://www.nytimes.com/2026/11/08/world/europe/poland-shooting-suspect-family.html",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-08T22:48:25.000Z",
-      "publishLagMinutes": 50.6,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "nyt-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "nyt-world",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "nyt-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_353e677bb5",
-      "cluster": "title:five9 fivn evercore isi downgraded the stock despite ai revenue growth rate of 91",
-      "title": "Five9 (FIVN): Evercore ISI Downgraded the Stock Despite AI Revenue Growth Rate of 91%",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/five9-fivn-evercore-isi-downgraded-202815705.html?.tsrc=rss",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-08T20:28:15.000Z",
-      "publishLagMinutes": 190.8,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "opinion",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "yahoo-finance"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yahoo-finance"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3967b60337",
-      "cluster": "title:president milei welcomes pope leo during historic visit to argentina",
-      "title": "President Milei welcomes Pope Leo during historic visit to Argentina",
-      "url": "https://www.aljazeera.com/news/2026/11/8/president-milei-welcomes-pope-leo-during-historic-visit-to-argentina?traffic_source=rss",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-08T22:16:50.000Z",
-      "publishLagMinutes": 82.2,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "aljazeera"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "aljazeera"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3af5e79150",
-      "cluster": "title:a once in a decade opportunity 1 super growth stock down 58 to buy and hold for a decade",
-      "title": "A Once-in-a-Decade Opportunity: 1 Super Growth Stock Down 58% to Buy and Hold for a Decade",
-      "url": "https://www.fool.com/investing/2026/11/08/once-in-a-decade-opportunity-super-growth-stock/?.tsrc=rss",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-08T20:05:00.000Z",
-      "publishLagMinutes": 214,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "yahoo-finance"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yahoo-finance"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3b7bc6b2da",
-      "cluster": "title:2028年 哪个美国政客敢批准大型数据中心项目",
-      "title": "2028年，哪个美国政客敢批准大型数据中心项目？",
-      "url": "https://wallstreetcn.com/charts/41960147",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "wallstreetcn",
-      "publishedAt": "2026-11-08T06:58:44.000Z",
-      "publishLagMinutes": 1000.3,
-      "lastSeenAt": "2026-11-09T07:39:02+08:00",
-      "lastEdition": "2026-11-09/06",
-      "topic": "tech-ai",
-      "lane": "zh",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "wallstreetcn"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "wallstreetcn",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "wallstreetcn"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-09T07:39:02+08:00",
+        "leadMinutes": 2394
       }
     },
     {
@@ -73050,7 +73740,7 @@
       "firstSourceId": "cnbc-topnews",
       "publishedAt": "2026-10-15T20:33:24.000Z",
       "publishLagMinutes": 566.6,
-      "lastSeenAt": "2026-11-14T17:01:37+08:00",
+      "lastSeenAt": "2026-11-14T17:04:33+08:00",
       "lastEdition": "2026-11-14/13",
       "topic": "tech-ai",
       "lane": "external",
@@ -76300,6 +76990,14 @@
           "url": "https://www.bloomberg.com/news/audio/2026-11-14/odd-lots-wall-street-and-the-post-huang-nvidia-era-podcast",
           "edition": "2026-11-14/13",
           "publishedAt": "2026-11-14T09:00:00.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-14T17:04:33+08:00",
+          "title": "How Wall Street Is Bracing For the Post-Jensen Huang Nvidia Era",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-14/how-wall-street-is-bracing-for-the-post-jensen-huang-nvidia-era",
+          "edition": "2026-11-14/13",
+          "publishedAt": "2026-11-14T09:00:19.000Z"
         }
       ],
       "headlineRevisions": [
@@ -76566,6 +77264,22 @@
           "url": "https://www.solidot.org/story?sid=85878",
           "from": "黄仁勋辞职",
           "to": "英伟达员工请愿让黄仁勋复职"
+        },
+        {
+          "at": "2026-11-14T17:04:33+08:00",
+          "sourceId": "bbc-world",
+          "edition": "2026-11-14/13",
+          "url": "https://www.bbc.co.uk/news/articles/cqvg2d1eg7zro?at_medium=RSS&at_campaign=rss",
+          "from": "Pressure grows on Trump's Commerce Secretary Lutnick in fallout from Nvidia scandal",
+          "to": "Nvidia scandal fallout widens as Trump's treasury secretary blames cabinet colleague"
+        },
+        {
+          "at": "2026-11-14T17:04:33+08:00",
+          "sourceId": "solidot",
+          "edition": "2026-11-14/13",
+          "url": "https://www.solidot.org/story?sid=85872",
+          "from": "英伟达员工请愿让黄仁勋复职",
+          "to": "黄仁勋辞职"
         }
       ],
       "firstMover": {
@@ -88006,53 +88720,80 @@
       }
     }
   ],
-  "generatedAt": "2026-11-14T17:02:51+08:00",
+  "generatedAt": "2026-11-14T17:06:46+08:00",
   "counts": {
     "stories": 2000,
-    "sightings": 2528,
-    "multiSightingStories": 57,
-    "storiesWithRevisions": 17,
+    "sightings": 2598,
+    "multiSightingStories": 102,
+    "storiesWithRevisions": 21,
     "skippedRecords": 0,
     "editions": 70,
-    "articles": 30640,
-    "duplicates": 448
+    "articles": 30662,
+    "duplicates": 211
   },
   "firstMover": {
     "windowDays": 30,
     "from": "2026-10-15",
     "to": "2026-11-14",
     "storiesInWindow": 2000,
-    "soleFirstStories": 1970,
-    "contestedStories": 21,
-    "tiedFirstStories": 30,
+    "soleFirstStories": 1964,
+    "contestedStories": 45,
+    "tiedFirstStories": 36,
     "leadBasis": "observed",
     "wires": [
       {
-        "sourceId": "bloomberg-markets",
-        "soleFirsts": 225,
-        "contestedFirsts": 4,
+        "sourceId": "nyt-world",
+        "soleFirsts": 64,
+        "contestedFirsts": 8,
+        "coFirsts": 9,
+        "stories": 87,
+        "leadSamples": 8,
+        "medianLeadMinutes": 2119.7
+      },
+      {
+        "sourceId": "aljazeera",
+        "soleFirsts": 212,
+        "contestedFirsts": 7,
         "coFirsts": 4,
-        "stories": 244,
-        "leadSamples": 4,
-        "medianLeadMinutes": 9615.5
+        "stories": 240,
+        "leadSamples": 7,
+        "medianLeadMinutes": 2394
+      },
+      {
+        "sourceId": "guardian-world",
+        "soleFirsts": 94,
+        "contestedFirsts": 6,
+        "coFirsts": 8,
+        "stories": 117,
+        "leadSamples": 6,
+        "medianLeadMinutes": 2486.7
+      },
+      {
+        "sourceId": "bloomberg-markets",
+        "soleFirsts": 222,
+        "contestedFirsts": 5,
+        "coFirsts": 5,
+        "stories": 246,
+        "leadSamples": 5,
+        "medianLeadMinutes": 9151
       },
       {
         "sourceId": "ft-companies",
-        "soleFirsts": 180,
+        "soleFirsts": 178,
         "contestedFirsts": 4,
-        "coFirsts": 5,
+        "coFirsts": 6,
         "stories": 196,
         "leadSamples": 4,
         "medianLeadMinutes": 3182.1
       },
       {
-        "sourceId": "aljazeera",
-        "soleFirsts": 220,
-        "contestedFirsts": 2,
-        "coFirsts": 3,
-        "stories": 237,
-        "leadSamples": 2,
-        "medianLeadMinutes": 2160
+        "sourceId": "bbc-world",
+        "soleFirsts": 111,
+        "contestedFirsts": 3,
+        "coFirsts": 5,
+        "stories": 137,
+        "leadSamples": 3,
+        "medianLeadMinutes": 3335.1
       },
       {
         "sourceId": "wallstreetcn-live",
@@ -88064,6 +88805,15 @@
         "medianLeadMinutes": 10.2
       },
       {
+        "sourceId": "marketwatch-top",
+        "soleFirsts": 58,
+        "contestedFirsts": 2,
+        "coFirsts": 1,
+        "stories": 69,
+        "leadSamples": 2,
+        "medianLeadMinutes": 2135.1
+      },
+      {
         "sourceId": "cls-telegraph",
         "soleFirsts": 180,
         "contestedFirsts": 1,
@@ -88073,17 +88823,8 @@
         "medianLeadMinutes": 928.3
       },
       {
-        "sourceId": "bbc-world",
-        "soleFirsts": 115,
-        "contestedFirsts": 1,
-        "coFirsts": 4,
-        "stories": 132,
-        "leadSamples": 1,
-        "medianLeadMinutes": 10080
-      },
-      {
         "sourceId": "cnbc-topnews",
-        "soleFirsts": 114,
+        "soleFirsts": 111,
         "contestedFirsts": 1,
         "coFirsts": 6,
         "stories": 136,
@@ -88092,30 +88833,30 @@
       },
       {
         "sourceId": "wallstreetcn",
-        "soleFirsts": 105,
+        "soleFirsts": 104,
         "contestedFirsts": 1,
         "coFirsts": 2,
-        "stories": 132,
+        "stories": 131,
         "leadSamples": 1,
         "medianLeadMinutes": 5590.5
       },
       {
-        "sourceId": "guardian-world",
-        "soleFirsts": 87,
+        "sourceId": "the-diplomat",
+        "soleFirsts": 55,
         "contestedFirsts": 1,
-        "coFirsts": 4,
-        "stories": 104,
+        "coFirsts": 3,
+        "stories": 63,
         "leadSamples": 1,
-        "medianLeadMinutes": 1440
+        "medianLeadMinutes": 3157.1
       },
       {
-        "sourceId": "marketwatch-top",
-        "soleFirsts": 56,
+        "sourceId": "npr-world",
+        "soleFirsts": 16,
         "contestedFirsts": 1,
-        "coFirsts": 1,
-        "stories": 67,
+        "coFirsts": 5,
+        "stories": 30,
         "leadSamples": 1,
-        "medianLeadMinutes": 1500
+        "medianLeadMinutes": 1052.5
       },
       {
         "sourceId": "douyin-hot",
@@ -88146,10 +88887,10 @@
       },
       {
         "sourceId": "yahoo-finance",
-        "soleFirsts": 181,
+        "soleFirsts": 178,
         "contestedFirsts": 0,
         "coFirsts": 0,
-        "stories": 196,
+        "stories": 193,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
@@ -88163,44 +88904,26 @@
         "medianLeadMinutes": null
       },
       {
-        "sourceId": "nyt-world",
-        "soleFirsts": 62,
-        "contestedFirsts": 0,
-        "coFirsts": 6,
-        "stories": 79,
-        "leadSamples": 0,
-        "medianLeadMinutes": null
-      },
-      {
-        "sourceId": "the-diplomat",
-        "soleFirsts": 53,
-        "contestedFirsts": 0,
-        "coFirsts": 3,
-        "stories": 61,
-        "leadSamples": 0,
-        "medianLeadMinutes": null
-      },
-      {
         "sourceId": "bbc-business",
-        "soleFirsts": 28,
+        "soleFirsts": 30,
         "contestedFirsts": 0,
         "coFirsts": 4,
-        "stories": 41,
+        "stories": 43,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
       {
         "sourceId": "dw-chinese",
-        "soleFirsts": 21,
+        "soleFirsts": 22,
         "contestedFirsts": 0,
         "coFirsts": 4,
-        "stories": 32,
+        "stories": 33,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
       {
         "sourceId": "attentionvc-ai",
-        "soleFirsts": 20,
+        "soleFirsts": 19,
         "contestedFirsts": 0,
         "coFirsts": 2,
         "stories": 29,
@@ -88235,15 +88958,6 @@
         "medianLeadMinutes": null
       },
       {
-        "sourceId": "npr-world",
-        "soleFirsts": 15,
-        "contestedFirsts": 0,
-        "coFirsts": 3,
-        "stories": 24,
-        "leadSamples": 0,
-        "medianLeadMinutes": null
-      },
-      {
         "sourceId": "solidot",
         "soleFirsts": 14,
         "contestedFirsts": 0,
@@ -88263,10 +88977,10 @@
       },
       {
         "sourceId": "economist-finance",
-        "soleFirsts": 6,
+        "soleFirsts": 8,
         "contestedFirsts": 0,
         "coFirsts": 4,
-        "stories": 11,
+        "stories": 13,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
@@ -88291,14 +89005,14 @@
     ]
   },
   "revisionTrail": {
-    "storiesWithRevisions": 17,
-    "totalRevisions": 153,
+    "storiesWithRevisions": 21,
+    "totalRevisions": 160,
     "items": [
       {
         "id": "st_42dca5f915",
         "title": "Nvidia, AMD, Dell sink in global tech rout on AI funding worries",
         "topic": "tech-ai",
-        "revisions": 33,
+        "revisions": 35,
         "steps": [
           {
             "at": "2026-10-28T07:08:08+08:00",
@@ -88910,6 +89624,48 @@
               "愿让",
               "英伟",
               "英伟达员工请愿让黄仁勋复职"
+            ]
+          },
+          {
+            "at": "2026-11-14T17:04:33+08:00",
+            "from": "Pressure grows on Trump's Commerce Secretary Lutnick in fallout from Nvidia scandal",
+            "to": "Nvidia scandal fallout widens as Trump's treasury secretary blames cabinet colleague",
+            "removed": [
+              "commerce",
+              "from",
+              "grows",
+              "in",
+              "lutnick",
+              "on",
+              "pressure"
+            ],
+            "added": [
+              "as",
+              "blames",
+              "cabinet",
+              "colleague",
+              "treasury",
+              "widens"
+            ]
+          },
+          {
+            "at": "2026-11-14T17:04:33+08:00",
+            "from": "英伟达员工请愿让黄仁勋复职",
+            "to": "黄仁勋辞职",
+            "removed": [
+              "伟达",
+              "勋复",
+              "员工",
+              "复职",
+              "工请",
+              "愿让",
+              "英伟",
+              "英伟达员工请愿让黄仁勋复职"
+            ],
+            "added": [
+              "勋辞",
+              "辞职",
+              "黄仁勋辞职"
             ]
           }
         ]
@@ -91213,6 +91969,35 @@
         ]
       },
       {
+        "id": "st_5c4d462ba8",
+        "title": "I’m second-guessing my adviser: Is an annuity the right move in this market?",
+        "topic": "global-markets",
+        "revisions": 2,
+        "steps": [
+          {
+            "at": "2026-11-08T07:00:20+08:00",
+            "from": "My adviser recommended an annuity. Is it the right move in this market environment?",
+            "to": "Second-guessing my adviser: Is an annuity the right move in this market?",
+            "removed": [
+              "environment",
+              "it",
+              "recommended"
+            ],
+            "added": [
+              "guessing",
+              "second"
+            ]
+          },
+          {
+            "at": "2026-11-09T14:05:57+08:00",
+            "from": "Second-guessing my adviser: Is an annuity the right move in this market?",
+            "to": "I’m second-guessing my adviser: Is an annuity the right move in this market?",
+            "removed": [],
+            "added": []
+          }
+        ]
+      },
+      {
         "id": "st_afcec4eb23",
         "title": "孟加拉与俄罗斯合建核电站年底启用 当地民众亦喜亦忧",
         "topic": "world",
@@ -91233,6 +92018,94 @@
               "on",
               "team",
               "to"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "st_839e3f18fa",
+        "title": "Man accused of HungryPanda delivery rider’s stabbing murder yells and exposes himself in Melbourne court",
+        "topic": "world",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-09T14:05:57+08:00",
+            "from": "Man charged with murder over fatal stabbing of HungryPanda delivery rider in Melbourne",
+            "to": "Man accused of HungryPanda delivery rider’s stabbing murder yells and exposes himself in Melbourne court",
+            "removed": [
+              "charged",
+              "fatal",
+              "over",
+              "with"
+            ],
+            "added": [
+              "accused",
+              "and",
+              "court",
+              "exposes",
+              "himself",
+              "yells"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "st_e84f8dd268",
+        "title": "Victorian election 2026: Concern and scepticism among Labor MPs as new poll shows party trailing One Nation",
+        "topic": "world",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-09T14:05:57+08:00",
+            "from": "NZ election 2026 live results: count on as National and Labour battle it out in knife-edge New Zealand poll",
+            "to": "New Zealand election coalition talks will likely take weeks – as it happened",
+            "removed": [
+              "2026",
+              "and",
+              "battle",
+              "count",
+              "edge",
+              "in",
+              "knife",
+              "labour"
+            ],
+            "added": [
+              "coalition",
+              "happened",
+              "likely",
+              "take",
+              "talks",
+              "weeks",
+              "will"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "st_d084d2686e",
+        "title": "In Argentina, Pope Leo Walks in the Giant Shadow of Francis",
+        "topic": "global-markets",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-09T07:39:02+08:00",
+            "from": "In Argentina, Pope Leo to Meet Church at Odds With President Milei",
+            "to": "In Argentina, Pope Leo Tells President Milei Economy Must Serve the Needy",
+            "removed": [
+              "at",
+              "church",
+              "meet",
+              "odds",
+              "to",
+              "with"
+            ],
+            "added": [
+              "economy",
+              "must",
+              "needy",
+              "serve",
+              "tells",
+              "the"
             ]
           }
         ]
