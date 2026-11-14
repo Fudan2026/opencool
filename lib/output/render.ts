@@ -19,7 +19,6 @@ import {
 import { guideBullets, isLikelyEnglishTitle } from "../invest/guide";
 import {
   routeEdition,
-  MIN_SECTION_ITEMS,
   type RoutedEdition,
   type RoutedLane,
   type RoutedSection,
@@ -95,6 +94,9 @@ const TEXTS_ZH = {
   subSocialHot: "财经热榜",
   subOverseasNews: "海外科技",
   subOverseas: "海外",
+  subCnTech: "中文科技",
+  thinSection: "内容较少",
+  thinSectionTitle: "该栏目今日内容较少，低于 3 条的常规版面标准。",
   emptySource: "该源今日无内容。",
   emptyCategory: "该分类今日无内容。",
   emptyGroup: "该组今日无数据。",
@@ -436,6 +438,9 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   subSocialHot: "Finance Hot",
   subOverseasNews: "Overseas Tech",
   subOverseas: "Overseas",
+  subCnTech: "Chinese Tech",
+  thinSection: "thin",
+  thinSectionTitle: "This section is thinner than the usual 3-item editorial floor.",
   emptySource: "No content from this source today.",
   emptyCategory: "No content in this category today.",
   emptyGroup: "No data for this group today.",
@@ -827,13 +832,13 @@ const SUBCATEGORY_ORDER: Partial<Record<Category, string[]>> = {
   // Locale filtering at registry level decides which actually appears:
   // zh mode keeps cn-community (V2EX / LinuxDo); en mode keeps
   // overseas-community (Hacker News / r/stocks).
-  tech: ["github-trending", "trending-papers", "x-viral", "ai-news", "cn-community", "overseas-community"],
+  tech: ["github-trending", "trending-papers", "x-viral", "ai-news", "cn-tech", "cn-community", "overseas-community"],
   // CN-first: Chinese finance feed → on-site X mirror → English wires
   finance: ["cn-news", "x-mirror", "wire"],
   politics: ["world", "hot"],
 };
 
-const TECH_MAIN_SUBS = new Set(["github-trending", "trending-papers", "x-viral", "ai-news"]);
+const TECH_MAIN_SUBS = new Set(["github-trending", "trending-papers", "x-viral", "ai-news", "cn-tech"]);
 const TECH_COMMUNITY_SUBS = new Set(["cn-community", "overseas-community"]);
 
 const SUBCATEGORY_LABELS: Record<string, string> = {
@@ -844,6 +849,7 @@ const SUBCATEGORY_LABELS: Record<string, string> = {
   "ai-news": STR.subAiNews,
   "x-viral": STR.subXViral,
   "blog-weekly": STR.subBlogWeekly,
+  "cn-tech": STR.subCnTech,
   news: STR.subFinanceNews,
   "cn-news": STR.subCnFinance,
   wire: STR.subWire,
@@ -907,6 +913,7 @@ function displayLimitFor(
  */
 export const MERGED_SUBGROUP_LIMITS: Record<string, number> = {
   "tech:ai-news": 15,
+  "tech:cn-tech": 15,
   "finance:news": 18,
   "finance:cn-news": 24,
   "finance:wire": 14,
@@ -1430,6 +1437,18 @@ function renderRawCategoryPanel(
 // ----- topic-routed lane panels (IA increment 2) -----
 
 /**
+ * Rendered item count below which a topic section is marked thin.
+ *
+ * This is the *previous* section floor (3, `MIN_SECTION_ITEMS` before OC-18),
+ * kept as a named constant rather than derived from the router: the owner
+ * decision lowered the floor to 2 so genuinely thin sections render instead
+ * of disappearing, and the marker is the honesty mechanism that replaces the
+ * old "withhold anything that cannot field 3 balanced items" rule. A 2-item
+ * section is real news and shows, visibly labelled as below the usual size.
+ */
+export const THIN_SECTION_ITEMS = 3;
+
+/**
  * One topic section.
  *
  * A section is a flat list — the source label is shown inline on every item
@@ -1440,12 +1459,22 @@ function renderRawCategoryPanel(
  *
  * Empty sections are never passed in: `groupRaw` omits them, which is how the
  * permanent 技术动态 / 财经热榜 empty shells disappear without special-casing.
+ *
+ * Sections rendering fewer than `THIN_SECTION_ITEMS` carry a small visible
+ * thin marker (`data-thin` + a badge in the heading) — the reader sees that a
+ * section is under its usual size rather than wondering whether items went
+ * missing.
  */
 function renderTopicSection(section: TopicSectionView, lane: LaneKey): string {
   if (section.items.length === 0) return "";
   const items = section.items.map((a) => renderArticleHtml(a, true)).join("\n");
-  return `<section class="topic-section" data-topic="${section.topic}" data-lane="${lane}" data-available="${section.available}" data-rendered="${section.items.length}">
-  <h3 class="topic-heading">${escapeHtml(section.label)}<span class="count">${section.items.length}</span></h3>
+  const thin = section.items.length < THIN_SECTION_ITEMS;
+  const thinAttr = thin ? ` data-thin="true"` : "";
+  const thinMark = thin
+    ? `<span class="thin-mark" title="${escapeHtml(STR.thinSectionTitle)}">${escapeHtml(STR.thinSection)}</span>`
+    : "";
+  return `<section class="topic-section" data-topic="${section.topic}" data-lane="${lane}" data-available="${section.available}" data-rendered="${section.items.length}"${thinAttr}>
+  <h3 class="topic-heading">${escapeHtml(section.label)}<span class="count">${section.items.length}</span>${thinMark}</h3>
   <div class="topic-items">${items}</div>
 </section>`;
 }
@@ -2132,6 +2161,10 @@ export function renderHtml(
   .topic-heading .count { font-family:"DM Sans",system-ui,sans-serif; font-size:0.72rem;
     font-weight:600; color:var(--accent); background:var(--rank-high-bg);
     padding:0.05rem 0.45rem; border-radius:999px; }
+  .topic-heading .thin-mark { font-family:"DM Sans",system-ui,sans-serif;
+    font-size:0.66rem; font-weight:600; color:var(--rank-mid-fg);
+    background:var(--rank-mid-bg); border:1px solid var(--rank-mid-fg);
+    padding:0.02rem 0.4rem; border-radius:999px; margin-left:0.3rem; cursor:help; }
   .topic-items .article { background:var(--card); border:1px solid var(--rule);
     border-radius:0.7rem; padding:0.7rem 0.9rem; margin:0 0 0.5rem; }
   .topic-items .article:last-child { margin-bottom:0; }

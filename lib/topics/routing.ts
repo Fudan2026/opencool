@@ -89,16 +89,16 @@ export const CLUSTER_CAP_PER_SECTION = 2;
 /**
  * Minimum items a section must render to be shown at all.
  *
- * Three, because "at most 40% of a section from one source" is arithmetically
- * unreachable below it: two items split across two sources is 50% each, and one
- * item is 100%. Rather than print a section that cannot meet the density
- * promise — or silently render it non-compliant — a topic that cannot field
- * three balanced items is omitted, and the audit's own acceptance criterion
- * ("every panel has ≥3 items or is not rendered at all") is satisfied by
- * construction. `RoutedLane.omitted` records what was withheld so the pipeline
- * log can say so.
+ * Two (owner decision OC-18, lowered from three). At two items the 40%
+ * per-source share is arithmetically unreachable (two sources split 50/50),
+ * so a 2-item section is shown *with a visible thin marker* at render time
+ * (see `THIN_SECTION_ITEMS` in lib/output/render.ts) and any one-source
+ * 2-item section is additionally reported by `sectionsBelowFloor` — real
+ * thin news renders honestly labelled instead of being withheld, and 0-item
+ * sections still never render at all. Topics that cannot field two items are
+ * recorded in `RoutedLane.omitted` so the pipeline log can say so.
  */
-export const MIN_SECTION_ITEMS = 3;
+export const MIN_SECTION_ITEMS = 2;
 
 /**
  * Maximum items one story cluster may occupy across a whole edition.

@@ -49,7 +49,8 @@
     "enabled": false,
     "locales": [
       "zh"
-    ]
+    ],
+    "notes": "Official feed serves an HTML shell, not XML (probed 2026-11-14). [OpenCool: tech trial — dropped, feed dead]"
   },
   {
     "id": "hackernews",
@@ -84,10 +85,11 @@
     "category": "tech",
     "subcategory": "ai-news",
     "lang": "zh",
-    "enabled": false,
+    "enabled": true,
     "locales": [
       "zh"
-    ]
+    ],
+    "notes": "Official feed. Tech-lane evidence trial 2026-11-14: enabled; stays only with measured fetch_health uptime >=80% across available production history."
   },
   {
     "id": "openai-news",
@@ -228,12 +230,13 @@
     "type": "rss",
     "url": "https://www.solidot.org/index.rss",
     "category": "tech",
-    "subcategory": "overseas-news",
-    "enabled": false,
+    "subcategory": "cn-tech",
+    "enabled": true,
     "locales": [
-      "zh",
-      "en"
-    ]
+      "zh"
+    ],
+    "lang": "zh",
+    "notes": "Official feed; Chinese-language tech news. Tech-lane evidence trial 2026-11-14: enabled; stays only with measured fetch_health uptime >=80% across available production history. Subcategory moved overseas-news -> cn-tech (renders under the tech L1 panel)."
   },
   {
     "id": "ars-technica",
@@ -930,7 +933,7 @@
     "locales": [
       "zh"
     ],
-    "notes": "Distilled NewsNow 36kr — finance/startup adjacent [OpenCool: soft-disabled — RSSHub often hangs Actions; re-enable anytime]"
+    "notes": "Distilled NewsNow 36kr — finance/startup adjacent [OpenCool: soft-disabled — RSSHub often hangs Actions; re-enable anytime] [Tech trial 2026-11-14: not retried — official 36kr.com/feed serves a JS/WAF HTML shell, and every RSSHub-family route measured 30-62% CI uptime, below the 80% gate]"
   },
   {
     "id": "fastbull-express",
@@ -945,5 +948,48 @@
       "zh"
     ],
     "notes": "Distilled NewsHub fastbull-express via RSSHub [OpenCool: soft-disabled — RSSHub often hangs Actions; re-enable anytime]"
+  },
+  {
+    "id": "geekpark",
+    "name": "极客公园",
+    "type": "rss",
+    "url": "https://www.geekpark.net/rss",
+    "category": "tech",
+    "subcategory": "cn-tech",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "Official feed (verified 200 + valid XML, ~30 items, 2026-11-14). Tech-business/startup coverage. Evidence trial: stays only with measured fetch_health uptime >=80% across available production history."
+  },
+  {
+    "id": "leiphone",
+    "name": "雷锋网",
+    "type": "rss",
+    "url": "https://www.leiphone.com/feed",
+    "category": "tech",
+    "subcategory": "cn-tech",
+    "lang": "zh",
+    "enabled": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "Official feed (verified 200 + valid XML, ~20 items, 2026-11-14). AI/robotics/semiconductor coverage. Evidence trial: stays only with measured fetch_health uptime >=80% across available production history."
+  },
+  {
+    "id": "199it",
+    "name": "199IT 互联网数据资讯网",
+    "type": "rss",
+    "url": "https://www.199it.com/feed",
+    "category": "tech",
+    "subcategory": "cn-tech",
+    "lang": "zh",
+    "enabled": false,
+    "useCurl": true,
+    "locales": [
+      "zh"
+    ],
+    "notes": "Official feed. Tech-lane trial candidate, DROPPED before enable on measured local evidence 2026-11-14: server resets non-browser UA connections (bot UA 0/3), and even browser-UA curl through the pipeline path timed out 2/3 tries (429KB payload, throttled server). Failed npm run dry-run. Re-probe only with a faster mirror."
   }
 ]

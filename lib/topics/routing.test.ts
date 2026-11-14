@@ -308,9 +308,11 @@ test("routing: empty topics are omitted, not rendered as shells", async (t) => {
   assert.ok(!topics.includes("opinion"));
 });
 
-test("routing: topics that cannot be balanced are reported, not faked", async (t) => {
-  // Two policy items from a single source: a 100%-one-source section, which the
-  // 40% rule cannot satisfy. It must be withheld and *reported*.
+test("routing: a 2-item section renders (floor 2) and its thinness is reported, not hidden", async (t) => {
+  // Owner decision OC-18 lowered the section floor 3 -> 2: a 2-item section is
+  // real news and renders, visibly marked thin at render time. What the 40%
+  // share rule cannot satisfy is *reported* (sectionsBelowFloor), never
+  // silently rendered non-compliant and never withheld either.
   const articles = [
     art({ sourceId: "only", title: "商务部回应汽车行业「内卷」问题", url: "https://example.com/p1" }),
     art({ sourceId: "only", title: "发改委印发新型储能实施方案", url: "https://example.com/p2" }),
@@ -318,10 +320,39 @@ test("routing: topics that cannot be balanced are reported, not faked", async (t
     ...spread("y", 4, "盘面追踪"),
   ];
   const edition = routeEdition(articles);
-  const policy = edition.lanes.flatMap((l) => l.sections).find((s) => s.topic === "policy");
-  assert.equal(policy, undefined, "a one-source 2-item policy section must not render");
-  const omitted = edition.lanes.flatMap((l) => l.omitted);
-  assert.ok(omitted.some((o) => o.topic === "policy"));
+
+  await t.test("the one-source 2-item policy section renders with exactly 2 items", () => {
+    const policy = edition.lanes.flatMap((l) => l.sections).find((s) => s.topic === "policy");
+    assert.ok(policy, "a 2-item section must render under the floor-2 rule");
+    assert.equal(policy.items.length, 2);
+  });
+
+  await t.test("a 1-item section is still below the floor and is omitted", () => {
+    const singles = routeEdition([
+      art({ sourceId: "solo", title: "商务部回应汽车行业「内卷」问题", url: "https://example.com/p1" }),
+      ...spread("x", 4, "市场观察"),
+      ...spread("y", 4, "盘面追踪"),
+    ]);
+    const policy = singles.lanes.flatMap((l) => l.sections).find((s) => s.topic === "policy");
+    assert.equal(policy, undefined, "a 1-item section must not render");
+    assert.ok(
+      singles.lanes.flatMap((l) => l.omitted).some((o) => o.topic === "policy"),
+      "the withheld 1-item topic must be recorded in omitted",
+    );
+  });
+
+  await t.test("the 100%-one-source section is reported by sectionsBelowFloor", () => {
+    const reported = sectionsBelowFloor(edition);
+    const policy = reported.find((r) => r.topic === "policy");
+    assert.ok(policy, "the one-source thin section must be reported, not faked");
+    assert.equal(policy.sources, 1);
+    assert.equal(policy.rendered, 2);
+  });
+
+  await t.test("omitted no longer swallows 2-item topics", () => {
+    const omitted = edition.lanes.flatMap((l) => l.omitted);
+    assert.ok(!omitted.some((o) => o.topic === "policy"));
+  });
 });
 
 test("routing: legacy untagged sidecars route via the live classifier", async (t) => {

@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { renderHtml } from "../../lib/output/render";
+import { renderHtml, THIN_SECTION_ITEMS } from "../../lib/output/render";
+import { MIN_SECTION_ITEMS } from "../../lib/topics/routing";
 import {
   article,
   rawNews,
@@ -175,4 +176,50 @@ test("golden: legacy report renders (no new fields)", async (t) => {
   assert.ok(html.includes("data-tab=\"zh\""));
   assert.ok(!html.includes("class=\"hero-morning\""));
   assert.ok(html.includes("市场情绪计尚未生成。") || html.includes("sentiment"));
+});
+
+/**
+ * Section floor 3 -> 2 (owner decision OC-18): a 2-item section renders and is
+ * visibly marked thin; a full 3-item section carries no marker. The marker is
+ * the honesty mechanism that replaces withholding — the reader must be able to
+ * tell a thin section from a full one at a glance.
+ */
+test("golden: thin sections are visibly marked, full sections are not", async (t) => {
+  const raw = rawNews();
+  const zhLane = raw.lanes.find((l) => l.lane === "zh")!;
+  const filings = zhLane.sections.find((s) => s.topic === "filings")!;
+  filings.items = filings.items.slice(0, 2);
+  filings.available = 2;
+  zhLane.count = zhLane.sections.reduce((n, s) => n + s.items.length, 0);
+
+  const html = renderHtml(reportFixture(), raw, "2026-11-14", {
+    editionHour: "06",
+    siblingHours: ["06", "13", "19"],
+  });
+
+  await t.test("the 2-item section carries the thin marker and data attribute", () => {
+    const panel = html.slice(html.indexOf('data-topic="filings"'), html.indexOf('data-topic="opinion"'));
+    assert.ok(panel.includes('data-thin="true"'), "missing data-thin attribute");
+    assert.ok(panel.includes('class="thin-mark"'), "missing the thin badge");
+    assert.ok(panel.includes("内容较少"), "missing the localized thin copy");
+    assert.ok(
+      panel.includes(`title="${"该栏目今日内容较少，低于 3 条的常规版面标准。"}"`),
+      "missing the localized tooltip",
+    );
+  });
+
+  await t.test("the 3-item sections carry no thin marker", () => {
+    const markets = html.slice(html.indexOf('data-topic="global-markets"'), html.indexOf('data-topic="world"'));
+    assert.ok(!markets.includes("thin-mark"));
+    assert.ok(!markets.includes('data-thin="true"'));
+    // Exactly one thin section in this fixture.
+    assert.equal((html.match(/class="thin-mark"/g) ?? []).length, 1);
+  });
+
+  await t.test("the thin threshold sits above the render floor", () => {
+    // If THIN_SECTION_ITEMS ever drops to the floor, every rendered section
+    // would be "thin" (or none could be) and the marker would stop meaning
+    // anything.
+    assert.ok(THIN_SECTION_ITEMS > MIN_SECTION_ITEMS);
+  });
 });
