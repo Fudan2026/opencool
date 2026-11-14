@@ -195,6 +195,8 @@ test("golden: build-site end-to-end", async (t) => {
       "keywords.json",
       "feed.xml",
       "status.html",
+      "/hour.html",
+      "/stories.html",
     ]) {
       assert.ok(llms.includes(p), `llms.txt missing ${p}`);
     }
