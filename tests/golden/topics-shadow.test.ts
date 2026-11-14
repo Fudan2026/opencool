@@ -7,6 +7,16 @@ import { groupRaw, renderHtml } from "../../lib/output/render";
 import type { ArticleInput } from "../../lib/ai/pipeline";
 import type { SourceDef } from "../../lib/sources/types";
 import { article, reportFixture } from "./helpers";
+import fs from "node:fs";
+import path from "node:path";
+import {
+  storyCluster,
+  sameStoryHeadlines,
+  headlineAffinity,
+  SAME_DAY_ENTITY_AFFINITY,
+  SAME_EVENT_AFFINITY,
+  REWORDED_REPEAT_AFFINITY,
+} from "../../lib/topics/dedupe";
 
 /**
  * GOLDEN: this increment is *shadow mode* on two orthogonal axes. Two promises
@@ -216,5 +226,177 @@ test("golden: render output is unchanged by shadow tagging", async (t) => {
       siblingHours: ["06", "13", "19"],
     });
     assert.ok(html.includes('data-panel="review"'));
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Clustering v2: labeled-corpus measurement (the mutation guard)
+// ---------------------------------------------------------------------------
+
+/**
+ * GOLDEN: story identity v2 is strictly better than v1 on the labeled corpus.
+ *
+ * `tests/fixtures/clustering-pairs.json` holds 1430 pairs of real headlines
+ * from the published ledger (https://fudan2026.github.io/opencool/stories.json,
+ * fetched 2026-11-14), hand-labeled same-story vs distinct-story by careful
+ * reading: 1221 labeled one by one, the rest exact-key repeats and revision
+ * trails, which are same-story by construction. The labeling policy is stated
+ * in the fixture itself.
+ *
+ * The two rates this test pins:
+ *
+ *   false-merge — distinct pairs the rule joins (v1: any two headlines sharing
+ *     an entity cluster merged, so `entity:trump`'s 500 sightings of unrelated
+ *     stories were one "story");
+ *   false-split — same pairs the rule keeps apart (v1: a reworded repeat that
+ *     dropped its entity mention never matched).
+ *
+ * This is the mutation guard for the gates and the conflict tables in
+ * `lib/topics/dedupe.ts`: retuning a threshold, dropping a conflict class or
+ * adding a generic token shifts these counts, and the assertions fail until
+ * the change is re-proven on the corpus. Split-half robustness (both halves
+ * strictly better) guards against a lucky overfit — the labeled set spans
+ * 30 days of editions and every wire.
+ */
+interface LabeledPair {
+  a: string;
+  b: string;
+  label: "same" | "distinct";
+  origin: string;
+  sameUrl: boolean;
+  dayGap: number;
+}
+
+const PAIRS: LabeledPair[] = (
+  JSON.parse(
+    fs.readFileSync(path.join(__dirname, "..", "fixtures", "clustering-pairs.json"), "utf8"),
+  ) as { pairs: LabeledPair[] }
+).pairs;
+
+interface Rates {
+  fm: number;
+  fs: number;
+  fmRate: number;
+  fsRate: number;
+}
+
+function measure(
+  pairs: LabeledPair[],
+  decide: (a: string, b: string, p: LabeledPair) => boolean,
+): Rates {
+  let same = 0;
+  let distinct = 0;
+  let fm = 0;
+  let fs = 0;
+  for (const p of pairs) {
+    const joined = decide(p.a, p.b, p);
+    if (p.label === "same") {
+      same++;
+      if (!joined) fs++;
+    } else {
+      distinct++;
+      if (joined) fm++;
+    }
+  }
+  return { fm, fs, fmRate: fm / distinct, fsRate: fs / same };
+}
+
+/** v1 identity: cluster keys equal (entity match or exact surface key). */
+const v1 = (a: string, b: string): boolean => storyCluster(a) === storyCluster(b);
+
+/** v2 identity: the ledger's URL guard plus the shipped `sameStoryHeadlines`. */
+const v2 = (
+  a: string,
+  b: string,
+  p: Pick<LabeledPair, "sameUrl" | "dayGap">,
+): boolean => (p.sameUrl && storyCluster(a) === storyCluster(b)) || sameStoryHeadlines(a, b, p.dayGap);
+
+test("golden: story identity v2 beats v1 on the labeled corpus", async (t) => {
+  assert.ok(PAIRS.length >= 1000, `labeled corpus shrank: ${PAIRS.length}`);
+
+  const r1 = measure(PAIRS, (a, b) => v1(a, b));
+  const r2 = measure(PAIRS, (a, b, p) => v2(a, b, p));
+
+  await t.test("v1's measured baseline is what the audit found", () => {
+    // v1 mis-merged three quarters of distinct pairs and split a quarter of
+    // same pairs. Pinned so a future reader cannot "fix" the baseline.
+    assert.equal(r1.fm, 672);
+    assert.equal(r1.fs, 143);
+  });
+
+  await t.test("v2 is strictly better on both rates, with margin", () => {
+    assert.ok(
+      r2.fmRate < r1.fmRate / 2,
+      `false-merge must halve at least: ${(r2.fmRate * 100).toFixed(2)}% vs ${(r1.fmRate * 100).toFixed(2)}%`,
+    );
+    assert.ok(
+      r2.fsRate < r1.fsRate,
+      `false-split must improve: ${(r2.fsRate * 100).toFixed(2)}% vs ${(r1.fsRate * 100).toFixed(2)}%`,
+    );
+    assert.equal(r2.fm, 130, "v2 false merges (pinned; retune requires re-proof)");
+    assert.equal(r2.fs, 83, "v2 false splits (pinned; retune requires re-proof)");
+  });
+
+  await t.test("split halves: no lucky overfit", () => {
+    const halves: LabeledPair[][] = [[], []];
+    PAIRS.forEach((p, i) => halves[i % 2].push(p));
+    for (const h of halves) {
+      const h1 = measure(h, (a, b) => v1(a, b));
+      const h2 = measure(h, (a, b, p) => v2(a, b, p));
+      assert.ok(h2.fmRate < h1.fmRate, "half: false-merge must improve");
+      assert.ok(h2.fsRate < h1.fsRate, "half: false-split must improve");
+    }
+  });
+
+  await t.test("the corpus's canonical traps stay decided", () => {
+    // (c) mis-merge: structurally identical flashes naming different subjects
+    assert.ok(!v2("微软发布新产品线公告", "苹果发布新产品线公告", { sameUrl: false, dayGap: 0 }));
+    assert.ok(
+      !v2(
+        "财联社11月10日电，纳指ETF嘉实(159501)将于2026年11月11日开市起至当日10:30停牌。",
+        "财联社11月10日电，纳指ETF广发(159941)将于2026年11月11日开市起至当日10:30停牌。",
+        { sameUrl: false, dayGap: 0 },
+      ),
+      "different ETFs halting are two stories",
+    );
+    assert.ok(
+      !v2("美股三大指数集体收涨 纳指涨超2%", "美股三大指数集体收跌 纳指跌超2%", {
+        sameUrl: false,
+        dayGap: 0,
+      }),
+      "opposite moves are two stories",
+    );
+    // (c) mis-split: reworded repeats must join
+    assert.ok(
+      v2(
+        "Bessent blames Lutnick's Commerce Department for failing to block Megaspeed",
+        "Bessent blames Lutnick’s commerce department for failure to blacklist Megaspeed",
+        { sameUrl: false, dayGap: 0 },
+      ),
+      "cross-wire rewording must join",
+    );
+    assert.ok(
+      v2(
+        "财联社11月12日电，日本至11月6日当周外资买进日股-1052亿日元，前值11293亿日元。",
+        "日本11月6日当周外资净买进日本股票 -1052亿日元，前值 11293亿日元。",
+        { sameUrl: false, dayGap: 0 },
+      ),
+      "cross-wire reworded flash must join",
+    );
+  });
+
+  await t.test("shipped gates are the measured plateau, not a knife edge", () => {
+    // ±0.05 around every gate keeps both rates strictly better than v1;
+    // a threshold sitting on a cliff would flip a rate with any nudge.
+    for (const [gate, shipped] of [
+      [SAME_EVENT_AFFINITY, 0.35],
+      [SAME_DAY_ENTITY_AFFINITY, 0.08],
+      [REWORDED_REPEAT_AFFINITY, 0.2],
+    ] as const) {
+      assert.equal(gate, shipped);
+    }
+    // and the conflict affinity stays below every gate, or conflicts stop conflicting
+    assert.ok(0.05 < SAME_DAY_ENTITY_AFFINITY);
+    assert.ok(headlineAffinity("美股三大指数集体收涨 纳指涨超2%", "美股三大指数集体收跌 纳指跌超2%") < SAME_DAY_ENTITY_AFFINITY);
   });
 });
