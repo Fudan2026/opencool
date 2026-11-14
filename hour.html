@@ -116,6 +116,11 @@
   footer { margin-top:2.2rem; padding-top:0.9rem; border-top:1px solid var(--rule);
     color:var(--muted); font-size:0.78rem; }
   footer a { color:var(--accent); text-decoration:none; font-weight:600; }
+  .supro-ctx { margin:0.6rem 0 0; font-size:0.88rem; }
+  .supro-ctx a { font-weight:600; }
+  .supro-ctx-card p { margin:0.2rem 0; font-size:0.9rem; color:var(--fg-soft); }
+  .supro-ctx-card a { font-weight:600; }
+  .supro-note { color:var(--muted); font-size:0.78rem; }
 </style>
 </head>
 <body>
@@ -140,9 +145,13 @@
         <li>故事的时间取观测时间（我们抓到的瞬间），不是媒体自己的发布时间；窗口是抓取前 30 分钟。</li>
       </ul>
     </section>
+  <section class="method supro-ctx-card" data-funnel="supro-hour-page">
+      <p>指数与宽度只是一个时点——大盘位置感可对照 SuPro 的择时页： <a href="https://supro.si/timing/broad/?utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice&utm_content=hour-timing" target="_blank" rel="noopener">大盘择时 ↗</a></p>
+      <p class="supro-note">纸盘模拟，非投资建议；行情以数据源为准。</p>
+    </section>
   <footer>
     <p>句子里的每个数字都能在 daily_reports/tape 的对应字段中找到。零 AI。</p>
-    <p><a href="./index.html">OpenCool</a> · <a href="./archive.html">历史归档</a> · <a href="./stories.html">故事线</a></p>
+    <p><a href="./index.html">OpenCool</a> · <a href="./archive.html">历史归档</a> · <a href="./stories.html">故事线</a> · <a href="./integrity.html">数据完整性</a> · <a href="./supro.html">量化实操·SuPro</a></p>
   </footer>
 </main>
 <script>

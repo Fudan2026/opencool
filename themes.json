@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T08:54:54.699Z",
+  "generatedAt": "2026-11-14T09:02:38.711Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
@@ -13,8 +13,9 @@
       "boardChangePct": -3.33,
       "boardUp": 14,
       "boardDown": 173,
-      "articleHits": 3,
+      "articleHits": 4,
       "matchedAliases": [
+        "半导体",
         "芯片"
       ],
       "constituents": [
@@ -43,7 +44,7 @@
       "boardChangePct": -3.25,
       "boardUp": 11,
       "boardDown": 82,
-      "articleHits": 1,
+      "articleHits": 2,
       "matchedAliases": [
         "通信"
       ],
@@ -62,6 +63,36 @@
           "symbol": "003031",
           "name": "中瓷电子",
           "changePct": -6.13
+        }
+      ]
+    },
+    {
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": -1.78,
+      "boardUp": 48,
+      "boardDown": 204,
+      "articleHits": 2,
+      "matchedAliases": [
+        "英伟达"
+      ],
+      "constituents": [
+        {
+          "symbol": "000665",
+          "name": "湖北广电",
+          "changePct": 10.1
+        },
+        {
+          "symbol": "002042",
+          "name": "华孚时尚",
+          "changePct": 10.03
+        },
+        {
+          "symbol": "000701",
+          "name": "厦门信达",
+          "changePct": -4.47
         }
       ]
     },
@@ -92,36 +123,6 @@
           "symbol": "000090",
           "name": "天健集团",
           "changePct": -4.79
-        }
-      ]
-    },
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": -1.78,
-      "boardUp": 48,
-      "boardDown": 204,
-      "articleHits": 1,
-      "matchedAliases": [
-        "英伟达"
-      ],
-      "constituents": [
-        {
-          "symbol": "000665",
-          "name": "湖北广电",
-          "changePct": 10.1
-        },
-        {
-          "symbol": "002042",
-          "name": "华孚时尚",
-          "changePct": 10.03
-        },
-        {
-          "symbol": "000701",
-          "name": "厦门信达",
-          "changePct": -4.47
         }
       ]
     },
