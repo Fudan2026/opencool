@@ -684,8 +684,12 @@ jobs:
       # actually published, not from a fresh empty tree. `tape/` and `stories.json`
       # feed the reading pages; `themes.json` and `reactions.json` feed the /v1
       # re-exports (the latter only exists once its own bake has shipped, so its
-      # restore is allowed to fail).
-      - name: Restore tape and ledger from gh-pages
+      # restore is allowed to fail); and the EDITION DIRECTORIES feed the
+      # publish-lag table on integrity.html — without them this job's v1 bake
+      # would render the named no-measurement state and CLOBBER the real 14-day
+      # table the build job published minutes earlier (every pages tick would
+      # overwrite honesty with an empty-state placeholder).
+      - name: Restore tape, ledger and editions from gh-pages
         run: |
           mkdir -p daily_reports
           if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
@@ -694,7 +698,9 @@ jobs:
             git --work-tree=daily_reports checkout origin/gh-pages -- stories.json || true
             git --work-tree=daily_reports checkout origin/gh-pages -- themes.json || true
             git --work-tree=daily_reports checkout origin/gh-pages -- reactions.json || true
+            git --work-tree=daily_reports checkout origin/gh-pages -- '2*' || true
             echo "Restored $(find daily_reports/tape -name '*.json' 2>/dev/null | wc -l) tape file(s)"
+            echo "Restored $(find daily_reports -maxdepth 2 -name '*.json' -path '*/2*' 2>/dev/null | wc -l) edition sidecar(s)"
             echo "Restored ledger=$(test -f daily_reports/stories.json && echo yes || echo no) themes=$(test -f daily_reports/themes.json && echo yes || echo no) reactions=$(test -f daily_reports/reactions.json && echo yes || echo no)"
           else
             echo "gh-pages doesn't exist yet — the pages will render their waiting state"

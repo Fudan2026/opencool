@@ -248,7 +248,7 @@ test("golden: the runner keeps every bake/assert step, in order, for both caller
         "Setup Node",
         "Install dependencies",
         "Record run start",
-        "Restore tape and ledger from gh-pages",
+        "Restore tape, ledger and editions from gh-pages",
         "Build reading pages",
         "Assert zero LLM calls",
         "Assert both pages exist",
@@ -650,7 +650,7 @@ test("golden: reading pages publish even when no edition is due", async (t) => {
   });
 
   await t.test("it restores every input the v1 re-exports read", () => {
-    const step = stepSource(job, "Restore tape and ledger from gh-pages");
+    const step = stepSource(job, "Restore tape, ledger and editions from gh-pages");
     // stories.json and themes.json are re-exported verbatim; reactions.json is
     // optional (absent until its own bake ships) so its restore is `|| true`.
     // Only inputs are restored — restoring the previous `v1/` tree would be
@@ -659,6 +659,20 @@ test("golden: reading pages publish even when no edition is due", async (t) => {
     assert.match(step, /checkout origin\/gh-pages -- stories\.json/);
     assert.match(step, /checkout origin\/gh-pages -- themes\.json/);
     assert.match(step, /checkout origin\/gh-pages -- reactions\.json \|\| true/);
+  });
+
+  await t.test("it restores the edition sidecars so integrity.html keeps the real lag table", () => {
+    // The honesty defect: this job's v1 bake re-renders integrity.html every
+    // tick, and assert:v1 requires it on disk — with only tape/ledger
+    // restored, the publish-lag table rendered the named no-measurement
+    // state and OVERWROTE the build job's real 14-day table ~40s after every
+    // edition publish. The sidecars must be in the tree the bake reads.
+    const step = stepSource(job, "Restore tape, ledger and editions from gh-pages");
+    assert.match(
+      step,
+      /checkout origin\/gh-pages -- '2\*' \|\| true/,
+      "the pages job must restore the edition dirs for the v1 publish-lag table",
+    );
   });
 
   await t.test("it publishes only additively, so it cannot delete an edition", () => {
@@ -695,7 +709,7 @@ test("golden: reading pages publish even when no edition is due", async (t) => {
       "the pages job must run the real bake, not a copy of it",
     );
 
-    const restoreAt = names.indexOf("Restore tape and ledger from gh-pages");
+    const restoreAt = names.indexOf("Restore tape, ledger and editions from gh-pages");
     const bakeAt = names.indexOf("Bake reaction windows");
     const assertAt = names.indexOf("Assert reaction windows are honest");
     const v1At = names.indexOf("Bake v1 namespace and integrity page");
@@ -727,7 +741,7 @@ test("golden: reading pages publish even when no edition is due", async (t) => {
   });
 
   await t.test("it restores the tape and ledger it renders", () => {
-    const step = stepSource(job, "Restore tape and ledger from gh-pages");
+    const step = stepSource(job, "Restore tape, ledger and editions from gh-pages");
     assert.match(step, /checkout origin\/gh-pages -- tape/);
     assert.match(step, /checkout origin\/gh-pages -- stories\.json/);
   });
