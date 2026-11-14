@@ -1937,11 +1937,15 @@ included. No LLM behind any endpoint.
   news→practice funnel: OpenCool informs, SuPro practices. Every reading
   surface carries a contextual entry point under one shared UTM scheme
   (utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice);
-  utm_content names the entry point: home/timing/signals/paper/news
-  (edition CTA strip), landing (supro.html), badge (homepage pill),
-  archive (archive nav), edition-themes/edition-flows (review panel),
-  hour-tape/hour-timing (/hour.html), story-act/story-signals
-  (/stories.html), integrity (/integrity.html)
+  utm_content names the entry point:
+  home/timing/signals/paper/news (edition CTA strip),
+  landing (supro.html),
+  badge (homepage pill),
+  archive (archive nav),
+  edition-themes/edition-flows (review panel),
+  hour-tape/hour-timing (/hour.html),
+  story-act/story-signals (/stories.html),
+  integrity (/integrity.html)
 - Trend comparison: /periods.html + /periods.json — WoW (6 Monday-based
   weeks) and MoM (3 months) buckets of sentiment/theme/index deltas
 - Subscribe: /subscribe.html — local-only subscription intent (no email

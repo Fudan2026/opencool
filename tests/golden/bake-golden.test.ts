@@ -202,7 +202,7 @@ test("golden: build-site end-to-end", async (t) => {
     // measurable entry (utm_content=archive) for the returning-reader surface.
     assert.ok(arch.includes('href="./supro.html"'));
     assert.ok(arch.includes("https://supro.si/?"));
-    assert.ok(arch.includes("utm_content=archive"));
+    assert.ok(arch.includes('utm_content=archive"'));
     const status = read("status.html");
     assert.ok(status.includes('href="./supro.html"'));
   });
@@ -217,7 +217,7 @@ test("golden: build-site end-to-end", async (t) => {
   await t.test("funnel: integrity page carries the contextual SuPro chain", () => {
     const html = read("integrity.html");
     assert.ok(html.includes("https://supro.si/paper?"));
-    assert.ok(html.includes("utm_content=integrity"));
+    assert.ok(html.includes('utm_content=integrity"'));
     // The honesty page links the sibling surfaces it shares a tree with…
     assert.ok(html.includes('href="./supro.html"'));
     // …and strips the reading pages this fixture never built.
@@ -228,20 +228,18 @@ test("golden: build-site end-to-end", async (t) => {
   await t.test("llms.txt documents the shared funnel UTM scheme", () => {
     const llms = read("llms.txt");
     assert.ok(llms.includes("utm_campaign=news_to_practice"));
-    // one value per entry point is the measurability contract
-    for (const content of [
-      "landing",
-      "badge",
-      "archive",
-      "edition-themes",
-      "edition-flows",
-      "hour-tape",
-      "hour-timing",
-      "story-act",
-      "story-signals",
-      "integrity",
+    // one value per entry point is the measurability contract; the phrases are
+    // anchored to their neighbours so a value cannot half-mutate and survive.
+    for (const phrase of [
+      "landing (supro.html)",
+      "badge (homepage pill)",
+      "archive (archive nav)",
+      "edition-themes/edition-flows (review panel)",
+      "hour-tape/hour-timing (/hour.html)",
+      "story-act/story-signals (/stories.html)",
+      "integrity (/integrity.html)",
     ]) {
-      assert.ok(llms.includes(content), `llms.txt missing utm_content value ${content}`);
+      assert.ok(llms.includes(phrase), `llms.txt missing funnel entry ${phrase}`);
     }
   });
 

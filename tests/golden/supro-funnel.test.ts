@@ -92,9 +92,9 @@ test("golden: funnel — edition page nav + review-panel contexts", async (t) =>
     );
     // Themes context → per-day signals; fund-flow context → paper.
     assert.ok(html.includes("https://supro.si/signals?"), "signals link missing");
-    assert.ok(html.includes("utm_content=edition-themes"), "themes entry point missing");
+    assert.ok(html.includes('utm_content=edition-themes"'), "themes entry point missing");
     assert.ok(html.includes("https://supro.si/paper?"), "paper link missing");
-    assert.ok(html.includes("utm_content=edition-flows"), "flows entry point missing");
+    assert.ok(html.includes('utm_content=edition-flows"'), "flows entry point missing");
   });
 
   await t.test("every outbound link carries the shared UTM scheme", () => {
@@ -188,13 +188,13 @@ test("golden: funnel — /hour.html tape contexts", async (t) => {
       "one per-slot link per captured slot",
     );
     assert.ok(html.includes("https://supro.si/paper?"));
-    assert.ok(html.includes("utm_content=hour-tape"));
+    assert.ok(html.includes('utm_content=hour-tape"'));
   });
 
   await t.test("the page-level timing entry point exists", () => {
     assert.equal(html.split('data-funnel="supro-hour-page"').length - 1, 1);
     assert.ok(html.includes("https://supro.si/timing/broad/?"));
-    assert.ok(html.includes("utm_content=hour-timing"));
+    assert.ok(html.includes('utm_content=hour-timing"'));
   });
 
   await t.test("footer wires the siblings + landing", () => {
@@ -215,8 +215,8 @@ test("golden: funnel — /hour.html tape contexts", async (t) => {
       expectedSlots: TAPE_SLOTS,
       empty: true,
     });
-    assert.ok(emptyHtml.includes("utm_content=hour-timing"), "page-level guidance is state-independent");
-    assert.ok(!emptyHtml.includes("utm_content=hour-tape"), "no per-slot link without a slot");
+    assert.ok(emptyHtml.includes('utm_content=hour-timing"'), "page-level guidance is state-independent");
+    assert.ok(!emptyHtml.includes('utm_content=hour-tape"'), "no per-slot link without a slot");
   });
 });
 
@@ -327,13 +327,13 @@ test("golden: funnel — /stories.html per-story act links", async (t) => {
       "one act link per rendered thread",
     );
     assert.ok(html.includes("https://supro.si/paper?"));
-    assert.ok(html.includes("utm_content=story-act"));
+    assert.ok(html.includes('utm_content=story-act"'));
   });
 
   await t.test("the page-level signals entry point exists", () => {
     assert.equal(html.split('data-funnel="supro-stories-page"').length - 1, 1);
     assert.ok(html.includes("https://supro.si/signals?"));
-    assert.ok(html.includes("utm_content=story-signals"));
+    assert.ok(html.includes('utm_content=story-signals"'));
   });
 
   await t.test("footer wires the siblings + landing", () => {
@@ -349,7 +349,7 @@ test("golden: funnel — /stories.html per-story act links", async (t) => {
   await t.test("the gap state keeps the footer wiring, drops per-story links", () => {
     const gapHtml = renderStoriesPage({ payload: null, reason: "stories.json not present yet" });
     assert.ok(gapHtml.includes('href="./supro.html"'));
-    assert.ok(!gapHtml.includes("utm_content=story-act"), "no act link without a story");
+    assert.ok(!gapHtml.includes('utm_content=story-act"'), "no act link without a story");
   });
 });
 
