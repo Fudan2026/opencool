@@ -35,6 +35,7 @@ import {
   renderSentimentPanel,
   sparklineForTicker,
 } from "./quant-panels";
+import { suproUrl, SUPRO_LINK_ATTRS } from "./supro";
 
 // ----- i18n -----
 
@@ -230,6 +231,8 @@ const TEXTS_ZH = {
   hourIntegrityBadgeMislabel: "标签不符",
   hourIntegrityBadgeClosed: "休市抓取",
   hourFooter: "句子里的每个数字都能在 daily_reports/tape 的对应字段中找到。零 AI。",
+  hourSuproAct: "看完这个截面，去 SuPro 纸盘验证你的判断",
+  hourSuproTimingLead: "指数与宽度只是一个时点——大盘位置感可对照 SuPro 的择时页：",
   storiesTitle: "故事线",
   storiesSubtitle: "同一件事的历次观测、标题修订与首发归属",
   storiesEmptyTitle: "故事账本还是空的",
@@ -271,6 +274,8 @@ const TEXTS_ZH = {
   storiesThreadHeading: "全部故事线",
   storiesWindow: "账本窗口 {from} 至 {to} · {days} 天",
   storiesFooter: "只记录我们何时看到，不记录媒体自称何时发布。零 AI。",
+  storiesSuproAct: "看完这条故事，去 SuPro 纸盘演练你的反应",
+  storiesSuproRankLead: "谁先发只是观察粒度——你的反应才是可练的，对照 SuPro 的",
   // Integrity page (/integrity.html). The page exists to name what is missing,
   // so every string here is deliberately plain: no "all good" wording, no
   // cheerleading, and a percentage is never shown when nothing was expected.
@@ -385,6 +390,18 @@ const TEXTS_ZH = {
   integrityLagEarly: "提前 {n} 分钟",
   integrityLagMissing: "缺失",
   integrityLagPending: "未到点",
+  // News → practice funnel (supro.si). One scheme, one link builder
+  // (lib/output/supro.ts); every entry point passes its own utm_content so
+  // the sister site can attribute traffic per surface. Copy stays generic:
+  // no product claims, the paper-simulation disclaimer is always attached.
+  navSupro: "量化实操·SuPro",
+  suproTiming: "大盘择时",
+  suproSignals: "今日信号",
+  suproPaper: "纸盘演练",
+  suproDisclaimer: "纸盘模拟，非投资建议；行情以数据源为准。",
+  suproThemesLead: "题材命中只是标题计数——想核对板块今天的实际反应，去 SuPro 查",
+  suproFlowsLead: "资金流只是当日截面——想在纸盘上试自己的判断，去 SuPro",
+  integritySuproLead: "核对完数据的来龙去脉，可以在 SuPro 的纸盘上按同样的纪律演练：",
 };
 
 const TEXTS_EN: typeof TEXTS_ZH = {
@@ -569,6 +586,8 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   hourIntegrityBadgeMislabel: "Label mismatch",
   hourIntegrityBadgeClosed: "Closed-market capture",
   hourFooter: "Every figure in these sentences maps to a field under daily_reports/tape. Zero AI.",
+  hourSuproAct: "Read this cross-section? Test your read on SuPro's paper desk",
+  hourSuproTimingLead: "The index and breadth above are one point in time — for market positioning, compare against SuPro's timing page:",
   storiesTitle: "Story threads",
   storiesSubtitle: "Every observation of a story, its headline revisions, and who had it first",
   storiesEmptyTitle: "The story ledger is still empty",
@@ -610,6 +629,8 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   storiesThreadHeading: "All story threads",
   storiesWindow: "Ledger window {from} to {to} · {days} days",
   storiesFooter: "We record when we saw it, never when the publisher claims it appeared. Zero AI.",
+  storiesSuproAct: "Act on this story: drill your response on SuPro's paper desk",
+  storiesSuproRankLead: "Who led is observation granularity — your response is what you can practice; compare against SuPro's",
   integrityTitle: "Data integrity",
   integrityTagline: "Per-day gaps · revisions · first-seen coverage · zero AI",
   integrityIntro:
@@ -726,6 +747,15 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   integrityLagEarly: "{n} min early",
   integrityLagMissing: "missing",
   integrityLagPending: "not yet due",
+  // News → practice funnel keys — placeholder-identical to TEXTS_ZH.
+  navSupro: "Practice · SuPro",
+  suproTiming: "Market timing",
+  suproSignals: "Today's signals",
+  suproPaper: "Paper drill",
+  suproDisclaimer: "Paper simulation, not investment advice; quotes follow the data source.",
+  suproThemesLead: "Theme hits are headline counts — to check how the boards actually moved today, see SuPro's",
+  suproFlowsLead: "Fund flows are a single-day snapshot — to test your own read on the paper desk, go to SuPro's",
+  integritySuproLead: "After auditing where the data comes from, practice the same discipline on SuPro's paper desk:",
 };
 
 const STR = REPORT_LOCALE === "en" ? TEXTS_EN : TEXTS_ZH;
@@ -1276,7 +1306,45 @@ export function siteNavLinks(): string {
     // (a local `build-site` without `v1:bake`). A nav item that 404s on the
     // pages whose whole claim is honesty is worse than a missing nav item.
     `<a data-nav="integrity" href="../integrity.html">${STR.navIntegrity}</a>`,
+    // The sister-project landing sits next to the reading pages in the same
+    // root; build-site rewrites the `../` prefix for the homepage copy the same
+    // way it does for archive/hour/stories above.
+    `<a data-nav="supro" href="../supro.html">${STR.navSupro}</a>`,
   ].join("");
+}
+
+/**
+ * Contextual funnel strip for the review tab. The theme hits and sector fund
+ * flows above are *inputs*, not verdicts — each line routes the reader to the
+ * practice surface that matches the context (per-day signals for boards,
+ * paper for flows). Each link carries its own utm_content so supro.si can
+ * attribute the two entry points separately. Rendered only when the block it
+ * matches rendered: a strip about themes/flows with neither on the page would
+ * be a non-sequitur, not guidance.
+ */
+function suproReviewContext(
+  quant: DailyReport["quant"],
+  themes: DailyReport["themes"],
+): string {
+  if (!quant) return "";
+  const themeLine = themes?.length
+    ? `<p>${STR.suproThemesLead} <a href="${suproUrl(
+        "signals",
+        "edition-themes",
+      )}" ${SUPRO_LINK_ATTRS}>${STR.suproSignals} ↗</a></p>`
+    : "";
+  const flowLine = quant.fundFlows?.sectors?.length
+    ? `<p>${STR.suproFlowsLead} <a href="${suproUrl(
+        "paper",
+        "edition-flows",
+      )}" ${SUPRO_LINK_ATTRS}>${STR.suproPaper} ↗</a></p>`
+    : "";
+  const lines = [themeLine, flowLine].filter(Boolean).join("\n    ");
+  if (!lines) return "";
+  return `  <div class="supro-ctx" data-funnel="supro-context" style="margin:1rem 0 0;padding:.7rem .95rem;background:var(--card);border:1px solid var(--rule);border-left:3px solid #1e3a8a;border-radius:.6rem;">
+    ${lines}
+    <p class="muted tiny">${STR.suproDisclaimer}</p>
+  </div>`;
 }
 
 function escapeHtml(s: string): string {
@@ -2193,7 +2261,7 @@ export function renderHtml(
 
   ${lanePanels}
   ${trading ? `<section class="panel" data-panel="trading">${renderTradingPanel(trading)}</section>` : ""}
-  <section class="panel" data-panel="review">${renderReviewPanel(quant, report.themes)}</section>
+  <section class="panel" data-panel="review">${renderReviewPanel(quant, report.themes)}${suproReviewContext(quant, report.themes)}</section>
   <section class="panel" data-panel="sentiment">${renderSentimentPanel(sentiment, sentimentContext)}</section>
   <section class="panel" data-panel="techread">${renderTechReadPanel(trading)}</section>
   <section class="panel" data-panel="personas">${renderPersonasPanel(quant)}</section>
@@ -3144,9 +3212,16 @@ ${notPromiseItems}
 ${endpointRows}
     </tbody></table>
   <p class="meta">generated ${e(coverage.generatedAt)} · ${e(coverage.timezone)}</p>
+  <div class="supro-ctx" data-funnel="supro-integrity">
+    <p>${e(STR.integritySuproLead)} <a class="home" href="${suproUrl("paper", "integrity")}" target="_blank" rel="noopener">${e(STR.suproPaper)} ↗</a></p>
+    <p class="meta">${e(STR.suproDisclaimer)}</p>
+  </div>
   <p style="margin-top:2rem"><a class="home" href="./index.html">← ${e(STR.integrityNavHome)}</a>
    · <a class="home" href="./archive.html">${e(STR.integrityNavArchive)}</a>
-   · <a class="home" href="./status.html">${e(STR.integrityNavStatus)}</a></p>
+   · <a class="home" href="./status.html">${e(STR.integrityNavStatus)}</a>
+   · <a class="home" href="./hour.html">${e(STR.navHour)}</a>
+   · <a class="home" href="./stories.html">${e(STR.navStories)}</a>
+   · <a class="home" href="./supro.html">${e(STR.navSupro)}</a></p>
 </main>
 </body>
 </html>
