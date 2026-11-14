@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-14T14:57:49.377Z",
+  "generatedAt": "2026-11-14T23:42:01.777Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-14/19",
+  "edition": "2026-11-15/06",
   "themes": [
     {
       "key": "comms",
@@ -13,7 +13,7 @@
       "boardChangePct": -3.25,
       "boardUp": 11,
       "boardDown": 82,
-      "articleHits": 5,
+      "articleHits": 3,
       "matchedAliases": [
         "通信",
         "卫星"
@@ -37,66 +37,6 @@
       ]
     },
     {
-      "key": "defense",
-      "name": "军工",
-      "boardCode": "BK0490",
-      "boardName": "军工",
-      "boardChangePct": -2.54,
-      "boardUp": 34,
-      "boardDown": 408,
-      "articleHits": 1,
-      "matchedAliases": [
-        "国防"
-      ],
-      "constituents": [
-        {
-          "symbol": "000678",
-          "name": "襄阳轴承",
-          "changePct": -9.98
-        },
-        {
-          "symbol": "000530",
-          "name": "冰山冷热",
-          "changePct": -5.66
-        },
-        {
-          "symbol": "000576",
-          "name": "甘化科工",
-          "changePct": -4.52
-        }
-      ]
-    },
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": -2.43,
-      "boardUp": 0,
-      "boardDown": 13,
-      "articleHits": 1,
-      "matchedAliases": [
-        "黄金"
-      ],
-      "constituents": [
-        {
-          "symbol": "000426",
-          "name": "兴业银锡",
-          "changePct": -3.55
-        },
-        {
-          "symbol": "002716",
-          "name": "湖南白银",
-          "changePct": -3.37
-        },
-        {
-          "symbol": "600988",
-          "name": "赤峰黄金",
-          "changePct": -2.83
-        }
-      ]
-    },
-    {
       "key": "ai",
       "name": "人工智能",
       "boardCode": "BK0800",
@@ -104,9 +44,9 @@
       "boardChangePct": -1.78,
       "boardUp": 123,
       "boardDown": 624,
-      "articleHits": 1,
+      "articleHits": 2,
       "matchedAliases": [
-        "人工智能"
+        "AI"
       ],
       "constituents": [
         {
@@ -157,32 +97,62 @@
       ]
     },
     {
-      "key": "oil",
-      "name": "石油石化",
-      "boardCode": "BK1276",
-      "boardName": "油气开采Ⅱ",
-      "boardChangePct": -0.68,
-      "boardUp": 2,
-      "boardDown": 3,
+      "key": "bank",
+      "name": "银行",
+      "boardCode": "BK1283",
+      "boardName": "银行",
+      "boardChangePct": 1.43,
+      "boardUp": 40,
+      "boardDown": 0,
       "articleHits": 1,
       "matchedAliases": [
-        "油价"
+        "银行"
       ],
       "constituents": [
         {
-          "symbol": "601969",
-          "name": "海南矿业",
-          "changePct": -3.05
+          "symbol": "002948",
+          "name": "青岛银行",
+          "changePct": 3.65
         },
         {
-          "symbol": "600938",
-          "name": "中国海油",
-          "changePct": 2.05
+          "symbol": "000001",
+          "name": "平安银行",
+          "changePct": 2.37
         },
         {
-          "symbol": "000968",
-          "name": "蓝焰控股",
-          "changePct": -1.84
+          "symbol": "600919",
+          "name": "江苏银行",
+          "changePct": 2.24
+        }
+      ]
+    },
+    {
+      "key": "brokerage",
+      "name": "券商",
+      "boardCode": "BK1366",
+      "boardName": "证券Ⅲ",
+      "boardChangePct": -0.89,
+      "boardUp": 4,
+      "boardDown": 41,
+      "articleHits": 1,
+      "matchedAliases": [
+        "证券"
+      ],
+      "constituents": [
+        {
+          "symbol": "002945",
+          "name": "华林证券",
+          "changePct": -2.47
+        },
+        {
+          "symbol": "600095",
+          "name": "湘财股份",
+          "changePct": -1.68
+        },
+        {
+          "symbol": "000712",
+          "name": "锦龙股份",
+          "changePct": -1.67
         }
       ]
     },
@@ -299,6 +269,34 @@
       ]
     },
     {
+      "key": "defense",
+      "name": "军工",
+      "boardCode": "BK0490",
+      "boardName": "军工",
+      "boardChangePct": -2.54,
+      "boardUp": 34,
+      "boardDown": 408,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000678",
+          "name": "襄阳轴承",
+          "changePct": -9.98
+        },
+        {
+          "symbol": "000530",
+          "name": "冰山冷热",
+          "changePct": -5.66
+        },
+        {
+          "symbol": "000576",
+          "name": "甘化科工",
+          "changePct": -4.52
+        }
+      ]
+    },
+    {
       "key": "realestate",
       "name": "房地产",
       "boardCode": "BK0451",
@@ -323,6 +321,34 @@
           "symbol": "000006",
           "name": "深振业Ａ",
           "changePct": -6.63
+        }
+      ]
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": -2.43,
+      "boardUp": 0,
+      "boardDown": 13,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000426",
+          "name": "兴业银锡",
+          "changePct": -3.55
+        },
+        {
+          "symbol": "002716",
+          "name": "湖南白银",
+          "changePct": -3.37
+        },
+        {
+          "symbol": "600988",
+          "name": "赤峰黄金",
+          "changePct": -2.83
         }
       ]
     },
@@ -467,34 +493,6 @@
       ]
     },
     {
-      "key": "bank",
-      "name": "银行",
-      "boardCode": "BK1283",
-      "boardName": "银行",
-      "boardChangePct": 1.43,
-      "boardUp": 40,
-      "boardDown": 0,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002948",
-          "name": "青岛银行",
-          "changePct": 3.65
-        },
-        {
-          "symbol": "000001",
-          "name": "平安银行",
-          "changePct": 2.37
-        },
-        {
-          "symbol": "600919",
-          "name": "江苏银行",
-          "changePct": 2.24
-        }
-      ]
-    },
-    {
       "key": "travel",
       "name": "旅游酒店",
       "boardCode": "BK0485",
@@ -551,30 +549,30 @@
       ]
     },
     {
-      "key": "brokerage",
-      "name": "券商",
-      "boardCode": "BK1366",
-      "boardName": "证券Ⅲ",
-      "boardChangePct": -0.89,
-      "boardUp": 4,
-      "boardDown": 41,
+      "key": "oil",
+      "name": "石油石化",
+      "boardCode": "BK1276",
+      "boardName": "油气开采Ⅱ",
+      "boardChangePct": -0.68,
+      "boardUp": 2,
+      "boardDown": 3,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "002945",
-          "name": "华林证券",
-          "changePct": -2.47
+          "symbol": "601969",
+          "name": "海南矿业",
+          "changePct": -3.05
         },
         {
-          "symbol": "600095",
-          "name": "湘财股份",
-          "changePct": -1.68
+          "symbol": "600938",
+          "name": "中国海油",
+          "changePct": 2.05
         },
         {
-          "symbol": "000712",
-          "name": "锦龙股份",
-          "changePct": -1.67
+          "symbol": "000968",
+          "name": "蓝焰控股",
+          "changePct": -1.84
         }
       ]
     },
