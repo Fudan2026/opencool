@@ -4,11 +4,16 @@
  * panel (散户学堂 spirit), not a trading signal.
  *
  * Scoring:
- *   - Substring match per article over the title (weight ×2) and the
- *     first 500 chars of summary/excerpt (weight ×1). Longer dictionary
- *     terms match before shorter ones at the same position family.
- *   - Chinese negation guard: a negative CJK term whose occurrence is
- *     directly preceded by 不/未/难/止/无 is skipped ("不再下跌", "止跌…").
+ *   - Match per article over the title (weight ×2) and the first 500
+ *     chars of summary/excerpt (weight ×1). CJK terms match as substrings,
+ *     Latin terms as whole words; longer terms match before shorter ones
+ *     at the same position family (v2: the vocabulary lives in lexicon.ts).
+ *   - Negation guard (v2, both polarities): a CJK term directly preceded
+ *     by 不/未/难/无/没/止 or a negation bigram (不再/难以/失去/…) is
+ *     skipped ("不再下跌", "未获上调"); a Latin term preceded by an
+ *     English negator ("won't sink", "Not New Tariffs") is skipped too.
+ *     Damping, not flipping: negated words score 0; positive readings of
+ *     negated bearish moves ("止跌回升") are explicit lexicon compounds.
  *   - CALIBRATION (wave 6): score = round(100 · tanh((raw / scanned) / K))
  *     with K = 3, clamped to [-100, 100], where raw is the signed
  *     weighted hit total and scanned the number of finance articles.
@@ -26,6 +31,13 @@ import { REPORT_LOCALE } from "../sources/registry";
 import type { ArticleInput } from "../ai/pipeline";
 import { WATCHLIST, type AssetGroup } from "../trading/watchlist";
 import { matchKeysForTicker } from "../invest/events";
+import {
+  LEXICON,
+  ZH_NEGATION_PREFIX,
+  ZH_NEGATION_BIGRAMS,
+  EN_NEGATORS,
+  type LexiconEntry,
+} from "./lexicon";
 
 export interface SentimentDriver {
   term: string;
@@ -71,95 +83,10 @@ export interface MarketSentiment {
 export const MIN_HISTORY_SAMPLES = 20;
 
 /**
- * Signed weights: +2 strong bullish … +1 bullish, -1 bearish … -2 strong
- * bearish. Chinese terms first, then English wires.
+ * Signed weights live in lexicon.ts (v2 vocabulary table, zh + en).
+ * Rules live here: matching order, absorption, negation guards.
  */
-const TERMS: Readonly<{ term: string; weight: number }[]> = [
-  // — zh, bullish —
-  { term: "创历史新高", weight: 2 },
-  { term: "止跌回升", weight: 2 },
-  { term: "扭亏为盈", weight: 2 },
-  { term: "大幅增持", weight: 2 },
-  { term: "巨额回购", weight: 2 },
-  { term: "放量上攻", weight: 2 },
-  { term: "涨停", weight: 2 },
-  { term: "大涨", weight: 2 },
-  { term: "暴涨", weight: 2 },
-  { term: "飙升", weight: 2 },
-  { term: "超预期", weight: 2 },
-  { term: "创新高", weight: 2 },
-  { term: "新高", weight: 1 },
-  { term: "景气", weight: 1 },
-  { term: "复苏", weight: 1 },
-  { term: "反弹", weight: 1 },
-  { term: "回暖", weight: 1 },
-  { term: "增持", weight: 1 },
-  { term: "回购", weight: 1 },
-  { term: "利好", weight: 1 },
-  { term: "上涨", weight: 1 },
-  { term: "走高", weight: 1 },
-  { term: "走强", weight: 1 },
-  { term: "强势", weight: 1 },
-  { term: "普涨", weight: 1 },
-  { term: "领涨", weight: 1 },
-  { term: "突破", weight: 1 },
-  { term: "中标", weight: 1 },
-  { term: "获批", weight: 1 },
-  { term: "签约", weight: 1 },
-  { term: "上调", weight: 1 },
-  { term: "减亏", weight: 1 },
-  { term: "扭亏", weight: 1 },
-  // — zh, bearish —
-  { term: "创历史新低", weight: -2 },
-  { term: "立案调查", weight: -2 },
-  { term: "创新低", weight: -2 },
-  { term: "跌停", weight: -2 },
-  { term: "大跌", weight: -2 },
-  { term: "暴跌", weight: -2 },
-  { term: "重挫", weight: -2 },
-  { term: "崩盘", weight: -2 },
-  { term: "爆雷", weight: -2 },
-  { term: "巨亏", weight: -2 },
-  { term: "违约", weight: -2 },
-  { term: "退市", weight: -2 },
-  { term: "预亏", weight: -2 },
-  { term: "跳水", weight: -2 },
-  { term: "新低", weight: -1 },
-  { term: "减持", weight: -1 },
-  { term: "亏损", weight: -1 },
-  { term: "担忧", weight: -1 },
-  { term: "风险", weight: -1 },
-  { term: "处罚", weight: -1 },
-  { term: "罚款", weight: -1 },
-  { term: "停牌", weight: -1 },
-  { term: "收紧", weight: -1 },
-  { term: "制裁", weight: -1 },
-  { term: "关税", weight: -1 },
-  { term: "下调", weight: -1 },
-  { term: "缩水", weight: -1 },
-  { term: "失速", weight: -1 },
-  { term: "下跌", weight: -1 },
-  { term: "走低", weight: -1 },
-  { term: "走弱", weight: -1 },
-  { term: "普跌", weight: -1 },
-  { term: "领跌", weight: -1 },
-  { term: "调查", weight: -1 },
-  // — en wires —
-  { term: "record high", weight: 2 },
-  { term: "beats estimates", weight: 2 },
-  { term: "surge", weight: 1 },
-  { term: "rally", weight: 1 },
-  { term: "buyback", weight: 1 },
-  { term: "upgrade", weight: 1 },
-  { term: "selloff", weight: -2 },
-  { term: "plunge", weight: -2 },
-  { term: "slump", weight: -2 },
-  { term: "default", weight: -2 },
-  { term: "downgrade", weight: -1 },
-  { term: "lawsuit", weight: -1 },
-  { term: "probe", weight: -1 },
-  { term: "warning", weight: -1 },
-];
+const TERMS = LEXICON;
 
 /** Watchlist group → match keys, built once (teaching-grade bucketing). */
 const SECTOR_KEYS: ReadonlyArray<{ group: AssetGroup; keys: string[] }> =
@@ -191,12 +118,21 @@ export function percentileFor(
 
 /** Longest first so 创历史新高 wins over 新高 in the same headline. */
 const SORTED_TERMS = [...TERMS].sort((a, b) => b.term.length - a.term.length);
-/** Single-char negators directly before a bearish term. */
-const NEGATION_PREFIX = new Set(["不", "未", "难", "无"]);
-/** Two-char negation phrases ending right before a bearish term (不再下跌). */
-const NEGATION_BIGRAMS = new Set([
-  "不再", "并未", "没有", "尚未", "难以", "未能", "未见", "不会",
-]);
+/** Latin terms match as whole words ("surge" must not fire inside "surgeon"). */
+const IS_LATIN = /[a-z0-9]/i;
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\-]/g, "\\$&");
+const SORTED_MATCHERS: ReadonlyArray<{
+  entry: LexiconEntry;
+  isCjk: boolean;
+  re?: RegExp;
+}> = SORTED_TERMS.map((entry) => {
+  const isCjk = !IS_LATIN.test(entry.term);
+  return {
+    entry,
+    isCjk,
+    re: isCjk ? undefined : new RegExp(`\\b${escapeRe(entry.term)}\\b`, "g"),
+  };
+});
 
 interface TermMatch {
   term: string;
@@ -204,35 +140,60 @@ interface TermMatch {
   hits: number;
 }
 
+/** CJK negation: single char or two-char phrase directly before the term. */
+function zhNegated(text: string, idx: number): boolean {
+  const prev = idx > 0 ? text[idx - 1] : "";
+  const bigram = idx >= 2 ? text.slice(idx - 2, idx) : "";
+  return ZH_NEGATION_PREFIX.has(prev) || ZH_NEGATION_BIGRAMS.has(bigram);
+}
+
+/** Latin negation: a negator among the ≤3 words immediately before the term. */
+function enNegated(text: string, idx: number): boolean {
+  const before = text.slice(0, idx).replace(/['’`]/g, "");
+  const words = before.split(/[^a-z0-9]+/).filter(Boolean);
+  return words.slice(-3).some((w) => EN_NEGATORS.has(w));
+}
+
 /**
- * Longest-match-first scan of one text surface: occurrences of a shorter
- * term that fall INSIDE an already-matched longer term's span are absorbed
- * (创新高 inside 创历史新高 doesn't double-count), and each CJK negative
- * occurrence carries its own negation check (不再下跌 → skipped).
+ * Longest-match-first scan of one lowercased surface: occurrences of a
+ * shorter term that fall INSIDE an already-matched longer term's span are
+ * absorbed (创新高 inside 创历史新高, 飙升 inside 成本飙升 — context-flip
+ * compounds therefore beat their component words), and every occurrence
+ * carries its own negation check in BOTH directions (不再下跌 is skipped,
+ * and so is 销量不再上涨; v1 only guarded the bearish side).
  */
-function matchText(text: string): TermMatch[] {
+export function matchText(text: string): TermMatch[] {
   const spans: [number, number][] = [];
   const out = new Map<string, TermMatch>();
-  for (const { term, weight } of SORTED_TERMS) {
-    const isCjk = /[\u4e00-\u9fff]/.test(term);
-    let idx = text.indexOf(term);
+  for (const { entry, isCjk, re } of SORTED_MATCHERS) {
+    const { term, weight } = entry;
     let hits = 0;
-    while (idx >= 0 && hits < 3) {
-      const end = idx + term.length;
-      const inside = spans.some(([s, e]) => idx >= s && end <= e);
-      if (!inside) {
-        const prev = idx > 0 ? text[idx - 1] : "";
-        const bigram = idx >= 2 ? text.slice(idx - 2, idx) : "";
-        const negated =
-          weight < 0 &&
-          isCjk &&
-          (NEGATION_PREFIX.has(prev) || NEGATION_BIGRAMS.has(bigram));
-        if (!negated) {
+    if (isCjk) {
+      let idx = text.indexOf(term);
+      while (idx >= 0 && hits < 3) {
+        const end = idx + term.length;
+        const inside = spans.some(([s, e]) => idx >= s && end <= e);
+        if (!inside) {
+          // The span is recorded even for negated occurrences: otherwise a
+          // negated compound ("不再下跌") leaks its bare component ("跌")
+          // as an unguarded hit on the next, shorter pass.
+          if (!zhNegated(text, idx)) hits++;
+          spans.push([idx, end]);
+        }
+        idx = text.indexOf(term, idx + 1);
+      }
+    } else {
+      re!.lastIndex = 0;
+      for (const m of text.matchAll(re!)) {
+        if (hits >= 3) break;
+        const idx = m.index!;
+        const end = idx + term.length;
+        const inside = spans.some(([s, e]) => idx >= s && end <= e);
+        if (!inside && !enNegated(text, idx)) {
           spans.push([idx, end]);
           hits++;
         }
       }
-      idx = text.indexOf(term, idx + term.length);
     }
     if (hits > 0) out.set(term, { term, weight, hits });
   }
@@ -294,6 +255,7 @@ export function scoreSentiment(
     ] as [string, number][]) {
       const hay = surface[0].toLowerCase();
       for (const { term, weight, hits } of matchText(hay)) {
+        if (weight === 0) continue; // absorber (减速机): span only, no score
         const contribution = weight * hits * surface[1];
         raw += contribution;
         if (weight > 0) posHits += hits;

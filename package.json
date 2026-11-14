@@ -10,6 +10,7 @@
     "regen-enrich": "tsx scripts/regen-enrich.ts",
     "topics:report": "tsx scripts/topics-report.ts",
     "quota-report": "tsx scripts/quota-report.ts",
+    "sentiment:eval": "tsx scripts/sentiment-eval.ts",
     "sources": "tsx scripts/sources.ts",
     "sources:check": "tsx scripts/sources.ts check",
     "typecheck": "tsc --noEmit",

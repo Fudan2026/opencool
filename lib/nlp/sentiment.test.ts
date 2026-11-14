@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { scoreSentiment } from "./sentiment";
+import { scoreSentiment, matchText } from "./sentiment";
 import type { ArticleInput } from "../ai/pipeline";
 
 function art(title: string, excerpt = ""): ArticleInput {
@@ -57,11 +57,40 @@ test("sentiment gauge", async (t) => {
       art("出口未下跌"),
       art("基金难下跌"),
       art("盘面无下跌"),
-      art("指数止跌回稳"),
+      art("指数止跌，延续盘整"),
     ]);
     // Every 下跌 occurrence is prefix-negated → raw 0 → neutral.
     assert.equal(negated.label, "中性");
     assert.ok(Math.abs(negated.score) < 18);
+  });
+
+  await t.test("v2: negation also guards bullish terms", () => {
+    const negated = scoreSentiment([
+      art("销量不再上涨"),
+      art("利润未超预期"),
+      art("项目难以回暖"),
+      art("盘面没有走高"),
+      art("股价失去上涨动力"),
+    ]);
+    assert.equal(negated.label, "中性");
+    assert.equal(negated.raw, 0);
+  });
+
+  await t.test("v2: negated compound absorbs its bare component (no 跌 leak)", () => {
+    const m = matchText("物价不再下跌");
+    assert.deepEqual(m, []);
+  });
+
+  await t.test("v2: recovery compounds read positive, not merely un-negative", () => {
+    const s = scoreSentiment([
+      art("指数止跌回稳"),
+      art("地产销售企稳回升"),
+      art("消费复苏"),
+      art("外贸回暖"),
+      art("政策宽松"),
+    ]);
+    assert.ok(s.score > 18, `止跌/企稳 should read positive, got ${s.score}`);
+    assert.ok(s.label.includes("偏多"));
   });
 
   await t.test("sector buckets: watchlist hits land in groups", () => {
@@ -169,5 +198,49 @@ test("sentiment gauge", async (t) => {
     assert.ok(drivers.includes("创历史新高"));
     assert.ok(drivers.includes("创新高"));
     assert.ok(!drivers.includes("新高"), "新高 should be absorbed by longer terms");
+  });
+
+  await t.test("v2: latin terms match as whole words only", () => {
+    // "surgeon" must not fire "surge"; a true market surge must.
+    assert.deepEqual(matchText("surgeon saved officer's life"), []);
+    assert.ok(matchText("stocks surge after beat").some((m) => m.term === "surge"));
+    assert.ok(matchText("record high").some((m) => m.term === "record high"));
+  });
+
+  await t.test("v2: english negation guards both polarities", () => {
+    const m = matchText("deepseek won't sink u.s. ai titans");
+    assert.deepEqual(m, [], "won't sink should be damped");
+    assert.ok(
+      !matchText("why barclays cut gartner despite a 27% rally in its shares").some(
+        (m2) => m2.term === "rally",
+      ),
+      "despite-guarded rally should be damped",
+    );
+  });
+
+  await t.test("v2: hedge 或 damps a maybe-move", () => {
+    assert.deepEqual(matchText("PPI或见顶"), []);
+    assert.deepEqual(matchText("油价或上涨"), [], "油价或上涨 should be damped");
+    assert.ok(
+      matchText("油价上涨").some((m) => m.term === "上涨"),
+      "油价上涨 without hedge still fires",
+    );
+  });
+
+  await t.test("v2: absorbers block component false-fires", () => {
+    // 减速机/减速器 are gearboxes, not slowdowns.
+    assert.deepEqual(
+      matchText("产品覆盖rv减速机、谐波减速器、行星减速器").filter((m) => m.weight !== 0),
+      [],
+    );
+    assert.ok(matchText("出口增速减速").some((m) => m.term === "减速"));
+  });
+
+  await t.test("v2: context-flip compounds beat their component words", () => {
+    const cost = matchText("存储成本飙升，成本飙升加剧压力");
+    assert.ok(cost.some((m) => m.term === "成本飙升" && m.weight < 0));
+    assert.ok(!cost.some((m) => m.term === "飙升"), "飙升 must be absorbed inside 成本飙升");
+    const cpi = matchText("美国通胀回落，物价回落缓解压力");
+    assert.ok(cpi.some((m) => m.term === "通胀回落" && m.weight > 0));
   });
 });
