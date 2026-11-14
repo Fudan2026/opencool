@@ -8,6 +8,11 @@ import { fileURLToPath } from "node:url";
 import { renderIntegrityHtml } from "../../lib/output/render";
 import { buildV1, writeV1, type CoveragePayload } from "../../lib/v1/build";
 import {
+  collectPublishLag,
+  injectPublishLagSection,
+  renderPublishLagSection,
+} from "../../lib/v1/publish-lag";
+import {
   V1_GUARANTEES,
   V1_HORIZONS,
   V1_REQUIRED_FIELDS,
@@ -740,6 +745,123 @@ test("golden: integrity.html states the truth, including 'no data'", async (t) =
     assert.ok(html.includes('href="./archive.html"'));
     fs.rmSync(tmp, { recursive: true, force: true });
   });
+});
+
+test("golden: publish-lag measures every slot, including the bad days", async (t) => {
+  const { tmp, root } = makeRoot("v1-lag-");
+  // Fixed clock: Monday 2026-11-16 15:30 Shanghai. The 14-day window is
+  // 2026-11-03 .. 2026-11-16, slots 06/13/19 — 42 cells, all of which must
+  // appear, because the table exists to name the bad days.
+  const NOW_LAG = new Date("2026-11-16T15:30:00+08:00");
+  const mkSidecar = (date: string, slot: string, generatedAt: string | null) => {
+    fs.mkdirSync(path.join(root, date), { recursive: true });
+    const report =
+      generatedAt === null ? { fetch_health: {} } : { fetch_health: { generated_at: generatedAt } };
+    fs.writeFileSync(path.join(root, date, `${slot}.json`), JSON.stringify(report), "utf8");
+  };
+  // Today 06: rebuilt 34m37s after its slot — the premature-then-rebuilt case.
+  mkSidecar("2026-11-16", "06", "2026-11-16T06:34:37.441+08:00");
+  // Today 13: 24m34s late, which rounds to 25.
+  mkSidecar("2026-11-16", "13", "2026-11-16T13:24:34.111+08:00");
+  // Today 19: not due at 15:30 — absent on purpose.
+  // 2026-11-15 06: exactly 20m late — on time at the limit boundary (<= 20).
+  mkSidecar("2026-11-15", "06", "2026-11-15T06:20:00+08:00");
+  // 2026-11-15 13: 21m late — one minute past the limit.
+  mkSidecar("2026-11-15", "13", "2026-11-15T13:21:00+08:00");
+  // 2026-11-15 19: a sidecar whose generated_at is unreadable — punctuality
+  // that cannot be verified must not display as on time.
+  mkSidecar("2026-11-15", "19", null);
+  // 2026-11-14 06: generated before its own slot — premature, named as early.
+  mkSidecar("2026-11-14", "06", "2026-11-14T05:50:00+08:00");
+  // 2026-11-14 13: never published. 2026-11-03 .. 11-13: nothing at all.
+
+  const view = collectPublishLag({ root, now: NOW_LAG, timezone: TZ });
+
+  await t.test("one row per date x slot across the whole window, newest first", () => {
+    assert.equal(view.rows.length, 42, "14 days x 3 slots");
+    assert.equal(view.rows[0].date, "2026-11-16");
+    assert.deepEqual(
+      view.rows.slice(0, 3).map((r) => r.slot),
+      ["06", "13", "19"],
+    );
+    const dates = [...new Set(view.rows.map((r) => r.date))];
+    assert.equal(dates.length, 14);
+    assert.equal(dates[dates.length - 1], "2026-11-03");
+  });
+
+  await t.test("verdicts come from the sidecar's own generated_at", () => {
+    const byKey = new Map(view.rows.map((r) => [`${r.date} ${r.slot}`, r]));
+    const today06 = byKey.get("2026-11-16 06")!;
+    assert.equal(today06.verdict, "late");
+    assert.equal(today06.lagMinutes, 35, "34m37s rounds to 35");
+    assert.equal(today06.actualSh, "2026-11-16 06:34");
+    assert.equal(byKey.get("2026-11-16 13")!.verdict, "late");
+    assert.equal(byKey.get("2026-11-16 13")!.lagMinutes, 25, "24m34s rounds to 25");
+    assert.equal(byKey.get("2026-11-15 06")!.verdict, "on-time", "20m is still on time (<= limit)");
+    assert.equal(byKey.get("2026-11-15 13")!.verdict, "late");
+    assert.equal(byKey.get("2026-11-14 06")!.verdict, "early");
+    assert.equal(byKey.get("2026-11-14 06")!.lagMinutes, -10);
+  });
+
+  await t.test("not yet due is pending, never published is missing, unmeasurable is not on time", () => {
+    const byKey = new Map(view.rows.map((r) => [`${r.date} ${r.slot}`, r]));
+    assert.equal(byKey.get("2026-11-16 19")!.verdict, "pending");
+    assert.equal(byKey.get("2026-11-16 19")!.actualSh, null);
+    assert.equal(byKey.get("2026-11-14 13")!.verdict, "missing");
+    assert.equal(byKey.get("2026-11-15 19")!.verdict, "missing", "no readable instant = not verifiable");
+    // 11-15/19, 11-14/13, 11-14/19, plus 11 days (11-03..11-13) x 3 slots.
+    assert.equal(view.counts.missing, 36);
+    assert.equal(view.counts.onTime, 1);
+    assert.equal(view.counts.late, 3);
+    assert.equal(view.counts.early, 1);
+    assert.equal(view.counts.pending, 1);
+    assert.equal(
+      view.counts.onTime + view.counts.late + view.counts.early + view.counts.missing + view.counts.pending,
+      42,
+    );
+  });
+
+  await t.test("the limit is the tolerance knob", () => {
+    const wide = collectPublishLag({ root, now: NOW_LAG, timezone: TZ, limitMin: 60 });
+    const byKey = new Map(wide.rows.map((r) => [`${r.date} ${r.slot}`, r]));
+    assert.equal(byKey.get("2026-11-16 06")!.verdict, "on-time", "34m is late at 20 but on time at 60");
+    assert.equal(byKey.get("2026-11-15 13")!.verdict, "on-time");
+  });
+
+  await t.test("the section renders every verdict and injects under the lede", () => {
+    const build = buildV1({ root, now: NOW, timezone: TZ });
+    const page = renderIntegrityHtml(build.coverage, build.manifest);
+    const section = renderPublishLagSection(view);
+    const { html, injected } = injectPublishLagSection(page, section);
+    assert.ok(injected, "the anchor is built from the same STR table the page used");
+    assert.ok(html.includes('data-surface="publish-lag"'));
+    assert.ok(html.includes("迟到 35 分钟"));
+    assert.ok(html.includes("迟到 25 分钟"));
+    assert.ok(html.includes("准时"));
+    assert.ok(html.includes("提前 10 分钟"));
+    assert.ok(html.includes("缺失"));
+    assert.ok(html.includes("未到点"));
+    // Publish honesty is stated before anything about the tape, so the table
+    // sits under the intro and above the not-started notice.
+    assert.ok(html.indexOf('data-surface="publish-lag"') < html.indexOf('data-surface="no-tape"'));
+    // No green-checkmark vocabulary: this table reports, it does not cheer.
+    assert.ok(!section.includes("✓"));
+  });
+
+  await t.test("a tree with no edition sidecars states no measurement, not 42 fake failures", () => {
+    // The reading-pages job restores only the tape and the ledger; a partial
+    // restore like that must not be published as a two-week outage.
+    const { tmp: tmp2, root: root2 } = makeRoot("v1-lagnone-");
+    writeTree(root2, { slots: ["09:35"] });
+    const v = collectPublishLag({ root: root2, now: NOW_LAG, timezone: TZ });
+    assert.equal(v.available, false);
+    const sec = renderPublishLagSection(v);
+    assert.ok(sec.includes('data-surface="publish-lag-empty"'), "the no-measurement state is named");
+    assert.ok(!sec.includes('data-surface="publish-lag"'), "no table may render");
+    fs.rmSync(tmp2, { recursive: true, force: true });
+  });
+
+  fs.rmSync(tmp, { recursive: true, force: true });
 });
 
 test("golden: guarantee copy is paired with the STR tables", async (t) => {

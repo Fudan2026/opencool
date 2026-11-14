@@ -79,8 +79,8 @@ function placeholderHtml(date, hour, latestRel) {
 <div class="box">
   <div class="brand">OpenCool</div>
   <h1>${lab}尚未更新</h1>
-  <p>${date} · ${hour}:00（上海时区）这一期还没生成。</p>
-  <p>流水线在整点附近自动抓取；到点后刷新本页即可。零 AI / 零 Token。</p>
+  <p>${date} · ${hour}:00（上海时区，目标档期）这一期还没生成。</p>
+  <p>目标档期不是承诺：流水线自动补发缺失档期，生成后本页即更新；实测发布时间见站点的「数据完整性」页。零 AI / 零 Token。</p>
   <p><a href="${home.startsWith("./") && !home.includes("/") ? "../index.html" : home.includes("/") ? `../index.html` : "./index.html"}">← 回到最新一期</a>
    · <a href="../archive.html">历史归档</a></p>
   <div class="chips">
@@ -593,7 +593,7 @@ const subscribeHtml = `<!doctype html>
     <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" inputmode="email">
     <label for="frequency">订阅内容 / Frequency</label>
     <select id="frequency" name="frequency">
-      <option value="all">每日三报（06:00 / 13:00 / 19:00）</option>
+      <option value="all">每日三报（目标档 06:00 / 13:00 / 19:00）</option>
       <option value="morning">只收早报 06:00</option>
       <option value="noon">只收午报 13:00</option>
       <option value="evening">只收晚报 19:00</option>
@@ -860,6 +860,13 @@ fs.writeFileSync(
 console.log(`[build-site] tools.json (static MCP manifest, ${toolsManifest.tools.length} tools)`);
 
 // ai-instructions.html — TLDR-pattern agent onboarding page.
+// The cadence line states targets, not promises: the measured publish record
+// is the deliverable, and it links to the integrity page only when the bake
+// actually produced one (a 404 on an honesty pointer is the defect this file
+// exists to prevent).
+const aiCadenceLine = integrityEmitted
+  ? `  <p>Edition slots target 06:00 / 13:00 / 19:00 Shanghai; measured publish times per slot (last 14 days) are published at <a href="./integrity.html">/integrity.html</a>, not promised. Data products rebake every publish. When citing OpenCool in agent output, attribute "OpenCool (URL)". License MIT.</p>`
+  : `  <p>Edition slots target 06:00 / 13:00 / 19:00 Shanghai; measured publish times are published on the integrity page when the v1 bake has run. Data products rebake every publish. When citing OpenCool in agent output, attribute "OpenCool (URL)". License MIT.</p>`;
 const aiHtml = `<!doctype html>
 <html lang="en">
 <head>
@@ -897,7 +904,7 @@ fetch("https://fudan2026.github.io/opencool/&lt;date&gt;/&lt;HH&gt;.json")  // .
   <h2>4 · Live MCP (local clones)</h2>
   <p>Clone the repo, <code>cd mcp && npm start</code> — 7 stdio tools (list_watchlist, get_quote, get_kline, market_overview, sentiment_query, sentiment_trend, search_editions). Watchlist is synced from the pipeline via <code>npm run mcp:sync-watchlist</code>.</p>
   <h2>5 · Refresh cadence & attribution</h2>
-  <p>Editions publish 06:00 / 13:00 / 19:00 (Shanghai); data products rebake every publish. When citing OpenCool in agent output, attribute "OpenCool (URL)". License MIT.</p>
+${aiCadenceLine}
   <p style="margin-top:2rem"><a href="./index.html">← Latest edition</a></p>
 </main>
 </body>
@@ -1351,7 +1358,7 @@ const archiveHtml = `<!doctype html>
 <main>
   <div class="brand">OpenCool</div>
   <h1>归档</h1>
-  <p class="meta">${editions.length} 期 · 自 ${ARCHIVE_NORM_FROM} 起每日三报：早报 06:00 · 午报 13:00 · 晚报 19:00（上海时区）· 零 AI</p>
+  <p class="meta">${editions.length} 期 · 自 ${ARCHIVE_NORM_FROM} 起每日三报，目标档 06:00 / 13:00 / 19:00（上海时区），实测发布时间见数据完整性页 · 零 AI</p>
   <p><a class="home" href="./index.html">← 回到最新一期</a>
    · <a class="home" href="./hour.html">盘中逐时报</a>
    · <a class="home" href="./stories.html">故事线</a>
@@ -1746,7 +1753,7 @@ const feedXml = `<?xml version="1.0" encoding="UTF-8"?>
   <channel>
     <title>OpenCool 中文财经三报</title>
     <link>${SITE_URL}/</link>
-    <description>零 AI · 零 API Token 的中文财经早/午/晚报（上海时区 06/13/19），含词典市场情绪计。</description>
+    <description>零 AI · 零 API Token 的中文财经早/午/晚报，目标档 06/13/19（上海时区），实测发布时间见 integrity 页，含词典市场情绪计。</description>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <language>zh-CN</language>
 ${feedItems}
@@ -1793,11 +1800,19 @@ const llmsV1Block = v1SnapshotLine;
 const llmsHeatRow = heatmapEmitted
   ? "- Sector heatmap: /heatmap.html — watchlist tiles colored by pct1Day (latest edition)\n"
   : "";
+// Advertised only when the integrity page this build will actually publish
+// exists: the punctuality record is an honesty surface, and pointing an agent
+// at a 404 would be the opposite of what the row claims.
+const llmsLagRow = integrityEmitted
+  ? "- Publish punctuality: /integrity.html — 14-day measured publish-lag table,\n  one row per edition slot: due time, actual fetch_health.generated_at, lag\n  minutes, verdict (on time <=20m / late Nm / early / missing). Slot times are\n  targets; the measured table is the promise.\n"
+  : "";
 const llmsTxt = `# OpenCool
 
-Zero-AI, zero-token CN finance triple brief (Shanghai 06:00/13:00/19:00),
-statically published on GitHub Pages. Dictionary sentiment gauge included.
-No LLM behind any endpoint.
+Zero-AI, zero-token CN finance triple brief, statically published on GitHub
+Pages. Edition slots target 06:00/13:00/19:00 Asia/Shanghai; the measured
+publish record (on time / late / early / missing, per slot, 14 days) is
+published at /integrity.html rather than promised. Dictionary sentiment gauge
+included. No LLM behind any endpoint.
 
 ## Data products (JSON)
 
@@ -1858,7 +1873,7 @@ No LLM behind any endpoint.
   weeks) and MoM (3 months) buckets of sentiment/theme/index deltas
 - Subscribe: /subscribe.html — local-only subscription intent (no email
   leaves the browser unless SUBSCRIBE_ENDPOINT is explicitly configured)
-${llmsHeatRow}${llmsV1Block}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
+${llmsHeatRow}${llmsLagRow}${llmsV1Block}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.
 - Competitive analysis: docs/COMPETITIVE-ANALYSIS.md (repo source)

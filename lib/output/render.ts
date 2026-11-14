@@ -364,6 +364,25 @@ const TEXTS_ZH = {
   integrityNavHome: "回到首页",
   integrityNavStatus: "运行状态",
   integrityNavArchive: "历史归档",
+  // Measured publish times (publish-lag table, baked by scripts/bake-v1.ts
+  // via lib/v1/publish-lag.ts). The slot times are targets; these strings make
+  // the measured record the promise.
+  integrityLagTitle: "发布时效实测（近 {days} 天）",
+  integrityLagIntro:
+    "三报的档期时间（{slots}）是目标，不是承诺：定时触发实测会丢拍，准点无法保证，所以这一页不承诺钟点，只发布实测。下表逐档用数据侧车里的 fetch_health.generated_at（生成时刻）对照档期时间，迟到 {limit} 分钟以内算准时；缺失的档期照常点名，不隐藏。",
+  integrityLagSummary:
+    "近 {days} 天 {slots} 档：准时 {onTime} · 迟到 {late} · 提前 {early} · 缺失 {missing} · 未到点 {pending}",
+  integrityLagNoData:
+    "这一栏暂时没有数字可报：本次烘焙读到的输入树里没有任何期次侧车（daily_reports/<date>/<HH>.json），发布时效因此无法测量。恢复完整发布树后的下一次烘焙会填上这张表。",
+  integrityLagColSlot: "档期",
+  integrityLagColActual: "实际生成",
+  integrityLagColLag: "滞后（分钟）",
+  integrityLagColVerdict: "判定",
+  integrityLagOnTime: "准时",
+  integrityLagLate: "迟到 {n} 分钟",
+  integrityLagEarly: "提前 {n} 分钟",
+  integrityLagMissing: "缺失",
+  integrityLagPending: "未到点",
 };
 
 const TEXTS_EN: typeof TEXTS_ZH = {
@@ -684,6 +703,24 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   integrityNavHome: "Latest edition",
   integrityNavStatus: "Run status",
   integrityNavArchive: "Archive",
+  // Measured publish times (publish-lag table). Kept placeholder-identical to
+  // TEXTS_ZH; i18n parity tests compare the two.
+  integrityLagTitle: "Measured publish times (last {days} days)",
+  integrityLagIntro:
+    "The edition slot times ({slots}) are targets, not promises: scheduled triggers measurably drop, so punctuality is not something this page claims. It publishes the measurement instead: each row compares the sidecar's own fetch_health.generated_at (the instant its data was generated) against the slot time, and up to {limit} minutes late counts as on time. Missing slots are named, never hidden.",
+  integrityLagSummary:
+    "Last {days} days, {slots} slots: {onTime} on time · {late} late · {early} early · {missing} missing · {pending} not yet due",
+  integrityLagNoData:
+    "There is no number to report here yet: the input tree this bake read contains no edition sidecars (daily_reports/<date>/<HH>.json), so publish lag cannot be measured. The next bake with a full publish tree fills this table in.",
+  integrityLagColSlot: "Slot",
+  integrityLagColActual: "Generated at",
+  integrityLagColLag: "Lag (min)",
+  integrityLagColVerdict: "Verdict",
+  integrityLagOnTime: "on time",
+  integrityLagLate: "{n} min late",
+  integrityLagEarly: "{n} min early",
+  integrityLagMissing: "missing",
+  integrityLagPending: "not yet due",
 };
 
 const STR = REPORT_LOCALE === "en" ? TEXTS_EN : TEXTS_ZH;

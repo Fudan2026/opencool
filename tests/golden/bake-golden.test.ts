@@ -19,7 +19,12 @@ function dayOffset(n: number): string {
   return new Date(Date.now() - n * 86_400_000).toISOString().slice(0, 10);
 }
 
-function makeSidecar(dir: string, date: string, hour: string, opts: { caixinFail?: boolean } = {}) {
+function makeSidecar(
+  dir: string,
+  date: string,
+  hour: string,
+  opts: { caixinFail?: boolean; generatedAt?: string } = {},
+) {
   fs.mkdirSync(path.join(dir, date), { recursive: true });
   const report = {
     hero_headline: `${date} ${hour} 头条`,
@@ -37,7 +42,9 @@ function makeSidecar(dir: string, date: string, hour: string, opts: { caixinFail
       ],
     },
     fetch_health: {
-      generated_at: new Date().toISOString(),
+      // Deterministic instants let the publish-lag table assert verdicts that
+      // do not depend on when the test run happens to execute.
+      generated_at: opts.generatedAt ?? new Date().toISOString(),
       entries: [
         { id: "healthy-src", ms: 100, ok: true, count: 5 },
         {
@@ -92,17 +99,22 @@ test("golden: build-site end-to-end", async (t) => {
   // today: both slots real; yesterday: 19 real + 06 placeholder;
   // d2-d4: one slot each (crosses the weekly MIN_DAYS=5 floor);
   // caixin fails on every sidecar → 7-day streak → overlay E2E;
-  // 40 days ago: real edition with a prunable articles sidecar
-  for (const [d, h] of [
-    [today, "06"],
-    [today, "19"],
-    [yesterday, "19"],
-    [d2, "06"],
-    [d3, "06"],
-    [d4, "06"],
-    [old, "06"],
+  // 40 days ago: real edition with a prunable articles sidecar.
+  // generatedAt pins the publish-lag verdicts the integrity assertions below
+  // rely on: 26m late, 21m late, 10m early, 5m late (on time).
+  for (const [d, h, gen] of [
+    [today, "06", `${today}T06:26:00+08:00`],
+    [today, "19", `${today}T19:21:00+08:00`],
+    [yesterday, "19", null],
+    [d2, "06", `${d2}T05:50:00+08:00`],
+    [d3, "06", `${d3}T06:05:00+08:00`],
+    [d4, "06", null],
+    [old, "06", null],
   ] as const) {
-    makeSidecar(R, d, h, { caixinFail: true });
+    makeSidecar(R, d, h, {
+      caixinFail: true,
+      generatedAt: gen ?? undefined,
+    });
   }
   makePlaceholder(R, yesterday, "06");
   fs.writeFileSync(
@@ -202,6 +214,24 @@ test("golden: build-site end-to-end", async (t) => {
     }
   });
 
+  await t.test("llms.txt states targets, not clock promises", () => {
+    const llms = read("llms.txt");
+    // The intro reframes the slot times as targets and names where the
+    // measured record lives — an agent must not be told we publish on a clock.
+    assert.ok(
+      llms.includes("Edition slots target 06:00/13:00/19:00 Asia/Shanghai"),
+      "llms.txt intro must frame slots as targets",
+    );
+    assert.ok(
+      llms.includes("published at /integrity.html rather than promised"),
+      "llms.txt must point at the measured publish record",
+    );
+    assert.ok(
+      llms.includes("- Publish punctuality: /integrity.html — 14-day measured publish-lag table,"),
+      "the publish-punctuality row must be advertised when integrity.html exists",
+    );
+  });
+
   await t.test("v1 namespace: manifest + coverage are published inside the tree", () => {
     const manifest = JSON.parse(read("v1/manifest.json"));
     assert.equal(manifest.schemaVersion, 1);
@@ -255,6 +285,28 @@ test("golden: build-site end-to-end", async (t) => {
     assert.ok(read("archive.html").includes('href="./integrity.html"'));
     assert.ok(read("status.html").includes('href="./integrity.html"'));
     assert.ok(read("index.html").includes('href="./integrity.html"'));
+  });
+
+  await t.test("integrity.html carries the 14-day measured publish-lag table", () => {
+    const html = read("integrity.html");
+    assert.ok(html.includes('data-surface="publish-lag"'), "the lag table must render");
+    assert.ok(html.includes("不是承诺"), "the intro must frame the slot times as targets");
+    const tbl = html.split('data-surface="publish-lag"')[1].split("</table>")[0];
+    // 14 calendar days x 3 slots, plus the header row — a missing slot is a
+    // row, never an omission.
+    assert.equal(tbl.split("<tr").length - 1, 43, "14 days x 3 slots + thead row");
+    // Verdicts are measured from the sidecar's own fetch_health.generated_at.
+    assert.ok(
+      tbl.includes(`<tr><td>${today}</td><td>06:00</td><td>${today} 06:26</td><td class="n">26</td><td>迟到 26 分钟</td></tr>`),
+      "today's 06 slot must show its measured 26-minute lateness",
+    );
+    assert.ok(tbl.includes(`<td>${d2} 05:50</td><td class="n">-10</td><td>提前 10 分钟</td></tr>`), "an early build is named early");
+    assert.ok(tbl.includes(`<td>${d3} 06:05</td><td class="n">5</td><td>准时</td></tr>`), "a within-limit slot is on time");
+    assert.ok(
+      tbl.includes(`<tr><td>${yesterday}</td><td>06:00</td><td>—</td><td class="n">—</td><td>缺失</td></tr>`),
+      "a placeholder-only slot must be named missing, never omitted",
+    );
+    assert.ok(tbl.includes(`<td>${today}</td><td>13:00</td>`), "an absent not-yet-due slot still has its row");
   });
 
   await t.test("heatmap: baked from sidecar trading.tickers", () => {
