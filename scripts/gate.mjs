@@ -513,7 +513,16 @@ export function makePathProbe({ repo, token, fetchImpl = fetch }) {
 }
 
 /**
- * Is a "Build & publish" job of this workflow already running or queued?
+ * Is a "Build & publish" job of this repo's Daily Brief pipeline already
+ * running or queued — in ANY caller (daily.yml, watchdog.yml)?
+ *
+ * The pipeline is a reusable workflow, and a run belongs to its CALLER's
+ * workflow file: listing one workflow file would leave each caller blind to
+ * the other's in-flight build, and the build group's `cancel-in-progress:
+ * true` would then kill and restart it on the very next tick. So the run
+ * list is repo-wide and the job-name match tolerates the "<called workflow> /
+ * Build & publish" shape the jobs API can use for jobs that live in the
+ * called workflow file.
  *
  * The build group is `cancel-in-progress: true`, so without this check a slow
  * build would be cancelled and restarted on every gate tick and could never
@@ -523,7 +532,6 @@ export function makePathProbe({ repo, token, fetchImpl = fetch }) {
 export async function hasBuildInFlight({
   repo,
   token,
-  workflowFile = "daily.yml",
   selfRunId,
   buildJobName = "Build & publish",
   fetchImpl = fetch,
@@ -533,7 +541,7 @@ export async function hasBuildInFlight({
     const runs = [];
     for (const status of ["in_progress", "queued"]) {
       const list = await getJson(
-        `${API_BASE}/repos/${repo}/actions/workflows/${workflowFile}/runs?status=${status}&per_page=20`,
+        `${API_BASE}/repos/${repo}/actions/runs?status=${status}&per_page=20`,
         token,
         fetchImpl,
       );
@@ -554,7 +562,7 @@ export async function hasBuildInFlight({
       if (jobs.status !== 200 || !jobs.body || !Array.isArray(jobs.body.jobs)) continue;
       const busy = jobs.body.jobs.find(
         (j) =>
-          j.name === buildJobName &&
+          (j.name === buildJobName || j.name.endsWith(`/ ${buildJobName}`)) &&
           ["in_progress", "queued", "pending", "waiting"].includes(j.status),
       );
       if (busy) {

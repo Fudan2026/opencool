@@ -1,0 +1,91 @@
+name: Edition watchdog
+
+# THE SECOND SCHEDULE — doubles effective tick coverage for the Daily Brief.
+#
+# Measured (2026-11): GitHub's cron fires this repo's schedule ~8x/day against
+# a 96x/day schedule — 92% of triggers dropped, 0/27 recent slots on time,
+# median 164m late, and three 19:00 editions never published at all (blackout
+# windows of 5h51m–7h33m; every dropped trigger meant a missing edition until
+# the next tick that happened to survive). A second, independent scheduled
+# caller of the SAME pipeline makes the drops decorrelate: whichever of the two
+# schedules gets a tick through, the edition ships.
+#
+# Why interleaved offsets: daily.yml fires at :04/:19/:34/:49 and this workflow
+# at :02/:17/:32/:47 — two minutes earlier, so the pair never lands on the same
+# burst, and a slot that becomes due at :00 gets its first recovery chance at
+# :02 rather than waiting for the next surviving daily tick. When both fire,
+# the gate's repo-wide in-flight guard makes the later tick a no-op, and the
+# build job's shared concurrency group (daily-brief-build) is the backstop —
+# no double-publish.
+#
+# The alert: whenever this workflow HAD to act — its gate found a due slot
+# missing/premature (daily.yml's schedule should have covered it) or a
+# pipeline job failed — it opens or updates ONE pinned tracking issue labelled
+# `edition-watch` (scripts/watchdog-issue.mjs creates the issue on first use
+# and appends deduplicated comments after, so a persistently missing slot
+# pings once, not four times an hour). Nothing is filed on a healthy no-op
+# tick; that is the ordinary case and the whole point of the arrangement.
+
+on:
+  schedule:
+    - cron: '2,17,32,47 * * * *'
+  # The owner can click this even where agents cannot (`gh workflow run`
+  # returns 403 to us). A manual run gates from the clock exactly like a
+  # scheduled tick and files the issue if it had to cover a slot.
+  workflow_dispatch:
+    inputs:
+      tape_slot:
+        description: 'Force a tape capture for one slot (HH:MM or HHMM); leave empty'
+        required: false
+        default: ''
+
+permissions:
+  # The called pipeline needs contents: write (gh-pages publish) and
+  # actions: read (the gate's in-flight guard); this alert job needs
+  # issues: write to open/comment the edition-watch tracking issue.
+  contents: write
+  issues: write
+  actions: read
+
+# NOTE: no workflow-level concurrency, same rule as daily.yml — a hung build
+# must never queue-block the cheap gate runs.
+
+jobs:
+  pipeline:
+    name: Daily brief pipeline (watchdog tick)
+    # The identical DAG, verbatim, shared with daily.yml via the reusable
+    # workflow. The called jobs see THIS run's github context (event_name
+    # 'schedule'/'workflow_dispatch'), so the gate decides from the clock.
+    uses: ./.github/workflows/daily-run.yml
+    with:
+      tape_slot: ${{ inputs.tape_slot || '' }}
+    secrets: inherit
+
+  alert:
+    name: File or update edition-watch issue
+    needs: pipeline
+    # Runs whatever the pipeline did: a watchdog tick that had to build a
+    # missing slot but FAILED is exactly what the tracking issue must record.
+    # should-run is the CALLED workflow's declared output; needs.<other> job
+    # outputs from inside daily-run.yml are not addressable here and must
+    # never be referenced.
+    if: always() && (needs.pipeline.outputs.should-run == 'true' || needs.pipeline.result == 'failure' || needs.pipeline.result == 'cancelled')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout issue script
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/watchdog-issue.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Open or update the edition-watch issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WATCHDOG_SHOULD_RUN: ${{ needs.pipeline.outputs.should-run }}
+          WATCHDOG_REASON: ${{ needs.pipeline.outputs.reason }}
+          WATCHDOG_EDITION_DATE: ${{ needs.pipeline.outputs.edition-date }}
+          WATCHDOG_EDITION_HOUR: ${{ needs.pipeline.outputs.edition-hour }}
+          WATCHDOG_RESULT: ${{ needs.pipeline.result }}
+        run: node scripts/watchdog-issue.mjs

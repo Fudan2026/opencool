@@ -419,6 +419,72 @@ test("gate — helpers", async (t) => {
     assert.equal(r.inFlight, false);
     assert.equal(r.checked, false);
   });
+
+  await t.test("in-flight guard lists runs repo-wide, not per caller workflow", async () => {
+    // The pipeline is a reusable workflow called by BOTH daily.yml and
+    // watchdog.yml, and a run belongs to its caller's workflow file. Listing
+    // one workflow file would leave each caller blind to the other's
+    // in-flight build — and cancel-in-progress would then thrash it.
+    const seen: string[] = [];
+    const fakeFetch = (async (url: string | URL | Request) => {
+      const u = String(url);
+      seen.push(u);
+      if (u.includes("/runs?status=")) {
+        return {
+          status: 200,
+          json: async () => ({ workflow_runs: [] }),
+        } as unknown as Response;
+      }
+      throw new Error(`unexpected fetch: ${u}`);
+    }) as unknown as typeof fetch;
+
+    const r = await hasBuildInFlight({
+      repo: "Fudan2026/opencool",
+      token: "t",
+      selfRunId: "999",
+      fetchImpl: fakeFetch,
+    });
+    assert.equal(r.inFlight, false);
+    assert.equal(seen.length, 2, "one run list per status (in_progress + queued)");
+    for (const u of seen) {
+      assert.match(u, /\/repos\/Fudan2026\/opencool\/actions\/runs\?status=/);
+      assert.equal(
+        u.includes("/workflows/"),
+        false,
+        "the run list must be repo-wide so every caller's build is visible",
+      );
+    }
+  });
+
+  await t.test("in-flight guard recognises called-workflow job names", async () => {
+    // Jobs that live in the reusable workflow file can surface with a
+    // "<called workflow> / <job name>" shape in the jobs API. The guard must
+    // still see them, or every tick would cancel the in-flight build.
+    const fakeFetch = (async (url: string | URL | Request) => {
+      const u = String(url);
+      if (u.includes("/runs?status=")) {
+        return {
+          status: 200,
+          json: async () => ({ workflow_runs: [{ id: 111 }] }),
+        } as unknown as Response;
+      }
+      return {
+        status: 200,
+        json: async () => ({
+          jobs: [{ name: "Daily brief pipeline / Build & publish", status: "in_progress" }],
+        }),
+      } as unknown as Response;
+    }) as unknown as typeof fetch;
+
+    const r = await hasBuildInFlight({
+      repo: "Fudan2026/opencool",
+      token: "t",
+      selfRunId: "999",
+      fetchImpl: fakeFetch,
+    });
+    assert.equal(r.inFlight, true);
+    assert.equal(r.checked, true);
+  });
 });
 
 test("gate — tape mode decides capture without touching the edition path", async (t) => {

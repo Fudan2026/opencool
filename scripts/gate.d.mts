@@ -128,7 +128,6 @@ export function decideTape(opts: {
 export function hasBuildInFlight(opts: {
   repo: string;
   token: string;
-  workflowFile?: string;
   selfRunId?: string;
   buildJobName?: string;
   fetchImpl?: typeof fetch;

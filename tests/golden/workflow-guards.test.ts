@@ -3,10 +3,20 @@
  *
  * Owner directive: the scheduled / CI pipeline must never spend a token, and
  * "did it publish on time" must be a machine check rather than something a
- * human or agent watches. Both are structural properties of
- * `.github/workflows/daily.yml`, so they are asserted against the file itself —
- * a future edit that reintroduces `LLM_MODE=auto`, forwards a provider key, or
- * drops the assertions fails here instead of costing tokens or silent lateness.
+ * human or agent watches. Both are structural properties of the workflow
+ * YAML, so they are asserted against the files themselves — a future edit that
+ * reintroduces `LLM_MODE=auto`, forwards a provider key, or drops the
+ * assertions fails here instead of costing tokens or silent lateness.
+ *
+ * Since the watchdog split there are THREE files under test:
+ *   - `daily-run.yml`  — the reusable pipeline (workflow_call): the whole job
+ *     DAG and every guard live HERE, once, for both callers;
+ *   - `daily.yml`      — thin caller: cron 4,19,34,49 + push + dispatch;
+ *   - `watchdog.yml`   — second caller: cron 2,17,32,47 + dispatch, plus the
+ *     edition-watch issue alert on a gate that had to act or a job that
+ *     failed.
+ * Job-level assertions read the runner; caller-shape assertions read both
+ * callers; parseability/no-inline-script assertions read all three files.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -14,19 +24,47 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const WORKFLOW = path.resolve(
+const WORKFLOWS_DIR = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
-  "../../.github/workflows/daily.yml",
+  "../../.github/workflows",
 );
+const RUNNER = path.join(WORKFLOWS_DIR, "daily-run.yml");
+const DAILY = path.join(WORKFLOWS_DIR, "daily.yml");
+const WATCHDOG = path.join(WORKFLOWS_DIR, "watchdog.yml");
+const REPO_ROOT = path.resolve(WORKFLOWS_DIR, "../..");
+const ALL_WORKFLOWS: [string, string][] = [
+  ["daily.yml", DAILY],
+  ["watchdog.yml", WATCHDOG],
+  ["daily-run.yml", RUNNER],
+];
+
+const readWorkflow = (p: string): string => fs.readFileSync(p, "utf8");
 
 /** The build job's text block (from its `build:` key to the next top-level job). */
 function buildJobSource(): string {
-  const src = fs.readFileSync(WORKFLOW, "utf8");
+  const src = readWorkflow(RUNNER);
   const start = src.indexOf("\n  build:");
-  assert.ok(start >= 0, "build job not found in daily.yml");
+  assert.ok(start >= 0, "build job not found in daily-run.yml");
   const rest = src.slice(start + 1);
   const next = rest.search(/\n {2}[a-z][\w-]*:/);
   return next >= 0 ? rest.slice(0, next) : rest;
+}
+
+/** Text of one job in a workflow (from its 2-space key to the next job). */
+function jobSource(src: string, jobId: string): string {
+  const start = src.indexOf(`\n  ${jobId}:`);
+  assert.ok(start >= 0, `job "${jobId}" not found`);
+  const rest = src.slice(start + 1);
+  const next = rest.search(/\n {2}[a-z][\w-]*:/);
+  return next >= 0 ? rest.slice(0, next) : rest;
+}
+
+/** The gate job (everything before `build:`) of the reusable pipeline. */
+function gateSource(): string {
+  const src = readWorkflow(RUNNER);
+  const gate = src.slice(0, src.indexOf("\n  build:"));
+  assert.ok(gate.includes("  gate:"), "gate job not found in daily-run.yml");
+  return gate;
 }
 
 function stepNames(job: string): string[] {
@@ -41,6 +79,196 @@ function stepSource(job: string, name: string): string {
   const next = rest.search(/\n {6}- /);
   return next >= 0 ? rest.slice(0, next) : rest;
 }
+
+test("golden: the pipeline is one reusable workflow with two thin callers", async (t) => {
+  const runner = readWorkflow(RUNNER);
+  const daily = readWorkflow(DAILY);
+  const watchdog = readWorkflow(WATCHDOG);
+
+  await t.test("daily-run.yml is a workflow_call reusable pipeline", () => {
+    assert.match(runner, /^on:\n {2}workflow_call:$/m);
+    assert.doesNotMatch(runner, /^ {2}schedule:/m, "the runner must not schedule itself — only callers trigger");
+  });
+
+  await t.test("daily.yml keeps its triggers and calls the pipeline", () => {
+    assert.match(daily, /cron: '4,19,34,49 \* \* \* \*'/, "daily.yml must keep its historical cron offsets");
+    assert.match(daily, /push:\n {4}branches: \[main\]/);
+    assert.match(daily, /workflow_dispatch:/);
+    assert.match(daily, /uses: \.\/\.github\/workflows\/daily-run\.yml/);
+    assert.match(daily, /secrets: inherit/);
+  });
+
+  await t.test("watchdog.yml interleaves its own schedule, two minutes early", () => {
+    assert.match(watchdog, /cron: '2,17,32,47 \* \* \* \*'/);
+    assert.equal(
+      /cron: '4,19,34,49/.test(watchdog),
+      false,
+      "the watchdog must NOT reuse daily.yml's offsets — identical crons correlate the drops",
+    );
+    assert.match(watchdog, /workflow_dispatch:/, "the owner must be able to click the watchdog");
+    assert.equal(/push:/.test(watchdog), false, "daily.yml owns the push trigger");
+    assert.match(watchdog, /uses: \.\/\.github\/workflows\/daily-run\.yml/);
+    assert.match(watchdog, /secrets: inherit/);
+  });
+
+  await t.test("the runner forwards the gate's decision outputs to its callers", () => {
+    for (const out of [
+      "should-run",
+      "edition-date",
+      "edition-hour",
+      "reason",
+      "tape-should-run",
+      "tape-date",
+      "tape-slot",
+      "tape-reason",
+    ]) {
+      assert.match(
+        runner,
+        new RegExp(`^ {6}${out}:\n {8}value: \\$\\{\\{ jobs\\.gate\\.outputs\\.${out} \\}\\}$`, "m"),
+        `workflow_call output "${out}" must map the gate job's output`,
+      );
+    }
+  });
+
+  await t.test("both callers grant the permissions the pipeline needs", () => {
+    for (const src of [daily, watchdog]) {
+      assert.match(src, /^ {2}contents: write$/m);
+      assert.match(src, /^ {2}actions: read$/m);
+    }
+    assert.match(watchdog, /^ {2}issues: write$/m, "the watchdog alert job needs issues: write");
+    assert.doesNotMatch(runner, /^ {2}issues: write$/m, "the pipeline itself must not need the issue scope");
+  });
+
+  await t.test("neither caller gates the pipeline call", () => {
+    for (const [name, job] of [
+      ["daily.yml", jobSource(daily, "daily")],
+      ["watchdog.yml", jobSource(watchdog, "pipeline")],
+    ] as [string, string][]) {
+      assert.doesNotMatch(
+        job,
+        /^ {4}if:/m,
+        `${name} must let every tick reach the gate — a caller-side if: would skip editions`,
+      );
+    }
+  });
+
+  await t.test("the tape-slot dispatch input is plumbed through both callers", () => {
+    for (const [name, src] of [
+      ["daily.yml", daily],
+      ["watchdog.yml", watchdog],
+    ] as [string, string][]) {
+      assert.match(src, /tape_slot:/, `${name} must expose the tape_slot dispatch input`);
+      assert.match(src, /tape_slot: \$\{\{ inputs\.tape_slot \|\| '' \}\}/, `${name} must forward tape_slot to the pipeline`);
+    }
+    const gateTape = stepSource(gateSource(), "Check tape schedule");
+    assert.match(gateTape, /TAPE_SLOT: \$\{\{ inputs\.tape_slot/, "the gate must read the workflow_call input");
+  });
+
+  await t.test("the build job keeps its cross-caller concurrency group", () => {
+    // The group NAME is repo-global: whichever caller's tick wins it, the
+    // other queues or cancels — never a double publish.
+    const job = buildJobSource();
+    assert.match(job, /group: daily-brief-build/);
+    assert.match(job, /cancel-in-progress: true/);
+    for (const src of [daily, watchdog]) {
+      assert.doesNotMatch(src, /concurrency:/, "callers must not add a workflow-level concurrency that could queue-block gates");
+    }
+  });
+});
+
+test("golden: the runner keeps every bake/assert step, in order, for both callers", async (t) => {
+  // The callers share this ONE job graph, so a dropped or reordered guard
+  // regresses BOTH schedules at once. The exact ordered step lists freeze the
+  // DAG as it was extracted from the monolithic daily.yml.
+  const expectedSteps: [string, string[]][] = [
+    [
+      "gate",
+      ["Checkout gate script", "Check schedule", "Check tape schedule"],
+    ],
+    [
+      "build",
+      [
+        "Checkout code",
+        "Setup Node",
+        "Install dependencies",
+        "Record run start",
+        "Typecheck",
+        "Test suite (quality gate)",
+        "Validate source config",
+        "Restore existing reports from gh-pages",
+        "Note whether this edition was already live",
+        "Bake pre-market tips",
+        "Bake dragon-tiger list",
+        "Generate edition report",
+        "Build trails page (favorites)",
+        "Bake keyword heat (7d)",
+        "Bake weekly review (7d)",
+        "Bake theme heat",
+        "Bake story ledger",
+        "Assert story ledger timezone",
+        "Bake reaction windows",
+        "Assert reaction windows are honest",
+        "Assert theme boards resolved",
+        "Bake trend periods",
+        "Bake search index",
+        "Build reading pages (hour + stories)",
+        "Bake v1 namespace and integrity page",
+        "Assert v1 contract",
+        "Build static site (index + archive)",
+        "Assert zero LLM calls",
+        "Alert if edition HTML missing or empty",
+        "Capture the published archive snapshot",
+        "Publish to gh-pages",
+        "Assert archive survived publish",
+        "Assert publish lag",
+        "Push new edition (opt-in)",
+        "Alert on job failure",
+      ],
+    ],
+    [
+      "tape",
+      [
+        "Checkout code",
+        "Setup Node",
+        "Install dependencies",
+        "Record run start",
+        "Restore existing tape from gh-pages",
+        "Capture snapshot",
+        "Rebuild intraday page",
+        "Assert zero LLM calls",
+        "Assert snapshot integrity",
+        "Publish tape to gh-pages",
+        "Alert on tape failure",
+      ],
+    ],
+    [
+      "pages",
+      [
+        "Checkout code",
+        "Setup Node",
+        "Install dependencies",
+        "Record run start",
+        "Restore tape and ledger from gh-pages",
+        "Build reading pages",
+        "Assert zero LLM calls",
+        "Assert both pages exist",
+        "Bake reaction windows",
+        "Assert reaction windows are honest",
+        "Bake v1 namespace and integrity page",
+        "Assert v1 contract",
+        "Publish reading pages and tape",
+        "Alert on pages failure",
+      ],
+    ],
+  ];
+
+  const src = readWorkflow(RUNNER);
+  for (const [jobId, steps] of expectedSteps) {
+    await t.test(`${jobId} job: exact step order`, () => {
+      assert.deepEqual(stepNames(jobSource(src, jobId)), steps);
+    });
+  }
+});
 
 test("golden: build job is structurally zero-token", async (t) => {
   const job = buildJobSource();
@@ -143,8 +371,7 @@ test("golden: publish-lag assertion is wired and cannot deadlock the slot", asyn
 
   await t.test("the gate reason reaches the assert as the trigger", () => {
     assert.match(stepSource(job, "Assert publish lag"), /EDITION_TRIGGER:/);
-    const gate = fs.readFileSync(WORKFLOW, "utf8").slice(0, fs.readFileSync(WORKFLOW, "utf8").indexOf("\n  build:"));
-    assert.match(gate, /reason: \$\{\{ steps\.check\.outputs\.reason \}\}/, "gate must expose its reason");
+    assert.match(gateSource(), /reason: \$\{\{ steps\.check\.outputs\.reason \}\}/, "gate must expose its reason");
   });
 
   await t.test("a lag breach does not double-page with the generic failure alert", () => {
@@ -153,43 +380,78 @@ test("golden: publish-lag assertion is wired and cannot deadlock the slot", asyn
   });
 });
 
-test("golden: daily.yml stays parseable — no inline multi-line scripts", async (t) => {
+test("golden: all three workflow files stay parseable — no inline multi-line scripts", async (t) => {
   /**
    * A workflow that does not parse fails the run before any step executes.
    * That is what happened when an inline `node -e '…'` block with an unquoted
    * `:` landed in the tape job: every push went red in 0s with "This run likely
-   * failed because of a workflow file issue", and no test caught it because the
-   * guards above only regex the text.
+   * failed because of a workflow file issue", and no test caught it because
+   * the guards above only regex the text.
    *
    * The project ships zero dependencies, so there is no YAML parser here. The
    * hazard is specific and cheap to ban structurally: a multi-line quoted shell
-   * body is the only construct in this file that can break YAML while still
-   * looking correct. Scripts belong in `scripts/`, invoked by path.
+   * body is the only construct that can break YAML while still looking
+   * correct. Scripts belong in `scripts/`, invoked by path.
    */
-  const src = fs.readFileSync(WORKFLOW, "utf8");
-
-  await t.test("the three jobs exist at two-space indent", () => {
-    for (const job of ["gate", "build", "tape"]) {
-      assert.match(src, new RegExp(`^  ${job}:$`, "m"), `job "${job}" must exist`);
+  await t.test("the four pipeline jobs exist at two-space indent in the runner", () => {
+    const src = readWorkflow(RUNNER);
+    for (const job of ["gate", "build", "tape", "pages"]) {
+      assert.match(src, new RegExp(`^ {2}${job}:$`, "m"), `job "${job}" must exist in daily-run.yml`);
     }
   });
 
-  await t.test("no inline multi-line node block (the unparseable-YAML hazard)", () => {
-    assert.deepEqual(
-      [...src.matchAll(/run:\s*node\s+--input-type=module/g)].map((m) => m[0]),
-      [],
-      "move inline node -e bodies into scripts/ — a bare colon inside them breaks the YAML",
-    );
-    assert.deepEqual([...src.matchAll(/run:\s*node\s+-e\s/g)].map((m) => m[0]), []);
-  });
+  for (const [name, file] of ALL_WORKFLOWS) {
+    await t.test(`${name}: no inline multi-line node block (the unparseable-YAML hazard)`, () => {
+      const src = readWorkflow(file);
+      assert.deepEqual(
+        [...src.matchAll(/run:\s*node\s+--input-type=module/g)].map((m) => m[0]),
+        [],
+        "move inline node -e bodies into scripts/ — a bare colon inside them breaks the YAML",
+      );
+      assert.deepEqual([...src.matchAll(/run:\s*node\s+-e\s/g)].map((m) => m[0]), []);
+    });
 
-  await t.test("every `run:` is a single-line command or a block scalar", () => {
-    // `run: ` must be followed by either more text on the same line or `>` / `|`.
-    for (const m of src.matchAll(/^ {8}run: (.*)$/gm)) {
-      const rest = m[1].trim();
-      assert.ok(rest.length > 0, "a run: key with no command and no block scalar is a parse error");
-    }
-  });
+    await t.test(`${name}: every \`run:\` is a single-line command or a block scalar`, () => {
+      // `run: ` must be followed by either more text on the same line or `>` / `|`.
+      const src = readWorkflow(file);
+      for (const m of src.matchAll(/^ {8}run: (.*)$/gm)) {
+        const rest = m[1].trim();
+        assert.ok(rest.length > 0, "a run: key with no command and no block scalar is a parse error");
+      }
+    });
+  }
+});
+
+test("golden: every workflow file pins zero-token wherever LLM_MODE appears", async (t) => {
+  // The callers cannot set env on a `uses:` job, so the pin lives once in the
+  // runner and covers BOTH callers structurally. This sweep makes sure no
+  // file anywhere sets any other mode and no provider key leaks anywhere.
+  for (const [name, file] of ALL_WORKFLOWS) {
+    await t.test(`${name}: every LLM_MODE occurrence is 'off'`, () => {
+      const src = readWorkflow(file);
+      const occurrences = [...src.matchAll(/LLM_MODE:\s*(.+)$/gm)].map((m) => m[1].trim());
+      if (file === RUNNER) {
+        assert.ok(occurrences.length >= 3, "the runner must pin LLM_MODE in build, tape and pages");
+      }
+      for (const v of occurrences) {
+        assert.equal(v, "'off'", `${name} sets LLM_MODE: ${v} — only 'off' is allowed in CI`);
+      }
+    });
+
+    await t.test(`${name}: no provider key is wired into the workflow`, () => {
+      const src = readWorkflow(file);
+      for (const key of [
+        "ZHIPU_API_KEY",
+        "ANTHROPIC_API_KEY",
+        "OPENAI_API_KEY",
+        "DEEPSEEK_API_KEY",
+        "MINIMAX_API_KEY",
+        "LLM_API_KEY",
+      ]) {
+        assert.equal(new RegExp(`${key}:\\s*\\$\\{\\{`).test(src), false, `${key} must not reach ${name}`);
+      }
+    });
+  }
 });
 
 test("golden: the story ledger bake is wired into the build job", async (t) => {
@@ -313,12 +575,8 @@ test("golden: reaction windows bake is wired between the ledger and the guards",
  * publish with `keep_files: true` so it cannot delete what it did not write.
  */
 test("golden: reading pages publish even when no edition is due", async (t) => {
-  const src = fs.readFileSync(WORKFLOW, "utf8");
-  const start = src.indexOf("\n  pages:");
-  assert.ok(start >= 0, "pages job not found in daily.yml");
-  const rest = src.slice(start + 1);
-  const next = rest.search(/\n {2}[a-z][\w-]*:/);
-  const job = next >= 0 ? rest.slice(0, next) : rest;
+  const src = readWorkflow(RUNNER);
+  const job = jobSource(src, "pages");
 
   await t.test("the job exists and is not gated on should-run or a tape capture", () => {
     const ifLine = /^ {4}if: (.+)$/m.exec(job);
@@ -527,16 +785,12 @@ test("golden: a missing llm-calls.jsonl is the documented pass case", () => {
 /**
  * The tape job is held to the same zero-token rule as the build job, and must
  * not be able to disturb the edition path. Both are structural properties of
- * `daily.yml`, so they are asserted against the file: a future edit that drops
+ * the pipeline, so they are asserted against the file: a future edit that drops
  * the pin, forwards a key, or reshapes the edition publish fails here.
  */
 test("golden: tape job is zero-token and cannot disturb the edition path", async (t) => {
-  const src = fs.readFileSync(WORKFLOW, "utf8");
-  const start = src.indexOf("\n  tape:");
-  assert.ok(start >= 0, "tape job not found in daily.yml");
-  const rest = src.slice(start + 1);
-  const next = rest.search(/\n {2}[a-z][\w-]*:/);
-  const job = next >= 0 ? rest.slice(0, next) : rest;
+  const src = readWorkflow(RUNNER);
+  const job = jobSource(src, "tape");
 
   await t.test("LLM_MODE is pinned to off at job level", () => {
     const jobEnv = job.slice(0, job.indexOf("    steps:"));
@@ -604,7 +858,7 @@ test("golden: tape job is zero-token and cannot disturb the edition path", async
   });
 
   await t.test("the gate exposes the tape outputs and runs the tape decision", () => {
-    const gate = src.slice(0, src.indexOf("\n  build:"));
+    const gate = gateSource();
     for (const out of ["tape-should-run", "tape-date", "tape-slot", "tape-reason"]) {
       assert.match(gate, new RegExp(`^ {6}${out}: \\$\\{\\{ steps\\.tape\\.outputs\\.${out} \\}\\}$`, "m"));
     }
@@ -613,7 +867,7 @@ test("golden: tape job is zero-token and cannot disturb the edition path", async
   });
 
   await t.test("the gate job stays cheap: no npm ci, no setup-node", () => {
-    const gate = src.slice(0, src.indexOf("\n  build:"));
+    const gate = gateSource();
     assert.equal(
       /uses: actions\/setup-node/.test(gate),
       false,
@@ -623,7 +877,7 @@ test("golden: tape job is zero-token and cannot disturb the edition path", async
     // …and the tape decision reuses the single sparse checkout of gate.mjs
     // instead of adding a second checkout.
     assert.equal(
-      (src.match(/sparse-checkout: \|/g) ?? []).length,
+      (readWorkflow(RUNNER).match(/sparse-checkout: \|/g) ?? []).length,
       1,
       "the tape decision must reuse the gate's one sparse checkout, not add another",
     );
@@ -717,7 +971,7 @@ test("golden: the reading pages are wired into the edition build", async (t) => 
   });
 
   await t.test("no inline multi-line node body was added for the pages", () => {
-    const src = fs.readFileSync(WORKFLOW, "utf8");
+    const src = readWorkflow(RUNNER);
     assert.deepEqual([...src.matchAll(/run:\s*node\s+-e\s/g)].map((m) => m[0]), []);
   });
 });
@@ -794,4 +1048,184 @@ test("golden: the v1 namespace bake is wired before publish and guarded", async 
     assert.match(step, /REPORT_TZ:/);
     assert.match(step, /vars\.REPORT_TZ \|\| 'Asia\/Shanghai'/);
   });
+});
+
+/**
+ * The watchdog exists because GitHub's cron drops 92% of this repo's scheduled
+ * triggers. Its alert is the accountability surface: whenever the watchdog HAD
+ * to act (its gate found a due slot missing/premature — daily.yml's schedule
+ * should have covered it) or a pipeline job failed, ONE pinned issue labelled
+ * `edition-watch` is opened or updated. These assertions pin that contract.
+ */
+test("golden: watchdog files exactly one tracking issue when it had to act", async (t) => {
+  const watchdog = readWorkflow(WATCHDOG);
+
+  await t.test("the alert job runs after the pipeline, whatever its result", () => {
+    const job = jobSource(watchdog, "alert");
+    assert.match(job, /^ {4}needs: pipeline$/m);
+    assert.match(job, /if: always\(\) &&/);
+  });
+
+  await t.test("it fires when the watchdog covered a slot OR a job failed/cancelled", () => {
+    const job = jobSource(watchdog, "alert");
+    assert.match(job, /needs\.pipeline\.outputs\.should-run == 'true'/);
+    assert.match(job, /needs\.pipeline\.result == 'failure'/);
+    assert.match(job, /needs\.pipeline\.result == 'cancelled'/);
+  });
+
+  await t.test("it runs the issue-filer script, never an inline body", () => {
+    const job = jobSource(watchdog, "alert");
+    assert.match(job, /node scripts\/watchdog-issue\.mjs/);
+    assert.doesNotMatch(job, /run:\s*node\s+-e\s/);
+  });
+
+  await t.test("it passes the gate outputs and the pipeline result to the script", () => {
+    const job = jobSource(watchdog, "alert");
+    for (const name of [
+      "WATCHDOG_SHOULD_RUN",
+      "WATCHDOG_REASON",
+      "WATCHDOG_EDITION_DATE",
+      "WATCHDOG_EDITION_HOUR",
+      "WATCHDOG_RESULT",
+    ]) {
+      assert.match(job, new RegExp(`${name}:`), `env ${name} must be wired`);
+    }
+  });
+
+  await t.test("the issue filer is watchdog-only", () => {
+    assert.doesNotMatch(readWorkflow(DAILY), /watchdog-issue/);
+    assert.doesNotMatch(readWorkflow(RUNNER), /watchdog-issue/);
+  });
+
+  await t.test("the script maintains one issue, deduplicated, not one issue per event", () => {
+    const scriptSrc = fs.readFileSync(path.join(REPO_ROOT, "scripts", "watchdog-issue.mjs"), "utf8");
+    assert.match(scriptSrc, /edition-watch/, "the tracking label is edition-watch");
+    assert.match(scriptSrc, /state=open/, "it must search for the existing open issue first");
+    assert.match(scriptSrc, /watchdog-event:/, "comments carry a dedupe marker");
+    // and it must no-op on a healthy tick (nothing to report), so the issue
+    // only ever carries real events.
+    assert.match(scriptSrc, /nothing to report/);
+  });
+});
+
+/**
+ * The build job restores gh-pages with `|| true` and publishes with
+ * `keep_files: false`: a partial restore would silently DELETE every unrestored
+ * old edition on the next publish, and the run would stay green (forensics:
+ * missing-19s-forensics). The archive-survival steps bracket the publish so a
+ * wipe is impossible to miss: capture the fetched tree's sidecars before the
+ * push, assert every one survived right after it.
+ */
+test("golden: the build publish cannot silently wipe the archive", async (t) => {
+  const job = buildJobSource();
+  const names = stepNames(job);
+
+  await t.test("the publish is bracketed by a capture and a survival assert", () => {
+    const captureAt = names.indexOf("Capture the published archive snapshot");
+    const publishAt = names.indexOf("Publish to gh-pages");
+    const assertAt = names.indexOf("Assert archive survived publish");
+    assert.ok(captureAt >= 0 && publishAt >= 0 && assertAt >= 0);
+    assert.ok(captureAt < publishAt, "the snapshot must be taken BEFORE the keep_files:false publish");
+    assert.equal(assertAt, publishAt + 1, "the survival assert is the first thing after the publish");
+  });
+
+  await t.test("both steps run the real script with their phase flag", () => {
+    assert.match(
+      stepSource(job, "Capture the published archive snapshot"),
+      /node scripts\/assert-archive-survival\.mjs --capture/,
+    );
+    assert.match(
+      stepSource(job, "Assert archive survived publish"),
+      /node scripts\/assert-archive-survival\.mjs --assert/,
+    );
+  });
+
+  await t.test("the script exists and reads the FETCHED tree, not the possibly-partial checkout", () => {
+    const scriptSrc = fs.readFileSync(
+      path.join(REPO_ROOT, "scripts", "assert-archive-survival.mjs"),
+      "utf8",
+    );
+    assert.match(scriptSrc, /git ls-tree -r --name-only origin\/gh-pages/);
+    assert.match(scriptSrc, /RUNNER_TEMP/, "the capture list must live outside the publish dir");
+  });
+
+  const { checkSurvival, filterSidecarPaths } = (await import("../../scripts/assert-archive-survival.mjs")) as {
+    checkSurvival: (opts: { listFile: string; publishDir?: string }) => Promise<{
+      listed: number;
+      missing: string[];
+    }>;
+    filterSidecarPaths: (paths: string[]) => string[];
+  };
+  const os = await import("node:os");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "assert-archive-"));
+  const publishDir = path.join(dir, "daily_reports");
+  const sidecars = ["2026-11-13/06.json", "2026-11-13/19.json", "2026-11-14/06.json"];
+  for (const rel of sidecars) {
+    fs.mkdirSync(path.join(publishDir, path.dirname(rel)), { recursive: true });
+    fs.writeFileSync(path.join(publishDir, rel), "{}");
+  }
+  const listFile = path.join(dir, "gh-pages-sidecars.txt");
+  fs.writeFileSync(listFile, sidecars.join("\n") + "\n");
+
+  await t.test("the filter keeps only date/slot sidecars", () => {
+    assert.deepEqual(
+      filterSidecarPaths([
+        "2026-11-13/06.json",
+        "2026-11-13/06.html",
+        "tape/2026-11-13/0935.json",
+        "stories.json",
+        "2026-11-13/19.json",
+        "index.html",
+      ]),
+      ["2026-11-13/06.json", "2026-11-13/19.json"],
+    );
+  });
+
+  await t.test("mutation: all-present passes", async () => {
+    const r = await checkSurvival({ listFile, publishDir });
+    assert.equal(r.listed, sidecars.length);
+    assert.deepEqual(r.missing, []);
+  });
+
+  await t.test("mutation: a present-file-missing fails the assert", async () => {
+    // The partial-restore mutation: one restored sidecar disappears from the
+    // publish tree. The assert must name exactly that file.
+    fs.rmSync(path.join(publishDir, "2026-11-13", "19.json"));
+    const r = await checkSurvival({ listFile, publishDir });
+    assert.deepEqual(r.missing, ["2026-11-13/19.json"]);
+  });
+
+  await t.test("a missing capture list throws, never passes", async () => {
+    await assert.rejects(() =>
+      checkSurvival({ listFile: path.join(dir, "absent.txt"), publishDir }),
+    );
+  });
+
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+/**
+ * A reusable workflow's job graph is NOT addressable from the caller: callers
+ * see only the calling job's `outputs` and `result`. Conversely a job inside the
+ * runner must not key on outputs that belong to a different workflow. This
+ * sweep enforces both directions: every `needs.<id>.` reference must name a job
+ * declared in the SAME file — which is exactly the "no workflow accidentally
+ * keys on another job's should-run" rule for the two-caller shape.
+ */
+test("golden: no workflow keys on a job it does not own", async (t) => {
+  for (const [name, file] of ALL_WORKFLOWS) {
+    await t.test(`${name}: every needs.<id> names a job in the same file`, () => {
+      const src = readWorkflow(file);
+      const jobsAt = src.indexOf("\njobs:");
+      assert.ok(jobsAt >= 0, `${name} must declare jobs`);
+      const jobIds = [...src.slice(jobsAt).matchAll(/^ {2}([\w-]+):$/gm)].map((m) => m[1]);
+      assert.ok(jobIds.length > 0);
+      for (const ref of src.matchAll(/needs\.([\w-]+)\./g)) {
+        assert.ok(
+          jobIds.includes(ref[1]),
+          `${name} references needs.${ref[1]}.* — a job may only key on its own workflow's jobs`,
+        );
+      }
+    });
+  }
 });
