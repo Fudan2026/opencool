@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-15T10:48:34.702Z",
+  "generatedAt": "2026-11-15T17:27:48.039Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-15/13",
+  "edition": "2026-11-15/19",
   "themes": [
     {
       "key": "ai",
@@ -13,9 +13,8 @@
       "boardChangePct": -1.78,
       "boardUp": 123,
       "boardDown": 624,
-      "articleHits": 4,
+      "articleHits": 3,
       "matchedAliases": [
-        "人工智能",
         "AI"
       ],
       "constituents": [
@@ -37,123 +36,62 @@
       ]
     },
     {
-      "key": "comms",
-      "name": "通信",
-      "boardCode": "BK0448",
-      "boardName": "通信设备",
-      "boardChangePct": -3.25,
-      "boardUp": 11,
-      "boardDown": 82,
-      "articleHits": 3,
-      "matchedAliases": [
-        "通信",
-        "卫星"
-      ],
-      "constituents": [
-        {
-          "symbol": "002281",
-          "name": "光迅科技",
-          "changePct": -8.48
-        },
-        {
-          "symbol": "001267",
-          "name": "汇绿生态",
-          "changePct": -7.56
-        },
-        {
-          "symbol": "003031",
-          "name": "中瓷电子",
-          "changePct": -6.13
-        }
-      ]
-    },
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": -2.43,
-      "boardUp": 0,
-      "boardDown": 13,
-      "articleHits": 3,
-      "matchedAliases": [
-        "黄金"
-      ],
-      "constituents": [
-        {
-          "symbol": "000426",
-          "name": "兴业银锡",
-          "changePct": -3.55
-        },
-        {
-          "symbol": "002716",
-          "name": "湖南白银",
-          "changePct": -3.37
-        },
-        {
-          "symbol": "600988",
-          "name": "赤峰黄金",
-          "changePct": -2.83
-        }
-      ]
-    },
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": -1.78,
-      "boardUp": 48,
-      "boardDown": 204,
-      "articleHits": 2,
-      "matchedAliases": [
-        "英伟达"
-      ],
-      "constituents": [
-        {
-          "symbol": "000665",
-          "name": "湖北广电",
-          "changePct": 10.1
-        },
-        {
-          "symbol": "002042",
-          "name": "华孚时尚",
-          "changePct": 10.03
-        },
-        {
-          "symbol": "000701",
-          "name": "厦门信达",
-          "changePct": -4.47
-        }
-      ]
-    },
-    {
-      "key": "semiconductor",
-      "name": "半导体",
-      "boardCode": "BK1036",
-      "boardName": "半导体",
-      "boardChangePct": -3.33,
-      "boardUp": 14,
-      "boardDown": 173,
+      "key": "consumer-elec",
+      "name": "消费电子",
+      "boardCode": "BK1037",
+      "boardName": "消费电子",
+      "boardChangePct": -3.07,
+      "boardUp": 8,
+      "boardDown": 91,
       "articleHits": 1,
       "matchedAliases": [
-        "芯片"
+        "手机"
       ],
       "constituents": [
         {
-          "symbol": "300373",
-          "name": "扬杰科技",
-          "changePct": -4.83
+          "symbol": "002655",
+          "name": "共达电声",
+          "changePct": -8.16
         },
         {
-          "symbol": "001309",
-          "name": "德明利",
+          "symbol": "002045",
+          "name": "国光电器",
+          "changePct": -6.59
+        },
+        {
+          "symbol": "002861",
+          "name": "瀛通通讯",
+          "changePct": -5.58
+        }
+      ]
+    },
+    {
+      "key": "travel",
+      "name": "旅游酒店",
+      "boardCode": "BK0485",
+      "boardName": "旅游酒店",
+      "boardChangePct": -1.16,
+      "boardUp": 8,
+      "boardDown": 31,
+      "articleHits": 1,
+      "matchedAliases": [
+        "酒店"
+      ],
+      "constituents": [
+        {
+          "symbol": "300756",
+          "name": "金马游乐",
           "changePct": -4.55
         },
         {
-          "symbol": "002409",
-          "name": "雅克科技",
-          "changePct": -4.46
+          "symbol": "300859",
+          "name": "西域旅游",
+          "changePct": -4.32
+        },
+        {
+          "symbol": "000610",
+          "name": "*ST西旅",
+          "changePct": 3.25
         }
       ]
     },
@@ -186,30 +124,58 @@
       ]
     },
     {
-      "key": "consumer-elec",
-      "name": "消费电子",
-      "boardCode": "BK1037",
-      "boardName": "消费电子",
-      "boardChangePct": -3.07,
-      "boardUp": 8,
-      "boardDown": 91,
+      "key": "semiconductor",
+      "name": "半导体",
+      "boardCode": "BK1036",
+      "boardName": "半导体",
+      "boardChangePct": -3.33,
+      "boardUp": 14,
+      "boardDown": 173,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "002655",
-          "name": "共达电声",
-          "changePct": -8.16
+          "symbol": "300373",
+          "name": "扬杰科技",
+          "changePct": -4.83
         },
         {
-          "symbol": "002045",
-          "name": "国光电器",
-          "changePct": -6.59
+          "symbol": "001309",
+          "name": "德明利",
+          "changePct": -4.55
         },
         {
-          "symbol": "002861",
-          "name": "瀛通通讯",
-          "changePct": -5.58
+          "symbol": "002409",
+          "name": "雅克科技",
+          "changePct": -4.46
+        }
+      ]
+    },
+    {
+      "key": "comms",
+      "name": "通信",
+      "boardCode": "BK0448",
+      "boardName": "通信设备",
+      "boardChangePct": -3.25,
+      "boardUp": 11,
+      "boardDown": 82,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "002281",
+          "name": "光迅科技",
+          "changePct": -8.48
+        },
+        {
+          "symbol": "001267",
+          "name": "汇绿生态",
+          "changePct": -7.56
+        },
+        {
+          "symbol": "003031",
+          "name": "中瓷电子",
+          "changePct": -6.13
         }
       ]
     },
@@ -294,6 +260,34 @@
           "symbol": "000006",
           "name": "深振业Ａ",
           "changePct": -6.63
+        }
+      ]
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": -2.43,
+      "boardUp": 0,
+      "boardDown": 13,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000426",
+          "name": "兴业银锡",
+          "changePct": -3.55
+        },
+        {
+          "symbol": "002716",
+          "name": "湖南白银",
+          "changePct": -3.37
+        },
+        {
+          "symbol": "600988",
+          "name": "赤峰黄金",
+          "changePct": -2.83
         }
       ]
     },
@@ -410,6 +404,34 @@
       ]
     },
     {
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": -1.78,
+      "boardUp": 48,
+      "boardDown": 204,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000665",
+          "name": "湖北广电",
+          "changePct": 10.1
+        },
+        {
+          "symbol": "002042",
+          "name": "华孚时尚",
+          "changePct": 10.03
+        },
+        {
+          "symbol": "000701",
+          "name": "厦门信达",
+          "changePct": -4.47
+        }
+      ]
+    },
+    {
       "key": "steel",
       "name": "钢铁",
       "boardCode": "BK1227",
@@ -462,34 +484,6 @@
           "symbol": "600919",
           "name": "江苏银行",
           "changePct": 2.24
-        }
-      ]
-    },
-    {
-      "key": "travel",
-      "name": "旅游酒店",
-      "boardCode": "BK0485",
-      "boardName": "旅游酒店",
-      "boardChangePct": -1.16,
-      "boardUp": 8,
-      "boardDown": 31,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "300756",
-          "name": "金马游乐",
-          "changePct": -4.55
-        },
-        {
-          "symbol": "300859",
-          "name": "西域旅游",
-          "changePct": -4.32
-        },
-        {
-          "symbol": "000610",
-          "name": "*ST西旅",
-          "changePct": 3.25
         }
       ]
     },

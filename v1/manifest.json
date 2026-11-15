@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-15T19:00:17+08:00",
+  "generatedAt": "2026-11-16T01:29:10+08:00",
   "timezone": "Asia/Shanghai",
   "endpoints": [
     {
@@ -10,6 +10,13 @@
       "version": 1,
       "available": true,
       "description": "This document: endpoints, snapshot index, coverage summary, license and the deprecation policy."
+    },
+    {
+      "id": "asof",
+      "path": "/v1/asof/<YYYY-MM-DD>.json",
+      "version": 1,
+      "available": true,
+      "description": "Every tape snapshot for one day, in slot order. Each slot and each section carries asOf (market clock) and observedAt (our fetch clock); absent slots and sections are named in gaps[] with a code."
     },
     {
       "id": "coverage",
@@ -44,15 +51,22 @@
     "launchDate": "2026-11-16",
     "started": false,
     "expectedSlotsPerDay": 10,
-    "firstDate": null,
-    "lastDate": null,
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-16",
     "totalSlots": 0,
     "totalRevisionFiles": 0,
-    "days": []
+    "days": [
+      {
+        "date": "2026-11-16",
+        "slots": 0,
+        "revisions": 0,
+        "complete": false
+      }
+    ]
   },
   "coverage": {
-    "days": 0,
-    "tradingDays": 0,
+    "days": 1,
+    "tradingDays": 1,
     "daysWithGaps": 0,
     "expectedSlots": 0,
     "capturedSlots": 0,

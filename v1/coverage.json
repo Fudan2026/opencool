@@ -1,30 +1,54 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-15T19:00:17+08:00",
+  "generatedAt": "2026-11-16T01:29:10+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
     "started": false,
     "expectedSlotsPerDay": 10,
-    "firstDate": null,
-    "lastDate": null,
-    "days": 0,
-    "tradingDays": 0,
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-16",
+    "days": 1,
+    "tradingDays": 1,
     "snapshots": 0,
     "revisionFiles": 0
   },
-  "days": [],
+  "days": [
+    {
+      "date": "2026-11-16",
+      "tradingDay": true,
+      "beforeLaunch": false,
+      "expectedSlots": 0,
+      "capturedSlots": 0,
+      "missingSlots": [],
+      "pendingSlots": [
+        "09:35",
+        "10:05",
+        "10:35",
+        "11:05",
+        "11:35",
+        "13:05",
+        "13:35",
+        "14:05",
+        "14:35",
+        "15:05"
+      ],
+      "revisions": 0,
+      "sections": {},
+      "gaps": []
+    }
+  ],
   "stories": {
     "available": true,
     "total": 2000,
     "withFirstSeenAt": 2000,
     "withoutFirstSeenAt": 0,
     "firstSeenCoveragePct": 100,
-    "editions": 72,
-    "sightings": 2731,
-    "storiesWithRevisions": 23,
-    "updatedAt": "2026-11-15T18:49:41+08:00"
+    "editions": 73,
+    "sightings": 2800,
+    "storiesWithRevisions": 25,
+    "updatedAt": "2026-11-16T01:28:59+08:00"
   },
   "horizons": [
     {

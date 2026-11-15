@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-15T10:48:11.802Z",
+  "generatedAt": "2026-11-15T17:27:31.557Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 21,
+  "editions": 22,
   "avgSentiment": -3.8,
   "sentimentCurve": [
     {
@@ -110,56 +110,61 @@
       "date": "2026-11-15",
       "hour": "13",
       "score": -3
+    },
+    {
+      "date": "2026-11-15",
+      "hour": "19",
+      "score": -4
     }
   ],
   "sectorAvg": [
     {
       "key": "china-ashare",
       "label": "A 股蓝筹",
-      "avg": 72.5,
-      "editions": 2
+      "avg": 80.3,
+      "editions": 3
     },
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -52.3,
-      "editions": 3
+      "avg": -63,
+      "editions": 4
     },
     {
       "key": "china-equity",
       "label": "中概港股",
-      "avg": 37.4,
-      "editions": 5
+      "avg": 33,
+      "editions": 6
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -20.3,
-      "editions": 21
-    },
-    {
-      "key": "macro",
-      "label": "宏观指数",
-      "avg": 20.1,
-      "editions": 7
+      "avg": -20.1,
+      "editions": 22
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -19,
-      "editions": 21
+      "avg": -19.9,
+      "editions": 22
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -14.7,
-      "editions": 21
+      "avg": -17,
+      "editions": 22
+    },
+    {
+      "key": "macro",
+      "label": "宏观指数",
+      "avg": 5.1,
+      "editions": 8
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -1.8,
-      "editions": 21
+      "avg": -1.5,
+      "editions": 22
     }
   ],
   "topEvents": [
@@ -168,21 +173,21 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Trump says FBI investigating Nvidia boss's affair with alleged Chinese spy",
       "url": "https://www.bbc.co.uk/news/articles/cqg7x7dpvym8o?at_medium=RSS&at_campaign=rss",
-      "count": 15
+      "count": 16
     },
     {
       "symbol": "NVDA",
@@ -203,6 +208,13 @@
       "displayName": "Nvidia",
       "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
       "url": "https://www.bbc.co.uk/news/articles/c64g1gzy2vdzo?at_medium=RSS&at_campaign=rss",
+      "count": 15
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Nvidia hires major US law firm to investigate alleged Chinese spy affair",
+      "url": "https://www.bbc.co.uk/news/articles/ck1wvwwl3x0go?at_medium=RSS&at_campaign=rss",
       "count": 14
     },
     {
@@ -210,13 +222,6 @@
       "displayName": "美元 / 人民币",
       "title": "Anthropic斥资34亿美元接手发电设备",
       "url": "https://www.ftchinese.com/story/001111311",
-      "count": 13
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Nvidia hires major US law firm to investigate alleged Chinese spy affair",
-      "url": "https://www.bbc.co.uk/news/articles/ck1wvwwl3x0go?at_medium=RSS&at_campaign=rss",
       "count": 13
     },
     {
@@ -229,9 +234,9 @@
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
-      "title": "Nvidia opens investigation after report CEO Jensen Huang was target of foreign intelligence",
-      "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation",
-      "count": 9
+      "title": "Who could replace Jensen Huang as Nvidia's chief executive?",
+      "url": "https://www.bbc.co.uk/news/articles/cqgm37dv20e8o?at_medium=RSS&at_campaign=rss",
+      "count": 10
     }
   ],
   "keywords": [
@@ -360,42 +365,42 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 111
+      "totalHits": 119
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 93
+      "totalHits": 100
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 64
+      "totalHits": 67
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 55
+      "totalHits": 59
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 45
+      "totalHits": 46
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 45
-    },
-    {
-      "key": "defense",
-      "name": "军工",
-      "totalHits": 30
+      "totalHits": 46
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 30
+      "totalHits": 34
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "totalHits": 31
     },
     {
       "key": "brokerage",
@@ -408,31 +413,31 @@
       "totalHits": 20
     },
     {
+      "key": "pharma",
+      "name": "创新药",
+      "totalHits": 16
+    },
+    {
       "key": "comms",
       "name": "通信",
       "totalHits": 15
-    },
-    {
-      "key": "infra",
-      "name": "基建",
-      "totalHits": 12
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.41,
-      "editions": 20
+      "avgChangePct": -0.42,
+      "editions": 21
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.2,
-      "editions": 20
+      "avgChangePct": -1.24,
+      "editions": 21
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.65,
-      "editions": 19
+      "avgChangePct": -1.73,
+      "editions": 20
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
