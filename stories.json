@@ -3,8 +3,1185 @@
   "timezone": "Asia/Shanghai",
   "retentionDays": 30,
   "maxStories": 2000,
-  "updatedAt": "2026-11-16T01:28:59+08:00",
+  "updatedAt": "2026-11-16T06:09:18+08:00",
   "stories": [
+    {
+      "id": "st_001fa13e4a",
+      "cluster": "title:bank of america names 5 bullish stocks amid market concerns",
+      "title": "Bank of America Names 5 Bullish Stocks Amid Market Concerns",
+      "url": "https://beincrypto.com/bank-of-america-safe-haven-stocks/?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-15T19:03:48.000Z",
+      "publishLagMinutes": 183.9,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_0632ccc245",
+      "cluster": "title:roughed up bond traders look to fedspeak minutes for next move",
+      "title": "Roughed-Up Bond Traders Look to Fedspeak, Minutes for Next Move",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-15/roughed-up-bond-traders-look-to-fedspeak-minutes-for-next-move",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "bloomberg-markets",
+      "publishedAt": "2026-11-15T20:00:00.000Z",
+      "publishLagMinutes": 127.7,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bloomberg-markets"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bloomberg-markets",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bloomberg-markets"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_0c57baac7e",
+      "cluster": "title:israeli drone filmed flying low outside homes in southern lebanon",
+      "title": "Israeli drone filmed flying low outside homes in southern Lebanon",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/15/israeli-drone-filmed-flying-low-outside-homes-in-southern-lebanon?traffic_source=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "aljazeera",
+      "publishedAt": "2026-11-15T19:02:21.000Z",
+      "publishLagMinutes": 185.4,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "aljazeera"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "aljazeera"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_0e714c6ec3",
+      "cluster": "title:budget airlines are going upscale with first class seats and faster wifi",
+      "title": "Budget airlines are going upscale with first-class seats and faster wifi",
+      "url": "https://www.marketwatch.com/story/budget-airlines-are-going-upscale-with-first-class-seats-and-faster-wifi-999868ab?mod=mw_rss_topstories",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "marketwatch-top",
+      "publishedAt": "2026-11-15T21:31:00.000Z",
+      "publishLagMinutes": 36.7,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "marketwatch-top"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "marketwatch-top",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "marketwatch-top"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_0f933a74ee",
+      "cluster": "entity:nvidia",
+      "title": "Jensen Huang discusses comeback as Nvidia CEO with allies",
+      "url": "https://www.ft.com/content/45383d86-33c4-4d99-86e5-5e058d3567c1?syn-25a6b1a6=1",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "ft-companies",
+      "publishedAt": "2026-11-13T08:33:58.000Z",
+      "publishLagMinutes": 3693.8,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "tech-ai",
+      "lane": "external",
+      "domestic": false,
+      "entities": [
+        "nvidia"
+      ],
+      "sources": [
+        "ft-companies",
+        "solidot",
+        "yahoo-finance"
+      ],
+      "sightings": [
+        {
+          "sourceId": "solidot",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "英伟达员工请愿让黄仁勋复职",
+          "url": "https://www.solidot.org/story?sid=85878",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-13T08:33:58.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Nvidia, Anthropic, Walmart, Home Depot, the Fed, Home Sales, and More to Watch This Week",
+          "url": "https://finance.yahoo.com/m/f8d75492-d543-31f8-a9e4-525c6a832328/nvidia%2C-anthropic%2C-walmart%2C.html?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T19:00:00.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Nvidia CEO Jensen Huang Resigns as Stock Tanks. Here Are the Next Steps for Investors.",
+          "url": "https://www.fool.com/investing/2026/11/15/nvidia-ceo-jensen-huang-resigns-as-stock-tanks-here-are-the-next-steps-for-investors/?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T21:20:02.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": null,
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": true,
+        "coFirstSourceIds": [
+          "ft-companies",
+          "solidot",
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_1cd3f5885e",
+      "cluster": "title:prince harry tells ukrainians they are going to win war on surprise trip to lviv",
+      "title": "Prince Harry tells Ukrainians they are ‘going to win war’ on surprise trip to Lviv",
+      "url": "https://www.theguardian.com/uk-news/2026/nov/15/prince-harry-ukraine-war-surprise-trip-invictus-games",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "guardian-world",
+      "publishedAt": "2026-11-15T22:00:24.000Z",
+      "publishLagMinutes": 7.3,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "guardian-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "guardian-world",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "guardian-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_1d28be5787",
+      "cluster": "title:africa cdc says ebola outbreak in dr congo still not under control",
+      "title": "Africa CDC says Ebola outbreak in DR Congo ‘still not under control’",
+      "url": "https://www.aljazeera.com/news/2026/11/15/africa-cdc-says-ebola-outbreak-in-dr-congo-still-not-under-control?traffic_source=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "aljazeera",
+      "publishedAt": "2026-11-15T20:07:06.000Z",
+      "publishLagMinutes": 120.6,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "aljazeera"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "aljazeera"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_2b872484cb",
+      "cluster": "title:this dividend king yields 5 times the s p 500 is it a buy now",
+      "title": "This Dividend King Yields 5 Times the S&P 500. Is It a Buy Now?",
+      "url": "https://www.fool.com/investing/2026/11/15/this-dividend-king-yields-5-times-the-s-and-p-500-is-it-a-buy-now/?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-15T18:50:02.000Z",
+      "publishLagMinutes": 197.7,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_2d9f136d93",
+      "cluster": "title:clothing factories shut in bangladesh as workers strike over pay",
+      "title": "Clothing factories shut in Bangladesh as workers strike over pay",
+      "url": "https://www.bbc.co.uk/news/articles/cx5y1pzr9604o?at_medium=RSS&at_campaign=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "bbc-world",
+      "publishedAt": "2026-11-15T16:15:20.000Z",
+      "publishLagMinutes": 352.4,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bbc-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bbc-world",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bbc-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_32cde8222c",
+      "cluster": "entity:amazon",
+      "title": "Photos: Pope Leo visits Peru’s Amazon and Andean regions during 12-day tour",
+      "url": "https://www.aljazeera.com/gallery/2026/11/15/photos-pope-leo-visits-perus-amazon-and-andean-regions-during-12-day-tour?traffic_source=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "aljazeera",
+      "publishedAt": "2026-11-15T18:38:11.000Z",
+      "publishLagMinutes": 209.5,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [
+        "amazon"
+      ],
+      "sources": [
+        "aljazeera",
+        "bbc-world",
+        "cls-telegraph"
+      ],
+      "sightings": [
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Pope Leo rides in helicopter cockpit during Peru trip",
+          "url": "https://www.bbc.co.uk/news/videos/c6pw4rl00lrjo?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T18:38:11.000Z"
+        },
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "美“火神”火箭未能将亚马逊卫星送入预定轨道",
+          "url": "https://www.cls.cn/detail/2534803",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T21:20:15.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": null,
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": true,
+        "coFirstSourceIds": [
+          "aljazeera",
+          "bbc-world",
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_3cb8703d90",
+      "cluster": "title:too many chips in one basket",
+      "title": "Too Many Chips in One Basket?",
+      "url": "https://www.nytimes.com/2026/11/15/world/nvidia-jensen-huang-ai-chips.html",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "nyt-world",
+      "publishedAt": "2026-11-15T20:48:30.000Z",
+      "publishLagMinutes": 79.2,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "tech-ai",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "nyt-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "nyt-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_422a08094e",
+      "cluster": "entity:eu",
+      "title": "爱尔兰提出欧盟碳市场改革折中方案 以推动分歧重重的谈判",
+      "url": "https://www.cls.cn/detail/2534802",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T21:06:22.000Z",
+      "publishLagMinutes": 61.4,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [
+        "eu"
+      ],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_525279f6f9",
+      "cluster": "title:christian priest says us denied him a visa for being palestinian",
+      "title": "Christian priest says US denied him a visa for being Palestinian",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/15/christian-priest-says-us-denied-him-a-visa-for-being-palestinian?traffic_source=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "aljazeera",
+      "publishedAt": "2026-11-15T18:07:32.000Z",
+      "publishLagMinutes": 240.2,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "aljazeera"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "aljazeera"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_61b76e1a1d",
+      "cluster": "title:yemen s houthis unilaterally release 600 war detainees",
+      "title": "Yemen’s Houthis unilaterally release 600 war detainees",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/15/yemens-houthis-unilaterally-release-600-war-detainees?traffic_source=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "aljazeera",
+      "publishedAt": "2026-11-15T21:19:08.000Z",
+      "publishLagMinutes": 48.6,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "aljazeera"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "aljazeera"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_69ab66acb9",
+      "cluster": "title:据沙特方面报道 也门亚丁以西传出两声爆炸",
+      "title": "财联社11月16日电，据沙特方面报道，也门亚丁以西传出两声爆炸。",
+      "url": "https://www.cls.cn/detail/2534793",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T17:49:39.000Z",
+      "publishLagMinutes": 258.1,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_6a310e9d9a",
+      "cluster": "title:也门胡塞武装称用两枚弹道导弹袭击了沙特利雅得的哈立德国王机场和金融中心",
+      "title": "财联社11月16日电，也门胡塞武装称用两枚弹道导弹袭击了沙特利雅得的哈立德国王机场和金融中心。",
+      "url": "https://www.cls.cn/detail/2534795",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T18:35:27.000Z",
+      "publishLagMinutes": 212.3,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_6bc67217b6",
+      "cluster": "title:morocco becomes first arab nation in fifa s top five men s rankings",
+      "title": "Morocco becomes first Arab nation in FIFA’s top five men’s rankings",
+      "url": "https://www.aljazeera.com/sports/2026/11/15/morocco-becomes-first-arab-nation-in-fifas-top-five-mens-rankings?traffic_source=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "aljazeera",
+      "publishedAt": "2026-11-15T17:33:03.000Z",
+      "publishLagMinutes": 274.7,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "aljazeera"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "aljazeera"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_7214816315",
+      "cluster": "title:美能源勘探巨头diamondback将以约50亿美元从double eagle收购资产组合",
+      "title": "财联社11月16日电，美能源勘探巨头Diamondback将以约50亿美元从Double Eagle收购资产组合。",
+      "url": "https://www.cls.cn/detail/2534794",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T18:33:56.000Z",
+      "publishLagMinutes": 213.8,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "filings",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_74a83c03d9",
+      "cluster": "title:saudi backed forces retreat in yemen leaving key strait in houthi control",
+      "title": "Saudi-Backed Forces Retreat in Yemen, Leaving Key Strait in Houthi Control",
+      "url": "https://www.nytimes.com/2026/11/15/world/middleeast/saudi-houthis-yemen-red-sea.html",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "nyt-world",
+      "publishedAt": "2026-11-15T21:26:18.000Z",
+      "publishLagMinutes": 41.4,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "nyt-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "nyt-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_779479d258",
+      "cluster": "title:pictet adds japan stocks in diversification push after midterms",
+      "title": "Pictet Adds Japan Stocks in Diversification Push After Midterms",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-15/pictet-adds-japan-stocks-in-diversification-push-after-midterms",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "bloomberg-markets",
+      "publishedAt": "2026-11-15T21:00:00.000Z",
+      "publishLagMinutes": 67.7,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bloomberg-markets"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bloomberg-markets",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bloomberg-markets"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_861bde05c1",
+      "cluster": "entity:tesla",
+      "title": "Zelensky urges US and Musk to lift Starlink restrictions and be on 'right side of history'",
+      "url": "https://www.bbc.co.uk/news/articles/c6m25zg88k45o?at_medium=RSS&at_campaign=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "bbc-world",
+      "publishedAt": "2026-11-15T19:32:39.000Z",
+      "publishLagMinutes": 155.1,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [
+        "tesla",
+        "zelensky"
+      ],
+      "sources": [
+        "bbc-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bbc-world",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bbc-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_8a78aad1dc",
+      "cluster": "entity:tesla",
+      "title": "财联社11月16日电，据报道，三星将在美国为SpaceX生产卫星芯片。",
+      "url": "https://www.cls.cn/detail/2534801",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T20:53:51.000Z",
+      "publishLagMinutes": 73.9,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "tech-ai",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [
+        "tesla",
+        "samsung"
+      ],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_a752b24870",
+      "cluster": "title:据报道 白宫或将对五角大楼前首席战略家提起刑事诉讼",
+      "title": "财联社11月16日电，据报道，白宫或将对五角大楼前首席战略家提起刑事诉讼。",
+      "url": "https://www.cls.cn/detail/2534804",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T21:47:02.000Z",
+      "publishLagMinutes": 20.7,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_b99c17b6d1",
+      "cluster": "title:diamondback in talks to buy double eagle for about 5 billion",
+      "title": "Diamondback in Talks to Buy Double Eagle for About $5 Billion",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-15/diamondback-in-talks-to-buy-double-eagle-for-about-5-billion",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "bloomberg-markets",
+      "publishedAt": "2026-11-15T18:27:27.000Z",
+      "publishLagMinutes": 220.3,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bloomberg-markets",
+        "ft-companies"
+      ],
+      "sightings": [
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Diamondback nears $5bn deal to expand drilling in oil-rich Permian Basin",
+          "url": "https://www.ft.com/content/a56fc76f-af32-45b2-8ae1-d5e211cb9643?syn-25a6b1a6=1",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T18:27:27.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": null,
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": true,
+        "coFirstSourceIds": [
+          "bloomberg-markets",
+          "ft-companies"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_bad9695653",
+      "cluster": "entity:fed",
+      "title": "财联社11月16日电，堪萨斯城联储主席称，若撇开能源价格，通胀仍将运行在3%。美联储在通胀方面还有一些工作要做。",
+      "url": "https://www.cls.cn/detail/2534796",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T18:46:03.000Z",
+      "publishLagMinutes": 201.7,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [
+        "fed"
+      ],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_bea36e8e97",
+      "cluster": "title:yemeni government forces redeploy from bab al mandeb to defend aden",
+      "title": "Yemeni government forces redeploy from Bab al-Mandeb to defend Aden",
+      "url": "https://www.aljazeera.com/news/2026/11/15/yemeni-government-forces-redeploy-from-bab-al-mandeb-to-defend-aden?traffic_source=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "aljazeera",
+      "publishedAt": "2026-11-15T17:33:00.000Z",
+      "publishLagMinutes": 274.7,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "aljazeera"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "aljazeera"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_c85681aed0",
+      "cluster": "title:3 magnificent stocks to buy before 2027 and hold for a decade",
+      "title": "3 Magnificent Stocks to Buy Before 2027 and Hold for a Decade",
+      "url": "https://www.fool.com/investing/2026/11/15/3-magnificent-stocks-to-buy-before-2027-and-hold-for-a-decade/?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-15T17:20:02.000Z",
+      "publishLagMinutes": 287.7,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "3 Beaten-Down Stocks Under $10 to Buy in November",
+          "url": "https://www.fool.com/investing/2026/11/15/3-stocks-under-10-to-buy-in-november/?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T17:20:02.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_ce974c5c57",
+      "cluster": "entity:ukraine",
+      "title": "Prince Harry in Ukraine meeting Invictus 2027 hopefuls",
+      "url": "https://www.aljazeera.com/news/2026/11/15/prince-harry-in-ukraine-meeting-invictus-2027-hopefuls?traffic_source=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "aljazeera",
+      "publishedAt": "2026-11-15T18:31:52.000Z",
+      "publishLagMinutes": 215.9,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [
+        "ukraine"
+      ],
+      "sources": [
+        "aljazeera"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "aljazeera"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_d464cc00ab",
+      "cluster": "title:法国周末示威活动中超过400人被拘捕",
+      "title": "法国周末示威活动中超过400人被拘捕",
+      "url": "https://www.cls.cn/detail/2534797",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T18:56:06.000Z",
+      "publishLagMinutes": 191.6,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_d69d5e3ba7",
+      "cluster": "entity:fed",
+      "title": "CME“美联储观察”：美联储12月加息25个基点的概率为95%",
+      "url": "https://www.cls.cn/detail/2534806",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T22:05:16.000Z",
+      "publishLagMinutes": 2.5,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [
+        "fed"
+      ],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_e2316b454e",
+      "cluster": "title:堪萨斯城联储主席表示 当前利率没有任何限制性",
+      "title": "财联社11月16日电，堪萨斯城联储主席表示，当前利率没有任何限制性。",
+      "url": "https://www.cls.cn/detail/2534799",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T19:47:35.000Z",
+      "publishLagMinutes": 140.1,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_e5bae14201",
+      "cluster": "title:ronaldinho makes comeback in ravenna win",
+      "title": "Ronaldinho makes comeback in Ravenna win",
+      "url": "https://www.bbc.co.uk/sport/football/articles/ckregz4g823xo?at_medium=RSS&at_campaign=rss",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "bbc-world",
+      "publishedAt": "2026-11-15T19:31:48.000Z",
+      "publishLagMinutes": 155.9,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bbc-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bbc-world",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bbc-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_f58e9cf2c4",
+      "cluster": "title:投行phillip securities将palantir评级上调至买入 目标价248美元",
+      "title": "财联社11月16日电，投行Phillip Securities将Palantir评级上调至买入，目标价248美元。",
+      "url": "https://www.cls.cn/detail/2534798",
+      "firstSeenAt": "2026-11-16T06:07:43+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-15T19:14:35.000Z",
+      "publishLagMinutes": 173.1,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "opinion",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T06:07:43+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
     {
       "id": "st_028b5a305b",
       "cluster": "title:flames engulf syrian refugee camp in eastern lebanon",
@@ -393,8 +1570,8 @@
       "firstSourceId": "cls-telegraph",
       "publishedAt": "2026-11-15T15:21:47.000Z",
       "publishLagMinutes": 125.3,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "zh",
       "domestic": false,
@@ -403,7 +1580,9 @@
       ],
       "sources": [
         "cls-telegraph",
-        "wallstreetcn-live"
+        "wallstreetcn-live",
+        "aljazeera",
+        "guardian-world"
       ],
       "sightings": [
         {
@@ -413,6 +1592,30 @@
           "url": "https://wallstreetcn.com/livenews/3200216",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T15:21:47.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Estonia to close border crossings with Russia after attack on drone maker",
+          "url": "https://www.aljazeera.com/news/2026/11/15/estonia-to-close-border-crossings-with-russia-after-attack-on-drone-maker?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T18:07:02.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Estonia to close border crossings with Russia after alleged arson attack",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/15/estonia-to-close-border-crossings-with-russia-after-alleged-arson-attack?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T20:31:18.000Z"
+        },
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Estonia to close all border crossings with Russia after attack on drone maker",
+          "url": "https://www.theguardian.com/world/2026/nov/15/estonia-to-close-all-border-crossings-with-russia-after-attack-on-drone-maker",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T18:23:12.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -424,9 +1627,9 @@
           "cls-telegraph",
           "wallstreetcn-live"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-16T06:07:43+08:00",
+        "leadMinutes": 280.7
       }
     },
     {
@@ -1358,8 +2561,8 @@
       "firstSourceId": "bloomberg-markets",
       "publishedAt": "2026-11-15T13:28:26.000Z",
       "publishLagMinutes": 238.6,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "global-markets",
       "lane": "external",
       "domestic": false,
@@ -1367,7 +2570,16 @@
       "sources": [
         "bloomberg-markets"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Nvidia Fallout, Next Mega IPO, FAA Router Failure",
+          "url": "https://www.bloomberg.com/news/videos/2026-11-15/bloomberg-this-weekend-11-15-2026-video",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T16:53:51.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "bloomberg-markets",
@@ -1655,10 +2867,10 @@
       "firstSeenAt": "2026-11-16T01:27:03+08:00",
       "firstEdition": "2026-11-15/19",
       "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-15T16:15:05.000Z",
-      "publishLagMinutes": 72,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "publishedAt": "2026-11-15T15:50:02.000Z",
+      "publishLagMinutes": 97,
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "global-markets",
       "lane": "external",
       "domestic": false,
@@ -1674,6 +2886,38 @@
           "url": "https://www.fool.com/coverage/etfs/2026/11/15/which-real-estate-etf-is-the-better-buy-state-street-s-reit-fund-rwr-or-global-fund-rwo/?.tsrc=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T16:15:05.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T01:27:03+08:00",
+          "title": "Which Bond ETF Is the Better Buy: Vanguard’s Total Bond Market BND or iShares’ Corporate IGIB?",
+          "url": "https://www.fool.com/coverage/etfs/2026/11/15/which-bond-etf-is-the-better-buy-vanguard-s-total-bond-market-bnd-or-ishares-corporate-igib/?.tsrc=rss",
+          "edition": "2026-11-15/19",
+          "publishedAt": "2026-11-15T15:50:02.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Which Global Real Estate ETF Is the Better Buy: State Street’s RWO or Vanguard’s International VNQI?",
+          "url": "https://www.fool.com/coverage/etfs/2026/11/15/which-global-real-estate-etf-is-the-better-buy-state-street-s-rwo-or-vanguard-s-international-vnqi/?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T19:52:19.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Which Healthcare ETF Is the Better Buy: State Street’s Pharma Fund XPH or iShares’ Biotech Fund IBB?",
+          "url": "https://www.fool.com/coverage/etfs/2026/11/15/which-healthcare-etf-is-the-better-buy-state-street-s-pharma-fund-xph-or-ishares-biotech-fund-ibb/?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T18:39:54.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Which Healthcare ETF Is the Better Buy: VanEck’s Pharma Fund PPH or iShares’ Biotech Fund IBB?",
+          "url": "https://www.fool.com/coverage/etfs/2026/11/15/which-healthcare-etf-is-the-better-buy-vaneck-s-pharma-fund-pph-or-ishares-biotech-fund-ibb/?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T19:36:33.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -2068,16 +3312,26 @@
       "firstSourceId": "yahoo-finance",
       "publishedAt": "2026-11-15T11:15:00.000Z",
       "publishLagMinutes": 372.1,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "global-markets",
       "lane": "external",
       "domestic": false,
       "entities": [],
       "sources": [
-        "yahoo-finance"
+        "yahoo-finance",
+        "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "The hidden costs of the US AI boom",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/15/the-hidden-costs-of-the-us-ai-boom?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T17:24:59.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "yahoo-finance",
@@ -2086,9 +3340,9 @@
         "coFirstSourceIds": [
           "yahoo-finance"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-16T06:07:43+08:00",
+        "leadMinutes": 280.7
       }
     },
     {
@@ -2101,8 +3355,8 @@
       "firstSourceId": "cnbc-topnews",
       "publishedAt": "2026-11-15T14:24:18.000Z",
       "publishLagMinutes": 182.8,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
       "domestic": false,
@@ -2110,8 +3364,26 @@
       "sources": [
         "cnbc-topnews"
       ],
-      "sightings": [],
-      "headlineRevisions": [],
+      "sightings": [
+        {
+          "sourceId": "cnbc-topnews",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "'We slept here': Flight delays linger but schedule is back on track for Monday",
+          "url": "https://www.cnbc.com/2026/11/15/flight-delays-ground-faa-stop.html",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T21:48:16.000Z"
+        }
+      ],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-16T06:07:43+08:00",
+          "sourceId": "cnbc-topnews",
+          "edition": "2026-11-16/06",
+          "url": "https://www.cnbc.com/2026/11/15/flight-delays-ground-faa-stop.html",
+          "from": "'We slept here.' Flight delays linger as airlines scramble to recover from ground stop",
+          "to": "'We slept here': Flight delays linger but schedule is back on track for Monday"
+        }
+      ],
       "firstMover": {
         "sourceId": "cnbc-topnews",
         "observedAt": "2026-11-16T01:27:03+08:00",
@@ -4869,15 +6141,16 @@
       "firstSourceId": "aljazeera",
       "publishedAt": "2026-11-15T08:15:04.000Z",
       "publishLagMinutes": 152.6,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
       "domestic": false,
       "entities": [],
       "sources": [
         "aljazeera",
-        "bbc-world"
+        "bbc-world",
+        "nyt-world"
       ],
       "sightings": [
         {
@@ -4887,6 +6160,22 @@
           "url": "https://www.bbc.co.uk/news/articles/c3rrg9xgqlwpo?at_medium=RSS&at_campaign=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T11:06:32.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Jordan sentences three men to death over deadly church attack in Karak",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/15/jordan-sentences-three-men-to-death-over-deadly-church-attack-in-karak?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T20:12:38.000Z"
+        },
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Jordan Sentences 3 to Death Over Greek Orthodox Church Attack",
+          "url": "https://www.nytimes.com/2026/11/15/world/middleeast/jordan-church-attack-death-sentence.html",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T21:33:59.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -6628,8 +7917,8 @@
       "firstSourceId": "bloomberg-markets",
       "publishedAt": "2026-11-12T14:03:11.000Z",
       "publishLagMinutes": 3458,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
       "domestic": false,
@@ -6647,7 +7936,8 @@
         "bbc-world",
         "ft-companies",
         "marketwatch-top",
-        "wallstreetcn-live"
+        "wallstreetcn-live",
+        "aljazeera"
       ],
       "sightings": [
         {
@@ -6849,6 +8139,14 @@
           "url": "https://www.axios.com/2026/11/15/nvidia-stocks-401k-retirement-accounts#utm_source=yahoo_finance&utm_medium=partner&utm_campaign=subs-partner-yahoo-finance-AI?.tsrc=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T12:30:10.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "US Treasury chief calls for outsider to lead embattled tech firm Nvidia",
+          "url": "https://www.aljazeera.com/news/2026/11/15/us-treasury-chief-calls-for-outsider-to-lead-embattled-tech-firm-nvidia?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T21:47:47.000Z"
         }
       ],
       "headlineRevisions": [
@@ -6859,6 +8157,14 @@
           "url": "https://www.solidot.org/story?sid=85878",
           "from": "黄仁勋辞职",
           "to": "英伟达员工请愿让黄仁勋复职"
+        },
+        {
+          "at": "2026-11-16T06:07:43+08:00",
+          "sourceId": "yahoo-finance",
+          "edition": "2026-11-16/06",
+          "url": "https://finance.yahoo.com/m/53e50dc8-f137-3f6c-bfd6-912334fef9f1/dow-jones-futures-loom-for.html?.tsrc=rss",
+          "from": "Dow Jones Futures Loom For Shaky Market Rally As Bitcoin Dives; Nvidia Earnings, Anthropic IPO Ahead",
+          "to": "Dow Jones Futures Loom For Shaky Market Rally; Jensen Huang Mulls Nvidia Return?"
         }
       ],
       "firstMover": {
@@ -6986,8 +8292,8 @@
       "firstSourceId": "cls-telegraph",
       "publishedAt": "2026-11-14T09:19:43.000Z",
       "publishLagMinutes": 861.5,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "zh",
       "domestic": true,
@@ -7106,6 +8412,22 @@
           "url": "https://www.nytimes.com/2026/11/15/world/middleeast/bahrain-iran-israel.html",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T15:55:09.000Z"
+        },
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "财联社11月16日电，伊朗海军称一艘油轮在霍尔木兹海峡以东触雷后起火。",
+          "url": "https://www.cls.cn/detail/2534800",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T20:24:10.000Z"
+        },
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Iran launches drone attacks against US military base in Bahrain",
+          "url": "https://www.theguardian.com/world/2026/nov/15/iran-launches-drone-attacks-against-us-military-base-in-bahrain",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T18:03:56.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -7519,8 +8841,8 @@
       "firstSourceId": "aljazeera",
       "publishedAt": "2026-11-14T15:57:22.000Z",
       "publishLagMinutes": 463.8,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
       "domestic": false,
@@ -7546,6 +8868,14 @@
           "url": "https://www.aljazeera.com/features/2026/11/15/gaza-families-bury-bodies-of-loved-ones-trapped-for-years-under-rubble?traffic_source=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T13:45:02.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Palestinians reclaim Gaza’s shores with a swim for hope",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/15/palestinians-reclaim-gazas-shores-with-a-swim-for-hope?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T20:50:15.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -8171,8 +9501,8 @@
       "firstSourceId": "wallstreetcn",
       "publishedAt": "2026-11-14T11:47:50.000Z",
       "publishLagMinutes": 713.3,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "tech-ai",
       "lane": "zh",
       "domestic": false,
@@ -8182,7 +9512,8 @@
       "sources": [
         "wallstreetcn",
         "bloomberg-markets",
-        "ft-companies"
+        "ft-companies",
+        "cnbc-topnews"
       ],
       "sightings": [
         {
@@ -8200,6 +9531,22 @@
           "url": "https://www.ft.com/content/bc8ac781-9837-46de-b7ed-958886ba43af?syn-25a6b1a6=1",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T11:40:44.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Anthropic’s IPO Makes Dario Amodei the New Face of the AI Boom",
+          "url": "https://www.bloomberg.com/news/features/2026-11-15/anthropic-s-ipo-makes-dario-amodei-the-new-face-of-the-ai-boom",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T19:00:20.000Z"
+        },
+        {
+          "sourceId": "cnbc-topnews",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Meet the seven co-founders of Anthropic",
+          "url": "https://www.cnbc.com/2026/11/14/meet-the-seven-co-founders-of-anthropic.html",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-14T12:15:01.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -8326,8 +9673,8 @@
       "firstSourceId": "aljazeera",
       "publishedAt": "2026-11-14T12:48:18.000Z",
       "publishLagMinutes": 652.9,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
       "domestic": false,
@@ -8337,7 +9684,8 @@
       "sources": [
         "aljazeera",
         "cls-telegraph",
-        "wallstreetcn-live"
+        "wallstreetcn-live",
+        "guardian-world"
       ],
       "sightings": [
         {
@@ -8387,6 +9735,22 @@
           "url": "https://www.aljazeera.com/news/2026/11/15/can-netanyahu-and-eisenkot-form-a-unity-government-in-israel?traffic_source=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T14:02:08.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Who can force Israel to implement Gaza ceasefire deal?",
+          "url": "https://www.aljazeera.com/video/inside-story/2026/11/15/who-can-force-israel-to-implement-gaza-ceasefire-deal?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T20:37:43.000Z"
+        },
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Australia, UK, Canada and Italy urge Israel to allow critical aid to Gaza ahead of winter",
+          "url": "https://www.theguardian.com/australia-news/2026/nov/16/australia-uk-canada-italy-urge-israel-critical-aid-gaza-winter-ntwnfb",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T21:57:21.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -8399,9 +9763,9 @@
           "cls-telegraph",
           "wallstreetcn-live"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "guardian-world",
+        "runnerUpObservedAt": "2026-11-16T06:07:43+08:00",
+        "leadMinutes": 1346.6
       }
     },
     {
@@ -17541,7 +18905,8 @@
       "entities": [],
       "sources": [
         "aljazeera",
-        "cnbc-topnews"
+        "cnbc-topnews",
+        "marketwatch-top"
       ],
       "sightings": [
         {
@@ -17583,6 +18948,14 @@
           "url": "https://www.cnbc.com/2026/11/14/root-cause-of-nationwide-ground-stop-is-unknown-faa-says.html",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-14T22:54:47.000Z"
+        },
+        {
+          "sourceId": "marketwatch-top",
+          "observedAt": "2026-11-14T22:55:16+08:00",
+          "title": "U.S. air travel could take days to recover after FAA’s lifting of rare nationwide ground stop",
+          "url": "https://www.marketwatch.com/story/faa-declares-rare-widespread-ground-outage-bdc46393?mod=mw_rss_topstories",
+          "edition": "2026-11-14/19",
+          "publishedAt": "2026-11-14T14:27:00.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -18736,16 +20109,26 @@
       "firstSourceId": "ft-companies",
       "publishedAt": "2026-11-14T03:21:57.000Z",
       "publishLagMinutes": 122.6,
-      "lastSeenAt": "2026-11-14T13:24:34+08:00",
-      "lastEdition": "2026-11-14/13",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "policy",
       "lane": "external",
       "domestic": false,
       "entities": [],
       "sources": [
-        "ft-companies"
+        "ft-companies",
+        "bbc-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Thousands of US flights still cancelled or delayed two days after grounding of planes nationwide",
+          "url": "https://www.bbc.co.uk/news/articles/cw1mdlv0k2r4o?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T19:20:53.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "ft-companies",
@@ -18754,9 +20137,9 @@
         "coFirstSourceIds": [
           "ft-companies"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-16T06:07:43+08:00",
+        "leadMinutes": 2443.2
       }
     },
     {
@@ -20465,16 +21848,26 @@
       "firstSourceId": "aljazeera",
       "publishedAt": "2026-11-13T22:02:07.000Z",
       "publishLagMinutes": 32.5,
-      "lastSeenAt": "2026-11-14T06:34:37+08:00",
-      "lastEdition": "2026-11-14/06",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
       "domestic": true,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "cnbc-topnews"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "cnbc-topnews",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "DOT Sec. Duffy ties router in southern Arkansas to issues that led to nationwide ground stop",
+          "url": "https://www.cnbc.com/2026/11/14/faa-ground-stop-flights-resume-delays.html",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T18:15:14.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "aljazeera",
@@ -20483,9 +21876,9 @@
         "coFirstSourceIds": [
           "aljazeera"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "cnbc-topnews",
+        "runnerUpObservedAt": "2026-11-16T06:07:43+08:00",
+        "leadMinutes": 2853.1
       }
     },
     {
@@ -22554,8 +23947,8 @@
       "firstSourceId": "aljazeera",
       "publishedAt": "2026-11-13T19:23:40.000Z",
       "publishLagMinutes": 191,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
       "domestic": false,
@@ -22571,6 +23964,14 @@
           "url": "https://www.aljazeera.com/news/2026/11/15/record-number-of-migrants-arrive-in-spains-canary-islands?traffic_source=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T15:16:29.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Nearly 1,500 migrants reach Spain’s Canary Islands in one day",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/15/nearly-1500-migrants-reach-spains-canary-islands-in-one-day?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T17:39:23.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -26670,9 +28071,26 @@
           "url": "https://www.aljazeera.com/sports/liveblog/2026/11/15/live-spain-vs-england-uefa-nations-league?traffic_source=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T16:45:00.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-15T07:41:10+08:00",
+          "title": "Portugal 1-4 Denmark: UEFA Nations League – as it happened",
+          "url": "https://www.aljazeera.com/sports/liveblog/2026/11/14/portugal-vs-denmark-live-uefa-nations-league?traffic_source=rss",
+          "edition": "2026-11-15/06",
+          "publishedAt": "2026-11-14T16:45:00.000Z"
         }
       ],
-      "headlineRevisions": [],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-16T06:07:43+08:00",
+          "sourceId": "aljazeera",
+          "edition": "2026-11-16/06",
+          "url": "https://www.aljazeera.com/sports/liveblog/2026/11/15/live-spain-vs-england-uefa-nations-league?traffic_source=rss",
+          "from": "LIVE: Spain vs England – UEFA Nations League",
+          "to": "Spain vs England live: UEFA Nations League"
+        }
+      ],
       "firstMover": {
         "sourceId": "aljazeera",
         "observedAt": "2026-11-13T23:48:55+08:00",
@@ -27349,8 +28767,8 @@
       "firstSourceId": "yahoo-finance",
       "publishedAt": "2026-11-13T14:53:52.000Z",
       "publishLagMinutes": 55.1,
-      "lastSeenAt": "2026-11-14T22:55:16+08:00",
-      "lastEdition": "2026-11-14/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "global-markets",
       "lane": "external",
       "domestic": false,
@@ -27366,6 +28784,14 @@
           "url": "https://www.fool.com/coverage/market-movers/2026/11/14/why-advanced-micro-devices-stock-surged-this-week/?.tsrc=rss",
           "edition": "2026-11-14/19",
           "publishedAt": "2026-11-14T13:06:02.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Why Fervo Energy Stock Surged This Week",
+          "url": "https://www.fool.com/coverage/market-movers/2026/11/15/why-fervo-energy-stock-surged-this-week/?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T19:02:04.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -28811,7 +30237,8 @@
       "domestic": true,
       "entities": [],
       "sources": [
-        "yahoo-finance"
+        "yahoo-finance",
+        "bloomberg-markets"
       ],
       "sightings": [
         {
@@ -28829,6 +30256,14 @@
           "url": "https://www.thestreet.com/investing/stocks/goldman-sachs-reset-sp-500-price-target-for-2027?.tsrc=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T15:37:00.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-14T22:55:16+08:00",
+          "title": "Goldman Sachs Sees 19% Return on Asia ex-Japan Stocks in 2027",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-14/goldman-sachs-sees-19-return-on-asia-ex-japan-stocks-in-2027",
+          "edition": "2026-11-14/19",
+          "publishedAt": "2026-11-14T10:16:50.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -28839,9 +30274,9 @@
         "coFirstSourceIds": [
           "yahoo-finance"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bloomberg-markets",
+        "runnerUpObservedAt": "2026-11-14T22:55:16+08:00",
+        "leadMinutes": 1386.4
       }
     },
     {
@@ -32767,8 +34202,8 @@
       "firstSourceId": "yahoo-finance",
       "publishedAt": "2026-11-13T07:29:02.000Z",
       "publishLagMinutes": 148,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "global-markets",
       "lane": "external",
       "domestic": false,
@@ -32792,6 +34227,14 @@
           "url": "https://www.fool.com/investing/2026/11/15/history-says-this-dividend-stock-can-protect-your/?.tsrc=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T15:35:00.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T06:07:43+08:00",
+          "title": "Investors: If a Market Correction Is Coming, This 1 Move Will Make or Break Your Portfolio",
+          "url": "https://www.fool.com/investing/2026/11/15/investors-if-a-market-correction-is-coming-this-1-move-will-make-or-break-your-portfolio/?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-15T19:05:02.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -38914,8 +40357,8 @@
       "firstSeenAt": "2026-11-12T21:13:56+08:00",
       "firstEdition": "2026-11-12/19",
       "firstSourceId": "economist-finance",
-      "publishedAt": "2026-11-12T10:38:28.000Z",
-      "publishLagMinutes": 155.5,
+      "publishedAt": "2026-11-10T05:00:29.000Z",
+      "publishLagMinutes": 3373.5,
       "lastSeenAt": "2026-11-12T21:13:56+08:00",
       "lastEdition": "2026-11-12/19",
       "topic": "global-markets",
@@ -38923,20 +40366,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "economist-finance"
+        "economist-finance",
+        "ft-companies"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "AI’s affair to remember",
+          "url": "https://www.ft.com/content/4bf7b037-7ef1-4421-b298-7c2ecf4bf870?syn-25a6b1a6=1",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T05:00:29.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "economist-finance",
-        "observedAt": "2026-11-12T21:13:56+08:00",
+        "sourceId": "ft-companies",
+        "observedAt": "2026-11-10T16:19:01+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "economist-finance"
+          "ft-companies"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "economist-finance",
+        "runnerUpObservedAt": "2026-11-12T21:13:56+08:00",
+        "leadMinutes": 3174.9
       }
     },
     {
@@ -41583,6 +43036,14 @@
           "url": "https://www.bbc.co.uk/news/articles/ck1wvrrgln13o?at_medium=RSS&at_campaign=rss",
           "edition": "2026-11-10/06",
           "publishedAt": "2026-11-09T02:50:13.000Z"
+        },
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "'Cruise for life' ship seized in Singapore",
+          "url": "https://www.bbc.co.uk/news/articles/cqr7y7myer53o?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T01:49:06.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -44624,8 +46085,8 @@
       "firstSeenAt": "2026-11-12T17:42:49+08:00",
       "firstEdition": "2026-11-12/13",
       "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-12T02:39:19.000Z",
-      "publishLagMinutes": 423.5,
+      "publishedAt": "2026-11-09T19:09:27.000Z",
+      "publishLagMinutes": 3753.4,
       "lastSeenAt": "2026-11-12T17:42:49+08:00",
       "lastEdition": "2026-11-12/13",
       "topic": "global-markets",
@@ -44633,20 +46094,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "nyt-world"
+        "nyt-world",
+        "bbc-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Millions fill Buenos Aires streets to welcome Pope Leo XIV",
+          "url": "https://www.bbc.co.uk/news/videos/cvp8g82pled5o?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-09T19:09:27.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "nyt-world",
-        "observedAt": "2026-11-12T17:42:49+08:00",
+        "sourceId": "bbc-world",
+        "observedAt": "2026-11-10T16:19:01+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "nyt-world"
+          "bbc-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "nyt-world",
+        "runnerUpObservedAt": "2026-11-12T17:42:49+08:00",
+        "leadMinutes": 2963.8
       }
     },
     {
@@ -44897,8 +46368,8 @@
       "firstSeenAt": "2026-11-12T17:42:49+08:00",
       "firstEdition": "2026-11-12/13",
       "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-12T05:38:27.000Z",
-      "publishLagMinutes": 244.4,
+      "publishedAt": "2026-11-10T05:28:25.000Z",
+      "publishLagMinutes": 3134.4,
       "lastSeenAt": "2026-11-12T17:42:49+08:00",
       "lastEdition": "2026-11-12/13",
       "topic": "global-markets",
@@ -44908,11 +46379,20 @@
       "sources": [
         "guardian-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Beau Lamarre-Condon admits entering Jesse Baird’s house when he wasn’t home and eating Easter egg, murder trial hears",
+          "url": "https://www.theguardian.com/australia-news/2026/nov/10/beau-lamarre-condon-murder-trial-ntwnfb",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T05:28:25.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "guardian-world",
-        "observedAt": "2026-11-12T17:42:49+08:00",
+        "observedAt": "2026-11-10T16:19:01+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "guardian-world"
@@ -47542,8 +49022,8 @@
       "firstSeenAt": "2026-11-12T08:46:37+08:00",
       "firstEdition": "2026-11-12/06",
       "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-11T11:47:22.000Z",
-      "publishLagMinutes": 779.3,
+      "publishedAt": "2026-11-10T01:38:49.000Z",
+      "publishLagMinutes": 2827.8,
       "lastSeenAt": "2026-11-12T08:46:37+08:00",
       "lastEdition": "2026-11-12/06",
       "topic": "global-markets",
@@ -47551,15 +49031,34 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bbc-world"
+        "bbc-world",
+        "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Newly-elected Democrats react to Hegseth impeachment bid",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/10/newly-elected-democrats-react-to-hegseth-impeachment-bid?traffic_source=rss",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T03:16:44.000Z"
+        },
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Republican congressman to force impeachment vote on Defence Secretary Hegseth",
+          "url": "https://www.bbc.co.uk/news/articles/cwr5y58jjp8ro?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T01:38:49.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-12T08:46:37+08:00",
-        "tied": false,
+        "sourceId": null,
+        "observedAt": "2026-11-10T16:19:01+08:00",
+        "tied": true,
         "coFirstSourceIds": [
+          "aljazeera",
           "bbc-world"
         ],
         "runnerUpSourceId": null,
@@ -48514,8 +50013,8 @@
       "firstSeenAt": "2026-11-12T08:46:37+08:00",
       "firstEdition": "2026-11-12/06",
       "firstSourceId": "wallstreetcn-live",
-      "publishedAt": "2026-11-12T00:01:07.000Z",
-      "publishLagMinutes": 45.5,
+      "publishedAt": "2026-11-10T08:06:19.000Z",
+      "publishLagMinutes": 2440.3,
       "lastSeenAt": "2026-11-12T08:46:37+08:00",
       "lastEdition": "2026-11-12/06",
       "topic": "global-markets",
@@ -48523,20 +50022,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "wallstreetcn-live"
+        "wallstreetcn-live",
+        "wallstreetcn"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "wallstreetcn",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "韩国首尔综指盘初上涨5%",
+          "url": "https://wallstreetcn.com/articles/3785613",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T08:06:19.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "wallstreetcn-live",
-        "observedAt": "2026-11-12T08:46:37+08:00",
+        "sourceId": "wallstreetcn",
+        "observedAt": "2026-11-10T16:19:01+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "wallstreetcn-live"
+          "wallstreetcn"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "wallstreetcn-live",
+        "runnerUpObservedAt": "2026-11-12T08:46:37+08:00",
+        "leadMinutes": 2427.6
       }
     },
     {
@@ -48798,6 +50307,14 @@
           "url": "https://www.nytimes.com/2026/11/08/climate/what-is-cop31-climate.html",
           "edition": "2026-11-10/06",
           "publishedAt": "2026-11-08T10:01:51.000Z"
+        },
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Countries fight over keeping electricity pledge clean at COP31",
+          "url": "https://www.ft.com/content/decd853e-0cce-46c1-a047-d8dbb7c2b229?syn-25a6b1a6=1",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T05:00:21.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -48809,8 +50326,8 @@
           "nyt-world"
         ],
         "runnerUpSourceId": "ft-companies",
-        "runnerUpObservedAt": "2026-11-12T08:46:37+08:00",
-        "leadMinutes": 3335.1
+        "runnerUpObservedAt": "2026-11-10T16:19:01+08:00",
+        "leadMinutes": 907.5
       }
     },
     {
@@ -55058,8 +56575,8 @@
       "firstSeenAt": "2026-11-11T16:21:50+08:00",
       "firstEdition": "2026-11-11/13",
       "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-11T06:00:33.000Z",
-      "publishLagMinutes": 141.3,
+      "publishedAt": "2026-11-10T07:27:41.000Z",
+      "publishLagMinutes": 1494.2,
       "lastSeenAt": "2026-11-11T16:21:50+08:00",
       "lastEdition": "2026-11-11/13",
       "topic": "policy",
@@ -55067,20 +56584,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "guardian-world"
+        "guardian-world",
+        "nyt-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Saudi Arabia Sentences Mother to 100 Lashes for Birth Outside Marriage",
+          "url": "https://www.nytimes.com/2026/11/10/world/middleeast/saudi-arabia-lashing-sentence-kenyan-woman.html",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T07:27:41.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "guardian-world",
-        "observedAt": "2026-11-11T16:21:50+08:00",
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-10T16:19:01+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "guardian-world"
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "guardian-world",
+        "runnerUpObservedAt": "2026-11-11T16:21:50+08:00",
+        "leadMinutes": 1442.8
       }
     },
     {
@@ -55934,8 +57461,8 @@
       "firstSeenAt": "2026-11-11T12:16:08+08:00",
       "firstEdition": "2026-11-11/06",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-11T01:43:42.000Z",
-      "publishLagMinutes": 152.4,
+      "publishedAt": "2026-11-09T22:41:12.000Z",
+      "publishLagMinutes": 1774.9,
       "lastSeenAt": "2026-11-11T12:16:08+08:00",
       "lastEdition": "2026-11-11/06",
       "topic": "world",
@@ -55943,20 +57470,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "cnbc-topnews"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "cnbc-topnews",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Hegseth impeachment articles introduced by Rep. Massie",
+          "url": "https://www.cnbc.com/2026/11/09/pete-hegseth-impeachment-articles-massie.html",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-09T22:41:12.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-11T12:16:08+08:00",
+        "sourceId": "cnbc-topnews",
+        "observedAt": "2026-11-10T16:19:01+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "aljazeera"
+          "cnbc-topnews"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
+        "leadMinutes": 1197.1
       }
     },
     {
@@ -56784,6 +58321,22 @@
           "url": "https://www.nytimes.com/2026/11/08/world/europe/poland-shooting-suspect-family.html",
           "edition": "2026-11-10/06",
           "publishedAt": "2026-11-08T22:48:25.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Poland Probes Krakow Shooting as Terrorism",
+          "url": "https://www.bloomberg.com/news/videos/2026-11-08/poland-probes-krakow-shooting-as-terrorism-video",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T13:06:23.000Z"
+        },
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Polish unity on show in silent march to honour Krakow shooting victims",
+          "url": "https://www.bbc.co.uk/news/articles/cqkg5gm4nr4no?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T05:38:53.000Z"
         }
       ],
       "headlineRevisions": [
@@ -59820,8 +61373,8 @@
       "firstSeenAt": "2026-11-11T12:16:08+08:00",
       "firstEdition": "2026-11-11/06",
       "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-11T00:30:53.000Z",
-      "publishLagMinutes": 225.3,
+      "publishedAt": "2026-11-10T08:11:44.000Z",
+      "publishLagMinutes": 1204.4,
       "lastSeenAt": "2026-11-11T12:16:08+08:00",
       "lastEdition": "2026-11-11/06",
       "topic": "filings",
@@ -59829,20 +61382,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bloomberg-markets"
+        "bloomberg-markets",
+        "cnbc-topnews"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "cnbc-topnews",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "SoftBank swings to $7 billion net loss in second quarter as tech selloff weighs on results",
+          "url": "https://www.cnbc.com/2026/11/10/softbank-2q-earnings-tech-selloff.html",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T08:11:44.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-11T12:16:08+08:00",
+        "sourceId": "cnbc-topnews",
+        "observedAt": "2026-11-10T16:19:01+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bloomberg-markets"
+          "cnbc-topnews"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bloomberg-markets",
+        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
+        "leadMinutes": 1197.1
       }
     },
     {
@@ -61630,8 +63193,8 @@
       "firstSeenAt": "2026-11-11T12:16:08+08:00",
       "firstEdition": "2026-11-11/06",
       "firstSourceId": "cls-telegraph",
-      "publishedAt": "2026-11-11T04:01:30.000Z",
-      "publishLagMinutes": 14.6,
+      "publishedAt": "2026-11-10T08:10:22.000Z",
+      "publishLagMinutes": 1205.8,
       "lastSeenAt": "2026-11-11T12:16:08+08:00",
       "lastEdition": "2026-11-11/06",
       "topic": "global-markets",
@@ -61641,11 +63204,20 @@
       "sources": [
         "cls-telegraph"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "港股收盘：恒生科技指数涨1% 光通信股涨幅居前",
+          "url": "https://www.cls.cn/detail/2530271",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T08:10:22.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "cls-telegraph",
-        "observedAt": "2026-11-11T12:16:08+08:00",
+        "observedAt": "2026-11-10T16:19:01+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "cls-telegraph"
@@ -62211,7 +63783,8 @@
       "entities": [],
       "sources": [
         "bbc-world",
-        "bloomberg-markets"
+        "bloomberg-markets",
+        "aljazeera"
       ],
       "sightings": [
         {
@@ -62221,6 +63794,14 @@
           "url": "https://www.bloomberg.com/news/articles/2026-11-09/krakow-mass-shooter-dies-in-the-hospital-polish-police-says",
           "edition": "2026-11-10/06",
           "publishedAt": "2026-11-09T06:22:55.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Poland’s political rivals join ‘March of Silence’ for shooting victims",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/10/polands-political-rivals-join-march-of-silence-for-shooting-victims?traffic_source=rss",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T05:12:54.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -62231,9 +63812,9 @@
         "coFirstSourceIds": [
           "bloomberg-markets"
         ],
-        "runnerUpSourceId": "bbc-world",
-        "runnerUpObservedAt": "2026-11-10T19:43:41+08:00",
-        "leadMinutes": 1112.1
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-10T16:19:01+08:00",
+        "leadMinutes": 907.5
       }
     },
     {
@@ -62897,8 +64478,8 @@
       "firstSeenAt": "2026-11-10T19:43:41+08:00",
       "firstEdition": "2026-11-10/19",
       "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-10T11:23:18.000Z",
-      "publishLagMinutes": 20.4,
+      "publishedAt": "2026-11-10T05:23:57.000Z",
+      "publishLagMinutes": 379.7,
       "lastSeenAt": "2026-11-10T19:43:41+08:00",
       "lastEdition": "2026-11-10/19",
       "topic": "world",
@@ -62906,20 +64487,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bbc-world"
+        "bbc-world",
+        "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "Israeli forces kill 14-year-old Palestinian boy in occupied West Bank",
+          "url": "https://www.aljazeera.com/news/2026/11/10/israeli-forces-kill-14-year-old-palestinian-boy-in-occupied-west-bank?traffic_source=rss",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T05:23:57.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-10T19:43:41+08:00",
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-10T16:19:01+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bbc-world"
+          "aljazeera"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-10T19:43:41+08:00",
+        "leadMinutes": 204.7
       }
     },
     {
@@ -64543,8 +66134,8 @@
       "firstSeenAt": "2026-11-10T19:43:41+08:00",
       "firstEdition": "2026-11-10/19",
       "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-10T05:03:55.000Z",
-      "publishLagMinutes": 399.8,
+      "publishedAt": "2026-11-10T04:00:06.000Z",
+      "publishLagMinutes": 463.6,
       "lastSeenAt": "2026-11-10T19:43:41+08:00",
       "lastEdition": "2026-11-10/19",
       "topic": "global-markets",
@@ -64553,7 +66144,8 @@
       "entities": [],
       "sources": [
         "cnbc-topnews",
-        "bloomberg-markets"
+        "bloomberg-markets",
+        "nyt-world"
       ],
       "sightings": [
         {
@@ -64571,6 +66163,14 @@
           "url": "https://www.cnbc.com/2026/11/10/china-trade-october-exports-imports-surplus-.html",
           "edition": "2026-11-10/13",
           "publishedAt": "2026-11-10T05:03:55.000Z"
+        },
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "China’s Trade Surplus Passes $1 Trillion at Record Pace",
+          "url": "https://www.nytimes.com/2026/11/09/business/china-trade-surplus-trillion.html",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T04:00:06.000Z"
         }
       ],
       "headlineRevisions": [
@@ -64589,7 +66189,8 @@
         "tied": true,
         "coFirstSourceIds": [
           "bloomberg-markets",
-          "cnbc-topnews"
+          "cnbc-topnews",
+          "nyt-world"
         ],
         "runnerUpSourceId": null,
         "runnerUpObservedAt": null,
@@ -66382,8 +67983,8 @@
       "firstSeenAt": "2026-11-10T16:19:01+08:00",
       "firstEdition": "2026-11-10/13",
       "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-09T14:28:56.000Z",
-      "publishLagMinutes": 1070.1,
+      "publishedAt": "2026-11-08T15:07:15.000Z",
+      "publishLagMinutes": 2471.8,
       "lastSeenAt": "2026-11-10T16:19:01+08:00",
       "lastEdition": "2026-11-10/13",
       "topic": "opinion",
@@ -66393,7 +67994,8 @@
       "sources": [
         "bloomberg-markets",
         "ft-companies",
-        "npr-world"
+        "npr-world",
+        "aljazeera"
       ],
       "sightings": [
         {
@@ -66411,1109 +68013,35 @@
           "url": "https://www.npr.org/2026/11/09/nx-s1-6034335/british-comedian-russell-brand-sentenced",
           "edition": "2026-11-10/06",
           "publishedAt": "2026-11-09T14:36:54.000Z"
+        },
+        {
+          "sourceId": "npr-world",
+          "observedAt": "2026-11-09T07:39:02+08:00",
+          "title": "Russell Brand to learn sentence after being found guilty of rape and sexual assault",
+          "url": "https://www.npr.org/2026/11/08/nx-s1-6033957/russell-brand-learn-sentence-found-guilty-rape-sexual-assault",
+          "edition": "2026-11-09/06",
+          "publishedAt": "2026-11-08T15:07:15.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-10T01:11:34+08:00",
+          "title": "UK court hands comedian Russell Brand 10.5 years for rape, sexual assault",
+          "url": "https://www.aljazeera.com/news/2026/11/9/uk-court-hands-comedian-russel-brand-10-5-years-for-rape-sexual-assault?traffic_source=rss",
+          "edition": "2026-11-10/06",
+          "publishedAt": "2026-11-09T14:42:39.000Z"
         }
       ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": null,
-        "observedAt": "2026-11-10T01:11:34+08:00",
-        "tied": true,
+        "sourceId": "npr-world",
+        "observedAt": "2026-11-09T07:39:02+08:00",
+        "tied": false,
         "coFirstSourceIds": [
-          "ft-companies",
           "npr-world"
         ],
-        "runnerUpSourceId": "bloomberg-markets",
-        "runnerUpObservedAt": "2026-11-10T16:19:01+08:00",
-        "leadMinutes": 907.5
-      }
-    },
-    {
-      "id": "st_2b93ab78ff",
-      "cluster": "title:新加坡推出农业食品基金 目标投资额约5亿美元",
-      "title": "财联社11月10日电，新加坡推出农业食品基金，目标投资额约5亿美元。",
-      "url": "https://www.cls.cn/detail/2530280",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "cls-telegraph",
-      "publishedAt": "2026-11-10T08:16:32.000Z",
-      "publishLagMinutes": 2.5,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "cls-telegraph"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cls-telegraph",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cls-telegraph"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_2bbf3035d3",
-      "cluster": "title:latest godzilla release sets box office records for japanese film",
-      "title": "Latest Godzilla release sets box office records for Japanese film",
-      "url": "https://www.ft.com/content/9e3dacfa-ebff-4f05-a89e-9514211d73a2?syn-25a6b1a6=1",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-10T06:53:37.000Z",
-      "publishLagMinutes": 85.4,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "ft-companies"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "ft-companies",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "ft-companies"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_2cc0c5cf37",
-      "cluster": "title:author jojo moyes among uk travellers at risk of eu ban amid digital border system glitches",
-      "title": "Author Jojo Moyes among UK travellers at risk of EU ban amid digital border system glitches",
-      "url": "https://www.theguardian.com/business/2026/nov/10/jojo-moyes-uk-travellers-eu-ban-digital-border-system-ees",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-10T07:00:32.000Z",
-      "publishLagMinutes": 78.5,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "guardian-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "guardian-world",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "guardian-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_2d9875faea",
-      "cluster": "title:从区域分化看2027年出口新中枢",
-      "title": "从区域分化看2027年出口新中枢",
-      "url": "https://wallstreetcn.com/articles/3785637",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "wallstreetcn",
-      "publishedAt": "2026-11-10T07:13:00.000Z",
-      "publishLagMinutes": 66,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "wallstreetcn"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "wallstreetcn",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "wallstreetcn"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_30d15e6e84",
-      "cluster": "title:72岁王健林重回 一号位 万达商管走到关键路口",
-      "title": "72岁王健林重回“一号位”，万达商管走到关键路口",
-      "url": "https://www.yicai.com/news/103433109.html",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "yicai",
-      "publishedAt": "2026-11-09T23:27:47.000Z",
-      "publishLagMinutes": 531.2,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "yicai"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yicai",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yicai"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_31083a8b44",
-      "cluster": "title:californians reject wealth tax for billionaires",
-      "title": "Californians reject wealth tax for billionaires",
-      "url": "https://www.bbc.co.uk/news/articles/cq398em3032wo?at_medium=RSS&at_campaign=rss",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "bbc-business",
-      "publishedAt": "2026-11-10T03:34:46.000Z",
-      "publishLagMinutes": 284.3,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bbc-business"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bbc-business",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bbc-business"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_326101aefc",
-      "cluster": "title:adnoc gas cfo still exploring opportunities in fujairah",
-      "title": "Adnoc Gas CFO: Still Exploring Opportunities in Fujairah",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-10/adnoc-gas-cfo-still-exploring-opportunities-in-fujairah-video",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-10T05:54:23.000Z",
-      "publishLagMinutes": 144.6,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bloomberg-markets"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bloomberg-markets"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_32ca91f69d",
-      "cluster": "title:u s stock futures steady after tech led rebound cpi in focus",
-      "title": "U.S. stock futures steady after tech-led rebound; CPI in focus",
-      "url": "https://finance.yahoo.com/news/u-stock-futures-steady-tech-004342905.html?.tsrc=rss",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-10T00:43:42.000Z",
-      "publishLagMinutes": 455.3,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "yahoo-finance"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yahoo-finance"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_345b6877e3",
-      "cluster": "title:a key report for where inflation stood in october comes out tuesday here s what to expect",
-      "title": "A key report for where inflation stood in October comes out Tuesday. Here's what to expect",
-      "url": "https://www.cnbc.com/2026/11/09/october-cpi-report-2026-inflation.html",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-09T21:03:55.000Z",
-      "publishLagMinutes": 675.1,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "cnbc-topnews"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cnbc-topnews"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3533ce91e7",
-      "cluster": "title:mortgage holders confidence crashes to lowest level since 1994 as year that feels like a recession looms",
-      "title": "Mortgage holders’ confidence crashes to lowest level since 1994 as year that ‘feels like a recession’ looms",
-      "url": "https://www.theguardian.com/australia-news/2026/nov/10/mortgage-holders-confidence-crashes-to-lowest-level-since-1994-as-year-that-feels-like-a-recession-looms",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-10T05:17:31.000Z",
-      "publishLagMinutes": 181.5,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "guardian-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "guardian-world",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "guardian-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3735182f26",
-      "cluster": "title:saudi arabia downs missiles fired at riyadh after houthi attack on pipeline",
-      "title": "Saudi Arabia downs missiles fired at Riyadh after Houthi attack on pipeline",
-      "url": "https://www.aljazeera.com/news/2026/11/10/saudi-arabia-downs-missiles-fired-at-riyadh-after-houthi-attack-on-pipeline?traffic_source=rss",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-10T03:17:51.000Z",
-      "publishLagMinutes": 301.2,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "aljazeera"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "aljazeera"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_376dd1cb48",
-      "cluster": "title:exxonmobil explores return to venezuela after calling nation uninvestable",
-      "title": "ExxonMobil explores return to Venezuela after calling nation ‘uninvestable’",
-      "url": "https://www.ft.com/content/cd3b2969-9c58-404a-a80a-c823754899ef?syn-25a6b1a6=1",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-10T00:34:45.000Z",
-      "publishLagMinutes": 464.3,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "ft-companies"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "ft-companies",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "ft-companies"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_37e37ce34e",
-      "cluster": "title:children s place files for bankruptcy protection seeks buyer",
-      "title": "Children’s Place files for bankruptcy protection, seeks buyer",
-      "url": "https://www.cnbc.com/2026/11/09/childrens-place-chapter-11-sale.html",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-09T20:57:46.000Z",
-      "publishLagMinutes": 681.3,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "cnbc-topnews"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cnbc-topnews"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3923c3e721",
-      "cluster": "title:培风客 美股尚无明确见底信号 美债明年或迎阶段性反弹 镍值得关注 大鹏说8",
-      "title": "培风客：美股尚无明确见底信号，美债明年或迎阶段性反弹，镍值得关注【大鹏说8】",
-      "url": "https://wallstreetcn.com/premium/articles/3785619?layout=wscn-layout",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "wallstreetcn",
-      "publishedAt": "2026-11-10T04:08:51.000Z",
-      "publishLagMinutes": 250.2,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "wallstreetcn"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "wallstreetcn",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "wallstreetcn"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_39fcd711cb",
-      "cluster": "title:能控制机器人拧瓶盖 解魔方和画画 fable 5 2的具身智能能力实现 惊人跃迁",
-      "title": "能控制机器人拧瓶盖、解魔方和画画！Fable 5.2的具身智能能力实现“惊人跃迁”",
-      "url": "https://wallstreetcn.com/articles/3785622",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "wallstreetcn",
-      "publishedAt": "2026-11-10T02:57:40.000Z",
-      "publishLagMinutes": 321.4,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "tech-ai",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "wallstreetcn"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "wallstreetcn",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "wallstreetcn"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3b627da45c",
-      "cluster": "title:pakistan considers panda bonds amid evolving us legislative dynamics",
-      "title": "Pakistan Considers Panda Bonds Amid Evolving US Legislative Dynamics",
-      "url": "https://thediplomat.com/2026/11/pakistan-considers-panda-bonds-amid-evolving-us-legislative-dynamics/",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "the-diplomat",
-      "publishedAt": "2026-11-09T07:42:00.000Z",
-      "publishLagMinutes": 1477,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "the-diplomat"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "the-diplomat",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "the-diplomat"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3b95faf40e",
-      "cluster": "title:i took vinted to court to get my money back",
-      "title": "I took Vinted to court to get my money back",
-      "url": "https://www.bbc.co.uk/news/articles/cm369e3l15lwo?at_medium=RSS&at_campaign=rss",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "bbc-business",
-      "publishedAt": "2026-11-10T00:27:37.000Z",
-      "publishLagMinutes": 471.4,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bbc-business"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bbc-business",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bbc-business"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_3f5eb2f5d8",
-      "cluster": "title:剪刀差再扩张 ppi或见顶 蕴含哪些关键信号",
-      "title": "剪刀差再扩张，PPI或见顶：蕴含哪些关键信号？",
-      "url": "https://wallstreetcn.com/member/articles/3785627",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "wallstreetcn",
-      "publishedAt": "2026-11-10T04:28:09.000Z",
-      "publishLagMinutes": 230.9,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "wallstreetcn"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "wallstreetcn",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "wallstreetcn"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_40a066fefc",
-      "cluster": "title:新希望旗下德州六和农牧公司增资至13 36亿",
-      "title": "新希望旗下德州六和农牧公司增资至13.36亿",
-      "url": "https://www.cls.cn/detail/2530254",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "cls-telegraph",
-      "publishedAt": "2026-11-10T08:03:21.000Z",
-      "publishLagMinutes": 15.7,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "cls-telegraph"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cls-telegraph",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cls-telegraph"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_41f24332ee",
-      "cluster": "title:cvs break up shows how m a first strategy is not the healthiest option",
-      "title": "CVS break-up shows how M&A-first strategy is not the healthiest option",
-      "url": "https://www.ft.com/content/373a5096-c8a8-44d2-830c-b9d8e0129c78?syn-25a6b1a6=1",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-10T05:00:21.000Z",
-      "publishLagMinutes": 198.7,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "ft-companies"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "ft-companies",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "ft-companies"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_42ad361291",
-      "cluster": "title:the french fridge hacks were relatively unsophisticated an ai enabled attack would raise the stakes",
-      "title": "The French fridge hacks were relatively unsophisticated. An AI-enabled attack would raise the stakes",
-      "url": "https://www.theguardian.com/technology/2026/nov/09/cyber-attack-french-supermarket-freezers-iran-europe",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-09T19:40:45.000Z",
-      "publishLagMinutes": 758.3,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "tech-ai",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "guardian-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "guardian-world",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "guardian-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_44cb689258",
-      "cluster": "title:消费会饱和吗 经济哲思",
-      "title": "消费会饱和吗｜经济哲思",
-      "url": "https://mini.caixin.com/2026-11-10/102503037.html",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "caixin",
-      "publishedAt": "2026-11-10T04:56:49.000Z",
-      "publishLagMinutes": 202.2,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "caixin"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "caixin",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "caixin"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_4599ec9e16",
-      "cluster": "title:接受wsj调查的经济学家预计 10月美国总体通胀月率将从9月的0 6 降至0 3 核心通胀月率从0 3 降至0 2",
-      "title": "财联社11月10日电，接受WSJ调查的经济学家预计，10月美国总体通胀月率将从9月的0.6%降至0.3%，核心通胀月率从0.3%降至0.2%。",
-      "url": "https://www.cls.cn/detail/2530263",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "cls-telegraph",
-      "publishedAt": "2026-11-10T08:05:31.000Z",
-      "publishLagMinutes": 13.5,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "cls-telegraph"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cls-telegraph",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cls-telegraph"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_4632d707e8",
-      "cluster": "title:医药行业再吹暖风 地缘政治压力缓解 行业订单持续高增",
-      "title": "医药行业再吹暖风：地缘政治压力缓解，行业订单持续高增",
-      "url": "https://wallstreetcn.com/member/articles/3785615",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "wallstreetcn",
-      "publishedAt": "2026-11-10T02:57:02.000Z",
-      "publishLagMinutes": 322,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "world",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "wallstreetcn"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "wallstreetcn",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "wallstreetcn"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_4a1817ab6c",
-      "cluster": "title:stocks build on tech fueled rally as oil retreats markets wrap",
-      "title": "Stocks Build on Tech-Fueled Rally as Oil Retreats: Markets Wrap",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-09/stock-market-today-dow-s-p-live-updates",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-09T22:16:53.000Z",
-      "publishLagMinutes": 602.1,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bloomberg-markets"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bloomberg-markets"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_4a95f12bab",
-      "cluster": "title:the future of trumponomics compromise or failure",
-      "title": "The future of Trumponomics: compromise or failure",
-      "url": "https://www.economist.com/finance-and-economics/2026/11/09/the-future-of-trumponomics-compromise-or-failure",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "economist-finance",
-      "publishedAt": "2026-11-09T19:13:41.000Z",
-      "publishLagMinutes": 785.3,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "opinion",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "economist-finance"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "economist-finance",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "economist-finance"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_4aa5d53f16",
-      "cluster": "title:xi jinping s paradox of political control",
-      "title": "Xi Jinping’s Paradox of Political Control",
-      "url": "https://thediplomat.com/2026/11/xi-jinpings-paradox-of-political-control/",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "the-diplomat",
-      "publishedAt": "2026-11-09T14:03:00.000Z",
-      "publishLagMinutes": 1096,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "the-diplomat"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "the-diplomat",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "the-diplomat"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_50531f5820",
-      "cluster": "title:softbank group shares surge 14 as asian tech stocks track wall street rebound",
-      "title": "SoftBank Group shares surge 14% as Asian tech stocks track Wall Street rebound",
-      "url": "https://www.cnbc.com/2026/11/10/ai-softbank-sk-hynix-samsung-wall-street-tech-stocks.html",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-10T08:06:29.000Z",
-      "publishLagMinutes": 12.5,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "cnbc-topnews"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cnbc-topnews"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_51d6865238",
-      "cluster": "title:pope leo draws 2 5 million people during historic argentina mass",
-      "title": "Pope Leo draws 2.5 million people during historic Argentina Mass",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/10/pope-leo-draws-2-5-million-people-during-historic-argentina-mass?traffic_source=rss",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-10T05:08:30.000Z",
-      "publishLagMinutes": 190.5,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "aljazeera"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "aljazeera"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_53d4c8de67",
-      "cluster": "title:被控涉嫌受贿时长约23年 深圳70岁高官戴北方将于海南受审",
-      "title": "被控涉嫌受贿时长约23年 深圳70岁高官戴北方将于海南受审",
-      "url": "https://china.caixin.com/2026-11-10/102502965.html",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "caixin",
-      "publishedAt": "2026-11-10T03:41:37.000Z",
-      "publishLagMinutes": 277.4,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "caixin"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "caixin",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "caixin"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_54ccf4d207",
-      "cluster": "title:高盛ceo 限制数据中心建设恐使美国算力投资流向海外",
-      "title": "【华尔街原声】高盛CEO：限制数据中心建设恐使美国算力投资流向海外",
-      "url": "https://database.caixin.com/2026-11-10/102502940.html",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "caixin",
-      "publishedAt": "2026-11-10T02:21:01.000Z",
-      "publishLagMinutes": 358,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "opinion",
-      "lane": "zh",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "caixin"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "caixin",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "caixin"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_5898f779d9",
-      "cluster": "title:dow sees its third 1 000 point swing in four days why the volatility isn t over yet",
-      "title": "Dow sees its third 1,000-point swing in four days. Why the volatility isn’t over yet.",
-      "url": "https://www.marketwatch.com/story/dow-sees-its-third-1-000-point-swing-in-four-days-why-volatility-isnt-over-yet-5380567b?mod=mw_rss_topstories",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "marketwatch-top",
-      "publishedAt": "2026-11-09T21:52:00.000Z",
-      "publishLagMinutes": 627,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "marketwatch-top"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "marketwatch-top",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "marketwatch-top"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_5c0b8dd391",
-      "cluster": "title:第九届进博会期间 上海超2800家离境退税商店办理离境退税销售额超1亿元",
-      "title": "第九届进博会期间 上海超2800家离境退税商店办理离境退税销售额超1亿元",
-      "url": "https://www.cls.cn/detail/2530242",
-      "firstSeenAt": "2026-11-10T16:19:01+08:00",
-      "firstEdition": "2026-11-10/13",
-      "firstSourceId": "cls-telegraph",
-      "publishedAt": "2026-11-10T07:59:50.000Z",
-      "publishLagMinutes": 19.2,
-      "lastSeenAt": "2026-11-10T16:19:01+08:00",
-      "lastEdition": "2026-11-10/13",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "cls-telegraph"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cls-telegraph",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cls-telegraph"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-10T01:11:34+08:00",
+        "leadMinutes": 1052.5
       }
     },
     {
@@ -67552,6 +68080,14 @@
           "url": "https://www.bbc.co.uk/news/articles/cv2d6dpge65go?at_medium=RSS&at_campaign=rss",
           "edition": "2026-11-10/13",
           "publishedAt": "2026-11-09T16:33:55.000Z"
+        },
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-10T01:11:34+08:00",
+          "title": "Thirteen migrants die after boat sinks off Crete",
+          "url": "https://www.bbc.co.uk/news/articles/c65ynyxrjdyeo?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-10/06",
+          "publishedAt": "2026-11-09T13:50:01.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -67563,8 +68099,8 @@
           "aljazeera"
         ],
         "runnerUpSourceId": "bbc-world",
-        "runnerUpObservedAt": "2026-11-10T16:19:01+08:00",
-        "leadMinutes": 2477.2
+        "runnerUpObservedAt": "2026-11-10T01:11:34+08:00",
+        "leadMinutes": 1569.8
       }
     },
     {
@@ -69853,6 +70389,14 @@
           "url": "https://www.solidot.org/story?sid=85875",
           "from": "微软云服务宕机持续逾 24 小时",
           "to": "微软云服务全球宕机"
+        },
+        {
+          "at": "2026-11-16T06:07:43+08:00",
+          "sourceId": "solidot",
+          "edition": "2026-11-16/06",
+          "url": "https://www.solidot.org/story?sid=85886",
+          "from": "微软云服务全球宕机",
+          "to": "微软云服务宕机持续逾 24 小时"
         }
       ],
       "firstMover": {
@@ -90793,66 +91337,75 @@
       }
     }
   ],
-  "generatedAt": "2026-11-16T01:28:59+08:00",
+  "generatedAt": "2026-11-16T06:09:18+08:00",
   "counts": {
     "stories": 2000,
-    "sightings": 2800,
-    "multiSightingStories": 188,
-    "storiesWithRevisions": 25,
+    "sightings": 2855,
+    "multiSightingStories": 207,
+    "storiesWithRevisions": 27,
     "skippedRecords": 0,
     "editions": 73,
-    "articles": 32593,
-    "duplicates": 230
+    "articles": 32679,
+    "duplicates": 232
   },
   "firstMover": {
     "windowDays": 30,
     "from": "2026-10-16",
     "to": "2026-11-15",
     "storiesInWindow": 1999,
-    "soleFirstStories": 1937,
-    "contestedStories": 78,
-    "tiedFirstStories": 62,
+    "soleFirstStories": 1934,
+    "contestedStories": 90,
+    "tiedFirstStories": 65,
     "leadBasis": "observed",
     "wires": [
       {
         "sourceId": "aljazeera",
-        "soleFirsts": 228,
-        "contestedFirsts": 16,
-        "coFirsts": 9,
-        "stories": 263,
-        "leadSamples": 16,
+        "soleFirsts": 233,
+        "contestedFirsts": 18,
+        "coFirsts": 11,
+        "stories": 276,
+        "leadSamples": 18,
         "medianLeadMinutes": 1276.1
       },
       {
-        "sourceId": "bloomberg-markets",
-        "soleFirsts": 205,
-        "contestedFirsts": 9,
-        "coFirsts": 9,
-        "stories": 233,
-        "leadSamples": 9,
-        "medianLeadMinutes": 1777.7
-      },
-      {
         "sourceId": "cls-telegraph",
-        "soleFirsts": 203,
+        "soleFirsts": 210,
         "contestedFirsts": 9,
-        "coFirsts": 22,
-        "stories": 258,
+        "coFirsts": 23,
+        "stories": 266,
         "leadSamples": 9,
         "medianLeadMinutes": 666.5
       },
       {
-        "sourceId": "bbc-world",
-        "soleFirsts": 100,
-        "contestedFirsts": 7,
+        "sourceId": "bloomberg-markets",
+        "soleFirsts": 204,
+        "contestedFirsts": 9,
         "coFirsts": 10,
-        "stories": 136,
+        "stories": 235,
+        "leadSamples": 9,
+        "medianLeadMinutes": 1777.7
+      },
+      {
+        "sourceId": "bbc-world",
+        "soleFirsts": 102,
+        "contestedFirsts": 8,
+        "coFirsts": 12,
+        "stories": 142,
+        "leadSamples": 8,
+        "medianLeadMinutes": 1408.8
+      },
+      {
+        "sourceId": "ft-companies",
+        "soleFirsts": 159,
+        "contestedFirsts": 7,
+        "coFirsts": 8,
+        "stories": 189,
         "leadSamples": 7,
-        "medianLeadMinutes": 905.2
+        "medianLeadMinutes": 3174.9
       },
       {
         "sourceId": "wallstreetcn-live",
-        "soleFirsts": 132,
+        "soleFirsts": 131,
         "contestedFirsts": 6,
         "coFirsts": 22,
         "stories": 187,
@@ -90860,26 +91413,35 @@
         "medianLeadMinutes": 485.1
       },
       {
-        "sourceId": "ft-companies",
-        "soleFirsts": 161,
+        "sourceId": "cnbc-topnews",
+        "soleFirsts": 105,
         "contestedFirsts": 5,
-        "coFirsts": 7,
-        "stories": 189,
+        "coFirsts": 9,
+        "stories": 137,
         "leadSamples": 5,
-        "medianLeadMinutes": 3728.7
+        "medianLeadMinutes": 1197.1
       },
       {
         "sourceId": "wallstreetcn",
-        "soleFirsts": 94,
-        "contestedFirsts": 4,
+        "soleFirsts": 90,
+        "contestedFirsts": 5,
         "coFirsts": 5,
-        "stories": 125,
-        "leadSamples": 4,
+        "stories": 121,
+        "leadSamples": 5,
         "medianLeadMinutes": 1065.9
       },
       {
+        "sourceId": "yahoo-finance",
+        "soleFirsts": 173,
+        "contestedFirsts": 4,
+        "coFirsts": 3,
+        "stories": 197,
+        "leadSamples": 4,
+        "medianLeadMinutes": 1386.4
+      },
+      {
         "sourceId": "guardian-world",
-        "soleFirsts": 82,
+        "soleFirsts": 79,
         "contestedFirsts": 4,
         "coFirsts": 7,
         "stories": 108,
@@ -90887,65 +91449,47 @@
         "medianLeadMinutes": 1210.4
       },
       {
-        "sourceId": "cnbc-topnews",
-        "soleFirsts": 106,
-        "contestedFirsts": 3,
-        "coFirsts": 9,
-        "stories": 136,
-        "leadSamples": 3,
-        "medianLeadMinutes": 907.5
-      },
-      {
         "sourceId": "marketwatch-top",
         "soleFirsts": 58,
         "contestedFirsts": 3,
         "coFirsts": 2,
-        "stories": 72,
+        "stories": 73,
         "leadSamples": 3,
         "medianLeadMinutes": 2770.2
       },
       {
-        "sourceId": "yahoo-finance",
-        "soleFirsts": 171,
-        "contestedFirsts": 2,
-        "coFirsts": 2,
-        "stories": 194,
-        "leadSamples": 2,
-        "medianLeadMinutes": 2360.8
+        "sourceId": "nyt-world",
+        "soleFirsts": 58,
+        "contestedFirsts": 3,
+        "coFirsts": 11,
+        "stories": 90,
+        "leadSamples": 3,
+        "medianLeadMinutes": 907.5
       },
       {
-        "sourceId": "nyt-world",
-        "soleFirsts": 56,
-        "contestedFirsts": 2,
-        "coFirsts": 10,
-        "stories": 85,
-        "leadSamples": 2,
-        "medianLeadMinutes": 1926.2
+        "sourceId": "npr-world",
+        "soleFirsts": 15,
+        "contestedFirsts": 3,
+        "coFirsts": 5,
+        "stories": 27,
+        "leadSamples": 3,
+        "medianLeadMinutes": 1052.5
       },
       {
         "sourceId": "the-diplomat",
-        "soleFirsts": 45,
+        "soleFirsts": 43,
         "contestedFirsts": 2,
         "coFirsts": 3,
-        "stories": 54,
+        "stories": 52,
         "leadSamples": 2,
         "medianLeadMinutes": 886.7
       },
       {
-        "sourceId": "npr-world",
-        "soleFirsts": 14,
-        "contestedFirsts": 2,
-        "coFirsts": 6,
-        "stories": 27,
-        "leadSamples": 2,
-        "medianLeadMinutes": 2495
-      },
-      {
         "sourceId": "caixin",
-        "soleFirsts": 106,
+        "soleFirsts": 103,
         "contestedFirsts": 1,
         "coFirsts": 1,
-        "stories": 122,
+        "stories": 119,
         "leadSamples": 1,
         "medianLeadMinutes": 2424.9
       },
@@ -90978,10 +91522,10 @@
       },
       {
         "sourceId": "bbc-business",
-        "soleFirsts": 26,
+        "soleFirsts": 24,
         "contestedFirsts": 0,
         "coFirsts": 3,
-        "stories": 38,
+        "stories": 36,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
@@ -91004,20 +91548,20 @@
         "medianLeadMinutes": null
       },
       {
-        "sourceId": "yicai",
-        "soleFirsts": 18,
+        "sourceId": "solidot",
+        "soleFirsts": 17,
         "contestedFirsts": 0,
-        "coFirsts": 1,
-        "stories": 27,
+        "coFirsts": 5,
+        "stories": 29,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
       {
-        "sourceId": "solidot",
+        "sourceId": "yicai",
         "soleFirsts": 17,
         "contestedFirsts": 0,
-        "coFirsts": 4,
-        "stories": 28,
+        "coFirsts": 1,
+        "stories": 26,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
@@ -91050,10 +91594,10 @@
       },
       {
         "sourceId": "economist-finance",
-        "soleFirsts": 7,
+        "soleFirsts": 5,
         "contestedFirsts": 0,
         "coFirsts": 4,
-        "stories": 12,
+        "stories": 11,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
@@ -91078,8 +91622,8 @@
     ]
   },
   "revisionTrail": {
-    "storiesWithRevisions": 25,
-    "totalRevisions": 172,
+    "storiesWithRevisions": 27,
+    "totalRevisions": 176,
     "items": [
       {
         "id": "st_42dca5f915",
@@ -91788,7 +92332,7 @@
         "id": "st_5cb5e636cd",
         "title": "Microsoft, Shopify and 3 more AI stocks that are favorite Wall Street earnings plays",
         "topic": "global-markets",
-        "revisions": 19,
+        "revisions": 20,
         "steps": [
           {
             "at": "2026-10-30T08:20:12+08:00",
@@ -92129,6 +92673,27 @@
               "务全",
               "微软云服务全球宕机",
               "球宕"
+            ]
+          },
+          {
+            "at": "2026-11-16T06:07:43+08:00",
+            "from": "微软云服务全球宕机",
+            "to": "微软云服务宕机持续逾 24 小时",
+            "removed": [
+              "全球",
+              "务全",
+              "微软云服务全球宕机",
+              "球宕"
+            ],
+            "added": [
+              "24",
+              "4小",
+              "务宕",
+              "小时",
+              "微软云服务宕机持续逾",
+              "持续",
+              "机持",
+              "续逾"
             ]
           }
         ]
@@ -94167,6 +94732,54 @@
         ]
       },
       {
+        "id": "st_100a74df49",
+        "title": "Nationwide Ground Stop Lifted, Nvidia Spy Scandal, Starship’s Longest Test Flight",
+        "topic": "world",
+        "revisions": 2,
+        "steps": [
+          {
+            "at": "2026-11-15T18:47:38+08:00",
+            "from": "黄仁勋辞职",
+            "to": "英伟达员工请愿让黄仁勋复职",
+            "removed": [
+              "勋辞",
+              "辞职",
+              "黄仁勋辞职"
+            ],
+            "added": [
+              "伟达",
+              "勋复",
+              "员工",
+              "复职",
+              "工请",
+              "愿让",
+              "英伟",
+              "英伟达员工请愿让黄仁勋复职"
+            ]
+          },
+          {
+            "at": "2026-11-16T06:07:43+08:00",
+            "from": "Dow Jones Futures Loom For Shaky Market Rally As Bitcoin Dives; Nvidia Earnings, Anthropic IPO Ahead",
+            "to": "Dow Jones Futures Loom For Shaky Market Rally; Jensen Huang Mulls Nvidia Return?",
+            "removed": [
+              "ahead",
+              "anthropic",
+              "as",
+              "bitcoin",
+              "dives",
+              "earnings",
+              "ipo"
+            ],
+            "added": [
+              "huang",
+              "jensen",
+              "mulls",
+              "return"
+            ]
+          }
+        ]
+      },
+      {
         "id": "st_f790d7d708",
         "title": "A mother’s touch helps premature babies grow strong in Gaza",
         "topic": "world",
@@ -94215,6 +94828,54 @@
         ]
       },
       {
+        "id": "st_0f74487dca",
+        "title": "Portugal vs Denmark: UEFA Nations League – predictions, how to watch, teams",
+        "topic": "world",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-16T06:07:43+08:00",
+            "from": "LIVE: Spain vs England – UEFA Nations League",
+            "to": "Spain vs England live: UEFA Nations League",
+            "removed": [],
+            "added": []
+          }
+        ]
+      },
+      {
+        "id": "st_c458192e9f",
+        "title": "'We slept here.' Flight delays linger as airlines scramble to recover from ground stop",
+        "topic": "world",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-16T06:07:43+08:00",
+            "from": "'We slept here.' Flight delays linger as airlines scramble to recover from ground stop",
+            "to": "'We slept here': Flight delays linger but schedule is back on track for Monday",
+            "removed": [
+              "airlines",
+              "as",
+              "from",
+              "ground",
+              "recover",
+              "scramble",
+              "stop",
+              "to"
+            ],
+            "added": [
+              "back",
+              "but",
+              "for",
+              "is",
+              "monday",
+              "on",
+              "schedule",
+              "track"
+            ]
+          }
+        ]
+      },
+      {
         "id": "st_b01da9b3b1",
         "title": "After Nationwide Ground Stop, Trump Admin Prioritizes Safety, Calls for Full Modernization Funding",
         "topic": "world",
@@ -94238,34 +94899,6 @@
               "on",
               "sunday",
               "trash"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "st_100a74df49",
-        "title": "Nationwide Ground Stop Lifted, Nvidia Spy Scandal, Starship’s Longest Test Flight",
-        "topic": "world",
-        "revisions": 1,
-        "steps": [
-          {
-            "at": "2026-11-15T18:47:38+08:00",
-            "from": "黄仁勋辞职",
-            "to": "英伟达员工请愿让黄仁勋复职",
-            "removed": [
-              "勋辞",
-              "辞职",
-              "黄仁勋辞职"
-            ],
-            "added": [
-              "伟达",
-              "勋复",
-              "员工",
-              "复职",
-              "工请",
-              "愿让",
-              "英伟",
-              "英伟达员工请愿让黄仁勋复职"
             ]
           }
         ]

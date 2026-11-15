@@ -1,10 +1,41 @@
 {
-  "generatedAt": "2026-11-15T17:27:48.039Z",
+  "generatedAt": "2026-11-15T22:08:41.603Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-15/19",
+  "edition": "2026-11-16/06",
   "themes": [
+    {
+      "key": "comms",
+      "name": "通信",
+      "boardCode": "BK0448",
+      "boardName": "通信设备",
+      "boardChangePct": -3.25,
+      "boardUp": 11,
+      "boardDown": 82,
+      "articleHits": 4,
+      "matchedAliases": [
+        "通信",
+        "卫星"
+      ],
+      "constituents": [
+        {
+          "symbol": "002281",
+          "name": "光迅科技",
+          "changePct": -8.48
+        },
+        {
+          "symbol": "001267",
+          "name": "汇绿生态",
+          "changePct": -7.56
+        },
+        {
+          "symbol": "003031",
+          "name": "中瓷电子",
+          "changePct": -6.13
+        }
+      ]
+    },
     {
       "key": "ai",
       "name": "人工智能",
@@ -32,6 +63,36 @@
           "symbol": "000090",
           "name": "天健集团",
           "changePct": -4.79
+        }
+      ]
+    },
+    {
+      "key": "semiconductor",
+      "name": "半导体",
+      "boardCode": "BK1036",
+      "boardName": "半导体",
+      "boardChangePct": -3.33,
+      "boardUp": 14,
+      "boardDown": 173,
+      "articleHits": 2,
+      "matchedAliases": [
+        "芯片"
+      ],
+      "constituents": [
+        {
+          "symbol": "300373",
+          "name": "扬杰科技",
+          "changePct": -4.83
+        },
+        {
+          "symbol": "001309",
+          "name": "德明利",
+          "changePct": -4.55
+        },
+        {
+          "symbol": "002409",
+          "name": "雅克科技",
+          "changePct": -4.46
         }
       ]
     },
@@ -120,62 +181,6 @@
           "symbol": "002865",
           "name": "钧达股份",
           "changePct": -8.73
-        }
-      ]
-    },
-    {
-      "key": "semiconductor",
-      "name": "半导体",
-      "boardCode": "BK1036",
-      "boardName": "半导体",
-      "boardChangePct": -3.33,
-      "boardUp": 14,
-      "boardDown": 173,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "300373",
-          "name": "扬杰科技",
-          "changePct": -4.83
-        },
-        {
-          "symbol": "001309",
-          "name": "德明利",
-          "changePct": -4.55
-        },
-        {
-          "symbol": "002409",
-          "name": "雅克科技",
-          "changePct": -4.46
-        }
-      ]
-    },
-    {
-      "key": "comms",
-      "name": "通信",
-      "boardCode": "BK0448",
-      "boardName": "通信设备",
-      "boardChangePct": -3.25,
-      "boardUp": 11,
-      "boardDown": 82,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002281",
-          "name": "光迅科技",
-          "changePct": -8.48
-        },
-        {
-          "symbol": "001267",
-          "name": "汇绿生态",
-          "changePct": -7.56
-        },
-        {
-          "symbol": "003031",
-          "name": "中瓷电子",
-          "changePct": -6.13
         }
       ]
     },

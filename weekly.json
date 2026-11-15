@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-15T17:27:31.557Z",
+  "generatedAt": "2026-11-15T22:08:25.460Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 22,
-  "avgSentiment": -3.8,
+  "daysCovered": 9,
+  "editions": 23,
+  "avgSentiment": -3.7,
   "sentimentCurve": [
     {
       "date": "2026-11-08",
@@ -115,6 +115,11 @@
       "date": "2026-11-15",
       "hour": "19",
       "score": -4
+    },
+    {
+      "date": "2026-11-16",
+      "hour": "06",
+      "score": -1
     }
   ],
   "sectorAvg": [
@@ -137,22 +142,22 @@
       "editions": 6
     },
     {
-      "key": "us-equity",
-      "label": "美股",
-      "avg": -20.1,
-      "editions": 22
-    },
-    {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -19.9,
-      "editions": 22
+      "avg": -20.7,
+      "editions": 23
+    },
+    {
+      "key": "us-equity",
+      "label": "美股",
+      "avg": -20,
+      "editions": 23
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -17,
-      "editions": 22
+      "avg": -16.5,
+      "editions": 23
     },
     {
       "key": "macro",
@@ -163,8 +168,8 @@
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -1.5,
-      "editions": 22
+      "avg": -1.3,
+      "editions": 23
     }
   ],
   "topEvents": [
@@ -173,20 +178,27 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Trump says FBI investigating Nvidia boss's affair with alleged Chinese spy",
       "url": "https://www.bbc.co.uk/news/articles/cqg7x7dpvym8o?at_medium=RSS&at_campaign=rss",
+      "count": 17
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
+      "url": "https://www.bbc.co.uk/news/articles/c64g1gzy2vdzo?at_medium=RSS&at_campaign=rss",
       "count": 16
     },
     {
@@ -206,60 +218,53 @@
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
-      "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
-      "url": "https://www.bbc.co.uk/news/articles/c64g1gzy2vdzo?at_medium=RSS&at_campaign=rss",
-      "count": 15
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
       "title": "Nvidia hires major US law firm to investigate alleged Chinese spy affair",
       "url": "https://www.bbc.co.uk/news/articles/ck1wvwwl3x0go?at_medium=RSS&at_campaign=rss",
-      "count": 14
+      "count": 15
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Anthropic斥资34亿美元接手发电设备",
       "url": "https://www.ftchinese.com/story/001111311",
-      "count": 13
+      "count": 14
     },
     {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Anthropic寻求以1.4万亿美元估值上市",
       "url": "https://www.ftchinese.com/story/001111328",
-      "count": 10
+      "count": 11
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Who could replace Jensen Huang as Nvidia's chief executive?",
       "url": "https://www.bbc.co.uk/news/articles/cqgm37dv20e8o?at_medium=RSS&at_campaign=rss",
-      "count": 10
+      "count": 11
     }
   ],
   "keywords": [
     {
       "term": "1月",
-      "count": 3,
+      "count": 4,
       "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
-    },
-    {
-      "term": "月1",
-      "count": 3,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
+      "lastSeen": "2026-11-16"
     },
     {
       "term": "联社",
-      "count": 3,
+      "count": 4,
       "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
+      "lastSeen": "2026-11-16"
     },
     {
       "term": "财联",
+      "count": 4,
+      "firstSeen": "2026-11-12",
+      "lastSeen": "2026-11-16"
+    },
+    {
+      "term": "月1",
       "count": 3,
       "firstSeen": "2026-11-12",
       "lastSeen": "2026-11-13"
@@ -313,6 +318,12 @@
       "lastSeen": "2026-11-08"
     },
     {
+      "term": "社1",
+      "count": 2,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-16"
+    },
+    {
       "term": "美元",
       "count": 2,
       "firstSeen": "2026-11-08",
@@ -353,43 +364,37 @@
       "count": 1,
       "firstSeen": "2026-11-11",
       "lastSeen": "2026-11-11"
-    },
-    {
-      "term": "2025年医保目录国谈药品采购金额数量双增长",
-      "count": 1,
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 119
+      "totalHits": 126
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 100
+      "totalHits": 103
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 67
+      "totalHits": 70
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 59
-    },
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "totalHits": 46
+      "totalHits": 63
     },
     {
       "key": "oil",
       "name": "石油石化",
+      "totalHits": 47
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
       "totalHits": 46
     },
     {
@@ -400,7 +405,7 @@
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 31
+      "totalHits": 33
     },
     {
       "key": "brokerage",
@@ -413,31 +418,31 @@
       "totalHits": 20
     },
     {
+      "key": "comms",
+      "name": "通信",
+      "totalHits": 17
+    },
+    {
       "key": "pharma",
       "name": "创新药",
       "totalHits": 16
-    },
-    {
-      "key": "comms",
-      "name": "通信",
-      "totalHits": 15
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.42,
-      "editions": 21
+      "avgChangePct": -0.43,
+      "editions": 22
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.24,
-      "editions": 21
+      "avgChangePct": -1.28,
+      "editions": 22
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.73,
-      "editions": 20
+      "avgChangePct": -1.81,
+      "editions": 21
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
