@@ -36,6 +36,14 @@ import {
   sparklineForTicker,
 } from "./quant-panels";
 import { suproUrl, SUPRO_LINK_ATTRS } from "./supro";
+import {
+  SITE_URL,
+  slotInstantIso,
+  buildInstantIso,
+  socialMetaTags,
+  jsonLdScript,
+  newsArticleLd,
+} from "./meta";
 
 // ----- i18n -----
 
@@ -402,6 +410,59 @@ const TEXTS_ZH = {
   suproThemesLead: "题材命中只是标题计数——想核对板块今天的实际反应，去 SuPro 查",
   suproFlowsLead: "资金流只是当日截面——想在纸盘上试自己的判断，去 SuPro",
   integritySuproLead: "核对完数据的来龙去脉，可以在 SuPro 的纸盘上按同样的纪律演练：",
+  // Reaction windows page (/reactions.html). Every visible state is a real
+  // answer: pending/insufficient are honest results, not errors, and the page
+  // must never fold them into a quieter "no data".
+  navReactions: "反应窗",
+  reactionsTitle: "题材反应窗",
+  reactionsSubtitle: "新闻首次出现后，其所属板块在 +1h / +1d / +5d 相对市场的实际涨跌。待定与样本不足同样是诚实的答案。",
+  reactionsDataThrough: "数据截至 {dataThrough} · 时区 {tz}",
+  reactionsDataThroughNone: "尚无输入时点（tape 与台账均为空）",
+  reactionsHeadlineTitle: "口径",
+  reactionsCountsTitle: "样本与状态",
+  reactionsCountsStories: "台账故事 {stories} 条 · 可测 {measured} 条 · 已发布 {published} 条",
+  reactionsAttrHeading: "归因五桶（互斥，不可互换）",
+  reactionsAttrEntity: "实体 {n}：板块已解析且被报价",
+  reactionsAttrTopic: "题材 {n}：题材板块已解析且被报价",
+  reactionsAttrMarket: "市场 {n}：tape 已开始、确无板块关联（这是发现）",
+  reactionsAttrPending: "待定 {n}：tape 未开始，尚不可判（不是市场桶）",
+  reactionsAttrUnmapped: "未映射 {n}：tape 已开始但无任何报价",
+  reactionsChipEntity: "实体",
+  reactionsChipTopic: "题材",
+  reactionsChipMarket: "市场",
+  reactionsChipPending: "待判",
+  reactionsChipUnmapped: "未映射",
+  reactionsHorizonLine: "{label}：已测 {ok} · 待定 {pending} · 缺口 {gap}",
+  reactionsAggTopic: "按题材聚合（仅实体/题材归因样本）",
+  reactionsAggEntity: "按实体聚合",
+  reactionsAggNone: "暂无聚合行。",
+  reactionsAggInsufficient: "样本不足（n={n}，需 ≥{min}）",
+  reactionsAggOk: "均值 {mean} · 中位 {median} · n={n}",
+  reactionsAggHitRate: "命中率 {rate}",
+  reactionsAggExcluded: "排除：待定 {pending} · 缺口 {gap}",
+  reactionsObsTitle: "逐条观察（最新在前）",
+  reactionsObsNone: "暂无可发布的观察。",
+  reactionsObsPublished: "显示已发布的 {published} 条观察（全部测得 {total} 条）。",
+  reactionsColFirstSeen: "首次出现",
+  reactionsColStory: "故事",
+  reactionsColTarget: "归属",
+  reactionsColHorizon: "{label}",
+  reactionsReview: "复盘下一信号 ↗",
+  reactionsRawLine: "原始 {raw} · 窗口 {minutes} 分钟",
+  reactionsStatusPending: "待定",
+  reactionsStatusGap: "缺口",
+  reactionsStatusReason: "原因：{reason}",
+  reactionsGapsTitle: "数据缺口",
+  reactionsGapsNone: "无缺口。",
+  reactionsGapLine: "{kind} × {count} — {detail}",
+  reactionsMethodTitle: "方法",
+  reactionsMethodSummary: "头条指标是 {metric}：板块在窗口内的涨幅，减去同一窗口全部行业板块的横截面均值。原始涨幅与相对板块自身漂移的超额一同发布；后者在完整的前置窗口出现前为空。",
+  reactionsMethodNote: "完整口径（进入/退出快照规则、最小样本、缺口命名）见下方 JSON 文件与仓库测试。",
+  reactionsDataLink: "数据：/reactions.json · 冻结契约：/v1/reactions.json",
+  reactionsMissingTitle: "反应窗尚未生成",
+  reactionsMissingBody: "reactions.json 还没有生成。它由 reactions:bake 从时点 tape 与故事台账算出——生成后本页即有内容。",
+  reactionsMissingReason: "原因：{reason}",
+  reactionsFooter: "本页由 reactions.json 静态渲染；零 AI；口径与诚实性断言见仓库测试与 /v1。",
 };
 
 const TEXTS_EN: typeof TEXTS_ZH = {
@@ -756,6 +817,59 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   suproThemesLead: "Theme hits are headline counts — to check how the boards actually moved today, see SuPro's",
   suproFlowsLead: "Fund flows are a single-day snapshot — to test your own read on the paper desk, go to SuPro's",
   integritySuproLead: "After auditing where the data comes from, practice the same discipline on SuPro's paper desk:",
+  // Reaction windows page (/reactions.html). Every visible state is a real
+  // answer: pending/insufficient are honest results, not errors, and the page
+  // must never fold them into a quieter "no data".
+  navReactions: "Reaction windows",
+  reactionsTitle: "Theme reaction windows",
+  reactionsSubtitle: "After a story first appears, how its sector actually moved vs the market at +1h / +1d / +5d. Pending and insufficient are honest answers too.",
+  reactionsDataThrough: "Data through {dataThrough} · timezone {tz}",
+  reactionsDataThroughNone: "No input instant yet (tape and ledger are both empty)",
+  reactionsHeadlineTitle: "Method",
+  reactionsCountsTitle: "Samples and states",
+  reactionsCountsStories: "{stories} ledger stories · {measured} measurable · {published} published",
+  reactionsAttrHeading: "Attribution buckets (mutually exclusive, not interchangeable)",
+  reactionsAttrEntity: "entity {n}: a sector board resolved and was quoted",
+  reactionsAttrTopic: "topic {n}: the topic's broad board resolved and was quoted",
+  reactionsAttrMarket: "market {n}: the tape HAD started and the story genuinely has no sector link (a finding)",
+  reactionsAttrPending: "pending {n}: the tape has not started, so nothing could be attributed yet (NOT the market bucket)",
+  reactionsAttrUnmapped: "unmapped {n}: the tape started but nothing was quoted",
+  reactionsChipEntity: "entity",
+  reactionsChipTopic: "topic",
+  reactionsChipMarket: "market",
+  reactionsChipPending: "pending",
+  reactionsChipUnmapped: "unmapped",
+  reactionsHorizonLine: "{label}: measured {ok} · pending {pending} · gap {gap}",
+  reactionsAggTopic: "By topic (entity/topic-attributed samples only)",
+  reactionsAggEntity: "By entity",
+  reactionsAggNone: "No aggregate rows yet.",
+  reactionsAggInsufficient: "insufficient (n={n}, needs >= {min})",
+  reactionsAggOk: "mean {mean} · median {median} · n={n}",
+  reactionsAggHitRate: "hit rate {rate}",
+  reactionsAggExcluded: "excluded: pending {pending} · gap {gap}",
+  reactionsObsTitle: "Per-story observations (newest first)",
+  reactionsObsNone: "No publishable observations yet.",
+  reactionsObsPublished: "Showing the {published} published observations ({total} measured in total).",
+  reactionsColFirstSeen: "First seen",
+  reactionsColStory: "Story",
+  reactionsColTarget: "Attribution",
+  reactionsColHorizon: "{label}",
+  reactionsReview: "Review the next signal ↗",
+  reactionsRawLine: "raw {raw} · window {minutes} min",
+  reactionsStatusPending: "pending",
+  reactionsStatusGap: "gap",
+  reactionsStatusReason: "reason: {reason}",
+  reactionsGapsTitle: "Named gaps",
+  reactionsGapsNone: "No gaps.",
+  reactionsGapLine: "{kind} x {count} — {detail}",
+  reactionsMethodTitle: "Method",
+  reactionsMethodSummary: "The headline metric is {metric}: the sector's return over the window minus the cross-sectional mean of all industry boards over the identical window. The raw return and the excess vs the sector's own trailing drift are published alongside; the latter stays null until a full prior window exists.",
+  reactionsMethodNote: "Full method (entry/exit snapshot rules, minimum sample, gap naming) lives in the JSON below and in the repo tests.",
+  reactionsDataLink: "Data: /reactions.json · frozen contract: /v1/reactions.json",
+  reactionsMissingTitle: "Reaction windows have not been generated yet",
+  reactionsMissingBody: "reactions.json does not exist yet. It is baked by reactions:bake from the point-in-time tape and the story ledger — this page fills in as soon as the file does.",
+  reactionsMissingReason: "Reason: {reason}",
+  reactionsFooter: "This page is rendered statically from reactions.json; zero AI; the method and honesty assertions live in the repo tests and /v1.",
 };
 
 const STR = REPORT_LOCALE === "en" ? TEXTS_EN : TEXTS_ZH;
@@ -1302,6 +1416,10 @@ export function siteNavLinks(): string {
     `<a href="../archive.html">${STR.archiveLink}</a>`,
     `<a href="../hour.html">${STR.navHour}</a>`,
     `<a href="../stories.html">${STR.navStories}</a>`,
+    // The reaction windows page is a peer reading surface; tagged so build-site
+    // can drop it on a tree where the reactions bake did not run (the page is
+    // presence-gated on reactions.json).
+    `<a data-nav="reactions" href="../reactions.html">${STR.navReactions}</a>`,
     // Tagged so build-site can drop it on a tree where the v1 bake did not run
     // (a local `build-site` without `v1:bake`). A nav item that 404s on the
     // pages whose whole claim is honesty is worse than a missing nav item.
@@ -1804,12 +1922,42 @@ export function renderHtml(
     }
   </section>`;
 
+  // Structured discovery: og:/twitter card + one NewsArticle JSON-LD per
+  // edition. The page URL is absolute because the edition renders at
+  // `/<date>/<HH>.html` on the published site; dates carry the REPORT_TZ
+  // offset (the sidecar's dual clocks are the same convention).
+  const pageTitle = `${STR.siteTitle} · ${editionLabel} · ${date}`;
+  const pageUrl = editionHour
+    ? `${SITE_URL}/${date}/${editionHour}.html`
+    : `${SITE_URL}/${date}/${date}.html`;
+  const publishedIso = editionHour ? slotInstantIso(date, editionHour) : "";
+  const ogDescription =
+    report.daily_overview || report.hero_headline || STR.siteTagline;
+  const discoveryHead = `${socialMetaTags({
+    title: pageTitle,
+    description: ogDescription,
+    url: pageUrl,
+    type: "article",
+    publishedIso,
+    modifiedIso: buildInstantIso(),
+  })}
+${jsonLdScript(
+  newsArticleLd({
+    headline: report.hero_headline || pageTitle,
+    description: ogDescription,
+    url: pageUrl,
+    datePublishedIso: publishedIso || buildInstantIso(),
+    dateModifiedIso: buildInstantIso(),
+  }),
+)}`;
+
   return `<!doctype html>
 <html lang="${REPORT_LOCALE === "en" ? "en" : "zh-CN"}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${STR.siteTitle} · ${editionLabel} · ${date}</title>
+${discoveryHead}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;0,9..40,700;1,9..40,500&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">

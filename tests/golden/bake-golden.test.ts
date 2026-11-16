@@ -23,14 +23,14 @@ function makeSidecar(
   dir: string,
   date: string,
   hour: string,
-  opts: { caixinFail?: boolean; generatedAt?: string } = {},
+  opts: { caixinFail?: boolean; generatedAt?: string; extraFinanceBriefs?: Array<{ title: string; url: string; source: string; summary: string; importance: number }> } = {},
 ) {
   fs.mkdirSync(path.join(dir, date), { recursive: true });
   const report = {
     hero_headline: `${date} ${hour} 头条`,
     daily_overview: "概览",
     tech_briefs: [],
-    finance_briefs: [],
+    finance_briefs: opts.extraFinanceBriefs ?? [],
     politics_briefs: [],
     editor_note: "",
     keywords: ["MLF", "央行"],
@@ -66,12 +66,18 @@ function makeSidecar(
     path.join(dir, date, `${hour}.html`),
     // The synthetic edition mirrors the WEB_MODE nav row render.ts emits, so
     // build-site's ../ → ./ rewrites and its missing-page stripping are
-    // exercised over the same anchor shapes the real pages carry.
-    `<html><head><title>t</title></head><body><main><h1>${date} ${hour}</h1>` +
+    // exercised over the same anchor shapes the real pages carry. The head
+    // mirrors render.ts's discovery block the same way, so the homepage's
+    // og:url rewrite and WebSite injection run against realistic markup.
+    `<html><head><title>t</title>` +
+      `<meta property="og:url" content="https://fudan2026.github.io/opencool/${date}/${hour}.html">` +
+      `<script type="application/ld+json">{"@context": "https://schema.org","@type": "NewsArticle"}</script>` +
+      `</head><body><main><h1>${date} ${hour}</h1>` +
       `<nav class="site-nav">` +
       `<a href="../archive.html">历史归档</a>` +
       `<a href="../hour.html">盘中逐时报</a>` +
       `<a href="../stories.html">故事线</a>` +
+      `<a data-nav="reactions" href="../reactions.html">反应窗</a>` +
       `<a data-nav="integrity" href="../integrity.html">数据完整性</a>` +
       `<a data-nav="supro" href="../supro.html">量化实操·SuPro</a>` +
       `</nav></main><footer>f</footer></body></html>`,
@@ -124,12 +130,122 @@ test("golden: build-site end-to-end", async (t) => {
     makeSidecar(R, d, h, {
       caixinFail: true,
       generatedAt: gen ?? undefined,
+      // One ai-theme brief on the newest edition, so the per-theme feed has a
+      // deterministic item to assert on.
+      extraFinanceBriefs:
+        d === today && h === "19"
+          ? [
+              {
+                title: "人工智能大模型发布会",
+                url: "https://example.com/ai",
+                source: "测试源",
+                summary: "大模型 算力需求继续爆发",
+                importance: 3,
+              },
+            ]
+          : undefined,
     });
   }
   makePlaceholder(R, yesterday, "06");
   fs.writeFileSync(
     path.join(R, old, "06-articles.json"),
     JSON.stringify({ articles: [] }),
+    "utf8",
+  );
+
+  // themes.json fixture for the per-theme feeds: `ai` exists in the committed
+  // catalog (so its aliases match the brief above); `gold` does not, so its
+  // channel must still exist — one feed per theme in themes.json — and be
+  // honestly empty.
+  fs.writeFileSync(
+    path.join(R, "themes.json"),
+    JSON.stringify({
+      generatedAt: new Date().toISOString(),
+      status: "ok",
+      registry: "live",
+      edition: `${today}/19`,
+      themes: [
+        { key: "ai", name: "人工智能", boardCode: "BK0800", articleHits: 2, matchedAliases: ["人工智能"], constituents: [] },
+        { key: "gold", name: "黄金", boardCode: null, articleHits: 0, matchedAliases: [], constituents: [] },
+      ],
+    }),
+    "utf8",
+  );
+
+  // reactions.json fixture: one measurable +1h window, one pending story, one
+  // insufficient aggregate — the exact states the public page must keep visible.
+  fs.writeFileSync(
+    path.join(R, "reactions.json"),
+    JSON.stringify({
+      schemaVersion: 1,
+      dataThrough: `${today}T19:21:00+08:00`,
+      timezone: "Asia/Shanghai",
+      headlineMetric: "marketExcessPct",
+      headlineReason: "cross-sectional excess is the headline",
+      method: {},
+      tape: { days: 1, snapshots: 2, from: `${today}T09:35:00+08:00`, to: `${today}T14:35:00+08:00`, slots: ["09:35"] },
+      ledger: { stories: 2, withFirstSeen: 2, maxStories: 2000, retentionDays: 30, updatedAt: `${today}T19:21:00+08:00`, retainedFrom: today, retainedTo: today, capBinding: false },
+      counts: {
+        stories: 2,
+        attributed: { entity: 1, topic: 0, market: 0, pending: 1, unmapped: 0 },
+        horizons: { "1h": { ok: 1, pending: 1, gap: 0 }, "1d": { ok: 0, pending: 2, gap: 0 }, "5d": { ok: 0, pending: 2, gap: 0 } },
+        aggregates: { byTopic: 1, byEntity: 0 },
+        observationsTotal: 2,
+        observationsPublished: 2,
+      },
+      aggregates: {
+        byTopic: [
+          {
+            key: "global-markets",
+            label: "全球市场",
+            expectedSign: null,
+            horizons: {
+              "1h": { n: 3, status: "insufficient", excluded: { pending: 1, gap: 0 } },
+              "1d": { n: 0, status: "insufficient", excluded: { pending: 0, gap: 0 } },
+              "5d": { n: 0, status: "insufficient", excluded: { pending: 0, gap: 0 } },
+            },
+          },
+        ],
+        byEntity: [],
+      },
+      observations: [
+        {
+          id: "st_fix01",
+          firstSeenAt: `${today}T13:05:12+08:00`,
+          firstEdition: `${today}/13`,
+          topic: "global-markets",
+          target: "theme:ai",
+          targetLabel: "人工智能",
+          attribution: "entity",
+          entity: "nvidia",
+          attributionReason: "entity nvidia -> theme ai",
+          horizons: {
+            "1h": { status: "ok", windowMinutes: 60, rawReturnPct: 2.1, marketExcessPct: 1.23, marketMeanPct: 0.87 },
+            "1d": { status: "pending", reason: "no snapshot at/after firstSeenAt + horizon" },
+            "5d": { status: "pending", reason: "no snapshot at/after firstSeenAt + horizon" },
+          },
+        },
+        {
+          id: "st_fix02",
+          firstSeenAt: `${today}T14:10:00+08:00`,
+          firstEdition: `${today}/13`,
+          topic: "policy",
+          target: null,
+          targetLabel: null,
+          attribution: "pending",
+          attributionPending: true,
+          entity: null,
+          attributionReason: "tape has not started",
+          horizons: {
+            "1h": { status: "pending", reason: "no snapshot at/after firstSeenAt + horizon" },
+            "1d": { status: "pending", reason: "no snapshot at/after firstSeenAt + horizon" },
+            "5d": { status: "pending", reason: "no snapshot at/after firstSeenAt + horizon" },
+          },
+        },
+      ],
+      observationsTruncated: false,
+      gaps: [{ kind: "attribution-pending", detail: "tape has not started", count: 1 }],
+    }),
     "utf8",
   );
 
@@ -147,6 +263,17 @@ test("golden: build-site end-to-end", async (t) => {
       stdio: "pipe",
     });
   }
+  // Per-theme feeds + the reactions page: the two presence-gated products
+  // this increment adds. Spawned the same way (real scripts, synthetic tree).
+  execFileSync(tsxBin, [path.join(REPO_ROOT, "scripts", "bake-feeds.ts")], {
+    cwd: tmp,
+    stdio: "pipe",
+  });
+  execFileSync(
+    tsxBin,
+    [path.join(REPO_ROOT, "scripts", "build-reading-pages.ts"), "--only=reactions"],
+    { cwd: tmp, stdio: "pipe" },
+  );
 
   bake(tmp);
 
@@ -481,6 +608,131 @@ test("golden: build-site end-to-end", async (t) => {
     assert.equal(w.editions, 6);
     assert.ok(Array.isArray(w.sectorAvg));
     assert.ok(Array.isArray(w.topEvents));
+  });
+
+  await t.test("feeds: one channel per theme, UTM per item, placeholders excluded", () => {
+    const feeds = fs.readdirSync(path.join(R, "feed")).filter((f) => f.endsWith(".xml"));
+    assert.deepEqual(feeds, ["ai.xml", "gold.xml"]);
+    const ai = read("feed/ai.xml");
+    // The only edition whose briefs match the ai aliases is today/19.
+    assert.ok(ai.includes(`<link>https://fudan2026.github.io/opencool/${today}/19.html?`));
+    // ampersands are XML-escaped; assert the scheme parts, not the raw & chain.
+    assert.ok(ai.includes("utm_source=opencool"));
+    assert.ok(ai.includes("utm_campaign=news_to_practice"));
+    assert.ok(
+      ai.includes("utm_content=rss-ai"),
+      "the item link carries the theme's own UTM value",
+    );
+    assert.ok(
+      ai.includes(`<guid isPermaLink="true">https://fudan2026.github.io/opencool/${today}/19.html</guid>`),
+      "the guid is the bare permalink, not the tracked link",
+    );
+    assert.equal(ai.split("<item>").length - 1, 1, "no other edition matched");
+    assert.ok(!ai.includes("尚未更新"), "placeholders never leak into a channel");
+    // A theme outside the catalog still gets its channel — one feed per theme
+    // in themes.json — and it is honestly empty.
+    const gold = read("feed/gold.xml");
+    assert.equal(gold.split("<item>").length - 1, 0);
+  });
+
+  await t.test("sitemap.xml: root pages + real editions, placeholders excluded", () => {
+    const sitemap = read("sitemap.xml");
+    const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    for (const page of [
+      "index.html",
+      "archive.html",
+      "status.html",
+      "supro.html",
+      "subscribe.html",
+      "ai-instructions.html",
+      "heatmap.html",
+      "periods.html",
+      "reactions.html",
+    ]) {
+      assert.ok(
+        locs.includes(`https://fudan2026.github.io/opencool/${page}`),
+        `sitemap missing root page ${page}`,
+      );
+    }
+    assert.ok(
+      locs.includes(`https://fudan2026.github.io/opencool/${today}/19.html`),
+      "real editions are listed",
+    );
+    assert.equal(
+      locs.some((l) => l.endsWith(`${yesterday}/06.html`)),
+      false,
+      "placeholder pages are never listed",
+    );
+    // lastmod for an edition is the sidecar's own generated_at, not the mtime.
+    assert.ok(
+      sitemap.includes(`<loc>https://fudan2026.github.io/opencool/${today}/06.html</loc>\n    <lastmod>${today}T06:26:00+08:00</lastmod>`),
+      "edition lastmod comes from fetch_health.generated_at",
+    );
+    // Every edition in the tree is covered: 7 real sidecars + legacy = 7 here.
+    assert.equal(locs.filter((l) => /\/\d{4}-\d{2}-\d{2}\//.test(l)).length, 7);
+  });
+
+  await t.test("robots.txt names the sitemap", () => {
+    const robots = read("robots.txt");
+    assert.ok(robots.includes("User-agent: *"));
+    assert.ok(robots.includes("Sitemap: https://fudan2026.github.io/opencool/sitemap.xml"));
+  });
+
+  await t.test("og cards: build-site pages carry the card block", () => {
+    const arch = read("archive.html");
+    assert.ok(arch.includes('<meta property="og:title" content="OpenCool 归档">'));
+    assert.ok(arch.includes('<meta name="twitter:card" content="summary">'));
+    assert.ok(arch.includes('"@type": "CollectionPage"'));
+    const status = read("status.html");
+    assert.ok(status.includes('<meta property="og:url" content="https://fudan2026.github.io/opencool/status.html">'));
+    assert.ok(status.includes('"@type": "WebPage"'));
+    // The placeholder page carries the card too — it is a public page. The
+    // fixture's yesterday/06.html is hand-written (not a build-site
+    // placeholder), so assert on the placeholder build-site itself writes
+    // for the latest day's missing slot: today/13.html.
+    const ph = read(`${today}/13.html`);
+    assert.ok(ph.includes('<meta property="og:type" content="website">'));
+    // The homepage: og:url rewritten to the root + WebSite JSON-LD added on top
+    // of the NewsArticle the edition template emitted.
+    const home = read("index.html");
+    assert.ok(home.includes('<meta property="og:url" content="https://fudan2026.github.io/opencool/">'));
+    assert.ok(home.includes('"@type": "WebSite"'));
+    assert.equal(home.includes('"@type": "NewsArticle"'), true, "the edition article is still described");
+  });
+
+  await t.test("reactions: presence-gated page is wired into the tree it exists in", () => {
+    const html = read("reactions.html");
+    assert.ok(html.includes('data-table="observations"'), "the observations table rendered");
+    assert.ok(read("archive.html").includes('href="./reactions.html"'));
+    assert.ok(read("status.html").includes('href="./reactions.html"'));
+    assert.ok(read("supro.html").includes('href="./reactions.html"'));
+    // The homepage copy rewrote the edition nav's `../` link...
+    assert.ok(read("index.html").includes('href="./reactions.html"'));
+    // ...and the page's own footer drops the siblings this fixture never built
+    // (hour/stories), keeping the one that exists (integrity).
+    assert.ok(!html.includes('href="./hour.html"'));
+    assert.ok(!html.includes('href="./stories.html"'));
+    assert.ok(html.includes('href="./integrity.html"'));
+  });
+
+  await t.test("reactions: honest states stay visible, one funnel entry per horizon", () => {
+    const html = read("reactions.html");
+    assert.ok(html.includes("+1.23%"), "the measurable window's headline is shown");
+    assert.ok(html.includes("待定"), "pending stays pending");
+    assert.ok(html.includes("样本不足"), "insufficient aggregates are named");
+    for (const key of ["reactions-1h", "reactions-1d", "reactions-5d"]) {
+      assert.ok(html.includes(`utm_content=${key}"`), `missing funnel entry ${key}`);
+    }
+    assert.ok(html.includes("https://supro.si/paper?"));
+  });
+
+  await t.test("llms.txt registers the discovery surfaces", () => {
+    const llms = read("llms.txt");
+    assert.ok(llms.includes("Reaction windows page: /reactions.html"), "reactions row missing");
+    assert.ok(llms.includes("Per-theme RSS: /feed/<theme-key>.xml"), "feeds row missing");
+    assert.ok(llms.includes("- Discovery: /sitemap.xml"), "sitemap/robots row missing");
+    assert.ok(llms.includes("rss-<theme-key> (per-theme RSS items)"), "funnel utm list not extended");
+    assert.ok(llms.includes("reactions-1h/reactions-1d/reactions-5d (/reactions.html)"));
   });
 
   fs.rmSync(tmp, { recursive: true, force: true });

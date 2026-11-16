@@ -28,6 +28,7 @@ import { isoWithOffset } from "../stories/time";
 import { getReportTz } from "../utils";
 import { esc, fill, STRINGS as R } from "./render";
 import { suproUrl, SUPRO_LINK_ATTRS } from "./supro";
+import { SITE_URL, socialMetaTags, jsonLdScript, collectionPageLd } from "./meta";
 
 export interface StoriesPageOptions {
   /** `null` when `daily_reports/stories.json` is missing or unparseable. */
@@ -373,6 +374,12 @@ export function renderStoriesPage(opts: StoriesPageOptions): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(S.storiesTitle)} · ${esc(S.siteTitle)}</title>
+${socialMetaTags({
+  title: `${S.storiesTitle} · ${S.siteTitle}`,
+  description: S.storiesSubtitle,
+  url: `${SITE_URL}/stories.html`,
+})}
+${jsonLdScript(collectionPageLd(`${S.storiesTitle}`, `${SITE_URL}/stories.html`, S.storiesSubtitle))}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -390,9 +397,11 @@ export function renderStoriesPage(opts: StoriesPageOptions): string {
     <p>${esc(S.storiesFooter)}</p>
     <p><a href="./index.html">← ${esc(S.navHome)}</a> · <a href="./archive.html">${esc(
       S.archiveLink,
-    )}</a> · <a href="./hour.html">${esc(S.navHour)}</a> · <a href="./integrity.html">${esc(
-      S.navIntegrity,
-    )}</a> · <a href="./supro.html">${esc(S.navSupro)}</a></p>
+    )}</a> · <a href="./hour.html">${esc(S.navHour)}</a> · <a href="./reactions.html">${esc(
+      S.navReactions,
+    )}</a> · <a href="./integrity.html">${esc(S.navIntegrity)}</a> · <a href="./supro.html">${esc(
+      S.navSupro,
+    )}</a></p>
   </footer>
 </main>
 </body>

@@ -209,6 +209,7 @@ test("golden: the runner keeps every bake/assert step, in order, for both caller
         "Bake reaction windows",
         "Assert reaction windows are honest",
         "Assert theme boards resolved",
+        "Bake per-theme RSS feeds",
         "Bake trend periods",
         "Bake search index",
         "Build reading pages (hour + stories)",
@@ -250,11 +251,11 @@ test("golden: the runner keeps every bake/assert step, in order, for both caller
         "Install dependencies",
         "Record run start",
         "Restore tape, ledger and editions from gh-pages",
+        "Bake reaction windows",
+        "Assert reaction windows are honest",
         "Build reading pages",
         "Assert zero LLM calls",
         "Assert both pages exist",
-        "Bake reaction windows",
-        "Assert reaction windows are honest",
         "Bake v1 namespace and integrity page",
         "Assert v1 contract",
         "Publish reading pages and tape",
@@ -988,6 +989,64 @@ test("golden: the reading pages are wired into the edition build", async (t) => 
   await t.test("no inline multi-line node body was added for the pages", () => {
     const src = readWorkflow(RUNNER);
     assert.deepEqual([...src.matchAll(/run:\s*node\s+-e\s/g)].map((m) => m[0]), []);
+  });
+});
+
+/**
+ * Structured discovery (roadmap §2-#1/#3/#4). The per-theme feeds and the
+ * reactions page are presence-gated products: a dropped bake step leaves the
+ * tree silently without them while everything stays green, which is the same
+ * failure class the reading-pages wiring test above exists for.
+ */
+test("golden: the feeds bake and the reactions page are wired into the jobs", async (t) => {
+  const job = buildJobSource();
+  const names = stepNames(job);
+
+  await t.test("the feeds bake runs after themes.json exists and before build-site", () => {
+    const at = names.indexOf("Bake per-theme RSS feeds");
+    assert.ok(at >= 0, "missing feeds bake step");
+    assert.match(stepSource(job, "Bake per-theme RSS feeds"), /npm run feeds:bake/);
+    assert.ok(
+      names.indexOf("Bake theme heat") < at,
+      "the feeds read themes.json, which the theme bake writes",
+    );
+    assert.ok(
+      at < names.indexOf("Build static site (index + archive)"),
+      "build-site lists feed/ in llms.txt only when present, so the feeds must exist first",
+    );
+  });
+
+  await t.test("the feeds bake gets the report timezone and locale", () => {
+    const step = stepSource(job, "Bake per-theme RSS feeds");
+    assert.match(step, /REPORT_TZ:/);
+    assert.match(step, /REPORT_LOCALE:/);
+  });
+
+  await t.test("the pages job bakes reactions before it builds the reading pages", () => {
+    const src = readWorkflow(RUNNER);
+    const pages = jobSource(src, "pages");
+    const pnames = stepNames(pages);
+    const bakeAt = pnames.indexOf("Bake reaction windows");
+    const pagesAt = pnames.indexOf("Build reading pages");
+    assert.ok(bakeAt >= 0 && pagesAt >= 0);
+    assert.ok(
+      bakeAt < pagesAt,
+      "reactions.html renders reactions.json, so the bake must precede the page build",
+    );
+    assert.ok(
+      bakeAt < pnames.indexOf("Assert zero LLM calls"),
+      "the bake must sit under the zero-token assert, not after it",
+    );
+  });
+
+  await t.test("the reading-pages assert knows the presence-gated reactions page", () => {
+    const src = fs.readFileSync(
+      path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../scripts/assert-reading-pages.mjs"),
+      "utf8",
+    );
+    assert.ok(src.includes('file: "reactions.html"'), "the reactions page must be in the PAGES list");
+    assert.match(src, /dataGate: "reactions\.json"/, "the page asserts only when its data exists");
+    assert.ok(src.includes('data-table="observations"'), "the data state must be provable");
   });
 });
 
