@@ -41,6 +41,8 @@ export const REACTIONS_SCHEMA_VERSION = 1;
 /** Minimum viable ledger record — the fields attribution and measurement need. */
 export interface LedgerStory {
   id: string;
+  /** Headline, consulted for atlas company/index aliases. May be empty. */
+  title?: string;
   firstSeenAt?: unknown;
   firstEdition?: unknown;
   topic?: unknown;
@@ -100,6 +102,7 @@ export function readLedgerStories(
     }
     stories.push({
       id,
+      title: asString(r.title),
       firstSeenAt,
       firstEdition: asString(r.firstEdition),
       topic: asString(r.topic),
@@ -160,12 +163,17 @@ export function buildReactions(
     themes,
     tapeStarted,
     hasIndex: (code) => series.has(indexSeriesKey(code)),
+    // An atlas row is a target only when the tape actually priced that board;
+    // without this guard a committed mapping would name a series measurement
+    // can never read.
+    hasBoard: (code) => series.has(boardSeriesKey(code)),
   };
 
   const attributed: AttributedStory[] = ledgerStories.map((s) =>
     attributeStory(
       {
         id: s.id,
+        title: asString(s.title),
         firstSeenAt: asString(s.firstSeenAt),
         firstEdition: asString(s.firstEdition),
         topic: asString(s.topic),
@@ -306,7 +314,14 @@ export function buildReactions(
       levels:
         "level(t) = base(day) x (1 + changePct/100), base chained from each day's close; a missing close starts a new segment and a window spanning it is a gap, never interpolated",
       attribution:
-        "entity -> theme table (reviewable, in lib/reactions/attribution.ts) first, then topic, then 上证指数 as a market fallback; nothing is inferred",
+        "entity -> theme table (reviewable, in lib/reactions/attribution.ts) first, then the committed board atlas " +
+        "(company/index aliases -> the industry board they are a verified constituent of; ambiguous short forms are " +
+        "excluded from the atlas itself), then topic, then 上证指数 as a market fallback; nothing is inferred",
+      boardAtlas:
+        "lib/reactions/board-atlas.json maps companies to industry boards from Eastmoney board membership fetched at " +
+        "dev time (npm run atlas:bake) — a committed static file, never fetched at runtime; every row's boardCode " +
+        "exists in the board registry and every alias resolves to exactly one company, with collisions recorded as " +
+        "ambiguous and excluded, so an attribution row never ships on memory alone",
       attributionStates:
         "entity = a sector board resolved and the tape quoted it; topic = the topic's broad board resolved; " +
         "market = the tape HAS started, the index is quoted, and the story genuinely has no entity or topic link; " +

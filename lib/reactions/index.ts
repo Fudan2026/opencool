@@ -36,6 +36,20 @@ export {
   type EntityThemeLink,
 } from "./attribution";
 export {
+  BOARD_ATLAS_FILE,
+  loadBoardAtlas,
+  parseAtlas,
+  matchAtlas,
+  resolveAtlasTarget,
+  resetBoardAtlasCache,
+  aliasPosition,
+  type AtlasCompany,
+  type AtlasIndex,
+  type AtlasAmbiguous,
+  type AtlasMatch,
+  type BoardAtlas,
+} from "./atlas";
+export {
   earliestAtOrAfter,
   marketMeanPct,
   measureHorizon,

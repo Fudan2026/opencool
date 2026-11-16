@@ -21,6 +21,17 @@
  *      carries the reason it exists. A story whose first mapped entity resolves
  *      to a theme the tape actually quoted is measured on that theme's board.
  *
+ *   1b. `entity` via the **board atlas** (`lib/reactions/atlas.ts`) — a title
+ *      that names an A-share company is measured on the industry board that
+ *      company is a verified constituent of. The atlas is a committed data
+ *      file built at dev time from Eastmoney board membership, so the link is
+ *      ground truth, not judgement; ambiguous aliases (平安, 中信 — two
+ *      companies each) and sector words (银行, 石油) are excluded from it by
+ *      the baker and never resolve. Explicit entity links (1) still win.
+ *      A title that names an *index* (沪指, 创业板指) is measured on that
+ *      index instead of the default proxy — still `market`, a better target
+ *      rather than a different claim.
+ *
  *   2. `topic` — no entity mapped, but the story's topic has a defensible
  *      broad board (a `policy` story is measured on nothing; a `tech-ai` story
  *      is measured on the AI concept board). Strictly weaker: `tech-ai` covers
@@ -35,12 +46,13 @@
  *      board the tape never quoted. Counted as `unmapped`, never silently
  *      dropped.
  *
- * The table is data, not logic, so a reviewer can audit the whole moat in one
+ * The tables are data, not logic, so a reviewer can audit the whole moat in one
  * screen. Links that would be indefensible (e.g. `trump` → 军工) are absent on
  * purpose.
  */
 
 import { loadThemeCatalog, type ThemeDef } from "../themes/catalog";
+import { loadBoardAtlas, resolveAtlasTarget } from "./atlas";
 import type { AttributedStory } from "./types";
 
 export interface EntityThemeLink {
@@ -122,6 +134,12 @@ export interface AttributionContext {
   tapeStarted: boolean;
   /** True when the tape quoted this index code, so a market fallback is measurable. */
   hasIndex?: (code: string) => boolean;
+  /**
+   * True when the tape quoted this board code, so an atlas company row is a
+   * measurable target. Absent → treated as not quoted (attribution then falls
+   * through rather than naming a board the tape never priced).
+   */
+  hasBoard?: (code: string) => boolean;
   /** Themes in the catalog, for display names. */
   themes?: readonly ThemeDef[];
 }
@@ -134,9 +152,20 @@ const linkByTopic = new Map(TOPIC_THEME_LINKS.map((l) => [l.topic, l]));
  *
  * `target` is the tape series key (`board:BK0800` / `index:000001`), so the
  * measurement layer never has to guess what a target means.
+ *
+ * `title` is optional because the ledger always carries one but hand-made
+ * fixtures may not; without it only the explicit tables are consulted.
  */
 export function attributeStory(
-  story: { id: string; firstSeenAt: string; firstEdition: string; topic: string; entities?: readonly string[] },
+  story: {
+    id: string;
+    firstSeenAt: string;
+    firstEdition: string;
+    topic: string;
+    entities?: readonly string[];
+    /** Headline, consulted for atlas company/index aliases. */
+    title?: string;
+  },
   ctx: AttributionContext,
 ): AttributedStory {
   const base = {
@@ -158,6 +187,12 @@ export function attributeStory(
   //    and then silently redistributed them on the first real session.
   if (!ctx.tapeStarted) {
     const knownEntity = (story.entities ?? []).find((e) => linkByEntity.has(e)) ?? null;
+    const atlas = loadBoardAtlas();
+    const atlasHit = story.title ? resolveAtlasTarget(story.title, atlas) : null;
+    const candidate =
+      knownEntity ??
+      (atlasHit?.match.company ? atlasHit.match.company.company : null) ??
+      (atlasHit?.match.index ? atlasHit.match.index.name : null);
     return {
       ...base,
       target: null,
@@ -168,8 +203,8 @@ export function attributeStory(
       // the diagnostic is not lost.
       entity: null,
       attributionPending: true,
-      attributionReason: knownEntity
-        ? `tape has not started — no sector board has been quoted yet, so ${knownEntity}'s board cannot be resolved; this is not a market fallback`
+      attributionReason: candidate
+        ? `tape has not started — no sector board has been quoted yet, so ${candidate}'s board cannot be resolved; this is not a market fallback`
         : "tape has not started — no sector board has been quoted yet, so nothing can be attributed; this is not a market fallback",
     };
   }
@@ -189,6 +224,48 @@ export function attributeStory(
       entity,
       attributionReason: `${entity} → ${themeName(link.theme)} (${link.theme}): ${link.reason}`,
     };
+  }
+
+  // 1b. The board atlas. The title names an A-share company (or an index) and
+  //     the atlas — verified board membership, committed as data — maps it to
+  //     the industry board it belongs to. Two guards keep the claim honest:
+  //     the alias must be unambiguous (the baker excludes colliding short
+  //     forms from the file entirely), and the tape must have quoted the board,
+  //     otherwise the row is a mapping we cannot measure and the story falls
+  //     through to the weaker paths below rather than being pinned to it.
+  const atlas = loadBoardAtlas();
+  const atlasHit = story.title ? resolveAtlasTarget(story.title, atlas) : null;
+  if (atlasHit?.kind === "company" && atlasHit.match.company) {
+    const { company } = atlasHit.match;
+    if (ctx.hasBoard?.(company.boardCode) ?? false) {
+      return {
+        ...base,
+        target: `board:${company.boardCode}`,
+        targetLabel: company.boardName,
+        attribution: "entity",
+        entity: company.company,
+        attributionReason:
+          `title names ${atlasHit.match.alias} → ${company.company}, a verified constituent of ` +
+          `${company.boardName} (${company.boardCode}) in the committed board atlas`,
+      };
+    }
+  }
+  // A title naming an index is measured on *that* index — a better target than
+  // the default proxy, still a market observation ("did the tape move").
+  if (atlasHit?.kind === "index" && atlasHit.match.index) {
+    const { index } = atlasHit.match;
+    if (ctx.hasIndex?.(index.code) ?? false) {
+      return {
+        ...base,
+        target: `index:${index.code}`,
+        targetLabel: index.name,
+        attribution: "market",
+        entity: null,
+        attributionReason:
+          `title names ${atlasHit.match.alias} (${index.name}) explicitly, so the story is measured on that ` +
+          `index — still an index measurement, never a sector claim`,
+      };
+    }
   }
 
   // 2. Topic, only when it has a declared broad board and the tape quoted it.
