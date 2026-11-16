@@ -3,7 +3,7 @@
   "namespace": "v1",
   "date": "2026-11-16",
   "timezone": "Asia/Shanghai",
-  "generatedAt": "2026-11-16T10:17:29+08:00",
+  "generatedAt": "2026-11-16T10:22:16+08:00",
   "tradingDay": true,
   "beforeLaunch": false,
   "expectedSlots": [
@@ -3620,20 +3620,5670 @@
         }
       },
       "unavailableSections": []
-    }
-  ],
-  "gaps": [
+    },
     {
       "slot": "10:05",
-      "code": "missed",
-      "reason": "no snapshot for 10:05 on 2026-11-16 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+      "observedAt": "2026-11-16T10:17:54+08:00",
+      "asOf": "2026-11-16T10:21:27+08:00",
+      "revision": 0,
+      "captures": [
+        {
+          "revision": 0,
+          "file": "1005.json",
+          "path": "tape/2026-11-16/1005.json",
+          "observedAt": "2026-11-16T10:17:54+08:00",
+          "changed": null
+        }
+      ],
+      "registry": "live",
+      "sections": {
+        "indices": {
+          "asOf": "2026-11-16T10:20:30+08:00",
+          "observedAt": "2026-11-16T10:17:54+08:00",
+          "timestampSource": "upstream",
+          "records": [
+            {
+              "code": "000001",
+              "name": "上证指数",
+              "price": 3606.99,
+              "changePct": -0.75,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "399001",
+              "name": "深证成指",
+              "price": 10772.28,
+              "changePct": -1.79,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "399006",
+              "name": "创业板指",
+              "price": 2359.3,
+              "changePct": -2.75,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            }
+          ],
+          "meta": {
+            "note": "东方财富公开延时接口 · 非实时 · 仅供参考"
+          }
+        },
+        "industries": {
+          "asOf": "2026-11-16T10:20:30+08:00",
+          "observedAt": "2026-11-16T10:17:54+08:00",
+          "timestampSource": "upstream",
+          "records": [
+            {
+              "code": "BK1015",
+              "name": "能源金属",
+              "secid": "90.BK1015",
+              "changePct": -2.29,
+              "up": 0,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1016",
+              "name": "汽车服务",
+              "secid": "90.BK1016",
+              "changePct": 2.04,
+              "up": 7,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1018",
+              "name": "橡胶",
+              "secid": "90.BK1018",
+              "changePct": -0.97,
+              "up": 5,
+              "down": 16,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1019",
+              "name": "化学原料",
+              "secid": "90.BK1019",
+              "changePct": -0.98,
+              "up": 12,
+              "down": 48,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1020",
+              "name": "非金属材料Ⅱ",
+              "secid": "90.BK1020",
+              "changePct": -2.55,
+              "up": 2,
+              "down": 14,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1027",
+              "name": "小金属",
+              "secid": "90.BK1027",
+              "changePct": -2.92,
+              "up": 1,
+              "down": 26,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1028",
+              "name": "燃气Ⅱ",
+              "secid": "90.BK1028",
+              "changePct": -2.36,
+              "up": 2,
+              "down": 27,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1030",
+              "name": "电机Ⅱ",
+              "secid": "90.BK1030",
+              "changePct": -2,
+              "up": 1,
+              "down": 26,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1031",
+              "name": "光伏设备",
+              "secid": "90.BK1031",
+              "changePct": -2.75,
+              "up": 9,
+              "down": 60,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1032",
+              "name": "风电设备",
+              "secid": "90.BK1032",
+              "changePct": -2.28,
+              "up": 1,
+              "down": 30,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1033",
+              "name": "电池",
+              "secid": "90.BK1033",
+              "changePct": 0.31,
+              "up": 53,
+              "down": 52,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1034",
+              "name": "其他电源设备Ⅱ",
+              "secid": "90.BK1034",
+              "changePct": -2.47,
+              "up": 3,
+              "down": 33,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1035",
+              "name": "美容护理",
+              "secid": "90.BK1035",
+              "changePct": -0.58,
+              "up": 8,
+              "down": 25,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1036",
+              "name": "半导体",
+              "secid": "90.BK1036",
+              "changePct": -4.14,
+              "up": 4,
+              "down": 183,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1037",
+              "name": "消费电子",
+              "secid": "90.BK1037",
+              "changePct": -2.57,
+              "up": 15,
+              "down": 82,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1038",
+              "name": "光学光电子",
+              "secid": "90.BK1038",
+              "changePct": -2.54,
+              "up": 8,
+              "down": 87,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1039",
+              "name": "电子化学品Ⅱ",
+              "secid": "90.BK1039",
+              "changePct": -4,
+              "up": 0,
+              "down": 37,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1040",
+              "name": "中药Ⅱ",
+              "secid": "90.BK1040",
+              "changePct": -0.53,
+              "up": 22,
+              "down": 39,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1041",
+              "name": "医疗器械",
+              "secid": "90.BK1041",
+              "changePct": -0.98,
+              "up": 33,
+              "down": 104,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1042",
+              "name": "医药商业",
+              "secid": "90.BK1042",
+              "changePct": 0.18,
+              "up": 16,
+              "down": 15,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1043",
+              "name": "专业服务",
+              "secid": "90.BK1043",
+              "changePct": -0.66,
+              "up": 13,
+              "down": 19,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1044",
+              "name": "生物制品",
+              "secid": "90.BK1044",
+              "changePct": -2.52,
+              "up": 9,
+              "down": 49,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1045",
+              "name": "房地产服务",
+              "secid": "90.BK1045",
+              "changePct": -1.82,
+              "up": 0,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1046",
+              "name": "游戏Ⅱ",
+              "secid": "90.BK1046",
+              "changePct": -0.06,
+              "up": 6,
+              "down": 18,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1200",
+              "name": "电力设备",
+              "secid": "90.BK1200",
+              "changePct": -1.32,
+              "up": 94,
+              "down": 314,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1201",
+              "name": "电子",
+              "secid": "90.BK1201",
+              "changePct": -3.46,
+              "up": 33,
+              "down": 482,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1202",
+              "name": "房地产",
+              "secid": "90.BK1202",
+              "changePct": -1.46,
+              "up": 9,
+              "down": 88,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1203",
+              "name": "非银金融",
+              "secid": "90.BK1203",
+              "changePct": -0.34,
+              "up": 22,
+              "down": 47,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1204",
+              "name": "国防军工",
+              "secid": "90.BK1204",
+              "changePct": -2.9,
+              "up": 5,
+              "down": 136,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1205",
+              "name": "机械设备",
+              "secid": "90.BK1205",
+              "changePct": -2.14,
+              "up": 96,
+              "down": 524,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1206",
+              "name": "基础化工",
+              "secid": "90.BK1206",
+              "changePct": -1.53,
+              "up": 60,
+              "down": 388,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1207",
+              "name": "计算机",
+              "secid": "90.BK1207",
+              "changePct": -1.66,
+              "up": 36,
+              "down": 321,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1208",
+              "name": "建筑材料",
+              "secid": "90.BK1208",
+              "changePct": -1.17,
+              "up": 14,
+              "down": 59,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1209",
+              "name": "建筑装饰",
+              "secid": "90.BK1209",
+              "changePct": -1.19,
+              "up": 36,
+              "down": 109,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1210",
+              "name": "交通运输",
+              "secid": "90.BK1210",
+              "changePct": 0.11,
+              "up": 61,
+              "down": 60,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1211",
+              "name": "汽车",
+              "secid": "90.BK1211",
+              "changePct": -1.68,
+              "up": 41,
+              "down": 281,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1212",
+              "name": "轻工制造",
+              "secid": "90.BK1212",
+              "changePct": -1.29,
+              "up": 37,
+              "down": 129,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1213",
+              "name": "商贸零售",
+              "secid": "90.BK1213",
+              "changePct": -0.12,
+              "up": 45,
+              "down": 49,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1214",
+              "name": "社会服务",
+              "secid": "90.BK1214",
+              "changePct": -0.36,
+              "up": 32,
+              "down": 55,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1215",
+              "name": "通信",
+              "secid": "90.BK1215",
+              "changePct": -2.7,
+              "up": 12,
+              "down": 120,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1216",
+              "name": "医药生物",
+              "secid": "90.BK1216",
+              "changePct": -1.22,
+              "up": 112,
+              "down": 379,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1217",
+              "name": "综合",
+              "secid": "90.BK1217",
+              "changePct": -1.07,
+              "up": 2,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1218",
+              "name": "出版",
+              "secid": "90.BK1218",
+              "changePct": 0.22,
+              "up": 15,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1219",
+              "name": "电视广播Ⅱ",
+              "secid": "90.BK1219",
+              "changePct": 1.21,
+              "up": 8,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1220",
+              "name": "广告营销",
+              "secid": "90.BK1220",
+              "changePct": -0.35,
+              "up": 12,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1221",
+              "name": "数字媒体",
+              "secid": "90.BK1221",
+              "changePct": -1.42,
+              "up": 4,
+              "down": 11,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1222",
+              "name": "影视院线",
+              "secid": "90.BK1222",
+              "changePct": 0.1,
+              "up": 8,
+              "down": 10,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1223",
+              "name": "其他电子Ⅱ",
+              "secid": "90.BK1223",
+              "changePct": -3.06,
+              "up": 2,
+              "down": 31,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1224",
+              "name": "纺织制造",
+              "secid": "90.BK1224",
+              "changePct": -0.61,
+              "up": 11,
+              "down": 20,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1225",
+              "name": "服装家纺",
+              "secid": "90.BK1225",
+              "changePct": -0.95,
+              "up": 17,
+              "down": 40,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1226",
+              "name": "普钢",
+              "secid": "90.BK1226",
+              "changePct": -0.59,
+              "up": 2,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1227",
+              "name": "特钢Ⅱ",
+              "secid": "90.BK1227",
+              "changePct": -0.91,
+              "up": 2,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1228",
+              "name": "冶钢原料",
+              "secid": "90.BK1228",
+              "changePct": -1.25,
+              "up": 1,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1229",
+              "name": "地面兵装Ⅱ",
+              "secid": "90.BK1229",
+              "changePct": -2.49,
+              "up": 1,
+              "down": 11,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1230",
+              "name": "航海装备Ⅱ",
+              "secid": "90.BK1230",
+              "changePct": -1.26,
+              "up": 2,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1231",
+              "name": "航空装备Ⅱ",
+              "secid": "90.BK1231",
+              "changePct": -2.63,
+              "up": 0,
+              "down": 49,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1232",
+              "name": "航天装备Ⅱ",
+              "secid": "90.BK1232",
+              "changePct": -4.39,
+              "up": 0,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1233",
+              "name": "军工电子Ⅱ",
+              "secid": "90.BK1233",
+              "changePct": -3.27,
+              "up": 2,
+              "down": 59,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1234",
+              "name": "环保设备Ⅱ",
+              "secid": "90.BK1234",
+              "changePct": -1.55,
+              "up": 4,
+              "down": 22,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1235",
+              "name": "环境治理",
+              "secid": "90.BK1235",
+              "changePct": -1.22,
+              "up": 26,
+              "down": 76,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1266",
+              "name": "文娱用品",
+              "secid": "90.BK1266",
+              "changePct": -0.83,
+              "up": 4,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1267",
+              "name": "造纸",
+              "secid": "90.BK1267",
+              "changePct": -1.24,
+              "up": 3,
+              "down": 21,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1268",
+              "name": "互联网电商",
+              "secid": "90.BK1268",
+              "changePct": -1.38,
+              "up": 6,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1269",
+              "name": "旅游零售Ⅱ",
+              "secid": "90.BK1269",
+              "changePct": -0.25,
+              "up": 0,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1270",
+              "name": "专业连锁Ⅱ",
+              "secid": "90.BK1270",
+              "changePct": -1.14,
+              "up": 1,
+              "down": 6,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1271",
+              "name": "酒店餐饮",
+              "secid": "90.BK1271",
+              "changePct": -0.29,
+              "up": 4,
+              "down": 6,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1272",
+              "name": "旅游及景区",
+              "secid": "90.BK1272",
+              "changePct": -0.1,
+              "up": 9,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1273",
+              "name": "体育Ⅱ",
+              "secid": "90.BK1273",
+              "changePct": -0.16,
+              "up": 1,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1274",
+              "name": "炼化及贸易",
+              "secid": "90.BK1274",
+              "changePct": -0.95,
+              "up": 7,
+              "down": 23,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1275",
+              "name": "油服工程",
+              "secid": "90.BK1275",
+              "changePct": -2.69,
+              "up": 1,
+              "down": 11,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1276",
+              "name": "油气开采Ⅱ",
+              "secid": "90.BK1276",
+              "changePct": -1.57,
+              "up": 0,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1277",
+              "name": "白酒Ⅱ",
+              "secid": "90.BK1277",
+              "changePct": 0.32,
+              "up": 9,
+              "down": 11,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1278",
+              "name": "调味发酵品Ⅱ",
+              "secid": "90.BK1278",
+              "changePct": 0.17,
+              "up": 10,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1279",
+              "name": "非白酒",
+              "secid": "90.BK1279",
+              "changePct": -0.56,
+              "up": 6,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1280",
+              "name": "食品加工",
+              "secid": "90.BK1280",
+              "changePct": -0.46,
+              "up": 8,
+              "down": 18,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1281",
+              "name": "休闲食品",
+              "secid": "90.BK1281",
+              "changePct": -0.83,
+              "up": 8,
+              "down": 15,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1282",
+              "name": "饮料乳品",
+              "secid": "90.BK1282",
+              "changePct": 0.03,
+              "up": 12,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1283",
+              "name": "银行",
+              "secid": "90.BK1283",
+              "changePct": 1.03,
+              "up": 39,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1287",
+              "name": "工业金属",
+              "secid": "90.BK1287",
+              "changePct": -2.09,
+              "up": 3,
+              "down": 54,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1288",
+              "name": "金属新材料",
+              "secid": "90.BK1288",
+              "changePct": -3.42,
+              "up": 0,
+              "down": 36,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1289",
+              "name": "大众出版",
+              "secid": "90.BK1289",
+              "changePct": -0.53,
+              "up": 6,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1290",
+              "name": "教育出版",
+              "secid": "90.BK1290",
+              "changePct": 1.55,
+              "up": 9,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1291",
+              "name": "电视广播Ⅲ",
+              "secid": "90.BK1291",
+              "changePct": 1.29,
+              "up": 8,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1292",
+              "name": "广告媒体",
+              "secid": "90.BK1292",
+              "changePct": 0.22,
+              "up": 1,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1293",
+              "name": "营销代理",
+              "secid": "90.BK1293",
+              "changePct": -0.52,
+              "up": 11,
+              "down": 15,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1294",
+              "name": "门户网站",
+              "secid": "90.BK1294",
+              "changePct": -1.88,
+              "up": 2,
+              "down": 7,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1295",
+              "name": "其他数字媒体",
+              "secid": "90.BK1295",
+              "changePct": -4.72,
+              "up": 0,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1296",
+              "name": "视频媒体",
+              "secid": "90.BK1296",
+              "changePct": 4.6,
+              "up": 1,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1297",
+              "name": "图片媒体",
+              "secid": "90.BK1297",
+              "changePct": -0.81,
+              "up": 0,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1298",
+              "name": "文字媒体",
+              "secid": "90.BK1298",
+              "changePct": 0.84,
+              "up": 1,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1299",
+              "name": "影视动漫制作",
+              "secid": "90.BK1299",
+              "changePct": -1.16,
+              "up": 3,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1300",
+              "name": "院线",
+              "secid": "90.BK1300",
+              "changePct": 4.13,
+              "up": 3,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1301",
+              "name": "游戏Ⅲ",
+              "secid": "90.BK1301",
+              "changePct": -0.2,
+              "up": 6,
+              "down": 18,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1302",
+              "name": "电池化学品",
+              "secid": "90.BK1302",
+              "changePct": -0.1,
+              "up": 20,
+              "down": 23,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1303",
+              "name": "锂电池",
+              "secid": "90.BK1303",
+              "changePct": -0.04,
+              "up": 18,
+              "down": 15,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1304",
+              "name": "锂电专用设备",
+              "secid": "90.BK1304",
+              "changePct": 0.08,
+              "up": 7,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1305",
+              "name": "燃料电池",
+              "secid": "90.BK1305",
+              "changePct": -2.71,
+              "up": 0,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1306",
+              "name": "蓄电池及其他电池",
+              "secid": "90.BK1306",
+              "changePct": 2.45,
+              "up": 5,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1307",
+              "name": "电机Ⅲ",
+              "secid": "90.BK1307",
+              "changePct": -2.03,
+              "up": 1,
+              "down": 26,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1308",
+              "name": "电工仪器仪表",
+              "secid": "90.BK1308",
+              "changePct": -0.54,
+              "up": 7,
+              "down": 7,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1309",
+              "name": "电网自动化设备",
+              "secid": "90.BK1309",
+              "changePct": -1.39,
+              "up": 7,
+              "down": 22,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1310",
+              "name": "配电设备",
+              "secid": "90.BK1310",
+              "changePct": -1.4,
+              "up": 4,
+              "down": 24,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1311",
+              "name": "输变电设备",
+              "secid": "90.BK1311",
+              "changePct": -1.25,
+              "up": 3,
+              "down": 26,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1312",
+              "name": "线缆部件及其他",
+              "secid": "90.BK1312",
+              "changePct": -1.68,
+              "up": 4,
+              "down": 36,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1313",
+              "name": "风电零部件",
+              "secid": "90.BK1313",
+              "changePct": -2.41,
+              "up": 1,
+              "down": 25,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1314",
+              "name": "风电整机",
+              "secid": "90.BK1314",
+              "changePct": -2.4,
+              "up": 0,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1315",
+              "name": "光伏电池组件",
+              "secid": "90.BK1315",
+              "changePct": -2.73,
+              "up": 3,
+              "down": 19,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1316",
+              "name": "光伏辅材",
+              "secid": "90.BK1316",
+              "changePct": -3.21,
+              "up": 2,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1317",
+              "name": "光伏加工设备",
+              "secid": "90.BK1317",
+              "changePct": -4.84,
+              "up": 0,
+              "down": 10,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1318",
+              "name": "光伏主材",
+              "secid": "90.BK1318",
+              "changePct": -1.38,
+              "up": 0,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1319",
+              "name": "硅料硅片",
+              "secid": "90.BK1319",
+              "changePct": -1.02,
+              "up": 2,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1320",
+              "name": "逆变器",
+              "secid": "90.BK1320",
+              "changePct": -1.54,
+              "up": 2,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1321",
+              "name": "火电设备",
+              "secid": "90.BK1321",
+              "changePct": -0.87,
+              "up": 0,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1322",
+              "name": "其他电源设备Ⅲ",
+              "secid": "90.BK1322",
+              "changePct": -2.9,
+              "up": 2,
+              "down": 28,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1323",
+              "name": "综合电力设备商",
+              "secid": "90.BK1323",
+              "changePct": -1.65,
+              "up": 0,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1325",
+              "name": "半导体材料",
+              "secid": "90.BK1325",
+              "changePct": -4.01,
+              "up": 2,
+              "down": 30,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1326",
+              "name": "半导体设备",
+              "secid": "90.BK1326",
+              "changePct": -4.66,
+              "up": 1,
+              "down": 24,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1327",
+              "name": "分立器件",
+              "secid": "90.BK1327",
+              "changePct": -4.71,
+              "up": 0,
+              "down": 18,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1328",
+              "name": "集成电路封测",
+              "secid": "90.BK1328",
+              "changePct": -4.42,
+              "up": 0,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1329",
+              "name": "集成电路制造",
+              "secid": "90.BK1329",
+              "changePct": -3.56,
+              "up": 0,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1330",
+              "name": "模拟芯片设计",
+              "secid": "90.BK1330",
+              "changePct": -4.27,
+              "up": 1,
+              "down": 34,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1331",
+              "name": "数字芯片设计",
+              "secid": "90.BK1331",
+              "changePct": -4.16,
+              "up": 0,
+              "down": 56,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1332",
+              "name": "电子化学品Ⅲ",
+              "secid": "90.BK1332",
+              "changePct": -4.15,
+              "up": 0,
+              "down": 37,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1333",
+              "name": "LED",
+              "secid": "90.BK1333",
+              "changePct": -1.86,
+              "up": 3,
+              "down": 26,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1334",
+              "name": "光学元件",
+              "secid": "90.BK1334",
+              "changePct": -4.05,
+              "up": 0,
+              "down": 27,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1335",
+              "name": "面板",
+              "secid": "90.BK1335",
+              "changePct": -2.27,
+              "up": 4,
+              "down": 34,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1336",
+              "name": "其他电子Ⅲ",
+              "secid": "90.BK1336",
+              "changePct": -3.18,
+              "up": 2,
+              "down": 31,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1337",
+              "name": "品牌消费电子",
+              "secid": "90.BK1337",
+              "changePct": -0.25,
+              "up": 5,
+              "down": 6,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1338",
+              "name": "消费电子零部件及组装",
+              "secid": "90.BK1338",
+              "changePct": -2.99,
+              "up": 9,
+              "down": 78,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1339",
+              "name": "被动元件",
+              "secid": "90.BK1339",
+              "changePct": -2.87,
+              "up": 3,
+              "down": 15,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1340",
+              "name": "印制电路板",
+              "secid": "90.BK1340",
+              "changePct": -4.85,
+              "up": 1,
+              "down": 47,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1341",
+              "name": "房产租赁经纪",
+              "secid": "90.BK1341",
+              "changePct": -1.81,
+              "up": 0,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1342",
+              "name": "房地产综合服务",
+              "secid": "90.BK1342",
+              "changePct": -1.31,
+              "up": 0,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1343",
+              "name": "物业管理",
+              "secid": "90.BK1343",
+              "changePct": -1.84,
+              "up": 1,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1344",
+              "name": "产业地产",
+              "secid": "90.BK1344",
+              "changePct": -0.82,
+              "up": 2,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1345",
+              "name": "商业地产",
+              "secid": "90.BK1345",
+              "changePct": -0.61,
+              "up": 2,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1346",
+              "name": "住宅开发",
+              "secid": "90.BK1346",
+              "changePct": -1.66,
+              "up": 6,
+              "down": 56,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1347",
+              "name": "纺织鞋类制造",
+              "secid": "90.BK1347",
+              "changePct": 1,
+              "up": 1,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1348",
+              "name": "辅料",
+              "secid": "90.BK1348",
+              "changePct": -0.13,
+              "up": 2,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1349",
+              "name": "棉纺",
+              "secid": "90.BK1349",
+              "changePct": -0.87,
+              "up": 2,
+              "down": 7,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1350",
+              "name": "其他纺织",
+              "secid": "90.BK1350",
+              "changePct": -0.65,
+              "up": 5,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1351",
+              "name": "印染",
+              "secid": "90.BK1351",
+              "changePct": -1.11,
+              "up": 1,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1352",
+              "name": "非运动服装",
+              "secid": "90.BK1352",
+              "changePct": -0.87,
+              "up": 12,
+              "down": 24,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1353",
+              "name": "家纺",
+              "secid": "90.BK1353",
+              "changePct": -0.6,
+              "up": 3,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1354",
+              "name": "鞋帽及其他",
+              "secid": "90.BK1354",
+              "changePct": -1.28,
+              "up": 3,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1355",
+              "name": "运动服装",
+              "secid": "90.BK1355",
+              "changePct": -2.11,
+              "up": 0,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1356",
+              "name": "其他饰品",
+              "secid": "90.BK1356",
+              "changePct": -0.41,
+              "up": 0,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1357",
+              "name": "钟表珠宝",
+              "secid": "90.BK1357",
+              "changePct": -1.4,
+              "up": 3,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1358",
+              "name": "保险Ⅲ",
+              "secid": "90.BK1358",
+              "changePct": 0.7,
+              "up": 4,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1359",
+              "name": "金融控股",
+              "secid": "90.BK1359",
+              "changePct": -0.56,
+              "up": 1,
+              "down": 7,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1391",
+              "name": "综合环境治理",
+              "secid": "90.BK1391",
+              "changePct": -1.79,
+              "up": 2,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1392",
+              "name": "工程机械器件",
+              "secid": "90.BK1392",
+              "changePct": -1.23,
+              "up": 2,
+              "down": 11,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1393",
+              "name": "工程机械整机",
+              "secid": "90.BK1393",
+              "changePct": 0.37,
+              "up": 12,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1394",
+              "name": "轨交设备Ⅲ",
+              "secid": "90.BK1394",
+              "changePct": -0.99,
+              "up": 13,
+              "down": 18,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1395",
+              "name": "机床工具",
+              "secid": "90.BK1395",
+              "changePct": -2.23,
+              "up": 3,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1396",
+              "name": "金属制品",
+              "secid": "90.BK1396",
+              "changePct": -2.24,
+              "up": 10,
+              "down": 71,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1397",
+              "name": "磨具磨料",
+              "secid": "90.BK1397",
+              "changePct": -3.41,
+              "up": 1,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1398",
+              "name": "其他通用设备",
+              "secid": "90.BK1398",
+              "changePct": -2.44,
+              "up": 9,
+              "down": 47,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1400",
+              "name": "制冷空调设备",
+              "secid": "90.BK1400",
+              "changePct": -1.78,
+              "up": 6,
+              "down": 14,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1401",
+              "name": "纺织服装设备",
+              "secid": "90.BK1401",
+              "changePct": -2.06,
+              "up": 1,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1402",
+              "name": "楼宇设备",
+              "secid": "90.BK1402",
+              "changePct": -1.48,
+              "up": 1,
+              "down": 14,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1403",
+              "name": "能源及重型设备",
+              "secid": "90.BK1403",
+              "changePct": -1.7,
+              "up": 12,
+              "down": 51,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1404",
+              "name": "农用机械",
+              "secid": "90.BK1404",
+              "changePct": -1.39,
+              "up": 0,
+              "down": 10,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1405",
+              "name": "其他专用设备",
+              "secid": "90.BK1405",
+              "changePct": -2.31,
+              "up": 15,
+              "down": 77,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1406",
+              "name": "印刷包装机械",
+              "secid": "90.BK1406",
+              "changePct": -1.26,
+              "up": 2,
+              "down": 10,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1407",
+              "name": "工控设备",
+              "secid": "90.BK1407",
+              "changePct": -2.74,
+              "up": 1,
+              "down": 31,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1408",
+              "name": "机器人",
+              "secid": "90.BK1408",
+              "changePct": -2.54,
+              "up": 2,
+              "down": 20,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1409",
+              "name": "激光设备",
+              "secid": "90.BK1409",
+              "changePct": -4.27,
+              "up": 0,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1410",
+              "name": "其他自动化设备",
+              "secid": "90.BK1410",
+              "changePct": -3.51,
+              "up": 2,
+              "down": 28,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1411",
+              "name": "非金属材料Ⅲ",
+              "secid": "90.BK1411",
+              "changePct": -2.65,
+              "up": 3,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1412",
+              "name": "氨纶",
+              "secid": "90.BK1412",
+              "changePct": 0.92,
+              "up": 1,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1413",
+              "name": "涤纶",
+              "secid": "90.BK1413",
+              "changePct": -1.17,
+              "up": 3,
+              "down": 7,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1414",
+              "name": "锦纶",
+              "secid": "90.BK1414",
+              "changePct": -2.74,
+              "up": 0,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1415",
+              "name": "其他化学纤维",
+              "secid": "90.BK1415",
+              "changePct": -1.63,
+              "up": 0,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1416",
+              "name": "粘胶",
+              "secid": "90.BK1416",
+              "changePct": -1.09,
+              "up": 0,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1417",
+              "name": "纯碱",
+              "secid": "90.BK1417",
+              "changePct": -0.13,
+              "up": 1,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1418",
+              "name": "氯碱",
+              "secid": "90.BK1418",
+              "changePct": -0.88,
+              "up": 2,
+              "down": 10,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1419",
+              "name": "煤化工",
+              "secid": "90.BK1419",
+              "changePct": -1.17,
+              "up": 0,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1420",
+              "name": "其他化学原料",
+              "secid": "90.BK1420",
+              "changePct": -1.22,
+              "up": 3,
+              "down": 15,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1421",
+              "name": "钛白粉",
+              "secid": "90.BK1421",
+              "changePct": -0.09,
+              "up": 2,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1452",
+              "name": "卫浴电器",
+              "secid": "90.BK1452",
+              "changePct": -1.16,
+              "up": 2,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1453",
+              "name": "彩电",
+              "secid": "90.BK1453",
+              "changePct": -0.92,
+              "up": 1,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1454",
+              "name": "其他黑色家电",
+              "secid": "90.BK1454",
+              "changePct": 0.04,
+              "up": 2,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1455",
+              "name": "家电零部件Ⅲ",
+              "secid": "90.BK1455",
+              "changePct": -2.01,
+              "up": 6,
+              "down": 29,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1456",
+              "name": "其他家电Ⅲ",
+              "secid": "90.BK1456",
+              "changePct": -0.24,
+              "up": 1,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1457",
+              "name": "厨房小家电",
+              "secid": "90.BK1457",
+              "changePct": 3.24,
+              "up": 8,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1458",
+              "name": "个护小家电",
+              "secid": "90.BK1458",
+              "changePct": -0.68,
+              "up": 1,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1459",
+              "name": "清洁小家电",
+              "secid": "90.BK1459",
+              "changePct": 0.84,
+              "up": 7,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1460",
+              "name": "照明设备Ⅲ",
+              "secid": "90.BK1460",
+              "changePct": -0.01,
+              "up": 7,
+              "down": 7,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1461",
+              "name": "玻璃制造",
+              "secid": "90.BK1461",
+              "changePct": -1.86,
+              "up": 0,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1462",
+              "name": "玻纤制造",
+              "secid": "90.BK1462",
+              "changePct": -3.29,
+              "up": 0,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1463",
+              "name": "水泥制品",
+              "secid": "90.BK1463",
+              "changePct": -0.28,
+              "up": 2,
+              "down": 7,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1464",
+              "name": "水泥制造",
+              "secid": "90.BK1464",
+              "changePct": -0.72,
+              "up": 4,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1465",
+              "name": "防水材料",
+              "secid": "90.BK1465",
+              "changePct": -1.96,
+              "up": 0,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1466",
+              "name": "管材",
+              "secid": "90.BK1466",
+              "changePct": -0.9,
+              "up": 1,
+              "down": 6,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1467",
+              "name": "耐火材料",
+              "secid": "90.BK1467",
+              "changePct": -1.19,
+              "up": 3,
+              "down": 6,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1468",
+              "name": "其他建材Ⅲ",
+              "secid": "90.BK1468",
+              "changePct": -0.82,
+              "up": 4,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1469",
+              "name": "涂料",
+              "secid": "90.BK1469",
+              "changePct": -0.45,
+              "up": 0,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1470",
+              "name": "房屋建设Ⅲ",
+              "secid": "90.BK1470",
+              "changePct": 0.28,
+              "up": 5,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1471",
+              "name": "工程咨询服务Ⅲ",
+              "secid": "90.BK1471",
+              "changePct": -1.45,
+              "up": 7,
+              "down": 36,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1472",
+              "name": "基建市政工程",
+              "secid": "90.BK1472",
+              "changePct": 0.17,
+              "up": 14,
+              "down": 10,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1473",
+              "name": "园林工程",
+              "secid": "90.BK1473",
+              "changePct": -0.44,
+              "up": 4,
+              "down": 10,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1474",
+              "name": "钢结构",
+              "secid": "90.BK1474",
+              "changePct": -1.61,
+              "up": 2,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1475",
+              "name": "国际工程",
+              "secid": "90.BK1475",
+              "changePct": -0.89,
+              "up": 0,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1476",
+              "name": "化学工程",
+              "secid": "90.BK1476",
+              "changePct": -1.35,
+              "up": 3,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1477",
+              "name": "其他专业工程",
+              "secid": "90.BK1477",
+              "changePct": -3.16,
+              "up": 0,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1478",
+              "name": "装修装饰Ⅲ",
+              "secid": "90.BK1478",
+              "changePct": -1.6,
+              "up": 1,
+              "down": 18,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1479",
+              "name": "航空运输",
+              "secid": "90.BK1479",
+              "changePct": -0.26,
+              "up": 1,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1480",
+              "name": "机场",
+              "secid": "90.BK1480",
+              "changePct": 0.25,
+              "up": 3,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1481",
+              "name": "港口",
+              "secid": "90.BK1481",
+              "changePct": 0.24,
+              "up": 9,
+              "down": 6,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1512",
+              "name": "生猪养殖",
+              "secid": "90.BK1512",
+              "changePct": 0.02,
+              "up": 6,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1513",
+              "name": "海洋捕捞",
+              "secid": "90.BK1513",
+              "changePct": -0.79,
+              "up": 1,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1514",
+              "name": "水产养殖",
+              "secid": "90.BK1514",
+              "changePct": -3.16,
+              "up": 0,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1515",
+              "name": "粮食种植",
+              "secid": "90.BK1515",
+              "changePct": 0.42,
+              "up": 2,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1516",
+              "name": "其他种植业",
+              "secid": "90.BK1516",
+              "changePct": -2.05,
+              "up": 0,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1517",
+              "name": "食用菌",
+              "secid": "90.BK1517",
+              "changePct": -1.74,
+              "up": 0,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1518",
+              "name": "种子",
+              "secid": "90.BK1518",
+              "changePct": -1.02,
+              "up": 1,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1519",
+              "name": "电动乘用车",
+              "secid": "90.BK1519",
+              "changePct": -0.94,
+              "up": 1,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1520",
+              "name": "综合乘用车",
+              "secid": "90.BK1520",
+              "changePct": -0.74,
+              "up": 0,
+              "down": 6,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1521",
+              "name": "摩托车",
+              "secid": "90.BK1521",
+              "changePct": -2.5,
+              "up": 2,
+              "down": 7,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1522",
+              "name": "其他运输设备",
+              "secid": "90.BK1522",
+              "changePct": -0.27,
+              "up": 4,
+              "down": 6,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1523",
+              "name": "汽车经销商",
+              "secid": "90.BK1523",
+              "changePct": 3.93,
+              "up": 6,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1524",
+              "name": "汽车综合服务",
+              "secid": "90.BK1524",
+              "changePct": -2.08,
+              "up": 1,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1525",
+              "name": "车身附件及饰件",
+              "secid": "90.BK1525",
+              "changePct": -1.98,
+              "up": 4,
+              "down": 39,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1526",
+              "name": "底盘与发动机系统",
+              "secid": "90.BK1526",
+              "changePct": -2.18,
+              "up": 7,
+              "down": 108,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1527",
+              "name": "轮胎轮毂",
+              "secid": "90.BK1527",
+              "changePct": -1.51,
+              "up": 3,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1528",
+              "name": "其他汽车零部件",
+              "secid": "90.BK1528",
+              "changePct": -1.99,
+              "up": 5,
+              "down": 51,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1529",
+              "name": "汽车电子电气系统",
+              "secid": "90.BK1529",
+              "changePct": -2.12,
+              "up": 0,
+              "down": 41,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1530",
+              "name": "商用载货车",
+              "secid": "90.BK1530",
+              "changePct": -0.2,
+              "up": 5,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1531",
+              "name": "商用载客车",
+              "secid": "90.BK1531",
+              "changePct": -0.12,
+              "up": 2,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1532",
+              "name": "金属包装",
+              "secid": "90.BK1532",
+              "changePct": -1.1,
+              "up": 3,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1533",
+              "name": "塑料包装",
+              "secid": "90.BK1533",
+              "changePct": -1.12,
+              "up": 2,
+              "down": 7,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1534",
+              "name": "印刷",
+              "secid": "90.BK1534",
+              "changePct": -0.3,
+              "up": 2,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1535",
+              "name": "纸包装",
+              "secid": "90.BK1535",
+              "changePct": -1.06,
+              "up": 5,
+              "down": 14,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1536",
+              "name": "综合包装",
+              "secid": "90.BK1536",
+              "changePct": -0.89,
+              "up": 1,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1537",
+              "name": "成品家居",
+              "secid": "90.BK1537",
+              "changePct": -1.08,
+              "up": 4,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1538",
+              "name": "瓷砖地板",
+              "secid": "90.BK1538",
+              "changePct": -3.2,
+              "up": 0,
+              "down": 11,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1539",
+              "name": "定制家居",
+              "secid": "90.BK1539",
+              "changePct": -1.59,
+              "up": 3,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1540",
+              "name": "其他家居用品",
+              "secid": "90.BK1540",
+              "changePct": -1.52,
+              "up": 5,
+              "down": 19,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1541",
+              "name": "卫浴制品",
+              "secid": "90.BK1541",
+              "changePct": -1.16,
+              "up": 1,
+              "down": 6,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1602",
+              "name": "诊断服务",
+              "secid": "90.BK1602",
+              "changePct": -1.28,
+              "up": 2,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1603",
+              "name": "体外诊断",
+              "secid": "90.BK1603",
+              "changePct": -0.94,
+              "up": 7,
+              "down": 33,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1604",
+              "name": "医疗耗材",
+              "secid": "90.BK1604",
+              "changePct": -1.17,
+              "up": 15,
+              "down": 39,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1605",
+              "name": "医疗设备",
+              "secid": "90.BK1605",
+              "changePct": -0.75,
+              "up": 13,
+              "down": 28,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1606",
+              "name": "线下药店",
+              "secid": "90.BK1606",
+              "changePct": 0.75,
+              "up": 5,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1607",
+              "name": "医药流通",
+              "secid": "90.BK1607",
+              "changePct": 0.04,
+              "up": 11,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1608",
+              "name": "中药Ⅲ",
+              "secid": "90.BK1608",
+              "changePct": -0.48,
+              "up": 25,
+              "down": 37,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1609",
+              "name": "城商行Ⅲ",
+              "secid": "90.BK1609",
+              "changePct": 1.15,
+              "up": 16,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1610",
+              "name": "股份制银行Ⅲ",
+              "secid": "90.BK1610",
+              "changePct": 0.82,
+              "up": 8,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1611",
+              "name": "国有大型银行Ⅲ",
+              "secid": "90.BK1611",
+              "changePct": 1.44,
+              "up": 6,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1612",
+              "name": "农商行Ⅲ",
+              "secid": "90.BK1612",
+              "changePct": 0.56,
+              "up": 8,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1613",
+              "name": "铝",
+              "secid": "90.BK1613",
+              "changePct": -1.79,
+              "up": 3,
+              "down": 26,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1614",
+              "name": "铅锌",
+              "secid": "90.BK1614",
+              "changePct": -2.03,
+              "up": 0,
+              "down": 11,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1615",
+              "name": "铜",
+              "secid": "90.BK1615",
+              "changePct": -2.53,
+              "up": 0,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1616",
+              "name": "白银",
+              "secid": "90.BK1616",
+              "changePct": -2.88,
+              "up": 0,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1617",
+              "name": "黄金",
+              "secid": "90.BK1617",
+              "changePct": -1.18,
+              "up": 1,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1618",
+              "name": "磁性材料",
+              "secid": "90.BK1618",
+              "changePct": -3.62,
+              "up": 0,
+              "down": 15,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1619",
+              "name": "其他金属新材料",
+              "secid": "90.BK1619",
+              "changePct": -3.2,
+              "up": 0,
+              "down": 21,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1620",
+              "name": "钴",
+              "secid": "90.BK1620",
+              "changePct": -1.89,
+              "up": 0,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1621",
+              "name": "锂",
+              "secid": "90.BK1621",
+              "changePct": -2.43,
+              "up": 0,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1622",
+              "name": "镍",
+              "secid": "90.BK1622",
+              "changePct": -2.76,
+              "up": 0,
+              "down": 2,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1623",
+              "name": "钼",
+              "secid": "90.BK1623",
+              "changePct": -2.98,
+              "up": 0,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1624",
+              "name": "其他小金属",
+              "secid": "90.BK1624",
+              "changePct": -2.65,
+              "up": 1,
+              "down": 15,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1625",
+              "name": "钨",
+              "secid": "90.BK1625",
+              "changePct": -3.98,
+              "up": 0,
+              "down": 4,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1626",
+              "name": "稀土",
+              "secid": "90.BK1626",
+              "changePct": -3.05,
+              "up": 1,
+              "down": 3,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK1627",
+              "name": "综合Ⅲ",
+              "secid": "90.BK1627",
+              "changePct": -1.06,
+              "up": 3,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0420",
+              "name": "航空机场",
+              "secid": "90.BK0420",
+              "changePct": -0.05,
+              "up": 6,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0421",
+              "name": "铁路公路",
+              "secid": "90.BK0421",
+              "changePct": 0.55,
+              "up": 23,
+              "down": 10,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0422",
+              "name": "物流",
+              "secid": "90.BK0422",
+              "changePct": -0.28,
+              "up": 17,
+              "down": 27,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0424",
+              "name": "水泥",
+              "secid": "90.BK0424",
+              "changePct": -0.52,
+              "up": 7,
+              "down": 16,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0427",
+              "name": "公用事业",
+              "secid": "90.BK0427",
+              "changePct": -1.13,
+              "up": 28,
+              "down": 109,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0428",
+              "name": "电力",
+              "secid": "90.BK0428",
+              "changePct": -0.79,
+              "up": 26,
+              "down": 82,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0433",
+              "name": "农林牧渔",
+              "secid": "90.BK0433",
+              "changePct": -0.94,
+              "up": 26,
+              "down": 86,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0436",
+              "name": "纺织服饰",
+              "secid": "90.BK0436",
+              "changePct": -0.97,
+              "up": 32,
+              "down": 77,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0437",
+              "name": "煤炭",
+              "secid": "90.BK0437",
+              "changePct": 0.59,
+              "up": 17,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0438",
+              "name": "食品饮料",
+              "secid": "90.BK0438",
+              "changePct": -0.1,
+              "up": 60,
+              "down": 66,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0440",
+              "name": "家居用品",
+              "secid": "90.BK0440",
+              "changePct": -1.68,
+              "up": 15,
+              "down": 56,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0448",
+              "name": "通信设备",
+              "secid": "90.BK0448",
+              "changePct": -3.21,
+              "up": 8,
+              "down": 86,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0450",
+              "name": "航运港口",
+              "secid": "90.BK0450",
+              "changePct": 0.09,
+              "up": 14,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0451",
+              "name": "房地产开发",
+              "secid": "90.BK0451",
+              "changePct": -1.4,
+              "up": 11,
+              "down": 77,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0454",
+              "name": "塑料",
+              "secid": "90.BK0454",
+              "changePct": -2.05,
+              "up": 10,
+              "down": 67,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0456",
+              "name": "家用电器",
+              "secid": "90.BK0456",
+              "changePct": -0.12,
+              "up": 49,
+              "down": 57,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0457",
+              "name": "电网设备",
+              "secid": "90.BK0457",
+              "changePct": -1.36,
+              "up": 25,
+              "down": 116,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0458",
+              "name": "仪器仪表",
+              "secid": "90.BK0458",
+              "changePct": -2.93,
+              "up": 6,
+              "down": 58,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0459",
+              "name": "元件",
+              "secid": "90.BK0459",
+              "changePct": -4.37,
+              "up": 3,
+              "down": 63,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0464",
+              "name": "石油石化",
+              "secid": "90.BK0464",
+              "changePct": -1.52,
+              "up": 8,
+              "down": 40,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0465",
+              "name": "化学制药",
+              "secid": "90.BK0465",
+              "changePct": -1.29,
+              "up": 24,
+              "down": 134,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0471",
+              "name": "化学纤维",
+              "secid": "90.BK0471",
+              "changePct": -1.53,
+              "up": 4,
+              "down": 22,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0473",
+              "name": "证券Ⅱ",
+              "secid": "90.BK0473",
+              "changePct": -0.01,
+              "up": 16,
+              "down": 27,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0474",
+              "name": "保险Ⅱ",
+              "secid": "90.BK0474",
+              "changePct": 0.6,
+              "up": 4,
+              "down": 1,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0475",
+              "name": "银行Ⅱ",
+              "secid": "90.BK0475",
+              "changePct": 0.98,
+              "up": 38,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0476",
+              "name": "装修建材",
+              "secid": "90.BK0476",
+              "changePct": -0.99,
+              "up": 7,
+              "down": 31,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0478",
+              "name": "有色金属",
+              "secid": "90.BK0478",
+              "changePct": -2.53,
+              "up": 6,
+              "down": 139,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0479",
+              "name": "钢铁",
+              "secid": "90.BK0479",
+              "changePct": -0.81,
+              "up": 6,
+              "down": 37,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0481",
+              "name": "汽车零部件",
+              "secid": "90.BK0481",
+              "changePct": -2.08,
+              "up": 20,
+              "down": 256,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0482",
+              "name": "一般零售",
+              "secid": "90.BK0482",
+              "changePct": 0.34,
+              "up": 32,
+              "down": 24,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0484",
+              "name": "贸易Ⅱ",
+              "secid": "90.BK0484",
+              "changePct": -0.19,
+              "up": 4,
+              "down": 8,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0486",
+              "name": "传媒",
+              "secid": "90.BK0486",
+              "changePct": -0.13,
+              "up": 53,
+              "down": 73,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0538",
+              "name": "化学制品",
+              "secid": "90.BK0538",
+              "changePct": -1.79,
+              "up": 18,
+              "down": 168,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0539",
+              "name": "综合Ⅱ",
+              "secid": "90.BK0539",
+              "changePct": -1.06,
+              "up": 3,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0545",
+              "name": "通用设备",
+              "secid": "90.BK0545",
+              "changePct": -2.54,
+              "up": 33,
+              "down": 221,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0546",
+              "name": "玻璃玻纤",
+              "secid": "90.BK0546",
+              "changePct": -2.54,
+              "up": 0,
+              "down": 16,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0725",
+              "name": "装修装饰Ⅱ",
+              "secid": "90.BK0725",
+              "changePct": -1.5,
+              "up": 1,
+              "down": 17,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0726",
+              "name": "工程咨询服务Ⅱ",
+              "secid": "90.BK0726",
+              "changePct": -1.45,
+              "up": 7,
+              "down": 35,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0727",
+              "name": "医疗服务",
+              "secid": "90.BK0727",
+              "changePct": -2.12,
+              "up": 6,
+              "down": 46,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0728",
+              "name": "环保",
+              "secid": "90.BK0728",
+              "changePct": -1.29,
+              "up": 27,
+              "down": 98,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0731",
+              "name": "农化制品",
+              "secid": "90.BK0731",
+              "changePct": -0.94,
+              "up": 6,
+              "down": 56,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0732",
+              "name": "贵金属",
+              "secid": "90.BK0732",
+              "changePct": -1.59,
+              "up": 1,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0734",
+              "name": "饰品",
+              "secid": "90.BK0734",
+              "changePct": -1.27,
+              "up": 3,
+              "down": 14,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0735",
+              "name": "计算机设备",
+              "secid": "90.BK0735",
+              "changePct": -1.94,
+              "up": 12,
+              "down": 76,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0736",
+              "name": "通信服务",
+              "secid": "90.BK0736",
+              "changePct": -1.68,
+              "up": 4,
+              "down": 34,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0737",
+              "name": "软件开发",
+              "secid": "90.BK0737",
+              "changePct": -1.56,
+              "up": 18,
+              "down": 114,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0738",
+              "name": "多元金融",
+              "secid": "90.BK0738",
+              "changePct": -1.12,
+              "up": 5,
+              "down": 19,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0739",
+              "name": "工程机械",
+              "secid": "90.BK0739",
+              "changePct": -0.31,
+              "up": 14,
+              "down": 20,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0740",
+              "name": "教育",
+              "secid": "90.BK0740",
+              "changePct": -0.45,
+              "up": 4,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "code": "BK0910",
+              "name": "专用设备",
+              "secid": "90.BK0910",
+              "changePct": -1.98,
+              "up": 27,
+              "down": 177,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            }
+          ],
+          "meta": {
+            "registryBoards": 496,
+            "quoted": 316
+          }
+        },
+        "themes": {
+          "asOf": "2026-11-16T10:20:30+08:00",
+          "observedAt": "2026-11-16T10:17:54+08:00",
+          "timestampSource": "upstream",
+          "records": [
+            {
+              "key": "ai",
+              "name": "人工智能",
+              "boardCode": "BK0800",
+              "boardName": "人工智能",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "ai-compute",
+              "name": "算力",
+              "boardCode": "BK1134",
+              "boardName": "算力概念",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "semiconductor",
+              "name": "半导体",
+              "boardCode": "BK1036",
+              "boardName": "半导体",
+              "changePct": -4.14,
+              "up": 4,
+              "down": 183,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "ev",
+              "name": "新能源车",
+              "boardCode": "BK0900",
+              "boardName": "新能源车",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "solar",
+              "name": "光伏",
+              "boardCode": "BK1031",
+              "boardName": "光伏设备",
+              "changePct": -2.75,
+              "up": 9,
+              "down": 60,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "pharma",
+              "name": "创新药",
+              "boardCode": "BK1106",
+              "boardName": "创新药",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "liquor",
+              "name": "白酒",
+              "boardCode": "BK0896",
+              "boardName": "白酒",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "defense",
+              "name": "军工",
+              "boardCode": "BK0490",
+              "boardName": "军工",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "bank",
+              "name": "银行",
+              "boardCode": "BK1283",
+              "boardName": "银行",
+              "changePct": 1.03,
+              "up": 39,
+              "down": 0,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "brokerage",
+              "name": "券商",
+              "boardCode": "BK1366",
+              "boardName": "证券Ⅲ",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "realestate",
+              "name": "房地产",
+              "boardCode": "BK0451",
+              "boardName": "房地产开发",
+              "changePct": -1.4,
+              "up": 11,
+              "down": 77,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "coal",
+              "name": "煤炭",
+              "boardCode": "BK0437",
+              "boardName": "煤炭",
+              "changePct": 0.59,
+              "up": 17,
+              "down": 13,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "metals",
+              "name": "有色金属",
+              "boardCode": "BK0732",
+              "boardName": "贵金属",
+              "changePct": -1.59,
+              "up": 1,
+              "down": 12,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "oil",
+              "name": "石油石化",
+              "boardCode": "BK1276",
+              "boardName": "油气开采Ⅱ",
+              "changePct": -1.57,
+              "up": 0,
+              "down": 5,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "agriculture",
+              "name": "农业",
+              "boardCode": "BK1261",
+              "boardName": "种植业",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "consumer-elec",
+              "name": "消费电子",
+              "boardCode": "BK1037",
+              "boardName": "消费电子",
+              "changePct": -2.57,
+              "up": 15,
+              "down": 82,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "robotics",
+              "name": "机器人",
+              "boardCode": "BK1408",
+              "boardName": "机器人",
+              "changePct": -2.54,
+              "up": 2,
+              "down": 20,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "quantum",
+              "name": "量子科技",
+              "boardCode": "BK0710",
+              "boardName": "量子科技",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "comms",
+              "name": "通信",
+              "boardCode": "BK0448",
+              "boardName": "通信设备",
+              "changePct": -3.21,
+              "up": 8,
+              "down": 86,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "gaming",
+              "name": "游戏",
+              "boardCode": "BK1046",
+              "boardName": "游戏Ⅱ",
+              "changePct": -0.06,
+              "up": 6,
+              "down": 18,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "media",
+              "name": "传媒",
+              "boardCode": "BK0486",
+              "boardName": "传媒",
+              "changePct": -0.13,
+              "up": 53,
+              "down": 73,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "steel",
+              "name": "钢铁",
+              "boardCode": "BK1227",
+              "boardName": "特钢Ⅱ",
+              "changePct": -0.91,
+              "up": 2,
+              "down": 9,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "infra",
+              "name": "基建",
+              "boardCode": "BK1247",
+              "boardName": "基础建设",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "key": "travel",
+              "name": "旅游酒店",
+              "boardCode": "BK0485",
+              "boardName": "旅游酒店",
+              "changePct": null,
+              "up": null,
+              "down": null,
+              "asOf": "2026-11-16T10:20:30+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            }
+          ],
+          "meta": {
+            "themes": 24,
+            "resolved": 24,
+            "quoted": 13
+          }
+        },
+        "fundFlows": {
+          "asOf": "2026-11-16T10:21:27+08:00",
+          "observedAt": "2026-11-16T10:17:54+08:00",
+          "timestampSource": "upstream",
+          "records": [
+            {
+              "name": "银行",
+              "changePct": 0.94,
+              "netInflowYi": 5.1148,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "铁路公路",
+              "changePct": 0.57,
+              "netInflowYi": 4.3012,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "电视广播Ⅲ",
+              "changePct": 1.05,
+              "netInflowYi": 3.9845,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "国有大型银行Ⅲ",
+              "changePct": 1.5,
+              "netInflowYi": 3.891,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "高速公路",
+              "changePct": 1.12,
+              "netInflowYi": 3.746,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "厨房小家电",
+              "changePct": 3.14,
+              "netInflowYi": 3.0099,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "饮料乳品",
+              "changePct": 0.16,
+              "netInflowYi": 2.3609,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "院线",
+              "changePct": 4.17,
+              "netInflowYi": 1.6308,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "股份制银行Ⅲ",
+              "changePct": 0.84,
+              "netInflowYi": 1.4752,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "电网自动化设备",
+              "changePct": -1.43,
+              "netInflowYi": 1.2744,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "生活用纸",
+              "changePct": -0.89,
+              "netInflowYi": 1.1834,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "白酒Ⅱ",
+              "changePct": 0.46,
+              "netInflowYi": 1.0444,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "医疗设备",
+              "changePct": -0.73,
+              "netInflowYi": 1.0334,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "蓄电池及其他电池",
+              "changePct": 2.55,
+              "netInflowYi": 0.7391,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "房屋建设Ⅲ",
+              "changePct": 0.33,
+              "netInflowYi": 0.6589,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "港口",
+              "changePct": 0.28,
+              "netInflowYi": 0.657,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "冰洗",
+              "changePct": 2.67,
+              "netInflowYi": 0.6422,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "铁路运输",
+              "changePct": 0.28,
+              "netInflowYi": 0.6184,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "动力煤",
+              "changePct": 1,
+              "netInflowYi": 0.545,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "航运",
+              "changePct": -0.03,
+              "netInflowYi": 0.4959,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "空调",
+              "changePct": 1.59,
+              "netInflowYi": 0.4624,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "装修装饰Ⅲ",
+              "changePct": -1.54,
+              "netInflowYi": 0.446,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "食品及饲料添加剂",
+              "changePct": -0.66,
+              "netInflowYi": 0.4209,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "厨房电器",
+              "changePct": 1.06,
+              "netInflowYi": 0.4151,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "视频媒体",
+              "changePct": 3.14,
+              "netInflowYi": 0.4096,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "畜禽饲料",
+              "changePct": 1.28,
+              "netInflowYi": 0.4,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "焦炭Ⅲ",
+              "changePct": 0.42,
+              "netInflowYi": 0.3427,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "黄金",
+              "changePct": -1.13,
+              "netInflowYi": 0.317,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "教育出版",
+              "changePct": 1.42,
+              "netInflowYi": 0.2734,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "钢结构",
+              "changePct": -1.47,
+              "netInflowYi": 0.2613,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他建材Ⅲ",
+              "changePct": -0.9,
+              "netInflowYi": 0.2557,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "航空运输",
+              "changePct": -0.07,
+              "netInflowYi": 0.2344,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "航空机场",
+              "changePct": 0,
+              "netInflowYi": 0.2232,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "合成树脂",
+              "changePct": -1.86,
+              "netInflowYi": 0.2078,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "聚氨酯",
+              "changePct": -1.39,
+              "netInflowYi": 0.1555,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "焦煤",
+              "changePct": 0.58,
+              "netInflowYi": 0.1541,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他黑色家电",
+              "changePct": 0,
+              "netInflowYi": 0.1477,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "配电设备",
+              "changePct": -1.35,
+              "netInflowYi": 0.1289,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "垂直应用软件",
+              "changePct": -1.42,
+              "netInflowYi": 0.1207,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "照明设备Ⅲ",
+              "changePct": 0.03,
+              "netInflowYi": 0.1169,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "跨境物流",
+              "changePct": 0.08,
+              "netInflowYi": 0.1134,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "光伏辅材",
+              "changePct": -3.18,
+              "netInflowYi": 0.1107,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "线下药店",
+              "changePct": 0.79,
+              "netInflowYi": 0.0778,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "卫浴电器",
+              "changePct": -1.27,
+              "netInflowYi": 0.069,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "氮肥",
+              "changePct": -0.95,
+              "netInflowYi": 0.0659,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "粮油加工",
+              "changePct": -1.33,
+              "netInflowYi": 0.0628,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "中药Ⅲ",
+              "changePct": -0.44,
+              "netInflowYi": 0.0486,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "医疗耗材",
+              "changePct": -1.17,
+              "netInflowYi": 0.0447,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "酒店餐饮",
+              "changePct": -0.22,
+              "netInflowYi": 0.0407,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "化妆品制造及其他",
+              "changePct": -0.95,
+              "netInflowYi": 0.0321,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "食品加工",
+              "changePct": -0.36,
+              "netInflowYi": 0.0275,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "动物保健Ⅲ",
+              "changePct": -0.38,
+              "netInflowYi": 0.0242,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "锂电专用设备",
+              "changePct": 0.12,
+              "netInflowYi": 0.0219,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "公路货运",
+              "changePct": 0.51,
+              "netInflowYi": 0.0121,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "个护小家电",
+              "changePct": -0.9,
+              "netInflowYi": 0.0114,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他养殖",
+              "changePct": -0.6,
+              "netInflowYi": 0.0099,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他家电Ⅲ",
+              "changePct": -0.34,
+              "netInflowYi": 0.0081,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "农业综合Ⅲ",
+              "changePct": -0.21,
+              "netInflowYi": 0.0055,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "洗护用品",
+              "changePct": -0.76,
+              "netInflowYi": 0.0055,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "体育Ⅱ",
+              "changePct": -0.23,
+              "netInflowYi": 0.005,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "快递",
+              "changePct": 1.08,
+              "netInflowYi": 0.004,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "火电设备",
+              "changePct": -0.78,
+              "netInflowYi": 0.003,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "清洁小家电",
+              "changePct": 0.9,
+              "netInflowYi": -0.0011,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "机场",
+              "changePct": 0.35,
+              "netInflowYi": -0.0042,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "涂料",
+              "changePct": -0.52,
+              "netInflowYi": -0.0073,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "化学工程",
+              "changePct": -1.32,
+              "netInflowYi": -0.0101,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "医美服务",
+              "changePct": -0.12,
+              "netInflowYi": -0.0109,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "仓储物流",
+              "changePct": -0.79,
+              "netInflowYi": -0.011,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "旅游及景区",
+              "changePct": -0.02,
+              "netInflowYi": -0.0136,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "燃料电池",
+              "changePct": -2.9,
+              "netInflowYi": -0.0177,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "民爆制品",
+              "changePct": -2.08,
+              "netInflowYi": -0.0186,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他橡胶制品",
+              "changePct": -1.09,
+              "netInflowYi": -0.02,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "炭黑",
+              "changePct": -0.54,
+              "netInflowYi": -0.0203,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "原材料供应链服务",
+              "changePct": -0.67,
+              "netInflowYi": -0.0243,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "物流",
+              "changePct": -0.29,
+              "netInflowYi": -0.0298,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "炼化及贸易",
+              "changePct": -0.98,
+              "netInflowYi": -0.0432,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "管材",
+              "changePct": -0.95,
+              "netInflowYi": -0.0445,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "综合电力设备商",
+              "changePct": -1.63,
+              "netInflowYi": -0.0476,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "钴",
+              "changePct": -1.88,
+              "netInflowYi": -0.0534,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "耐火材料",
+              "changePct": -1.27,
+              "netInflowYi": -0.0541,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "果蔬加工",
+              "changePct": -1.41,
+              "netInflowYi": -0.0635,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "公交",
+              "changePct": -0.66,
+              "netInflowYi": -0.0653,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "广告媒体",
+              "changePct": 0.24,
+              "netInflowYi": -0.0659,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "休闲食品",
+              "changePct": -0.6,
+              "netInflowYi": -0.0667,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "医美耗材",
+              "changePct": 0.19,
+              "netInflowYi": -0.0681,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "农药",
+              "changePct": -0.93,
+              "netInflowYi": -0.0798,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "图片媒体",
+              "changePct": -0.93,
+              "netInflowYi": -0.0822,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "医药流通",
+              "changePct": 0.06,
+              "netInflowYi": -0.0835,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "旅游零售Ⅱ",
+              "changePct": -0.1,
+              "netInflowYi": -0.0905,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "宠物食品",
+              "changePct": -2.04,
+              "netInflowYi": -0.0932,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "玻璃制造",
+              "changePct": -1.85,
+              "netInflowYi": -0.104,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "国际工程",
+              "changePct": -0.75,
+              "netInflowYi": -0.1041,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "复合肥",
+              "changePct": -0.5,
+              "netInflowYi": -0.1101,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "安防设备",
+              "changePct": -1.86,
+              "netInflowYi": -0.1129,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "端到端供应链服务",
+              "changePct": -1.07,
+              "netInflowYi": -0.1134,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "防水材料",
+              "changePct": -1.95,
+              "netInflowYi": -0.1141,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "油气开采Ⅱ",
+              "changePct": -1.44,
+              "netInflowYi": -0.1148,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "城商行Ⅲ",
+              "changePct": 1.18,
+              "netInflowYi": -0.1185,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "涂料油墨",
+              "changePct": -2.51,
+              "netInflowYi": -0.1205,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "农商行Ⅲ",
+              "changePct": 0.55,
+              "netInflowYi": -0.1228,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "基建市政工程",
+              "changePct": 0.1,
+              "netInflowYi": -0.1266,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "锂电池",
+              "changePct": -0.05,
+              "netInflowYi": -0.1312,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "综合Ⅲ",
+              "changePct": -1.05,
+              "netInflowYi": -0.1324,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "文娱用品",
+              "changePct": -0.82,
+              "netInflowYi": -0.133,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "互联网电商",
+              "changePct": -1.45,
+              "netInflowYi": -0.1334,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "造纸",
+              "changePct": -1.18,
+              "netInflowYi": -0.1343,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "体外诊断",
+              "changePct": -0.93,
+              "netInflowYi": -0.1414,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "肉鸡养殖",
+              "changePct": -0.95,
+              "netInflowYi": -0.1513,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "纺织化学制品",
+              "changePct": -1.69,
+              "netInflowYi": -0.1619,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "诊断服务",
+              "changePct": -1.31,
+              "netInflowYi": -0.1623,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "电工仪器仪表",
+              "changePct": -0.58,
+              "netInflowYi": -0.1653,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "园林工程",
+              "changePct": -0.51,
+              "netInflowYi": -0.2125,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "水泥制品",
+              "changePct": -0.12,
+              "netInflowYi": -0.2188,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "橡胶助剂",
+              "changePct": -1.92,
+              "netInflowYi": -0.2195,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "专业连锁Ⅱ",
+              "changePct": -1,
+              "netInflowYi": -0.2371,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "钼",
+              "changePct": -2.98,
+              "netInflowYi": -0.2425,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "改性塑料",
+              "changePct": -2.45,
+              "netInflowYi": -0.2572,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "有机硅",
+              "changePct": -1.9,
+              "netInflowYi": -0.2634,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "光伏主材",
+              "changePct": -1.38,
+              "netInflowYi": -0.2862,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "磷肥及磷化工",
+              "changePct": -1.25,
+              "netInflowYi": -0.2955,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "品牌化妆品",
+              "changePct": 0.11,
+              "netInflowYi": -0.2957,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "胶黏剂及胶带",
+              "changePct": -2.57,
+              "netInflowYi": -0.3129,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "彩电",
+              "changePct": -0.87,
+              "netInflowYi": -0.3506,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "林业Ⅲ",
+              "changePct": -2.09,
+              "netInflowYi": -0.3578,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "非白酒",
+              "changePct": -0.46,
+              "netInflowYi": -0.4216,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他塑料制品",
+              "changePct": -1.29,
+              "netInflowYi": -0.444,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "调味发酵品Ⅱ",
+              "changePct": 0.28,
+              "netInflowYi": -0.528,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "铅锌",
+              "changePct": -2,
+              "netInflowYi": -0.5592,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "水产饲料",
+              "changePct": -3.28,
+              "netInflowYi": -0.5597,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "工程咨询服务Ⅲ",
+              "changePct": -1.47,
+              "netInflowYi": -0.5607,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "氟化工",
+              "changePct": -1.2,
+              "netInflowYi": -0.5875,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "无机盐",
+              "changePct": -2.01,
+              "netInflowYi": -0.6001,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "镍",
+              "changePct": -2.73,
+              "netInflowYi": -0.6078,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "油服工程",
+              "changePct": -2.65,
+              "netInflowYi": -0.6277,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他专业工程",
+              "changePct": -3.19,
+              "netInflowYi": -0.6576,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他金属新材料",
+              "changePct": -3.18,
+              "netInflowYi": -0.7624,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "白银",
+              "changePct": -2.78,
+              "netInflowYi": -0.7858,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "磁性材料",
+              "changePct": -3.65,
+              "netInflowYi": -0.7896,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "输变电设备",
+              "changePct": -1.23,
+              "netInflowYi": -0.8097,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "门户网站",
+              "changePct": -1.85,
+              "netInflowYi": -0.8315,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "水泥制造",
+              "changePct": -0.63,
+              "netInflowYi": -0.8423,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "钾肥",
+              "changePct": -0.96,
+              "netInflowYi": -0.9046,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "家电零部件Ⅲ",
+              "changePct": -2.13,
+              "netInflowYi": -1.0404,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "影视动漫制作",
+              "changePct": -0.94,
+              "netInflowYi": -1.0439,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "水泥",
+              "changePct": -0.45,
+              "netInflowYi": -1.0561,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "电机Ⅲ",
+              "changePct": -2.2,
+              "netInflowYi": -1.072,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他数字媒体",
+              "changePct": -4.74,
+              "netInflowYi": -1.0954,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "风电整机",
+              "changePct": -2.14,
+              "netInflowYi": -1.1994,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "风电零部件",
+              "changePct": -2.43,
+              "netInflowYi": -1.2094,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "铝",
+              "changePct": -1.66,
+              "netInflowYi": -1.2677,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "电池化学品",
+              "changePct": 0.01,
+              "netInflowYi": -1.3518,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他电源设备Ⅲ",
+              "changePct": -2.88,
+              "netInflowYi": -1.3525,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "线缆部件及其他",
+              "changePct": -1.73,
+              "netInflowYi": -1.3979,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "光伏电池组件",
+              "changePct": -2.82,
+              "netInflowYi": -1.4318,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "光伏加工设备",
+              "changePct": -4.95,
+              "netInflowYi": -1.4411,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "膜材料",
+              "changePct": -2.41,
+              "netInflowYi": -1.5398,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "金属新材料",
+              "changePct": -3.39,
+              "netInflowYi": -1.5454,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他化学制品",
+              "changePct": -2.04,
+              "netInflowYi": -1.6265,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他农产品加工",
+              "changePct": -1.11,
+              "netInflowYi": -1.743,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "横向通用软件",
+              "changePct": -2.27,
+              "netInflowYi": -1.7483,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "大众出版",
+              "changePct": -0.52,
+              "netInflowYi": -1.7615,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "逆变器",
+              "changePct": -1.52,
+              "netInflowYi": -1.9869,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "文字媒体",
+              "changePct": 0.24,
+              "netInflowYi": -2.1648,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "钨",
+              "changePct": -4.1,
+              "netInflowYi": -2.3069,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "锂",
+              "changePct": -2.47,
+              "netInflowYi": -2.3617,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "铜",
+              "changePct": -2.5,
+              "netInflowYi": -2.3753,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "集成电路封测",
+              "changePct": -4.4,
+              "netInflowYi": -2.4368,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "分立器件",
+              "changePct": -4.7,
+              "netInflowYi": -2.9634,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "营销代理",
+              "changePct": -0.63,
+              "netInflowYi": -2.9654,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他小金属",
+              "changePct": -2.83,
+              "netInflowYi": -3.3657,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "其他计算机设备",
+              "changePct": -2.04,
+              "netInflowYi": -3.4356,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "玻纤制造",
+              "changePct": -3.34,
+              "netInflowYi": -3.4681,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "半导体材料",
+              "changePct": -3.99,
+              "netInflowYi": -4.2241,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "工业金属",
+              "changePct": -2.09,
+              "netInflowYi": -4.2839,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "集成电路制造",
+              "changePct": -3.54,
+              "netInflowYi": -4.3046,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "硅料硅片",
+              "changePct": -0.88,
+              "netInflowYi": -4.3953,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "半导体设备",
+              "changePct": -4.56,
+              "netInflowYi": -4.6043,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "稀土",
+              "changePct": -3.14,
+              "netInflowYi": -6.5881,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "游戏Ⅲ",
+              "changePct": -0.32,
+              "netInflowYi": -8.5062,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            },
+            {
+              "name": "IT服务Ⅲ",
+              "changePct": -1.79,
+              "netInflowYi": -9.0466,
+              "asOf": "2026-11-16T10:21:27+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "upstream"
+            }
+          ],
+          "meta": {
+            "boardType": 2
+          }
+        },
+        "limitPool": {
+          "asOf": "2026-11-16T10:17:54+08:00",
+          "observedAt": "2026-11-16T10:17:54+08:00",
+          "timestampSource": "fetch",
+          "records": [
+            {
+              "code": "000819",
+              "name": "岳阳兴长",
+              "changePct": 9.984399795532227,
+              "boards": 2,
+              "industry": "炼化及贸",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002148",
+              "name": "北纬科技",
+              "changePct": 10.06289291381836,
+              "boards": 4,
+              "industry": "通信服务",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002242",
+              "name": "九阳股份",
+              "changePct": 10.018691062927246,
+              "boards": 1,
+              "industry": "小家电",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002905",
+              "name": "金逸影视",
+              "changePct": 10,
+              "boards": 2,
+              "industry": "影视院线",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002425",
+              "name": "凯撒文化",
+              "changePct": 10.1010103225708,
+              "boards": 2,
+              "industry": "游戏Ⅱ",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002548",
+              "name": "金新农",
+              "changePct": 9.921670913696289,
+              "boards": 2,
+              "industry": "饲料",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002187",
+              "name": "广百股份",
+              "changePct": 10.043041229248047,
+              "boards": 3,
+              "industry": "一般零售",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002419",
+              "name": "天虹股份",
+              "changePct": 9.979633331298828,
+              "boards": 1,
+              "industry": "一般零售",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "603358",
+              "name": "华达科技",
+              "changePct": 9.989806175231934,
+              "boards": 1,
+              "industry": "汽车零部",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002685",
+              "name": "华东重机",
+              "changePct": 9.9277982711792,
+              "boards": 2,
+              "industry": "工程机械",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "000820",
+              "name": "神雾节能",
+              "changePct": 9.86842155456543,
+              "boards": 1,
+              "industry": "环保设备",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002356",
+              "name": "鹏飞绿能",
+              "changePct": 10.043667793273926,
+              "boards": 1,
+              "industry": "一般零售",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "605378",
+              "name": "野马电池",
+              "changePct": 9.992913246154785,
+              "boards": 1,
+              "industry": "电池",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "601188",
+              "name": "龙江交通",
+              "changePct": 10,
+              "boards": 1,
+              "industry": "铁路公路",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "600822",
+              "name": "上海物贸",
+              "changePct": 10.011641502380371,
+              "boards": 1,
+              "industry": "汽车服务",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "600936",
+              "name": "北投科技",
+              "changePct": 10.13698673248291,
+              "boards": 1,
+              "industry": "IT服务Ⅱ",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "000521",
+              "name": "长虹美菱",
+              "changePct": 9.948979377746582,
+              "boards": 1,
+              "industry": "白色家电",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "600386",
+              "name": "北巴传媒",
+              "changePct": 10.115607261657715,
+              "boards": 1,
+              "industry": "汽车服务",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "001318",
+              "name": "阳光乳业",
+              "changePct": 10.007524490356445,
+              "boards": 1,
+              "industry": "饮料乳品",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "601929",
+              "name": "吉视传媒",
+              "changePct": 10.037175178527832,
+              "boards": 1,
+              "industry": "电视广播",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002058",
+              "name": "紫竹高科",
+              "changePct": 10.019646644592285,
+              "boards": 1,
+              "industry": "电池",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "603880",
+              "name": "南卫股份",
+              "changePct": -10.027854919433594,
+              "boards": null,
+              "industry": "医疗器械",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "605169",
+              "name": "洪通燃气",
+              "changePct": -9.98603343963623,
+              "boards": null,
+              "industry": "燃气Ⅱ",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "000011",
+              "name": "深物业A",
+              "changePct": -9.964829444885254,
+              "boards": null,
+              "industry": "房地产开",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "605168",
+              "name": "三人行",
+              "changePct": -9.99307632446289,
+              "boards": null,
+              "industry": "广告营销",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "603353",
+              "name": "和顺石油",
+              "changePct": -9.996846199035645,
+              "boards": null,
+              "industry": "炼化及贸",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "600802",
+              "name": "福建水泥",
+              "changePct": -9.961190223693848,
+              "boards": null,
+              "industry": "水泥",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "603706",
+              "name": "东方环宇",
+              "changePct": -9.98198127746582,
+              "boards": null,
+              "industry": "燃气Ⅱ",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002578",
+              "name": "闽发铝业",
+              "changePct": -9.926470756530762,
+              "boards": null,
+              "industry": "工业金属",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "002696",
+              "name": "百洋股份",
+              "changePct": -9.990485191345215,
+              "boards": null,
+              "industry": "饲料",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "000026",
+              "name": "飞亚达",
+              "changePct": -9.995936393737793,
+              "boards": null,
+              "industry": "饰品",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "603381",
+              "name": "永臻股份",
+              "changePct": -9.995076179504395,
+              "boards": null,
+              "industry": "光伏设备",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "600259",
+              "name": "中稀有色",
+              "changePct": -9.995497703552246,
+              "boards": null,
+              "industry": "小金属",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "603396",
+              "name": "金辰股份",
+              "changePct": -9.994338035583496,
+              "boards": null,
+              "industry": "光伏设备",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            },
+            {
+              "code": "300779",
+              "name": "惠城环保",
+              "changePct": -20,
+              "boards": null,
+              "industry": "环境治理",
+              "asOf": "2026-11-16T10:17:54+08:00",
+              "observedAt": "2026-11-16T10:17:54+08:00",
+              "timestampSource": "fetch"
+            }
+          ],
+          "meta": {
+            "upstream": "push2ex",
+            "tradeDate": "2026-11-16",
+            "limitUp": 21,
+            "limitDown": 14
+          }
+        }
+      },
+      "unavailableSections": []
     }
   ],
+  "gaps": [],
   "counts": {
     "expectedSlots": 2,
-    "capturedSlots": 1,
+    "capturedSlots": 2,
     "revisionFiles": 0,
-    "gaps": 1
+    "gaps": 0
   },
   "note": "Each slot is the immutable first capture of that slot (the base file) with its two clocks: asOf is the market timestamp the values describe, observedAt is when we fetched them. Later re-captures are listed in captures[] and live at their own tape/<date>/<HHMM>.rev-N.json path; the base bytes are never rewritten. Every absent slot or section is named in gaps[] with a code."
 }
