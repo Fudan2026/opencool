@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-16T05:08:26.670Z",
+  "generatedAt": "2026-11-16T05:44:06.808Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 21,
-  "avgSentiment": -4.1,
+  "avgSentiment": -4.3,
   "sentimentCurve": [
     {
       "date": "2026-11-09",
@@ -109,7 +109,7 @@
     {
       "date": "2026-11-16",
       "hour": "13",
-      "score": -12
+      "score": -15
     }
   ],
   "sectorAvg": [
@@ -134,31 +134,31 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -21.6,
-      "editions": 21
-    },
-    {
-      "key": "commodity-fx",
-      "label": "商品汇率",
-      "avg": -20.3,
+      "avg": -21.8,
       "editions": 21
     },
     {
       "key": "china-etf",
       "label": "ETF",
+      "avg": -20.9,
+      "editions": 21
+    },
+    {
+      "key": "commodity-fx",
+      "label": "商品汇率",
       "avg": -20.2,
       "editions": 21
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -12.6,
+      "avg": -13.1,
       "editions": 9
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -1.3,
+      "avg": -1.5,
       "editions": 21
     }
   ],
@@ -290,6 +290,12 @@
       "lastSeen": "2026-11-13"
     },
     {
+      "term": "美元",
+      "count": 2,
+      "firstSeen": "2026-11-11",
+      "lastSeen": "2026-11-16"
+    },
+    {
       "term": "英伟",
       "count": 2,
       "firstSeen": "2026-11-12",
@@ -348,29 +354,23 @@
       "count": 1,
       "firstSeen": "2026-11-14",
       "lastSeen": "2026-11-14"
-    },
-    {
-      "term": "5年",
-      "count": 1,
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 125
+      "totalHits": 126
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 100
+      "totalHits": 104
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 64
+      "totalHits": 66
     },
     {
       "key": "bank",
@@ -390,7 +390,7 @@
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 36
+      "totalHits": 38
     },
     {
       "key": "defense",
@@ -400,12 +400,12 @@
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 25
+      "totalHits": 22
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 20
+      "totalHits": 19
     },
     {
       "key": "pharma",
@@ -431,7 +431,7 @@
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.72,
+      "avgChangePct": -1.73,
       "editions": 21
     }
   ],

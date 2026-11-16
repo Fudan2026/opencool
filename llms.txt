@@ -82,9 +82,9 @@ included. No LLM behind any endpoint.
   minutes, verdict (on time <=20m / late Nm / early / missing). Slot times are
   targets; the measured table is the promise.
 - Point-in-time tape: /v1/manifest.json + /v1/asof/<YYYY-MM-DD>.json —
-  5 immutable snapshot(s) across 1 day(s)
+  6 immutable snapshot(s) across 1 day(s)
   (2026-11-16 → 2026-11-16),
-  83.3% of expected slots captured,
+  85.7% of expected slots captured,
   1 named gap(s). Every slot and every section carries
   asOf (market clock) + observedAt (our fetch clock); a re-capture writes
   <HHMM>.rev-N.json and never rewrites the base bytes.
