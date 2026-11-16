@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-16T06:43:54.911Z",
+  "generatedAt": "2026-11-16T07:07:29.230Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 21,
-  "avgSentiment": -4.7,
+  "avgSentiment": -4.8,
   "sentimentCurve": [
     {
       "date": "2026-11-09",
@@ -109,7 +109,7 @@
     {
       "date": "2026-11-16",
       "hour": "13",
-      "score": -23
+      "score": -25
     }
   ],
   "sectorAvg": [
@@ -140,25 +140,25 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -21.6,
+      "avg": -21.8,
       "editions": 21
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -21.6,
+      "avg": -21.4,
       "editions": 21
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -13.1,
+      "avg": -12.9,
       "editions": 9
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -1.5,
+      "avg": -1.6,
       "editions": 21
     }
   ],
@@ -370,7 +370,7 @@
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 66
+      "totalHits": 64
     },
     {
       "key": "bank",
@@ -380,12 +380,12 @@
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 48
+      "totalHits": 49
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 41
+      "totalHits": 42
     },
     {
       "key": "robotics",
@@ -395,7 +395,7 @@
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 30
+      "totalHits": 28
     },
     {
       "key": "brokerage",
@@ -410,7 +410,7 @@
     {
       "key": "pharma",
       "name": "创新药",
-      "totalHits": 16
+      "totalHits": 17
     },
     {
       "key": "comms",
@@ -421,17 +421,17 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.39,
+      "avgChangePct": -0.38,
       "editions": 21
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.2,
+      "avgChangePct": -1.18,
       "editions": 21
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.8,
+      "avgChangePct": -1.78,
       "editions": 21
     }
   ],

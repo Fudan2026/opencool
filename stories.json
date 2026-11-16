@@ -3,8 +3,430 @@
   "timezone": "Asia/Shanghai",
   "retentionDays": 30,
   "maxStories": 2000,
-  "updatedAt": "2026-11-16T14:47:02+08:00",
+  "updatedAt": "2026-11-16T15:09:56+08:00",
   "stories": [
+    {
+      "id": "st_0bd86d978a",
+      "cluster": "title:尾盘半小时多只宽基etf显著放量 沪深300etf华泰柏瑞 510300 成交超40亿",
+      "title": "尾盘半小时多只宽基ETF显著放量 沪深300ETF华泰柏瑞（510300）成交超40亿",
+      "url": "https://www.cls.cn/detail/2535333",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T06:55:56.000Z",
+      "publishLagMinutes": 10.3,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph",
+        "wallstreetcn-live"
+      ],
+      "sightings": [
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "多只宽基ETF尾盘放量成交",
+          "url": "https://wallstreetcn.com/livenews/3200470",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T06:55:56.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": null,
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": true,
+        "coFirstSourceIds": [
+          "cls-telegraph",
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_28dee71a56",
+      "cluster": "entity:pboc",
+      "title": "财联社11月16日电，法国兴业银行分析师表示，英国第三季度GDP增速为0.7%，显著高于英国央行0.4%的预测值，使得英国央行加息压力上升。",
+      "url": "https://www.cls.cn/detail/2535325",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T06:51:35.000Z",
+      "publishLagMinutes": 14.6,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [
+        "pboc"
+      ],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_4d2378f4d8",
+      "cluster": "title:人民日报 要客观看待消费品以旧换新政策效果 算大账 看结构 看长远",
+      "title": "人民日报：要客观看待消费品以旧换新政策效果，算大账、看结构、看长远",
+      "url": "https://wallstreetcn.com/articles/3786005",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "wallstreetcn",
+      "publishedAt": "2026-11-16T06:49:31.000Z",
+      "publishLagMinutes": 16.7,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "policy",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn",
+        "wallstreetcn-live"
+      ],
+      "sightings": [
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "人民日报：要客观看待消费品以旧换新政策效果",
+          "url": "https://wallstreetcn.com/livenews/3200467",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T06:49:31.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": null,
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": true,
+        "coFirstSourceIds": [
+          "wallstreetcn",
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_692079a602",
+      "cluster": "title:沪电股份触及跌停",
+      "title": "沪电股份触及跌停。",
+      "url": "https://wallstreetcn.com/livenews/3200465",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T06:41:17.000Z",
+      "publishLagMinutes": 24.9,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_70b7dcd822",
+      "cluster": "title:据mysteel数据显示 11月9日至15日 澳洲锂精矿发运至中国总量21 8万吨 环比增加13 2万吨",
+      "title": "财联社11月16日电，据Mysteel数据显示，11月9日至15日，澳洲锂精矿发运至中国总量21.8万吨，环比增加13.2万吨。",
+      "url": "https://www.cls.cn/detail/2535317",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T06:44:57.000Z",
+      "publishLagMinutes": 21.3,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_79a69f9f95",
+      "cluster": "title:当国产创新药撞上院长们的经营底线 一",
+      "title": "当国产创新药撞上院长们的经营底线（一）",
+      "url": "https://opinion.caixin.com/2026-11-16/102505289.html",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "caixin",
+      "publishedAt": "2026-11-16T06:56:22.000Z",
+      "publishLagMinutes": 9.8,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "caixin"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "caixin",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "caixin"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_8a66b05931",
+      "cluster": "entity:oil",
+      "title": "商品期货收盘，LU燃油、纯苯、BR橡胶、原油、苯乙烯涨超2%。沪银跌超6%，红枣跌超4%，豆一、碳酸锂、铁矿石、铂跌超3%。",
+      "url": "https://wallstreetcn.com/livenews/3200477",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T07:01:26.000Z",
+      "publishLagMinutes": 4.8,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [
+        "oil"
+      ],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_9bf749ee69",
+      "cluster": "title:monday briefing the many stages of the uk eu relationship and what s next",
+      "title": "Monday briefing: The many stages of the UK-EU relationship – and what’s next",
+      "url": "https://www.theguardian.com/world/2026/nov/16/monday-briefing-the-many-stages-of-the-uk-eu-relationship-and-whats-next",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "guardian-world",
+      "publishedAt": "2026-11-16T06:46:27.000Z",
+      "publishLagMinutes": 19.8,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "world",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "guardian-world"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "guardian-world",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "guardian-world"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_b5a0a48642",
+      "cluster": "title:工信部 以标准提升引领轻工业优化升级实施方案 正式发布",
+      "title": "工信部：《以标准提升引领轻工业优化升级实施方案》正式发布",
+      "url": "https://wallstreetcn.com/livenews/3200479",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T07:02:56.000Z",
+      "publishLagMinutes": 3.3,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "policy",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_d37d56ad0d",
+      "cluster": "title:农发行发行182天期债券 规模20亿元 发行利率1 2639 预期1 3000 投标倍数3 72倍 边际倍数1 42倍 农发行发行3年期债券 规模40亿元 发行利率1 3506 预",
+      "title": "农发行发行182天期债券，规模20亿元，发行利率1.2639%，预期1.3000%，投标倍数3.72倍，边际倍数1.42倍； 农发行发行3年期债券，规模40亿元，发行利率1.3506%，预...",
+      "url": "https://wallstreetcn.com/livenews/3200480",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T07:04:00.000Z",
+      "publishLagMinutes": 2.2,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_e4a526f4d0",
+      "cluster": "title:a股收盘 创业板指低开低走跌4 37 算力硬件 芯片股集体下挫",
+      "title": "A股收盘：创业板指低开低走跌4.37%，算力硬件、芯片股集体下挫",
+      "url": "https://wallstreetcn.com/livenews/3200478",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T07:01:52.000Z",
+      "publishLagMinutes": 4.3,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_edd2387298",
+      "cluster": "title:asia stocks tumble as chipmakers slide and weak china data adds pressure",
+      "title": "Asia stocks tumble as chipmakers slide and weak China data adds pressure",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/asia-stocks-slide-ai-jitters-043337789.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T04:33:37.000Z",
+      "publishLagMinutes": 152.6,
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
+      "topic": "tech-ai",
+      "lane": "external",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T15:06:12+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
     {
       "id": "st_00a2ec0f3b",
       "cluster": "title:从 找律师难 说起 企业出海的另一道门槛",
@@ -413,16 +835,26 @@
       "firstSourceId": "cls-telegraph",
       "publishedAt": "2026-11-16T06:10:31.000Z",
       "publishLagMinutes": 32.8,
-      "lastSeenAt": "2026-11-16T14:43:17+08:00",
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
       "lastEdition": "2026-11-16/13",
       "topic": "global-markets",
       "lane": "zh",
       "domestic": false,
       "entities": [],
       "sources": [
-        "cls-telegraph"
+        "cls-telegraph",
+        "wallstreetcn-live"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "印尼盾兑美元跌至历史新低。",
+          "url": "https://wallstreetcn.com/livenews/3200466",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T06:41:25.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "cls-telegraph",
@@ -431,9 +863,9 @@
         "coFirstSourceIds": [
           "cls-telegraph"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "wallstreetcn-live",
+        "runnerUpObservedAt": "2026-11-16T15:06:12+08:00",
+        "leadMinutes": 22.9
       }
     },
     {
@@ -1742,7 +2174,7 @@
       "firstSourceId": "cls-telegraph",
       "publishedAt": "2026-11-16T05:09:44.000Z",
       "publishLagMinutes": 33.4,
-      "lastSeenAt": "2026-11-16T13:43:06+08:00",
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
       "lastEdition": "2026-11-16/13",
       "topic": "opinion",
       "lane": "zh",
@@ -1760,6 +2192,14 @@
           "url": "https://wallstreetcn.com/livenews/3200423",
           "edition": "2026-11-16/13",
           "publishedAt": "2026-11-16T05:09:44.000Z"
+        },
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "财联社11月16日电，摩根士丹利预计到2027年第四季度，金价将达到5250美元/盎司。",
+          "url": "https://www.cls.cn/detail/2535313",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T06:42:45.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -2661,7 +3101,7 @@
       "firstSourceId": "cls-telegraph",
       "publishedAt": "2026-11-16T04:05:26.000Z",
       "publishLagMinutes": 61.5,
-      "lastSeenAt": "2026-11-16T13:06:56+08:00",
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
       "lastEdition": "2026-11-16/13",
       "topic": "policy",
       "lane": "zh",
@@ -2690,6 +3130,14 @@
           "url": "https://wallstreetcn.com/livenews/3200402",
           "edition": "2026-11-16/13",
           "publishedAt": "2026-11-16T04:12:12.000Z"
+        },
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "财联社11月16日电，日本央行审议委员高田创表示，日本央行仍在提高政策利率的过程中，因为它寻求政策正常化，以应对全球货币和财政政策的转变；日本央行应在每次...",
+          "url": "https://www.cls.cn/detail/2535326",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T06:52:36.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -4713,8 +5161,8 @@
       "firstSourceId": "wallstreetcn-live",
       "publishedAt": "2026-11-16T03:31:00.000Z",
       "publishLagMinutes": 6.6,
-      "lastSeenAt": "2026-11-16T11:37:35+08:00",
-      "lastEdition": "2026-11-16/06",
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
       "topic": "global-markets",
       "lane": "zh",
       "domestic": true,
@@ -4722,7 +5170,16 @@
       "sources": [
         "wallstreetcn-live"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "上证指数收报3602.57点，跌0.87%。 深证成指收报10690.78点，跌2.53%。 创业板指收报2320.02点，跌4.37%。 沪深300收报3979.80点，跌0.91%。 科创50收报1213.68...",
+          "url": "https://wallstreetcn.com/livenews/3200474",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T07:01:01.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "wallstreetcn-live",
@@ -5072,8 +5529,8 @@
       "firstSourceId": "bloomberg-markets",
       "publishedAt": "2026-11-16T03:21:26.000Z",
       "publishLagMinutes": 16.2,
-      "lastSeenAt": "2026-11-16T11:37:35+08:00",
-      "lastEdition": "2026-11-16/06",
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
       "topic": "global-markets",
       "lane": "external",
       "domestic": true,
@@ -5081,9 +5538,19 @@
         "pboc"
       ],
       "sources": [
-        "bloomberg-markets"
+        "bloomberg-markets",
+        "cls-telegraph"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "财联社11月16日电，印尼央行数据显示，印尼9月外债总额由8月修正后的4554亿美元升至4589亿美元。",
+          "url": "https://www.cls.cn/detail/2535322",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T06:49:24.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "bloomberg-markets",
@@ -5092,9 +5559,9 @@
         "coFirstSourceIds": [
           "bloomberg-markets"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "cls-telegraph",
+        "runnerUpObservedAt": "2026-11-16T15:06:12+08:00",
+        "leadMinutes": 208.6
       }
     },
     {
@@ -5274,8 +5741,8 @@
       "firstSourceId": "cls-telegraph",
       "publishedAt": "2026-11-16T03:31:18.000Z",
       "publishLagMinutes": 6.3,
-      "lastSeenAt": "2026-11-16T11:37:35+08:00",
-      "lastEdition": "2026-11-16/06",
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
       "topic": "global-markets",
       "lane": "zh",
       "domestic": true,
@@ -5283,7 +5750,16 @@
       "sources": [
         "cls-telegraph"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "国内商品期货多数收跌 沪银跌超6%",
+          "url": "https://www.cls.cn/detail/2535337",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T07:00:59.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "cls-telegraph",
@@ -8896,6 +9372,14 @@
           "url": "https://www.bloomberg.com/news/articles/2026-11-15/stock-market-today-dow-s-p-live-updates",
           "from": "Asian Stocks Rattled by Tech Selloff, Oil Drops: Markets Wrap",
           "to": "Stocks Slide as Tech Selloff Worsens, Oil Steady: Markets Wrap"
+        },
+        {
+          "at": "2026-11-16T15:06:12+08:00",
+          "sourceId": "bloomberg-markets",
+          "edition": "2026-11-16/13",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-15/stock-market-today-dow-s-p-live-updates",
+          "from": "Stocks Slide as Tech Selloff Worsens, Oil Steady: Markets Wrap",
+          "to": "Stocks Slide as Tech Selloff Worsens, Oil Rebounds: Markets Wrap"
         }
       ],
       "firstMover": {
@@ -10150,8 +10634,8 @@
       "firstSourceId": "bloomberg-markets",
       "publishedAt": "2026-11-16T00:00:06.000Z",
       "publishLagMinutes": 122.6,
-      "lastSeenAt": "2026-11-16T10:02:42+08:00",
-      "lastEdition": "2026-11-16/06",
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
+      "lastEdition": "2026-11-16/13",
       "topic": "opinion",
       "lane": "external",
       "domestic": false,
@@ -10159,7 +10643,16 @@
       "sources": [
         "bloomberg-markets"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "IDR/USD: Indonesian Rupiah Falls to Record Low as Fed Bets Boost Dollar",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-16/idr-usd-indonesian-rupiah-prabowo-fed-bets-boost-dollar",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T06:50:34.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "bloomberg-markets",
@@ -12207,7 +12700,7 @@
       "firstSourceId": "marketwatch-top",
       "publishedAt": "2026-11-15T12:30:00.000Z",
       "publishLagMinutes": 297.1,
-      "lastSeenAt": "2026-11-16T14:10:11+08:00",
+      "lastSeenAt": "2026-11-16T15:06:12+08:00",
       "lastEdition": "2026-11-16/13",
       "topic": "global-markets",
       "lane": "external",
@@ -12253,6 +12746,14 @@
           "url": "https://wallstreetcn.com/livenews/3200442",
           "edition": "2026-11-16/13",
           "publishedAt": "2026-11-16T05:51:49.000Z"
+        },
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T15:06:12+08:00",
+          "title": "黄金跌至2025年10月以来最低 因美国加息预期升温",
+          "url": "https://www.cls.cn/detail/2535328",
+          "edition": "2026-11-16/13",
+          "publishedAt": "2026-11-16T06:53:54.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -19577,7 +20078,16 @@
           "publishedAt": "2026-11-16T00:15:57.000Z"
         }
       ],
-      "headlineRevisions": [],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-16T15:06:12+08:00",
+          "sourceId": "aljazeera",
+          "edition": "2026-11-16/13",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/11/16/iran-war-live-tehran-warns-it-may-strike-first-before-another-us-attack?traffic_source=rss",
+          "from": "Iran war live: Third US carrier arrives, Iran warns it could strike first",
+          "to": "Iran war live: Third US carrier arrives, Iran says oil tankers hit mines"
+        }
+      ],
       "firstMover": {
         "sourceId": "aljazeera",
         "observedAt": "2026-11-14T22:55:16+08:00",
@@ -25192,8 +25702,8 @@
       "firstSeenAt": "2026-11-14T17:01:37+08:00",
       "firstEdition": "2026-11-14/13",
       "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-14T07:42:11.000Z",
-      "publishLagMinutes": 79.4,
+      "publishedAt": "2026-11-10T15:30:06.000Z",
+      "publishLagMinutes": 5371.5,
       "lastSeenAt": "2026-11-14T22:55:16+08:00",
       "lastEdition": "2026-11-14/19",
       "topic": "world",
@@ -25202,7 +25712,8 @@
       "entities": [],
       "sources": [
         "bbc-world",
-        "aljazeera"
+        "aljazeera",
+        "nyt-world"
       ],
       "sightings": [
         {
@@ -25212,19 +25723,27 @@
           "url": "https://www.aljazeera.com/news/2026/11/14/qatar-and-turkiye-sign-a-mutual-defence-pact-what-do-we-know?traffic_source=rss",
           "edition": "2026-11-14/19",
           "publishedAt": "2026-11-14T09:19:43.000Z"
+        },
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-12T08:46:37+08:00",
+          "title": "What to Know About Thomas Massie, Leader of Drive to Impeach Hegseth",
+          "url": "https://www.nytimes.com/2026/11/10/us/thomas-massie-impeachment-hegseth.html",
+          "edition": "2026-11-12/06",
+          "publishedAt": "2026-11-10T15:30:06.000Z"
         }
       ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-14T17:01:37+08:00",
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-12T08:46:37+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "bbc-world"
+          "nyt-world"
         ],
-        "runnerUpSourceId": "aljazeera",
-        "runnerUpObservedAt": "2026-11-14T22:55:16+08:00",
-        "leadMinutes": 353.7
+        "runnerUpSourceId": "bbc-world",
+        "runnerUpObservedAt": "2026-11-14T17:01:37+08:00",
+        "leadMinutes": 3375
       }
     },
     {
@@ -36111,7 +36630,8 @@
       "entities": [],
       "sources": [
         "wallstreetcn-live",
-        "cls-telegraph"
+        "cls-telegraph",
+        "wallstreetcn"
       ],
       "sightings": [
         {
@@ -36137,6 +36657,14 @@
           "url": "https://wallstreetcn.com/livenews/3200452",
           "edition": "2026-11-16/13",
           "publishedAt": "2026-11-16T06:07:20.000Z"
+        },
+        {
+          "sourceId": "wallstreetcn",
+          "observedAt": "2026-11-16T11:37:35+08:00",
+          "title": "创业板指跌超2%，沪指跌逾1%",
+          "url": "https://wallstreetcn.com/articles/3785986",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T01:53:12.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -36147,9 +36675,9 @@
         "coFirstSourceIds": [
           "wallstreetcn-live"
         ],
-        "runnerUpSourceId": "cls-telegraph",
-        "runnerUpObservedAt": "2026-11-16T13:43:06+08:00",
-        "leadMinutes": 3560.3
+        "runnerUpSourceId": "wallstreetcn",
+        "runnerUpObservedAt": "2026-11-16T11:37:35+08:00",
+        "leadMinutes": 3434.8
       }
     },
     {
@@ -40479,8 +41007,8 @@
       "firstSeenAt": "2026-11-13T23:48:55+08:00",
       "firstEdition": "2026-11-13/19",
       "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-13T12:03:24.000Z",
-      "publishLagMinutes": 225.5,
+      "publishedAt": "2026-11-11T03:00:00.000Z",
+      "publishLagMinutes": 3648.9,
       "lastSeenAt": "2026-11-13T23:48:55+08:00",
       "lastEdition": "2026-11-13/19",
       "topic": "global-markets",
@@ -40488,20 +41016,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "cnbc-topnews"
+        "cnbc-topnews",
+        "bloomberg-markets"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-11T12:16:08+08:00",
+          "title": "Korea Fines Bond Dealers Record $1.2 Billion Over Collusion",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-11/korea-fines-bond-dealers-record-1-2-billion-over-collusion",
+          "edition": "2026-11-11/06",
+          "publishedAt": "2026-11-11T03:00:00.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-13T23:48:55+08:00",
+        "sourceId": "bloomberg-markets",
+        "observedAt": "2026-11-11T12:16:08+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "cnbc-topnews"
+          "bloomberg-markets"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "cnbc-topnews",
+        "runnerUpObservedAt": "2026-11-13T23:48:55+08:00",
+        "leadMinutes": 3572.8
       }
     },
     {
@@ -47365,8 +47903,8 @@
       "firstSeenAt": "2026-11-13T08:44:11+08:00",
       "firstEdition": "2026-11-13/06",
       "firstSourceId": "guardian-world",
-      "publishedAt": "2026-11-12T16:39:47.000Z",
-      "publishLagMinutes": 484.4,
+      "publishedAt": "2026-11-11T00:24:27.000Z",
+      "publishLagMinutes": 2899.7,
       "lastSeenAt": "2026-11-13T08:44:11+08:00",
       "lastEdition": "2026-11-13/06",
       "topic": "world",
@@ -47374,20 +47912,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "guardian-world"
+        "guardian-world",
+        "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-11T12:16:08+08:00",
+          "title": "‘Everything and everyone we love is at stake’: Thunberg slams COP31 talks",
+          "url": "https://www.aljazeera.com/news/2026/11/11/everything-and-everyone-we-love-is-at-stake-thunberg-slams-cop31-talks?traffic_source=rss",
+          "edition": "2026-11-11/06",
+          "publishedAt": "2026-11-11T00:24:27.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "guardian-world",
-        "observedAt": "2026-11-13T08:44:11+08:00",
+        "sourceId": "aljazeera",
+        "observedAt": "2026-11-11T12:16:08+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "guardian-world"
+          "aljazeera"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "guardian-world",
+        "runnerUpObservedAt": "2026-11-13T08:44:11+08:00",
+        "leadMinutes": 2668.1
       }
     },
     {
@@ -48200,8 +48748,8 @@
       "firstSeenAt": "2026-11-13T08:44:11+08:00",
       "firstEdition": "2026-11-13/06",
       "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-12T18:22:04.000Z",
-      "publishLagMinutes": 382.1,
+      "publishedAt": "2026-11-10T15:30:06.000Z",
+      "publishLagMinutes": 3434.1,
       "lastSeenAt": "2026-11-13T08:44:11+08:00",
       "lastEdition": "2026-11-13/06",
       "topic": "world",
@@ -48209,20 +48757,30 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "nyt-world"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "nyt-world",
+          "observedAt": "2026-11-11T12:16:08+08:00",
+          "title": "What to Know About Thomas Massie, Leader of Drive to Impeach Hegseth",
+          "url": "https://www.nytimes.com/2026/11/10/us/thomas-massie-impeachment-hegseth.html",
+          "edition": "2026-11-11/06",
+          "publishedAt": "2026-11-10T15:30:06.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-13T08:44:11+08:00",
+        "sourceId": "nyt-world",
+        "observedAt": "2026-11-11T12:16:08+08:00",
         "tied": false,
         "coFirstSourceIds": [
-          "aljazeera"
+          "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-13T08:44:11+08:00",
+        "leadMinutes": 2668.1
       }
     },
     {
@@ -57498,7 +58056,8 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "aljazeera"
+        "aljazeera",
+        "cnbc-topnews"
       ],
       "sightings": [
         {
@@ -57508,6 +58067,14 @@
           "url": "https://www.aljazeera.com/news/2026/11/10/what-is-hasinas-game-plan-as-she-seeks-passport-to-return-to-bangladesh?traffic_source=rss",
           "edition": "2026-11-10/19",
           "publishedAt": "2026-11-10T09:46:43.000Z"
+        },
+        {
+          "sourceId": "cnbc-topnews",
+          "observedAt": "2026-11-11T12:16:08+08:00",
+          "title": "Fossil CEO says turnaround is ahead of plan as sales return to growth",
+          "url": "https://www.cnbc.com/2026/11/10/fossil-fosl-q3-2026-earnings.html",
+          "edition": "2026-11-11/06",
+          "publishedAt": "2026-11-10T22:39:30.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -57518,9 +58085,9 @@
         "coFirstSourceIds": [
           "aljazeera"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "cnbc-topnews",
+        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
+        "leadMinutes": 992.5
       }
     },
     {
@@ -60883,7 +61450,8 @@
       "sources": [
         "bbc-world",
         "aljazeera",
-        "cnbc-topnews"
+        "cnbc-topnews",
+        "npr-world"
       ],
       "sightings": [
         {
@@ -60925,6 +61493,14 @@
           "url": "https://www.cnbc.com/2026/11/10/pete-hegseth-impeachment-massie-iran.html",
           "edition": "2026-11-11/06",
           "publishedAt": "2026-11-10T23:46:41.000Z"
+        },
+        {
+          "sourceId": "npr-world",
+          "observedAt": "2026-11-11T12:16:08+08:00",
+          "title": "House set to vote to impeach Hegseth. And, SCOTUS allows border wall work to proceed",
+          "url": "https://www.npr.org/2026/11/10/g-s1-152777/up-first-newsletter-pete-hegseth-impeachment-trump-iran-nvidia-border-wall-texas",
+          "edition": "2026-11-11/06",
+          "publishedAt": "2026-11-10T12:01:04.000Z"
         }
       ],
       "headlineRevisions": [
@@ -64538,8 +65114,8 @@
       "firstSeenAt": "2026-11-12T08:46:37+08:00",
       "firstEdition": "2026-11-12/06",
       "firstSourceId": "bbc-business",
-      "publishedAt": "2026-11-11T07:52:05.000Z",
-      "publishLagMinutes": 1014.5,
+      "publishedAt": "2026-11-11T00:16:44.000Z",
+      "publishLagMinutes": 1469.9,
       "lastSeenAt": "2026-11-12T08:46:37+08:00",
       "lastEdition": "2026-11-12/06",
       "topic": "global-markets",
@@ -64549,11 +65125,29 @@
       "sources": [
         "bbc-business"
       ],
-      "sightings": [],
-      "headlineRevisions": [],
+      "sightings": [
+        {
+          "sourceId": "bbc-business",
+          "observedAt": "2026-11-11T12:16:08+08:00",
+          "title": "Stickers and building sets help drive toy sales ahead of Christmas rush",
+          "url": "https://www.bbc.co.uk/news/articles/cx5ynyg6j375o?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-11/06",
+          "publishedAt": "2026-11-11T00:16:44.000Z"
+        }
+      ],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-12T08:46:37+08:00",
+          "sourceId": "bbc-business",
+          "edition": "2026-11-12/06",
+          "url": "https://www.bbc.co.uk/news/articles/cx5ynyg6j375o?at_medium=RSS&at_campaign=rss",
+          "from": "Stickers and building sets help drive toy sales ahead of Christmas rush",
+          "to": "Christmas toy rush being driven by squishies and building sets"
+        }
+      ],
       "firstMover": {
         "sourceId": "bbc-business",
-        "observedAt": "2026-11-12T08:46:37+08:00",
+        "observedAt": "2026-11-11T12:16:08+08:00",
         "tied": false,
         "coFirstSourceIds": [
           "bbc-business"
@@ -69416,473 +70010,6 @@
       }
     },
     {
-      "id": "st_113a6825ff",
-      "cluster": "title:arrests made after visit from former us president biden",
-      "title": "Arrests made after visit from former US President Biden",
-      "url": "https://www.bbc.co.uk/news/articles/ck78p827y642o?at_medium=RSS&at_campaign=rss",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-10T18:07:56.000Z",
-      "publishLagMinutes": 608.2,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bbc-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bbc-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1145e4aefb",
-      "cluster": "title:spain s king and queen attend memorial service for rail crash victims",
-      "title": "Spain's king and queen attend memorial service for rail crash victims",
-      "url": "https://www.bbc.co.uk/news/articles/ckjwew54yd4wo?at_medium=RSS&at_campaign=rss",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-10T20:46:40.000Z",
-      "publishLagMinutes": 449.5,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bbc-world",
-        "aljazeera"
-      ],
-      "sightings": [
-        {
-          "sourceId": "aljazeera",
-          "observedAt": "2026-11-11T12:16:08+08:00",
-          "title": "Spain holds state funeral for 69 victims of deadly train crash",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/11/spain-holds-state-funeral-for-69-victims-of-deadly-train-crash?traffic_source=rss",
-          "edition": "2026-11-11/06",
-          "publishedAt": "2026-11-11T00:42:41.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": null,
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": true,
-        "coFirstSourceIds": [
-          "aljazeera",
-          "bbc-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_12be1bd620",
-      "cluster": "title:顺应人口结构之变 十五五 民生礼包密集落地",
-      "title": "顺应人口结构之变，“十五五”民生礼包密集落地",
-      "url": "https://www.yicai.com/news/103435027.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "yicai",
-      "publishedAt": "2026-11-10T23:29:36.000Z",
-      "publishLagMinutes": 286.5,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "policy",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "yicai"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yicai",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yicai"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1309f51894",
-      "cluster": "title:港元隔夜hibor创9月30日以来最大涨幅",
-      "title": "港元隔夜Hibor创9月30日以来最大涨幅",
-      "url": "https://www.cls.cn/detail/2531167",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "cls-telegraph",
-      "publishedAt": "2026-11-11T03:37:48.000Z",
-      "publishLagMinutes": 38.3,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "cls-telegraph"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cls-telegraph",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cls-telegraph"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_15e38cd454",
-      "cluster": "title:republicans block hegseth impeachment motion",
-      "title": "Republicans block Hegseth impeachment motion",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/11/republicans-block-hegseth-impeachment-motion?traffic_source=rss",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-09T22:41:12.000Z",
-      "publishLagMinutes": 1774.9,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "aljazeera",
-        "cnbc-topnews"
-      ],
-      "sightings": [
-        {
-          "sourceId": "cnbc-topnews",
-          "observedAt": "2026-11-10T16:19:01+08:00",
-          "title": "Hegseth impeachment articles introduced by Rep. Massie",
-          "url": "https://www.cnbc.com/2026/11/09/pete-hegseth-impeachment-articles-massie.html",
-          "edition": "2026-11-10/13",
-          "publishedAt": "2026-11-09T22:41:12.000Z"
-        },
-        {
-          "sourceId": "cnbc-topnews",
-          "observedAt": "2026-11-11T12:16:08+08:00",
-          "title": "Hegseth impeachment effort torpedoed in House",
-          "url": "https://www.cnbc.com/2026/11/10/pete-hegseth-impeachment-massie-iran.html",
-          "edition": "2026-11-11/06",
-          "publishedAt": "2026-11-10T23:46:41.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cnbc-topnews"
-        ],
-        "runnerUpSourceId": "aljazeera",
-        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
-        "leadMinutes": 1197.1
-      }
-    },
-    {
-      "id": "st_173aa14346",
-      "cluster": "title:countries speed up on renewables as china s blistering pace slows",
-      "title": "Countries speed up on renewables as China’s blistering pace slows",
-      "url": "https://www.ft.com/content/71f35844-9635-4cfe-bf47-39a4014dc8ee?syn-25a6b1a6=1",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-10T12:00:05.000Z",
-      "publishLagMinutes": 976.1,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "ft-companies"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "ft-companies",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "ft-companies"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_175cb9a8b7",
-      "cluster": "title:炖肉时出现的浮沫 是营养精华还是脏东西 该不该撇去 科学",
-      "title": "炖肉时出现的浮沫，是营养精华还是脏东西？该不该撇去？｜科学",
-      "url": "https://mini.caixin.com/2026-11-11/102503353.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "caixin",
-      "publishedAt": "2026-11-11T02:11:55.000Z",
-      "publishLagMinutes": 124.2,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "caixin"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "caixin",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "caixin"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1772477b37",
-      "cluster": "title:进博会五项核心数据创新高 外企 不只把中国当销售市场",
-      "title": "进博会五项核心数据创新高，外企“不只把中国当销售市场”",
-      "url": "https://www.yicai.com/news/103434485.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "yicai",
-      "publishedAt": "2026-11-10T23:29:36.000Z",
-      "publishLagMinutes": 286.5,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "yicai"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yicai",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yicai"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1acc8b0342",
-      "cluster": "title:数据显示 全球股票对冲基金去风险速度创逾十年新高 尽管小摩认为动量拥挤度下降 投降抛售已深入 但波动率控制基金仍面临约500亿美元潜在抛压 点击查看",
-      "title": "数据显示，全球股票对冲基金去风险速度创逾十年新高。尽管小摩认为动量拥挤度下降、“投降抛售已深入”，但波动率控制基金仍面临约500亿美元潜在抛压。点击查看...",
-      "url": "https://xnews.jin10.com/details/234908",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "jin10-flash",
-      "publishedAt": "2026-11-11T04:08:30.000Z",
-      "publishLagMinutes": 7.6,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "jin10-flash"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "jin10-flash",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "jin10-flash"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1c04ebb3bb",
-      "cluster": "title:10 year treasury yield races back to 5 as inflation data waller comments drive rate hike expectations",
-      "title": "10-year Treasury yield races back to 5% as inflation data, Waller comments drive rate hike expectations",
-      "url": "https://www.cnbc.com/2026/11/10/us-bonds-treasurys-yields.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-10T21:06:07.000Z",
-      "publishLagMinutes": 430,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "cnbc-topnews"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cnbc-topnews"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1c9725b0e3",
-      "cluster": "title:california police investigate after 27 fall ill at half marathon running event",
-      "title": "California police investigate after 27 fall ill at half-marathon running event",
-      "url": "https://www.bbc.co.uk/news/articles/cq0ldlyd556go?at_medium=RSS&at_campaign=rss",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-10T13:22:12.000Z",
-      "publishLagMinutes": 893.9,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bbc-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bbc-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1d93f50687",
-      "cluster": "title:pre market turns red",
-      "title": "Pre-Market Turns Red",
-      "url": "https://finance.yahoo.com/economy/policy/articles/pre-market-turns-red-022500151.html?.tsrc=rss",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-09T15:05:00.000Z",
-      "publishLagMinutes": 2231.1,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "yahoo-finance"
-      ],
-      "sightings": [
-        {
-          "sourceId": "yahoo-finance",
-          "observedAt": "2026-11-10T01:11:34+08:00",
-          "title": "Pre-Market in Green",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/pre-market-green-150500238.html?.tsrc=rss",
-          "edition": "2026-11-10/06",
-          "publishedAt": "2026-11-09T15:05:00.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-10T01:11:34+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yahoo-finance"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1df0678044",
-      "cluster": "title:画地为牢 终于有一个词 可以形容和最好的朋友走散 热点",
-      "title": "“画地为牢”，终于有一个词，可以形容和最好的朋友走散｜热点",
-      "url": "https://mini.caixin.com/2026-11-11/102503383.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "caixin",
-      "publishedAt": "2026-11-11T03:32:38.000Z",
-      "publishLagMinutes": 43.5,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "caixin"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "caixin",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "caixin"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
       "id": "st_f90f94079b",
       "cluster": "title:当美国无法建设数据中心 会对 ai 产生怎样的冲击",
       "title": "当美国无法建设数据中心，会对 AI 产生怎样的冲击",
@@ -69926,6 +70053,66 @@
       }
     },
     {
+      "id": "st_0f7d15cd9b",
+      "cluster": "title:european stocks rise as banking and technology sectors advance",
+      "title": "European Stocks Rise as Banking and Technology Sectors Advance",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-09/european-stocks-rise-as-banks-technology-shares-advance",
+      "firstSeenAt": "2026-11-10T01:11:34+08:00",
+      "firstEdition": "2026-11-10/06",
+      "firstSourceId": "bloomberg-markets",
+      "publishedAt": "2026-11-09T08:26:42.000Z",
+      "publishLagMinutes": 524.9,
+      "lastSeenAt": "2026-11-11T12:16:08+08:00",
+      "lastEdition": "2026-11-11/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bloomberg-markets",
+        "yahoo-finance",
+        "guardian-world"
+      ],
+      "sightings": [
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-10T16:19:01+08:00",
+          "title": "FTSE 100 Set to Rise as European Stock Rally Extends",
+          "url": "https://www.bloomberg.com/news/live-blog/2026-11-10/ftse-100-live-updates-pound-gilts-stock-rally-europe-what-s-moving-uk-markets-right-now-markets-today",
+          "edition": "2026-11-10/13",
+          "publishedAt": "2026-11-10T06:47:05.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-10T19:43:41+08:00",
+          "title": "World shares rise after technology shares advance on Wall Street ahead of US inflation data",
+          "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-stocks-rise-technology-shares-034421581.html?.tsrc=rss",
+          "edition": "2026-11-10/19",
+          "publishedAt": "2026-11-10T03:44:21.000Z"
+        },
+        {
+          "sourceId": "guardian-world",
+          "observedAt": "2026-11-11T12:16:08+08:00",
+          "title": "US and rest of world must follow China’s lead on green energy, says John Kerry",
+          "url": "https://www.theguardian.com/environment/2026/nov/10/china-green-energy-john-kerry-cop31",
+          "edition": "2026-11-11/06",
+          "publishedAt": "2026-11-10T12:08:23.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bloomberg-markets",
+        "observedAt": "2026-11-10T01:11:34+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bloomberg-markets"
+        ],
+        "runnerUpSourceId": "yahoo-finance",
+        "runnerUpObservedAt": "2026-11-10T19:43:41+08:00",
+        "leadMinutes": 1112.1
+      }
+    },
+    {
       "id": "st_03f94ebad0",
       "cluster": "title:israeli opposition leader warns of point of no return for democracy",
       "title": "Israeli opposition leader warns of ‘point of no return’ for democracy",
@@ -69964,57 +70151,6 @@
           "aljazeera"
         ],
         "runnerUpSourceId": "nyt-world",
-        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
-        "leadMinutes": 3157.1
-      }
-    },
-    {
-      "id": "st_1e2de0201a",
-      "cluster": "title:photos diwali celebrations light up india and its global diaspora",
-      "title": "Photos: Diwali celebrations light up India and its global diaspora",
-      "url": "https://www.aljazeera.com/gallery/2026/11/8/photos-diwali-celebrations-light-up-india-and-its-global-diaspora?traffic_source=rss",
-      "firstSeenAt": "2026-11-09T07:39:02+08:00",
-      "firstEdition": "2026-11-09/06",
-      "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-08T17:03:14.000Z",
-      "publishLagMinutes": 395.8,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "aljazeera",
-        "the-diplomat"
-      ],
-      "sightings": [
-        {
-          "sourceId": "aljazeera",
-          "observedAt": "2026-11-09T14:05:57+08:00",
-          "title": "India’s night lights up for Diwali",
-          "url": "https://www.aljazeera.com/video/2026/11/9/indias-night-lights-up-for-diwali?traffic_source=rss",
-          "edition": "2026-11-09/13",
-          "publishedAt": "2026-11-09T00:24:04.000Z"
-        },
-        {
-          "sourceId": "the-diplomat",
-          "observedAt": "2026-11-11T12:16:08+08:00",
-          "title": "India’s Diwali: How Irresponsible Celebrations Spoil the Festival for Many",
-          "url": "https://thediplomat.com/2026/11/indias-diwali-how-irresponsible-celebrations-spoil-the-festival-for-many/",
-          "edition": "2026-11-11/06",
-          "publishedAt": "2026-11-10T11:22:00.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "aljazeera"
-        ],
-        "runnerUpSourceId": "the-diplomat",
         "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
         "leadMinutes": 3157.1
       }
@@ -70320,6 +70456,239 @@
         "runnerUpSourceId": null,
         "runnerUpObservedAt": null,
         "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_0514349d79",
+      "cluster": "title:asian stocks to fall as tech rout fuels ai fears markets wrap",
+      "title": "Asian Stocks to Fall as Tech Rout Fuels AI Fears: Markets Wrap",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-01/stock-market-today-dow-s-p-live-updates",
+      "firstSeenAt": "2026-11-02T07:02:11+08:00",
+      "firstEdition": "2026-11-02/06",
+      "firstSourceId": "bloomberg-markets",
+      "publishedAt": "2026-11-01T21:28:04.000Z",
+      "publishLagMinutes": 94.1,
+      "lastSeenAt": "2026-11-11T12:16:08+08:00",
+      "lastEdition": "2026-11-11/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bloomberg-markets",
+        "aljazeera",
+        "bbc-world",
+        "ft-companies",
+        "marketwatch-top",
+        "bbc-business",
+        "yahoo-finance"
+      ],
+      "sightings": [
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-02T13:51:06+08:00",
+          "title": "Copper Recovers as Easing Tech Rout, Lower Oil Calm Growth Fears",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-02/copper-recovers-as-easing-tech-rout-lower-oil-calm-growth-fears",
+          "edition": "2026-11-02/13",
+          "publishedAt": "2026-11-02T04:44:37.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-04T15:07:25+08:00",
+          "title": "Asian Stocks Fall as Democratic Gains in US Add to AI Worries",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-04/asian-stocks-fall-as-democratic-gains-in-us-add-to-ai-worries",
+          "edition": "2026-11-04/13",
+          "publishedAt": "2026-11-04T03:52:59.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-04T15:07:25+08:00",
+          "title": "European Stocks Set to Dip as Democrat Sweep Stokes AI Worries",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-04/european-stocks-set-to-dip-as-democrat-sweep-stokes-ai-worries",
+          "edition": "2026-11-04/13",
+          "publishedAt": "2026-11-04T05:51:38.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-04T15:07:25+08:00",
+          "title": "FTSE 100 Live: UK, European Stocks Set to Fall After US Democratic Sweep",
+          "url": "https://www.bloomberg.com/news/live-blog/2026-11-04/ftse-100-live-updates-pound-bonds-gilts-us-midterms-trump-democrats-pmi-novo-what-s-moving-uk-markets-right-now-markets-today-mw1rl1g6",
+          "edition": "2026-11-04/13",
+          "publishedAt": "2026-11-04T06:57:20.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-05T06:35:43+08:00",
+          "title": "Key moments as Democrats sweep to victories in US midterms",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/4/key-moments-as-democrats-sweep-to-victories-in-us-midterms?traffic_source=rss",
+          "edition": "2026-11-05/06",
+          "publishedAt": "2026-11-04T18:13:01.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-05T06:35:43+08:00",
+          "title": "Palestinians, Israelis react after Democrats sweep US midterms",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/4/palestinians-israelis-react-after-democrats-sweep-us-midterms?traffic_source=rss",
+          "edition": "2026-11-05/06",
+          "publishedAt": "2026-11-04T22:06:24.000Z"
+        },
+        {
+          "sourceId": "bbc-world",
+          "observedAt": "2026-11-05T06:35:43+08:00",
+          "title": "Tears, celebrations and selfies: US midterms in pictures",
+          "url": "https://www.bbc.co.uk/news/articles/cq74pexm44elo?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-05/06",
+          "publishedAt": "2026-11-04T08:05:53.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-05T06:35:43+08:00",
+          "title": "Defense Stocks in US, Europe Drop After Democrats Sweep Midterms",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-04/european-defense-stocks-slide-as-democrats-sweep-dents-optimism",
+          "edition": "2026-11-05/06",
+          "publishedAt": "2026-11-04T11:27:31.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-05T06:35:43+08:00",
+          "title": "Asian Stocks to Rise as Oil Slides After US Vote: Markets Wrap",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-04/stock-market-today-dow-s-p-live-updates",
+          "edition": "2026-11-05/06",
+          "publishedAt": "2026-11-04T22:15:04.000Z"
+        },
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-05T20:11:32+08:00",
+          "title": "Asian tech stocks slide on post-midterm AI fears",
+          "url": "https://www.ft.com/content/21755495-c68a-45a9-90d8-64f698cd1952?syn-25a6b1a6=1",
+          "edition": "2026-11-05/13",
+          "publishedAt": "2026-11-05T05:12:51.000Z"
+        },
+        {
+          "sourceId": "marketwatch-top",
+          "observedAt": "2026-11-05T20:11:32+08:00",
+          "title": "Research firm declares ‘end of the AI trade as we know it’ — and Asian tech stocks reflect the shift",
+          "url": "https://www.marketwatch.com/story/research-firm-declares-end-of-the-ai-trade-as-we-know-it-and-asian-tech-stocks-reflect-the-shift-25ac8e8f?mod=mw_rss_topstories",
+          "edition": "2026-11-05/13",
+          "publishedAt": "2026-11-05T11:22:00.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-05T23:45:23+08:00",
+          "title": "European Stocks Erase Gains as Tech Rout Builds, Defense Drops",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-05/european-stocks-hit-fresh-record-as-ai-unwind-boosts-region",
+          "edition": "2026-11-05/19",
+          "publishedAt": "2026-11-05T08:09:35.000Z"
+        },
+        {
+          "sourceId": "bbc-business",
+          "observedAt": "2026-11-06T15:22:25+08:00",
+          "title": "Global tech stocks plunge as US midterms add to AI slowdown fears",
+          "url": "https://www.bbc.co.uk/news/articles/cmn04705rd8jo?at_medium=RSS&at_campaign=rss",
+          "edition": "2026-11-06/13",
+          "publishedAt": "2026-11-06T06:00:59.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-06T15:22:25+08:00",
+          "title": "AI Selloff Drives Asian Stock Markets to Fresh Grim Milestones",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-06/ai-selloff-asian-stock-markets-nikkei-kospi-taiex-grim-milestones",
+          "edition": "2026-11-06/13",
+          "publishedAt": "2026-11-06T05:11:11.000Z"
+        },
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-06T15:22:25+08:00",
+          "title": "FirstFT: Global stocks tumble as Democratic sweep sparks AI rout",
+          "url": "https://www.ft.com/content/7d123a1c-d627-44c4-adf5-48b75d3313b0?syn-25a6b1a6=1",
+          "edition": "2026-11-06/13",
+          "publishedAt": "2026-11-06T05:33:31.000Z"
+        },
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-06T15:22:25+08:00",
+          "title": "Asian tech stocks sink",
+          "url": "https://www.ft.com/content/b77ebe43-a017-4e63-af84-5bdec8f47648?syn-25a6b1a6=1",
+          "edition": "2026-11-06/13",
+          "publishedAt": "2026-11-06T05:07:03.000Z"
+        },
+        {
+          "sourceId": "marketwatch-top",
+          "observedAt": "2026-11-06T15:22:25+08:00",
+          "title": "Tech stocks log worst day since 2020 as carnage comes to the AI trade",
+          "url": "https://www.marketwatch.com/story/tech-stocks-log-worst-day-since-2020-as-carnage-comes-to-the-ai-trade-56109845?mod=mw_rss_topstories",
+          "edition": "2026-11-06/13",
+          "publishedAt": "2026-11-05T22:48:00.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-06T15:22:25+08:00",
+          "title": "Asia stocks tumble as AI rout batters Japan, S. Korea",
+          "url": "https://finance.yahoo.com/markets/world-indices/articles/asia-stocks-tumble-ai-rout-034250084.html?.tsrc=rss",
+          "edition": "2026-11-06/13",
+          "publishedAt": "2026-11-06T03:42:50.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-06T23:22:11+08:00",
+          "title": "Tech stock rout, driven by US AI fears, continues in Asian trading",
+          "url": "https://www.aljazeera.com/economy/2026/11/6/tech-stock-rout-driven-by-us-ai-fears-continues-in-asian-trading?traffic_source=rss",
+          "edition": "2026-11-06/19",
+          "publishedAt": "2026-11-06T08:41:05.000Z"
+        },
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-07T07:00:20+08:00",
+          "title": "US stocks recover after tech rout",
+          "url": "https://www.ft.com/content/642b32dc-e3a1-4df8-ae91-5c84bdeb89e0?syn-25a6b1a6=1",
+          "edition": "2026-11-07/06",
+          "publishedAt": "2026-11-06T22:22:05.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-09T14:05:57+08:00",
+          "title": "Asian stock markets climb after earlier tech rout",
+          "url": "https://www.aljazeera.com/economy/2026/11/9/asian-stock-markets-climb-after-earlier-tech-rout?traffic_source=rss",
+          "edition": "2026-11-09/13",
+          "publishedAt": "2026-11-09T04:03:02.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-09T14:05:57+08:00",
+          "title": "Asian Stocks Rally on Tech Rebound, Taiwan Surges: Markets Wrap",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-08/stock-market-today-dow-s-p-live-updates",
+          "edition": "2026-11-09/13",
+          "publishedAt": "2026-11-08T22:20:51.000Z"
+        },
+        {
+          "sourceId": "bloomberg-markets",
+          "observedAt": "2026-11-11T12:16:08+08:00",
+          "title": "Power Turbine Stocks Dip as SoftBank Loss Fuels Fears",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-10/power-turbine-stocks-dip-as-softbank-writedown-fuels-demand-fear",
+          "edition": "2026-11-11/06",
+          "publishedAt": "2026-11-10T15:48:25.000Z"
+        }
+      ],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-06T00:09:11+08:00",
+          "sourceId": "bloomberg-markets",
+          "edition": "2026-11-06/06",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-05/european-stocks-hit-fresh-record-as-ai-unwind-boosts-region",
+          "from": "European Stocks Erase Gains as Tech Rout Builds, Defense Drops",
+          "to": "European Stocks Reverse Gains as Tech Rout Builds, Defense Drops"
+        }
+      ],
+      "firstMover": {
+        "sourceId": "bloomberg-markets",
+        "observedAt": "2026-11-02T07:02:11+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bloomberg-markets"
+        ],
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-05T06:35:43+08:00",
+        "leadMinutes": 4293.5
       }
     },
     {
@@ -72401,6 +72770,14 @@
           "url": "https://www.solidot.org/story?sid=85875",
           "from": "微软云服务宕机持续逾 24 小时",
           "to": "微软云服务全球宕机"
+        },
+        {
+          "at": "2026-11-16T15:06:12+08:00",
+          "sourceId": "solidot",
+          "edition": "2026-11-16/13",
+          "url": "https://www.solidot.org/story?sid=85886",
+          "from": "微软云服务全球宕机",
+          "to": "微软云服务宕机持续逾 24 小时"
         }
       ],
       "firstMover": {
@@ -93381,75 +93758,75 @@
       }
     }
   ],
-  "generatedAt": "2026-11-16T14:47:02+08:00",
+  "generatedAt": "2026-11-16T15:09:56+08:00",
   "counts": {
     "stories": 2000,
-    "sightings": 3054,
-    "multiSightingStories": 291,
-    "storiesWithRevisions": 35,
+    "sightings": 3092,
+    "multiSightingStories": 300,
+    "storiesWithRevisions": 38,
     "skippedRecords": 0,
     "editions": 74,
     "articles": 33359,
-    "duplicates": 240
+    "duplicates": 241
   },
   "firstMover": {
     "windowDays": 30,
     "from": "2026-10-17",
     "to": "2026-11-16",
     "storiesInWindow": 1980,
-    "soleFirstStories": 1910,
-    "contestedStories": 129,
-    "tiedFirstStories": 70,
+    "soleFirstStories": 1909,
+    "contestedStories": 135,
+    "tiedFirstStories": 71,
     "leadBasis": "observed",
     "wires": [
       {
         "sourceId": "cls-telegraph",
-        "soleFirsts": 249,
-        "contestedFirsts": 20,
-        "coFirsts": 40,
-        "stories": 317,
-        "leadSamples": 20,
-        "medianLeadMinutes": 472.6
+        "soleFirsts": 250,
+        "contestedFirsts": 21,
+        "coFirsts": 41,
+        "stories": 320,
+        "leadSamples": 21,
+        "medianLeadMinutes": 419.2
+      },
+      {
+        "sourceId": "aljazeera",
+        "soleFirsts": 206,
+        "contestedFirsts": 16,
+        "coFirsts": 8,
+        "stories": 240,
+        "leadSamples": 16,
+        "medianLeadMinutes": 823.6
       },
       {
         "sourceId": "wallstreetcn-live",
-        "soleFirsts": 182,
+        "soleFirsts": 187,
         "contestedFirsts": 16,
-        "coFirsts": 39,
-        "stories": 255,
+        "coFirsts": 41,
+        "stories": 263,
         "leadSamples": 16,
         "medianLeadMinutes": 291.7
       },
       {
-        "sourceId": "aljazeera",
-        "soleFirsts": 207,
-        "contestedFirsts": 15,
-        "coFirsts": 9,
-        "stories": 241,
-        "leadSamples": 15,
-        "medianLeadMinutes": 666.5
+        "sourceId": "bloomberg-markets",
+        "soleFirsts": 197,
+        "contestedFirsts": 14,
+        "coFirsts": 6,
+        "stories": 220,
+        "leadSamples": 14,
+        "medianLeadMinutes": 1472.6
       },
       {
         "sourceId": "bbc-world",
-        "soleFirsts": 90,
-        "contestedFirsts": 13,
-        "coFirsts": 12,
-        "stories": 119,
-        "leadSamples": 13,
-        "medianLeadMinutes": 905.2
-      },
-      {
-        "sourceId": "bloomberg-markets",
-        "soleFirsts": 194,
-        "contestedFirsts": 10,
-        "coFirsts": 6,
-        "stories": 217,
-        "leadSamples": 10,
-        "medianLeadMinutes": 1201.9
+        "soleFirsts": 87,
+        "contestedFirsts": 12,
+        "coFirsts": 11,
+        "stories": 117,
+        "leadSamples": 12,
+        "medianLeadMinutes": 1008.7
       },
       {
         "sourceId": "ft-companies",
-        "soleFirsts": 151,
+        "soleFirsts": 150,
         "contestedFirsts": 9,
         "coFirsts": 5,
         "stories": 175,
@@ -93460,35 +93837,44 @@
         "sourceId": "wallstreetcn",
         "soleFirsts": 95,
         "contestedFirsts": 7,
-        "coFirsts": 7,
-        "stories": 122,
+        "coFirsts": 8,
+        "stories": 124,
         "leadSamples": 7,
         "medianLeadMinutes": 1065.9
+      },
+      {
+        "sourceId": "nyt-world",
+        "soleFirsts": 49,
+        "contestedFirsts": 7,
+        "coFirsts": 5,
+        "stories": 70,
+        "leadSamples": 7,
+        "medianLeadMinutes": 2668.1
       },
       {
         "sourceId": "yahoo-finance",
         "soleFirsts": 157,
         "contestedFirsts": 6,
         "coFirsts": 5,
-        "stories": 178,
+        "stories": 180,
         "leadSamples": 6,
         "medianLeadMinutes": 1386.4
       },
       {
         "sourceId": "cnbc-topnews",
-        "soleFirsts": 86,
-        "contestedFirsts": 6,
+        "soleFirsts": 83,
+        "contestedFirsts": 5,
         "coFirsts": 3,
-        "stories": 108,
-        "leadSamples": 6,
-        "medianLeadMinutes": 1052.3
+        "stories": 107,
+        "leadSamples": 5,
+        "medianLeadMinutes": 907.5
       },
       {
         "sourceId": "guardian-world",
         "soleFirsts": 73,
         "contestedFirsts": 5,
         "coFirsts": 3,
-        "stories": 94,
+        "stories": 96,
         "leadSamples": 5,
         "medianLeadMinutes": 1230.5
       },
@@ -93497,34 +93883,25 @@
         "soleFirsts": 50,
         "contestedFirsts": 5,
         "coFirsts": 1,
-        "stories": 60,
+        "stories": 61,
         "leadSamples": 5,
         "medianLeadMinutes": 1500
-      },
-      {
-        "sourceId": "nyt-world",
-        "soleFirsts": 47,
-        "contestedFirsts": 5,
-        "coFirsts": 5,
-        "stories": 68,
-        "leadSamples": 5,
-        "medianLeadMinutes": 1442.8
       },
       {
         "sourceId": "bbc-business",
         "soleFirsts": 26,
         "contestedFirsts": 3,
         "coFirsts": 1,
-        "stories": 31,
+        "stories": 32,
         "leadSamples": 3,
         "medianLeadMinutes": 2668.1
       },
       {
         "sourceId": "caixin",
-        "soleFirsts": 119,
+        "soleFirsts": 118,
         "contestedFirsts": 2,
         "coFirsts": 1,
-        "stories": 134,
+        "stories": 133,
         "leadSamples": 2,
         "medianLeadMinutes": 1304.6
       },
@@ -93533,7 +93910,7 @@
         "soleFirsts": 11,
         "contestedFirsts": 2,
         "coFirsts": 3,
-        "stories": 14,
+        "stories": 15,
         "leadSamples": 2,
         "medianLeadMinutes": 2495
       },
@@ -93587,7 +93964,7 @@
         "soleFirsts": 30,
         "contestedFirsts": 0,
         "coFirsts": 0,
-        "stories": 35,
+        "stories": 34,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
@@ -93610,20 +93987,20 @@
         "medianLeadMinutes": null
       },
       {
-        "sourceId": "yicai",
-        "soleFirsts": 18,
-        "contestedFirsts": 0,
-        "coFirsts": 1,
-        "stories": 22,
-        "leadSamples": 0,
-        "medianLeadMinutes": null
-      },
-      {
         "sourceId": "solidot",
         "soleFirsts": 17,
         "contestedFirsts": 0,
         "coFirsts": 5,
         "stories": 30,
+        "leadSamples": 0,
+        "medianLeadMinutes": null
+      },
+      {
+        "sourceId": "yicai",
+        "soleFirsts": 16,
+        "contestedFirsts": 0,
+        "coFirsts": 1,
+        "stories": 20,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
@@ -93638,18 +94015,18 @@
       },
       {
         "sourceId": "jin10-flash",
-        "soleFirsts": 3,
+        "soleFirsts": 2,
         "contestedFirsts": 0,
         "coFirsts": 0,
-        "stories": 4,
+        "stories": 3,
         "leadSamples": 0,
         "medianLeadMinutes": null
       }
     ]
   },
   "revisionTrail": {
-    "storiesWithRevisions": 35,
-    "totalRevisions": 199,
+    "storiesWithRevisions": 38,
+    "totalRevisions": 204,
     "items": [
       {
         "id": "st_42dca5f915",
@@ -94367,7 +94744,7 @@
         "id": "st_5cb5e636cd",
         "title": "Microsoft, Shopify and 3 more AI stocks that are favorite Wall Street earnings plays",
         "topic": "global-markets",
-        "revisions": 29,
+        "revisions": 30,
         "steps": [
           {
             "at": "2026-10-30T08:20:12+08:00",
@@ -94918,6 +95295,27 @@
               "务全",
               "微软云服务全球宕机",
               "球宕"
+            ]
+          },
+          {
+            "at": "2026-11-16T15:06:12+08:00",
+            "from": "微软云服务全球宕机",
+            "to": "微软云服务宕机持续逾 24 小时",
+            "removed": [
+              "全球",
+              "务全",
+              "微软云服务全球宕机",
+              "球宕"
+            ],
+            "added": [
+              "24",
+              "4小",
+              "务宕",
+              "小时",
+              "微软云服务宕机持续逾",
+              "持续",
+              "机持",
+              "续逾"
             ]
           }
         ]
@@ -96479,6 +96877,83 @@
         ]
       },
       {
+        "id": "st_5911bcbad7",
+        "title": "Tech Selloff Drags Asian Stocks Lower, Oil Drops: Markets Wrap",
+        "topic": "global-markets",
+        "revisions": 5,
+        "steps": [
+          {
+            "at": "2026-11-16T11:37:35+08:00",
+            "from": "Tech Selloff Drags Asian Stocks Lower, Oil Drops: Markets Wrap",
+            "to": "Asian Stocks Slide on Tech Selloff, Oil Declines: Markets Wrap",
+            "removed": [
+              "drags",
+              "drops",
+              "lower"
+            ],
+            "added": [
+              "declines",
+              "on",
+              "slide"
+            ]
+          },
+          {
+            "at": "2026-11-16T13:06:56+08:00",
+            "from": "Asian Stocks Slide on Tech Selloff, Oil Declines: Markets Wrap",
+            "to": "Asian Stocks Slump on Tech Selloff, Oil Drops: Markets Wrap",
+            "removed": [
+              "declines",
+              "slide"
+            ],
+            "added": [
+              "drops",
+              "slump"
+            ]
+          },
+          {
+            "at": "2026-11-16T13:43:06+08:00",
+            "from": "Asian Stocks Slump on Tech Selloff, Oil Drops: Markets Wrap",
+            "to": "Asian Stocks Rattled by Tech Selloff, Oil Drops: Markets Wrap",
+            "removed": [
+              "on",
+              "slump"
+            ],
+            "added": [
+              "by",
+              "rattled"
+            ]
+          },
+          {
+            "at": "2026-11-16T14:43:17+08:00",
+            "from": "Asian Stocks Rattled by Tech Selloff, Oil Drops: Markets Wrap",
+            "to": "Stocks Slide as Tech Selloff Worsens, Oil Steady: Markets Wrap",
+            "removed": [
+              "asian",
+              "by",
+              "drops",
+              "rattled"
+            ],
+            "added": [
+              "as",
+              "slide",
+              "steady",
+              "worsens"
+            ]
+          },
+          {
+            "at": "2026-11-16T15:06:12+08:00",
+            "from": "Stocks Slide as Tech Selloff Worsens, Oil Steady: Markets Wrap",
+            "to": "Stocks Slide as Tech Selloff Worsens, Oil Rebounds: Markets Wrap",
+            "removed": [
+              "steady"
+            ],
+            "added": [
+              "rebounds"
+            ]
+          }
+        ]
+      },
+      {
         "id": "st_454329acda",
         "title": "How Putin may react to the rift between the U.S. and Ukraine",
         "topic": "world",
@@ -96792,72 +97267,6 @@
               "own",
               "sales",
               "search"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "st_5911bcbad7",
-        "title": "Tech Selloff Drags Asian Stocks Lower, Oil Drops: Markets Wrap",
-        "topic": "global-markets",
-        "revisions": 4,
-        "steps": [
-          {
-            "at": "2026-11-16T11:37:35+08:00",
-            "from": "Tech Selloff Drags Asian Stocks Lower, Oil Drops: Markets Wrap",
-            "to": "Asian Stocks Slide on Tech Selloff, Oil Declines: Markets Wrap",
-            "removed": [
-              "drags",
-              "drops",
-              "lower"
-            ],
-            "added": [
-              "declines",
-              "on",
-              "slide"
-            ]
-          },
-          {
-            "at": "2026-11-16T13:06:56+08:00",
-            "from": "Asian Stocks Slide on Tech Selloff, Oil Declines: Markets Wrap",
-            "to": "Asian Stocks Slump on Tech Selloff, Oil Drops: Markets Wrap",
-            "removed": [
-              "declines",
-              "slide"
-            ],
-            "added": [
-              "drops",
-              "slump"
-            ]
-          },
-          {
-            "at": "2026-11-16T13:43:06+08:00",
-            "from": "Asian Stocks Slump on Tech Selloff, Oil Drops: Markets Wrap",
-            "to": "Asian Stocks Rattled by Tech Selloff, Oil Drops: Markets Wrap",
-            "removed": [
-              "on",
-              "slump"
-            ],
-            "added": [
-              "by",
-              "rattled"
-            ]
-          },
-          {
-            "at": "2026-11-16T14:43:17+08:00",
-            "from": "Asian Stocks Rattled by Tech Selloff, Oil Drops: Markets Wrap",
-            "to": "Stocks Slide as Tech Selloff Worsens, Oil Steady: Markets Wrap",
-            "removed": [
-              "asian",
-              "by",
-              "drops",
-              "rattled"
-            ],
-            "added": [
-              "as",
-              "slide",
-              "steady",
-              "worsens"
             ]
           }
         ]
@@ -97184,6 +97593,33 @@
               "kill",
               "officials",
               "strikes"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "st_1d4d361bab",
+        "title": "伊朗伊拉姆省发生客车侧翻事故 已致10人死亡",
+        "topic": "world",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-16T15:06:12+08:00",
+            "from": "Iran war live: Third US carrier arrives, Iran warns it could strike first",
+            "to": "Iran war live: Third US carrier arrives, Iran says oil tankers hit mines",
+            "removed": [
+              "could",
+              "first",
+              "it",
+              "strike",
+              "warns"
+            ],
+            "added": [
+              "hit",
+              "mines",
+              "oil",
+              "says",
+              "tankers"
             ]
           }
         ]
@@ -97538,6 +97974,33 @@
         ]
       },
       {
+        "id": "st_a9fbd2697f",
+        "title": "Christmas toy rush being driven by squishies and building sets",
+        "topic": "global-markets",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-12T08:46:37+08:00",
+            "from": "Stickers and building sets help drive toy sales ahead of Christmas rush",
+            "to": "Christmas toy rush being driven by squishies and building sets",
+            "removed": [
+              "ahead",
+              "drive",
+              "help",
+              "of",
+              "sales",
+              "stickers"
+            ],
+            "added": [
+              "being",
+              "by",
+              "driven",
+              "squishies"
+            ]
+          }
+        ]
+      },
+      {
         "id": "st_ff11099d24",
         "title": "David Jones to close half its stores, triggering mass job losses in ‘urgent restructure’",
         "topic": "global-markets",
@@ -97552,6 +98015,25 @@
             ],
             "added": [
               "in"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "st_0514349d79",
+        "title": "Asian Stocks to Fall as Tech Rout Fuels AI Fears: Markets Wrap",
+        "topic": "global-markets",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-06T00:09:11+08:00",
+            "from": "European Stocks Erase Gains as Tech Rout Builds, Defense Drops",
+            "to": "European Stocks Reverse Gains as Tech Rout Builds, Defense Drops",
+            "removed": [
+              "erase"
+            ],
+            "added": [
+              "reverse"
             ]
           }
         ]
