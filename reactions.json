@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "dataThrough": "2026-11-16T11:44:15+08:00",
+  "dataThrough": "2026-11-16T13:06:56+08:00",
   "timezone": "Asia/Shanghai",
   "headlineMetric": "marketExcessPct",
   "headlineReason": "Cross-sectional excess is the standard market-factor abnormal return and is computable from exactly the two snapshots a horizon needs, so the headline is never absent for a window that is otherwise measurable. `rawReturnPct` and `sectorExcessPct` (vs the sector's own trailing drift over the same length) are published alongside for every sample, but the trailing baseline needs a full prior window of tape and is therefore null through the early history.",
@@ -61,17 +61,17 @@
     "withFirstSeen": 2000,
     "maxStories": 2000,
     "retentionDays": 30,
-    "updatedAt": "2026-11-16T11:43:28+08:00",
+    "updatedAt": "2026-11-16T13:10:25+08:00",
     "retainedFrom": "2026-10-16T06:00:00+08:00",
-    "retainedTo": "2026-11-16T11:37:35+08:00",
+    "retainedTo": "2026-11-16T13:06:56+08:00",
     "capBinding": true
   },
   "counts": {
     "stories": 2000,
     "attributed": {
-      "entity": 93,
+      "entity": 94,
       "topic": 0,
-      "market": 1907,
+      "market": 1906,
       "pending": 0,
       "unmapped": 0
     },
@@ -203,7 +203,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 1,
+              "pending": 2,
               "gap": 0
             }
           },
@@ -211,7 +211,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 1,
+              "pending": 2,
               "gap": 0
             }
           },
@@ -219,7 +219,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 1,
+              "pending": 2,
               "gap": 0
             }
           }
@@ -546,7 +546,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 3,
+              "pending": 4,
               "gap": 0
             }
           },
@@ -554,7 +554,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 3,
+              "pending": 4,
               "gap": 0
             }
           },
@@ -562,7 +562,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 3,
+              "pending": 4,
               "gap": 0
             }
           }
@@ -881,6 +881,37 @@
       {
         "key": "中际旭创",
         "label": "中际旭创 (通信网络设备及器件)",
+        "expectedSign": null,
+        "horizons": {
+          "1h": {
+            "n": 0,
+            "status": "insufficient",
+            "excluded": {
+              "pending": 1,
+              "gap": 0
+            }
+          },
+          "1d": {
+            "n": 0,
+            "status": "insufficient",
+            "excluded": {
+              "pending": 1,
+              "gap": 0
+            }
+          },
+          "5d": {
+            "n": 0,
+            "status": "insufficient",
+            "excluded": {
+              "pending": 1,
+              "gap": 0
+            }
+          }
+        }
+      },
+      {
+        "key": "会畅科技",
+        "label": "会畅科技 (通信应用增值服务)",
         "expectedSign": null,
         "horizons": {
           "1h": {
@@ -1964,37 +1995,6 @@
         }
       },
       {
-        "key": "超颖电子",
-        "label": "超颖电子 (印制电路板)",
-        "expectedSign": null,
-        "horizons": {
-          "1h": {
-            "n": 0,
-            "status": "insufficient",
-            "excluded": {
-              "pending": 1,
-              "gap": 0
-            }
-          },
-          "1d": {
-            "n": 0,
-            "status": "insufficient",
-            "excluded": {
-              "pending": 1,
-              "gap": 0
-            }
-          },
-          "5d": {
-            "n": 0,
-            "status": "insufficient",
-            "excluded": {
-              "pending": 1,
-              "gap": 0
-            }
-          }
-        }
-      },
-      {
         "key": "通化金马",
         "label": "通化金马 (化学制剂)",
         "expectedSign": null,
@@ -2183,6 +2183,1506 @@
     ]
   },
   "observations": [
+    {
+      "id": "st_07b23b49f2",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_0f2aa636fb",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "filings",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_1974f0146a",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_20f202d168",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_21f68d1345",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_2a84ede6d9",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "tech-ai",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_3109164eb8",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "policy",
+      "target": "board:BK1283",
+      "targetLabel": "银行",
+      "attribution": "entity",
+      "entity": "pboc",
+      "attributionReason": "pboc → 银行 (bank): PBOC policy is the direct driver of the bank board",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_323baade2f",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "opinion",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_33cf43a971",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_3704a23219",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_3ee08d7b7e",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_40c27877fe",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "tech-ai",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_41db9ba1c6",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_42dc183b1c",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "policy",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_532d3aaaf1",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "policy",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_53f021b264",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_581fb8635e",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_583af47464",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_5a38b48e7d",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_6843bf55f7",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_6d9b83ad7a",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_6f4d595104",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_703b9abb4c",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_7072c4e5b0",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_752d079d9c",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_7bb8b523e1",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "policy",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_7ea954b3be",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_81bf69c88e",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "tech-ai",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_89fb8f9771",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_92ac8222a4",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_9dca40603c",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_a2e4bdf861",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_a438869c82",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "tech-ai",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_a72f527fe9",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_ada49057ad",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_b5be09bfb1",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_ba075d83da",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_bb7a3d8743",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_bd0b018a12",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_bd5702778c",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_be8739b275",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_c077228950",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_c1269539a1",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_c1cf57f222",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_c546ac9744",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_c5b2e54250",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "tech-ai",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_c62e5e2a62",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_cab810fb09",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_cd3b866ad4",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_d66228a3f7",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_dfdea5db43",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_e2d3f04198",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_e43c6aeb20",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_e932cdcff4",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_ef051ef827",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_f2aab1df08",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "policy",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_f62b9f7a78",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_fad0d48ecd",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "tech-ai",
+      "target": "board:BK1589",
+      "targetLabel": "通信应用增值服务",
+      "attribution": "entity",
+      "entity": "会畅科技",
+      "attributionReason": "title names 会畅科技 → 会畅科技, a verified constituent of 通信应用增值服务 (BK1589) in the committed board atlas",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_fe73f535dc",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_ffe2eba6bc",
+      "firstSeenAt": "2026-11-16T13:06:56+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T13:06:56+08:00); tape ends 2026-11-16T11:44:15+08:00"
+        }
+      }
+    },
     {
       "id": "st_09320c32e8",
       "firstSeenAt": "2026-11-16T11:37:35+08:00",
@@ -19164,2766 +20664,6 @@
             "slot": "09:35"
           },
           "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_7b8ee7709e",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_7d91610f84",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_83a399ab9c",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_83fd6252cc",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_84d174e579",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_88582f61a0",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "policy",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_8d8eeb16c8",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_8f83aa2e86",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_906dca8ab7",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "board:BK0448",
-      "targetLabel": "通信设备",
-      "attribution": "entity",
-      "entity": "bitcoin",
-      "attributionReason": "bitcoin → 通信 (comms): Crypto-mining demand reads through to A-share compute/comms hardware",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_91c89f4a90",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_91f5c74f32",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "tech-ai",
-      "target": "board:BK1036",
-      "targetLabel": "半导体",
-      "attribution": "entity",
-      "entity": "samsung",
-      "attributionReason": "samsung → 半导体 (semiconductor): Memory pricing drives the A-share component board",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_93298ca9fe",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_9a93b22f2c",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "policy",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_9ef085b73a",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_a03b074ed6",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "opinion",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_a49309902d",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_a94adcaecf",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_aa3f48cd59",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "tech-ai",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_b3610f81ce",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_b3bfac752a",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "filings",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_b575169b30",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_b9a3e4b590",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_c2bd3593bf",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "tech-ai",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_c73ee36e13",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_c7c85678ab",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_ca4dad29e6",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "policy",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_cacebdd609",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_d65f34d915",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_d6bd325a46",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_d85b07a5ca",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_d97cd0efd3",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_e0e4f8469d",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_e17ccfd45d",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_e3f7a31246",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_e55d6c65b5",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_e70a9b3b61",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_e9dfa39f2e",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_eef016344b",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "board:BK1283",
-      "targetLabel": "银行",
-      "attribution": "entity",
-      "entity": "pboc",
-      "attributionReason": "pboc → 银行 (bank): PBOC policy is the direct driver of the bank board",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_f9ae174c70",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "board:BK1276",
-      "targetLabel": "油气开采Ⅱ",
-      "attribution": "entity",
-      "entity": "oil",
-      "attributionReason": "oil → 石油石化 (oil): Crude price moves are the 油气开采 board's own driver",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_fb9dbce3a2",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_fcc173bbaa",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "opinion",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_fd49490ba8",
-      "firstSeenAt": "2026-11-15T18:47:38+08:00",
-      "firstEdition": "2026-11-15/13",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 1d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T18:47:38+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 907.1
-        }
-      }
-    },
-    {
-      "id": "st_0480ae611f",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "tech-ai",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_04ee18c028",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_077d019fb8",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_0e1917a3ab",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_0e20c1f1e3",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_100a74df49",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_150947c144",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_15d28c8bf5",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "board:BK1519",
-      "targetLabel": "电动乘用车",
-      "attribution": "entity",
-      "entity": "比亚迪",
-      "attributionReason": "title names 比亚迪 → 比亚迪, a verified constituent of 电动乘用车 (BK1519) in the committed board atlas",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_1777ef974b",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_1d4d361bab",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_2112433d8d",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_21f6bf4f85",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_269f662b9a",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_295b159867",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_29a9b5ed6a",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_2f78252a86",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_2fd47f0b13",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "tech-ai",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        }
-      }
-    },
-    {
-      "id": "st_315e2cecee",
-      "firstSeenAt": "2026-11-15T07:41:10+08:00",
-      "firstEdition": "2026-11-15/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 60min horizon (< 30min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "measured window would be 0min of a 1440min horizon (< 720min floor); a later capture extends it",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-15T07:41:10+08:00 + 5d; tape ends 2026-11-16T11:44:15+08:00",
-          "entry": {
-            "ms": 1794794085000,
-            "asOf": "2026-11-16T09:54:45+08:00",
-            "date": "2026-11-16",
-            "slot": "09:35"
-          },
-          "entryOvershootMinutes": 1573.6
         }
       }
     }

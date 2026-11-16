@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-16T03:39:06.232Z",
+  "generatedAt": "2026-11-16T05:08:26.670Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 20,
-  "avgSentiment": -3.7,
+  "editions": 21,
+  "avgSentiment": -4.1,
   "sentimentCurve": [
     {
       "date": "2026-11-09",
@@ -105,6 +105,11 @@
       "date": "2026-11-16",
       "hour": "06",
       "score": -2
+    },
+    {
+      "date": "2026-11-16",
+      "hour": "13",
+      "score": -12
     }
   ],
   "sectorAvg": [
@@ -117,8 +122,8 @@
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -69.4,
-      "editions": 5
+      "avg": -70.5,
+      "editions": 6
     },
     {
       "key": "china-equity",
@@ -129,32 +134,32 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -20.5,
-      "editions": 20
+      "avg": -21.6,
+      "editions": 21
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -18.7,
-      "editions": 20
+      "avg": -20.3,
+      "editions": 21
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -18.6,
-      "editions": 20
+      "avg": -20.2,
+      "editions": 21
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -2.4,
-      "editions": 8
+      "avg": -12.6,
+      "editions": 9
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -1.2,
-      "editions": 20
+      "avg": -1.3,
+      "editions": 21
     }
   ],
   "topEvents": [
@@ -163,14 +168,14 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "NVDA",
@@ -178,6 +183,20 @@
       "title": "Trump says FBI investigating Nvidia boss's affair with alleged Chinese spy",
       "url": "https://www.bbc.co.uk/news/articles/cqg7x7dpvym8o?at_medium=RSS&at_campaign=rss",
       "count": 16
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Nvidia hires major US law firm to investigate alleged Chinese spy affair",
+      "url": "https://www.bbc.co.uk/news/articles/ck1wvwwl3x0go?at_medium=RSS&at_campaign=rss",
+      "count": 16
+    },
+    {
+      "symbol": "USDCNY=X",
+      "displayName": "美元 / 人民币",
+      "title": "Anthropic斥资34亿美元接手发电设备",
+      "url": "https://www.ftchinese.com/story/001111311",
+      "count": 15
     },
     {
       "symbol": "NVDA",
@@ -201,32 +220,18 @@
       "count": 15
     },
     {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Nvidia hires major US law firm to investigate alleged Chinese spy affair",
-      "url": "https://www.bbc.co.uk/news/articles/ck1wvwwl3x0go?at_medium=RSS&at_campaign=rss",
-      "count": 15
-    },
-    {
-      "symbol": "USDCNY=X",
-      "displayName": "美元 / 人民币",
-      "title": "Anthropic斥资34亿美元接手发电设备",
-      "url": "https://www.ftchinese.com/story/001111311",
-      "count": 14
-    },
-    {
       "symbol": "USDCNY=X",
       "displayName": "美元 / 人民币",
       "title": "Anthropic寻求以1.4万亿美元估值上市",
       "url": "https://www.ftchinese.com/story/001111328",
-      "count": 11
+      "count": 12
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "Who could replace Jensen Huang as Nvidia's chief executive?",
       "url": "https://www.bbc.co.uk/news/articles/cqgm37dv20e8o?at_medium=RSS&at_campaign=rss",
-      "count": 11
+      "count": 12
     }
   ],
   "keywords": [
@@ -253,6 +258,12 @@
       "count": 3,
       "firstSeen": "2026-11-12",
       "lastSeen": "2026-11-13"
+    },
+    {
+      "term": "attack",
+      "count": 2,
+      "firstSeen": "2026-11-16",
+      "lastSeen": "2026-11-16"
     },
     {
       "term": "huang",
@@ -343,44 +354,38 @@
       "count": 1,
       "firstSeen": "2026-11-15",
       "lastSeen": "2026-11-15"
-    },
-    {
-      "term": "apple",
-      "count": 1,
-      "firstSeen": "2026-11-10",
-      "lastSeen": "2026-11-10"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 120
+      "totalHits": 125
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 95
-    },
-    {
-      "key": "bank",
-      "name": "银行",
-      "totalHits": 61
+      "totalHits": 100
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 60
+      "totalHits": 64
+    },
+    {
+      "key": "bank",
+      "name": "银行",
+      "totalHits": 64
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 46
+      "totalHits": 47
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 37
+      "totalHits": 39
     },
     {
       "key": "robotics",
@@ -390,17 +395,17 @@
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 28
+      "totalHits": 29
     },
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 22
+      "totalHits": 25
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 19
+      "totalHits": 20
     },
     {
       "key": "pharma",
@@ -416,18 +421,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.35,
-      "editions": 20
+      "avgChangePct": -0.37,
+      "editions": 21
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.11,
-      "editions": 20
+      "avgChangePct": -1.15,
+      "editions": 21
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.65,
-      "editions": 20
+      "avgChangePct": -1.72,
+      "editions": 21
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
