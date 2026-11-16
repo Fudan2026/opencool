@@ -217,6 +217,7 @@ test("golden: the runner keeps every bake/assert step, in order, for both caller
         "Build static site (index + archive)",
         "Assert zero LLM calls",
         "Alert if edition HTML missing or empty",
+        "Re-restore tape published during this build",
         "Capture the published archive snapshot",
         "Publish to gh-pages",
         "Assert archive survived publish",
@@ -1143,6 +1144,22 @@ test("golden: the build publish cannot silently wipe the archive", async (t) => 
     assert.equal(assertAt, publishAt + 1, "the survival assert is the first thing after the publish");
   });
 
+  await t.test("the tape tree is re-restored after generating, before the capture", () => {
+    // The build's start-of-job restore is minutes stale by publish time; a
+    // tape snapshot pushed mid-build was measured being deleted by the
+    // build's own keep_files:false push (2026-11-16 10:14 SH, 406b580→cc731be).
+    // The re-restore refreshes the tape tree so the publish carries it, and it
+    // must precede the archive capture so the assert names anything that
+    // still slips through the seconds-wide residual window.
+    const reRestoreAt = names.indexOf("Re-restore tape published during this build");
+    const captureAt = names.indexOf("Capture the published archive snapshot");
+    assert.ok(reRestoreAt >= 0, "the build job must re-restore the tape tree ahead of publishing");
+    assert.ok(captureAt > reRestoreAt, "the re-restore must run before the archive capture");
+    const step = stepSource(job, "Re-restore tape published during this build");
+    assert.match(step, /git fetch origin gh-pages/);
+    assert.match(step, /checkout origin\/gh-pages -- tape/, "the re-restore must take the tape tree from gh-pages");
+  });
+
   await t.test("both steps run the real script with their phase flag", () => {
     assert.match(
       stepSource(job, "Capture the published archive snapshot"),
@@ -1181,17 +1198,28 @@ test("golden: the build publish cannot silently wipe the archive", async (t) => 
   const listFile = path.join(dir, "gh-pages-sidecars.txt");
   fs.writeFileSync(listFile, sidecars.join("\n") + "\n");
 
-  await t.test("the filter keeps only date/slot sidecars", () => {
+  await t.test("the filter keeps date/slot sidecars and the whole tape tree", () => {
     assert.deepEqual(
       filterSidecarPaths([
         "2026-11-13/06.json",
         "2026-11-13/06.html",
         "tape/2026-11-13/0935.json",
+        "tape/2026-11-16/1005.rev-1.json",
+        "tape/2026-11-16/index.json",
+        "tape/2026-11-16/revisions.jsonl",
         "stories.json",
         "2026-11-13/19.json",
         "index.html",
+        "tapestry.css",
       ]),
-      ["2026-11-13/06.json", "2026-11-13/19.json"],
+      [
+        "2026-11-13/06.json",
+        "tape/2026-11-13/0935.json",
+        "tape/2026-11-16/1005.rev-1.json",
+        "tape/2026-11-16/index.json",
+        "tape/2026-11-16/revisions.jsonl",
+        "2026-11-13/19.json",
+      ],
     );
   });
 
@@ -1213,6 +1241,17 @@ test("golden: the build publish cannot silently wipe the archive", async (t) => 
     await assert.rejects(() =>
       checkSurvival({ listFile: path.join(dir, "absent.txt"), publishDir }),
     );
+  });
+
+  await t.test("mutation: a tape snapshot missing from the publish tree is named", async () => {
+    // The 2026-11-16 clobber, replayed: the capture list has a tape file the
+    // publish tree lost to a keep_files:false push. The assert must name it —
+    // a silent green is exactly the failure this script exists to prevent.
+    fs.mkdirSync(path.join(publishDir, "tape", "2026-11-16"), { recursive: true });
+    fs.writeFileSync(path.join(publishDir, "tape", "2026-11-16", "0935.json"), "{}");
+    fs.writeFileSync(listFile, "tape/2026-11-16/0935.json\ntape/2026-11-16/1005.json\n", "utf8");
+    const r = await checkSurvival({ listFile, publishDir });
+    assert.deepEqual(r.missing, ["tape/2026-11-16/1005.json"]);
   });
 
   fs.rmSync(dir, { recursive: true, force: true });

@@ -404,6 +404,25 @@ jobs:
           EDITION_HOUR: ${{ needs.gate.outputs.edition-hour }}
         run: node scripts/notify-failure.mjs --missing-html
 
+      # The restore at job start is minutes stale by publish time: a tape
+      # snapshot pushed while this edition was generating would be deleted by
+      # this publish (keep_files: false). The gate's in-flight guard has a
+      # blind window when two runs start together — measured 2026-11-16 10:14
+      # SH: commit 406b580 added tape/2026-11-16/1005.json, and this job's own
+      # push (cc731be) removed it. Re-fetch and re-checkout the tape tree so
+      # the publish carries the newest snapshots; tape publishes themselves use
+      # keep_files: true, so only this direction can delete and only this
+      # step can close it. Runs BEFORE the archive capture so a snapshot that
+      # lands inside the (now seconds-wide) remaining window is caught by the
+      # survival assert instead of vanishing silently.
+      - name: Re-restore tape published during this build
+        run: |
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git fetch origin gh-pages --depth=1 --quiet
+            git --work-tree=daily_reports checkout origin/gh-pages -- tape || true
+            echo "Re-restored $(find daily_reports/tape \( -name '*.json' -o -name '*.jsonl' \) 2>/dev/null | wc -l) tape file(s) ahead of publish"
+          fi
+
       # ARCHIVE-SURVIVAL CAPTURE: list every published `YYYY-MM-DD/HH.json`
       # sidecar in the FETCHED origin/gh-pages tree, before publishing. The
       # restore step above swallows partial failures with `|| true`, and the

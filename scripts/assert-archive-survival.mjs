@@ -38,10 +38,19 @@ import { execSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 
 const SIDECAR_RE = /^\d{4}-\d{2}-\d{2}\/\d{2}\.json$/;
+const TAPE_RE = /^tape\/.+\.(json|jsonl)$/;
 
-/** Keep only `<date>/<HH>.json` paths — the sidecars the gate probes. */
+/**
+ * Keep `<date>/<HH>.json` sidecars and every file under `tape/` — the two
+ * trees a build publish must never lose. Tape snapshots are append-only with
+ * no pruning path anywhere in the repo, so the rule is as absolute as the
+ * sidecar one: if gh-pages has it, the publish tree must still have it.
+ * (Forensics 2026-11-16 10:14 SH: a tape capture landing mid-build WAS wiped
+ * by the build's own `keep_files: false` push — commit 406b580 added
+ * tape/2026-11-16/1005.json, cc731be deleted it.)
+ */
 export function filterSidecarPaths(paths) {
-  return paths.filter((p) => SIDECAR_RE.test(p));
+  return paths.filter((p) => SIDECAR_RE.test(p) || TAPE_RE.test(p));
 }
 
 function listFilePath(override) {
