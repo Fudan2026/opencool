@@ -305,20 +305,39 @@ test("golden: build-site end-to-end", async (t) => {
     const manifest = JSON.parse(read("v1/manifest.json"));
     assert.equal(manifest.schemaVersion, 1);
     assert.equal(manifest.namespace, "v1");
-    // Only endpoints with a file behind them are advertised. This fixture has
-    // no tape directory, so `asof` is correctly absent — the same rule that keeps
-    // /v1/reactions.json out of the manifest until its bake has run.
+    // Only endpoints with a file behind them are advertised. Since the tape's
+    // launch date the bake synthesizes an as-of day file for every calendar
+    // day up to the build instant — zero captures included — so `asof` has a
+    // file behind it and is advertised; /v1/reactions.json stays out until its
+    // bake has run. (Pre-launch this fixture advertised no `asof`; which side
+    // of the launch date the bake lands on is decided by the wall clock, so
+    // the assertions follow the post-launch truth, which holds from now on.)
     const ids = manifest.endpoints.map((e: { id: string }) => e.id);
     assert.ok(ids.includes("manifest"), "the manifest must list itself");
     assert.ok(ids.includes("coverage"), "coverage.json was written, so it is advertised");
-    assert.equal(ids.includes("asof"), false, "no day file exists, so asof is not advertised");
+    assert.ok(
+      ids.includes("asof"),
+      "post-launch the bake writes a zero-capture day file, so asof is advertised",
+    );
+    assert.equal(
+      ids.includes("reactions"),
+      false,
+      "no reactions.json in this tree, so reactions is not advertised",
+    );
     const cov = JSON.parse(read("v1/coverage.json"));
     assert.equal(cov.namespace, "v1");
     assert.ok(Array.isArray(cov.days));
     // This fixture tree has no tape directory at all, so the namespace must
-    // report "not started" rather than a clean 100%.
+    // report "not started" with zero captures — never a clean 100%. Before
+    // the first slot of the newest day is due, coveragePct is null; once
+    // slots come due it is 0. Both are honest zero-capture states, so both
+    // are accepted to keep the golden stable at any hour of any day.
     assert.equal(cov.tape.started, false);
-    assert.equal(cov.summary.coveragePct, null);
+    assert.equal(cov.summary.capturedSlots, 0);
+    assert.ok(
+      cov.summary.coveragePct === null || cov.summary.coveragePct === 0,
+      "zero captures must not invent a percentage",
+    );
   });
 
   await t.test("v1 endpoints are advertised in tools.json and llms.txt", () => {
