@@ -139,7 +139,7 @@
 | 4 | **超出已积累范围的盘中历史** | 无 tape；`sentiment-history.json` 实测仅 **48 条**、2026-10-27 → 2026-11-13（上限 60） | 只能靠**时间**积累；不可回填。可回填的只有上游源本身保留的历史（如 Tushare 历史分钟，2000 元一次性，<https://tushare.pro/document/2?doc_id=290>）——但那不是我们的 availability time，仍不能算 vintage |
 | 5 | **信源之外的跨市场覆盖** | 26 个 `enabled` 源（其中 15 个带 `en` locale），按 `sources.config.json` 实测；行情仅上证/深成/创业板三指数 + 观察池 | 指数覆盖受东财延时接口约束（实测 `push2` 连续 502、`push2delay` 返回 200）；扩到港股/美股需逐源验证可用性与授权，且与「不做付费数据」冲突 |
 | 6 | **故事修订史与「谁最先报道」** | 现有 `lib/topics/dedupe.ts` 做聚类，但没有持久化的 `firstSeenAt` / 头条修订轨迹 | 规划增量 3：`lib/stories/` + `scripts/bake-stories.ts`，给每个聚类稳定 id 与 sighting 序列 |
-| 7 | **新闻→价格反应库（+1h/+1d/+5d）** | 不存在 | 规划增量 4：`scripts/bake-reactions.ts`，纯算术、零 LLM、最小样本门槛后才发布 |
+| 7 | **新闻→价格反应库（+1h/+1d/+5d）** | 已上线并积累中（2026-11-16 首个交易日起：`/reactions.json` 实测 1h 窗口首批 **73 个可测样本**，每条带 `rawReturnPct` 与 `marketExcessPct`（横截面超额，标题指标），`sectorExcessPct` 在完整前置窗口出现前如实为 null；`attributed.pending` 从 2000 降至 0，实体归因 92 条） | 机制已落地：`scripts/bake-reactions.ts`，纯算术、零 LLM、最小样本门槛后才发布；剩余只是积累 |
 | 8 | **归档的密码学不可篡改性** | 发布用 `keep_files: false` 并从 gh-pages 恢复旧目录再整树重推；内容靠流程保证（档期已发布即跳过），不是哈希链 | 若要「可证明未被改」，需对每期产物出哈希并公开链式清单（SuPro 的治理页用「哈希上链」描述同类做法：<https://supro.si/governance/>）。**当前未做，不应宣称** |
 
 ## 6. 我们赌的那件事
