@@ -31,6 +31,78 @@ function labelFor(hour) {
   return LABEL[hour] || `${hour}:00`;
 }
 
+// ---------------------------------------------------------------------------
+// Structured discovery (roadmap §2-#1). Plain-JS mirror of lib/output/meta.ts
+// for the pages node bakes — the TS module serves the tsx-rendered pages;
+// golden tests pin both shapes. Every generated public page carries og:/
+// twitter: card meta; JSON-LD is added where a fitting schema exists.
+// ---------------------------------------------------------------------------
+const SITE_URL = "https://fudan2026.github.io/opencool";
+
+function metaEsc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+/**
+ * og: + twitter: card block for one page. Mirrors `socialMetaTags` in
+ * lib/output/meta.ts (which is the source of truth; keep in lockstep).
+ */
+function socialMeta(m) {
+  const type = m.type || "website";
+  const published =
+    m.type === "article" && m.publishedIso
+      ? `\n<meta property="article:published_time" content="${metaEsc(m.publishedIso)}">`
+      : "";
+  const modified = m.modifiedIso ? `\n<meta property="article:modified_time" content="${metaEsc(m.modifiedIso)}">` : "";
+  const locale = (process.env.REPORT_LOCALE || "zh") === "en" ? "en_US" : "zh_CN";
+  return `<meta name="description" content="${metaEsc(m.description)}">
+<meta property="og:title" content="${metaEsc(m.title)}">
+<meta property="og:description" content="${metaEsc(m.description)}">
+<meta property="og:type" content="${type}">
+<meta property="og:url" content="${metaEsc(m.url)}">
+<meta property="og:site_name" content="OpenCool">
+<meta property="og:locale" content="${locale}">${published}${modified}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="${metaEsc(m.title)}">
+<meta name="twitter:description" content="${metaEsc(m.description)}">`;
+}
+
+function jsonLdScript(obj) {
+  return `<script type="application/ld+json">${JSON.stringify(obj, null, 2)}</script>`;
+}
+
+function collectionPageLd(name, url, description) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    url,
+    description,
+    isAccessibleForFree: true,
+  };
+}
+
+function webPageLd(name, url, description) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name,
+    url,
+    description,
+    isAccessibleForFree: true,
+  };
+}
+
+function webSiteLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "OpenCool",
+    url: `${SITE_URL}/`,
+    inLanguage: (process.env.REPORT_LOCALE || "zh") === "en" ? "en" : "zh-CN",
+  };
+}
+
 function parseHoursEnv() {
   const raw = process.env.REPORT_HOUR?.trim() || "6,13,19";
   const parts = raw
@@ -55,6 +127,11 @@ function placeholderHtml(date, hour, latestRel) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenCool · ${lab}尚未更新 · ${date}</title>
+${socialMeta({
+  title: `OpenCool · ${lab}尚未更新 · ${date}`,
+  description: `${date} · ${hour}:00（上海时区，目标档期）这一期还没生成。目标档期不是承诺：流水线自动补发缺失档期。零 AI / 零 Token。`,
+  url: `${SITE_URL}/${date}/${hour}.html`,
+})}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -206,6 +283,12 @@ if (fs.existsSync("data/mcp-desk.json")) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenCool · MCP 机构数据台</title>
+${socialMeta({
+  title: "OpenCool · MCP 机构数据台",
+  description: "操作员烘焙的机构数据快照：宏观、指数估值、同花顺 × Wind 双源交叉验证、ETF。每行标注来源，可独立复查。零 AI。",
+  url: `${SITE_URL}/mcp-desk.html`,
+})}
+${jsonLdScript(webPageLd("OpenCool · MCP 机构数据台", `${SITE_URL}/mcp-desk.html`, "操作员烘焙的机构数据快照，每行来源可复查。"))}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -405,6 +488,12 @@ if (fs.existsSync(path.join(ROOT, "periods.json"))) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenCool · 趋势对比</title>
+${socialMeta({
+  title: "OpenCool · 趋势对比",
+  description: "情绪、题材命中与指数的周度 / 月度趋势对比：桶均值与环比变化。",
+  url: `${SITE_URL}/periods.html`,
+})}
+${jsonLdScript(webPageLd("OpenCool · 趋势对比", `${SITE_URL}/periods.html`, "情绪、题材命中与指数的周度 / 月度趋势对比。"))}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -461,6 +550,12 @@ const subscribeHtml = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenCool · 订阅</title>
+${socialMeta({
+  title: "OpenCool · 订阅",
+  description: "留下邮箱选择档位。当前版本仅在本机保存订阅意向，不上传任何信息；RSS 订阅无需邮箱。",
+  url: `${SITE_URL}/subscribe.html`,
+})}
+${jsonLdScript(webPageLd("OpenCool · 订阅", `${SITE_URL}/subscribe.html`, "订阅意向（本机保存）与 RSS 订阅入口。"))}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -637,12 +732,19 @@ function stripMissingNav(html, rel, present, label) {
 // detection — so the footer can list every sibling reading surface and then
 // drop the ones this tree does not carry: a landing page that 404s its own
 // siblings would undercut the funnel it exists to serve.
+const reactionsPresent = fs.existsSync(path.join(ROOT, "reactions.html"));
 const suproHtml = `<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenCool · 量化实操 · SuPro (supro.si)</title>
+${socialMeta({
+  title: "OpenCool · 量化实操 · SuPro (supro.si)",
+  description: "OpenCool 让你看见市场；SuPro（supro.si）让你练手市场。姐妹项目：从看报到纸盘演练的一条闭环。",
+  url: `${SITE_URL}/supro.html`,
+})}
+${jsonLdScript(webPageLd("OpenCool · 量化实操 · SuPro", `${SITE_URL}/supro.html`, "看报 → 研究 → 纸盘实操的姐妹项目落地页。"))}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -727,7 +829,7 @@ const suproHtml = `<!doctype html>
    · <a class="home" href="./mcp-desk.html">机构数据台</a>
    · <a class="home" href="./supro.html">量化实操·SuPro</a>
    · <a class="home" href="./periods.html">趋势对比</a>
-   · <a class="home" href="./subscribe.html">订阅</a></p>
+   · <a class="home" href="./subscribe.html">订阅</a>${reactionsPresent ? `\n   · <a class="home" href="./reactions.html">反应窗</a>` : ""}</p>
 </main>
 </body>
 </html>
@@ -772,11 +874,22 @@ const suproHtml = `<!doctype html>
     }
     if (changed) fs.writeFileSync(fp, html, "utf8");
   };
-  pass("hour.html", [{ rel: "./integrity.html", present: integrityEmitted }]);
-  pass("stories.html", [{ rel: "./integrity.html", present: integrityEmitted }]);
+  // The reactions page is presence-gated, so every sibling's link to it must
+  // vanish with it; and its own footer links the siblings, so it gets the same
+  // treatment in reverse. Same rule as the integrity strip above: a nav link
+  // that 404s is worse than a missing nav link.
+  const reactionsNav = { rel: "./reactions.html", present: reactionsPresent };
+  pass("hour.html", [{ rel: "./integrity.html", present: integrityEmitted }, reactionsNav]);
+  pass("stories.html", [{ rel: "./integrity.html", present: integrityEmitted }, reactionsNav]);
   pass("integrity.html", [
     { rel: "./hour.html", present: hourPresent },
     { rel: "./stories.html", present: storiesPresent },
+    reactionsNav,
+  ]);
+  pass("reactions.html", [
+    { rel: "./hour.html", present: hourPresent },
+    { rel: "./stories.html", present: storiesPresent },
+    { rel: "./integrity.html", present: integrityEmitted },
   ]);
 }
 
@@ -787,6 +900,9 @@ const navPresence = [
   // Written unconditionally by this script just above, so the edition nav can
   // rely on it in every publish tree.
   { rel: "../supro.html", present: fs.existsSync(path.join(ROOT, "supro.html")), label: "supro.html" },
+  // Presence-gated page: reactions.html is written by reading:pages only when
+  // reactions.json is in the tree, so the nav link must vanish with it.
+  { rel: "../reactions.html", present: fs.existsSync(path.join(ROOT, "reactions.html")), label: "reactions.html" },
 ];
 
 // tools.json — the "Static MCP" manifest: every MCP tool mapped to its
@@ -936,6 +1052,12 @@ const aiHtml = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenCool · AI Instructions</title>
+${socialMeta({
+  title: "OpenCool · AI Instructions",
+  description: "How to consume OpenCool programmatically: /llms.txt index, static MCP endpoints, search, attribution. Zero AI behind any endpoint.",
+  url: `${SITE_URL}/ai-instructions.html`,
+})}
+${jsonLdScript(webPageLd("OpenCool · AI Instructions", `${SITE_URL}/ai-instructions.html`, "Agent onboarding: static MCP endpoints and conventions."))}
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root { --bg:#fff8f0; --fg:#1a1510; --muted:#7a6a5a; --accent:#e85d04; --card:#fff; --rule:#f0e0d0; }
@@ -986,6 +1108,12 @@ if (fs.existsSync(path.join(ROOT, "search-index.json"))) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenCool · 搜索</title>
+${socialMeta({
+  title: "OpenCool · 搜索",
+  description: "搜索历史档期：关键词 / 公司 / 事件。客户端静态索引，零 AI。",
+  url: `${SITE_URL}/search.html`,
+})}
+${jsonLdScript(webPageLd("OpenCool · 搜索", `${SITE_URL}/search.html`, "历史档期客户端静态搜索。"))}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -1181,6 +1309,12 @@ ${tiles}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenCool · 热力图</title>
+${socialMeta({
+  title: "OpenCool · 热力图",
+  description: `Finviz 式标的热力格：${heatTickers.length} 只标的按 pct1Day 着色，宽度随涨跌幅。`,
+  url: `${SITE_URL}/heatmap.html`,
+})}
+${jsonLdScript(webPageLd("OpenCool · 热力图", `${SITE_URL}/heatmap.html`, "观测池标的按日涨跌幅着色的热力格。"))}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -1230,6 +1364,15 @@ ${heatSections}
 
 const latestPath = path.join(ROOT, latest.rel);
 let latestHtml = fs.readFileSync(latestPath, "utf8");
+// The homepage IS the latest edition, but its canonical social URL is the
+// root; the edition's og:url pointed at `/<date>/<HH>.html`.
+latestHtml = latestHtml.replace(
+  `<meta property="og:url" content="${SITE_URL}/${latest.rel}">`,
+  `<meta property="og:url" content="${SITE_URL}/">`,
+);
+// WebSite JSON-LD joins the NewsArticle the edition already carries: search
+// engines read one for the site, one for the article.
+latestHtml = latestHtml.replace("</head>", `${jsonLdScript(webSiteLd())}</head>`);
 latestHtml = latestHtml
   .replace(/href="\.\.\/archive\.html"/g, 'href="./archive.html"')
   // The reading pages live at the tree root next to index/archive, so the
@@ -1237,6 +1380,7 @@ latestHtml = latestHtml
   // the prefix — same treatment as the archive link just above.
   .replace(/href="\.\.\/hour\.html"/g, 'href="./hour.html"')
   .replace(/href="\.\.\/stories\.html"/g, 'href="./stories.html"')
+  .replace(/href="\.\.\/reactions\.html"/g, 'href="./reactions.html"')
   .replace(/href="\.\.\/integrity\.html"/g, 'href="./integrity.html"')
   .replace(/href="\.\.\/supro\.html"/g, 'href="./supro.html"')
   .replace(/href="\.\/(\d{2})\.html"/g, `href="./${latest.date}/$1.html"`);
@@ -1377,11 +1521,21 @@ const archHeatLink = heatmapEmitted
 const archIntegrityLink = integrityEmitted
   ? `\n   · <a class="home" href="./integrity.html">数据完整性</a>`
   : "";
+// Same presence rule for the reactions page — it is built only when its data is.
+const archReactionsLink = reactionsPresent
+  ? `\n   · <a class="home" href="./reactions.html">反应窗</a>`
+  : "";
 const archiveHtml = `<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <title>OpenCool 归档</title>
+${socialMeta({
+  title: "OpenCool 归档",
+  description: "全部历史档期：早报 / 午报 / 晚报，目标档 06:00 / 13:00 / 19:00（上海时区），实测发布时间见数据完整性页。零 AI。",
+  url: `${SITE_URL}/archive.html`,
+})}
+${jsonLdScript(collectionPageLd("OpenCool 归档", `${SITE_URL}/archive.html`, "全部历史档期的每日三报归档。"))}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1428,7 +1582,7 @@ const archiveHtml = `<!doctype html>
    · <a class="home" href="./stories.html">故事线</a>
    · <a class="home" href="./trails.html">徒步路线收藏</a>
    · <a class="home" href="./weekly.html">周报</a>
-   · <a class="home" href="./search.html">搜索</a>${archHeatLink}${archIntegrityLink}
+   · <a class="home" href="./search.html">搜索</a>${archHeatLink}${archIntegrityLink}${archReactionsLink}
    · <a class="home" href="./mcp-desk.html">机构数据台</a>
    · <a class="home" href="./supro.html">量化实操·SuPro</a>
    · <a class="home" href="${SUPRO_LINKS.archive}" target="_blank" rel="noopener">去 supro.si 练一遍 ↗</a>
@@ -1677,6 +1831,9 @@ function buildStatusHtml() {
   const statusIntegrityLink = integrityEmitted
     ? `\n   · <a class="home" href="./integrity.html">数据完整性</a>`
     : "";
+  const statusReactionsLink = reactionsPresent
+    ? `\n   · <a class="home" href="./reactions.html">反应窗</a>`
+    : "";
 
   return `<!doctype html>
 <html lang="zh-CN">
@@ -1684,6 +1841,12 @@ function buildStatusHtml() {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenCool · 运行状态</title>
+${socialMeta({
+  title: "OpenCool · 运行状态",
+  description: "发布矩阵（14 天 × 三档）、抓取健康、源健康与自动禁用、情绪趋势。数据侧车判定，占位页不冒充真档。",
+  url: `${SITE_URL}/status.html`,
+})}
+${jsonLdScript(webPageLd("OpenCool · 运行状态", `${SITE_URL}/status.html`, "发布矩阵与源健康的自诊断面板。"))}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -1735,7 +1898,7 @@ function buildStatusHtml() {
   <p class="meta">连续 ${3} 天全档失败的源写入 source-overlay.json（运行时禁用，config 永不改动；删除条目即恢复）。</p>
   <p style="margin-top:2rem"><a class="home" href="./index.html">← 回到最新一期</a>
    · <a class="home" href="./archive.html">历史归档</a>
-   · <a class="home" href="./trails.html">徒步路线收藏</a>${statusHeatLink}${statusIntegrityLink}
+   · <a class="home" href="./trails.html">徒步路线收藏</a>${statusHeatLink}${statusIntegrityLink}${statusReactionsLink}
    · <a class="home" href="./mcp-desk.html">机构数据台</a>
    · <a class="home" href="./supro.html">量化实操·SuPro</a></p>
   <p class="meta tiny">本页由 build-site 自动生成 · ${new Date().toISOString()}</p>
@@ -1794,10 +1957,10 @@ const historyPayload = {
   items: historyItems,
 };
 // ---------------------------------------------------------------------------
-// feed.xml (RSS 2.0, real editions only) + llms.txt (agent discovery)
+// feed.xml (RSS 2.0, real editions only) + per-theme feeds (baked by
+// `npm run feeds:bake` into feed/<key>.xml) + llms.txt (agent discovery)
 // ---------------------------------------------------------------------------
 
-const SITE_URL = "https://fudan2026.github.io/opencool";
 const realForFeed = editions
   .filter((e) => !e.placeholder && e.hour !== "legacy")
   .slice(0, 30);
@@ -1872,6 +2035,15 @@ const llmsHeatRow = heatmapEmitted
 const llmsLagRow = integrityEmitted
   ? "- Publish punctuality: /integrity.html — 14-day measured publish-lag table,\n  one row per edition slot: due time, actual fetch_health.generated_at, lag\n  minutes, verdict (on time <=20m / late Nm / early / missing). Slot times are\n  targets; the measured table is the promise.\n"
   : "";
+// Presence-gated rows: the reactions page exists only when reactions.json was
+// baked into this tree, the per-theme feeds only when feeds:bake ran. An agent
+// must never be pointed at a URL this build did not produce.
+const llmsReactionsRow = reactionsPresent
+  ? "- Reaction windows page: /reactions.html — the published +1h/+1d/+5d windows\n  as a human table; pending/insufficient states stay visible, each horizon\n  cell carries its own funnel entry (utm_content=reactions-1h/1d/5d)\n"
+  : "";
+const llmsFeedsRow = fs.existsSync(path.join(ROOT, "feed"))
+  ? "- Per-theme RSS: /feed/<theme-key>.xml — one channel per theme in themes.json;\n  an edition enters when its briefs match the theme's aliases; item links\n  carry utm_content=rss-<theme-key> (newest 30, placeholders never included)\n"
+  : "";
 const llmsTxt = `# OpenCool
 
 Zero-AI, zero-token CN finance triple brief, statically published on GitHub
@@ -1945,11 +2117,16 @@ included. No LLM behind any endpoint.
   edition-themes/edition-flows (review panel),
   hour-tape/hour-timing (/hour.html),
   story-act/story-signals (/stories.html),
-  integrity (/integrity.html)
+  integrity (/integrity.html),
+  reactions-1h/reactions-1d/reactions-5d (/reactions.html),
+  rss-<theme-key> (per-theme RSS items)
 - Trend comparison: /periods.html + /periods.json — WoW (6 Monday-based
   weeks) and MoM (3 months) buckets of sentiment/theme/index deltas
 - Subscribe: /subscribe.html — local-only subscription intent (no email
   leaves the browser unless SUBSCRIBE_ENDPOINT is explicitly configured)
+${llmsReactionsRow}${llmsFeedsRow}- Discovery: /sitemap.xml — every public HTML page (root pages + real
+  editions; placeholder pages are excluded by design) + /robots.txt naming the
+  sitemap
 ${llmsHeatRow}${llmsLagRow}${llmsV1Block}- Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.
@@ -1979,3 +2156,71 @@ console.log(
 );
 fs.writeFileSync(path.join(ROOT, ".nojekyll"), "", "utf8");
 console.log(`[build-site] .nojekyll`);
+
+// ---------------------------------------------------------------------------
+// sitemap.xml — every public HTML page this tree serves. Real editions only:
+// placeholders contain 尚未更新 and are transient by design — the same purity
+// rule feed.xml follows. lastmod comes from the sidecar's own
+// fetch_health.generated_at (our honest publish clock) when present, else the
+// file mtime.
+// ---------------------------------------------------------------------------
+const sitemapUrl = (page, lastmod) =>
+  `  <url>\n    <loc>${SITE_URL}/${page}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
+
+const rootPages = [
+  "index.html",
+  "archive.html",
+  "status.html",
+  "supro.html",
+  "subscribe.html",
+  "ai-instructions.html",
+  "search.html",
+  "heatmap.html",
+  "periods.html",
+  "mcp-desk.html",
+  "weekly.html",
+  "trails.html",
+  "hour.html",
+  "stories.html",
+  "integrity.html",
+  "reactions.html",
+];
+const sitemapEntries = [];
+for (const p of rootPages) {
+  const fp = path.join(ROOT, p);
+  if (!fs.existsSync(fp)) continue;
+  sitemapEntries.push(sitemapUrl(p, new Date(fs.statSync(fp).mtimeMs).toISOString()));
+}
+for (const e of editions) {
+  if (e.placeholder) continue;
+  const fp = path.join(ROOT, e.rel);
+  if (!fs.existsSync(fp)) continue;
+  let lastmod = new Date(fs.statSync(fp).mtimeMs).toISOString();
+  try {
+    const sidecar = JSON.parse(
+      fs.readFileSync(path.join(ROOT, e.rel.replace(/\.html$/, ".json")), "utf8"),
+    );
+    if (typeof sidecar?.fetch_health?.generated_at === "string") {
+      lastmod = sidecar.fetch_health.generated_at;
+    }
+  } catch {
+    // unreadable or missing sidecar — file mtime is the fallback clock
+  }
+  sitemapEntries.push(sitemapUrl(e.rel, lastmod));
+}
+fs.writeFileSync(
+  path.join(ROOT, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries.join("\n")}\n</urlset>\n`,
+  "utf8",
+);
+console.log(
+  `[build-site] sitemap.xml (${sitemapEntries.length} URLs: ${rootPages.filter((p) => fs.existsSync(path.join(ROOT, p))).length} root + ${editions.filter((e) => !e.placeholder).length} editions)`,
+);
+
+// robots.txt — the crawler contract, referencing the sitemap above.
+fs.writeFileSync(
+  path.join(ROOT, "robots.txt"),
+  `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`,
+  "utf8",
+);
+console.log(`[build-site] robots.txt (Sitemap: ${SITE_URL}/sitemap.xml)`);

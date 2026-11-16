@@ -31,6 +31,7 @@ import {
 import { REPORT_LOCALE } from "../sources/registry";
 import { esc, fill, STRINGS as S } from "./render";
 import { suproUrl, SUPRO_LINK_ATTRS } from "./supro";
+import { SITE_URL, socialMetaTags, jsonLdScript, webPageLd } from "./meta";
 
 function pct(n: number): string {
   return `${n >= 0 ? "+" : ""}${n.toFixed(2)}%`;
@@ -683,6 +684,12 @@ export function renderHourPage(opts: HourPageOptions): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(S.hourTitle)} · ${esc(S.siteTitle)}</title>
+${socialMetaTags({
+  title: `${S.hourTitle} · ${S.siteTitle}`,
+  description: S.hourSubtitle,
+  url: `${SITE_URL}/hour.html`,
+})}
+${jsonLdScript(webPageLd(`${S.hourTitle}`, `${SITE_URL}/hour.html`, S.hourSubtitle))}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -709,9 +716,11 @@ export function renderHourPage(opts: HourPageOptions): string {
     <p>${esc(S.hourFooter)}</p>
     <p><a href="./index.html">${esc(S.siteTitle)}</a> · <a href="./archive.html">${esc(
       S.archiveLink,
-    )}</a> · <a href="./stories.html">${esc(S.navStories)}</a> · <a href="./integrity.html">${esc(
-      S.navIntegrity,
-    )}</a> · <a href="./supro.html">${esc(S.navSupro)}</a></p>
+    )}</a> · <a href="./stories.html">${esc(S.navStories)}</a> · <a href="./reactions.html">${esc(
+      S.navReactions,
+    )}</a> · <a href="./integrity.html">${esc(S.navIntegrity)}</a> · <a href="./supro.html">${esc(
+      S.navSupro,
+    )}</a></p>
   </footer>
 </main>
 <script>${SCRIPT}</script>

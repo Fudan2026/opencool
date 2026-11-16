@@ -345,6 +345,17 @@ jobs:
             }
           '
 
+      # Per-theme RSS channels (roadmap §2-#3): one /feed/<theme>.xml per
+      # theme in themes.json, items sliced by the theme's article-hit aliases
+      # over the restored+fresh sidecars. Runs after themes.json exists and
+      # before build-site (which lists the feed/ dir in llms.txt only when
+      # present). Zero LLM, zero network; fail-open when themes.json is absent.
+      - name: Bake per-theme RSS feeds
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
+        run: npm run feeds:bake
+
       - name: Bake trend periods
         run: npm run periods:bake
 
@@ -706,29 +717,6 @@ jobs:
             echo "gh-pages doesn't exist yet — the pages will render their waiting state"
           fi
 
-      # Writes daily_reports/hour.html and daily_reports/stories.html. Fail-open:
-      # exits 0 with a named gap when there is no tape or no ledger, because a
-      # page that says "waiting for Monday 09:35" is the deliverable on a day
-      # with nothing to report.
-      - name: Build reading pages
-        env:
-          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
-          REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
-        run: npm run reading:pages
-
-      # Same structural zero-token rule as the other jobs: these pages are
-      # arithmetic over published JSON and must never be able to reach a model.
-      - name: Assert zero LLM calls
-        run: node scripts/assert-zero-llm.mjs --since "$LLM_LOG_SINCE"
-
-      # Fail-loud proof that the pages are real: both files must exist and each
-      # must carry its page marker. A page that rendered nothing would otherwise
-      # publish a 200 with an empty body and look fine from the outside.
-      - name: Assert both pages exist
-        run: >-
-          node scripts/assert-reading-pages.mjs
-          --dir daily_reports
-
       # `/reactions.json` shipped only inside `build`, so it would stay
       # unpublished for as long as no edition is due — the first post-merge run
       # was a Saturday, the gate answered `all-published`, `build` was skipped,
@@ -738,11 +726,15 @@ jobs:
       # reading pages and the v1 namespace.
       #
       # It runs HERE — after the gh-pages restore above (which brings back
-      # `tape/` and `stories.json`, the bake's only two inputs) and BEFORE the v1
-      # bake below, so the v1 manifest can re-export the file on the same run
-      # instead of a run later. The v1 worker already added
+      # `tape/` and `stories.json`, the bake's only two inputs) and BEFORE the
+      # reading pages + v1 bake below: the reading pages render
+      # `reactions.json` into /reactions.html (presence-gated), and the v1
+      # manifest re-exports the file, so both must see the payload this run
+      # just produced rather than a stale restore. The v1 worker already added
       # `reactions.json || true` to that restore, which is what makes the
-      # re-export chain work end to end.
+      # re-export chain work end to end. Placing it before the zero-LLM assert
+      # also brings the bake under that guard — a generating step placed after
+      # it would be unguarded.
       #
       # Note this does NOT regenerate `index.html` / `archive.html` / `llms.txt`
       # — the pages job deliberately does not run `build-site` (an index built
@@ -765,6 +757,31 @@ jobs:
       # this whole artifact has to be trusted against.
       - name: Assert reaction windows are honest
         run: node scripts/assert-reactions.mjs
+
+      # Writes daily_reports/hour.html, stories.html and reactions.html. The
+      # reactions page is presence-gated on reactions.json, which the bake above
+      # just (re)wrote — so in this job the page is never stale and never
+      # missing while its data exists. Fail-open: exits 0 with a named gap when
+      # there is no tape or no ledger, because a page that says "waiting for
+      # Monday 09:35" is the deliverable on a day with nothing to report.
+      - name: Build reading pages
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ || 'Asia/Shanghai' }}
+          REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
+        run: npm run reading:pages
+
+      # Same structural zero-token rule as the other jobs: these pages are
+      # arithmetic over published JSON and must never be able to reach a model.
+      - name: Assert zero LLM calls
+        run: node scripts/assert-zero-llm.mjs --since "$LLM_LOG_SINCE"
+
+      # Fail-loud proof that the pages are real: both files must exist and each
+      # must carry its page marker. A page that rendered nothing would otherwise
+      # publish a 200 with an empty body and look fine from the outside.
+      - name: Assert both pages exist
+        run: >-
+          node scripts/assert-reading-pages.mjs
+          --dir daily_reports
 
       # The versioned /v1 namespace + /integrity.html. This job is the one that
       # GUARANTEES publication: the same steps also live in `build`, but `build`

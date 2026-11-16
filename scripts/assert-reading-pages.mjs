@@ -37,6 +37,18 @@ const PAGES = [
     minBytes: 2000,
     anyOf: [["data-rank-basis=", 'data-gap="ledger"']],
   },
+  {
+    // Presence-gated page: reactions.html is written only when its data file
+    // is in the tree. When reactions.json is absent the page is absent BY
+    // DESIGN (build-site strips every nav link to it), so the assert only
+    // applies when the data exists. Markers are locale-independent so an
+    // REPORT_LOCALE=en build asserts the same contract.
+    file: "reactions.html",
+    markers: ['property="og:url" content="https://fudan2026.github.io/opencool/reactions.html"'],
+    minBytes: 2000,
+    anyOf: [['data-table="observations"', 'data-gap="reactions"']],
+    dataGate: "reactions.json",
+  },
 ];
 
 function arg(name, fallback) {
@@ -79,7 +91,18 @@ export function checkPage(dir, spec) {
 function main() {
   const dir = arg("dir", "daily_reports");
   const problems = [];
-  for (const spec of PAGES) problems.push(...checkPage(dir, spec));
+  const checked = [];
+  for (const spec of PAGES) {
+    // A presence-gated page never asserts when its data is absent: the page
+    // is legitimately missing then, and failing the publish for it would force
+    // a placeholder where the contract says "not built".
+    if (spec.dataGate && !fs.existsSync(path.join(dir, spec.dataGate))) {
+      console.log(`[assert-reading-pages] skip ${spec.file} (${spec.dataGate} not in tree — presence-gated)`);
+      continue;
+    }
+    checked.push(spec);
+    problems.push(...checkPage(dir, spec));
+  }
 
   if (problems.length) {
     for (const p of problems) console.error(`[assert-reading-pages] ${p}`);
@@ -89,7 +112,7 @@ function main() {
     );
     process.exit(1);
   }
-  for (const spec of PAGES) {
+  for (const spec of checked) {
     const bytes = fs.statSync(path.join(dir, spec.file)).size;
     console.log(`[assert-reading-pages] ok ${spec.file} (${bytes} bytes)`);
   }

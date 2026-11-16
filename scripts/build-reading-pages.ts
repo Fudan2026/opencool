@@ -6,7 +6,10 @@
  *
  *   hour.html     the intraday tape as prose — one sentence per cross-section,
  *                 slot and day navigation, two clocks always visible;
- *   stories.html  story threads — sightings, revision trail, first-mover column.
+ *   stories.html  story threads — sightings, revision trail, first-mover column;
+ *   reactions.html the reaction windows as a public table — written only when
+ *                 reactions.json is in the tree (presence rule), every
+ *                 pending/insufficient state kept visible.
  *
  * Why a separate baker rather than more code in `build-site.mjs`: build-site is
  * a publishing pipeline (index, archive, feed, status, prunes) that happens to
@@ -32,6 +35,8 @@ import path from "node:path";
 
 import { renderHourPage } from "../lib/output/hour-page";
 import { renderStoriesPage } from "../lib/output/stories-page";
+import { renderReactionsPage } from "../lib/output/reactions-page";
+import type { ReactionsPayload } from "../lib/reactions/types";
 import { loadAllSources } from "../lib/sources/registry";
 import { TAPE_SLOTS } from "../lib/tape/schedule";
 import { buildSlotReading, readTapeDays, type SlotReading, type StoryContext } from "../lib/tape/reading";
@@ -150,6 +155,40 @@ function buildStories(): void {
   );
 }
 
+/**
+ * /reactions.html — the published reaction windows as a human table.
+ *
+ * Presence rule: the page is written only when `reactions.json` exists in
+ * this tree, and build-site strips every nav link to it otherwise — a
+ * reactions page without its data would be the exact dishonesty the payload's
+ * four-state attribution exists to prevent. A present-but-unreadable file still
+ * gets a page (the named gap is a real deliverable); only absence skips.
+ */
+function buildReactions(): void {
+  const file = path.join(ROOT, "reactions.json");
+  if (!fs.existsSync(file)) {
+    console.log("[reactions] reactions.json not present — page skipped (links stay stripped)");
+    return;
+  }
+  let payload: ReactionsPayload | null = null;
+  let reason = "";
+  const raw = readJson(file);
+  if (raw && typeof raw === "object" && "observations" in raw) {
+    payload = raw as ReactionsPayload;
+  } else {
+    reason = "reactions.json is not a valid ReactionsPayload";
+  }
+  const html = renderReactionsPage({ payload, reason });
+  const out = path.join(ROOT, "reactions.html");
+  fs.writeFileSync(out, html, "utf8");
+  console.log(
+    `[reactions] ${out} · ` +
+      (payload
+        ? `${payload.counts.observationsPublished} published observation(s) · dataThrough=${payload.dataThrough ?? "none"}`
+        : `named gap (${reason})`),
+  );
+}
+
 function main(): void {
   fs.mkdirSync(ROOT, { recursive: true });
   // `--only=hour` lets the tape job refresh the intraday page alone: it
@@ -158,9 +197,14 @@ function main(): void {
   const only = (process.env.READING_PAGES ?? argOnly()).trim();
   const wantHour = only === "" || only === "hour" || only === "both";
   const wantStories = only === "" || only === "stories" || only === "both";
+  // `reactions` deliberately has no "both" alias: --only=hour is how the tape
+  // job rebuilds the intraday page from a tape-only restore, and that job must
+  // never rebuild (and thereby clobber) a page whose data it did not restore.
+  const wantReactions = only === "" || only === "reactions";
   const jobs: Array<[string, () => void]> = [];
   if (wantHour) jobs.push(["hour", buildHour]);
   if (wantStories) jobs.push(["stories", buildStories]);
+  if (wantReactions) jobs.push(["reactions", buildReactions]);
 
   // Each page is independently fail-open: a problem building one must not stop
   // the other, and neither may fail the publish.
