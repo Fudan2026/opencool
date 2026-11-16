@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-16T19:27:04+08:00",
+  "generatedAt": "2026-11-17T02:45:32+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
     "started": true,
     "expectedSlotsPerDay": 10,
     "firstDate": "2026-11-16",
-    "lastDate": "2026-11-16",
-    "days": 1,
-    "tradingDays": 1,
+    "lastDate": "2026-11-17",
+    "days": 2,
+    "tradingDays": 2,
     "snapshots": 10,
     "revisionFiles": 0
   },
@@ -31,6 +31,29 @@
         "fundFlows": 10,
         "limitPool": 10
       },
+      "gaps": []
+    },
+    {
+      "date": "2026-11-17",
+      "tradingDay": true,
+      "beforeLaunch": false,
+      "expectedSlots": 0,
+      "capturedSlots": 0,
+      "missingSlots": [],
+      "pendingSlots": [
+        "09:35",
+        "10:05",
+        "10:35",
+        "11:05",
+        "11:35",
+        "13:05",
+        "13:35",
+        "14:05",
+        "14:35",
+        "15:05"
+      ],
+      "revisions": 0,
+      "sections": {},
       "gaps": []
     }
   ],
