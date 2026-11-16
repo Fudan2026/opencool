@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-16T05:44:06.808Z",
+  "generatedAt": "2026-11-16T06:11:06.687Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 21,
-  "avgSentiment": -4.3,
+  "avgSentiment": -4.5,
   "sentimentCurve": [
     {
       "date": "2026-11-09",
@@ -109,7 +109,7 @@
     {
       "date": "2026-11-16",
       "hour": "13",
-      "score": -15
+      "score": -20
     }
   ],
   "sectorAvg": [
@@ -122,8 +122,8 @@
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -70.5,
-      "editions": 6
+      "avg": -69.4,
+      "editions": 5
     },
     {
       "key": "china-equity",
@@ -134,31 +134,31 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -21.8,
+      "avg": -22,
       "editions": 21
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -20.9,
+      "avg": -21.3,
       "editions": 21
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -20.2,
+      "avg": -21,
       "editions": 21
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -13.1,
-      "editions": 9
+      "avg": -2.4,
+      "editions": 8
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -1.5,
+      "avg": -1.7,
       "editions": 21
     }
   ],
@@ -237,32 +237,26 @@
   "keywords": [
     {
       "term": "1月",
-      "count": 3,
+      "count": 4,
       "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
+      "lastSeen": "2026-11-16"
     },
     {
       "term": "月1",
-      "count": 3,
+      "count": 4,
       "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
+      "lastSeen": "2026-11-16"
     },
     {
       "term": "联社",
-      "count": 3,
+      "count": 4,
       "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
+      "lastSeen": "2026-11-16"
     },
     {
       "term": "财联",
-      "count": 3,
+      "count": 4,
       "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
-    },
-    {
-      "term": "attack",
-      "count": 2,
-      "firstSeen": "2026-11-16",
       "lastSeen": "2026-11-16"
     },
     {
@@ -290,9 +284,9 @@
       "lastSeen": "2026-11-13"
     },
     {
-      "term": "美元",
+      "term": "社1",
       "count": 2,
-      "firstSeen": "2026-11-11",
+      "firstSeen": "2026-11-13",
       "lastSeen": "2026-11-16"
     },
     {
@@ -354,6 +348,12 @@
       "count": 1,
       "firstSeen": "2026-11-14",
       "lastSeen": "2026-11-14"
+    },
+    {
+      "term": "5年",
+      "count": 1,
+      "firstSeen": "2026-11-15",
+      "lastSeen": "2026-11-15"
     }
   ],
   "themeAvg": [
@@ -365,7 +365,7 @@
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 104
+      "totalHits": 98
     },
     {
       "key": "semiconductor",
@@ -385,17 +385,17 @@
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 39
+      "totalHits": 40
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 38
+      "totalHits": 37
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 29
+      "totalHits": 30
     },
     {
       "key": "brokerage",
@@ -421,17 +421,17 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.37,
+      "avgChangePct": -0.39,
       "editions": 21
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.15,
+      "avgChangePct": -1.18,
       "editions": 21
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.73,
+      "avgChangePct": -1.77,
       "editions": 21
     }
   ],
