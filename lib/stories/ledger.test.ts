@@ -441,6 +441,156 @@ test("story ledger: v2 identity discipline (gated cluster keys)", async (t) => {
   });
 });
 
+test("story ledger: point-in-time discipline on warm replays (OC-49)", async (t) => {
+  // A bake restores the whole prior ledger, then replays every sidecar on
+  // disk — including old ones. Every decision below must consult only state
+  // that existed at or before the replayed edition's observation instant;
+  // otherwise old articles join records created later (the 81/2855
+  // anachronistic sightings measured in production after v2).
+
+  await t.test("a replayed old edition cannot join a record created later", () => {
+    // The restored ledger holds a record first seen 11-14; the replay feeds it
+    // an 11-12 sidecar whose headline passes the reworded-repeat gate.
+    const ledger = emptyLedger();
+    ingestEdition(ledger, edition("2026-11-14", "13", "2026-11-14T05:04:00Z", [
+      art({
+        sourceId: "bbc-sport",
+        title: "Man United sack head coach Michael Carrick after dismal run of results",
+      }),
+    ]));
+    assert.equal(ledger.stories.length, 1);
+    ingestEdition(ledger, edition("2026-11-12", "06", "2026-11-11T22:44:11Z", [
+      art({
+        sourceId: "skysport",
+        title: "Manchester United sack Michael Carrick as manager",
+      }),
+    ]));
+    assert.equal(ledger.stories.length, 2, "the older article starts its own record");
+    const newer = ledger.stories.find((s) => s.title.includes("dismal run"))!;
+    assert.equal(newer.sightings.length, 0, "the newer record gained nothing from the past");
+    const older = ledger.stories.find((s) => s.title.includes("Manchester United sack"))!;
+    assert.ok(older, "the replayed article has its own record");
+    assert.equal(older.firstEdition, "2026-11-12/06", "observed when the edition was replayed from");
+  });
+
+  await t.test("the same pair, ingested in natural order, still joins", () => {
+    // Positive control: live ingest folds the reworded repeat into one record.
+    const ledger = emptyLedger();
+    ingestAll(ledger, [
+      edition("2026-11-12", "06", "2026-11-11T22:44:11Z", [
+        art({ sourceId: "skysport", title: "Manchester United sack Michael Carrick as manager" }),
+      ]),
+      edition("2026-11-14", "13", "2026-11-14T05:04:00Z", [
+        art({
+          sourceId: "bbc-sport",
+          title: "Man United sack head coach Michael Carrick after dismal run of results",
+        }),
+      ]),
+    ]);
+    assert.equal(ledger.stories.length, 1, "natural order: one story, two wires");
+    assert.equal(ledger.stories[0].sightings.length, 1);
+  });
+
+  await t.test("the reworded-repeat window looks strictly backwards", () => {
+    // The record existed at the replay instant, but its *latest* observation
+    // postdates it — an 11-13 edition must not be matched against a record
+    // whose current surface was only seen on 11-14.
+    const ledger = emptyLedger();
+    ingestAll(ledger, [
+      edition("2026-11-12", "06", "2026-11-11T22:44:11Z", [
+        art({
+          sourceId: "bbc-sport",
+          title: "Man United sack head coach Michael Carrick after dismal run of results",
+        }),
+      ]),
+      edition("2026-11-14", "13", "2026-11-14T05:04:00Z", [
+        art({ sourceId: "guardian-sport", title: "Carrick era ends: Man United act after dismal run" }),
+      ]),
+    ]);
+    assert.equal(ledger.stories.length, 1);
+    assert.equal(ledger.stories[0].sightings.length, 1, "the 11-14 wire joined");
+    ingestEdition(ledger, edition("2026-11-13", "13", "2026-11-13T05:04:00Z", [
+      art({ sourceId: "skysport", title: "Manchester United sack Michael Carrick as manager" }),
+    ]));
+    assert.equal(ledger.stories.length, 2, "the 11-13 replay is invisible to 11-14 surfaces");
+    assert.equal(ledger.stories[0].sightings.length, 1, "nothing was back-filed");
+  });
+
+  await t.test("a wire's later reprint does not suppress an earlier observation of the same text", () => {
+    // Anchors and exact-repeat checks are evaluated *as of* the replay
+    // instant: replaying an 11-13 sidecar that prints the exact text the wire
+    // would only surface on 11-14 records the earlier observation, instead of
+    // letting the future reprint suppress it.
+    const ledger = emptyLedger();
+    ingestAll(ledger, [
+      edition("2026-11-13", "06", "2026-11-12T22:44:11Z", [
+        art({
+          sourceId: "reuters",
+          title: "OPEC+ Leaves Oil Output Targets Unchanged for December",
+        }),
+      ]),
+      edition("2026-11-14", "13", "2026-11-14T05:04:00Z", [
+        art({
+          sourceId: "bloomberg",
+          title: "OPEC+ Sticks With Plan for Steady Oil Output Quotas in December",
+          url: "https://example.com/bloomberg/opec-sticks",
+        }),
+      ]),
+    ]);
+    const story = ledger.stories[0];
+    assert.equal(story.sightings.length, 1, "the 11-14 print is a sighting");
+    ingestEdition(ledger, edition("2026-11-13", "13", "2026-11-13T05:04:00Z", [
+      art({
+        sourceId: "bloomberg",
+        title: "OPEC+ Sticks With Plan for Steady Oil Output Quotas in December",
+        url: "https://example.com/bloomberg/opec-sticks-early",
+      }),
+    ]));
+    assert.equal(ledger.stories.length, 1, "same story, same entity, same day");
+    assert.equal(story.sightings.length, 2, "the earlier print is kept as its own observation");
+    assert.ok(
+      story.sightings.some((s) => s.edition === "2026-11-13/13"),
+      "the 11-13 observation landed with its own edition",
+    );
+    assert.equal(story.firstSeenAt, isoWithOffset(new Date("2026-11-12T22:44:11Z"), TZ), "firstSeenAt frozen");
+  });
+
+  await t.test("a shared url cannot join a record that did not exist yet", () => {
+    // A rolling url reused across editions: the replayed 11-12 article must
+    // not fold into a record whose url was first carried on 11-14.
+    const ledger = emptyLedger();
+    const url = "https://www.ft.com/content/rolling-wrap";
+    ingestEdition(ledger, edition("2026-11-14", "13", "2026-11-14T05:04:00Z", [
+      art({ sourceId: "ft-companies", title: "财联社11月14日电，新世界发展在香港暂停交易。", url }),
+    ]));
+    ingestEdition(ledger, edition("2026-11-12", "06", "2026-11-11T22:44:11Z", [
+      art({ sourceId: "cls-telegraph", title: "新世界发展在香港暂停交易。", url }),
+    ]));
+    assert.equal(ledger.stories.length, 2, "the older print keeps its own record");
+    const newer = ledger.stories.find((s) => s.title.includes("财联社"))!;
+    assert.equal(newer.sightings.length, 0, "the newer record did not absorb the past");
+  });
+
+  await t.test("an out-of-order backfill observed later still joins (the frozen rule holds)", () => {
+    // The backfill's observation instant is when the gate recovered the slot —
+    // later than the record's creation — so the record exists at that instant
+    // and the sighting is legitimately recorded. Point-in-time filters must
+    // not regress the frozen-firstSeenAt backfill path.
+    const ledger = emptyLedger();
+    ingestAll(ledger, [
+      edition("2026-11-13", "13", "2026-11-13T05:04:00Z", [
+        art({ sourceId: "reuters", title: "Nvidia board weighs replacing Jensen Huang" }),
+      ]),
+      edition("2026-11-13", "06", "2026-11-13T07:20:00Z", [
+        art({ sourceId: "bloomberg", title: "Nvidia succession question unsettles investors" }),
+      ]),
+    ]);
+    assert.equal(ledger.stories.length, 1);
+    assert.equal(ledger.stories[0].sightings.length, 1);
+    assert.equal(ledger.stories[0].firstSeenAt, isoWithOffset(new Date("2026-11-13T05:04:00Z"), TZ));
+  });
+});
+
 test("story ledger: first-mover ranking", async (t) => {
   await t.test("(d) the earliest distinct wire ranks first with a sane lead", () => {
     const ledger = emptyLedger();
