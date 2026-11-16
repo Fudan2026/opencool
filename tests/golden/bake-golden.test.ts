@@ -173,7 +173,13 @@ test("golden: build-site end-to-end", async (t) => {
   );
 
   // reactions.json fixture: one measurable +1h window, one pending story, one
-  // insufficient aggregate — the exact states the public page must keep visible.
+  // insufficient aggregate — the exact states the public page must keep
+  // visible. DECLARED here but WRITTEN after the v1 bake spawn below: the
+  // merged #78 assertion requires this fixture's v1 bake to see a tree
+  // WITHOUT reactions.json (so `/v1/reactions.json` stays unadvertised),
+  // while the reading-pages bake needs the file present to build
+  // /reactions.html. Both hold only with this ordering.
+  function writeReactionsFixture() {
   fs.writeFileSync(
     path.join(R, "reactions.json"),
     JSON.stringify({
@@ -248,6 +254,7 @@ test("golden: build-site end-to-end", async (t) => {
     }),
     "utf8",
   );
+  }
 
   // Bakes run BEFORE build-site in CI (their artifacts feed it:
   // keywords/periods.json gate page emission) — same order here.
@@ -263,6 +270,9 @@ test("golden: build-site end-to-end", async (t) => {
       stdio: "pipe",
     });
   }
+  // Only now does reactions.json enter the fixture tree — after the v1 bake
+  // (see writeReactionsFixture above) and before the reading pages bake.
+  writeReactionsFixture();
   // Per-theme feeds + the reactions page: the two presence-gated products
   // this increment adds. Spawned the same way (real scripts, synthetic tree).
   execFileSync(tsxBin, [path.join(REPO_ROOT, "scripts", "bake-feeds.ts")], {
