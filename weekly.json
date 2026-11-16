@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-16T03:10:04.251Z",
+  "generatedAt": "2026-11-16T03:39:06.232Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 20,
-  "avgSentiment": -3.9,
+  "avgSentiment": -3.7,
   "sentimentCurve": [
     {
       "date": "2026-11-09",
@@ -104,20 +104,20 @@
     {
       "date": "2026-11-16",
       "hour": "06",
-      "score": -6
+      "score": -2
     }
   ],
   "sectorAvg": [
     {
       "key": "china-ashare",
       "label": "A 股蓝筹",
-      "avg": 79.3,
+      "avg": 84.8,
       "editions": 4
     },
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -70.2,
+      "avg": -69.4,
       "editions": 5
     },
     {
@@ -125,12 +125,6 @@
       "label": "中概港股",
       "avg": 34.9,
       "editions": 7
-    },
-    {
-      "key": "china-etf",
-      "label": "ETF",
-      "avg": -20.7,
-      "editions": 20
     },
     {
       "key": "us-equity",
@@ -141,19 +135,25 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -20.2,
+      "avg": -18.7,
+      "editions": 20
+    },
+    {
+      "key": "china-etf",
+      "label": "ETF",
+      "avg": -18.6,
       "editions": 20
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -8.6,
+      "avg": -2.4,
       "editions": 8
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -1.1,
+      "avg": -1.2,
       "editions": 20
     }
   ],
@@ -182,13 +182,6 @@
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
-      "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
-      "url": "https://www.bbc.co.uk/news/articles/c64g1gzy2vdzo?at_medium=RSS&at_campaign=rss",
-      "count": 16
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
       "title": "Zoe Kleinman: Nvidia CEO's affair will cause ripples across US and beyond",
       "url": "https://www.bbc.co.uk/news/articles/cj3vqv3nee72o?at_medium=RSS&at_campaign=rss",
       "count": 15
@@ -198,6 +191,13 @@
       "displayName": "Nvidia",
       "title": "Nvidia shares tumble over investigation into Huang's affair with alleged Chinese spy",
       "url": "https://www.bbc.co.uk/news/articles/c6zxjx01vyleo?at_medium=RSS&at_campaign=rss",
+      "count": 15
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Faisal Islam: What the boss of US tech giant Nvidia told me about China and national security",
+      "url": "https://www.bbc.co.uk/news/articles/c64g1gzy2vdzo?at_medium=RSS&at_campaign=rss",
       "count": 15
     },
     {
@@ -297,12 +297,6 @@
       "lastSeen": "2026-11-14"
     },
     {
-      "term": "0月",
-      "count": 1,
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16"
-    },
-    {
       "term": "12月加息25个基点的概率升至85",
       "count": 1,
       "firstSeen": "2026-11-11",
@@ -345,22 +339,28 @@
       "lastSeen": "2026-11-14"
     },
     {
-      "term": "5亿",
+      "term": "5年",
       "count": 1,
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16"
+      "firstSeen": "2026-11-15",
+      "lastSeen": "2026-11-15"
+    },
+    {
+      "term": "apple",
+      "count": 1,
+      "firstSeen": "2026-11-10",
+      "lastSeen": "2026-11-10"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 121
+      "totalHits": 120
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 98
+      "totalHits": 95
     },
     {
       "key": "bank",
@@ -375,16 +375,16 @@
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 45
-    },
-    {
-      "key": "robotics",
-      "name": "机器人",
-      "totalHits": 37
+      "totalHits": 46
     },
     {
       "key": "metals",
       "name": "有色金属",
+      "totalHits": 37
+    },
+    {
+      "key": "robotics",
+      "name": "机器人",
       "totalHits": 36
     },
     {
@@ -400,7 +400,7 @@
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 21
+      "totalHits": 19
     },
     {
       "key": "pharma",
@@ -416,17 +416,17 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.36,
+      "avgChangePct": -0.35,
       "editions": 20
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.13,
+      "avgChangePct": -1.11,
       "editions": 20
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.68,
+      "avgChangePct": -1.65,
       "editions": 20
     }
   ],
