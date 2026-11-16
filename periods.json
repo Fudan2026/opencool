@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-16T07:10:02.093Z",
+  "generatedAt": "2026-11-16T11:08:12.406Z",
   "source": "bake-periods",
-  "editions": 80,
+  "editions": 81,
   "weeks": [
     {
       "key": "2026-10-12",
@@ -99,33 +99,33 @@
     {
       "key": "2026-11-16",
       "end": "2026-11-16",
-      "editions": 2,
-      "avgSentiment": -13.5,
-      "posNegRatio": 0.4,
+      "editions": 3,
+      "avgSentiment": -11,
+      "posNegRatio": 0.41,
       "topThemes": [
         {
           "name": "算力",
-          "hits": 13
+          "hits": 23
         },
         {
           "name": "人工智能",
-          "hits": 12
-        },
-        {
-          "name": "石油石化",
-          "hits": 8
+          "hits": 20
         },
         {
           "name": "半导体",
-          "hits": 8
+          "hits": 13
         },
         {
-          "name": "有色金属",
-          "hits": 7
+          "name": "石油石化",
+          "hits": 10
+        },
+        {
+          "name": "银行",
+          "hits": 9
         }
       ],
-      "avgIndexChangePct": -1.97,
-      "deltaVsPrev": -9.7
+      "avgIndexChangePct": -2.18,
+      "deltaVsPrev": -7.2
     }
   ],
   "months": [
@@ -152,33 +152,33 @@
     {
       "key": "2026-11",
       "end": "2026-11-16",
-      "editions": 44,
-      "avgSentiment": -24,
+      "editions": 45,
+      "avgSentiment": -23.6,
       "posNegRatio": 0.4,
       "topThemes": [
         {
           "name": "算力",
-          "hits": 170
+          "hits": 180
         },
         {
           "name": "人工智能",
-          "hits": 137
+          "hits": 145
         },
         {
           "name": "银行",
-          "hits": 98
+          "hits": 101
         },
         {
           "name": "半导体",
-          "hits": 95
+          "hits": 100
         },
         {
           "name": "有色金属",
           "hits": 76
         }
       ],
-      "avgIndexChangePct": -1,
-      "deltaVsPrev": 72.8
+      "avgIndexChangePct": -1.04,
+      "deltaVsPrev": 73.2
     }
   ],
   "note": "Zero AI · pure arithmetic · not investment advice"
