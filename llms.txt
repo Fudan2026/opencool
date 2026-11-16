@@ -81,10 +81,16 @@ included. No LLM behind any endpoint.
   one row per edition slot: due time, actual fetch_health.generated_at, lag
   minutes, verdict (on time <=20m / late Nm / early / missing). Slot times are
   targets; the measured table is the promise.
-- Point-in-time tape: /v1/manifest.json — capture has NOT started yet. The first
-  honest snapshot is expected 2026-11-16 09:35 Asia/Shanghai;
-  /v1/coverage.json publishes the empty ledger and names every gap rather than
-  showing a clean slate.
+- Point-in-time tape: /v1/manifest.json + /v1/asof/<YYYY-MM-DD>.json —
+  1 immutable snapshot(s) across 1 day(s)
+  (2026-11-16 → 2026-11-16),
+  50% of expected slots captured,
+  1 named gap(s). Every slot and every section carries
+  asOf (market clock) + observedAt (our fetch clock); a re-capture writes
+  <HHMM>.rev-N.json and never rewrites the base bytes.
+- Integrity surface: /integrity.html + /v1/coverage.json — per-day expected vs
+  captured slots, every gap with its reason, revision counts, first-seen
+  coverage and pending +1h/+1d/+5d horizons. Gaps are named, never hidden.
 - Static MCP manifest: /tools.json — every MCP tool mapped to a static
   endpoint (see /ai-instructions.html for agent onboarding)
 - Attribution: when citing, attribute "OpenCool (URL)". License MIT.
