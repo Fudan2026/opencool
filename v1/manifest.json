@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-16T15:10:08+08:00",
+  "generatedAt": "2026-11-16T15:13:53+08:00",
   "timezone": "Asia/Shanghai",
   "endpoints": [
     {
@@ -53,25 +53,25 @@
     "expectedSlotsPerDay": 10,
     "firstDate": "2026-11-16",
     "lastDate": "2026-11-16",
-    "totalSlots": 9,
+    "totalSlots": 10,
     "totalRevisionFiles": 0,
     "days": [
       {
         "date": "2026-11-16",
-        "slots": 9,
+        "slots": 10,
         "revisions": 0,
-        "complete": false
+        "complete": true
       }
     ]
   },
   "coverage": {
     "days": 1,
     "tradingDays": 1,
-    "daysWithGaps": 1,
+    "daysWithGaps": 0,
     "expectedSlots": 10,
-    "capturedSlots": 9,
-    "coveragePct": 90,
-    "gaps": 1
+    "capturedSlots": 10,
+    "coveragePct": 100,
+    "gaps": 0
   },
   "license": {
     "code": "MIT",

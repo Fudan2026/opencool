@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-16T15:10:08+08:00",
+  "generatedAt": "2026-11-16T15:13:53+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -11,7 +11,7 @@
     "lastDate": "2026-11-16",
     "days": 1,
     "tradingDays": 1,
-    "snapshots": 9,
+    "snapshots": 10,
     "revisionFiles": 0
   },
   "days": [
@@ -20,26 +20,18 @@
       "tradingDay": true,
       "beforeLaunch": false,
       "expectedSlots": 10,
-      "capturedSlots": 9,
-      "missingSlots": [
-        "15:05"
-      ],
+      "capturedSlots": 10,
+      "missingSlots": [],
       "pendingSlots": [],
       "revisions": 0,
       "sections": {
-        "indices": 9,
-        "industries": 9,
-        "themes": 9,
-        "fundFlows": 9,
-        "limitPool": 9
+        "indices": 10,
+        "industries": 10,
+        "themes": 10,
+        "fundFlows": 10,
+        "limitPool": 10
       },
-      "gaps": [
-        {
-          "slot": "15:05",
-          "code": "missed",
-          "reason": "no snapshot for 15:05 on 2026-11-16 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
-        }
-      ]
+      "gaps": []
     }
   ],
   "stories": {
@@ -57,8 +49,8 @@
     {
       "key": "1h",
       "hours": 1,
-      "measured": 227,
-      "pending": 1755,
+      "measured": 240,
+      "pending": 1741,
       "available": true
     },
     {
@@ -78,11 +70,11 @@
   ],
   "gaps": [],
   "summary": {
-    "daysWithGaps": 1,
-    "daysComplete": 0,
+    "daysWithGaps": 0,
+    "daysComplete": 1,
     "expectedSlots": 10,
-    "capturedSlots": 9,
-    "coveragePct": 90,
-    "gaps": 1
+    "capturedSlots": 10,
+    "coveragePct": 100,
+    "gaps": 0
   }
 }
