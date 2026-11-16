@@ -71,11 +71,22 @@ included. No LLM behind any endpoint.
   edition-themes/edition-flows (review panel),
   hour-tape/hour-timing (/hour.html),
   story-act/story-signals (/stories.html),
-  integrity (/integrity.html)
+  integrity (/integrity.html),
+  reactions-1h/reactions-1d/reactions-5d (/reactions.html),
+  rss-<theme-key> (per-theme RSS items)
 - Trend comparison: /periods.html + /periods.json — WoW (6 Monday-based
   weeks) and MoM (3 months) buckets of sentiment/theme/index deltas
 - Subscribe: /subscribe.html — local-only subscription intent (no email
   leaves the browser unless SUBSCRIBE_ENDPOINT is explicitly configured)
+- Reaction windows page: /reactions.html — the published +1h/+1d/+5d windows
+  as a human table; pending/insufficient states stay visible, each horizon
+  cell carries its own funnel entry (utm_content=reactions-1h/1d/5d)
+- Per-theme RSS: /feed/<theme-key>.xml — one channel per theme in themes.json;
+  an edition enters when its briefs match the theme's aliases; item links
+  carry utm_content=rss-<theme-key> (newest 30, placeholders never included)
+- Discovery: /sitemap.xml — every public HTML page (root pages + real
+  editions; placeholder pages are excluded by design) + /robots.txt naming the
+  sitemap
 - Sector heatmap: /heatmap.html — watchlist tiles colored by pct1Day (latest edition)
 - Publish punctuality: /integrity.html — 14-day measured publish-lag table,
   one row per edition slot: due time, actual fetch_health.generated_at, lag

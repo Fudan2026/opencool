@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "dataThrough": "2026-11-16T19:06:05+08:00",
+  "dataThrough": "2026-11-16T19:24:17+08:00",
   "timezone": "Asia/Shanghai",
   "headlineMetric": "marketExcessPct",
   "headlineReason": "Cross-sectional excess is the standard market-factor abnormal return and is computable from exactly the two snapshots a horizon needs, so the headline is never absent for a window that is otherwise measurable. `rawReturnPct` and `sectorExcessPct` (vs the sector's own trailing drift over the same length) are published alongside for every sample, but the trailing baseline needs a full prior window of tape and is therefore null through the early history.",
@@ -66,24 +66,24 @@
     "withFirstSeen": 2000,
     "maxStories": 2000,
     "retentionDays": 30,
-    "updatedAt": "2026-11-16T19:08:04+08:00",
+    "updatedAt": "2026-11-16T19:26:09+08:00",
     "retainedFrom": "2026-10-16T06:00:00+08:00",
-    "retainedTo": "2026-11-16T19:06:05+08:00",
+    "retainedTo": "2026-11-16T19:24:17+08:00",
     "capBinding": true
   },
   "counts": {
     "stories": 2000,
     "attributed": {
-      "entity": 123,
+      "entity": 126,
       "topic": 0,
-      "market": 1877,
+      "market": 1874,
       "pending": 0,
       "unmapped": 0
     },
     "horizons": {
       "1h": {
-        "ok": 244,
-        "pending": 1736,
+        "ok": 245,
+        "pending": 1735,
         "gap": 20
       },
       "1d": {
@@ -99,7 +99,7 @@
     },
     "aggregates": {
       "byTopic": 6,
-      "byEntity": 75
+      "byEntity": 74
     },
     "observationsTotal": 2000,
     "observationsPublished": 400
@@ -146,7 +146,7 @@
             "n": 6,
             "status": "insufficient",
             "excluded": {
-              "pending": 39,
+              "pending": 42,
               "gap": 14
             }
           },
@@ -154,7 +154,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 62,
+              "pending": 65,
               "gap": 0
             }
           },
@@ -162,7 +162,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 62,
+              "pending": 65,
               "gap": 0
             }
           }
@@ -427,7 +427,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 2,
+              "pending": 3,
               "gap": 0
             }
           },
@@ -435,7 +435,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 2,
+              "pending": 3,
               "gap": 0
             }
           },
@@ -443,7 +443,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 2,
+              "pending": 3,
               "gap": 0
             }
           }
@@ -489,7 +489,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 5,
+              "pending": 6,
               "gap": 0
             }
           },
@@ -497,7 +497,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 5,
+              "pending": 6,
               "gap": 0
             }
           },
@@ -505,7 +505,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 5,
+              "pending": 6,
               "gap": 0
             }
           }
@@ -551,7 +551,7 @@
             "n": 1,
             "status": "insufficient",
             "excluded": {
-              "pending": 4,
+              "pending": 5,
               "gap": 0
             }
           },
@@ -559,7 +559,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 6,
+              "pending": 7,
               "gap": 0
             }
           },
@@ -567,7 +567,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 6,
+              "pending": 7,
               "gap": 0
             }
           }
@@ -1018,37 +1018,6 @@
             "excluded": {
               "pending": 0,
               "gap": 1
-            }
-          },
-          "1d": {
-            "n": 0,
-            "status": "insufficient",
-            "excluded": {
-              "pending": 1,
-              "gap": 0
-            }
-          },
-          "5d": {
-            "n": 0,
-            "status": "insufficient",
-            "excluded": {
-              "pending": 1,
-              "gap": 0
-            }
-          }
-        }
-      },
-      {
-        "key": "传音控股",
-        "label": "传音控股 (品牌消费电子)",
-        "expectedSign": null,
-        "horizons": {
-          "1h": {
-            "n": 0,
-            "status": "insufficient",
-            "excluded": {
-              "pending": 1,
-              "gap": 0
             }
           },
           "1d": {
@@ -2163,7 +2132,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 1,
+              "pending": 2,
               "gap": 0
             }
           },
@@ -2171,7 +2140,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 1,
+              "pending": 2,
               "gap": 0
             }
           },
@@ -2179,7 +2148,7 @@
             "n": 0,
             "status": "insufficient",
             "excluded": {
-              "pending": 1,
+              "pending": 2,
               "gap": 0
             }
           }
@@ -2622,6 +2591,481 @@
     ]
   },
   "observations": [
+    {
+      "id": "st_02eae87ea8",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_19301944b0",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "tech-ai",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_28d890ba4d",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_2d3ba658c5",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "global-markets",
+      "target": "board:BK1283",
+      "targetLabel": "银行",
+      "attribution": "entity",
+      "entity": "pboc",
+      "attributionReason": "pboc → 银行 (bank): PBOC policy is the direct driver of the bank board",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_4bc099bcd6",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_4dd28fc47d",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "tech-ai",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_7f75898a4b",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_860be0f31e",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_8f3b9e6eaf",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_93ca39c768",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "filings",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_96dd2dfb51",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "filings",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_a2cb3a4100",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_a8d4525a9f",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_b143643704",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "filings",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_b3f1e1fa82",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "filings",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_bedb11a3a1",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "filings",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_c499687b36",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_f2a2c3d30b",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "global-markets",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
+    {
+      "id": "st_f6e6e9e867",
+      "firstSeenAt": "2026-11-16T19:24:17+08:00",
+      "firstEdition": "2026-11-16/19",
+      "topic": "global-markets",
+      "target": "board:BK1276",
+      "targetLabel": "油气开采Ⅱ",
+      "attribution": "entity",
+      "entity": "oil",
+      "attributionReason": "oil → 石油石化 (oil): Crude price moves are the 油气开采 board's own driver",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after firstSeenAt (2026-11-16T19:24:17+08:00); tape ends 2026-11-16T15:12:06+08:00"
+        }
+      }
+    },
     {
       "id": "st_0259b5f8e3",
       "firstSeenAt": "2026-11-16T19:06:05+08:00",
@@ -5403,6 +5847,52 @@
       "attribution": "entity",
       "entity": "pboc",
       "attributionReason": "pboc → 银行 (bank): PBOC policy is the direct driver of the bank board",
+      "horizons": {
+        "1h": {
+          "status": "pending",
+          "reason": "no snapshot at or after 2026-11-16T15:06:12+08:00 + 1h; tape ends 2026-11-16T15:12:06+08:00",
+          "entry": {
+            "ms": 1794813126000,
+            "asOf": "2026-11-16T15:12:06+08:00",
+            "date": "2026-11-16",
+            "slot": "15:05"
+          },
+          "entryOvershootMinutes": 5.9
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after 2026-11-16T15:06:12+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
+          "entry": {
+            "ms": 1794813126000,
+            "asOf": "2026-11-16T15:12:06+08:00",
+            "date": "2026-11-16",
+            "slot": "15:05"
+          },
+          "entryOvershootMinutes": 5.9
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after 2026-11-16T15:06:12+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
+          "entry": {
+            "ms": 1794813126000,
+            "asOf": "2026-11-16T15:12:06+08:00",
+            "date": "2026-11-16",
+            "slot": "15:05"
+          },
+          "entryOvershootMinutes": 5.9
+        }
+      }
+    },
+    {
+      "id": "st_38b456cc83",
+      "firstSeenAt": "2026-11-16T15:06:12+08:00",
+      "firstEdition": "2026-11-16/13",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
       "horizons": {
         "1h": {
           "status": "pending",
@@ -14619,6 +15109,65 @@
       }
     },
     {
+      "id": "st_ef6a918102",
+      "firstSeenAt": "2026-11-16T11:37:35+08:00",
+      "firstEdition": "2026-11-16/06",
+      "topic": "world",
+      "target": "index:000001",
+      "targetLabel": "上证指数",
+      "attribution": "market",
+      "entity": null,
+      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
+      "horizons": {
+        "1h": {
+          "status": "ok",
+          "entry": {
+            "ms": 1794800655000,
+            "asOf": "2026-11-16T11:44:15+08:00",
+            "date": "2026-11-16",
+            "slot": "11:35"
+          },
+          "exit": {
+            "ms": 1794806061000,
+            "asOf": "2026-11-16T13:14:21+08:00",
+            "date": "2026-11-16",
+            "slot": "13:05"
+          },
+          "entryOvershootMinutes": 6.7,
+          "overshootMinutes": 36.8,
+          "windowMinutes": 90.1,
+          "rawReturnPct": -0.3313,
+          "trailingDriftPct": 0.3627,
+          "sectorExcessPct": -0.694,
+          "marketMeanPct": -0.719,
+          "marketExcessPct": null,
+          "marketUniverse": 33
+        },
+        "1d": {
+          "status": "pending",
+          "reason": "no snapshot at or after 2026-11-16T11:37:35+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
+          "entry": {
+            "ms": 1794800655000,
+            "asOf": "2026-11-16T11:44:15+08:00",
+            "date": "2026-11-16",
+            "slot": "11:35"
+          },
+          "entryOvershootMinutes": 6.7
+        },
+        "5d": {
+          "status": "pending",
+          "reason": "no snapshot at or after 2026-11-16T11:37:35+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
+          "entry": {
+            "ms": 1794800655000,
+            "asOf": "2026-11-16T11:44:15+08:00",
+            "date": "2026-11-16",
+            "slot": "11:35"
+          },
+          "entryOvershootMinutes": 6.7
+        }
+      }
+    },
+    {
       "id": "st_f9f10122a6",
       "firstSeenAt": "2026-11-16T11:37:35+08:00",
       "firstEdition": "2026-11-16/06",
@@ -20584,1221 +21133,6 @@
     },
     {
       "id": "st_7fd2ab07c5",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_80d8381a69",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "board:BK1249",
-      "targetLabel": "焦炭Ⅱ",
-      "attribution": "entity",
-      "entity": "安泰集团",
-      "attributionReason": "title names 安泰集团 → 安泰集团, a verified constituent of 焦炭Ⅱ (BK1249) in the committed board atlas",
-      "horizons": {
-        "1h": {
-          "status": "gap",
-          "reason": "焦炭Ⅱ was not quoted at entry (2026-11-16T10:20:30+08:00)",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_811a7af149",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_81ee035d93",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_81f77dc40a",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "board:BK1451",
-      "targetLabel": "厨房电器",
-      "attribution": "entity",
-      "entity": "华帝股份",
-      "attributionReason": "title names 华帝股份 → 华帝股份, a verified constituent of 厨房电器 (BK1451) in the committed board atlas",
-      "horizons": {
-        "1h": {
-          "status": "gap",
-          "reason": "厨房电器 was not quoted at entry (2026-11-16T10:20:30+08:00)",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_84067e1c90",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_892cc2f0a1",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_8c1d997ecb",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_8c8d9a8884",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_8d66159a71",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "policy",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_9065bc942d",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "board:BK1450",
-      "targetLabel": "空调",
-      "attribution": "entity",
-      "entity": "美的集团",
-      "attributionReason": "title names 美的集团 → 美的集团, a verified constituent of 空调 (BK1450) in the committed board atlas",
-      "horizons": {
-        "1h": {
-          "status": "gap",
-          "reason": "空调 was not quoted at entry (2026-11-16T10:20:30+08:00)",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_90d9404c80",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "board:BK1483",
-      "targetLabel": "高速公路",
-      "attribution": "entity",
-      "entity": "龙江交通",
-      "attributionReason": "title names 龙江交通 → 龙江交通, a verified constituent of 高速公路 (BK1483) in the committed board atlas",
-      "horizons": {
-        "1h": {
-          "status": "gap",
-          "reason": "高速公路 was not quoted at entry (2026-11-16T10:20:30+08:00)",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_94e6043c92",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_9506b09b43",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_9669c5b591",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_9a621815b3",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_9a80f0235f",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_a5904cdb87",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "world",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_aa5880781b",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_b336c4d0b4",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "global-markets",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_b4b564f36d",
-      "firstSeenAt": "2026-11-16T10:02:42+08:00",
-      "firstEdition": "2026-11-16/06",
-      "topic": "opinion",
-      "target": "index:000001",
-      "targetLabel": "上证指数",
-      "attribution": "market",
-      "entity": null,
-      "attributionReason": "no entity or topic maps to a sector board — measured on 上证指数, which answers 'did the tape move', not 'did this sector move'",
-      "horizons": {
-        "1h": {
-          "status": "ok",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "exit": {
-            "ms": 1794798852000,
-            "asOf": "2026-11-16T11:14:12+08:00",
-            "date": "2026-11-16",
-            "slot": "11:05"
-          },
-          "entryOvershootMinutes": 17.8,
-          "overshootMinutes": 11.5,
-          "windowMinutes": 53.7,
-          "rawReturnPct": 0.3829,
-          "trailingDriftPct": null,
-          "sectorExcessPct": null,
-          "marketMeanPct": 0.6745,
-          "marketExcessPct": -0.2916,
-          "marketUniverse": 310
-        },
-        "1d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 1d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        },
-        "5d": {
-          "status": "pending",
-          "reason": "no snapshot at or after 2026-11-16T10:02:42+08:00 + 5d; tape ends 2026-11-16T15:12:06+08:00",
-          "entry": {
-            "ms": 1794795630000,
-            "asOf": "2026-11-16T10:20:30+08:00",
-            "date": "2026-11-16",
-            "slot": "10:05"
-          },
-          "entryOvershootMinutes": 17.8
-        }
-      }
-    },
-    {
-      "id": "st_bba1f85857",
       "firstSeenAt": "2026-11-16T10:02:42+08:00",
       "firstEdition": "2026-11-16/06",
       "topic": "global-markets",

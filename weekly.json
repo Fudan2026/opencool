@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-16T11:06:40.700Z",
+  "generatedAt": "2026-11-16T11:24:46.937Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 22,
-  "avgSentiment": -4.8,
+  "avgSentiment": -5,
   "sentimentCurve": [
     {
       "date": "2026-11-09",
@@ -114,7 +114,7 @@
     {
       "date": "2026-11-16",
       "hour": "19",
-      "score": -6
+      "score": -9
     }
   ],
   "sectorAvg": [
@@ -143,15 +143,15 @@
       "editions": 22
     },
     {
-      "key": "commodity-fx",
-      "label": "商品汇率",
+      "key": "china-etf",
+      "label": "ETF",
       "avg": -23,
       "editions": 22
     },
     {
-      "key": "china-etf",
-      "label": "ETF",
-      "avg": -23,
+      "key": "commodity-fx",
+      "label": "商品汇率",
+      "avg": -22.6,
       "editions": 22
     },
     {
@@ -163,7 +163,7 @@
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -1.4,
+      "avg": -1.5,
       "editions": 22
     }
   ],
@@ -385,7 +385,7 @@
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 51
+      "totalHits": 53
     },
     {
       "key": "metals",
@@ -405,7 +405,7 @@
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 23
+      "totalHits": 24
     },
     {
       "key": "media",
