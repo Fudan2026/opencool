@@ -80,6 +80,22 @@
  *     or Down Today?", 财联社's `早间新闻精选`), which v1 let through and one
  *     wire's trail inflated by one sighting per edition.
  *
+ * A third discipline (v3, OC-49) closes a replay-time hole the first weekend
+ * of v2 in production measured: **every attach decision consults only state
+ * that existed at or before the edition's observation instant**. A bake
+ * restores the whole prior ledger and replays every sidecar on disk, so the
+ * in-memory ledger holds records and sightings from AFTER the edition being
+ * replayed; without this rule, old-edition articles joined records created
+ * later (81 of 2855 live sightings had an edition day preceding their own
+ * record's firstSeen day). The revision logic always had the rule
+ * (`titleBefore` walks strictly before `at`); it now covers the url match
+ * (the record must predate the observation), the cluster and reworded-repeat
+ * channels (same, plus the repeat window looks strictly backwards), and the
+ * anchors (only surfaces observed at/before the instant may vouch — the
+ * moving latest anchor was chaining unrelated stories across replays). For a
+ * normal ingest of a new edition every filter is a no-op; only replays are
+ * disciplined.
+ *
  * Identity across runs: a record's `id` is a hash of the earliest entity set
  * plus the normalized title tokens, computed **once** at creation and then
  * persisted. A cluster never changes id when a new wire joins it, because the
@@ -707,6 +723,32 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
       (Date.parse(`${toDay}T00:00:00Z`) - Date.parse(`${fromDay}T00:00:00Z`)) / 86_400_000,
     );
 
+  /**
+   * ---- Point-in-time discipline (v3, OC-49) ----
+   *
+   * This edition's observation instant. A bake restores the *whole* prior
+   * ledger and then replays every sidecar on disk — including old ones — so
+   * the in-memory ledger holds records and sightings from AFTER the edition
+   * being replayed. Identity decisions must therefore only consult state
+   * that existed at or before this instant. The revision logic always had
+   * this rule (`titleBefore` walks strictly before `at`); v2 applied it only
+   * there, which let warm replays attach old-edition articles to records
+   * created later (measured: 81/2855 live sightings whose edition day
+   * precedes their own record's firstSeen day). In normal operation — a new
+   * edition folded into the current ledger — every filter below is a no-op,
+   * because nothing restored can postdate "now". They bite only replays.
+   */
+  const observedInstant = edition.observedAt.getTime();
+
+  /** True when the instant is readable and at or before this observation. */
+  const seenAtOrBefore = (iso: string | undefined): boolean => {
+    const at = parseInstant(iso);
+    return at !== null && at.getTime() <= observedInstant;
+  };
+
+  /** True when the record already existed at this observation instant. */
+  const existedAt = (story: StoryRecord): boolean => seenAtOrBefore(story.firstSeenAt);
+
   /** An observed headline that can vouch for the record's identity. */
   interface Anchor {
     title: string;
@@ -718,21 +760,27 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
    * look like the record's *current* surface or its original headline — not
    * any of the intermediate titles the v1 mega-merge once folded in. (Comparing
    * against every historical title is how entity buckets like `entity:trump`
-   * (500 sightings) absorbed everything.)
+   * (500 sightings) absorbed everything.) "Current" means *as of this
+   * observation instant*: replaying an old sidecar may only be vouched for by
+   * surfaces that already existed then — the moving latest anchor is exactly
+   * what chained unrelated stories together across replays.
    */
   const carriesHeadline = (story: StoryRecord, title: string): boolean =>
-    // A byte-identical reprint of any observed surface attaches even when the
-    // current anchor has moved on (v1 semantics: exact surface = same story).
+    // A byte-identical reprint of any surface observed at/before now attaches
+    // even when the current anchor has moved on (v1 semantics: exact surface
+    // = same story).
     exactRepeatCarried(story, title) ||
-    // Otherwise the current anchors must vouch under the v2 gates.
+    // Otherwise the anchors that existed at this instant must vouch under the
+    // v2 gates.
     anchorsOf(story).some((anchor) =>
       sameStoryHeadlines(anchor.title, title, dayGap(anchor.day, edition.date)),
     );
 
-  /** Any observed surface of this record is byte-identical to `title`. */
+  /** Any surface of this record *observed at/before this instant* is byte-identical to `title`. */
   const exactRepeatCarried = (story: StoryRecord, title: string): boolean =>
-    [story.title, ...story.sightings.map((s) => s.title), ...story.headlineRevisions.map((r) => r.to)]
-      .some((t) => exactStoryKey(t) === exactStoryKey(title));
+    exactStoryKey(story.title) === exactStoryKey(title) ||
+    story.sightings.some((s) => seenAtOrBefore(s.observedAt) && exactStoryKey(s.title) === exactStoryKey(title)) ||
+    story.headlineRevisions.some((r) => seenAtOrBefore(r.at) && exactStoryKey(r.to) === exactStoryKey(title));
 
   /** Newest-first order shared by both candidate searches. */
   const newestFirst = (a: StoryRecord, b: StoryRecord): number =>
@@ -752,11 +800,13 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
 
   /**
    * Cached anchors: recomputed only when the record actually changed. The
-   * cache key embeds the mutation counters so a fresh sighting invalidates it.
+   * cache key embeds the mutation counters and this edition's observation
+   * instant, so a fresh sighting — or replaying at a different instant, which
+   * changes which surfaces are visible — invalidates it.
    */
   const anchorCache = new Map<string, Anchor[]>();
   const anchorsOf = (story: StoryRecord): Anchor[] => {
-    const key = `${story.id}|${story.sightings.length}|${story.headlineRevisions.length}|${story.lastSeenAt}`;
+    const key = `${story.id}|${story.sightings.length}|${story.headlineRevisions.length}|${story.lastSeenAt}|${observedInstant}`;
     const hit = anchorCache.get(key);
     if (hit !== undefined) return hit;
     const computed = computeAnchors(story);
@@ -771,10 +821,15 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
       title: story.title,
       day: first ? civilDate(first, getReportTz()) : edition.date,
     });
-    const lastSighting = [...story.sightings].sort(
-      (a, b) =>
-        (parseInstant(b.observedAt)?.getTime() ?? 0) - (parseInstant(a.observedAt)?.getTime() ?? 0),
-    )[0];
+    // Only surfaces that existed at this observation instant may anchor an
+    // attach; a replaying edition must not be vouched for by headlines it
+    // could not yet have seen.
+    const lastSighting = [...story.sightings]
+      .filter((s) => seenAtOrBefore(s.observedAt))
+      .sort(
+        (a, b) =>
+          (parseInstant(b.observedAt)?.getTime() ?? 0) - (parseInstant(a.observedAt)?.getTime() ?? 0),
+      )[0];
     if (lastSighting) {
       const at = parseInstant(lastSighting.observedAt);
       out.push({
@@ -782,10 +837,12 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
         day: at ? civilDate(at, getReportTz()) : edition.date,
       });
     }
-    const lastRevision = [...story.headlineRevisions].sort(
-      (a, b) =>
-        (parseInstant(b.at)?.getTime() ?? 0) - (parseInstant(a.at)?.getTime() ?? 0),
-    )[0];
+    const lastRevision = [...story.headlineRevisions]
+      .filter((r) => seenAtOrBefore(r.at))
+      .sort(
+        (a, b) =>
+          (parseInstant(b.at)?.getTime() ?? 0) - (parseInstant(a.at)?.getTime() ?? 0),
+      )[0];
     if (lastRevision) {
       const at = parseInstant(lastRevision.at);
       out.push({
@@ -852,12 +909,20 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
   }
 
   /**
-   * Records seen within `REWORDED_REPEAT_WINDOW_DAYS` of this edition — the
-   * cross-cluster search space for reworded repeats, newest first. Computed
+   * Records eligible for the reworded-repeat channel: last observed at/before
+   * this edition's instant, and 0..`REWORDED_REPEAT_WINDOW_DAYS` calendar days
+   * *before* it. The strictly-backwards window is point-in-time discipline for
+   * warm replays (a restored ledger can hold records last seen after the
+   * edition being replayed; those must stay invisible to it), and is a no-op
+   * for normal ingest, where nothing restored can postdate "now". Computed
    * once; records created during this edition are appended as they appear.
    */
   const recentCandidates = ledger.stories
-    .filter((s) => Math.abs(dayGap(civilDateOf(s), edition.date)) <= REWORDED_REPEAT_WINDOW_DAYS)
+    .filter((s) => seenAtOrBefore(s.lastSeenAt))
+    .filter((s) => {
+      const gap = dayGap(civilDateOf(s), edition.date);
+      return gap >= 0 && gap <= REWORDED_REPEAT_WINDOW_DAYS;
+    })
     .sort(newestFirst);
 
   for (const article of ordered) {
@@ -875,6 +940,9 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
     // reuse an address, and attaching it would file "Oil price falls" as a
     // revision of an Nvidia headline.
     if (story && story.cluster !== cluster) story = undefined;
+    // Point-in-time: the record must already have existed when this edition was
+    // observed — a replayed sidecar cannot join a record a later bake created.
+    if (story && !existedAt(story)) story = undefined;
     if (!story) {
       // v2: a cluster key is a *candidate*, not a verdict. The entity
       // mega-records taught the lesson — attach only if the record's current
@@ -886,6 +954,7 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
       if (candidates?.length) {
         const ranked = [...candidates].sort(newestFirst);
         for (const cand of ranked) {
+          if (!existedAt(cand)) continue;
           if (carriesHeadline(cand, title)) {
             story = cand;
             break;
@@ -897,12 +966,15 @@ export function ingestEdition(ledger: StoryLedger, edition: EditionInput): Inges
       // v2: the reworded-repeat channel. A wire may drop or swap its entity
       // mention when rewording ("Man United sack…" vs "Manchester United
       // sack…"), leaving a different cluster key for the same story. Only
-      // recently-seen records are searched — a reworded repeat is a same-news-
-      // cycle phenomenon, and the bound keeps ingest linear enough. The list
-      // is precomputed once per edition (and extended with fresh records), so
+      // records *last observed in the 0..2 days before this edition* are
+      // searched — a reworded repeat is a same-news-cycle phenomenon, and the
+      // strictly-backwards window is what keeps a warm replay from matching
+      // records the replayed edition could not yet have seen. The list is
+      // precomputed once per edition (and extended with fresh records), so
       // each article only walks a handful of candidates.
       for (const cand of recentCandidates) {
         if (cand.cluster === cluster) continue; // already gated above
+        if (!existedAt(cand)) continue;
         if (carriesHeadline(cand, title)) {
           story = cand;
           break;
