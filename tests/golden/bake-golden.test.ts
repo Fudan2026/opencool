@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { V1_TAPE_LAUNCH_DATE } from "../../lib/v1/contract";
 
 /**
  * GOLDEN: build-site end-to-end over a synthetic tree (spawn the real
@@ -306,19 +307,55 @@ test("golden: build-site end-to-end", async (t) => {
     assert.equal(manifest.schemaVersion, 1);
     assert.equal(manifest.namespace, "v1");
     // Only endpoints with a file behind them are advertised. This fixture has
-    // no tape directory, so `asof` is correctly absent — the same rule that keeps
-    // /v1/reactions.json out of the manifest until its bake has run.
+    // no tape directory, so no day was ever captured — but from the tape
+    // launch date onward the v1 bake deliberately writes an honest
+    // no-capture day file for every calendar day up to today (lib/v1/build.ts:
+    // "a fully missed weekday is a real gap and deserves a file that says
+    // so"). `asof` is therefore advertised exactly once the calendar reaches
+    // V1_TAPE_LAUNCH_DATE in the bake's own timezone — still the same
+    // advertised-only-when-written rule that keeps /v1/reactions.json out of
+    // the manifest until its bake has run.
+    const bakeTz =
+      process.env.REPORT_TZ?.trim() ||
+      Intl.DateTimeFormat().resolvedOptions().timeZone ||
+      "UTC";
+    const civilToday = new Intl.DateTimeFormat("en-CA", { timeZone: bakeTz }).format(new Date());
+    const atOrPastLaunch = civilToday >= V1_TAPE_LAUNCH_DATE;
     const ids = manifest.endpoints.map((e: { id: string }) => e.id);
     assert.ok(ids.includes("manifest"), "the manifest must list itself");
     assert.ok(ids.includes("coverage"), "coverage.json was written, so it is advertised");
-    assert.equal(ids.includes("asof"), false, "no day file exists, so asof is not advertised");
+    assert.equal(
+      ids.includes("asof"),
+      atOrPastLaunch,
+      atOrPastLaunch
+        ? "from the launch date onward the asof day files exist (honest no-capture days) and must be advertised"
+        : "before the launch date no asof day file exists, so asof must not be advertised",
+    );
+    if (atOrPastLaunch) {
+      // The launch day's own file exists and reports zero captures — the
+      // honest "we have nothing yet" a reader can distinguish from a 404.
+      const launchDay = JSON.parse(read(`v1/asof/${V1_TAPE_LAUNCH_DATE}.json`));
+      assert.ok(Array.isArray(launchDay.slots), "the launch-day asof file lists its (zero) slots");
+      assert.equal(launchDay.slots.length, 0, "no tape was captured in this fixture");
+    }
     const cov = JSON.parse(read("v1/coverage.json"));
     assert.equal(cov.namespace, "v1");
     assert.ok(Array.isArray(cov.days));
     // This fixture tree has no tape directory at all, so the namespace must
     // report "not started" rather than a clean 100%.
     assert.equal(cov.tape.started, false);
-    assert.equal(cov.summary.coveragePct, null);
+    // Before the launch date nothing is expected yet, so there is no
+    // percentage at all (null — "we owe nothing yet", not success or
+    // failure). From launch day onward slots ARE expected, none were captured,
+    // and the honest number is 0 — never anything positive.
+    if (atOrPastLaunch) {
+      assert.ok(
+        cov.summary.coveragePct === null || cov.summary.coveragePct === 0,
+        `coveragePct with no tape must be null (nothing expected yet today) or 0, got ${cov.summary.coveragePct}`,
+      );
+    } else {
+      assert.equal(cov.summary.coveragePct, null, "pre-launch there is nothing to cover");
+    }
   });
 
   await t.test("v1 endpoints are advertised in tools.json and llms.txt", () => {
