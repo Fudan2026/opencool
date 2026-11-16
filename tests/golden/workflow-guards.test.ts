@@ -1121,6 +1121,18 @@ test("golden: watchdog files exactly one tracking issue when it had to act", asy
     // only ever carries real events.
     assert.match(scriptSrc, /nothing to report/);
   });
+
+  await t.test("a failure entry is probed, not assumed (the 11-14 weekend defect)", () => {
+    // Both red runs of 2026-11-14/15 posted "the slot is still missing" while
+    // the slot had published — the publish-lag assert fails the run AFTER the
+    // gh-pages push. The filer must probe the sidecar and write what it saw.
+    const scriptSrc = fs.readFileSync(path.join(REPO_ROOT, "scripts", "watchdog-issue.mjs"), "utf8");
+    assert.match(scriptSrc, /probeSidecarLive/, "the filer must probe the sidecar on failure/cancelled");
+    assert.match(scriptSrc, /the slot DID publish/, "a live probe must be reported as published");
+    assert.match(scriptSrc, /could not be verified/, "an unreadable probe must stay hedged");
+    // and the probe state rides the marker so missing→live re-pings.
+    assert.match(scriptSrc, /slotProbe\.status/, "the probe state must be part of the event");
+  });
 });
 
 /**
