@@ -305,13 +305,16 @@ test("golden: build-site end-to-end", async (t) => {
     const manifest = JSON.parse(read("v1/manifest.json"));
     assert.equal(manifest.schemaVersion, 1);
     assert.equal(manifest.namespace, "v1");
-    // Only endpoints with a file behind them are advertised. This fixture has
-    // no tape directory, so `asof` is correctly absent — the same rule that keeps
-    // /v1/reactions.json out of the manifest until its bake has run.
+    // Only endpoints with a file behind them are advertised. Since the tape
+    // launch date the baker also writes TODAY's honest-pending asof file when
+    // nothing is captured — a trading day with zero snapshots is a named gap,
+    // not a 404 — so `asof` is advertised on every bake from launch day on.
+    // (Pre-launch this fixture advertised no `asof`; the same rule — no file,
+    // no endpoint — is still what keeps unbaked `reactions` out.)
     const ids = manifest.endpoints.map((e: { id: string }) => e.id);
     assert.ok(ids.includes("manifest"), "the manifest must list itself");
     assert.ok(ids.includes("coverage"), "coverage.json was written, so it is advertised");
-    assert.equal(ids.includes("asof"), false, "no day file exists, so asof is not advertised");
+    assert.ok(ids.includes("asof"), "today's pending asof day file exists, so asof is advertised");
     const cov = JSON.parse(read("v1/coverage.json"));
     assert.equal(cov.namespace, "v1");
     assert.ok(Array.isArray(cov.days));
@@ -319,6 +322,14 @@ test("golden: build-site end-to-end", async (t) => {
     // report "not started" rather than a clean 100%.
     assert.equal(cov.tape.started, false);
     assert.equal(cov.summary.coveragePct, null);
+    // The advertised `asof` endpoint must have a real file behind it. The day
+    // is taken from the baker's own `lastDate` so the check cannot drift across
+    // midnight or timezones, and the file must carry the honest zero-capture
+    // state rather than borrow a future capture.
+    assert.ok(cov.tape.lastDate, "no-tape coverage still names the newest asof day");
+    const asofDay = JSON.parse(read(`v1/asof/${cov.tape.lastDate}.json`));
+    assert.equal(asofDay.beforeLaunch, false);
+    assert.equal(asofDay.counts.capturedSlots, 0);
   });
 
   await t.test("v1 endpoints are advertised in tools.json and llms.txt", () => {
