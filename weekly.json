@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-16T02:03:51.174Z",
+  "generatedAt": "2026-11-16T02:14:24.221Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
   "editions": 20,
-  "avgSentiment": -4,
+  "avgSentiment": -3.8,
   "sentimentCurve": [
     {
       "date": "2026-11-09",
@@ -104,7 +104,7 @@
     {
       "date": "2026-11-16",
       "hour": "06",
-      "score": -8
+      "score": -3
     }
   ],
   "sectorAvg": [
@@ -117,37 +117,37 @@
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -69.8,
+      "avg": -67.8,
       "editions": 5
     },
     {
       "key": "china-equity",
       "label": "中概港股",
-      "avg": 32.9,
-      "editions": 7
-    },
-    {
-      "key": "us-equity",
-      "label": "美股",
-      "avg": -20.7,
-      "editions": 20
+      "avg": 33,
+      "editions": 6
     },
     {
       "key": "china-etf",
       "label": "ETF",
+      "avg": -20.7,
+      "editions": 20
+    },
+    {
+      "key": "us-equity",
+      "label": "美股",
       "avg": -20.6,
       "editions": 20
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -20,
+      "avg": -16.9,
       "editions": 20
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -8.6,
+      "avg": -8.7,
       "editions": 8
     },
     {
@@ -355,12 +355,12 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 119
+      "totalHits": 120
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 94
+      "totalHits": 98
     },
     {
       "key": "bank",
@@ -375,17 +375,17 @@
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 42
-    },
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "totalHits": 36
+      "totalHits": 44
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 33
+      "totalHits": 36
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "totalHits": 35
     },
     {
       "key": "defense",
@@ -400,12 +400,12 @@
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 19
+      "totalHits": 21
     },
     {
       "key": "pharma",
       "name": "创新药",
-      "totalHits": 17
+      "totalHits": 16
     },
     {
       "key": "comms",
@@ -416,7 +416,7 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.38,
+      "avgChangePct": -0.37,
       "editions": 20
     },
     {
@@ -426,7 +426,7 @@
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.67,
+      "avgChangePct": -1.66,
       "editions": 20
     }
   ],
