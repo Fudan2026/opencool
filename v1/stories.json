@@ -3,8 +3,985 @@
   "timezone": "Asia/Shanghai",
   "retentionDays": 30,
   "maxStories": 2000,
-  "updatedAt": "2026-11-16T10:44:08+08:00",
+  "updatedAt": "2026-11-16T11:13:02+08:00",
   "stories": [
+    {
+      "id": "st_0cadaf8e3b",
+      "cluster": "title:a股家电股再度拉升 北鼎股份 小熊电器双双涨停 九阳股份此前封板 鸿智科技涨超10 欧圣电气 比依股份 石头科技等涨幅居前",
+      "title": "A股家电股再度拉升，北鼎股份、小熊电器双双涨停，九阳股份此前封板，鸿智科技涨超10%，欧圣电气、比依股份、石头科技等涨幅居前。",
+      "url": "https://wallstreetcn.com/livenews/3200361",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T02:48:59.000Z",
+      "publishLagMinutes": 20.1,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_24abb9c863",
+      "cluster": "title:buy alert 5 stocks analysts upgraded on thursday",
+      "title": "Buy Alert: 5 Stocks Analysts Upgraded on Thursday",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/buy-alert-5-stocks-analysts-025136531.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T02:51:36.000Z",
+      "publishLagMinutes": 17.5,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "Sell Alert: 5 Stocks Analysts Downgraded on Thursday",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/sell-alert-5-stocks-analysts-030437408.html?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T03:04:37.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_2518520c67",
+      "cluster": "title:the 16 25 figure behind roth capital s call on doubledown interactive ddi",
+      "title": "The $16.25 Figure Behind Roth Capital’s Call on DoubleDown Interactive (DDI)",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/16-25-figure-behind-roth-030454678.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T03:04:54.000Z",
+      "publishLagMinutes": 4.2,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_3455f4f79b",
+      "cluster": "title:事关婴幼儿配方乳粉两项风险防控指南 市场监管总局公开征求意见",
+      "title": "事关婴幼儿配方乳粉两项风险防控指南 市场监管总局公开征求意见",
+      "url": "https://www.cls.cn/detail/2535061",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T03:01:09.000Z",
+      "publishLagMinutes": 8,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "policy",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_3e0346df45",
+      "cluster": "title:ai省下的时间去了哪里 企业生产率的几道关口",
+      "title": "AI省下的时间去了哪里：企业生产率的几道关口",
+      "url": "https://opinion.caixin.com/2026-11-16/102505160.html",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "caixin",
+      "publishedAt": "2026-11-16T02:33:32.000Z",
+      "publishLagMinutes": 35.6,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "tech-ai",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "caixin"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "caixin",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "caixin"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_43d505a2d7",
+      "cluster": "title:piper sandler flags a risk at general mills gis",
+      "title": "Piper Sandler Flags a Risk at General Mills (GIS)",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/piper-sandler-flags-risk-general-030542589.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T03:05:42.000Z",
+      "publishLagMinutes": 3.4,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_4676b0098d",
+      "cluster": "title:卓创资讯 11月煤价暂不具备深跌基础",
+      "title": "卓创资讯：11月煤价暂不具备深跌基础",
+      "url": "https://www.cls.cn/detail/2535062",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T03:02:33.000Z",
+      "publishLagMinutes": 6.6,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph",
+        "wallstreetcn-live"
+      ],
+      "sightings": [
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "卓创资讯：11月煤价暂不具备深跌基础",
+          "url": "https://wallstreetcn.com/livenews/3200371",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T03:02:33.000Z"
+        }
+      ],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": null,
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": true,
+        "coFirstSourceIds": [
+          "cls-telegraph",
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_478c7b4eea",
+      "cluster": "title:蚂蚁研究院 三季度小微企业营收利润双承压 生存状况仍处历史低谷",
+      "title": "【市场洞察】蚂蚁研究院：三季度小微企业营收利润双承压 生存状况仍处历史低谷",
+      "url": "https://database.caixin.com/2026-11-16/102505147.html",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "caixin",
+      "publishedAt": "2026-11-16T02:22:11.000Z",
+      "publishLagMinutes": 46.9,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "filings",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "caixin"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "caixin",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "caixin"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_4f4a77922d",
+      "cluster": "title:can reliance rs outgrow the market in 2027 barclays weighs in",
+      "title": "Can Reliance (RS) Outgrow the Market in 2027? Barclays Weighs In",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/reliance-rs-outgrow-market-2027-025243888.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T02:52:43.000Z",
+      "publishLagMinutes": 16.4,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "opinion",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_54ff14c333",
+      "cluster": "title:主力资金监控 中际旭创净卖出超12亿",
+      "title": "主力资金监控：中际旭创净卖出超12亿",
+      "url": "https://www.cls.cn/detail/2535049",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T02:59:58.000Z",
+      "publishLagMinutes": 9.1,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_56d455bdaf",
+      "cluster": "title:airbus boeing supply chain shift boosts india aerospace stocks",
+      "title": "Airbus, Boeing Supply-Chain Shift Boosts India Aerospace Stocks",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-16/airbus-boeing-supply-chain-shift-boosts-india-aerospace-stocks",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "bloomberg-markets",
+      "publishedAt": "2026-11-16T02:39:02.000Z",
+      "publishLagMinutes": 30.1,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bloomberg-markets"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bloomberg-markets",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bloomberg-markets"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_605143bcb4",
+      "cluster": "title:in 1952 a north carolina man was the best man at his friend s wedding 10 years later he gave the groom 125 000 to invest the groom s name was warren buffett in 2014 fred stanback donated 397 million in berkshire stock to charity",
+      "title": "In 1952, A North Carolina Man Was The Best Man At His Friend’s Wedding. 10 Years Later, He Gave The Groom $125,000 To Invest. The Groom’s Name Was Warren Buffett. In 2014, Fred Stanback Donated $397 Million In Berkshire Stock To Charity.",
+      "url": "https://247wallst.com/investing/2026/11/15/in-1952-a-north-carolina-man-was-the-best-man-at-his-friends-wedding-10-years-later-he-gave-the-groom-125000-to-invest-the-grooms-name-was-warren-buffett-in-2014-fred-stanback-donated-397/?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T02:53:00.000Z",
+      "publishLagMinutes": 16.1,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_80225297c8",
+      "cluster": "title:barclays upgrades cleveland cliffs clf from underweight what changed",
+      "title": "Barclays Upgrades Cleveland-Cliffs (CLF) From Underweight. What Changed?",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/barclays-upgrades-cleveland-cliffs-clf-025417476.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T02:54:17.000Z",
+      "publishLagMinutes": 14.8,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "opinion",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_8070a28538",
+      "cluster": "title:瑞银 康方生物合作伙伴就ivonescimab联合化疗bla接获fda完整回应信属轻微负面 维持 买入 评级",
+      "title": "瑞银：康方生物合作伙伴就ivonescimab联合化疗BLA接获FDA完整回应信属轻微负面，维持“买入”评级",
+      "url": "https://wallstreetcn.com/livenews/3200367",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T03:00:48.000Z",
+      "publishLagMinutes": 8.3,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "opinion",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_88fccbbab9",
+      "cluster": "title:人形机器人概念局部回暖 肇民科技 安培龙双双涨超10",
+      "title": "人形机器人概念局部回暖 肇民科技、安培龙双双涨超10%",
+      "url": "https://www.cls.cn/detail/2535044",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T02:53:56.000Z",
+      "publishLagMinutes": 15.2,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "tech-ai",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_8a4c4cc434",
+      "cluster": "title:aerospace stocks shine as anti ai flows pour into india",
+      "title": "Aerospace Stocks Shine as Anti-AI Flows Pour Into India",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-11-16/aerospace-stocks-shine-as-anti-ai-flows-pour-into-india",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "bloomberg-markets",
+      "publishedAt": "2026-11-16T02:46:01.000Z",
+      "publishLagMinutes": 23.1,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "tech-ai",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bloomberg-markets"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bloomberg-markets",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bloomberg-markets"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_94979c2169",
+      "cluster": "title:海外新能源客车需求高增 这家公司全球化由整车出口向kd组装 技术输出和品牌授权升级 海外已成为核心收入来源",
+      "title": "【风口研报·公司】海外新能源客车需求高增，这家公司全球化由整车出口向KD组装、技术输出和品牌授权升级，海外已成为核心收入来源",
+      "url": "https://www.cls.cn/detail/2535025",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T02:36:21.000Z",
+      "publishLagMinutes": 32.8,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_9b74eb638b",
+      "cluster": "title:why argus turned bullish on republic services rsg",
+      "title": "Why Argus Turned Bullish on Republic Services (RSG)",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/why-argus-turned-bullish-republic-025158096.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T02:51:58.000Z",
+      "publishLagMinutes": 17.1,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_a6bcb60a48",
+      "cluster": "title:隔夜shibor报1 3040 上涨0 70个基点 7天shibor报1 3900 上涨0 90个基点 3个月shibor报1 4000 上涨0 00个基点",
+      "title": "隔夜SHIBOR报1.3040%，上涨0.70个基点。 7天SHIBOR报1.3900%，上涨0.90个基点。 3个月SHIBOR报1.4000%，上涨0.00个基点。",
+      "url": "https://wallstreetcn.com/livenews/3200368",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T03:01:00.000Z",
+      "publishLagMinutes": 8.1,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_b3c923f091",
+      "cluster": "title:the project behind freedom broker s call on mdu resources mdu",
+      "title": "The Project Behind Freedom Broker’s Call on MDU Resources (MDU)",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/project-behind-freedom-broker-call-025326478.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T02:53:26.000Z",
+      "publishLagMinutes": 15.7,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_bdfab4367b",
+      "cluster": "title:国家统计局 下阶段要强化宏观政策调节 持续扩大内需 优化供给",
+      "title": "国家统计局：下阶段要强化宏观政策调节 持续扩大内需、优化供给",
+      "url": "https://www.cls.cn/detail/2535065",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T03:05:18.000Z",
+      "publishLagMinutes": 3.8,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "policy",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_c106f6a8db",
+      "cluster": "title:供给端产品创新加快 这类资源正爆发出持续的 热效应 这家公司已布局相关领域",
+      "title": "【盘中宝】供给端产品创新加快，这类资源正爆发出持续的“热效应”，这家公司已布局相关领域",
+      "url": "https://www.cls.cn/detail/2535043",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T02:55:23.000Z",
+      "publishLagMinutes": 13.7,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_c77454ab92",
+      "cluster": "title:中国地震台网正式测定 11月16日10时41分在新疆巴音郭楞州轮台县 北纬42 22度 东经83 89度 发生3 3级地震 震源深度20千米",
+      "title": "中国地震台网正式测定：11月16日10时41分在新疆巴音郭楞州轮台县（北纬42.22度，东经83.89度）发生3.3级地震，震源深度20千米。",
+      "url": "https://wallstreetcn.com/livenews/3200366",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T02:58:37.000Z",
+      "publishLagMinutes": 10.5,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_c7a7cf007d",
+      "cluster": "title:bofa securities raised its target but downgraded victoria s secret vsxy",
+      "title": "BofA Securities Raised Its Target but Downgraded Victoria’s Secret (VSXY)",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/bofa-securities-raised-target-downgraded-030512754.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T03:05:12.000Z",
+      "publishLagMinutes": 3.9,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "opinion",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_cf1462749f",
+      "cluster": "title:印尼总统表示 所有采矿许可所产生的收益 至少70 必须归国家所有",
+      "title": "财联社11月16日电，印尼总统表示，所有采矿许可所产生的收益，至少70%必须归国家所有。",
+      "url": "https://www.cls.cn/detail/2535037",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T02:47:29.000Z",
+      "publishLagMinutes": 21.6,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "world",
+      "lane": "zh",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_d39eaff486",
+      "cluster": "title:indonesia says 70 of benefits from mines should go to state",
+      "title": "Indonesia Says 70% of Benefits From Mines Should Go to State",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-16/indonesia-says-70-of-benefits-from-mines-should-go-to-state",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "bloomberg-markets",
+      "publishedAt": "2026-11-16T02:33:18.000Z",
+      "publishLagMinutes": 35.8,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "policy",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "bloomberg-markets"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "bloomberg-markets",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "bloomberg-markets"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_da93721aeb",
+      "cluster": "title:固态电池概念震荡走高 领湃科技20cm涨停",
+      "title": "固态电池概念震荡走高 领湃科技20cm涨停",
+      "url": "https://www.cls.cn/detail/2535029",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "cls-telegraph",
+      "publishedAt": "2026-11-16T02:40:46.000Z",
+      "publishLagMinutes": 28.3,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "cls-telegraph"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "cls-telegraph",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "cls-telegraph"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_ee8424017d",
+      "cluster": "title:the 22 6 billion deal behind wolfe research s call on ptc ptc",
+      "title": "The $22.6 Billion Deal Behind Wolfe Research’s Call on PTC (PTC)",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/22-6-billion-deal-behind-030526155.html?.tsrc=rss",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "yahoo-finance",
+      "publishedAt": "2026-11-16T03:05:26.000Z",
+      "publishLagMinutes": 3.7,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "external",
+      "domestic": false,
+      "entities": [],
+      "sources": [
+        "yahoo-finance"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "yahoo-finance",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "yahoo-finance"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
+    {
+      "id": "st_f4c1217361",
+      "cluster": "title:国家统计局谈房地产市场 出现一定积极变化 但部分地区市场依然承压",
+      "title": "国家统计局谈房地产市场：出现一定积极变化，但部分地区市场依然承压",
+      "url": "https://wallstreetcn.com/livenews/3200370",
+      "firstSeenAt": "2026-11-16T11:09:06+08:00",
+      "firstEdition": "2026-11-16/06",
+      "firstSourceId": "wallstreetcn-live",
+      "publishedAt": "2026-11-16T03:01:27.000Z",
+      "publishLagMinutes": 7.7,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
+      "topic": "global-markets",
+      "lane": "zh",
+      "domestic": true,
+      "entities": [],
+      "sources": [
+        "wallstreetcn-live"
+      ],
+      "sightings": [],
+      "headlineRevisions": [],
+      "firstMover": {
+        "sourceId": "wallstreetcn-live",
+        "observedAt": "2026-11-16T11:09:06+08:00",
+        "tied": false,
+        "coFirstSourceIds": [
+          "wallstreetcn-live"
+        ],
+        "runnerUpSourceId": null,
+        "runnerUpObservedAt": null,
+        "leadMinutes": null
+      }
+    },
     {
       "id": "st_068322e015",
       "cluster": "title:康方生物跌超24 此前康方生物肿瘤免疫治疗药物依沃西在美国的首次上市申请未获得批准",
@@ -81,18 +1058,61 @@
       "firstSeenAt": "2026-11-16T10:39:15+08:00",
       "firstEdition": "2026-11-16/06",
       "firstSourceId": "wallstreetcn-live",
-      "publishedAt": "2026-11-16T02:08:03.000Z",
-      "publishLagMinutes": 31.2,
-      "lastSeenAt": "2026-11-16T10:39:15+08:00",
+      "publishedAt": "2026-11-16T02:05:05.000Z",
+      "publishLagMinutes": 34.2,
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
       "lastEdition": "2026-11-16/06",
       "topic": "policy",
       "lane": "zh",
       "domestic": true,
       "entities": [],
       "sources": [
-        "wallstreetcn-live"
+        "wallstreetcn-live",
+        "cls-telegraph",
+        "wallstreetcn"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "国家统计局：10月规上工业原油加工量5830万吨 同比下降8.1%",
+          "url": "https://www.cls.cn/detail/2534992",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:05:05.000Z"
+        },
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "国家统计局：10月份我国工业机器人产量同比增长26%",
+          "url": "https://www.cls.cn/detail/2534995",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:07:18.000Z"
+        },
+        {
+          "sourceId": "wallstreetcn",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "国家统计局：1—10月份，全国房地产开发投资57215亿元，同比下降21.6%",
+          "url": "https://wallstreetcn.com/articles/3785989",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:12:21.000Z"
+        },
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "国家统计局：10月份，规上工业原油产量1845万吨，同比增长2.3%，增速比9月份加快0.1个百分点；日均产量59.5万吨。 1—10月份，规上工业原油产量18304万吨，同比...",
+          "url": "https://wallstreetcn.com/livenews/3200346",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:09:59.000Z"
+        },
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "国家统计局：10月份，规上工业天然气产量222亿立方米，同比增长0.8%，9月份为下降1.0%；日均产量7.2亿立方米。 1—10月份，规上工业天然气产量2181亿立方米，同...",
+          "url": "https://wallstreetcn.com/livenews/3200347",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:10:40.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "wallstreetcn-live",
@@ -101,9 +1121,9 @@
         "coFirstSourceIds": [
           "wallstreetcn-live"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "cls-telegraph",
+        "runnerUpObservedAt": "2026-11-16T11:09:06+08:00",
+        "leadMinutes": 29.9
       }
     },
     {
@@ -304,7 +1324,16 @@
         "bloomberg-markets"
       ],
       "sightings": [],
-      "headlineRevisions": [],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-16T11:09:06+08:00",
+          "sourceId": "bloomberg-markets",
+          "edition": "2026-11-16/06",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-16/china-s-economy-weakens-more-than-forecast-despite-stimulus-push",
+          "from": "China’s Economy Misses Forecasts With Across-the-Board Slowdown",
+          "to": "China’s Economy Falters With Surprise Across-the-Board Slowdown"
+        }
+      ],
       "firstMover": {
         "sourceId": "bloomberg-markets",
         "observedAt": "2026-11-16T10:39:15+08:00",
@@ -327,14 +1356,15 @@
       "firstSourceId": "wallstreetcn-live",
       "publishedAt": "2026-11-16T02:00:00.000Z",
       "publishLagMinutes": 39.3,
-      "lastSeenAt": "2026-11-16T10:39:15+08:00",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
       "lastEdition": "2026-11-16/06",
       "topic": "global-markets",
       "lane": "zh",
       "domestic": true,
       "entities": [],
       "sources": [
-        "wallstreetcn-live"
+        "wallstreetcn-live",
+        "cls-telegraph"
       ],
       "sightings": [
         {
@@ -376,6 +1406,22 @@
           "url": "https://wallstreetcn.com/livenews/3200335",
           "edition": "2026-11-16/06",
           "publishedAt": "2026-11-16T02:01:30.000Z"
+        },
+        {
+          "sourceId": "cls-telegraph",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "1至10月全国铁路完成固定资产投资6773亿元 同比增长0.9%",
+          "url": "https://www.cls.cn/detail/2535048",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:55:06.000Z"
+        },
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "1至10月全国铁路完成固定资产投资6773亿元",
+          "url": "https://wallstreetcn.com/livenews/3200364",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:51:17.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -386,9 +1432,9 @@
         "coFirstSourceIds": [
           "wallstreetcn-live"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "cls-telegraph",
+        "runnerUpObservedAt": "2026-11-16T11:09:06+08:00",
+        "leadMinutes": 29.9
       }
     },
     {
@@ -2493,7 +3539,7 @@
       "firstSourceId": "wallstreetcn",
       "publishedAt": "2026-11-15T14:38:30.000Z",
       "publishLagMinutes": 684.2,
-      "lastSeenAt": "2026-11-16T10:13:15+08:00",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
       "lastEdition": "2026-11-16/06",
       "topic": "tech-ai",
       "lane": "zh",
@@ -2505,7 +3551,8 @@
         "wallstreetcn",
         "yicai",
         "dw-chinese",
-        "solidot"
+        "solidot",
+        "caixin"
       ],
       "sightings": [
         {
@@ -2531,6 +3578,14 @@
           "url": "https://www.solidot.org/story?sid=85893",
           "edition": "2026-11-16/06",
           "publishedAt": "2026-11-15T14:38:30.000Z"
+        },
+        {
+          "sourceId": "caixin",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "T早报｜SpaceX首次成功回收轨道返回的星舰飞船；香港迪士尼疑遭网络攻击；赛力斯与华为终端重新分工；",
+          "url": "https://www.caixin.com/2026-11-16/102505153.html",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:22:32.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -2853,14 +3908,15 @@
       "firstSourceId": "cls-telegraph",
       "publishedAt": "2026-11-16T01:39:22.000Z",
       "publishLagMinutes": 23.3,
-      "lastSeenAt": "2026-11-16T10:02:42+08:00",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
       "lastEdition": "2026-11-16/06",
       "topic": "global-markets",
       "lane": "zh",
       "domestic": true,
       "entities": [],
       "sources": [
-        "cls-telegraph"
+        "cls-telegraph",
+        "wallstreetcn-live"
       ],
       "sightings": [
         {
@@ -2870,6 +3926,14 @@
           "url": "https://www.cls.cn/detail/2534969",
           "edition": "2026-11-16/06",
           "publishedAt": "2026-11-16T01:58:17.000Z"
+        },
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "菲律宾股指日内跌幅达2%。",
+          "url": "https://wallstreetcn.com/livenews/3200363",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:50:36.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -2880,9 +3944,9 @@
         "coFirstSourceIds": [
           "cls-telegraph"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "wallstreetcn-live",
+        "runnerUpObservedAt": "2026-11-16T11:09:06+08:00",
+        "leadMinutes": 66.4
       }
     },
     {
@@ -3171,7 +4235,16 @@
         "guardian-world"
       ],
       "sightings": [],
-      "headlineRevisions": [],
+      "headlineRevisions": [
+        {
+          "at": "2026-11-16T11:09:06+08:00",
+          "sourceId": "guardian-world",
+          "edition": "2026-11-16/06",
+          "url": "https://www.theguardian.com/business/2026/nov/16/coles-cyber-attack-incident-data",
+          "from": "Coles investigating ‘cybersecurity incident’ and apologises to customers",
+          "to": "Coles investigates cyber-attack and apologises to customers"
+        }
+      ],
       "firstMover": {
         "sourceId": "guardian-world",
         "observedAt": "2026-11-16T10:02:42+08:00",
@@ -4717,14 +5790,15 @@
       "firstSourceId": "nyt-world",
       "publishedAt": "2026-11-15T15:42:25.000Z",
       "publishLagMinutes": 385.3,
-      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
       "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
       "domestic": false,
       "entities": [],
       "sources": [
-        "nyt-world"
+        "nyt-world",
+        "aljazeera"
       ],
       "sightings": [
         {
@@ -4734,6 +5808,14 @@
           "url": "https://www.nytimes.com/2026/11/15/world/middleeast/saudi-houthis-yemen-red-sea.html",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T15:42:25.000Z"
+        },
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "Houthis advance in Yemen as government forces move to defend Aden",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/16/houthis-advance-in-yemen-as-government-forces-move-to-defend-aden?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:22:29.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -4744,9 +5826,9 @@
         "coFirstSourceIds": [
           "nyt-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "aljazeera",
+        "runnerUpObservedAt": "2026-11-16T11:09:06+08:00",
+        "leadMinutes": 582.1
       }
     },
     {
@@ -5722,8 +6804,8 @@
       "firstSourceId": "dw-chinese",
       "publishedAt": "2026-11-15T12:14:00.000Z",
       "publishLagMinutes": 313.1,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "zh",
       "domestic": false,
@@ -5731,7 +6813,16 @@
       "sources": [
         "dw-chinese"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "dw-chinese",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "中美俄宣布“习特普”峰会将在深圳举行 北京处境微妙",
+          "url": "https://www.dw.com/zh/中美俄宣布-习特普-峰会将在深圳举行-北京处境微妙/a-79952049?maca=chi-rss-chi-all-1127-rdf",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T03:06:00.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "dw-chinese",
@@ -9363,8 +10454,8 @@
       "firstSourceId": "aljazeera",
       "publishedAt": "2026-11-15T08:07:08.000Z",
       "publishLagMinutes": 160.5,
-      "lastSeenAt": "2026-11-15T18:47:38+08:00",
-      "lastEdition": "2026-11-15/13",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
       "domestic": true,
@@ -9372,7 +10463,16 @@
       "sources": [
         "aljazeera"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "aljazeera",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "ASEAN, China fall short of agreeing on South China Sea code",
+          "url": "https://www.aljazeera.com/news/2026/11/16/asean-china-fall-short-of-agreeing-on-south-china-sea-code?traffic_source=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:46:35.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "aljazeera",
@@ -13722,7 +14822,7 @@
       "firstSourceId": "wallstreetcn",
       "publishedAt": "2026-11-14T11:47:50.000Z",
       "publishLagMinutes": 713.3,
-      "lastSeenAt": "2026-11-16T06:07:43+08:00",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
       "lastEdition": "2026-11-16/06",
       "topic": "tech-ai",
       "lane": "zh",
@@ -13734,7 +14834,8 @@
         "wallstreetcn",
         "bloomberg-markets",
         "ft-companies",
-        "cnbc-topnews"
+        "cnbc-topnews",
+        "caixin"
       ],
       "sightings": [
         {
@@ -13768,6 +14869,14 @@
           "url": "https://www.cnbc.com/2026/11/14/meet-the-seven-co-founders-of-anthropic.html",
           "edition": "2026-11-16/06",
           "publishedAt": "2026-11-14T12:15:01.000Z"
+        },
+        {
+          "sourceId": "caixin",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "【华尔街原声】IBM副董事长：Anthropic IPO将成AI估值风向标",
+          "url": "https://database.caixin.com/2026-11-16/102505163.html",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:47:48.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -13894,7 +15003,7 @@
       "firstSourceId": "aljazeera",
       "publishedAt": "2026-11-14T12:48:18.000Z",
       "publishLagMinutes": 652.9,
-      "lastSeenAt": "2026-11-16T10:02:42+08:00",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
       "lastEdition": "2026-11-16/06",
       "topic": "world",
       "lane": "external",
@@ -13980,6 +15089,14 @@
           "url": "https://www.aljazeera.com/news/2026/11/15/australia-canada-italy-and-the-uk-urge-israel-to-allow-aid-into-gaza?traffic_source=rss",
           "edition": "2026-11-16/06",
           "publishedAt": "2026-11-15T22:06:38.000Z"
+        },
+        {
+          "sourceId": "wallstreetcn-live",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "澳加英意四国敦促以色列立即允许人道援助进入加沙",
+          "url": "https://wallstreetcn.com/livenews/3200362",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:50:08.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -15386,8 +16503,8 @@
       "firstSourceId": "yahoo-finance",
       "publishedAt": "2026-11-14T19:50:02.000Z",
       "publishLagMinutes": 231.1,
-      "lastSeenAt": "2026-11-16T01:27:03+08:00",
-      "lastEdition": "2026-11-15/19",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "global-markets",
       "lane": "external",
       "domestic": true,
@@ -15403,6 +16520,14 @@
           "url": "https://www.fool.com/coverage/etfs/2026/11/15/which-bond-etf-is-the-better-buy-vanguard-s-total-bond-market-bnd-or-ishares-corporate-igib/?.tsrc=rss",
           "edition": "2026-11-15/19",
           "publishedAt": "2026-11-15T15:50:02.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "Better Healthcare ETF: Invesco's PJP vs. Simplify's PINK",
+          "url": "https://www.fool.com/coverage/etfs/2026/11/15/better-healthcare-etf-invesco-s-pjp-vs-simplify-s-pink/?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:32:37.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -26338,8 +27463,8 @@
       "firstSourceId": "yahoo-finance",
       "publishedAt": "2026-11-13T21:30:06.000Z",
       "publishLagMinutes": 64.5,
-      "lastSeenAt": "2026-11-14T06:34:37+08:00",
-      "lastEdition": "2026-11-14/06",
+      "lastSeenAt": "2026-11-16T11:09:06+08:00",
+      "lastEdition": "2026-11-16/06",
       "topic": "global-markets",
       "lane": "external",
       "domestic": false,
@@ -26347,7 +27472,24 @@
       "sources": [
         "yahoo-finance"
       ],
-      "sightings": [],
+      "sightings": [
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "What Bernstein Sees Looming Over ConocoPhillips (COP)",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/bernstein-sees-looming-over-conocophillips-030556041.html?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T03:05:56.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-16T11:09:06+08:00",
+          "title": "What Raymond James Sees in Mid Penn Bancorp (MPB)",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/raymond-james-sees-mid-penn-025215297.html?.tsrc=rss",
+          "edition": "2026-11-16/06",
+          "publishedAt": "2026-11-16T02:52:15.000Z"
+        }
+      ],
       "headlineRevisions": [],
       "firstMover": {
         "sourceId": "yahoo-finance",
@@ -47422,7 +48564,8 @@
       "domestic": false,
       "entities": [],
       "sources": [
-        "bbc-world"
+        "bbc-world",
+        "ft-companies"
       ],
       "sightings": [
         {
@@ -47440,6 +48583,14 @@
           "url": "https://www.bbc.co.uk/news/articles/cqr7y7myer53o?at_medium=RSS&at_campaign=rss",
           "edition": "2026-11-10/13",
           "publishedAt": "2026-11-10T01:49:06.000Z"
+        },
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-10T19:43:41+08:00",
+          "title": "Singapore seizes ‘forever’ cruise ship that dumped passengers in Cambodia",
+          "url": "https://www.ft.com/content/f53c5923-29b1-4ec8-963a-6fb57c000588?syn-25a6b1a6=1",
+          "edition": "2026-11-10/19",
+          "publishedAt": "2026-11-10T09:43:32.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -47450,9 +48601,9 @@
         "coFirstSourceIds": [
           "bbc-world"
         ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
+        "runnerUpSourceId": "ft-companies",
+        "runnerUpObservedAt": "2026-11-10T19:43:41+08:00",
+        "leadMinutes": 1112.1
       }
     },
     {
@@ -50397,6 +51548,14 @@
           "url": "https://finance.yahoo.com/markets/stocks/articles/bgsf-stock-falls-post-q3-145300726.html?.tsrc=rss",
           "edition": "2026-11-10/06",
           "publishedAt": "2026-11-09T14:53:00.000Z"
+        },
+        {
+          "sourceId": "yahoo-finance",
+          "observedAt": "2026-11-10T19:43:41+08:00",
+          "title": "2 Vanguard Index Funds to Buy Now to Beat the S&P 500 in the Next Year, According to Wall Street",
+          "url": "https://www.fool.com/investing/2026/11/10/2-vanguard-index-fund-buy-now-beat-sp-500-wall-street/?.tsrc=rss",
+          "edition": "2026-11-10/19",
+          "publishedAt": "2026-11-10T09:32:02.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -62538,7 +63697,8 @@
       "entities": [],
       "sources": [
         "bloomberg-markets",
-        "the-diplomat"
+        "the-diplomat",
+        "ft-companies"
       ],
       "sightings": [
         {
@@ -62564,6 +63724,14 @@
           "url": "https://www.bloomberg.com/news/articles/2026-11-09/soybeans-rise-as-us-presses-china-to-boost-farm-goods-purchases",
           "edition": "2026-11-09/13",
           "publishedAt": "2026-11-09T03:50:23.000Z"
+        },
+        {
+          "sourceId": "ft-companies",
+          "observedAt": "2026-11-10T19:43:41+08:00",
+          "title": "SoftBank slumps to $7bn loss on US data centre writedown",
+          "url": "https://www.ft.com/content/5ceed157-0016-4822-a272-8b607911da5e?syn-25a6b1a6=1",
+          "edition": "2026-11-10/19",
+          "publishedAt": "2026-11-10T10:55:57.000Z"
         }
       ],
       "headlineRevisions": [],
@@ -67739,1085 +68907,6 @@
       }
     },
     {
-      "id": "st_efbcfb1d6b",
-      "cluster": "title:mississippi senate scott colom extends tight lead over hyde smith as ballot deadlines hit",
-      "title": "Mississippi Senate: Scott Colom extends tight lead over Hyde-Smith as ballot deadlines hit",
-      "url": "https://www.cnbc.com/2026/11/10/mississippi-senate-scott-colom-hyde-smith.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-06T23:12:56.000Z",
-      "publishLagMinutes": 6063.2,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "cnbc-topnews"
-      ],
-      "sightings": [
-        {
-          "sourceId": "cnbc-topnews",
-          "observedAt": "2026-11-09T07:39:02+08:00",
-          "title": "Mississippi Senate: Colom increases lead over Hyde-Smith to nearly 2,500 votes",
-          "url": "https://www.cnbc.com/2026/11/05/mississippi-senate-election-scott-colom-hyde-smith.html",
-          "edition": "2026-11-09/06",
-          "publishedAt": "2026-11-06T23:12:56.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-09T07:39:02+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cnbc-topnews"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_f0d09cb540",
-      "cluster": "title:港股午评 恒生指数跌0 83 恒生科技指数跌1 36",
-      "title": "港股午评：恒生指数跌0.83% 恒生科技指数跌1.36%",
-      "url": "https://www.cls.cn/detail/2531182",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "cls-telegraph",
-      "publishedAt": "2026-11-10T08:10:22.000Z",
-      "publishLagMinutes": 1205.8,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "cls-telegraph"
-      ],
-      "sightings": [
-        {
-          "sourceId": "cls-telegraph",
-          "observedAt": "2026-11-10T16:19:01+08:00",
-          "title": "港股收盘：恒生科技指数涨1% 光通信股涨幅居前",
-          "url": "https://www.cls.cn/detail/2530271",
-          "edition": "2026-11-10/13",
-          "publishedAt": "2026-11-10T08:10:22.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cls-telegraph",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cls-telegraph"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_f22cca3aa4",
-      "cluster": "title:s p 500 sell off 1 investing step to take right now and 1 risky move to avoid",
-      "title": "S&P 500 Sell-Off: 1 Investing Step to Take Right Now, and 1 Risky Move to Avoid",
-      "url": "https://www.fool.com/investing/2026/11/10/sp-500-sell-off-1-investing-step-to-take-right-now/?.tsrc=rss",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-11T03:05:00.000Z",
-      "publishLagMinutes": 71.1,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "yahoo-finance"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yahoo-finance"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_f37d13b674",
-      "cluster": "title:coreweave s stock pops as new financing playbook eases debt concerns",
-      "title": "CoreWeave’s stock pops as new financing playbook eases debt concerns",
-      "url": "https://www.marketwatch.com/story/coreweaves-stock-pops-as-new-financing-playbook-eases-debt-concerns-70241525?mod=mw_rss_topstories",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "marketwatch-top",
-      "publishedAt": "2026-11-11T01:12:00.000Z",
-      "publishLagMinutes": 184.1,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "tech-ai",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "marketwatch-top"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "marketwatch-top",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "marketwatch-top"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_f71063a516",
-      "cluster": "title:david walliams accused of sexual misconduct",
-      "title": "David Walliams accused of sexual misconduct",
-      "url": "https://www.ft.com/content/6f1a0c67-2f67-4583-b710-498871721ef9?syn-25a6b1a6=1",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-10T22:43:08.000Z",
-      "publishLagMinutes": 333,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "ft-companies"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "ft-companies",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "ft-companies"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_f7bb629815",
-      "cluster": "title:what are rivian stock bulls not worried about",
-      "title": "What Are Rivian Stock Bulls Not Worried About?",
-      "url": "https://www.trefis.com/stock/rivn/articles/623951/what-are-rivian-stock-bulls-not-worried-about/2026-11-10?.tsrc=rss",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-11T01:16:12.000Z",
-      "publishLagMinutes": 179.9,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "yahoo-finance"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yahoo-finance"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_f8a09ffa3d",
-      "cluster": "title:australia s home loans fall by record after rapid rba rate hikes",
-      "title": "Australia’s Home Loans Fall by Record After Rapid RBA Rate Hikes",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-11/australia-s-home-loans-fall-by-record-after-rapid-rba-rate-hikes",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-11T00:49:42.000Z",
-      "publishLagMinutes": 206.4,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bloomberg-markets"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bloomberg-markets"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_f94fd3b863",
-      "cluster": "title:police officer dies and another injured after backpack explosion in northern spain",
-      "title": "Police officer dies and another injured after backpack explosion in northern Spain",
-      "url": "https://www.bbc.co.uk/news/articles/cwm262pzezy0o?at_medium=RSS&at_campaign=rss",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-10T11:25:46.000Z",
-      "publishLagMinutes": 1010.4,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bbc-world"
-      ],
-      "sightings": [
-        {
-          "sourceId": "bbc-world",
-          "observedAt": "2026-11-10T19:43:41+08:00",
-          "title": "Police officer dies and another injured after backpack explosion in Oviedo",
-          "url": "https://www.bbc.co.uk/news/articles/cwm262pzezy0o?at_medium=RSS&at_campaign=rss",
-          "edition": "2026-11-10/19",
-          "publishedAt": "2026-11-10T11:25:46.000Z"
-        }
-      ],
-      "headlineRevisions": [
-        {
-          "at": "2026-11-11T12:16:08+08:00",
-          "sourceId": "bbc-world",
-          "edition": "2026-11-11/06",
-          "url": "https://www.bbc.co.uk/news/articles/cwm262pzezy0o?at_medium=RSS&at_campaign=rss",
-          "from": "Police officer dies and another injured after backpack explosion in Oviedo",
-          "to": "Police officer dies and another injured after backpack explosion in northern Spain"
-        }
-      ],
-      "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-10T19:43:41+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bbc-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_f9ad211cbd",
-      "cluster": "title:malaysia s disgraced former pm leaves jail for house arrest after embezzling millions",
-      "title": "Malaysia's disgraced former PM leaves jail for house arrest after embezzling millions",
-      "url": "https://www.bbc.co.uk/news/articles/cxnv0v4yln7do?at_medium=RSS&at_campaign=rss",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-10T18:33:51.000Z",
-      "publishLagMinutes": 582.3,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bbc-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bbc-world",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bbc-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_fb6f9b61c6",
-      "cluster": "title:hegseth impeachment effort torpedoed in house",
-      "title": "Hegseth impeachment effort torpedoed in House",
-      "url": "https://www.cnbc.com/2026/11/10/pete-hegseth-impeachment-massie-iran.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "cnbc-topnews",
-      "publishedAt": "2026-11-10T23:46:41.000Z",
-      "publishLagMinutes": 269.5,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "cnbc-topnews"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cnbc-topnews",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cnbc-topnews"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_fc3434c87e",
-      "cluster": "title:jemima goldsmith russell brand s ex partner accuses him of abuse",
-      "title": "Jemima Goldsmith, Russell Brand’s Ex-Partner, Accuses Him of Abuse",
-      "url": "https://www.nytimes.com/2026/11/10/world/europe/jemima-goldsmith-russell-brand-assault.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-10T16:27:52.000Z",
-      "publishLagMinutes": 708.3,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "nyt-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "nyt-world",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "nyt-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_fc5d41bb11",
-      "cluster": "title:who is david walliams the uk entertainer accused of sexual misconduct",
-      "title": "Who Is David Walliams, the UK Entertainer Accused of Sexual Misconduct?",
-      "url": "https://www.nytimes.com/2026/11/10/world/europe/who-is-david-walliams-sexual-misconduct-allegations-uk.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-10T12:39:28.000Z",
-      "publishLagMinutes": 936.7,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "nyt-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "nyt-world",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "nyt-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_fd411894ba",
-      "cluster": "title:equity dispersion trade risks a blowup hedge fund ceo warns",
-      "title": "Equity Dispersion Trade Risks a Blowup, Hedge Fund CEO Warns",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-10/equity-dispersion-trade-risks-a-blowup-hedge-fund-ceo-warns",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-10T23:52:41.000Z",
-      "publishLagMinutes": 263.5,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bloomberg-markets"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bloomberg-markets"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_fd4cae7a39",
-      "cluster": "title:11元买套房 揭秘低价拍卖房背后的 连环套",
-      "title": "11元买套房！揭秘低价拍卖房背后的“连环套”",
-      "url": "https://www.yicai.com/news/103434631.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "yicai",
-      "publishedAt": "2026-11-10T23:29:36.000Z",
-      "publishLagMinutes": 286.5,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "yicai"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yicai",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yicai"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_fda8e0a2bd",
-      "cluster": "title:indonesia s vp offers resignation as questions mount over his eligibility",
-      "title": "Indonesia's VP offers resignation as questions mount over his eligibility",
-      "url": "https://www.npr.org/2026/11/10/g-s1-152788/indonesias-vp-offers-resignation-as-questions-mount-over-his-eligibility",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "npr-world",
-      "publishedAt": "2026-11-10T14:01:14.000Z",
-      "publishLagMinutes": 854.9,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "npr-world"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "npr-world",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "npr-world"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_fdacc9c6ce",
-      "cluster": "title:italian banks hit out at giorgia meloni over latest tax raid",
-      "title": "Italian banks hit out at Giorgia Meloni over latest tax raid",
-      "url": "https://www.ft.com/content/f0665cf7-a36f-4573-b7d6-93dda9d59d3f?syn-25a6b1a6=1",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-10T12:33:13.000Z",
-      "publishLagMinutes": 942.9,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "ft-companies"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "ft-companies",
-        "observedAt": "2026-11-11T12:16:08+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "ft-companies"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_fdad72cb79",
-      "cluster": "title:syria weighs sending troops to aid saudi war with houthis",
-      "title": "Syria Weighs Sending Troops to Aid Saudi War With Houthis",
-      "url": "https://www.nytimes.com/2026/11/10/world/middleeast/syria-weighs-sending-troops-to-aid-saudi-war-with-houthis.html",
-      "firstSeenAt": "2026-11-11T12:16:08+08:00",
-      "firstEdition": "2026-11-11/06",
-      "firstSourceId": "nyt-world",
-      "publishedAt": "2026-11-09T13:15:27.000Z",
-      "publishLagMinutes": 2340.7,
-      "lastSeenAt": "2026-11-11T12:16:08+08:00",
-      "lastEdition": "2026-11-11/06",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "nyt-world",
-        "aljazeera"
-      ],
-      "sightings": [
-        {
-          "sourceId": "aljazeera",
-          "observedAt": "2026-11-10T01:11:34+08:00",
-          "title": "Syria confirms sending troops to Saudi Arabia amid battle against Houthis",
-          "url": "https://www.aljazeera.com/features/2026/11/9/syria-confirms-sending-troops-to-saudi-arabia-amid-battle-against-houthis?traffic_source=rss",
-          "edition": "2026-11-10/06",
-          "publishedAt": "2026-11-09T13:15:27.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T01:11:34+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "aljazeera"
-        ],
-        "runnerUpSourceId": "nyt-world",
-        "runnerUpObservedAt": "2026-11-11T12:16:08+08:00",
-        "leadMinutes": 2104.6
-      }
-    },
-    {
-      "id": "st_01c24add93",
-      "cluster": "title:纳斯达克100etf招商 159659 将于2026年11月11日开市起至当日10 30停牌",
-      "title": "财联社11月10日电，纳斯达克100ETF招商(159659)将于2026年11月11日开市起至当日10:30停牌。",
-      "url": "https://www.cls.cn/detail/2530529",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "cls-telegraph",
-      "publishedAt": "2026-11-10T11:15:29.000Z",
-      "publishLagMinutes": 28.2,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "filings",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "cls-telegraph"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cls-telegraph",
-        "observedAt": "2026-11-10T19:43:41+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cls-telegraph"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_03ba0f4464",
-      "cluster": "title:polish unity on show as thousands join silent march for krakow shooting victims",
-      "title": "Polish unity on show as thousands join silent march for Krakow shooting victims",
-      "url": "https://www.bbc.co.uk/news/articles/cqkg5gm4nr4no?at_medium=RSS&at_campaign=rss",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "bbc-world",
-      "publishedAt": "2026-11-09T06:22:55.000Z",
-      "publishLagMinutes": 1760.8,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "world",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bbc-world",
-        "bloomberg-markets",
-        "aljazeera"
-      ],
-      "sightings": [
-        {
-          "sourceId": "bloomberg-markets",
-          "observedAt": "2026-11-10T01:11:34+08:00",
-          "title": "Krakow Gunman Dies as Poland Looks for Clues on Attack Motive",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-09/krakow-mass-shooter-dies-in-the-hospital-polish-police-says",
-          "edition": "2026-11-10/06",
-          "publishedAt": "2026-11-09T06:22:55.000Z"
-        },
-        {
-          "sourceId": "aljazeera",
-          "observedAt": "2026-11-10T16:19:01+08:00",
-          "title": "Poland’s political rivals join ‘March of Silence’ for shooting victims",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/11/10/polands-political-rivals-join-march-of-silence-for-shooting-victims?traffic_source=rss",
-          "edition": "2026-11-10/13",
-          "publishedAt": "2026-11-10T05:12:54.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-10T01:11:34+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bloomberg-markets"
-        ],
-        "runnerUpSourceId": "aljazeera",
-        "runnerUpObservedAt": "2026-11-10T16:19:01+08:00",
-        "leadMinutes": 907.5
-      }
-    },
-    {
-      "id": "st_041d8b987d",
-      "cluster": "title:california voters reject billionaire tax",
-      "title": "California voters reject billionaire tax",
-      "url": "https://www.aljazeera.com/news/2026/11/10/california-voters-reject-billionaire-tax?traffic_source=rss",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-10T03:34:46.000Z",
-      "publishLagMinutes": 488.9,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "aljazeera",
-        "bbc-business"
-      ],
-      "sightings": [
-        {
-          "sourceId": "bbc-business",
-          "observedAt": "2026-11-10T16:19:01+08:00",
-          "title": "Californians reject wealth tax for billionaires",
-          "url": "https://www.bbc.co.uk/news/articles/cq398em3032wo?at_medium=RSS&at_campaign=rss",
-          "edition": "2026-11-10/13",
-          "publishedAt": "2026-11-10T03:34:46.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bbc-business",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bbc-business"
-        ],
-        "runnerUpSourceId": "aljazeera",
-        "runnerUpObservedAt": "2026-11-10T19:43:41+08:00",
-        "leadMinutes": 204.7
-      }
-    },
-    {
-      "id": "st_083f2d56bc",
-      "cluster": "title:moroccan trio make african player of year shortlist as salah absent",
-      "title": "Moroccan trio make African Player of Year shortlist as Salah absent",
-      "url": "https://www.aljazeera.com/sports/2026/11/10/moroccan-trio-make-african-player-of-year-shortlist-as-salah-absent?traffic_source=rss",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "aljazeera",
-      "publishedAt": "2026-11-10T11:05:20.000Z",
-      "publishLagMinutes": 38.4,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "aljazeera"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "aljazeera",
-        "observedAt": "2026-11-10T19:43:41+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "aljazeera"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_0942125840",
-      "cluster": "title:falling oil prices and bond yields offer investors some relief",
-      "title": "Falling Oil Prices and Bond Yields Offer Investors Some Relief",
-      "url": "https://www.bloomberg.com/news/newsletters/2026-11-10/falling-oil-prices-and-bond-yields-offer-investors-some-relief",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-10T07:48:22.000Z",
-      "publishLagMinutes": 235.3,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bloomberg-markets"
-      ],
-      "sightings": [
-        {
-          "sourceId": "bloomberg-markets",
-          "observedAt": "2026-11-10T16:19:01+08:00",
-          "title": "Falling Oil and Gas Prices Give Gilt Traders Some Relief",
-          "url": "https://www.bloomberg.com/news/newsletters/2026-11-10/falling-oil-and-gas-prices-give-gilt-traders-some-relief",
-          "edition": "2026-11-10/13",
-          "publishedAt": "2026-11-10T07:48:22.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-10T16:19:01+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bloomberg-markets"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_0ab55fdf44",
-      "cluster": "title:美国劳工统计局表示 受去年政府停摆影响 将不公布10月cpi同比数据",
-      "title": "财联社11月10日电，美国劳工统计局表示，受去年政府停摆影响，将不公布10月CPI同比数据。",
-      "url": "https://www.cls.cn/detail/2530540",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "cls-telegraph",
-      "publishedAt": "2026-11-10T11:23:58.000Z",
-      "publishLagMinutes": 19.7,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "policy",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "cls-telegraph"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "cls-telegraph",
-        "observedAt": "2026-11-10T19:43:41+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "cls-telegraph"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_0bf22b96b3",
-      "cluster": "title:魏牌二代蓝山换代 瞄准豪华 方盒子 市场",
-      "title": "魏牌二代蓝山换代，瞄准豪华“方盒子”市场",
-      "url": "https://wallstreetcn.com/articles/3785186",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "wallstreetcn",
-      "publishedAt": "2026-11-10T08:01:32.000Z",
-      "publishLagMinutes": 222.2,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "wallstreetcn"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "wallstreetcn",
-        "observedAt": "2026-11-10T19:43:41+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "wallstreetcn"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_15068ceedc",
-      "cluster": "title:vodafone raises guidance after job cuts despite 5bn germany impairment",
-      "title": "Vodafone raises guidance after job cuts despite €5bn Germany impairment",
-      "url": "https://www.ft.com/content/8c734b5d-aa5a-4ba3-9ddc-b03b0f79cee2?syn-25a6b1a6=1",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "ft-companies",
-      "publishedAt": "2026-11-10T09:08:31.000Z",
-      "publishLagMinutes": 155.2,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "filings",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "ft-companies"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "ft-companies",
-        "observedAt": "2026-11-10T19:43:41+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "ft-companies"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_15384a6395",
-      "cluster": "title:marry the house date the rate backfires for stuck homeowners",
-      "title": "'Marry the House, Date the Rate' Backfires for Stuck Homeowners",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-10/-marry-the-house-date-the-rate-backfires-for-stuck-homeowners",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "bloomberg-markets",
-      "publishedAt": "2026-11-10T10:30:28.000Z",
-      "publishLagMinutes": 73.2,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "bloomberg-markets"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "bloomberg-markets",
-        "observedAt": "2026-11-10T19:43:41+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "bloomberg-markets"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_175ff4a335",
-      "cluster": "title:能源向终端价格传导的力度有所减弱 整体cpi有望边际降温 但核心通胀的黏性风险仍未消退 在12月加息概率已升至99 的背景下 只有 的情况才可能撼动定价",
-      "title": "能源向终端价格传导的力度有所减弱，整体CPI有望边际降温，但核心通胀的黏性风险仍未消退；在12月加息概率已升至99%的背景下，只有.....的情况才可能撼动定价",
-      "url": "https://xnews.jin10.com/details/234713",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "jin10-flash",
-      "publishedAt": "2026-11-10T11:38:10.000Z",
-      "publishLagMinutes": 5.5,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "global-markets",
-      "lane": "zh",
-      "domestic": true,
-      "entities": [],
-      "sources": [
-        "jin10-flash"
-      ],
-      "sightings": [],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "jin10-flash",
-        "observedAt": "2026-11-10T19:43:41+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "jin10-flash"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1959b5a5e3",
-      "cluster": "title:gilead sciences stock hits a new all time high is it still a good buy",
-      "title": "Gilead Sciences Stock Hits a New All-Time High: Is it Still a Good Buy?",
-      "url": "https://www.fool.com/investing/2026/11/10/gilead-sciences-stock-hits-a-new-all-time-high-is-it-still-a-good-buy/?.tsrc=rss",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "yahoo-finance",
-      "publishedAt": "2026-11-08T13:25:00.000Z",
-      "publishLagMinutes": 2778.7,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "yahoo-finance"
-      ],
-      "sightings": [
-        {
-          "sourceId": "yahoo-finance",
-          "observedAt": "2026-11-09T07:39:02+08:00",
-          "title": "This Is the Best-Performing Magnificent Seven Stock of 2026. Is It Still a Buy?",
-          "url": "https://www.fool.com/investing/2026/11/08/this-is-best-performing-magnificent-seven-stock/?.tsrc=rss",
-          "edition": "2026-11-09/06",
-          "publishedAt": "2026-11-08T19:50:00.000Z"
-        },
-        {
-          "sourceId": "yahoo-finance",
-          "observedAt": "2026-11-08T23:01:48+08:00",
-          "title": "Prediction: This Will Be the Best-Performing AI Stock of 2027",
-          "url": "https://www.fool.com/investing/2026/11/08/prediction-this-will-be-the-best-performing-ai-sto/?.tsrc=rss",
-          "edition": "2026-11-08/19",
-          "publishedAt": "2026-11-08T13:25:00.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": "yahoo-finance",
-        "observedAt": "2026-11-08T23:01:48+08:00",
-        "tied": false,
-        "coFirstSourceIds": [
-          "yahoo-finance"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
-      "id": "st_1ad93443fc",
-      "cluster": "title:fed s waller puts half point rate hike into the mix for december",
-      "title": "Fed’s Waller puts half-point rate hike into the mix for December",
-      "url": "https://www.marketwatch.com/story/feds-waller-puts-half-point-rate-hike-into-the-mix-for-december-1bebdffc?mod=mw_rss_topstories",
-      "firstSeenAt": "2026-11-10T19:43:41+08:00",
-      "firstEdition": "2026-11-10/19",
-      "firstSourceId": "marketwatch-top",
-      "publishedAt": "2026-11-10T09:00:00.000Z",
-      "publishLagMinutes": 163.7,
-      "lastSeenAt": "2026-11-10T19:43:41+08:00",
-      "lastEdition": "2026-11-10/19",
-      "topic": "global-markets",
-      "lane": "external",
-      "domestic": false,
-      "entities": [],
-      "sources": [
-        "marketwatch-top",
-        "cnbc-topnews",
-        "bloomberg-markets"
-      ],
-      "sightings": [
-        {
-          "sourceId": "cnbc-topnews",
-          "observedAt": "2026-11-10T19:43:41+08:00",
-          "title": "Fed Governor Waller sees December hike likely, opens door to possible half-point increase",
-          "url": "https://www.cnbc.com/2026/11/10/fed-governor-waller-sees-december-hike-likely.html",
-          "edition": "2026-11-10/19",
-          "publishedAt": "2026-11-10T09:00:01.000Z"
-        },
-        {
-          "sourceId": "bloomberg-markets",
-          "observedAt": "2026-11-10T19:43:41+08:00",
-          "title": "Fed’s Waller Backs December Rate Hike, Open to Larger Move",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-10/fed-s-waller-backs-december-rate-hike-says-open-to-larger-move",
-          "edition": "2026-11-10/19",
-          "publishedAt": "2026-11-10T09:00:00.000Z"
-        }
-      ],
-      "headlineRevisions": [],
-      "firstMover": {
-        "sourceId": null,
-        "observedAt": "2026-11-10T19:43:41+08:00",
-        "tied": true,
-        "coFirstSourceIds": [
-          "bloomberg-markets",
-          "cnbc-topnews",
-          "marketwatch-top"
-        ],
-        "runnerUpSourceId": null,
-        "runnerUpObservedAt": null,
-        "leadMinutes": null
-      }
-    },
-    {
       "id": "st_f90f94079b",
       "cluster": "title:当美国无法建设数据中心 会对 ai 产生怎样的冲击",
       "title": "当美国无法建设数据中心，会对 AI 产生怎样的冲击",
@@ -71178,6 +71267,14 @@
           "url": "https://www.solidot.org/story?sid=85875",
           "from": "微软云服务宕机持续逾 24 小时",
           "to": "微软云服务全球宕机"
+        },
+        {
+          "at": "2026-11-16T11:09:06+08:00",
+          "sourceId": "solidot",
+          "edition": "2026-11-16/06",
+          "url": "https://www.solidot.org/story?sid=85886",
+          "from": "微软云服务全球宕机",
+          "to": "微软云服务宕机持续逾 24 小时"
         }
       ],
       "firstMover": {
@@ -92158,16 +92255,16 @@
       }
     }
   ],
-  "generatedAt": "2026-11-16T10:44:08+08:00",
+  "generatedAt": "2026-11-16T11:13:02+08:00",
   "counts": {
     "stories": 2000,
-    "sightings": 2939,
-    "multiSightingStories": 237,
-    "storiesWithRevisions": 28,
+    "sightings": 2949,
+    "multiSightingStories": 234,
+    "storiesWithRevisions": 29,
     "skippedRecords": 0,
     "editions": 73,
-    "articles": 32767,
-    "duplicates": 237
+    "articles": 32787,
+    "duplicates": 236
   },
   "firstMover": {
     "windowDays": 30,
@@ -92175,76 +92272,76 @@
     "to": "2026-11-16",
     "storiesInWindow": 1980,
     "soleFirstStories": 1925,
-    "contestedStories": 104,
+    "contestedStories": 106,
     "tiedFirstStories": 55,
     "leadBasis": "observed",
     "wires": [
       {
         "sourceId": "cls-telegraph",
-        "soleFirsts": 219,
-        "contestedFirsts": 15,
-        "coFirsts": 24,
-        "stories": 263,
-        "leadSamples": 15,
+        "soleFirsts": 224,
+        "contestedFirsts": 16,
+        "coFirsts": 25,
+        "stories": 271,
+        "leadSamples": 16,
         "medianLeadMinutes": 525.9
       },
       {
         "sourceId": "aljazeera",
-        "soleFirsts": 223,
-        "contestedFirsts": 13,
+        "soleFirsts": 221,
+        "contestedFirsts": 12,
         "coFirsts": 9,
-        "stories": 255,
-        "leadSamples": 13,
-        "medianLeadMinutes": 980.7
+        "stories": 252,
+        "leadSamples": 12,
+        "medianLeadMinutes": 823.6
       },
       {
         "sourceId": "bloomberg-markets",
-        "soleFirsts": 199,
-        "contestedFirsts": 11,
-        "coFirsts": 9,
-        "stories": 222,
-        "leadSamples": 11,
-        "medianLeadMinutes": 1112.1
+        "soleFirsts": 197,
+        "contestedFirsts": 10,
+        "coFirsts": 8,
+        "stories": 219,
+        "leadSamples": 10,
+        "medianLeadMinutes": 1472.6
+      },
+      {
+        "sourceId": "wallstreetcn-live",
+        "soleFirsts": 152,
+        "contestedFirsts": 10,
+        "coFirsts": 24,
+        "stories": 201,
+        "leadSamples": 10,
+        "medianLeadMinutes": 457.6
+      },
+      {
+        "sourceId": "bbc-world",
+        "soleFirsts": 99,
+        "contestedFirsts": 10,
+        "coFirsts": 11,
+        "stories": 125,
+        "leadSamples": 10,
+        "medianLeadMinutes": 892.4
       },
       {
         "sourceId": "ft-companies",
-        "soleFirsts": 151,
+        "soleFirsts": 148,
         "contestedFirsts": 9,
         "coFirsts": 4,
-        "stories": 169,
+        "stories": 168,
         "leadSamples": 9,
         "medianLeadMinutes": 2443.2
       },
       {
-        "sourceId": "bbc-world",
-        "soleFirsts": 101,
-        "contestedFirsts": 9,
-        "coFirsts": 11,
-        "stories": 128,
-        "leadSamples": 9,
-        "medianLeadMinutes": 879.6
-      },
-      {
-        "sourceId": "wallstreetcn-live",
-        "soleFirsts": 147,
-        "contestedFirsts": 8,
-        "coFirsts": 23,
-        "stories": 194,
-        "leadSamples": 8,
-        "medianLeadMinutes": 543.2
-      },
-      {
         "sourceId": "cnbc-topnews",
-        "soleFirsts": 99,
+        "soleFirsts": 97,
         "contestedFirsts": 6,
-        "coFirsts": 4,
-        "stories": 121,
+        "coFirsts": 3,
+        "stories": 118,
         "leadSamples": 6,
         "medianLeadMinutes": 1197.1
       },
       {
         "sourceId": "wallstreetcn",
-        "soleFirsts": 87,
+        "soleFirsts": 86,
         "contestedFirsts": 6,
         "coFirsts": 7,
         "stories": 111,
@@ -92253,10 +92350,10 @@
       },
       {
         "sourceId": "yahoo-finance",
-        "soleFirsts": 163,
+        "soleFirsts": 170,
         "contestedFirsts": 5,
         "coFirsts": 5,
-        "stories": 183,
+        "stories": 190,
         "leadSamples": 5,
         "medianLeadMinutes": 1386.4
       },
@@ -92270,47 +92367,47 @@
         "medianLeadMinutes": 1210.4
       },
       {
-        "sourceId": "bbc-business",
-        "soleFirsts": 30,
+        "sourceId": "nyt-world",
+        "soleFirsts": 49,
         "contestedFirsts": 4,
-        "coFirsts": 1,
-        "stories": 35,
+        "coFirsts": 5,
+        "stories": 70,
         "leadSamples": 4,
-        "medianLeadMinutes": 2505.2
+        "medianLeadMinutes": 1175.2
       },
       {
         "sourceId": "marketwatch-top",
-        "soleFirsts": 53,
+        "soleFirsts": 52,
         "contestedFirsts": 3,
-        "coFirsts": 2,
-        "stories": 63,
+        "coFirsts": 1,
+        "stories": 61,
         "leadSamples": 3,
         "medianLeadMinutes": 2770.2
       },
       {
-        "sourceId": "nyt-world",
-        "soleFirsts": 51,
+        "sourceId": "bbc-business",
+        "soleFirsts": 29,
         "contestedFirsts": 3,
-        "coFirsts": 5,
-        "stories": 73,
+        "coFirsts": 1,
+        "stories": 34,
         "leadSamples": 3,
-        "medianLeadMinutes": 1442.8
+        "medianLeadMinutes": 2668.1
       },
       {
         "sourceId": "npr-world",
-        "soleFirsts": 15,
+        "soleFirsts": 14,
         "contestedFirsts": 2,
         "coFirsts": 3,
-        "stories": 18,
+        "stories": 17,
         "leadSamples": 2,
         "medianLeadMinutes": 2495
       },
       {
         "sourceId": "caixin",
-        "soleFirsts": 118,
+        "soleFirsts": 120,
         "contestedFirsts": 1,
         "coFirsts": 1,
-        "stories": 128,
+        "stories": 132,
         "leadSamples": 1,
         "medianLeadMinutes": 2424.9
       },
@@ -92361,10 +92458,10 @@
       },
       {
         "sourceId": "yicai",
-        "soleFirsts": 20,
+        "soleFirsts": 19,
         "contestedFirsts": 0,
         "coFirsts": 1,
-        "stories": 24,
+        "stories": 23,
         "leadSamples": 0,
         "medianLeadMinutes": null
       },
@@ -92415,18 +92512,18 @@
       },
       {
         "sourceId": "jin10-flash",
-        "soleFirsts": 4,
+        "soleFirsts": 3,
         "contestedFirsts": 0,
         "coFirsts": 0,
-        "stories": 5,
+        "stories": 4,
         "leadSamples": 0,
         "medianLeadMinutes": null
       }
     ]
   },
   "revisionTrail": {
-    "storiesWithRevisions": 28,
-    "totalRevisions": 182,
+    "storiesWithRevisions": 29,
+    "totalRevisions": 184,
     "items": [
       {
         "id": "st_42dca5f915",
@@ -93144,7 +93241,7 @@
         "id": "st_5cb5e636cd",
         "title": "Microsoft, Shopify and 3 more AI stocks that are favorite Wall Street earnings plays",
         "topic": "global-markets",
-        "revisions": 23,
+        "revisions": 24,
         "steps": [
           {
             "at": "2026-10-30T08:20:12+08:00",
@@ -93569,6 +93666,27 @@
               "务全",
               "微软云服务全球宕机",
               "球宕"
+            ]
+          },
+          {
+            "at": "2026-11-16T11:09:06+08:00",
+            "from": "微软云服务全球宕机",
+            "to": "微软云服务宕机持续逾 24 小时",
+            "removed": [
+              "全球",
+              "务全",
+              "微软云服务全球宕机",
+              "球宕"
+            ],
+            "added": [
+              "24",
+              "4小",
+              "务宕",
+              "小时",
+              "微软云服务宕机持续逾",
+              "持续",
+              "机持",
+              "续逾"
             ]
           }
         ]
@@ -95737,6 +95855,50 @@
         ]
       },
       {
+        "id": "st_3abf38e761",
+        "title": "China’s Economy Misses Forecasts With Across-the-Board Slowdown",
+        "topic": "global-markets",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-16T11:09:06+08:00",
+            "from": "China’s Economy Misses Forecasts With Across-the-Board Slowdown",
+            "to": "China’s Economy Falters With Surprise Across-the-Board Slowdown",
+            "removed": [
+              "forecasts",
+              "misses"
+            ],
+            "added": [
+              "falters",
+              "surprise"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "st_9a80f0235f",
+        "title": "Coles investigating ‘cybersecurity incident’ and apologises to customers",
+        "topic": "world",
+        "revisions": 1,
+        "steps": [
+          {
+            "at": "2026-11-16T11:09:06+08:00",
+            "from": "Coles investigating ‘cybersecurity incident’ and apologises to customers",
+            "to": "Coles investigates cyber-attack and apologises to customers",
+            "removed": [
+              "cybersecurity",
+              "incident",
+              "investigating"
+            ],
+            "added": [
+              "attack",
+              "cyber",
+              "investigates"
+            ]
+          }
+        ]
+      },
+      {
         "id": "st_f37479855b",
         "title": "FDA rejects cancer drug invented in China in blow to Beijing’s biotech sector",
         "topic": "global-markets",
@@ -95902,26 +96064,6 @@
               "on",
               "team",
               "to"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "st_f94fd3b863",
-        "title": "Police officer dies and another injured after backpack explosion in northern Spain",
-        "topic": "world",
-        "revisions": 1,
-        "steps": [
-          {
-            "at": "2026-11-11T12:16:08+08:00",
-            "from": "Police officer dies and another injured after backpack explosion in Oviedo",
-            "to": "Police officer dies and another injured after backpack explosion in northern Spain",
-            "removed": [
-              "oviedo"
-            ],
-            "added": [
-              "northern",
-              "spain"
             ]
           }
         ]
