@@ -133,7 +133,7 @@
 
 | # | 今天没有的东西 | 现状证据 | 距离（要补什么） |
 |---|---|---|---|
-| 1 | **小时级盘中历史（hourly tape）的深度** | 机制已上线（`lib/tape/` + `scripts/bake-tape.ts`，每交易日 10 个时点写 `<HHMM>.json`，双时钟 `asOf`+`observedAt`，重跑写 `.rev-N.json` 不覆盖）；采集自**首个交易日 2026-11-16 09:35 起**（此前天数为 0，不可回填） | 只剩时间这一项：**积累速度受限于上线时刻，无法回溯造假**。`/v1/coverage.json` 与 `/integrity.html` 逐日点名缺口与修订次数，不虚报覆盖率 |
+| 1 | **小时级盘中历史（hourly tape）的深度** | 机制已上线（`lib/tape/` + `scripts/bake-tape.ts`，每交易日 10 个时点写 `<HHMM>.json`，双时钟 `asOf`+`observedAt`，重跑写 `.rev-N.json` 不覆盖）；采集自**首个交易日 2026-11-16 09:35 起**（此前天数为 0，不可回填；上线日实测：GitHub cron 全日基本哑火，前三个时点均经推送门采集，`observedAt` 如实迟到） | 只剩时间这一项：**积累速度受限于上线时刻，无法回溯造假**。`/v1/coverage.json` 与 `/integrity.html` 逐日点名缺口与修订次数，不虚报覆盖率 |
 | 2 | **基本面修订史（revision history）** | 本站无任何财务报表明细接口；`/v1/asof` 未上线 | 需先建 vintage store（增量 2），再接入带申报日的源并保留原始申报与重述两份记录——参考做法：「保留两个值，各自标记携带它的申报文件」<https://developer.stockfit.io/blog/point-in-time-data-backtesting>。**当前零进度** |
 | 3 | **退市证券保留** | 观察池为 **32 个标的 / 7 个资产组**（`lib/trading/watchlist.ts`），全部为在售标的；无退市名录 | 需引入含 `active=false` 的证券主数据（如 Massive 的 All Tickers：<https://massive.com/docs/rest/stocks/tickers/ticker-overview>）并自建历史成分快照。**这是幸存者偏差的根，也是最贵的一项** |
 | 4 | **超出已积累范围的盘中历史** | 无 tape；`sentiment-history.json` 实测仅 **48 条**、2026-10-27 → 2026-11-13（上限 60） | 只能靠**时间**积累；不可回填。可回填的只有上游源本身保留的历史（如 Tushare 历史分钟，2000 元一次性，<https://tushare.pro/document/2?doc_id=290>）——但那不是我们的 availability time，仍不能算 vintage |
