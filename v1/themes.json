@@ -1,160 +1,42 @@
 {
-  "generatedAt": "2026-11-16T11:25:07.196Z",
+  "generatedAt": "2026-11-17T02:10:26.116Z",
   "source": {
     "path": "/themes.json",
     "note": "re-exported verbatim under the frozen path; the root /themes.json keeps evolving with the pipeline"
   },
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-16/19",
+  "edition": "2026-11-17/06",
   "themes": [
-    {
-      "key": "comms",
-      "name": "通信",
-      "boardCode": "BK0448",
-      "boardName": "通信设备",
-      "boardChangePct": -4.81,
-      "boardUp": 7,
-      "boardDown": 87,
-      "articleHits": 3,
-      "matchedAliases": [
-        "卫星"
-      ],
-      "constituents": [
-        {
-          "symbol": "002792",
-          "name": "通宇通讯",
-          "changePct": -9.93
-        },
-        {
-          "symbol": "002281",
-          "name": "光迅科技",
-          "changePct": -9.49
-        },
-        {
-          "symbol": "001267",
-          "name": "汇绿生态",
-          "changePct": -8.9
-        }
-      ]
-    },
     {
       "key": "ai",
       "name": "人工智能",
       "boardCode": "BK0800",
       "boardName": "人工智能",
-      "boardChangePct": -2.78,
-      "boardUp": 98,
-      "boardDown": 652,
-      "articleHits": 3,
+      "boardChangePct": -0.96,
+      "boardUp": 198,
+      "boardDown": 543,
+      "articleHits": 5,
       "matchedAliases": [
-        "AI"
+        "人工智能",
+        "AI",
+        "大模型"
       ],
       "constituents": [
         {
           "symbol": "000521",
           "name": "长虹美菱",
-          "changePct": 9.95
+          "changePct": 9.98
         },
         {
-          "symbol": "000070",
-          "name": "特发信息",
-          "changePct": -5.26
+          "symbol": "000681",
+          "name": "视觉中国",
+          "changePct": -3.8
         },
         {
-          "symbol": "000090",
-          "name": "天健集团",
-          "changePct": -4.36
-        }
-      ]
-    },
-    {
-      "key": "bank",
-      "name": "银行",
-      "boardCode": "BK1283",
-      "boardName": "银行",
-      "boardChangePct": 1.76,
-      "boardUp": 42,
-      "boardDown": 0,
-      "articleHits": 3,
-      "matchedAliases": [
-        "银行"
-      ],
-      "constituents": [
-        {
-          "symbol": "002966",
-          "name": "苏州银行",
-          "changePct": 4.05
-        },
-        {
-          "symbol": "600000",
-          "name": "浦发银行",
-          "changePct": 3.65
-        },
-        {
-          "symbol": "002142",
-          "name": "宁波银行",
-          "changePct": 3.16
-        }
-      ]
-    },
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": -3.87,
-      "boardUp": 0,
-      "boardDown": 13,
-      "articleHits": 1,
-      "matchedAliases": [
-        "黄金"
-      ],
-      "constituents": [
-        {
-          "symbol": "000426",
-          "name": "兴业银锡",
-          "changePct": -8.54
-        },
-        {
-          "symbol": "300139",
-          "name": "晓程科技",
-          "changePct": -5.98
-        },
-        {
-          "symbol": "002716",
-          "name": "湖南白银",
-          "changePct": -4.46
-        }
-      ]
-    },
-    {
-      "key": "defense",
-      "name": "军工",
-      "boardCode": "BK0490",
-      "boardName": "军工",
-      "boardChangePct": -3.82,
-      "boardUp": 30,
-      "boardDown": 414,
-      "articleHits": 1,
-      "matchedAliases": [
-        "航空航天"
-      ],
-      "constituents": [
-        {
-          "symbol": "000678",
-          "name": "襄阳轴承",
-          "changePct": -9.97
-        },
-        {
-          "symbol": "000547",
-          "name": "航天发展",
-          "changePct": -8.98
-        },
-        {
-          "symbol": "000530",
-          "name": "冰山冷热",
-          "changePct": 6.49
+          "symbol": "000676",
+          "name": "智度股份",
+          "changePct": -2.39
         }
       ]
     },
@@ -163,110 +45,29 @@
       "name": "半导体",
       "boardCode": "BK1036",
       "boardName": "半导体",
-      "boardChangePct": -5.99,
-      "boardUp": 2,
-      "boardDown": 185,
-      "articleHits": 0,
-      "matchedAliases": [],
+      "boardChangePct": 0.46,
+      "boardUp": 115,
+      "boardDown": 70,
+      "articleHits": 4,
+      "matchedAliases": [
+        "芯片",
+        "光刻"
+      ],
       "constituents": [
         {
           "symbol": "300604",
           "name": "长川科技",
-          "changePct": -10.11
+          "changePct": 4.5
         },
         {
-          "symbol": "300223",
-          "name": "君正股份",
-          "changePct": -9.91
+          "symbol": "003043",
+          "name": "华亚智能",
+          "changePct": 3.45
         },
         {
-          "symbol": "002409",
-          "name": "雅克科技",
-          "changePct": -8.15
-        }
-      ]
-    },
-    {
-      "key": "robotics",
-      "name": "机器人",
-      "boardCode": "BK1408",
-      "boardName": "机器人",
-      "boardChangePct": -4.15,
-      "boardUp": 2,
-      "boardDown": 20,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "688290",
-          "name": "景业智能",
-          "changePct": -8.88
-        },
-        {
-          "symbol": "603666",
-          "name": "亿嘉和",
-          "changePct": -7.3
-        },
-        {
-          "symbol": "300607",
-          "name": "拓斯达",
-          "changePct": -6.94
-        }
-      ]
-    },
-    {
-      "key": "quantum",
-      "name": "量子科技",
-      "boardCode": "BK0710",
-      "boardName": "量子科技",
-      "boardChangePct": -4.05,
-      "boardUp": 6,
-      "boardDown": 80,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002281",
-          "name": "光迅科技",
-          "changePct": -9.49
-        },
-        {
-          "symbol": "002819",
-          "name": "东方中科",
-          "changePct": -9.31
-        },
-        {
-          "symbol": "002126",
-          "name": "银轮股份",
-          "changePct": -8.9
-        }
-      ]
-    },
-    {
-      "key": "solar",
-      "name": "光伏",
-      "boardCode": "BK1031",
-      "boardName": "光伏设备",
-      "boardChangePct": -4.01,
-      "boardUp": 4,
-      "boardDown": 64,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002865",
-          "name": "钧达股份",
-          "changePct": -9.99
-        },
-        {
-          "symbol": "002623",
-          "name": "亚玛顿",
-          "changePct": -9.98
-        },
-        {
-          "symbol": "300093",
-          "name": "金刚光伏",
-          "changePct": -9.57
+          "symbol": "002119",
+          "name": "康强电子",
+          "changePct": 2.56
         }
       ]
     },
@@ -275,222 +76,28 @@
       "name": "算力",
       "boardCode": "BK1134",
       "boardName": "算力概念",
-      "boardChangePct": -3.85,
-      "boardUp": 19,
-      "boardDown": 236,
-      "articleHits": 0,
-      "matchedAliases": [],
+      "boardChangePct": -0.4,
+      "boardUp": 105,
+      "boardDown": 142,
+      "articleHits": 1,
+      "matchedAliases": [
+        "数据中心"
+      ],
       "constituents": [
         {
-          "symbol": "000608",
-          "name": "阳光股份",
-          "changePct": -6.92
-        },
-        {
-          "symbol": "001339",
-          "name": "智微智能",
-          "changePct": -6.66
+          "symbol": "000665",
+          "name": "湖北广电",
+          "changePct": -9.92
         },
         {
           "symbol": "000887",
           "name": "中鼎股份",
-          "changePct": -6.44
-        }
-      ]
-    },
-    {
-      "key": "consumer-elec",
-      "name": "消费电子",
-      "boardCode": "BK1037",
-      "boardName": "消费电子",
-      "boardChangePct": -3.85,
-      "boardUp": 12,
-      "boardDown": 86,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002861",
-          "name": "瀛通通讯",
-          "changePct": 10.03
+          "changePct": -6.4
         },
         {
-          "symbol": "002655",
-          "name": "共达电声",
-          "changePct": -6.68
-        },
-        {
-          "symbol": "000021",
-          "name": "深科技",
-          "changePct": -4.74
-        }
-      ]
-    },
-    {
-      "key": "ev",
-      "name": "新能源车",
-      "boardCode": "BK0900",
-      "boardName": "新能源车",
-      "boardChangePct": -3.1,
-      "boardUp": 91,
-      "boardDown": 618,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "000678",
-          "name": "襄阳轴承",
-          "changePct": -9.97
-        },
-        {
-          "symbol": "000021",
-          "name": "深科技",
-          "changePct": -4.74
-        },
-        {
-          "symbol": "000576",
-          "name": "甘化科工",
-          "changePct": -4.74
-        }
-      ]
-    },
-    {
-      "key": "agriculture",
-      "name": "农业",
-      "boardCode": "BK1261",
-      "boardName": "种植业",
-      "boardChangePct": -2.12,
-      "boardUp": 2,
-      "boardDown": 18,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "603336",
-          "name": "宏辉果蔬",
-          "changePct": -4.79
-        },
-        {
-          "symbol": "600354",
-          "name": "敦煌种业",
-          "changePct": -4.14
-        },
-        {
-          "symbol": "600540",
-          "name": "新赛股份",
-          "changePct": -4.11
-        }
-      ]
-    },
-    {
-      "key": "pharma",
-      "name": "创新药",
-      "boardCode": "BK1106",
-      "boardName": "创新药",
-      "boardChangePct": -1.97,
-      "boardUp": 49,
-      "boardDown": 173,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "000766",
-          "name": "通化金马",
-          "changePct": -10
-        },
-        {
-          "symbol": "000661",
-          "name": "长春高新",
-          "changePct": 4.22
-        },
-        {
-          "symbol": "000078",
-          "name": "ST海王",
-          "changePct": -3.94
-        }
-      ]
-    },
-    {
-      "key": "realestate",
-      "name": "房地产",
-      "boardCode": "BK0451",
-      "boardName": "房地产开发",
-      "boardChangePct": -1.88,
-      "boardUp": 14,
-      "boardDown": 72,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "000011",
-          "name": "深物业A",
-          "changePct": -9.96
-        },
-        {
-          "symbol": "000608",
-          "name": "阳光股份",
-          "changePct": -6.92
-        },
-        {
-          "symbol": "000656",
-          "name": "金科股份",
-          "changePct": -5.83
-        }
-      ]
-    },
-    {
-      "key": "gaming",
-      "name": "游戏",
-      "boardCode": "BK1046",
-      "boardName": "游戏Ⅱ",
-      "boardChangePct": -1.76,
-      "boardUp": 4,
-      "boardDown": 20,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002425",
-          "name": "凯撒文化",
-          "changePct": 10.1
-        },
-        {
-          "symbol": "300031",
-          "name": "宝通科技",
-          "changePct": -8.13
-        },
-        {
-          "symbol": "300315",
-          "name": "掌趣科技",
-          "changePct": -6.42
-        }
-      ]
-    },
-    {
-      "key": "oil",
-      "name": "石油石化",
-      "boardCode": "BK1276",
-      "boardName": "油气开采Ⅱ",
-      "boardChangePct": -1.5,
-      "boardUp": 1,
-      "boardDown": 4,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "600759",
-          "name": "ST洲际",
-          "changePct": -4.63
-        },
-        {
-          "symbol": "000968",
-          "name": "蓝焰控股",
-          "changePct": -1.56
-        },
-        {
-          "symbol": "600777",
-          "name": "新潮能源",
-          "changePct": -0.77
+          "symbol": "000701",
+          "name": "厦门信达",
+          "changePct": -6.02
         }
       ]
     },
@@ -499,26 +106,54 @@
       "name": "传媒",
       "boardCode": "BK0486",
       "boardName": "传媒",
-      "boardChangePct": -1.42,
-      "boardUp": 39,
-      "boardDown": 89,
+      "boardChangePct": -4.59,
+      "boardUp": 2,
+      "boardDown": 126,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
+          "symbol": "002343",
+          "name": "慈文传媒",
+          "changePct": -9.98
+        },
+        {
           "symbol": "000156",
           "name": "华数传媒",
-          "changePct": 10.05
+          "changePct": -9.95
         },
         {
-          "symbol": "001330",
-          "name": "博纳影业",
-          "changePct": -6.78
+          "symbol": "000665",
+          "name": "湖北广电",
+          "changePct": -9.92
+        }
+      ]
+    },
+    {
+      "key": "gaming",
+      "name": "游戏",
+      "boardCode": "BK1046",
+      "boardName": "游戏Ⅱ",
+      "boardChangePct": -4.27,
+      "boardUp": 1,
+      "boardDown": 23,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "002425",
+          "name": "凯撒文化",
+          "changePct": -10.09
         },
         {
-          "symbol": "002174",
-          "name": "游族网络",
-          "changePct": -5.71
+          "symbol": "300299",
+          "name": "富春股份",
+          "changePct": -5.56
+        },
+        {
+          "symbol": "300315",
+          "name": "掌趣科技",
+          "changePct": -4.96
         }
       ]
     },
@@ -527,138 +162,134 @@
       "name": "煤炭",
       "boardCode": "BK0437",
       "boardName": "煤炭",
-      "boardChangePct": 1.22,
-      "boardUp": 26,
-      "boardDown": 8,
+      "boardChangePct": -2.74,
+      "boardUp": 0,
+      "boardDown": 34,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "600408",
-          "name": "安泰集团",
-          "changePct": 5.63
+          "symbol": "600121",
+          "name": "郑州煤电",
+          "changePct": -9.38
         },
         {
-          "symbol": "600188",
-          "name": "兖矿能源",
-          "changePct": 4.3
+          "symbol": "000571",
+          "name": "新大洲A",
+          "changePct": -8.61
         },
         {
-          "symbol": "000983",
-          "name": "山西焦煤",
-          "changePct": 2.39
+          "symbol": "600792",
+          "name": "云煤能源",
+          "changePct": -6.19
         }
       ]
     },
     {
-      "key": "steel",
-      "name": "钢铁",
-      "boardCode": "BK1227",
-      "boardName": "特钢Ⅱ",
-      "boardChangePct": -0.86,
-      "boardUp": 3,
-      "boardDown": 7,
+      "key": "oil",
+      "name": "石油石化",
+      "boardCode": "BK1276",
+      "boardName": "油气开采Ⅱ",
+      "boardChangePct": -1.99,
+      "boardUp": 0,
+      "boardDown": 5,
       "articleHits": 0,
       "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "600399",
-          "name": "抚顺特钢",
-          "changePct": -3.67
-        },
-        {
-          "symbol": "300881",
-          "name": "盛德鑫泰",
-          "changePct": -2.84
-        },
-        {
-          "symbol": "688186",
-          "name": "广大特材",
-          "changePct": -2.62
-        }
-      ]
+      "constituents": []
     },
     {
       "key": "infra",
       "name": "基建",
       "boardCode": "BK1247",
       "boardName": "基础建设",
-      "boardChangePct": -0.61,
-      "boardUp": 18,
-      "boardDown": 24,
+      "boardChangePct": -1.68,
+      "boardUp": 7,
+      "boardDown": 33,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "300948",
-          "name": "冠中生态",
-          "changePct": -10.94
+          "symbol": "000010",
+          "name": "*ST美丽",
+          "changePct": -9.47
+        },
+        {
+          "symbol": "002431",
+          "name": "ST棕榈",
+          "changePct": -8.46
         },
         {
           "symbol": "300197",
           "name": "节能铁汉",
-          "changePct": 10.86
-        },
-        {
-          "symbol": "000010",
-          "name": "*ST美丽",
-          "changePct": -9.52
+          "changePct": -5.15
         }
       ]
     },
     {
-      "key": "travel",
-      "name": "旅游酒店",
-      "boardCode": "BK0485",
-      "boardName": "旅游酒店",
-      "boardChangePct": -0.53,
-      "boardUp": 15,
-      "boardDown": 23,
+      "key": "robotics",
+      "name": "机器人",
+      "boardCode": "BK1408",
+      "boardName": "机器人",
+      "boardChangePct": -1.46,
+      "boardUp": 4,
+      "boardDown": 18,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": []
+    },
+    {
+      "key": "realestate",
+      "name": "房地产",
+      "boardCode": "BK0451",
+      "boardName": "房地产开发",
+      "boardChangePct": -1.35,
+      "boardUp": 7,
+      "boardDown": 74,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "000610",
-          "name": "*ST西旅",
-          "changePct": -6.43
+          "symbol": "000656",
+          "name": "金科股份",
+          "changePct": -10.31
         },
         {
-          "symbol": "300756",
-          "name": "金马游乐",
-          "changePct": -5.98
+          "symbol": "000011",
+          "name": "深物业A",
+          "changePct": -7.03
         },
         {
-          "symbol": "002306",
-          "name": "ST云网",
-          "changePct": -4.27
+          "symbol": "000029",
+          "name": "深深房Ａ",
+          "changePct": -2.92
         }
       ]
     },
     {
-      "key": "brokerage",
-      "name": "券商",
-      "boardCode": "BK1366",
-      "boardName": "证券Ⅲ",
-      "boardChangePct": 0.36,
-      "boardUp": 31,
-      "boardDown": 11,
+      "key": "solar",
+      "name": "光伏",
+      "boardCode": "BK1031",
+      "boardName": "光伏设备",
+      "boardChangePct": -1.23,
+      "boardUp": 19,
+      "boardDown": 50,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "002736",
-          "name": "国信证券",
-          "changePct": 2.5
+          "symbol": "002623",
+          "name": "亚玛顿",
+          "changePct": -9.99
         },
         {
-          "symbol": "002945",
-          "name": "华林证券",
-          "changePct": 1.49
+          "symbol": "002129",
+          "name": "TCL中环",
+          "changePct": -7.63
         },
         {
-          "symbol": "000712",
-          "name": "锦龙股份",
-          "changePct": -1.22
+          "symbol": "300093",
+          "name": "金刚光伏",
+          "changePct": -2.63
         }
       ]
     },
@@ -667,26 +298,330 @@
       "name": "白酒",
       "boardCode": "BK0896",
       "boardName": "白酒",
-      "boardChangePct": -0.11,
-      "boardUp": 20,
-      "boardDown": 19,
+      "boardChangePct": -1.15,
+      "boardUp": 3,
+      "boardDown": 37,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": []
+    },
+    {
+      "key": "pharma",
+      "name": "创新药",
+      "boardCode": "BK1106",
+      "boardName": "创新药",
+      "boardChangePct": -0.84,
+      "boardUp": 40,
+      "boardDown": 175,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "002419",
-          "name": "天虹股份",
-          "changePct": 9.98
+          "symbol": "000766",
+          "name": "通化金马",
+          "changePct": -9.97
         },
         {
-          "symbol": "002342",
-          "name": "巨力索具",
-          "changePct": -7.32
+          "symbol": "000963",
+          "name": "华东医药",
+          "changePct": -2.81
         },
         {
-          "symbol": "000860",
-          "name": "顺鑫农业",
-          "changePct": 6.1
+          "symbol": "000513",
+          "name": "丽珠集团",
+          "changePct": -1.88
+        }
+      ]
+    },
+    {
+      "key": "travel",
+      "name": "旅游酒店",
+      "boardCode": "BK0485",
+      "boardName": "旅游酒店",
+      "boardChangePct": -0.78,
+      "boardUp": 7,
+      "boardDown": 31,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000610",
+          "name": "*ST西旅",
+          "changePct": -3.37
+        },
+        {
+          "symbol": "000524",
+          "name": "岭南控股",
+          "changePct": -3
+        },
+        {
+          "symbol": "000558",
+          "name": "天府文旅",
+          "changePct": -2.09
+        }
+      ]
+    },
+    {
+      "key": "brokerage",
+      "name": "券商",
+      "boardCode": "BK1366",
+      "boardName": "证券Ⅲ",
+      "boardChangePct": -0.63,
+      "boardUp": 2,
+      "boardDown": 44,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000686",
+          "name": "东北证券",
+          "changePct": 1.29
+        },
+        {
+          "symbol": "002945",
+          "name": "华林证券",
+          "changePct": 1.21
+        },
+        {
+          "symbol": "600061",
+          "name": "国投资本",
+          "changePct": -0.99
+        }
+      ]
+    },
+    {
+      "key": "quantum",
+      "name": "量子科技",
+      "boardCode": "BK0710",
+      "boardName": "量子科技",
+      "boardChangePct": -0.58,
+      "boardUp": 28,
+      "boardDown": 56,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "002222",
+          "name": "福晶科技",
+          "changePct": 6.12
+        },
+        {
+          "symbol": "002819",
+          "name": "东方中科",
+          "changePct": -5.18
+        },
+        {
+          "symbol": "002126",
+          "name": "银轮股份",
+          "changePct": -2.44
+        }
+      ]
+    },
+    {
+      "key": "agriculture",
+      "name": "农业",
+      "boardCode": "BK1261",
+      "boardName": "种植业",
+      "boardChangePct": -0.54,
+      "boardUp": 4,
+      "boardDown": 15,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "600354",
+          "name": "敦煌种业",
+          "changePct": -1.79
+        },
+        {
+          "symbol": "601118",
+          "name": "海南橡胶",
+          "changePct": -1.71
+        },
+        {
+          "symbol": "600371",
+          "name": "万向德农",
+          "changePct": -1.36
+        }
+      ]
+    },
+    {
+      "key": "ev",
+      "name": "新能源车",
+      "boardCode": "BK0900",
+      "boardName": "新能源车",
+      "boardChangePct": -0.52,
+      "boardUp": 252,
+      "boardDown": 446,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000678",
+          "name": "襄阳轴承",
+          "changePct": -8.66
+        },
+        {
+          "symbol": "000559",
+          "name": "万向钱潮",
+          "changePct": -4
+        },
+        {
+          "symbol": "000062",
+          "name": "深圳华强",
+          "changePct": 2.01
+        }
+      ]
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": 0.52,
+      "boardUp": 10,
+      "boardDown": 3,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "300139",
+          "name": "晓程科技",
+          "changePct": 2.49
+        },
+        {
+          "symbol": "600988",
+          "name": "赤峰黄金",
+          "changePct": 1.79
+        },
+        {
+          "symbol": "601069",
+          "name": "西部黄金",
+          "changePct": 1.13
+        }
+      ]
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "boardCode": "BK0490",
+      "boardName": "军工",
+      "boardChangePct": -0.39,
+      "boardUp": 162,
+      "boardDown": 274,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000678",
+          "name": "襄阳轴承",
+          "changePct": -8.49
+        },
+        {
+          "symbol": "000530",
+          "name": "冰山冷热",
+          "changePct": 3.18
+        },
+        {
+          "symbol": "000547",
+          "name": "航天发展",
+          "changePct": -1.87
+        }
+      ]
+    },
+    {
+      "key": "bank",
+      "name": "银行",
+      "boardCode": "BK1283",
+      "boardName": "银行",
+      "boardChangePct": -0.28,
+      "boardUp": 11,
+      "boardDown": 28,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "600928",
+          "name": "西安银行",
+          "changePct": -1.54
+        },
+        {
+          "symbol": "002142",
+          "name": "宁波银行",
+          "changePct": -1.08
+        },
+        {
+          "symbol": "601077",
+          "name": "渝农商行",
+          "changePct": -0.94
+        }
+      ]
+    },
+    {
+      "key": "comms",
+      "name": "通信",
+      "boardCode": "BK0448",
+      "boardName": "通信设备",
+      "boardChangePct": -0.27,
+      "boardUp": 34,
+      "boardDown": 58,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "002897",
+          "name": "意华股份",
+          "changePct": 4.94
+        },
+        {
+          "symbol": "002881",
+          "name": "美格智能",
+          "changePct": -2.95
+        },
+        {
+          "symbol": "002313",
+          "name": "日海智能",
+          "changePct": -2.88
+        }
+      ]
+    },
+    {
+      "key": "consumer-elec",
+      "name": "消费电子",
+      "boardCode": "BK1037",
+      "boardName": "消费电子",
+      "boardChangePct": 0.12,
+      "boardUp": 46,
+      "boardDown": 52,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": []
+    },
+    {
+      "key": "steel",
+      "name": "钢铁",
+      "boardCode": "BK1227",
+      "boardName": "特钢Ⅱ",
+      "boardChangePct": 0.12,
+      "boardUp": 8,
+      "boardDown": 4,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "600117",
+          "name": "西宁特钢",
+          "changePct": -1.02
+        },
+        {
+          "symbol": "603995",
+          "name": "甬金股份",
+          "changePct": 0.92
+        },
+        {
+          "symbol": "002318",
+          "name": "久立特材",
+          "changePct": 0.89
         }
       ]
     }
