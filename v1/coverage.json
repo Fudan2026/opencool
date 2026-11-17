@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-17T10:14:02+08:00",
+  "generatedAt": "2026-11-17T10:54:03+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -11,7 +11,7 @@
     "lastDate": "2026-11-17",
     "days": 2,
     "tradingDays": 2,
-    "snapshots": 11,
+    "snapshots": 12,
     "revisionFiles": 0
   },
   "days": [
@@ -37,13 +37,12 @@
       "date": "2026-11-17",
       "tradingDay": true,
       "beforeLaunch": false,
-      "expectedSlots": 2,
-      "capturedSlots": 1,
+      "expectedSlots": 3,
+      "capturedSlots": 2,
       "missingSlots": [
         "09:35"
       ],
       "pendingSlots": [
-        "10:35",
         "11:05",
         "11:35",
         "13:05",
@@ -54,11 +53,11 @@
       ],
       "revisions": 0,
       "sections": {
-        "indices": 1,
-        "industries": 1,
-        "themes": 1,
-        "fundFlows": 1,
-        "limitPool": 1
+        "indices": 2,
+        "industries": 2,
+        "themes": 2,
+        "fundFlows": 2,
+        "limitPool": 2
       },
       "gaps": [
         {
@@ -91,8 +90,8 @@
     {
       "key": "1d",
       "hours": 24,
-      "measured": 307,
-      "pending": 1680,
+      "measured": 338,
+      "pending": 1645,
       "available": true
     },
     {
@@ -107,9 +106,9 @@
   "summary": {
     "daysWithGaps": 1,
     "daysComplete": 1,
-    "expectedSlots": 12,
-    "capturedSlots": 11,
-    "coveragePct": 91.7,
+    "expectedSlots": 13,
+    "capturedSlots": 12,
+    "coveragePct": 92.3,
     "gaps": 1
   }
 }
