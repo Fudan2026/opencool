@@ -149,9 +149,746 @@
     <p class="subtitle">半个钟头一个截面：谁动了、动得多宽、指数怎么说</p>
   </header>
   <div class="pickers">
-          <div><p class="picker-label">交易日</p><div class="chips" role="group" aria-label="交易日"><button type="button" class="day-chip chip has-data active" data-day="2026-11-16"><span class="dot"></span>2026-11-16</button></div></div>
+          <div><p class="picker-label">交易日</p><div class="chips" role="group" aria-label="交易日"><button type="button" class="day-chip chip has-data active" data-day="2026-11-17"><span class="dot"></span>2026-11-17</button><button type="button" class="day-chip chip has-data" data-day="2026-11-16"><span class="dot"></span>2026-11-16</button></div></div>
         </div>
-        <div class="day-panel active" data-day-panel="2026-11-16">
+        <div class="day-panel active" data-day-panel="2026-11-17">
+        
+        <div class="pickers">
+          <div><p class="picker-label">盘面时点</p><div class="chips" role="group" aria-label="盘面时点"><button type="button" class="slot-chip chip is-empty" data-slot="09:35"><span class="dot"></span>09:35</button><button type="button" class="slot-chip chip has-data active" data-slot="10:05"><span class="dot"></span>10:05</button><button type="button" class="slot-chip chip is-empty" data-slot="10:35"><span class="dot"></span>10:35</button><button type="button" class="slot-chip chip is-empty" data-slot="11:05"><span class="dot"></span>11:05</button><button type="button" class="slot-chip chip is-empty" data-slot="11:35"><span class="dot"></span>11:35</button><button type="button" class="slot-chip chip is-empty" data-slot="13:05"><span class="dot"></span>13:05</button><button type="button" class="slot-chip chip is-empty" data-slot="13:35"><span class="dot"></span>13:35</button><button type="button" class="slot-chip chip is-empty" data-slot="14:05"><span class="dot"></span>14:05</button><button type="button" class="slot-chip chip is-empty" data-slot="14:35"><span class="dot"></span>14:35</button><button type="button" class="slot-chip chip is-empty" data-slot="15:05"><span class="dot"></span>15:05</button></div></div>
+        </div>
+        <section class="slot-panel" data-slot-panel="09:35"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">09:35 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel active" data-slot-panel="10:05"><div class="card" data-slot-reading="2026-11-17/10:05">
+              <div class="slot-head">
+                <span class="slot-time">10:05</span>
+                <span class="slot-date">2026-11-17 · Asia/Shanghai</span>
+                
+              </div>
+              
+    <div class="two-clocks" data-asof="2026-11-17T10:13:21+08:00" data-observed-at="2026-11-17T10:12:04+08:00">
+      <p class="clock-line">两个时钟：行情时间 asOf 2026-11-17 10:13:21 +08:00 是数据描述的市场时刻，观察时间 observedAt 2026-11-17 10:12:04 +08:00 是我们抓取的瞬间。</p>
+      <p class="clock-note" data-drift-minutes="-1.3">两者基本重合，这一档就是当下的盘面。</p>
+    </div>
+    
+    <div class="prose"><p>上证指数收于 3571.79 点，明显下跌 -0.85%；深证成指明显下跌 -0.75%，创业板指明显下跌 -1.16%。</p><p>行业层面 496 个板块中 112 个上涨、382 个下跌、2 个基本走平，上涨家数占比 23%——偏弱。</p><p>领涨的是集成电路制造（+3.02%），领跌的是稀土（-7.98%）；涨幅超过 2% 的板块 4 个，跌幅超过 2% 的 43 个。其中涨逾 5% 的 0 个、跌逾 5% 的 9 个。</p><p>资金面上，半导体 净流入 +4.99 亿，传媒 净流出 -21.43 亿。</p><p>24 个主题板块中 16 个拿到报价、4 个上涨，最强的是有色金属（+0.80%），最弱的是传媒（-4.64%）。</p><p>全市场涨停 22 家、跌停 27 家。</p><p>同一时间窗（前 30 分钟）里，账本新收录 168 条故事，最早一条来自 Bloomberg Markets，观测于 10:07:33：Bilt CEO on the Launch of “Neighborhood OS”。</p></div>
+    <h3 class="sub-head">指数</h3><table class="tape-table" data-table="indices"><thead><tr><th>指数</th><th>%</th><th>asOf</th></tr></thead><tbody><tr><td>上证指数</td><td class="neg">-0.85%</td><td class="muted tiny">10:12:30</td></tr><tr><td>深证成指</td><td class="neg">-0.75%</td><td class="muted tiny">10:12:30</td></tr><tr><td>创业板指</td><td class="neg">-1.16%</td><td class="muted tiny">10:12:30</td></tr></tbody></table>
+    <h3 class="sub-head">分段时钟</h3>
+    <table class="tape-table clocks" data-table="clocks"><thead><tr><th>section</th><th>asOf</th><th>observedAt</th><th>source</th></tr></thead><tbody><tr class=""><td>指数</td><td class="muted tiny">2026-11-17 10:12:30 +08:00</td><td class="muted tiny">2026-11-17 10:12:04 +08:00</td><td class="muted tiny">upstream</td></tr><tr class=""><td>行业板块</td><td class="muted tiny">2026-11-17 10:12:27 +08:00</td><td class="muted tiny">2026-11-17 10:12:04 +08:00</td><td class="muted tiny">upstream</td></tr><tr class=""><td>主题板块</td><td class="muted tiny">2026-11-17 10:12:27 +08:00</td><td class="muted tiny">2026-11-17 10:12:04 +08:00</td><td class="muted tiny">upstream</td></tr><tr class=""><td>板块资金</td><td class="muted tiny">2026-11-17 10:13:21 +08:00</td><td class="muted tiny">2026-11-17 10:12:04 +08:00</td><td class="muted tiny">upstream</td></tr><tr class=""><td>涨跌停池</td><td class="muted tiny">2026-11-17 10:12:04 +08:00</td><td class="muted tiny">2026-11-17 10:12:04 +08:00</td><td class="muted tiny">fetch</td></tr></tbody></table>
+    <h3 class="sub-head">故事线</h3>
+    <ul class="story-list"><li class="story-hit" data-story="st_011dafe409">
+        <a href="https://www.bloomberg.com/news/videos/2026-11-16/bilt-ceo-on-the-launch-of-neighborhood-os-video" target="_blank" rel="noopener noreferrer">Bilt CEO on the Launch of “Neighborhood OS”</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_038778e87f">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-16/gold-steadies-near-14-month-low-as-inflation-pressure-persists" target="_blank" rel="noopener noreferrer">Gold Steadies Near 14-Month Low as Inflation Pressure Persists</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_0395794bda">
+        <a href="https://www.cnbc.com/2026/11/16/nvidia-cramer-ai-trade-leadership-change.html" target="_blank" rel="noopener noreferrer">Jim Cramer says Nvidia’s leadership shake-up won’t derail the AI trade</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_04aa96089c">
+        <a href="https://thediplomat.com/2026/11/the-geopolitics-of-eurasias-newest-proposed-route-the-casa-railway-project/" target="_blank" rel="noopener noreferrer">The Geopolitics of Eurasia’s Newest Proposed Route: The CASA Railway Project</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_04b0181a06">
+        <a href="https://www.ft.com/content/bd65d6e0-3ecb-498c-b684-c7e4c782a0ae?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">CVC plans to back out of Italian deal with Advent, triggering potential legal clash</a>
+        <span class="story-meta">来源 Financial Times · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_0614ad2ac4">
+        <a href="https://www.trefis.com/stock/mpwr/articles/625197/what-is-monolithic-power-systems-no-longer-telling-you/2026-11-16?.tsrc=rss" target="_blank" rel="noopener noreferrer">What Is Monolithic Power Systems No Longer Telling You?</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_063e35a517">
+        <a href="https://www.nytimes.com/2026/11/16/world/europe/un-killer-robots-autonomous-weapons.html" target="_blank" rel="noopener noreferrer">U.N. Starts Uncertain Effort to Regulate Lethal Autonomous Weapons</a>
+        <span class="story-meta">来源 NYT World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_073ec3ced0">
+        <a href="https://www.solidot.org/story?sid=85884" target="_blank" rel="noopener noreferrer">美国历史上第三次航班大停飞</a>
+        <span class="story-meta">来源 Solidot 奇客 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_08523917d0">
+        <a href="https://thediplomat.com/2026/11/nepali-prime-minister-balen-shah-continues-to-test-the-limits-of-executive-power/" target="_blank" rel="noopener noreferrer">Nepali Prime Minister Balen Shah Continues to Test the Limits of Executive Power</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_089eb34526">
+        <a href="https://thediplomat.com/2026/11/sinopec-demands-derail-oil-refinery-plans-at-sri-lankas-hambantota/" target="_blank" rel="noopener noreferrer">Sinopec Demands Derail Oil Refinery Plans at Sri Lanka’s Hambantota</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_09168fc0d3">
+        <a href="https://www.bbc.co.uk/news/articles/ckx27v6dpjz0o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Landmark Crimea bridge hit as Russia reports biggest Ukrainian drone attack of war</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_0a5727f20c">
+        <a href="https://www.nytimes.com/2026/11/16/world/asia/roosters-cockfighting-philippines.html" target="_blank" rel="noopener noreferrer">American Roosters Fight in the Philippines Despite U.S. Crackdown</a>
+        <span class="story-meta">来源 NYT World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_0bb3b013e4">
+        <a href="https://www.aljazeera.com/news/2026/11/16/paraguay-ex-president-moved-to-military-jail-amid-special-treatment-reports?traffic_source=rss" target="_blank" rel="noopener noreferrer">Paraguay ex-president moved to military jail amid special treatment reports</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_0bfbab70c0">
+        <a href="https://www.cnbc.com/2026/11/16/anthropic-proxy-destiny-tech100-fund.html" target="_blank" rel="noopener noreferrer">This Anthropic proxy play is getting traders&#39; attention – here&#39;s where they see it going</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_0de11e11ad">
+        <a href="https://www.cnbc.com/make-it/2026/11/16/5-years-after-the-nft-boom-theres-a-lesson-for-investors-.html" target="_blank" rel="noopener noreferrer">A major NFT marketplace is shutting down—5 years after the boom, there&#39;s a lesson for investors</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_0de6e66ae2">
+        <a href="https://www.cnbc.com/2026/11/16/berkshire-hathaway-raised-its-stake-in-delta-air-in-the-third-quarter.html" target="_blank" rel="noopener noreferrer">Berkshire Hathaway raised its stake in Delta in the third quarter. It also trimmed a key bank holding</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_11044f54cc">
+        <a href="https://www.cnbc.com/2026/11/16/disney-options-trade-before-earnings.html" target="_blank" rel="noopener noreferrer">Market&#39;s Nvidia obsession obscuring an opportunity in this name</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_135cd76e5a">
+        <a href="https://www.ftchinese.com/story/001111388" target="_blank" rel="noopener noreferrer">科技投资者：“成功和名望”损害硅谷企业领导水平</a>
+        <span class="story-meta">来源 FT中文网 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_13dfea7a09">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-16/latest-oil-market-news-and-analysis-for-nov-17" target="_blank" rel="noopener noreferrer">Latest Oil Market News and Analysis for Nov. 17</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_15039ab5fb">
+        <a href="https://www.npr.org/2026/11/16/nx-s1-6035000/africa-trading-in-yuan" target="_blank" rel="noopener noreferrer">Africa: Trading in yuan</a>
+        <span class="story-meta">来源 NPR World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_159243200d">
+        <a href="https://www.aljazeera.com/news/2026/11/17/ethiopia-moyale-clashes-disrupt-livelihoods-as-territorial-dispute-deepens?traffic_source=rss" target="_blank" rel="noopener noreferrer">Ethiopia Moyale clashes disrupt livelihoods as territorial dispute deepens</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_16458d4b7c">
+        <a href="https://www.bbc.co.uk/news/articles/c574290jvk8wo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Robert Pattinson: How the Twilight star became 007</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_165213d60c">
+        <a href="https://www.leiphone.com/category/transportation/9YeGaaNjyBi0zkQ4.html" target="_blank" rel="noopener noreferrer">26.99万元起，腾势N8正式上市：首搭易三方Evo，纯电续航1003公里</a>
+        <span class="story-meta">来源 雷锋网 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_183471e133">
+        <a href="https://beincrypto.com/market-bloodbath-2-trillion-5-factors/?.tsrc=rss" target="_blank" rel="noopener noreferrer">Stocks, Gold, and Asia Bleed $2.2 Trillion: Top 5 Factors That Triggered the Crash</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_18d16ddaef">
+        <a href="https://www.ft.com/content/c2d24c06-85df-4550-8cd9-9ec5774d3d1c?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">UK air traffic chief stands by dividends amid outage backlash</a>
+        <span class="story-meta">来源 Financial Times · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_1987cd90c9">
+        <a href="https://beincrypto.com/crypto-crash-fed-rate-hike-bets/?.tsrc=rss" target="_blank" rel="noopener noreferrer">This Isn’t a Crypto Crash. Fed Hike Bets Are Hitting Everything</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_1d8f4ecb00">
+        <a href="https://www.bbc.co.uk/news/articles/cmy97qperq9eo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Houthi rebel advance in Yemen may further destabilise global economy</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_21c4105fac">
+        <a href="https://thediplomat.com/2026/11/ashok-swain-on-the-mounting-opposition-to-modis-authoritarian-rule/" target="_blank" rel="noopener noreferrer">Ashok Swain on the Mounting Opposition to Modi’s Authoritarian Rule</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_22c323fd09">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-16/airasia-malaysia-airports-in-122-million-debt-repayment-talks" target="_blank" rel="noopener noreferrer">AirAsia, Malaysia Airports in $122 Million Debt Repayment Talks</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_243be59e15">
+        <a href="https://finance.yahoo.com/markets/stocks/articles/stocks-carry-weekly-gains-wall-002300085.html?.tsrc=rss" target="_blank" rel="noopener noreferrer">Stocks Carry Weekly Gains Into a Wall of Chart Resistance as Volatility Cools</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_26fdb82738">
+        <a href="https://www.qbitai.com/2026/11/510369.html" target="_blank" rel="noopener noreferrer">提速2.48倍且画质不掉线，AI视频“降本增效”有了新解法</a>
+        <span class="story-meta">来源 量子位 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_28d06c22ee">
+        <a href="https://www.bbc.co.uk/news/articles/cvde1klewg88o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Ashes of exiled Nobel Laureate Miguel Ángel Asturias returned to Guatemala</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_29920bf878">
+        <a href="https://www.qbitai.com/2026/11/510493.html" target="_blank" rel="noopener noreferrer">SuperLink2026开启创投行业超级链接时刻，12月北京见</a>
+        <span class="story-meta">来源 量子位 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_2a3fc1431d">
+        <a href="https://www.qbitai.com/2026/11/510542.html" target="_blank" rel="noopener noreferrer">睿尔曼智能郑随兵：质量、经济性、稳定性是机器人落地三大标准</a>
+        <span class="story-meta">来源 量子位 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_2bf8dd6ef2">
+        <a href="https://www.bbc.co.uk/news/videos/cmd91xjd9zk2o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">When will we see Robert Pattinson as Bond in cinemas?</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_2f3430e9b8">
+        <a href="https://www.aljazeera.com/video/newsfeed/2026/11/16/london-palestine-film-festival-returns-for-27th-year?traffic_source=rss" target="_blank" rel="noopener noreferrer">London Palestine Film Festival returns for 27th year</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_30b493bd33">
+        <a href="https://www.fool.com/investing/2026/11/16/why-broadcom-stock-got-mashed-on-monday/?.tsrc=rss" target="_blank" rel="noopener noreferrer">Why Broadcom Stock Got Mashed on Monday</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_30d8ec6f5c">
+        <a href="https://www.trefis.com/stock/ceg/articles/625176/whats-going-to-happen-with-constellation-energy-stock-soon/2026-11-16?.tsrc=rss" target="_blank" rel="noopener noreferrer">What&#39;s Going To Happen With Constellation Energy Stock Soon?</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_30f9ca664a">
+        <a href="https://www.aljazeera.com/news/2026/11/16/california-files-lawsuit-against-openai-alleging-lack-of-proper-safeguards?traffic_source=rss" target="_blank" rel="noopener noreferrer">California files lawsuit against OpenAI alleging lack of proper safeguards</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_3318192a4f">
+        <a href="https://www.solidot.org/story?sid=85904" target="_blank" rel="noopener noreferrer">没有足够的植物纤维肠道细菌可能会吃你的肠道内壁</a>
+        <span class="story-meta">来源 Solidot 奇客 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_33287c8c5d">
+        <a href="https://www.bloomberg.com/news/videos/2026-11-17/the-close-11-16-2026-video" target="_blank" rel="noopener noreferrer">Tech Under Pressure Ahead of Anthropic IPO, Stock Selloff Continues</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_357927c710">
+        <a href="https://www.dw.com/zh/中国与东盟称将保持克制-南海距离-定规矩-还有多远？/a-79960794?maca=chi-rss-chi-all-1127-rdf" target="_blank" rel="noopener noreferrer">中国与东盟称将保持克制 南海距离“定规矩”还有多远？</a>
+        <span class="story-meta">来源 DW 中文 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_35a294e3b0">
+        <a href="https://www.bloomberg.com/news/videos/2026-11-16/shamrock-s-lasalle-different-ways-to-invest-in-sports-video" target="_blank" rel="noopener noreferrer">Shamrock’s Lasalle: Different Ways To Invest in Sports</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_3842ce2063">
+        <a href="https://www.nytimes.com/2026/11/16/world/middleeast/bahrain-shiite-clerics-convicted.html" target="_blank" rel="noopener noreferrer">Bahrain Convicts Dozens of Shiite Clerics in Sweeping Terrorism Trial</a>
+        <span class="story-meta">来源 NYT World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_38668d7c20">
+        <a href="https://www.marketwatch.com/story/the-fda-declined-to-approve-one-of-biotechs-most-closely-watched-cancer-drugs-d7c6a0a3?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer">The FDA declined to approve one of biotech’s most closely watched cancer drugs. The company’s stock tumbled.</a>
+        <span class="story-meta">来源 MarketWatch · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_387ceded55">
+        <a href="https://www.npr.org/2026/11/16/nx-s1-6042548/un-killer-robots-ai-weapons-drones" target="_blank" rel="noopener noreferrer">U.N. talks seek to rein in &#39;killer robots&#39; as fears over AI weapons grow</a>
+        <span class="story-meta">来源 NPR World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_389364aa85">
+        <a href="https://www.trefis.com/stock/cat/articles/625206/what-has-changed-in-caterpillars-story/2026-11-16?.tsrc=rss" target="_blank" rel="noopener noreferrer">What Has Changed In Caterpillar&#39;s Story?</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_38a7a679a1">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-16/rbnz-flags-growing-private-credit-risks-in-real-estate-finance" target="_blank" rel="noopener noreferrer">RBNZ Flags Growing Private Credit Risks in Property Finance</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_39fe0be255">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-16/colombia-s-de-la-espriella-vows-spending-cuts-in-investor-pitch" target="_blank" rel="noopener noreferrer">Colombia’s De La Espriella Vows Spending Cuts in Investor Pitch</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_3b44502b81">
+        <a href="https://www.aljazeera.com/news/2026/11/16/us-pentagon-rejects-allegations-linking-deputy-to-a-goldman-sachs-banker?traffic_source=rss" target="_blank" rel="noopener noreferrer">US Pentagon rejects allegations linking deputy to a Goldman Sachs banker</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_3c25a19824">
+        <a href="https://www.bloomberg.com/news/videos/2026-11-16/alzheimer-s-will-be-treatable-says-david-cameron-video" target="_blank" rel="noopener noreferrer">Alzheimer&#39;s Will Be a &quot;Treatable Condition,&quot; Says David Cameron</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_4366452f0c">
+        <a href="https://www.cnbc.com/2026/11/16/novo-wegovy-obesity-children-trial.html" target="_blank" rel="noopener noreferrer">Novo says Wegovy injection lowers BMI and obesity rates in children in trial</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_4917183231">
+        <a href="https://www.bbc.co.uk/news/articles/c6wy4l8nl42wo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Faisal Islam: What&#39;s in the Brexit reset food deal and are there trade-offs?</a>
+        <span class="story-meta">来源 BBC Business · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_49bd1a86ba">
+        <a href="https://www.economist.com/finance-and-economics/2026/11/16/america-does-not-produce-world-beating-statistics-who-does" target="_blank" rel="noopener noreferrer">America does not produce world-beating statistics. Who does?</a>
+        <span class="story-meta">来源 The Economist Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_4d951adbee">
+        <a href="https://www.ft.com/content/748f9a4b-fed7-45ba-bc74-a5fa9cfee09b?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">Miliband ‘would not quit’ over Rosebank oilfield approval</a>
+        <span class="story-meta">来源 Financial Times · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_4e05c81872">
+        <a href="https://www.dw.com/zh/赴美留学的人数减少-一些学生改赴中国-原因何在？/a-79961436?maca=chi-rss-chi-all-1127-rdf" target="_blank" rel="noopener noreferrer">赴美留学的人数减少 一些学生改赴中国 原因何在？</a>
+        <span class="story-meta">来源 DW 中文 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_4ef21689b6">
+        <a href="https://www.aljazeera.com/news/2026/11/16/eu-agrees-to-resurrect-cooperation-deal-with-syria?traffic_source=rss" target="_blank" rel="noopener noreferrer">EU agrees to resurrect cooperation deal with Syria</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_50c30b1ddf">
+        <a href="https://www.cnbc.com/2026/11/16/jpmorgan-chase-technical-issue.html" target="_blank" rel="noopener noreferrer">JPMorgan Chase says temporary software bug is affecting consumer banking</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5245035831">
+        <a href="https://www.aljazeera.com/gallery/2026/11/16/photos-california-residents-gather-to-watch-massive-el-nino-fuelled-waves?traffic_source=rss" target="_blank" rel="noopener noreferrer">Photos: California residents gather to watch massive El Nino-fuelled waves</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_52849f2b7a">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-17/samuel-sekuritas-denies-it-pumped-stock-took-part-in-msci-trade" target="_blank" rel="noopener noreferrer">Samuel Sekuritas Denies It Pumped Stock, Took Part in MSCI Trade</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_52b7d80fd5">
+        <a href="https://www.bbc.co.uk/news/articles/cry49plv8v3go?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Nvidia dismisses &#39;Bring Jensen Back&#39; campaign as Trump backs effort to reinstate ex CEO</a>
+        <span class="story-meta">来源 BBC Business · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5425c9d726">
+        <a href="https://www.aljazeera.com/news/2026/11/16/israeli-opposition-accuses-netanyahu-of-attempted-coup?traffic_source=rss" target="_blank" rel="noopener noreferrer">Israeli opposition accuses Netanyahu of attempted ‘coup’</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_54e0507ed2">
+        <a href="https://www.nytimes.com/2026/11/16/world/climate-cop31-ukraine-nvidia-james-bond.html" target="_blank" rel="noopener noreferrer">The Death of ‘Keep 1.5 Alive’</a>
+        <span class="story-meta">来源 NYT World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_58e5077b1f">
+        <a href="https://www.ft.com/content/d08ee4e3-210d-45d2-92be-2b98a8b150b6?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">Six-year-olds: Novo’s new frontier for weight-loss drugs</a>
+        <span class="story-meta">来源 Financial Times · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_59538a9a08">
+        <a href="https://www.qbitai.com/2026/11/510436.html" target="_blank" rel="noopener noreferrer">余承东发布新款问界M8：38万元起售，全系预埋L3架构</a>
+        <span class="story-meta">来源 量子位 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5a8c2bff83">
+        <a href="https://www.bbc.co.uk/news/articles/c38xzy980924o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">&#39;Complete system reset&#39; needed to get 440,000 young people into work, says major review</a>
+        <span class="story-meta">来源 BBC Business · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5b15510a95">
+        <a href="https://thediplomat.com/2026/11/it-is-time-for-timor-leste-to-acknowledge-the-victims-of-the-santa-cruz-massacre/" target="_blank" rel="noopener noreferrer">It Is Time For Timor-Leste to Acknowledge the Victims of the Santa Cruz Massacre</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5b8b03c4fe">
+        <a href="https://www.aljazeera.com/sports/2026/11/16/germany-thrash-netherlands-to-book-quarterfinal-spot?traffic_source=rss" target="_blank" rel="noopener noreferrer">Germany thrash Netherlands to book quarterfinal spot</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5beca6b6df">
+        <a href="https://www.bbc.co.uk/news/articles/c8ly0yr7wv1no?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Is India rethinking its short-term military recruitment scheme?</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5d05e48529">
+        <a href="https://www.trefis.com/stock/vst/articles/625175/what-mattered-most-in-vistras-latest-quarter/2026-11-16?.tsrc=rss" target="_blank" rel="noopener noreferrer">What Mattered Most In Vistra&#39;s Latest Quarter?</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5e0532c577">
+        <a href="https://www.cnbc.com/2026/11/16/openai-independent-ai-safety-evaluators.html" target="_blank" rel="noopener noreferrer">OpenAI inks agreements with four independent evaluators to boost company&#39;s safety work</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5e52890626">
+        <a href="https://www.marketwatch.com/story/berkshire-upped-its-bet-on-a-beleaguered-u-s-housing-market-while-souring-on-these-bank-stocks-2e8de402?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer">Berkshire upped its bet on a beleaguered U.S. housing market, while souring on these bank stocks</a>
+        <span class="story-meta">来源 MarketWatch · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5f10a4af22">
+        <a href="https://www.ft.com/content/b7655aab-8a43-4046-ab61-d56ec4843006?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">Jefferies fund eased lending checks on iron ore traders accused of fraud</a>
+        <span class="story-meta">来源 Financial Times · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_5f60480427">
+        <a href="https://www.leiphone.com/category/industrynews/LTOeijdeWR08fZGP.html" target="_blank" rel="noopener noreferrer">平均年龄25岁，00后小伙带队拿下首届蚂蚁灵波具身大模型挑战赛最高分</a>
+        <span class="story-meta">来源 雷锋网 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_61b336a03f">
+        <a href="https://thediplomat.com/2026/11/is-bangladesh-sending-human-rights-violators-abroad-as-peacekeepers/" target="_blank" rel="noopener noreferrer">Is Bangladesh Sending Human Rights Violators Abroad as Peacekeepers?</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_6535504ffc">
+        <a href="https://www.trefis.com/stock/swk/articles/625167/where-could-stanley-black-deckers-next-growth-come-from/2026-11-16?.tsrc=rss" target="_blank" rel="noopener noreferrer">Where Could Stanley Black &amp; Decker&#39;s Next Growth Come From?</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_65356e6ac9">
+        <a href="https://www.theguardian.com/sport/2026/nov/17/makybe-diva-melbourne-cup-trophies-stolen-flemington-raid-mount-waverley-ntwnfb" target="_blank" rel="noopener noreferrer">Police searching for three stolen Melbourne Cup trophies worth $1m each</a>
+        <span class="story-meta">来源 The Guardian · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_653c9b9eef">
+        <a href="https://thediplomat.com/2026/11/countering-chinas-college-campus-playbook/" target="_blank" rel="noopener noreferrer">Countering China’s College Campus Playbook</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_656c041efa">
+        <a href="https://www.leiphone.com/category/industrynews/OCFaX1WjrKRkcFm5.html" target="_blank" rel="noopener noreferrer">启境GT7 Ultra舒享版纯电/增程正式上新！首付6.66万起，拿下L3级架构猎装</a>
+        <span class="story-meta">来源 雷锋网 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_69b1b9deae">
+        <a href="https://www.ft.com/content/9187b8bf-5dab-4bde-9815-a9042851c558?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">Eurasian Resources Group to split its Kazakh and African assets</a>
+        <span class="story-meta">来源 Financial Times · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_6cea2811c4">
+        <a href="https://www.theguardian.com/australia-news/2026/nov/17/proposed-nsw-laws-to-allow-coalmine-to-increase-production-pose-serious-corruption-risk" target="_blank" rel="noopener noreferrer">Proposed NSW laws to allow coalmine to increase production pose ‘serious corruption risk’</a>
+        <span class="story-meta">来源 The Guardian · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_6d826f574c">
+        <a href="https://www.bloomberg.com/news/videos/2026-11-16/learfield-s-cole-gahagan-on-economics-of-college-sports-video" target="_blank" rel="noopener noreferrer">Learfield’s Cole Gahagan on Economics of College Sports</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_6ed91d938e">
+        <a href="https://www.cnbc.com/2026/11/16/us-crude-oil-declines-to-87-a-barrel-on-recovering-middle-east-exports.html" target="_blank" rel="noopener noreferrer">U.S. crude oil declines to $85 a barrel on recovering Middle East exports</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_70463b845d">
+        <a href="https://www.theguardian.com/australia-news/2026/nov/17/labor-backpacker-policy-backflip-work-regional-australia-holiday-visas" target="_blank" rel="noopener noreferrer">Labor policy backflip will allow more backpackers to work in regional Australia</a>
+        <span class="story-meta">来源 The Guardian · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_72b3691757">
+        <a href="https://www.dw.com/zh/被中国警方通缉的台湾立委vs-蒋家后代-台北市长选战意外胶着/a-79959703?maca=chi-rss-chi-all-1127-rdf" target="_blank" rel="noopener noreferrer">被中国警方通缉的台湾立委vs.蒋家后代  台北市长选战意外胶着</a>
+        <span class="story-meta">来源 DW 中文 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_737df1be85">
+        <a href="https://finance.yahoo.com/markets/stocks/articles/investors-fleeing-navitas-semiconductor-nvts-015221715.html?.tsrc=rss" target="_blank" rel="noopener noreferrer">Investors Are Fleeing Navitas Semiconductor (NVTS). Here’s Why</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_758ebc4b55">
+        <a href="https://www.trefis.com/stock/podd/articles/625204/can-insulet-stock-jump-50/2026-11-16?.tsrc=rss" target="_blank" rel="noopener noreferrer">Can Insulet Stock Jump 50%?</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_790bbdc659">
+        <a href="https://www.npr.org/2026/11/16/nx-s1-6041687/chris-van-hollen-chuck-schumer-senate-leader" target="_blank" rel="noopener noreferrer">Chris Van Hollen says he can beat Chuck Schumer. Here&#39;s his case</a>
+        <span class="story-meta">来源 NPR World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_7b798917e5">
+        <a href="https://www.aljazeera.com/video/newsfeed/2026/11/16/manchester-uniteds-endless-loop?traffic_source=rss" target="_blank" rel="noopener noreferrer">Manchester United’s Endless Loop</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_7bd77f2023">
+        <a href="https://www.cnbc.com/2026/11/16/prediction-market-odds-for-tesla-spacex-merger-by-april-2027-top-60percent.html" target="_blank" rel="noopener noreferrer">Prediction market odds for Tesla-SpaceX merger by April 2027 top 60%</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_7d040fe6e2">
+        <a href="https://www.bbc.co.uk/news/articles/cm20vexye1d0o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Gérard Depardieu drops appeal against sexual assault conviction</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_7e8b139534">
+        <a href="https://thediplomat.com/2026/11/bengals-bjp-government-targets-christians/" target="_blank" rel="noopener noreferrer">Bengal’s BJP Government Targets Christians</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_7f7ac20f34">
+        <a href="https://www.marketwatch.com/story/my-husband-is-happily-retired-at-64-and-thinks-i-should-keep-working-is-he-being-fair-325c5f38?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer">My husband is happily retired at 64 and thinks I should keep working. Is he being fair?</a>
+        <span class="story-meta">来源 MarketWatch · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_815beee32f">
+        <a href="https://www.cnbc.com/2026/11/16/united-airlines-outage-faa.html" target="_blank" rel="noopener noreferrer">United Airlines resolves system outage that affected departing flights</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_82be790c17">
+        <a href="https://www.aljazeera.com/news/2026/11/17/yemen-army-reports-661-attacks-on-houthis-amid-houthi-push-towards-aden?traffic_source=rss" target="_blank" rel="noopener noreferrer">Yemen army reports 661 attacks on Houthis amid Houthi push towards Aden</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_858a6a4493">
+        <a href="https://www.nytimes.com/2026/11/16/world/asia/asean-trade-security-technology.html" target="_blank" rel="noopener noreferrer">10 Numbers That Might Change How You See Asia</a>
+        <span class="story-meta">来源 NYT World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_860e3a785c">
+        <a href="https://www.bbc.co.uk/news/articles/cw5y1v8de35go?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Lindsay Clancy to face retrial next year for deaths of her three children</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_870caf1e7f">
+        <a href="https://www.bbc.co.uk/news/videos/crkgvnl51w1vo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Street cricket with a legend then metro ride as William and Kate begin India visit</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_875658a92d">
+        <a href="https://www.yicai.com/news/103442203.html" target="_blank" rel="noopener noreferrer">人类首次珠峰北壁滑降背后：一场跨越生死的云端奔赴</a>
+        <span class="story-meta">来源 第一财经 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_8a6b887189">
+        <a href="https://www.bloomberg.com/news/videos/2026-11-17/bok-s-yoon-ai-concerns-add-to-korea-equity-volatility-video" target="_blank" rel="noopener noreferrer">BoK&#39;s Yoon: AI Concerns Add to Korea Equity Volatility</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_8bf65e6956">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-17/new-zealand-sees-best-quarterly-population-gain-in-two-years" target="_blank" rel="noopener noreferrer">New Zealand Sees Best Quarterly Population Gain in Two Years</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_921408af1a">
+        <a href="https://www.leiphone.com/category/zaobao/QP6ok2UwM4JBsMEx.html" target="_blank" rel="noopener noreferrer">黄仁勋被曝考虑重返英伟达担任CEO！其硅谷盟友正施压董事会；女子因拒绝给HR带咖啡被取消面试，BOSS直聘回应；李牧青出任AI公司联席CEO</a>
+        <span class="story-meta">来源 雷锋网 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_9246f1daac">
+        <a href="https://www.ftchinese.com/story/001111386" target="_blank" rel="noopener noreferrer">欧盟再度推动AI治理全球协议</a>
+        <span class="story-meta">来源 FT中文网 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_9601954812">
+        <a href="https://www.aljazeera.com/news/2026/11/16/thousands-report-difficulties-accessing-accounts-online-at-major-us-banks?traffic_source=rss" target="_blank" rel="noopener noreferrer">Thousands report online banking outages at major US banks</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_9a0aec0b7f">
+        <a href="https://thediplomat.com/2026/11/tibets-top-elected-leader-on-repression-reincarnation-and-the-future-for-tibetans/" target="_blank" rel="noopener noreferrer">Tibet’s Top Elected Leader on Repression, Reincarnation, and the Future for Tibetans</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_9bb7b8e8b3">
+        <a href="https://www.cnbc.com/investingclub/2026/11/16/eli-lilly-makes-a-deal-outside-obesity-plus-another-word-of-caution-on-nvidia.html" target="_blank" rel="noopener noreferrer">Eli Lilly makes a deal outside obesity. Plus, another word of caution on Nvidia</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_9c87b86bc3">
+        <a href="https://www.aljazeera.com/news/2026/11/16/sudanese-army-air-attack-kills-13-in-western-sudan-rights-group?traffic_source=rss" target="_blank" rel="noopener noreferrer">Sudanese army air attack kills 13 in western Sudan: Rights group</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_9ec471f857">
+        <a href="https://www.solidot.org/story?sid=85902" target="_blank" rel="noopener noreferrer">微软称下一代 Xbox 游戏机能玩 PC 游戏</a>
+        <span class="story-meta">来源 Solidot 奇客 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_9edb5be4e0">
+        <a href="https://www.cnbc.com/2026/11/16/warren-buffett-donates-5point5-billion-thanksgiving.html" target="_blank" rel="noopener noreferrer">Warren Buffett donates $5.5 billion, says kindness &#39;compounds&#39; in Thanksgiving letter</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_a088572bd7">
+        <a href="https://www.cnbc.com/2026/11/16/property-tax-relief-homeowners-bills.html" target="_blank" rel="noopener noreferrer">There&#39;s a growing &#39;property tax revolt&#39; as homeowners face rising costs. How it could impact your bill</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_a1eaf48375">
+        <a href="https://www.ft.com/content/6b475027-f28a-4d1f-9331-c19a0e4d5a68?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">The delicate balance in America’s AI chip war with China</a>
+        <span class="story-meta">来源 Financial Times · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_a611cb1971">
+        <a href="https://www.aljazeera.com/news/2026/11/17/ukraine-holds-peace-talks-with-us-europe-as-conflict-escalates?traffic_source=rss" target="_blank" rel="noopener noreferrer">Ukraine holds peace talks with US, Europe as conflict escalates</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_a69cb429ae">
+        <a href="https://www.aljazeera.com/video/newsfeed/2026/11/16/uefa-backs-diallo-to-challenge-infantino-for-fifa-presidency?traffic_source=rss" target="_blank" rel="noopener noreferrer">UEFA backs Diallo to challenge Infantino for FIFA presidency</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_a7eee1197e">
+        <a href="https://www.bbc.co.uk/news/articles/c5742lwdyzglo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">We couldn&#39;t afford a house alone, so we bought one with strangers</a>
+        <span class="story-meta">来源 BBC Business · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_a95aa41b16">
+        <a href="https://www.trefis.com/stock/axon/articles/625163/are-rising-memory-costs-a-threat-to-axon-stock/2026-11-16?.tsrc=rss" target="_blank" rel="noopener noreferrer">Are Rising Memory Costs A Threat To Axon Stock?</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_a9d2aab764">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-17/china-s-buyback-push-struggles-to-put-a-floor-under-stocks" target="_blank" rel="noopener noreferrer">China’s Buyback Push Struggles to Put a Floor Under Stocks</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_acd108d22d">
+        <a href="https://x.com/BrianGoodner/status/2122105226119254063" target="_blank" rel="noopener noreferrer">Silver&#39;s Correction: Three Critical Support Levels to Watch</a>
+        <span class="story-meta">来源 X 市场声音（站内镜像） · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_ad5d0c3a8a">
+        <a href="https://www.aljazeera.com/news/2026/11/16/five-eu-countries-announce-plan-to-send-rejected-asylum-seekers-to-rwanda?traffic_source=rss" target="_blank" rel="noopener noreferrer">Five EU countries announce plan to send rejected asylum seekers to Rwanda</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_af1b24966a">
+        <a href="https://www.cnbc.com/2026/11/16/situational-awareness-aschenbrenner-new-ai-bets.html" target="_blank" rel="noopener noreferrer">Aschenbrenner’s Situational Awareness made AI bets again before October rout</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_af91881c65">
+        <a href="https://www.marketwatch.com/story/stanley-druckenmiller-dumped-these-chip-stocks-while-buying-into-spacex-and-palantir-9ae1f078?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer">Stanley Druckenmiller dumped these chip stocks while buying into SpaceX and Palantir</a>
+        <span class="story-meta">来源 MarketWatch · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_b13daf254f">
+        <a href="https://www.dw.com/zh/大人物将聚首深圳-两年准备只为这一刻/a-79959714?maca=chi-rss-chi-all-1127-rdf" target="_blank" rel="noopener noreferrer">大人物将聚首深圳 两年准备只为这一刻</a>
+        <span class="story-meta">来源 DW 中文 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_b22aaf99ea">
+        <a href="https://www.aljazeera.com/news/2026/11/17/uk-seeks-closer-ties-with-eu-after-brexit-fail?traffic_source=rss" target="_blank" rel="noopener noreferrer">UK seeks closer ties with EU after Brexit fail</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_b236c335e5">
+        <a href="https://www.marketwatch.com/story/nvidias-stock-extends-declines-following-harsh-words-from-the-u-s-government-d721188e?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer">Nvidia’s stock extends decline following harsh words from the U.S. government</a>
+        <span class="story-meta">来源 MarketWatch · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_b245e1ee57">
+        <a href="https://www.aljazeera.com/news/2026/11/16/saudi-arabia-dismisses-commander-of-coalition-forces-fighting-houthis?traffic_source=rss" target="_blank" rel="noopener noreferrer">Saudi Arabia dismisses commander of coalition forces fighting Houthis</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_b26f131ed6">
+        <a href="https://www.theguardian.com/us-news/2026/nov/16/aircraft-middle-east-trump-military" target="_blank" rel="noopener noreferrer">Third US aircraft carrier brings thousands more troops to Middle East</a>
+        <span class="story-meta">来源 The Guardian · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_b705f1122a">
+        <a href="https://thediplomat.com/2026/11/just-by-meeting-quad-leaders-send-a-signal-to-beijing/" target="_blank" rel="noopener noreferrer">Just by Meeting, Quad Leaders Send a Signal to Beijing</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_b8ec833d0d">
+        <a href="https://www.yicai.com/news/103442422.html" target="_blank" rel="noopener noreferrer">详解10月经济数据：服务消费、投资结构亮点多</a>
+        <span class="story-meta">来源 第一财经 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_b90f19a080">
+        <a href="https://www.ft.com/content/a81eebb0-237a-4b0f-ace5-cab71cb9a326?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">UK SFO charges eight over alleged £251mn London Capital &amp; Finance fraud</a>
+        <span class="story-meta">来源 Financial Times · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_bc028a457a">
+        <a href="https://www.ft.com/content/a8f489b3-7cb1-4013-9b6b-d684a0c4fb6b?syn-25a6b1a6=1" target="_blank" rel="noopener noreferrer">UK government set to limit banks’ retreat from the high street</a>
+        <span class="story-meta">来源 Financial Times · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_bdacf1ef95">
+        <a href="https://www.theguardian.com/australia-news/2026/nov/17/myefo-mid-year-budget-update-australia-treasurer-jim-chalmers" target="_blank" rel="noopener noreferrer">Mid-year budget update will ‘cut enough, but not too much’, Jim Chalmers says</a>
+        <span class="story-meta">来源 The Guardian · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_c55b4be487">
+        <a href="https://www.theguardian.com/technology/2026/nov/17/toll-truck-driver-fired-sacked-smartglasses-australia-ntwnfb" target="_blank" rel="noopener noreferrer">Truck driver fired for ‘unsafe’ use of smartglasses in first reported sacking over device in Australia</a>
+        <span class="story-meta">来源 The Guardian · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_c89e742345">
+        <a href="https://www.nytimes.com/2026/11/16/world/canada/carney-china-xi-trump-putin-trade.html" target="_blank" rel="noopener noreferrer">Canada’s Leader, Once a Curiosity at Asia Summits, Is Now a Star</a>
+        <span class="story-meta">来源 NYT World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_c8f613f33a">
+        <a href="https://www.cnbc.com/2026/11/16/nvidia-commerce-china-lutnick.html" target="_blank" rel="noopener noreferrer">Nvidia fallout: Commerce targets loophole for China&#39;s data center use</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_ca3e9bb56b">
+        <a href="https://www.leiphone.com/category/industrynews/kfphRdgYwSdN13Nv.html" target="_blank" rel="noopener noreferrer">当充电像加油一样快，租车自驾的边界被拓宽</a>
+        <span class="story-meta">来源 雷锋网 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_ca94e3b0c7">
+        <a href="https://www.qbitai.com/2026/11/510526.html" target="_blank" rel="noopener noreferrer">2026甲子引力年终盛典即将启幕，AI的无限游戏进入「第二序章」｜甲子引力</a>
+        <span class="story-meta">来源 量子位 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_cb2e80df4b">
+        <a href="https://www.aljazeera.com/news/2026/11/17/irish-court-jails-man-for-life-over-dublin-knife-attack-that-sparked-riots?traffic_source=rss" target="_blank" rel="noopener noreferrer">Irish court jails man for life over Dublin knife attack that sparked riots</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_cfecb6b206">
+        <a href="https://www.bbc.co.uk/news/articles/cw3djdjk5d7ko?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Aged 16-24 and looking for work? Use our look-up to find out which areas have the most jobs</a>
+        <span class="story-meta">来源 BBC Business · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_d0c494f21a">
+        <a href="https://www.cnbc.com/2026/11/16/fed-ai-task-force-kevin-warsh.html" target="_blank" rel="noopener noreferrer">Fed Chairman Kevin Warsh stresses importance of AI to economy, but says it could ‘disappoint’</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_d1f63d7f16">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-17/rba-raised-rates-as-price-risks-remained-to-upside-minutes-show" target="_blank" rel="noopener noreferrer">RBA Raised Rates as Price Risks Remained to Upside, Minutes Show</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_d27d885113">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-16/billionaire-cheng-family-bankrolls-risky-new-world-rescue-plan" target="_blank" rel="noopener noreferrer">Billionaire Cheng Family Bankrolls Risky New World Rescue Plan</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_d3e8e7e8d7">
+        <a href="https://www.npr.org/2026/11/15/nx-s1-6013327/sydney-sweeney-jeans-american-eagle-garment-industry" target="_blank" rel="noopener noreferrer">What&#39;s the real cost of fast fashion? Ask the people making your jeans</a>
+        <span class="story-meta">来源 NPR World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_d46f4a6aa9">
+        <a href="https://finance.yahoo.com/markets/stocks/articles/5-consumer-staples-stocks-reaching-231000495.html?.tsrc=rss" target="_blank" rel="noopener noreferrer">5 Consumer Staples Stocks Reaching New Highs as Markets Retreat</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_d7637f52c0">
+        <a href="https://thediplomat.com/2026/11/economic-diplomacy-abroad-and-restrictions-at-home-myanmars-international-trade-dilemma/" target="_blank" rel="noopener noreferrer">Economic Diplomacy Abroad and Restrictions at Home: Myanmar’s International Trade Dilemma</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_dbec509175">
+        <a href="https://thediplomat.com/2026/11/indonesia-and-singapore-a-tale-of-two-air-forces/" target="_blank" rel="noopener noreferrer">Indonesia and Singapore: A Tale of Two Air Forces</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_dc11d9fcd0">
+        <a href="https://finance.yahoo.com/markets/commodities/articles/usda-projects-lower-beef-higher-235700990.html?.tsrc=rss" target="_blank" rel="noopener noreferrer">USDA Projects Lower Beef and Higher Chicken Output for the Year Ahead</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_dcc7e2f856">
+        <a href="https://www.yicai.com/news/103442331.html" target="_blank" rel="noopener noreferrer">多地中小学延迟到校时间</a>
+        <span class="story-meta">来源 第一财经 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_dd2c1e2da5">
+        <a href="https://finance.yahoo.com/news/fuel-cell-market-seen-18-000800746.html?.tsrc=rss" target="_blank" rel="noopener noreferrer">Fuel Cell Market Seen at $18 Billion by 2030 as Quarterly Results Diverge</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_dd3a393d47">
+        <a href="https://finance.yahoo.com/markets/stocks/articles/canadas-telecom-map-could-redrawn-235800126.html?.tsrc=rss" target="_blank" rel="noopener noreferrer">Canada&#39;s Telecom Map Could Be Redrawn as a Takeover Approach Goes Public</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_ddcb02dde7">
+        <a href="https://thediplomat.com/2026/11/asean-leaders-pledge-to-pursue-calibrated-engagement-with-myanmar/" target="_blank" rel="noopener noreferrer">ASEAN Leaders Pledge to Pursue ‘Calibrated Engagement’ With Myanmar</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_def26a7ed5">
+        <a href="https://www.fool.com/coverage/stock-market-today/2026/11/16/stock-market-today-nov-16-iren-slides-as-neocloud-weakness-and-tech-sector-selling-put-pressure-on-shares/?.tsrc=rss" target="_blank" rel="noopener noreferrer">Stock Market Today, Nov. 16: IREN Slides as Neocloud Weakness and Tech Sector Selling Put Pressure on Shares</a>
+        <span class="story-meta">来源 Yahoo Finance · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_dfb3346d19">
+        <a href="https://x.com/LaunchOnSF/status/2122447825363407054" target="_blank" rel="noopener noreferrer">StonkFun: A Message from the Founder</a>
+        <span class="story-meta">来源 X 市场声音（站内镜像） · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_e1daa79ee8">
+        <a href="https://thediplomat.com/2026/11/why-is-beijing-so-determined-to-pursue-reunification-with-taiwan/" target="_blank" rel="noopener noreferrer">Why Is Beijing So Determined to Pursue Reunification With Taiwan?</a>
+        <span class="story-meta">来源 The Diplomat · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_e25f37adf8">
+        <a href="https://www.marketwatch.com/story/do-amazons-black-friday-deals-really-save-you-money-03859cf3?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer">Do Amazon’s Black Friday deals really save you money? A new report casts doubt.</a>
+        <span class="story-meta">来源 MarketWatch · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_e2cc8fec88">
+        <a href="https://www.bbc.co.uk/news/articles/cq9vwkggpx73o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Raye, Rosalía and Dolly Parton recognised in Grammy nominations</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_e384d53567">
+        <a href="https://www.cnbc.com/2026/11/16/kalshi-plans-to-launch-stock-trading-soon.html" target="_blank" rel="noopener noreferrer">Kalshi plans to launch stock trading soon</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_ecaecadf61">
+        <a href="https://www.yicai.com/news/103442566.html" target="_blank" rel="noopener noreferrer">中俄美元首将首次面对面会晤，APEC“中国年”成果丰厚</a>
+        <span class="story-meta">来源 第一财经 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_ed0d4934a7">
+        <a href="https://www.nytimes.com/2026/11/16/world/europe/austria-karin-kneissl-citizenship.html" target="_blank" rel="noopener noreferrer">Austria May Strip Former Foreign Minister Karin Kneissl of Citizenship</a>
+        <span class="story-meta">来源 NYT World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_ef7291331c">
+        <a href="https://www.theguardian.com/world/2026/nov/16/ukraine-drone-kerch-bridge-russia-occupied-crimea" target="_blank" rel="noopener noreferrer">Ukraine hits Kerch bridge between Russia and occupied Crimea</a>
+        <span class="story-meta">来源 The Guardian · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_f123a8a26e">
+        <a href="https://www.cnbc.com/2026/11/16/as-nike-lululemon-struggle-in-china-xiaohongshu-helps-local-brands.html" target="_blank" rel="noopener noreferrer">CNBC&#39;s The China Connection newsletter: As Nike and Lululemon struggle in China, Xiaohongshu is helping local brands take off</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_f2d9268d0e">
+        <a href="https://www.bloomberg.com/news/articles/2026-11-16/citigroup-targets-5-trillion-in-wealth-from-rival-banks" target="_blank" rel="noopener noreferrer">Citigroup Targets $5 Trillion in Wealth From Rival Banks</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_f572153da5">
+        <a href="https://www.marketwatch.com/story/u-s-dollars-ai-driven-breakout-could-become-a-stock-market-wrecking-ball-18199b95?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer">U.S. dollar’s AI-driven breakout could become a stock-market wrecking ball</a>
+        <span class="story-meta">来源 MarketWatch · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_f964fe03c6">
+        <a href="https://www.bloomberg.com/news/videos/2026-11-16/betterment-ceo-sarah-levy-on-plus-debut-new-ira-options-video" target="_blank" rel="noopener noreferrer">Betterment CEO Sarah Levy on Plus Debut, New IRA Options</a>
+        <span class="story-meta">来源 Bloomberg Markets · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_fa3643031d">
+        <a href="https://www.qbitai.com/2026/11/510382.html" target="_blank" rel="noopener noreferrer">今天截止！2026年度AI表彰，错过再等一年！</a>
+        <span class="story-meta">来源 量子位 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_fb6a8a7d94">
+        <a href="https://www.qbitai.com/2026/11/510416.html" target="_blank" rel="noopener noreferrer">龙芯、海光老兵集结，通研院孵化的AGI芯片公司浮出水面！半年连融数亿元</a>
+        <span class="story-meta">来源 量子位 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_fbe355ed21">
+        <a href="https://www.aljazeera.com/video/newsfeed/2026/11/16/mamdani-to-disband-nypd-unit-deployed-at-columbia-protests?traffic_source=rss" target="_blank" rel="noopener noreferrer">Mamdani to disband NYPD unit deployed at Columbia protests</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_fcce71976f">
+        <a href="https://www.bbc.co.uk/news/articles/c5n4exg1kkmyo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Forensic expert says his analysis of autopsy photos suggests Epstein was killed</a>
+        <span class="story-meta">来源 BBC World · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_fcf9da8097">
+        <a href="https://www.qbitai.com/2026/11/510404.html" target="_blank" rel="noopener noreferrer">没搞过一天研发的他，50岁以华为董事的身份退休了</a>
+        <span class="story-meta">来源 量子位 · 首次观测 10:07:33</span>
+        
+      </li><li class="story-hit" data-story="st_fe5a8405b8">
+        <a href="https://www.cnbc.com/2026/11/16/kevin-warsh-fed-ai-jobs-productivity-interest-rateshtml.html" target="_blank" rel="noopener noreferrer">Analysis: The Fed&#39;s chairman sees an AI revolution coming. Now he has to figure out what it means</a>
+        <span class="story-meta">来源 CNBC · 首次观测 10:07:33</span>
+        
+      </li></ul><details class="earlier"><summary>更早的故事（作背景，不属于这一档）</summary><ul class="story-list"><li class="story-hit" data-story="st_02eae87ea8">
+        <a href="https://www.cls.cn/detail/2535760" target="_blank" rel="noopener noreferrer">财联社11月16日电，纳斯达克ETF华夏(513300)将于2026年11月17日开市起至当日10:30停牌。</a>
+        <span class="story-meta">来源 财联社电报 · 首次观测 19:24:17</span>
+        
+      </li><li class="story-hit" data-story="st_19301944b0">
+        <a href="https://www.cls.cn/detail/2535740" target="_blank" rel="noopener noreferrer">【电报解读】出货量同比增长超260%！AI眼镜已处于由“产品验证”向“快速放量”过渡的关键阶段，机构看好附加值更多集中于上游核心器件与下游品牌渠道两端，这家...</a>
+        <span class="story-meta">来源 财联社电报 · 首次观测 19:24:17</span>
+        
+      </li><li class="story-hit" data-story="st_28d890ba4d">
+        <a href="https://www.cls.cn/detail/2535759" target="_blank" rel="noopener noreferrer">外汇局：10月银行结汇18162亿元人民币 售汇14465亿元人民币</a>
+        <span class="story-meta">来源 财联社电报 · 首次观测 19:24:17</span>
+        
+      </li></ul></details>
+    <p class="supro-ctx" data-funnel="supro-hour"><a href="https://supro.si/paper?utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice&utm_content=hour-tape" target="_blank" rel="noopener">看完这个截面，去 SuPro 纸盘验证你的判断 ↗</a></p>
+            </div></section><section class="slot-panel" data-slot-panel="10:35"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">10:35 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="11:05"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">11:05 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="11:35"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">11:35 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="13:05"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">13:05 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="13:35"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">13:35 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="14:05"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">14:05 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="14:35"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">14:35 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="15:05"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">15:05 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section>
+        <p class="sent-muted" data-missing-slots="9">这一天共 10 个盘面时点，缺 9 个：09:35 · 10:35 · 11:05 · 11:35 · 13:05 · 13:35 · 14:05 · 14:35 · 15:05。缺失的时点在上面的时点条里逐个标出。</p>
+      </div><div class="day-panel" data-day-panel="2026-11-16">
         
         <div class="pickers">
           <div><p class="picker-label">盘面时点</p><div class="chips" role="group" aria-label="盘面时点"><button type="button" class="slot-chip chip has-data" data-slot="09:35"><span class="dot"></span>09:35</button><button type="button" class="slot-chip chip has-data" data-slot="10:05"><span class="dot"></span>10:05</button><button type="button" class="slot-chip chip has-data" data-slot="10:35"><span class="dot"></span>10:35</button><button type="button" class="slot-chip chip has-data" data-slot="11:05"><span class="dot"></span>11:05</button><button type="button" class="slot-chip chip has-data is-closed" title="休市抓取" data-slot="11:35"><span class="dot"></span>11:35</button><button type="button" class="slot-chip chip has-data" data-slot="13:05"><span class="dot"></span>13:05</button><button type="button" class="slot-chip chip has-data" data-slot="13:35"><span class="dot"></span>13:35</button><button type="button" class="slot-chip chip has-data" data-slot="14:05"><span class="dot"></span>14:05</button><button type="button" class="slot-chip chip has-data" data-slot="14:35"><span class="dot"></span>14:35</button><button type="button" class="slot-chip chip has-data is-closed active" title="休市抓取" data-slot="15:05"><span class="dot"></span>15:05</button></div></div>
