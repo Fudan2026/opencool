@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "namespace": "v1",
+  "date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "generatedAt": "2026-11-18T03:24:15+08:00",
+  "tradingDay": true,
+  "beforeLaunch": false,
+  "expectedSlots": [
+    "09:35",
+    "10:05",
+    "10:35",
+    "11:05",
+    "11:35",
+    "13:05",
+    "13:35",
+    "14:05",
+    "14:35",
+    "15:05"
+  ],
+  "pendingSlots": [
+    "09:35",
+    "10:05",
+    "10:35",
+    "11:05",
+    "11:35",
+    "13:05",
+    "13:35",
+    "14:05",
+    "14:35",
+    "15:05"
+  ],
+  "slots": [],
+  "gaps": [],
+  "counts": {
+    "expectedSlots": 0,
+    "capturedSlots": 0,
+    "revisionFiles": 0,
+    "gaps": 0
+  },
+  "note": "Each slot is the immutable first capture of that slot (the base file) with its two clocks: asOf is the market timestamp the values describe, observedAt is when we fetched them. Later re-captures are listed in captures[] and live at their own tape/<date>/<HHMM>.rev-N.json path; the base bytes are never rewritten. Every absent slot or section is named in gaps[] with a code."
+}
