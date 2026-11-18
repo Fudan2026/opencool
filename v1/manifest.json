@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-18T04:03:58+08:00",
+  "generatedAt": "2026-11-18T09:47:21+08:00",
   "timezone": "Asia/Shanghai",
   "endpoints": [
     {
@@ -79,11 +79,11 @@
   "coverage": {
     "days": 3,
     "tradingDays": 3,
-    "daysWithGaps": 1,
-    "expectedSlots": 20,
+    "daysWithGaps": 2,
+    "expectedSlots": 21,
     "capturedSlots": 12,
-    "coveragePct": 60,
-    "gaps": 8
+    "coveragePct": 57.1,
+    "gaps": 9
   },
   "license": {
     "code": "MIT",
