@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-18T09:11:47.046Z",
+  "generatedAt": "2026-11-18T18:01:48.464Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 22,
-  "avgSentiment": -5,
+  "editions": 23,
+  "avgSentiment": -5.4,
   "sentimentCurve": [
     {
       "date": "2026-11-11",
@@ -115,14 +115,19 @@
       "date": "2026-11-18",
       "hour": "13",
       "score": -2
+    },
+    {
+      "date": "2026-11-18",
+      "hour": "19",
+      "score": -16
     }
   ],
   "sectorAvg": [
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -60.9,
-      "editions": 10
+      "avg": -48.5,
+      "editions": 11
     },
     {
       "key": "china-ashare",
@@ -131,40 +136,40 @@
       "editions": 7
     },
     {
-      "key": "macro",
-      "label": "宏观指数",
-      "avg": -32.1,
-      "editions": 12
-    },
-    {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -28.6,
-      "editions": 22
+      "avg": -29.9,
+      "editions": 23
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -27.7,
-      "editions": 22
+      "avg": -27,
+      "editions": 23
+    },
+    {
+      "key": "macro",
+      "label": "宏观指数",
+      "avg": -22.1,
+      "editions": 13
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -18.8,
-      "editions": 22
+      "avg": -19.4,
+      "editions": 23
     },
     {
       "key": "china-equity",
       "label": "中概港股",
-      "avg": 7.6,
-      "editions": 10
+      "avg": 5.4,
+      "editions": 11
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -1,
-      "editions": 22
+      "avg": -1.4,
+      "editions": 23
     }
   ],
   "topEvents": [
@@ -173,27 +178,27 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 22
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Nvidia hires major US law firm to investigate alleged Chinese spy affair",
-      "url": "https://www.bbc.co.uk/news/articles/ck1wvwwl3x0go?at_medium=RSS&at_campaign=rss",
-      "count": 17
+      "count": 23
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达聘请前联邦检察官调查黄仁勋事件",
       "url": "https://www.ftchinese.com/story/001111342",
+      "count": 18
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Nvidia hires major US law firm to investigate alleged Chinese spy affair",
+      "url": "https://www.bbc.co.uk/news/articles/ck1wvwwl3x0go?at_medium=RSS&at_campaign=rss",
       "count": 17
     },
     {
@@ -206,36 +211,36 @@
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
-      "title": "Scandal-hit Nvidia CEO Jensen Huang quits, plunging AI chipmaking giant into turmoil",
-      "url": "https://www.bbc.co.uk/news/articles/cmq5vd1wdgz6o?at_medium=RSS&at_campaign=rss",
-      "count": 15
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
       "title": "How a sex scandal at Nvidia is putting pressure on the White House",
       "url": "https://www.bbc.co.uk/news/articles/c67429m3vem3o?at_medium=RSS&at_campaign=rss",
-      "count": 15
+      "count": 16
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 15
+      "count": 16
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 15
+      "count": 16
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "美议员就芯片出口管控问题向卢特尼克施压",
       "url": "https://www.ftchinese.com/story/001111365",
+      "count": 16
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Scandal-hit Nvidia CEO Jensen Huang quits, plunging AI chipmaking giant into turmoil",
+      "url": "https://www.bbc.co.uk/news/articles/cmq5vd1wdgz6o?at_medium=RSS&at_campaign=rss",
       "count": 15
     }
   ],
@@ -365,47 +370,47 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 151
+      "totalHits": 158
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 128
+      "totalHits": 131
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 82
+      "totalHits": 85
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 66
-    },
-    {
-      "key": "robotics",
-      "name": "机器人",
-      "totalHits": 58
+      "totalHits": 69
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 55
+      "totalHits": 63
+    },
+    {
+      "key": "robotics",
+      "name": "机器人",
+      "totalHits": 61
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 39
+      "totalHits": 45
     },
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 28
+      "totalHits": 29
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 26
+      "totalHits": 28
     },
     {
       "key": "comms",
@@ -415,7 +420,7 @@
     {
       "key": "gaming",
       "name": "游戏",
-      "totalHits": 19
+      "totalHits": 20
     },
     {
       "key": "pharma",
@@ -426,18 +431,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.47,
-      "editions": 22
+      "avgChangePct": -0.45,
+      "editions": 23
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.26,
-      "editions": 22
+      "avgChangePct": -1.2,
+      "editions": 23
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.96,
-      "editions": 22
+      "avgChangePct": -1.84,
+      "editions": 23
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"

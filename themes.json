@@ -1,70 +1,10 @@
 {
-  "generatedAt": "2026-11-18T09:12:05.519Z",
+  "generatedAt": "2026-11-18T18:02:06.900Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-18/13",
+  "edition": "2026-11-18/19",
   "themes": [
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": -3.96,
-      "boardUp": 0,
-      "boardDown": 13,
-      "articleHits": 3,
-      "matchedAliases": [
-        "黄金"
-      ],
-      "constituents": [
-        {
-          "symbol": "600489",
-          "name": "中金黄金",
-          "changePct": -7.32
-        },
-        {
-          "symbol": "000975",
-          "name": "山金国际",
-          "changePct": -6.8
-        },
-        {
-          "symbol": "601069",
-          "name": "西部黄金",
-          "changePct": -5.16
-        }
-      ]
-    },
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": 1.96,
-      "boardUp": 162,
-      "boardDown": 90,
-      "articleHits": 3,
-      "matchedAliases": [
-        "英伟达"
-      ],
-      "constituents": [
-        {
-          "symbol": "002042",
-          "name": "华孚时尚",
-          "changePct": 10
-        },
-        {
-          "symbol": "000701",
-          "name": "厦门信达",
-          "changePct": -6.5
-        },
-        {
-          "symbol": "000818",
-          "name": "航锦科技",
-          "changePct": 4.3
-        }
-      ]
-    },
     {
       "key": "ai",
       "name": "人工智能",
@@ -73,8 +13,9 @@
       "boardChangePct": -0.7,
       "boardUp": 212,
       "boardDown": 531,
-      "articleHits": 3,
+      "articleHits": 4,
       "matchedAliases": [
+        "人工智能",
         "AI"
       ],
       "constituents": [
@@ -96,62 +37,60 @@
       ]
     },
     {
-      "key": "brokerage",
-      "name": "券商",
-      "boardCode": "BK1366",
-      "boardName": "证券Ⅲ",
-      "boardChangePct": -0.74,
-      "boardUp": 5,
-      "boardDown": 41,
+      "key": "oil",
+      "name": "石油石化",
+      "boardCode": "BK1276",
+      "boardName": "油气开采Ⅱ",
+      "boardChangePct": 0.12,
+      "boardUp": 2,
+      "boardDown": 3,
       "articleHits": 1,
       "matchedAliases": [
-        "证券"
+        "油价"
       ],
       "constituents": [
         {
-          "symbol": "002945",
-          "name": "华林证券",
-          "changePct": -6.16
+          "symbol": "600938",
+          "name": "中国海油",
+          "changePct": 1.83
         },
         {
-          "symbol": "000686",
-          "name": "东北证券",
-          "changePct": -1.54
+          "symbol": "600777",
+          "name": "新潮能源",
+          "changePct": 1.52
         },
         {
-          "symbol": "002926",
-          "name": "华西证券",
-          "changePct": -1.34
+          "symbol": "600759",
+          "name": "ST洲际",
+          "changePct": -1.5
         }
       ]
     },
     {
-      "key": "semiconductor",
-      "name": "半导体",
-      "boardCode": "BK1036",
-      "boardName": "半导体",
-      "boardChangePct": 0.11,
-      "boardUp": 90,
-      "boardDown": 97,
-      "articleHits": 1,
-      "matchedAliases": [
-        "芯片"
-      ],
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": -3.96,
+      "boardUp": 0,
+      "boardDown": 13,
+      "articleHits": 0,
+      "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "001309",
-          "name": "德明利",
-          "changePct": 5.78
+          "symbol": "600489",
+          "name": "中金黄金",
+          "changePct": -7.32
         },
         {
-          "symbol": "300604",
-          "name": "长川科技",
-          "changePct": 3.67
+          "symbol": "000975",
+          "name": "山金国际",
+          "changePct": -6.8
         },
         {
-          "symbol": "300373",
-          "name": "扬杰科技",
-          "changePct": 2.6
+          "symbol": "601069",
+          "name": "西部黄金",
+          "changePct": -5.16
         }
       ]
     },
@@ -236,6 +175,34 @@
           "symbol": "300093",
           "name": "金刚光伏",
           "changePct": -4.94
+        }
+      ]
+    },
+    {
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": 1.96,
+      "boardUp": 162,
+      "boardDown": 90,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "002042",
+          "name": "华孚时尚",
+          "changePct": 10
+        },
+        {
+          "symbol": "000701",
+          "name": "厦门信达",
+          "changePct": -6.5
+        },
+        {
+          "symbol": "000818",
+          "name": "航锦科技",
+          "changePct": 4.3
         }
       ]
     },
@@ -492,6 +459,34 @@
       ]
     },
     {
+      "key": "brokerage",
+      "name": "券商",
+      "boardCode": "BK1366",
+      "boardName": "证券Ⅲ",
+      "boardChangePct": -0.74,
+      "boardUp": 5,
+      "boardDown": 41,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "002945",
+          "name": "华林证券",
+          "changePct": -6.16
+        },
+        {
+          "symbol": "000686",
+          "name": "东北证券",
+          "changePct": -1.54
+        },
+        {
+          "symbol": "002926",
+          "name": "华西证券",
+          "changePct": -1.34
+        }
+      ]
+    },
+    {
       "key": "infra",
       "name": "基建",
       "boardCode": "BK1247",
@@ -604,30 +599,30 @@
       ]
     },
     {
-      "key": "oil",
-      "name": "石油石化",
-      "boardCode": "BK1276",
-      "boardName": "油气开采Ⅱ",
-      "boardChangePct": 0.12,
-      "boardUp": 2,
-      "boardDown": 3,
+      "key": "semiconductor",
+      "name": "半导体",
+      "boardCode": "BK1036",
+      "boardName": "半导体",
+      "boardChangePct": 0.11,
+      "boardUp": 90,
+      "boardDown": 97,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "600938",
-          "name": "中国海油",
-          "changePct": 1.83
+          "symbol": "001309",
+          "name": "德明利",
+          "changePct": 5.78
         },
         {
-          "symbol": "600777",
-          "name": "新潮能源",
-          "changePct": 1.52
+          "symbol": "300604",
+          "name": "长川科技",
+          "changePct": 3.67
         },
         {
-          "symbol": "600759",
-          "name": "ST洲际",
-          "changePct": -1.5
+          "symbol": "300373",
+          "name": "扬杰科技",
+          "changePct": 2.6
         }
       ]
     },
