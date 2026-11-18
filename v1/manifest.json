@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-18T09:49:03+08:00",
+  "generatedAt": "2026-11-18T10:22:55+08:00",
   "timezone": "Asia/Shanghai",
   "endpoints": [
     {
@@ -53,7 +53,7 @@
     "expectedSlotsPerDay": 10,
     "firstDate": "2026-11-16",
     "lastDate": "2026-11-18",
-    "totalSlots": 13,
+    "totalSlots": 14,
     "totalRevisionFiles": 0,
     "days": [
       {
@@ -70,7 +70,7 @@
       },
       {
         "date": "2026-11-18",
-        "slots": 1,
+        "slots": 2,
         "revisions": 0,
         "complete": false
       }
@@ -80,9 +80,9 @@
     "days": 3,
     "tradingDays": 3,
     "daysWithGaps": 1,
-    "expectedSlots": 21,
-    "capturedSlots": 13,
-    "coveragePct": 61.9,
+    "expectedSlots": 22,
+    "capturedSlots": 14,
+    "coveragePct": 63.6,
     "gaps": 8
   },
   "license": {
