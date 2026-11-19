@@ -1,10 +1,41 @@
 {
-  "generatedAt": "2026-11-18T18:02:06.900Z",
+  "generatedAt": "2026-11-19T00:01:20.298Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-18/19",
+  "edition": "2026-11-19/06",
   "themes": [
+    {
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": 1.96,
+      "boardUp": 162,
+      "boardDown": 90,
+      "articleHits": 4,
+      "matchedAliases": [
+        "数据中心",
+        "英伟达"
+      ],
+      "constituents": [
+        {
+          "symbol": "002042",
+          "name": "华孚时尚",
+          "changePct": 10
+        },
+        {
+          "symbol": "000701",
+          "name": "厦门信达",
+          "changePct": -6.5
+        },
+        {
+          "symbol": "000818",
+          "name": "航锦科技",
+          "changePct": 4.3
+        }
+      ]
+    },
     {
       "key": "ai",
       "name": "人工智能",
@@ -33,36 +64,6 @@
           "symbol": "000070",
           "name": "特发信息",
           "changePct": 6.44
-        }
-      ]
-    },
-    {
-      "key": "oil",
-      "name": "石油石化",
-      "boardCode": "BK1276",
-      "boardName": "油气开采Ⅱ",
-      "boardChangePct": 0.12,
-      "boardUp": 2,
-      "boardDown": 3,
-      "articleHits": 1,
-      "matchedAliases": [
-        "油价"
-      ],
-      "constituents": [
-        {
-          "symbol": "600938",
-          "name": "中国海油",
-          "changePct": 1.83
-        },
-        {
-          "symbol": "600777",
-          "name": "新潮能源",
-          "changePct": 1.52
-        },
-        {
-          "symbol": "600759",
-          "name": "ST洲际",
-          "changePct": -1.5
         }
       ]
     },
@@ -175,34 +176,6 @@
           "symbol": "300093",
           "name": "金刚光伏",
           "changePct": -4.94
-        }
-      ]
-    },
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": 1.96,
-      "boardUp": 162,
-      "boardDown": 90,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002042",
-          "name": "华孚时尚",
-          "changePct": 10
-        },
-        {
-          "symbol": "000701",
-          "name": "厦门信达",
-          "changePct": -6.5
-        },
-        {
-          "symbol": "000818",
-          "name": "航锦科技",
-          "changePct": 4.3
         }
       ]
     },
@@ -595,6 +568,34 @@
           "symbol": "600256",
           "name": "广汇能源",
           "changePct": 1.71
+        }
+      ]
+    },
+    {
+      "key": "oil",
+      "name": "石油石化",
+      "boardCode": "BK1276",
+      "boardName": "油气开采Ⅱ",
+      "boardChangePct": 0.12,
+      "boardUp": 2,
+      "boardDown": 3,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "600938",
+          "name": "中国海油",
+          "changePct": 1.83
+        },
+        {
+          "symbol": "600777",
+          "name": "新潮能源",
+          "changePct": 1.52
+        },
+        {
+          "symbol": "600759",
+          "name": "ST洲际",
+          "changePct": -1.5
         }
       ]
     },
