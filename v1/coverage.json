@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-19T14:14:41+08:00",
+  "generatedAt": "2026-11-19T14:19:08+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -11,7 +11,7 @@
     "lastDate": "2026-11-19",
     "days": 4,
     "tradingDays": 4,
-    "snapshots": 14,
+    "snapshots": 15,
     "revisionFiles": 0
   },
   "days": [
@@ -174,7 +174,7 @@
       "tradingDay": true,
       "beforeLaunch": false,
       "expectedSlots": 8,
-      "capturedSlots": 0,
+      "capturedSlots": 1,
       "missingSlots": [
         "09:35",
         "10:05",
@@ -182,15 +182,20 @@
         "11:05",
         "11:35",
         "13:05",
-        "13:35",
-        "14:05"
+        "13:35"
       ],
       "pendingSlots": [
         "14:35",
         "15:05"
       ],
       "revisions": 0,
-      "sections": {},
+      "sections": {
+        "indices": 1,
+        "industries": 1,
+        "themes": 1,
+        "fundFlows": 1,
+        "limitPool": 1
+      },
       "gaps": [
         {
           "slot": "09:35",
@@ -226,11 +231,6 @@
           "slot": "13:35",
           "code": "missed",
           "reason": "no snapshot for 13:35 on 2026-11-19 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
-        },
-        {
-          "slot": "14:05",
-          "code": "missed",
-          "reason": "no snapshot for 14:05 on 2026-11-19 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
         }
       ]
     }
@@ -250,22 +250,22 @@
     {
       "key": "1h",
       "hours": 1,
-      "measured": 479,
-      "pending": 1501,
+      "measured": 677,
+      "pending": 1302,
       "available": true
     },
     {
       "key": "1d",
       "hours": 24,
-      "measured": 860,
-      "pending": 1118,
+      "measured": 1281,
+      "pending": 691,
       "available": true
     },
     {
       "key": "5d",
       "hours": 120,
-      "measured": 0,
-      "pending": 2000,
+      "measured": 38,
+      "pending": 1961,
       "available": true
     }
   ],
@@ -274,8 +274,8 @@
     "daysWithGaps": 3,
     "daysComplete": 1,
     "expectedSlots": 38,
-    "capturedSlots": 14,
-    "coveragePct": 36.8,
-    "gaps": 24
+    "capturedSlots": 15,
+    "coveragePct": 39.5,
+    "gaps": 23
   }
 }
