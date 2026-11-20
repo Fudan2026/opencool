@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-20T07:51:18.154Z",
+  "generatedAt": "2026-11-20T12:15:55.028Z",
   "source": "bake-periods",
-  "editions": 92,
+  "editions": 93,
   "weeks": [
     {
       "key": "2026-10-12",
@@ -99,33 +99,33 @@
     {
       "key": "2026-11-16",
       "end": "2026-11-20",
-      "editions": 14,
-      "avgSentiment": -9.6,
+      "editions": 15,
+      "avgSentiment": -10.2,
       "posNegRatio": 0.42,
       "topThemes": [
         {
           "name": "算力",
-          "hits": 106
+          "hits": 114
         },
         {
           "name": "人工智能",
-          "hits": 78
+          "hits": 81
         },
         {
           "name": "半导体",
-          "hits": 54
+          "hits": 62
+        },
+        {
+          "name": "银行",
+          "hits": 47
         },
         {
           "name": "机器人",
-          "hits": 45
-        },
-        {
-          "name": "石油石化",
-          "hits": 44
+          "hits": 47
         }
       ],
-      "avgIndexChangePct": -0.88,
-      "deltaVsPrev": -5.8
+      "avgIndexChangePct": -1,
+      "deltaVsPrev": -6.4
     }
   ],
   "months": [
@@ -152,32 +152,32 @@
     {
       "key": "2026-11",
       "end": "2026-11-20",
-      "editions": 56,
+      "editions": 57,
       "avgSentiment": -20.8,
       "posNegRatio": 0.41,
       "topThemes": [
         {
           "name": "算力",
-          "hits": 263
+          "hits": 271
         },
         {
           "name": "人工智能",
-          "hits": 203
+          "hits": 206
         },
         {
           "name": "半导体",
-          "hits": 141
+          "hits": 149
         },
         {
           "name": "银行",
-          "hits": 136
+          "hits": 139
         },
         {
           "name": "有色金属",
-          "hits": 109
+          "hits": 111
         }
       ],
-      "avgIndexChangePct": -0.94,
+      "avgIndexChangePct": -0.97,
       "deltaVsPrev": 76
     }
   ],
