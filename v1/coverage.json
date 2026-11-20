@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-20T11:45:45+08:00",
+  "generatedAt": "2026-11-20T15:51:24+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -247,21 +247,20 @@
       "date": "2026-11-20",
       "tradingDay": true,
       "beforeLaunch": false,
-      "expectedSlots": 5,
+      "expectedSlots": 10,
       "capturedSlots": 1,
       "missingSlots": [
         "09:35",
         "10:05",
         "10:35",
-        "11:05"
-      ],
-      "pendingSlots": [
+        "11:05",
         "13:05",
         "13:35",
         "14:05",
         "14:35",
         "15:05"
       ],
+      "pendingSlots": [],
       "revisions": 0,
       "sections": {
         "indices": 1,
@@ -290,6 +289,31 @@
           "slot": "11:05",
           "code": "missed",
           "reason": "no snapshot for 11:05 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "13:05",
+          "code": "missed",
+          "reason": "no snapshot for 13:05 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "13:35",
+          "code": "missed",
+          "reason": "no snapshot for 13:35 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "14:05",
+          "code": "missed",
+          "reason": "no snapshot for 14:05 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "14:35",
+          "code": "missed",
+          "reason": "no snapshot for 14:35 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "15:05",
+          "code": "missed",
+          "reason": "no snapshot for 15:05 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
         }
       ]
     }
@@ -300,31 +324,31 @@
     "withFirstSeenAt": 2000,
     "withoutFirstSeenAt": 0,
     "firstSeenCoveragePct": 100,
-    "editions": 78,
-    "sightings": 2304,
-    "storiesWithRevisions": 78,
-    "updatedAt": "2026-11-20T06:48:47+08:00"
+    "editions": 77,
+    "sightings": 1786,
+    "storiesWithRevisions": 75,
+    "updatedAt": "2026-11-20T15:51:11+08:00"
   },
   "horizons": [
     {
       "key": "1h",
       "hours": 1,
-      "measured": 810,
-      "pending": 1169,
+      "measured": 674,
+      "pending": 1318,
       "available": true
     },
     {
       "key": "1d",
       "hours": 24,
-      "measured": 1527,
-      "pending": 449,
+      "measured": 1389,
+      "pending": 595,
       "available": true
     },
     {
       "key": "5d",
       "hours": 120,
-      "measured": 39,
-      "pending": 1960,
+      "measured": 31,
+      "pending": 1969,
       "available": true
     }
   ],
@@ -332,9 +356,9 @@
   "summary": {
     "daysWithGaps": 4,
     "daysComplete": 1,
-    "expectedSlots": 45,
+    "expectedSlots": 50,
     "capturedSlots": 16,
-    "coveragePct": 35.6,
-    "gaps": 29
+    "coveragePct": 32,
+    "gaps": 34
   }
 }

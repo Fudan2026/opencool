@@ -1,26 +1,11 @@
 {
-  "generatedAt": "2026-11-19T22:47:34.601Z",
+  "generatedAt": "2026-11-20T07:49:52.080Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 9,
-  "editions": 25,
-  "avgSentiment": -6.2,
+  "daysCovered": 8,
+  "editions": 23,
+  "avgSentiment": -7.5,
   "sentimentCurve": [
-    {
-      "date": "2026-11-12",
-      "hour": "06",
-      "score": 0
-    },
-    {
-      "date": "2026-11-12",
-      "hour": "13",
-      "score": -5
-    },
-    {
-      "date": "2026-11-12",
-      "hour": "19",
-      "score": -2
-    },
     {
       "date": "2026-11-13",
       "hour": "06",
@@ -130,14 +115,19 @@
       "date": "2026-11-20",
       "hour": "06",
       "score": -14
+    },
+    {
+      "date": "2026-11-20",
+      "hour": "13",
+      "score": -23
     }
   ],
   "sectorAvg": [
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -43.3,
-      "editions": 12
+      "avg": -45,
+      "editions": 13
     },
     {
       "key": "china-ashare",
@@ -148,38 +138,38 @@
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -32.2,
-      "editions": 25
+      "avg": -37.2,
+      "editions": 23
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -31.9,
-      "editions": 25
+      "avg": -36.9,
+      "editions": 23
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -28.1,
-      "editions": 14
+      "avg": -29.1,
+      "editions": 15
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -20.8,
-      "editions": 25
+      "avg": -22.3,
+      "editions": 23
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -2,
-      "editions": 25
+      "avg": -2.5,
+      "editions": 23
     },
     {
       "key": "china-equity",
       "label": "中概港股",
-      "avg": 1.4,
-      "editions": 14
+      "avg": 1.3,
+      "editions": 15
     }
   ],
   "topEvents": [
@@ -188,63 +178,49 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 25
+      "count": 23
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 25
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "英伟达聘请前联邦检察官调查黄仁勋事件",
-      "url": "https://www.ftchinese.com/story/001111342",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "How a sex scandal at Nvidia is putting pressure on the White House",
       "url": "https://www.bbc.co.uk/news/articles/c67429m3vem3o?at_medium=RSS&at_campaign=rss",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 20
+      "count": 21
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "美议员就芯片出口管控问题向卢特尼克施压",
       "url": "https://www.ftchinese.com/story/001111365",
+      "count": 21
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "英伟达聘请前联邦检察官调查黄仁勋事件",
+      "url": "https://www.ftchinese.com/story/001111342",
       "count": 20
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Who could replace Jensen Huang as Nvidia's chief executive?",
-      "url": "https://www.bbc.co.uk/news/articles/cqgm37dv20e8o?at_medium=RSS&at_campaign=rss",
-      "count": 16
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "Nvidia hires major US law firm to investigate alleged Chinese spy affair",
-      "url": "https://www.bbc.co.uk/news/articles/ck1wvwwl3x0go?at_medium=RSS&at_campaign=rss",
-      "count": 15
     },
     {
       "symbol": "NVDA",
@@ -252,21 +228,23 @@
       "title": "Scandal-hit Nvidia CEO Jensen Huang quits, plunging AI chipmaking giant into turmoil",
       "url": "https://www.bbc.co.uk/news/articles/cmq5vd1wdgz6o?at_medium=RSS&at_campaign=rss",
       "count": 15
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Who is Nvidia's interim CEO Colette Kress - and who could take over permanently?",
+      "url": "https://www.bbc.co.uk/news/articles/cqgm37dv20e8o?at_medium=RSS&at_campaign=rss",
+      "count": 15
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Pressure grows on Trump's Commerce Secretary Lutnick in fallout from Nvidia scandal",
+      "url": "https://www.bbc.co.uk/news/articles/cqvg2d1eg7zro?at_medium=RSS&at_campaign=rss",
+      "count": 13
     }
   ],
   "keywords": [
-    {
-      "term": "伟达",
-      "count": 4,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-19"
-    },
-    {
-      "term": "英伟",
-      "count": 4,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-19"
-    },
     {
       "term": "黄仁",
       "count": 4,
@@ -276,8 +254,8 @@
     {
       "term": "1月",
       "count": 3,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-20"
     },
     {
       "term": "仁勋",
@@ -286,22 +264,28 @@
       "lastSeen": "2026-11-18"
     },
     {
-      "term": "月1",
+      "term": "伟达",
       "count": 3,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-19"
     },
     {
       "term": "联社",
       "count": 3,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-20"
+    },
+    {
+      "term": "英伟",
+      "count": 3,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-19"
     },
     {
       "term": "财联",
       "count": 3,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-13"
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-20"
     },
     {
       "term": "airlines",
@@ -334,6 +318,18 @@
       "lastSeen": "2026-11-18"
     },
     {
+      "term": "月1",
+      "count": 2,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-13"
+    },
+    {
+      "term": "社1",
+      "count": 2,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-20"
+    },
+    {
       "term": "美联",
       "count": 2,
       "firstSeen": "2026-11-14",
@@ -364,12 +360,6 @@
       "lastSeen": "2026-11-15"
     },
     {
-      "term": "2日",
-      "count": 1,
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-12"
-    },
-    {
       "term": "3日",
       "count": 1,
       "firstSeen": "2026-11-13",
@@ -380,47 +370,37 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 177
+      "totalHits": 169
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 144
+      "totalHits": 136
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 94
+      "totalHits": 91
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 75
-    },
-    {
-      "key": "robotics",
-      "name": "机器人",
-      "totalHits": 73
+      "totalHits": 71
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 72
+      "totalHits": 67
+    },
+    {
+      "key": "robotics",
+      "name": "机器人",
+      "totalHits": 66
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 51
-    },
-    {
-      "key": "brokerage",
-      "name": "券商",
-      "totalHits": 29
-    },
-    {
-      "key": "defense",
-      "name": "军工",
-      "totalHits": 29
+      "totalHits": 50
     },
     {
       "key": "gaming",
@@ -428,9 +408,19 @@
       "totalHits": 29
     },
     {
+      "key": "brokerage",
+      "name": "券商",
+      "totalHits": 23
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "totalHits": 23
+    },
+    {
       "key": "comms",
       "name": "通信",
-      "totalHits": 22
+      "totalHits": 19
     },
     {
       "key": "pharma",
@@ -441,18 +431,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.47,
-      "editions": 25
+      "avgChangePct": -0.51,
+      "editions": 23
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.25,
-      "editions": 25
+      "avgChangePct": -1.35,
+      "editions": 23
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.93,
-      "editions": 25
+      "avgChangePct": -2.04,
+      "editions": 23
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
