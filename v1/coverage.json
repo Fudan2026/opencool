@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-20T08:40:27+08:00",
+  "generatedAt": "2026-11-20T11:45:45+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -11,7 +11,7 @@
     "lastDate": "2026-11-20",
     "days": 5,
     "tradingDays": 5,
-    "snapshots": 15,
+    "snapshots": 16,
     "revisionFiles": 0
   },
   "days": [
@@ -247,15 +247,15 @@
       "date": "2026-11-20",
       "tradingDay": true,
       "beforeLaunch": false,
-      "expectedSlots": 0,
-      "capturedSlots": 0,
-      "missingSlots": [],
-      "pendingSlots": [
+      "expectedSlots": 5,
+      "capturedSlots": 1,
+      "missingSlots": [
         "09:35",
         "10:05",
         "10:35",
-        "11:05",
-        "11:35",
+        "11:05"
+      ],
+      "pendingSlots": [
         "13:05",
         "13:35",
         "14:05",
@@ -263,8 +263,35 @@
         "15:05"
       ],
       "revisions": 0,
-      "sections": {},
-      "gaps": []
+      "sections": {
+        "indices": 1,
+        "industries": 1,
+        "themes": 1,
+        "fundFlows": 1,
+        "limitPool": 1
+      },
+      "gaps": [
+        {
+          "slot": "09:35",
+          "code": "missed",
+          "reason": "no snapshot for 09:35 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "10:05",
+          "code": "missed",
+          "reason": "no snapshot for 10:05 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "10:35",
+          "code": "missed",
+          "reason": "no snapshot for 10:35 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "11:05",
+          "code": "missed",
+          "reason": "no snapshot for 11:05 on 2026-11-20 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        }
+      ]
     }
   ],
   "stories": {
@@ -282,32 +309,32 @@
     {
       "key": "1h",
       "hours": 1,
-      "measured": 681,
-      "pending": 1298,
+      "measured": 810,
+      "pending": 1169,
       "available": true
     },
     {
       "key": "1d",
       "hours": 24,
-      "measured": 1080,
-      "pending": 899,
+      "measured": 1527,
+      "pending": 449,
       "available": true
     },
     {
       "key": "5d",
       "hours": 120,
-      "measured": 24,
-      "pending": 1976,
+      "measured": 39,
+      "pending": 1960,
       "available": true
     }
   ],
   "gaps": [],
   "summary": {
-    "daysWithGaps": 3,
+    "daysWithGaps": 4,
     "daysComplete": 1,
-    "expectedSlots": 40,
-    "capturedSlots": 15,
-    "coveragePct": 37.5,
-    "gaps": 25
+    "expectedSlots": 45,
+    "capturedSlots": 16,
+    "coveragePct": 35.6,
+    "gaps": 29
   }
 }
