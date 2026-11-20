@@ -149,9 +149,77 @@
     <p class="subtitle">半个钟头一个截面：谁动了、动得多宽、指数怎么说</p>
   </header>
   <div class="pickers">
-          <div><p class="picker-label">交易日</p><div class="chips" role="group" aria-label="交易日"><button type="button" class="day-chip chip has-data active" data-day="2026-11-19"><span class="dot"></span>2026-11-19</button><button type="button" class="day-chip chip has-data" data-day="2026-11-18"><span class="dot"></span>2026-11-18</button><button type="button" class="day-chip chip has-data" data-day="2026-11-17"><span class="dot"></span>2026-11-17</button><button type="button" class="day-chip chip has-data" data-day="2026-11-16"><span class="dot"></span>2026-11-16</button></div></div>
+          <div><p class="picker-label">交易日</p><div class="chips" role="group" aria-label="交易日"><button type="button" class="day-chip chip has-data active" data-day="2026-11-20"><span class="dot"></span>2026-11-20</button><button type="button" class="day-chip chip has-data" data-day="2026-11-19"><span class="dot"></span>2026-11-19</button><button type="button" class="day-chip chip has-data" data-day="2026-11-18"><span class="dot"></span>2026-11-18</button><button type="button" class="day-chip chip has-data" data-day="2026-11-17"><span class="dot"></span>2026-11-17</button><button type="button" class="day-chip chip has-data" data-day="2026-11-16"><span class="dot"></span>2026-11-16</button></div></div>
         </div>
-        <div class="day-panel active" data-day-panel="2026-11-19">
+        <div class="day-panel active" data-day-panel="2026-11-20">
+        
+        <div class="pickers">
+          <div><p class="picker-label">盘面时点</p><div class="chips" role="group" aria-label="盘面时点"><button type="button" class="slot-chip chip is-empty" data-slot="09:35"><span class="dot"></span>09:35</button><button type="button" class="slot-chip chip is-empty" data-slot="10:05"><span class="dot"></span>10:05</button><button type="button" class="slot-chip chip is-empty" data-slot="10:35"><span class="dot"></span>10:35</button><button type="button" class="slot-chip chip is-empty" data-slot="11:05"><span class="dot"></span>11:05</button><button type="button" class="slot-chip chip has-data is-closed active" title="休市抓取" data-slot="11:35"><span class="dot"></span>11:35</button><button type="button" class="slot-chip chip is-empty" data-slot="13:05"><span class="dot"></span>13:05</button><button type="button" class="slot-chip chip is-empty" data-slot="13:35"><span class="dot"></span>13:35</button><button type="button" class="slot-chip chip is-empty" data-slot="14:05"><span class="dot"></span>14:05</button><button type="button" class="slot-chip chip is-empty" data-slot="14:35"><span class="dot"></span>14:35</button><button type="button" class="slot-chip chip is-empty" data-slot="15:05"><span class="dot"></span>15:05</button></div></div>
+        </div>
+        <section class="slot-panel" data-slot-panel="09:35"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">09:35 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="10:05"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">10:05 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="10:35"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">10:35 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="11:05"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">11:05 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel active" data-slot-panel="11:35"><div class="card" data-slot-reading="2026-11-20/11:35">
+              <div class="slot-head">
+                <span class="slot-time">11:35</span>
+                <span class="slot-date">2026-11-20 · Asia/Shanghai</span>
+                
+              </div>
+              <div class="integrity-note" data-integrity="market-closed" data-market-lag="-10.1">
+      <p class="integrity-title"><span class="integrity-badge soft">休市抓取</span>抓取时休市，这一档描述的是最近一次收盘</p>
+      <p>观察时间 2026-11-20 11:44:41 +08:00 不在交易时段内（周末、节假日或盘外），因此行情时间 2026-11-20 11:45:06 +08:00 是上一个收盘价，与 11:35 相差 10 分钟。这不是缺陷，是休市时的正常结果——页面照实说明，不把它当作盘中变动。</p>
+    </div>
+    <div class="two-clocks" data-asof="2026-11-20T11:45:06+08:00" data-observed-at="2026-11-20T11:44:41+08:00">
+      <p class="clock-line">两个时钟：行情时间 asOf 2026-11-20 11:45:06 +08:00 是数据描述的市场时刻，观察时间 observedAt 2026-11-20 11:44:41 +08:00 是我们抓取的瞬间。</p>
+      <p class="clock-note" data-drift-minutes="-0.4">两者基本重合，这一档就是当下的盘面。</p>
+    </div>
+    
+    <div class="prose"><p>上证指数收于 3521.40 点，明显下跌 -1.57%；深证成指跌势剧烈 -2.05%，创业板指跌势剧烈 -2.08%。</p><p>行业层面 496 个板块中 36 个上涨、460 个下跌、0 个基本走平，上涨家数占比 7%——普跌。</p><p>领涨的是其他数字媒体（+15.00%），领跌的是稀土（-5.34%）；涨幅超过 2% 的板块 10 个，跌幅超过 2% 的 156 个。其中涨逾 5% 的 2 个、跌逾 5% 的 1 个。</p><p>资金面上，印制电路板 净流入 +22.39 亿，半导体 净流出 -71.60 亿。</p><p>24 个主题板块中 16 个拿到报价、2 个上涨，最强的是农业（+1.24%），最弱的是有色金属（-3.88%）。</p><p>全市场涨停 28 家、跌停 6 家。</p></div>
+    <h3 class="sub-head">指数</h3><table class="tape-table" data-table="indices"><thead><tr><th>指数</th><th>%</th><th>asOf</th></tr></thead><tbody><tr><td>上证指数</td><td class="neg">-1.57%</td><td class="muted tiny">11:44:54</td></tr><tr><td>深证成指</td><td class="neg">-2.05%</td><td class="muted tiny">11:44:51</td></tr><tr><td>创业板指</td><td class="neg">-2.08%</td><td class="muted tiny">11:44:18</td></tr></tbody></table>
+    <h3 class="sub-head">分段时钟</h3>
+    <table class="tape-table clocks" data-table="clocks"><thead><tr><th>section</th><th>asOf</th><th>observedAt</th><th>source</th></tr></thead><tbody><tr class=""><td>指数</td><td class="muted tiny">2026-11-20 11:44:54 +08:00</td><td class="muted tiny">2026-11-20 11:44:41 +08:00</td><td class="muted tiny">upstream</td></tr><tr class=""><td>行业板块</td><td class="muted tiny">2026-11-20 11:44:54 +08:00</td><td class="muted tiny">2026-11-20 11:44:41 +08:00</td><td class="muted tiny">upstream</td></tr><tr class=""><td>主题板块</td><td class="muted tiny">2026-11-20 11:44:54 +08:00</td><td class="muted tiny">2026-11-20 11:44:41 +08:00</td><td class="muted tiny">upstream</td></tr><tr class=""><td>板块资金</td><td class="muted tiny">2026-11-20 11:45:06 +08:00</td><td class="muted tiny">2026-11-20 11:44:41 +08:00</td><td class="muted tiny">upstream</td></tr><tr class=""><td>涨跌停池</td><td class="muted tiny">2026-11-20 11:44:41 +08:00</td><td class="muted tiny">2026-11-20 11:44:41 +08:00</td><td class="muted tiny">fetch</td></tr></tbody></table>
+    <h3 class="sub-head">故事线</h3>
+    <p class="sent-muted" data-stories-none="true">这一档的时间窗内账本没有新故事；盘中是行情时间，不是消息时间。</p><details class="earlier"><summary>更早的故事（作背景，不属于这一档）</summary><ul class="story-list"><li class="story-hit" data-story="st_040c57b2ae">
+        <a href="https://www.aljazeera.com/video/newsfeed/2026/11/19/how-vaccine-fears-fuelled-a-major-measles-comeback-in-the-us?traffic_source=rss" target="_blank" rel="noopener noreferrer">How vaccine fears fuelled a major measles comeback in the US</a>
+        <span class="story-meta">来源 Al Jazeera · 首次观测 06:47:08</span>
+        
+      </li><li class="story-hit" data-story="st_055114f646">
+        <a href="https://www.cnbc.com/2026/11/19/intuit-mailchimp-sale-bending-spoons.html" target="_blank" rel="noopener noreferrer">Intuit to sell Mailchimp to Bending Spoons for $3.68 billion</a>
+        <span class="story-meta">来源 CNBC · 首次观测 06:47:08</span>
+        
+      </li><li class="story-hit" data-story="st_055eb36b58">
+        <a href="https://www.bbc.co.uk/news/articles/ckdd1y09eqjmo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener noreferrer">Susan Smith denied parole again 32 years after drowning her two sons</a>
+        <span class="story-meta">来源 BBC World · 首次观测 06:47:08</span>
+        
+      </li></ul></details>
+    <p class="supro-ctx" data-funnel="supro-hour"><a href="https://supro.si/paper?utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice&utm_content=hour-tape" target="_blank" rel="noopener">看完这个截面，去 SuPro 纸盘验证你的判断 ↗</a></p>
+            </div></section><section class="slot-panel" data-slot-panel="13:05"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">13:05 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="13:35"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">13:35 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="14:05"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">14:05 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="14:35"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">14:35 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section><section class="slot-panel" data-slot-panel="15:05"><div class="gap-block" data-gap="slot">
+      <p class="gap-title">15:05 这个时点没有截面</p>
+      <p>本应在这个时点前 20 分钟内抓取，但没有落盘的文件。缺失本身是记录的一部分，不用往前后最近的数字去凑。</p>
+    </div></section>
+        <p class="sent-muted" data-missing-slots="9">这一天共 10 个盘面时点，缺 9 个：09:35 · 10:05 · 10:35 · 11:05 · 13:05 · 13:35 · 14:05 · 14:35 · 15:05。缺失的时点在上面的时点条里逐个标出。</p>
+      </div><div class="day-panel" data-day-panel="2026-11-19">
         
         <div class="pickers">
           <div><p class="picker-label">盘面时点</p><div class="chips" role="group" aria-label="盘面时点"><button type="button" class="slot-chip chip is-empty" data-slot="09:35"><span class="dot"></span>09:35</button><button type="button" class="slot-chip chip is-empty" data-slot="10:05"><span class="dot"></span>10:05</button><button type="button" class="slot-chip chip is-empty" data-slot="10:35"><span class="dot"></span>10:35</button><button type="button" class="slot-chip chip is-empty" data-slot="11:05"><span class="dot"></span>11:05</button><button type="button" class="slot-chip chip is-empty" data-slot="11:35"><span class="dot"></span>11:35</button><button type="button" class="slot-chip chip is-empty" data-slot="13:05"><span class="dot"></span>13:05</button><button type="button" class="slot-chip chip is-empty" data-slot="13:35"><span class="dot"></span>13:35</button><button type="button" class="slot-chip chip has-data active" data-slot="14:05"><span class="dot"></span>14:05</button><button type="button" class="slot-chip chip is-empty" data-slot="14:35"><span class="dot"></span>14:35</button><button type="button" class="slot-chip chip is-empty" data-slot="15:05"><span class="dot"></span>15:05</button></div></div>
