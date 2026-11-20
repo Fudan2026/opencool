@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-20T12:14:27.198Z",
+  "generatedAt": "2026-11-20T22:48:13.311Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 24,
-  "avgSentiment": -7.9,
+  "daysCovered": 9,
+  "editions": 25,
+  "avgSentiment": -9,
   "sentimentCurve": [
     {
       "date": "2026-11-13",
@@ -125,56 +125,61 @@
       "date": "2026-11-20",
       "hour": "19",
       "score": -18
+    },
+    {
+      "date": "2026-11-21",
+      "hour": "06",
+      "score": -36
     }
   ],
   "sectorAvg": [
     {
-      "key": "china-ashare",
-      "label": "A 股蓝筹",
-      "avg": 45.4,
-      "editions": 8
-    },
-    {
       "key": "crypto",
       "label": "加密",
-      "avg": -45,
-      "editions": 13
+      "avg": -48.3,
+      "editions": 14
+    },
+    {
+      "key": "china-ashare",
+      "label": "A 股蓝筹",
+      "avg": 42.2,
+      "editions": 9
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -38.4,
-      "editions": 24
+      "avg": -40.5,
+      "editions": 25
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -37.5,
-      "editions": 24
+      "avg": -39.9,
+      "editions": 25
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -33.4,
-      "editions": 16
+      "avg": -37.3,
+      "editions": 17
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -23.1,
-      "editions": 24
+      "avg": -25.8,
+      "editions": 25
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -2.8,
-      "editions": 24
+      "avg": -3.1,
+      "editions": 25
     },
     {
       "key": "china-equity",
       "label": "中概港股",
-      "avg": 0.7,
-      "editions": 16
+      "avg": -2.5,
+      "editions": 17
     }
   ],
   "topEvents": [
@@ -183,49 +188,49 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "How a sex scandal at Nvidia is putting pressure on the White House",
       "url": "https://www.bbc.co.uk/news/articles/c67429m3vem3o?at_medium=RSS&at_campaign=rss",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "美议员就芯片出口管控问题向卢特尼克施压",
       "url": "https://www.ftchinese.com/story/001111365",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达聘请前联邦检察官调查黄仁勋事件",
       "url": "https://www.ftchinese.com/story/001111342",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "NVDA",
@@ -250,6 +255,12 @@
     }
   ],
   "keywords": [
+    {
+      "term": "英伟",
+      "count": 4,
+      "firstSeen": "2026-11-13",
+      "lastSeen": "2026-11-21"
+    },
     {
       "term": "黄仁",
       "count": 4,
@@ -279,12 +290,6 @@
       "count": 3,
       "firstSeen": "2026-11-13",
       "lastSeen": "2026-11-20"
-    },
-    {
-      "term": "英伟",
-      "count": 3,
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-19"
     },
     {
       "term": "财联",
@@ -375,37 +380,37 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 177
+      "totalHits": 184
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 139
+      "totalHits": 142
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 99
+      "totalHits": 104
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 74
+      "totalHits": 77
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 69
+      "totalHits": 71
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 68
+      "totalHits": 71
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 52
+      "totalHits": 55
     },
     {
       "key": "gaming",
@@ -415,7 +420,7 @@
     {
       "key": "brokerage",
       "name": "券商",
-      "totalHits": 26
+      "totalHits": 27
     },
     {
       "key": "defense",
@@ -425,7 +430,7 @@
     {
       "key": "comms",
       "name": "通信",
-      "totalHits": 19
+      "totalHits": 20
     },
     {
       "key": "pharma",
@@ -436,18 +441,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.54,
-      "editions": 24
+      "avgChangePct": -0.56,
+      "editions": 25
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.42,
-      "editions": 24
+      "avgChangePct": -1.49,
+      "editions": 25
     },
     {
       "name": "创业板指",
-      "avgChangePct": -2.1,
-      "editions": 24
+      "avgChangePct": -2.16,
+      "editions": 25
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"

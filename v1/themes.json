@@ -1,44 +1,13 @@
 {
-  "generatedAt": "2026-11-20T12:14:50.532Z",
+  "generatedAt": "2026-11-20T22:48:29.599Z",
   "source": {
     "path": "/themes.json",
     "note": "re-exported verbatim under the frozen path; the root /themes.json keeps evolving with the pipeline"
   },
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-20/19",
+  "edition": "2026-11-21/06",
   "themes": [
-    {
-      "key": "oil",
-      "name": "石油石化",
-      "boardCode": "BK1276",
-      "boardName": "油气开采Ⅱ",
-      "boardChangePct": -2.06,
-      "boardUp": 1,
-      "boardDown": 4,
-      "articleHits": 5,
-      "matchedAliases": [
-        "原油",
-        "油价"
-      ],
-      "constituents": [
-        {
-          "symbol": "601969",
-          "name": "海南矿业",
-          "changePct": -3.1
-        },
-        {
-          "symbol": "600777",
-          "name": "新潮能源",
-          "changePct": -2.74
-        },
-        {
-          "symbol": "000968",
-          "name": "蓝焰控股",
-          "changePct": -2.5
-        }
-      ]
-    },
     {
       "key": "ai-compute",
       "name": "算力",
@@ -47,9 +16,11 @@
       "boardChangePct": -5.76,
       "boardUp": 12,
       "boardDown": 242,
-      "articleHits": 3,
+      "articleHits": 8,
       "matchedAliases": [
-        "算力"
+        "算力",
+        "数据中心",
+        "英伟达"
       ],
       "constituents": [
         {
@@ -77,9 +48,10 @@
       "boardChangePct": -5.19,
       "boardUp": 39,
       "boardDown": 717,
-      "articleHits": 3,
+      "articleHits": 4,
       "matchedAliases": [
-        "AI"
+        "AI",
+        "大模型"
       ],
       "constituents": [
         {
@@ -100,6 +72,66 @@
       ]
     },
     {
+      "key": "gaming",
+      "name": "游戏",
+      "boardCode": "BK1046",
+      "boardName": "游戏Ⅱ",
+      "boardChangePct": -5.06,
+      "boardUp": 2,
+      "boardDown": 22,
+      "articleHits": 3,
+      "matchedAliases": [
+        "游戏"
+      ],
+      "constituents": [
+        {
+          "symbol": "002425",
+          "name": "凯撒文化",
+          "changePct": -10.08
+        },
+        {
+          "symbol": "002517",
+          "name": "恺英网络",
+          "changePct": -9.99
+        },
+        {
+          "symbol": "002624",
+          "name": "完美世界",
+          "changePct": -7.72
+        }
+      ]
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": -4.41,
+      "boardUp": 0,
+      "boardDown": 13,
+      "articleHits": 3,
+      "matchedAliases": [
+        "铜"
+      ],
+      "constituents": [
+        {
+          "symbol": "300139",
+          "name": "晓程科技",
+          "changePct": -6.13
+        },
+        {
+          "symbol": "000426",
+          "name": "兴业银锡",
+          "changePct": -6.01
+        },
+        {
+          "symbol": "001337",
+          "name": "四川黄金",
+          "changePct": -5.63
+        }
+      ]
+    },
+    {
       "key": "semiconductor",
       "name": "半导体",
       "boardCode": "BK1036",
@@ -107,7 +139,7 @@
       "boardChangePct": -6.86,
       "boardUp": 7,
       "boardDown": 180,
-      "articleHits": 1,
+      "articleHits": 2,
       "matchedAliases": [
         "芯片"
       ],
@@ -130,32 +162,32 @@
       ]
     },
     {
-      "key": "robotics",
-      "name": "机器人",
-      "boardCode": "BK1408",
-      "boardName": "机器人",
-      "boardChangePct": -6.22,
-      "boardUp": 0,
-      "boardDown": 22,
-      "articleHits": 1,
+      "key": "oil",
+      "name": "石油石化",
+      "boardCode": "BK1276",
+      "boardName": "油气开采Ⅱ",
+      "boardChangePct": -2.06,
+      "boardUp": 1,
+      "boardDown": 4,
+      "articleHits": 2,
       "matchedAliases": [
-        "机器人"
+        "原油"
       ],
       "constituents": [
         {
-          "symbol": "688090",
-          "name": "瑞松科技",
-          "changePct": -13.04
+          "symbol": "601969",
+          "name": "海南矿业",
+          "changePct": -3.1
         },
         {
-          "symbol": "688290",
-          "name": "景业智能",
-          "changePct": -12.48
+          "symbol": "600777",
+          "name": "新潮能源",
+          "changePct": -2.74
         },
         {
-          "symbol": "603666",
-          "name": "亿嘉和",
-          "changePct": -10
+          "symbol": "000968",
+          "name": "蓝焰控股",
+          "changePct": -2.5
         }
       ]
     },
@@ -244,6 +276,34 @@
           "symbol": "001267",
           "name": "汇绿生态",
           "changePct": -8.76
+        }
+      ]
+    },
+    {
+      "key": "robotics",
+      "name": "机器人",
+      "boardCode": "BK1408",
+      "boardName": "机器人",
+      "boardChangePct": -6.22,
+      "boardUp": 0,
+      "boardDown": 22,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "688090",
+          "name": "瑞松科技",
+          "changePct": -13.04
+        },
+        {
+          "symbol": "688290",
+          "name": "景业智能",
+          "changePct": -12.48
+        },
+        {
+          "symbol": "603666",
+          "name": "亿嘉和",
+          "changePct": -10
         }
       ]
     },
@@ -360,34 +420,6 @@
       ]
     },
     {
-      "key": "gaming",
-      "name": "游戏",
-      "boardCode": "BK1046",
-      "boardName": "游戏Ⅱ",
-      "boardChangePct": -5.06,
-      "boardUp": 2,
-      "boardDown": 22,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002425",
-          "name": "凯撒文化",
-          "changePct": -10.08
-        },
-        {
-          "symbol": "002517",
-          "name": "恺英网络",
-          "changePct": -9.99
-        },
-        {
-          "symbol": "002624",
-          "name": "完美世界",
-          "changePct": -7.72
-        }
-      ]
-    },
-    {
       "key": "solar",
       "name": "光伏",
       "boardCode": "BK1031",
@@ -440,34 +472,6 @@
           "symbol": "000566",
           "name": "海南海药",
           "changePct": -5.48
-        }
-      ]
-    },
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": -4.41,
-      "boardUp": 0,
-      "boardDown": 13,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "300139",
-          "name": "晓程科技",
-          "changePct": -6.13
-        },
-        {
-          "symbol": "000426",
-          "name": "兴业银锡",
-          "changePct": -6.01
-        },
-        {
-          "symbol": "001337",
-          "name": "四川黄金",
-          "changePct": -5.63
         }
       ]
     },
