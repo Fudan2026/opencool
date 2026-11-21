@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-21T11:43:05.851Z",
+  "generatedAt": "2026-11-21T23:27:07.385Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 24,
-  "avgSentiment": -11.1,
+  "daysCovered": 9,
+  "editions": 25,
+  "avgSentiment": -11.3,
   "sentimentCurve": [
     {
       "date": "2026-11-14",
@@ -125,32 +125,37 @@
       "date": "2026-11-21",
       "hour": "19",
       "score": -23
+    },
+    {
+      "date": "2026-11-22",
+      "hour": "06",
+      "score": -17
     }
   ],
   "sectorAvg": [
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -50.2,
-      "editions": 18
+      "avg": -52.8,
+      "editions": 19
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -49.4,
-      "editions": 24
-    },
-    {
-      "key": "crypto",
-      "label": "加密",
-      "avg": -48.5,
-      "editions": 16
+      "avg": -50.5,
+      "editions": 25
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -46.8,
-      "editions": 24
+      "avg": -48.8,
+      "editions": 25
+    },
+    {
+      "key": "crypto",
+      "label": "加密",
+      "avg": -42.9,
+      "editions": 17
     },
     {
       "key": "china-ashare",
@@ -161,20 +166,20 @@
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -32.4,
-      "editions": 24
-    },
-    {
-      "key": "general",
-      "label": "大盘综合",
-      "avg": -3.5,
-      "editions": 24
+      "avg": -34.6,
+      "editions": 25
     },
     {
       "key": "china-equity",
       "label": "中概港股",
-      "avg": 1.8,
-      "editions": 19
+      "avg": 4.1,
+      "editions": 20
+    },
+    {
+      "key": "general",
+      "label": "大盘综合",
+      "avg": -3.6,
+      "editions": 25
     }
   ],
   "topEvents": [
@@ -183,56 +188,56 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "美议员就芯片出口管控问题向卢特尼克施压",
       "url": "https://www.ftchinese.com/story/001111365",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "How a sex scandal at Nvidia is putting pressure on the White House",
       "url": "https://www.bbc.co.uk/news/articles/c67429m3vem3o?at_medium=RSS&at_campaign=rss",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达聘请前联邦检察官调查黄仁勋事件",
       "url": "https://www.ftchinese.com/story/001111342",
-      "count": 23
+      "count": 24
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达董事会不考虑恢复黄仁勋的CEO职位",
       "url": "https://www.ftchinese.com/story/001111390",
-      "count": 14
+      "count": 15
     },
     {
       "symbol": "NVDA",
@@ -244,9 +249,9 @@
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
-      "title": "Ex-Nvidia CEO Jensen Huang summoned to testify before Congress about affair with alleged Chinese spy",
-      "url": "https://www.bbc.co.uk/news/articles/cmq5vd1wdgz6o?at_medium=RSS&at_campaign=rss",
-      "count": 12
+      "title": "Nvidia says it won't reinstate Huang as firm reports bumper results",
+      "url": "https://www.bbc.co.uk/news/articles/cm2kl50vkwkdo?at_medium=RSS&at_campaign=rss",
+      "count": 13
     }
   ],
   "keywords": [
@@ -375,47 +380,47 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 183
+      "totalHits": 192
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 141
+      "totalHits": 145
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 98
+      "totalHits": 101
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 74
+      "totalHits": 77
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 73
+      "totalHits": 74
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 64
+      "totalHits": 65
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 58
+      "totalHits": 60
     },
     {
       "key": "gaming",
       "name": "游戏",
-      "totalHits": 32
+      "totalHits": 33
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 24
+      "totalHits": 29
     },
     {
       "key": "brokerage",
@@ -423,31 +428,31 @@
       "totalHits": 21
     },
     {
+      "key": "media",
+      "name": "传媒",
+      "totalHits": 20
+    },
+    {
       "key": "pharma",
       "name": "创新药",
       "totalHits": 19
-    },
-    {
-      "key": "ev",
-      "name": "新能源车",
-      "totalHits": 18
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.61,
-      "editions": 24
+      "avgChangePct": -0.64,
+      "editions": 25
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.56,
-      "editions": 24
+      "avgChangePct": -1.63,
+      "editions": 25
     },
     {
       "name": "创业板指",
-      "avgChangePct": -2.17,
-      "editions": 24
+      "avgChangePct": -2.22,
+      "editions": 25
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
