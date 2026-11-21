@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-20T22:48:29.599Z",
+  "generatedAt": "2026-11-21T08:36:30.358Z",
   "source": {
     "path": "/themes.json",
     "note": "re-exported verbatim under the frozen path; the root /themes.json keeps evolving with the pipeline"
   },
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-21/06",
+  "edition": "2026-11-21/13",
   "themes": [
     {
       "key": "ai-compute",
@@ -16,11 +16,10 @@
       "boardChangePct": -5.76,
       "boardUp": 12,
       "boardDown": 242,
-      "articleHits": 8,
+      "articleHits": 4,
       "matchedAliases": [
         "算力",
-        "数据中心",
-        "英伟达"
+        "数据中心"
       ],
       "constituents": [
         {
@@ -48,10 +47,9 @@
       "boardChangePct": -5.19,
       "boardUp": 39,
       "boardDown": 717,
-      "articleHits": 4,
+      "articleHits": 3,
       "matchedAliases": [
-        "AI",
-        "大模型"
+        "AI"
       ],
       "constituents": [
         {
@@ -102,36 +100,6 @@
       ]
     },
     {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": -4.41,
-      "boardUp": 0,
-      "boardDown": 13,
-      "articleHits": 3,
-      "matchedAliases": [
-        "铜"
-      ],
-      "constituents": [
-        {
-          "symbol": "300139",
-          "name": "晓程科技",
-          "changePct": -6.13
-        },
-        {
-          "symbol": "000426",
-          "name": "兴业银锡",
-          "changePct": -6.01
-        },
-        {
-          "symbol": "001337",
-          "name": "四川黄金",
-          "changePct": -5.63
-        }
-      ]
-    },
-    {
       "key": "semiconductor",
       "name": "半导体",
       "boardCode": "BK1036",
@@ -139,7 +107,7 @@
       "boardChangePct": -6.86,
       "boardUp": 7,
       "boardDown": 180,
-      "articleHits": 2,
+      "articleHits": 1,
       "matchedAliases": [
         "芯片"
       ],
@@ -158,66 +126,6 @@
           "symbol": "002213",
           "name": "大为股份",
           "changePct": -9.32
-        }
-      ]
-    },
-    {
-      "key": "oil",
-      "name": "石油石化",
-      "boardCode": "BK1276",
-      "boardName": "油气开采Ⅱ",
-      "boardChangePct": -2.06,
-      "boardUp": 1,
-      "boardDown": 4,
-      "articleHits": 2,
-      "matchedAliases": [
-        "原油"
-      ],
-      "constituents": [
-        {
-          "symbol": "601969",
-          "name": "海南矿业",
-          "changePct": -3.1
-        },
-        {
-          "symbol": "600777",
-          "name": "新潮能源",
-          "changePct": -2.74
-        },
-        {
-          "symbol": "000968",
-          "name": "蓝焰控股",
-          "changePct": -2.5
-        }
-      ]
-    },
-    {
-      "key": "brokerage",
-      "name": "券商",
-      "boardCode": "BK1366",
-      "boardName": "证券Ⅲ",
-      "boardChangePct": -1.32,
-      "boardUp": 6,
-      "boardDown": 42,
-      "articleHits": 1,
-      "matchedAliases": [
-        "证券"
-      ],
-      "constituents": [
-        {
-          "symbol": "000712",
-          "name": "锦龙股份",
-          "changePct": -5.16
-        },
-        {
-          "symbol": "002670",
-          "name": "国盛证券",
-          "changePct": -3.06
-        },
-        {
-          "symbol": "600095",
-          "name": "湘财股份",
-          "changePct": -2.77
         }
       ]
     },
@@ -476,6 +384,34 @@
       ]
     },
     {
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": -4.41,
+      "boardUp": 0,
+      "boardDown": 13,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "300139",
+          "name": "晓程科技",
+          "changePct": -6.13
+        },
+        {
+          "symbol": "000426",
+          "name": "兴业银锡",
+          "changePct": -6.01
+        },
+        {
+          "symbol": "001337",
+          "name": "四川黄金",
+          "changePct": -5.63
+        }
+      ]
+    },
+    {
       "key": "travel",
       "name": "旅游酒店",
       "boardCode": "BK0485",
@@ -644,6 +580,34 @@
       ]
     },
     {
+      "key": "oil",
+      "name": "石油石化",
+      "boardCode": "BK1276",
+      "boardName": "油气开采Ⅱ",
+      "boardChangePct": -2.06,
+      "boardUp": 1,
+      "boardDown": 4,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "601969",
+          "name": "海南矿业",
+          "changePct": -3.1
+        },
+        {
+          "symbol": "600777",
+          "name": "新潮能源",
+          "changePct": -2.74
+        },
+        {
+          "symbol": "000968",
+          "name": "蓝焰控股",
+          "changePct": -2.5
+        }
+      ]
+    },
+    {
       "key": "agriculture",
       "name": "农业",
       "boardCode": "BK1261",
@@ -668,6 +632,34 @@
           "symbol": "600883",
           "name": "博闻科技",
           "changePct": -5.46
+        }
+      ]
+    },
+    {
+      "key": "brokerage",
+      "name": "券商",
+      "boardCode": "BK1366",
+      "boardName": "证券Ⅲ",
+      "boardChangePct": -1.32,
+      "boardUp": 6,
+      "boardDown": 42,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000712",
+          "name": "锦龙股份",
+          "changePct": -5.16
+        },
+        {
+          "symbol": "002670",
+          "name": "国盛证券",
+          "changePct": -3.06
+        },
+        {
+          "symbol": "600095",
+          "name": "湘财股份",
+          "changePct": -2.77
         }
       ]
     },
