@@ -49,10 +49,13 @@
   <p class="lede">这一页只做一件事：把每条数据的缺口说清楚。没有跑到的时点、没有取到的分区、缺失的输入文件，都在下面点名，不隐藏、不凑数。</p>
   <h2>发布时效实测（近 14 天）</h2>
   <p class="meta">三报的档期时间（06:00 / 13:00 / 19:00）是目标，不是承诺：定时触发实测会丢拍，准点无法保证，所以这一页不承诺钟点，只发布实测。下表逐档用数据侧车里的 fetch_health.generated_at（生成时刻）对照档期时间，迟到 20 分钟以内算准时；缺失的档期照常点名，不隐藏。</p>
-  <p class="meta">近 14 天 42 档：准时 0 · 迟到 39 · 提前 1 · 缺失 2 · 未到点 0</p>
+  <p class="meta">近 14 天 42 档：准时 0 · 迟到 36 · 提前 1 · 缺失 2 · 未到点 3</p>
   <table data-surface="publish-lag">
     <thead><tr><th>日期</th><th>档期</th><th>实际生成</th><th>滞后（分钟）</th><th>判定</th></tr></thead>
     <tbody>
+      <tr class="closed"><td>2026-11-22</td><td>06:00</td><td>—</td><td class="n">—</td><td>未到点</td></tr>
+      <tr class="closed"><td>2026-11-22</td><td>13:00</td><td>—</td><td class="n">—</td><td>未到点</td></tr>
+      <tr class="closed"><td>2026-11-22</td><td>19:00</td><td>—</td><td class="n">—</td><td>未到点</td></tr>
       <tr><td>2026-11-21</td><td>06:00</td><td>2026-11-21 06:47</td><td class="n">48</td><td>迟到 48 分钟</td></tr>
       <tr><td>2026-11-21</td><td>13:00</td><td>2026-11-21 16:35</td><td class="n">215</td><td>迟到 215 分钟</td></tr>
       <tr><td>2026-11-21</td><td>19:00</td><td>2026-11-21 19:42</td><td class="n">43</td><td>迟到 43 分钟</td></tr>
@@ -92,19 +95,17 @@
       <tr><td>2026-11-09</td><td>06:00</td><td>2026-11-09 07:39</td><td class="n">99</td><td>迟到 99 分钟</td></tr>
       <tr><td>2026-11-09</td><td>13:00</td><td>2026-11-09 14:05</td><td class="n">66</td><td>迟到 66 分钟</td></tr>
       <tr><td>2026-11-09</td><td>19:00</td><td>—</td><td class="n">—</td><td>缺失</td></tr>
-      <tr><td>2026-11-08</td><td>06:00</td><td>2026-11-08 07:00</td><td class="n">60</td><td>迟到 60 分钟</td></tr>
-      <tr><td>2026-11-08</td><td>13:00</td><td>2026-11-08 15:12</td><td class="n">133</td><td>迟到 133 分钟</td></tr>
-      <tr><td>2026-11-08</td><td>19:00</td><td>2026-11-08 23:01</td><td class="n">242</td><td>迟到 242 分钟</td></tr>
     </tbody>
   </table>
 
-  <p class="meta">采集已开始：最早 2026-11-16，最近 2026-11-21。</p>
+  <p class="meta">采集已开始：最早 2026-11-16，最近 2026-11-22。</p>
   <h2>总览</h2>
   <p class="meta">交易日 5 天 · 应到 50 个时点 · 实到 16 个 · 缺口 34 条 · 满勤 1 天 · <span class="n">覆盖率 32%</span></p>
   <h2>逐日缺口</h2>
   <table data-surface="days">
     <thead><tr><th>日期</th><th>逐日缺口</th></tr></thead>
     <tbody>
+      <tr class="closed"><td>2026-11-22</td><td colspan="3" class="meta">2026-11-22 · 非交易日，不要求采集</td></tr>
       <tr class="closed"><td>2026-11-21</td><td colspan="3" class="meta">2026-11-21 · 非交易日，不要求采集</td></tr>
       <tr><td>2026-11-20</td><td colspan="3">2026-11-20 · 实到 1/10 个时点 · 缺口 9 条 · 修订 0 次</td></tr>
       <tr><td>2026-11-19</td><td colspan="3">2026-11-19 · 实到 1/10 个时点 · 缺口 9 条 · 修订 0 次</td></tr>
@@ -198,7 +199,7 @@
       <tr><td><code>/v1/themes.json</code></td><td class="meta">题材板块热度：板块代码与名称、板块涨跌、涨跌家数、文章命中、成分股</td></tr>
       <tr><td><code>/v1/reactions.json</code></td><td class="meta">新闻→价格反应库（+1h/+1d/+5d）：尚未产出时不列入清单，也不发空文件</td></tr>
     </tbody></table>
-  <p class="meta">generated 2026-11-21T19:46:02+08:00 · Asia/Shanghai</p>
+  <p class="meta">generated 2026-11-22T00:23:54+08:00 · Asia/Shanghai</p>
   <div class="supro-ctx" data-funnel="supro-integrity">
     <p>核对完数据的来龙去脉，可以在 SuPro 的纸盘上按同样的纪律演练： <a class="home" href="https://supro.si/paper?utm_source=opencool&utm_medium=brief&utm_campaign=news_to_practice&utm_content=integrity" target="_blank" rel="noopener">纸盘演练 ↗</a></p>
     <p class="meta">纸盘模拟，非投资建议；行情以数据源为准。</p>
