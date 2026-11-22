@@ -1,37 +1,69 @@
 {
-  "generatedAt": "2026-11-22T11:54:04.770Z",
+  "generatedAt": "2026-11-22T22:17:43.716Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-22/19",
+  "edition": "2026-11-23/06",
   "themes": [
     {
-      "key": "brokerage",
-      "name": "券商",
-      "boardCode": "BK1366",
-      "boardName": "证券Ⅲ",
-      "boardChangePct": -1.32,
-      "boardUp": 6,
-      "boardDown": 42,
-      "articleHits": 3,
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": -5.76,
+      "boardUp": 12,
+      "boardDown": 242,
+      "articleHits": 5,
       "matchedAliases": [
-        "证券"
+        "算力",
+        "数据中心",
+        "GPU"
       ],
       "constituents": [
         {
-          "symbol": "000712",
-          "name": "锦龙股份",
-          "changePct": -5.16
+          "symbol": "000818",
+          "name": "航锦科技",
+          "changePct": -8.32
         },
         {
-          "symbol": "002670",
-          "name": "国盛证券",
-          "changePct": -3.06
+          "symbol": "000977",
+          "name": "浪潮信息",
+          "changePct": -8.06
         },
         {
-          "symbol": "600095",
-          "name": "湘财股份",
-          "changePct": -2.77
+          "symbol": "001388",
+          "name": "信通电子",
+          "changePct": -7.18
+        }
+      ]
+    },
+    {
+      "key": "ai",
+      "name": "人工智能",
+      "boardCode": "BK0800",
+      "boardName": "人工智能",
+      "boardChangePct": -5.19,
+      "boardUp": 39,
+      "boardDown": 717,
+      "articleHits": 3,
+      "matchedAliases": [
+        "AI"
+      ],
+      "constituents": [
+        {
+          "symbol": "000034",
+          "name": "神州数码",
+          "changePct": -9.97
+        },
+        {
+          "symbol": "000521",
+          "name": "长虹美菱",
+          "changePct": -9.05
+        },
+        {
+          "symbol": "000090",
+          "name": "天健集团",
+          "changePct": -6.55
         }
       ]
     },
@@ -66,36 +98,6 @@
       ]
     },
     {
-      "key": "ai",
-      "name": "人工智能",
-      "boardCode": "BK0800",
-      "boardName": "人工智能",
-      "boardChangePct": -5.19,
-      "boardUp": 39,
-      "boardDown": 717,
-      "articleHits": 1,
-      "matchedAliases": [
-        "AI"
-      ],
-      "constituents": [
-        {
-          "symbol": "000034",
-          "name": "神州数码",
-          "changePct": -9.97
-        },
-        {
-          "symbol": "000521",
-          "name": "长虹美菱",
-          "changePct": -9.05
-        },
-        {
-          "symbol": "000090",
-          "name": "天健集团",
-          "changePct": -6.55
-        }
-      ]
-    },
-    {
       "key": "semiconductor",
       "name": "半导体",
       "boardCode": "BK1036",
@@ -103,8 +105,10 @@
       "boardChangePct": -6.86,
       "boardUp": 7,
       "boardDown": 180,
-      "articleHits": 0,
-      "matchedAliases": [],
+      "articleHits": 1,
+      "matchedAliases": [
+        "芯片"
+      ],
       "constituents": [
         {
           "symbol": "300456",
@@ -120,6 +124,66 @@
           "symbol": "002213",
           "name": "大为股份",
           "changePct": -9.32
+        }
+      ]
+    },
+    {
+      "key": "gaming",
+      "name": "游戏",
+      "boardCode": "BK1046",
+      "boardName": "游戏Ⅱ",
+      "boardChangePct": -5.06,
+      "boardUp": 2,
+      "boardDown": 22,
+      "articleHits": 1,
+      "matchedAliases": [
+        "游戏"
+      ],
+      "constituents": [
+        {
+          "symbol": "002425",
+          "name": "凯撒文化",
+          "changePct": -10.08
+        },
+        {
+          "symbol": "002517",
+          "name": "恺英网络",
+          "changePct": -9.99
+        },
+        {
+          "symbol": "002624",
+          "name": "完美世界",
+          "changePct": -7.72
+        }
+      ]
+    },
+    {
+      "key": "brokerage",
+      "name": "券商",
+      "boardCode": "BK1366",
+      "boardName": "证券Ⅲ",
+      "boardChangePct": -1.32,
+      "boardUp": 6,
+      "boardDown": 42,
+      "articleHits": 1,
+      "matchedAliases": [
+        "证券"
+      ],
+      "constituents": [
+        {
+          "symbol": "000712",
+          "name": "锦龙股份",
+          "changePct": -5.16
+        },
+        {
+          "symbol": "002670",
+          "name": "国盛证券",
+          "changePct": -3.06
+        },
+        {
+          "symbol": "600095",
+          "name": "湘财股份",
+          "changePct": -2.77
         }
       ]
     },
@@ -236,34 +300,6 @@
       ]
     },
     {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": -5.76,
-      "boardUp": 12,
-      "boardDown": 242,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "000818",
-          "name": "航锦科技",
-          "changePct": -8.32
-        },
-        {
-          "symbol": "000977",
-          "name": "浪潮信息",
-          "changePct": -8.06
-        },
-        {
-          "symbol": "001388",
-          "name": "信通电子",
-          "changePct": -7.18
-        }
-      ]
-    },
-    {
       "key": "ev",
       "name": "新能源车",
       "boardCode": "BK0900",
@@ -288,34 +324,6 @@
           "symbol": "000559",
           "name": "万向钱潮",
           "changePct": -6.45
-        }
-      ]
-    },
-    {
-      "key": "gaming",
-      "name": "游戏",
-      "boardCode": "BK1046",
-      "boardName": "游戏Ⅱ",
-      "boardChangePct": -5.06,
-      "boardUp": 2,
-      "boardDown": 22,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002425",
-          "name": "凯撒文化",
-          "changePct": -10.08
-        },
-        {
-          "symbol": "002517",
-          "name": "恺英网络",
-          "changePct": -9.99
-        },
-        {
-          "symbol": "002624",
-          "name": "完美世界",
-          "changePct": -7.72
         }
       ]
     },

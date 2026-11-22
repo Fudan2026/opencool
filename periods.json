@@ -1,19 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-22T11:55:48.912Z",
+  "generatedAt": "2026-11-22T22:18:57.493Z",
   "source": "bake-periods",
-  "editions": 99,
+  "editions": 92,
   "weeks": [
-    {
-      "key": "2026-10-12",
-      "end": "2026-10-19",
-      "editions": 8,
-      "avgSentiment": null,
-      "posNegRatio": null,
-      "topThemes": [],
-      "avgIndexChangePct": -0.26,
-      "deltaVsPrev": null
-    },
     {
       "key": "2026-10-19",
       "end": "2026-10-26",
@@ -98,7 +88,7 @@
     },
     {
       "key": "2026-11-16",
-      "end": "2026-11-22",
+      "end": "2026-11-23",
       "editions": 21,
       "avgSentiment": -13.5,
       "posNegRatio": 0.39,
@@ -126,6 +116,37 @@
       ],
       "avgIndexChangePct": -1.46,
       "deltaVsPrev": -9.7
+    },
+    {
+      "key": "2026-11-23",
+      "end": "2026-11-23",
+      "editions": 1,
+      "avgSentiment": -17,
+      "posNegRatio": 0.35,
+      "topThemes": [
+        {
+          "name": "算力",
+          "hits": 8
+        },
+        {
+          "name": "人工智能",
+          "hits": 4
+        },
+        {
+          "name": "半导体",
+          "hits": 3
+        },
+        {
+          "name": "银行",
+          "hits": 3
+        },
+        {
+          "name": "有色金属",
+          "hits": 3
+        }
+      ],
+      "avgIndexChangePct": -2.62,
+      "deltaVsPrev": -3.5
     }
   ],
   "months": [
@@ -151,33 +172,33 @@
     },
     {
       "key": "2026-11",
-      "end": "2026-11-22",
-      "editions": 63,
+      "end": "2026-11-23",
+      "editions": 64,
       "avgSentiment": -20.8,
-      "posNegRatio": 0.4,
+      "posNegRatio": 0.39,
       "topThemes": [
         {
           "name": "算力",
-          "hits": 323
+          "hits": 331
         },
         {
           "name": "人工智能",
-          "hits": 233
+          "hits": 237
         },
         {
           "name": "半导体",
-          "hits": 170
+          "hits": 173
         },
         {
           "name": "银行",
-          "hits": 157
+          "hits": 160
         },
         {
           "name": "有色金属",
-          "hits": 127
+          "hits": 130
         }
       ],
-      "avgIndexChangePct": -1.13,
+      "avgIndexChangePct": -1.15,
       "deltaVsPrev": 76
     }
   ],

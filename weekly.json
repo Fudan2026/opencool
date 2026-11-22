@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-22T11:53:43.518Z",
+  "generatedAt": "2026-11-22T22:17:26.334Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 24,
-  "avgSentiment": -12.4,
+  "daysCovered": 9,
+  "editions": 25,
+  "avgSentiment": -12.6,
   "sentimentCurve": [
     {
       "date": "2026-11-15",
@@ -125,32 +125,43 @@
       "date": "2026-11-22",
       "hour": "19",
       "score": -15
+    },
+    {
+      "date": "2026-11-23",
+      "hour": "06",
+      "score": -17
     }
   ],
   "sectorAvg": [
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -56.7,
-      "editions": 21
+      "avg": -58.3,
+      "editions": 22
     },
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -54.5,
-      "editions": 24
+      "avg": -55.3,
+      "editions": 25
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -53.3,
-      "editions": 24
+      "avg": -54.2,
+      "editions": 25
     },
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -47.3,
-      "editions": 18
+      "avg": -49.1,
+      "editions": 19
+    },
+    {
+      "key": "us-equity",
+      "label": "美股",
+      "avg": -42.4,
+      "editions": 25
     },
     {
       "key": "china-ashare",
@@ -159,16 +170,10 @@
       "editions": 9
     },
     {
-      "key": "us-equity",
-      "label": "美股",
-      "avg": -40.7,
-      "editions": 24
-    },
-    {
       "key": "general",
       "label": "大盘综合",
-      "avg": -3.7,
-      "editions": 24
+      "avg": -3.8,
+      "editions": 25
     },
     {
       "key": "china-equity",
@@ -183,56 +188,56 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "美议员就芯片出口管控问题向卢特尼克施压",
       "url": "https://www.ftchinese.com/story/001111365",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达聘请前联邦检察官调查黄仁勋事件",
       "url": "https://www.ftchinese.com/story/001111342",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "How a sex scandal at Nvidia is putting pressure on the White House",
       "url": "https://www.bbc.co.uk/news/articles/c67429m3vem3o?at_medium=RSS&at_campaign=rss",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达董事会不考虑恢复黄仁勋的CEO职位",
       "url": "https://www.ftchinese.com/story/001111390",
-      "count": 17
+      "count": 18
     },
     {
       "symbol": "NVDA",
@@ -242,10 +247,10 @@
       "count": 13
     },
     {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "How important are Nvidia and Jensen Huang to the US economy?",
-      "url": "https://www.bbc.co.uk/news/articles/c68798vdprwpo?at_medium=RSS&at_campaign=rss",
+      "symbol": "512480.SS",
+      "displayName": "半导体ETF",
+      "title": "黄仁勋事件后 人们关注中国的芯片产业现状",
+      "url": "https://www.dw.com/zh/黄仁勋事件后-人们关注中国的芯片产业现状/a-79961605?maca=chi-rss-chi-all-1127-rdf",
       "count": 12
     }
   ],
@@ -365,52 +370,52 @@
       "lastSeen": "2026-11-16"
     },
     {
-      "term": "genocide",
+      "term": "catering",
       "count": 1,
-      "firstSeen": "2026-11-20",
-      "lastSeen": "2026-11-20"
+      "firstSeen": "2026-11-23",
+      "lastSeen": "2026-11-23"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 187
+      "totalHits": 195
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 126
+      "totalHits": 130
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 96
+      "totalHits": 99
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 74
+      "totalHits": 77
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 68
+      "totalHits": 71
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 63
+      "totalHits": 64
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 60
+      "totalHits": 63
     },
     {
       "key": "gaming",
       "name": "游戏",
-      "totalHits": 34
+      "totalHits": 37
     },
     {
       "key": "defense",
@@ -418,36 +423,36 @@
       "totalHits": 31
     },
     {
+      "key": "media",
+      "name": "传媒",
+      "totalHits": 25
+    },
+    {
       "key": "comms",
       "name": "通信",
-      "totalHits": 23
+      "totalHits": 24
     },
     {
       "key": "pharma",
       "name": "创新药",
-      "totalHits": 22
-    },
-    {
-      "key": "media",
-      "name": "传媒",
       "totalHits": 22
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.69,
-      "editions": 24
+      "avgChangePct": -0.71,
+      "editions": 25
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.69,
-      "editions": 24
+      "avgChangePct": -1.75,
+      "editions": 25
     },
     {
       "name": "创业板指",
-      "avgChangePct": -2.2,
-      "editions": 24
+      "avgChangePct": -2.25,
+      "editions": 25
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
