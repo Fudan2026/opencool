@@ -1,13 +1,44 @@
 {
-  "generatedAt": "2026-11-21T23:27:25.914Z",
+  "generatedAt": "2026-11-22T08:51:42.773Z",
   "source": {
     "path": "/themes.json",
     "note": "re-exported verbatim under the frozen path; the root /themes.json keeps evolving with the pipeline"
   },
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-22/06",
+  "edition": "2026-11-22/13",
   "themes": [
+    {
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": -5.76,
+      "boardUp": 12,
+      "boardDown": 242,
+      "articleHits": 5,
+      "matchedAliases": [
+        "算力",
+        "英伟达"
+      ],
+      "constituents": [
+        {
+          "symbol": "000818",
+          "name": "航锦科技",
+          "changePct": -8.32
+        },
+        {
+          "symbol": "000977",
+          "name": "浪潮信息",
+          "changePct": -8.06
+        },
+        {
+          "symbol": "001388",
+          "name": "信通电子",
+          "changePct": -7.18
+        }
+      ]
+    },
     {
       "key": "comms",
       "name": "通信",
@@ -40,94 +71,33 @@
       ]
     },
     {
-      "key": "defense",
-      "name": "军工",
-      "boardCode": "BK0490",
-      "boardName": "军工",
-      "boardChangePct": -5.78,
-      "boardUp": 11,
-      "boardDown": 434,
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": -4.41,
+      "boardUp": 0,
+      "boardDown": 13,
       "articleHits": 4,
       "matchedAliases": [
-        "国防",
-        "导弹"
+        "黄金",
+        "铜"
       ],
       "constituents": [
         {
-          "symbol": "000530",
-          "name": "冰山冷热",
-          "changePct": 10.03
+          "symbol": "300139",
+          "name": "晓程科技",
+          "changePct": -6.13
         },
         {
-          "symbol": "000599",
-          "name": "青岛双星",
-          "changePct": -8.22
+          "symbol": "000426",
+          "name": "兴业银锡",
+          "changePct": -6.01
         },
         {
-          "symbol": "000534",
-          "name": "万泽股份",
-          "changePct": -6.86
-        }
-      ]
-    },
-    {
-      "key": "semiconductor",
-      "name": "半导体",
-      "boardCode": "BK1036",
-      "boardName": "半导体",
-      "boardChangePct": -6.86,
-      "boardUp": 7,
-      "boardDown": 180,
-      "articleHits": 3,
-      "matchedAliases": [
-        "芯片"
-      ],
-      "constituents": [
-        {
-          "symbol": "300456",
-          "name": "赛微电子",
-          "changePct": -11.93
-        },
-        {
-          "symbol": "002156",
-          "name": "通富微电",
-          "changePct": -10
-        },
-        {
-          "symbol": "002213",
-          "name": "大为股份",
-          "changePct": -9.32
-        }
-      ]
-    },
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": -5.76,
-      "boardUp": 12,
-      "boardDown": 242,
-      "articleHits": 2,
-      "matchedAliases": [
-        "算力",
-        "数据中心"
-      ],
-      "constituents": [
-        {
-          "symbol": "000818",
-          "name": "航锦科技",
-          "changePct": -8.32
-        },
-        {
-          "symbol": "000977",
-          "name": "浪潮信息",
-          "changePct": -8.06
-        },
-        {
-          "symbol": "001388",
-          "name": "信通电子",
-          "changePct": -7.18
+          "symbol": "001337",
+          "name": "四川黄金",
+          "changePct": -5.63
         }
       ]
     },
@@ -139,9 +109,8 @@
       "boardChangePct": -5.19,
       "boardUp": 39,
       "boardDown": 717,
-      "articleHits": 2,
+      "articleHits": 3,
       "matchedAliases": [
-        "人工智能",
         "AI"
       ],
       "constituents": [
@@ -159,6 +128,34 @@
           "symbol": "000090",
           "name": "天健集团",
           "changePct": -6.55
+        }
+      ]
+    },
+    {
+      "key": "semiconductor",
+      "name": "半导体",
+      "boardCode": "BK1036",
+      "boardName": "半导体",
+      "boardChangePct": -6.86,
+      "boardUp": 7,
+      "boardDown": 180,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "300456",
+          "name": "赛微电子",
+          "changePct": -11.93
+        },
+        {
+          "symbol": "002156",
+          "name": "通富微电",
+          "changePct": -10
+        },
+        {
+          "symbol": "002213",
+          "name": "大为股份",
+          "changePct": -9.32
         }
       ]
     },
@@ -243,6 +240,34 @@
           "symbol": "003004",
           "name": "声迅股份",
           "changePct": -7.48
+        }
+      ]
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "boardCode": "BK0490",
+      "boardName": "军工",
+      "boardChangePct": -5.78,
+      "boardUp": 11,
+      "boardDown": 434,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000530",
+          "name": "冰山冷热",
+          "changePct": 10.03
+        },
+        {
+          "symbol": "000599",
+          "name": "青岛双星",
+          "changePct": -8.22
+        },
+        {
+          "symbol": "000534",
+          "name": "万泽股份",
+          "changePct": -6.86
         }
       ]
     },
@@ -355,34 +380,6 @@
           "symbol": "000566",
           "name": "海南海药",
           "changePct": -5.48
-        }
-      ]
-    },
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": -4.41,
-      "boardUp": 0,
-      "boardDown": 13,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "300139",
-          "name": "晓程科技",
-          "changePct": -6.13
-        },
-        {
-          "symbol": "000426",
-          "name": "兴业银锡",
-          "changePct": -6.01
-        },
-        {
-          "symbol": "001337",
-          "name": "四川黄金",
-          "changePct": -5.63
         }
       ]
     },
