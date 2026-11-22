@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-22T19:56:39+08:00",
+  "generatedAt": "2026-11-23T00:50:33+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
     "started": true,
     "expectedSlotsPerDay": 10,
     "firstDate": "2026-11-16",
-    "lastDate": "2026-11-22",
-    "days": 7,
-    "tradingDays": 5,
+    "lastDate": "2026-11-23",
+    "days": 8,
+    "tradingDays": 6,
     "snapshots": 16,
     "revisionFiles": 0
   },
@@ -337,6 +337,29 @@
       "capturedSlots": 0,
       "missingSlots": [],
       "pendingSlots": [],
+      "revisions": 0,
+      "sections": {},
+      "gaps": []
+    },
+    {
+      "date": "2026-11-23",
+      "tradingDay": true,
+      "beforeLaunch": false,
+      "expectedSlots": 0,
+      "capturedSlots": 0,
+      "missingSlots": [],
+      "pendingSlots": [
+        "09:35",
+        "10:05",
+        "10:35",
+        "11:05",
+        "11:35",
+        "13:05",
+        "13:35",
+        "14:05",
+        "14:35",
+        "15:05"
+      ],
       "revisions": 0,
       "sections": {},
       "gaps": []
