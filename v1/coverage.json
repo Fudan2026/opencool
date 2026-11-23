@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-23T08:26:08+08:00",
+  "generatedAt": "2026-11-23T10:52:34+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -11,7 +11,7 @@
     "lastDate": "2026-11-23",
     "days": 8,
     "tradingDays": 6,
-    "snapshots": 16,
+    "snapshots": 17,
     "revisionFiles": 0
   },
   "days": [
@@ -345,13 +345,13 @@
       "date": "2026-11-23",
       "tradingDay": true,
       "beforeLaunch": false,
-      "expectedSlots": 0,
-      "capturedSlots": 0,
-      "missingSlots": [],
-      "pendingSlots": [
+      "expectedSlots": 3,
+      "capturedSlots": 1,
+      "missingSlots": [
         "09:35",
-        "10:05",
-        "10:35",
+        "10:05"
+      ],
+      "pendingSlots": [
         "11:05",
         "11:35",
         "13:05",
@@ -361,8 +361,25 @@
         "15:05"
       ],
       "revisions": 0,
-      "sections": {},
-      "gaps": []
+      "sections": {
+        "indices": 1,
+        "industries": 1,
+        "themes": 1,
+        "fundFlows": 1,
+        "limitPool": 1
+      },
+      "gaps": [
+        {
+          "slot": "09:35",
+          "code": "missed",
+          "reason": "no snapshot for 09:35 on 2026-11-23 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "10:05",
+          "code": "missed",
+          "reason": "no snapshot for 10:05 on 2026-11-23 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        }
+      ]
     }
   ],
   "stories": {
@@ -387,25 +404,25 @@
     {
       "key": "1d",
       "hours": 24,
-      "measured": 592,
-      "pending": 1404,
+      "measured": 1012,
+      "pending": 983,
       "available": true
     },
     {
       "key": "5d",
       "hours": 120,
-      "measured": 11,
-      "pending": 1989,
+      "measured": 146,
+      "pending": 1853,
       "available": true
     }
   ],
   "gaps": [],
   "summary": {
-    "daysWithGaps": 4,
+    "daysWithGaps": 5,
     "daysComplete": 1,
-    "expectedSlots": 50,
-    "capturedSlots": 16,
-    "coveragePct": 32,
-    "gaps": 34
+    "expectedSlots": 53,
+    "capturedSlots": 17,
+    "coveragePct": 32.1,
+    "gaps": 36
   }
 }
