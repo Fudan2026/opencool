@@ -1,37 +1,67 @@
 {
-  "generatedAt": "2026-11-23T11:39:11.076Z",
+  "generatedAt": "2026-11-23T22:56:33.728Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-23/19",
+  "edition": "2026-11-24/06",
   "themes": [
     {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": 5.39,
-      "boardUp": 13,
-      "boardDown": 0,
+      "key": "consumer-elec",
+      "name": "消费电子",
+      "boardCode": "BK1037",
+      "boardName": "消费电子",
+      "boardChangePct": 4.14,
+      "boardUp": 96,
+      "boardDown": 3,
       "articleHits": 3,
       "matchedAliases": [
-        "铜"
+        "手机"
       ],
       "constituents": [
         {
-          "symbol": "300139",
-          "name": "晓程科技",
-          "changePct": 10.04
+          "symbol": "002655",
+          "name": "共达电声",
+          "changePct": 10.01
         },
         {
-          "symbol": "000975",
-          "name": "山金国际",
-          "changePct": 7.93
+          "symbol": "002045",
+          "name": "国光电器",
+          "changePct": 9.96
         },
         {
-          "symbol": "000506",
-          "name": "招金黄金",
-          "changePct": 7.42
+          "symbol": "002681",
+          "name": "奋达科技",
+          "changePct": 5.36
+        }
+      ]
+    },
+    {
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": 2.73,
+      "boardUp": 211,
+      "boardDown": 39,
+      "articleHits": 3,
+      "matchedAliases": [
+        "英伟达"
+      ],
+      "constituents": [
+        {
+          "symbol": "001388",
+          "name": "信通电子",
+          "changePct": 7.01
+        },
+        {
+          "symbol": "002042",
+          "name": "华孚时尚",
+          "changePct": 6.22
+        },
+        {
+          "symbol": "001339",
+          "name": "智微智能",
+          "changePct": 6.08
         }
       ]
     },
@@ -43,9 +73,10 @@
       "boardChangePct": 3.65,
       "boardUp": 687,
       "boardDown": 60,
-      "articleHits": 1,
+      "articleHits": 2,
       "matchedAliases": [
-        "AI"
+        "AI",
+        "大模型"
       ],
       "constituents": [
         {
@@ -62,6 +93,36 @@
           "symbol": "000676",
           "name": "智度股份",
           "changePct": 4.75
+        }
+      ]
+    },
+    {
+      "key": "gaming",
+      "name": "游戏",
+      "boardCode": "BK1046",
+      "boardName": "游戏Ⅱ",
+      "boardChangePct": 4.84,
+      "boardUp": 24,
+      "boardDown": 0,
+      "articleHits": 1,
+      "matchedAliases": [
+        "游戏"
+      ],
+      "constituents": [
+        {
+          "symbol": "300494",
+          "name": "盛天网络",
+          "changePct": 10.86
+        },
+        {
+          "symbol": "300031",
+          "name": "宝通科技",
+          "changePct": 10.4
+        },
+        {
+          "symbol": "300299",
+          "name": "富春股份",
+          "changePct": 8.06
         }
       ]
     },
@@ -94,6 +155,34 @@
       ]
     },
     {
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": 5.39,
+      "boardUp": 13,
+      "boardDown": 0,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "300139",
+          "name": "晓程科技",
+          "changePct": 10.04
+        },
+        {
+          "symbol": "000975",
+          "name": "山金国际",
+          "changePct": 7.93
+        },
+        {
+          "symbol": "000506",
+          "name": "招金黄金",
+          "changePct": 7.42
+        }
+      ]
+    },
+    {
       "key": "media",
       "name": "传媒",
       "boardCode": "BK0486",
@@ -122,34 +211,6 @@
       ]
     },
     {
-      "key": "gaming",
-      "name": "游戏",
-      "boardCode": "BK1046",
-      "boardName": "游戏Ⅱ",
-      "boardChangePct": 4.84,
-      "boardUp": 24,
-      "boardDown": 0,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "300494",
-          "name": "盛天网络",
-          "changePct": 10.86
-        },
-        {
-          "symbol": "300031",
-          "name": "宝通科技",
-          "changePct": 10.4
-        },
-        {
-          "symbol": "300299",
-          "name": "富春股份",
-          "changePct": 8.06
-        }
-      ]
-    },
-    {
       "key": "comms",
       "name": "通信",
       "boardCode": "BK0448",
@@ -174,34 +235,6 @@
           "symbol": "001267",
           "name": "汇绿生态",
           "changePct": 5.47
-        }
-      ]
-    },
-    {
-      "key": "consumer-elec",
-      "name": "消费电子",
-      "boardCode": "BK1037",
-      "boardName": "消费电子",
-      "boardChangePct": 4.14,
-      "boardUp": 96,
-      "boardDown": 3,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "002655",
-          "name": "共达电声",
-          "changePct": 10.01
-        },
-        {
-          "symbol": "002045",
-          "name": "国光电器",
-          "changePct": 9.96
-        },
-        {
-          "symbol": "002681",
-          "name": "奋达科技",
-          "changePct": 5.36
         }
       ]
     },
@@ -342,34 +375,6 @@
           "symbol": "000739",
           "name": "普洛药业",
           "changePct": 2.16
-        }
-      ]
-    },
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": 2.73,
-      "boardUp": 211,
-      "boardDown": 39,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "001388",
-          "name": "信通电子",
-          "changePct": 7.01
-        },
-        {
-          "symbol": "002042",
-          "name": "华孚时尚",
-          "changePct": 6.22
-        },
-        {
-          "symbol": "001339",
-          "name": "智微智能",
-          "changePct": 6.08
         }
       ]
     },

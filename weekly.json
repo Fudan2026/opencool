@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-23T11:38:44.746Z",
+  "generatedAt": "2026-11-23T22:56:19.316Z",
   "source": "build-weekly",
   "windowDays": 7,
-  "daysCovered": 8,
-  "editions": 24,
-  "avgSentiment": -13.5,
+  "daysCovered": 9,
+  "editions": 25,
+  "avgSentiment": -12.9,
   "sentimentCurve": [
     {
       "date": "2026-11-16",
@@ -125,38 +125,43 @@
       "date": "2026-11-23",
       "hour": "19",
       "score": -17
+    },
+    {
+      "date": "2026-11-24",
+      "hour": "06",
+      "score": 2
     }
   ],
   "sectorAvg": [
     {
-      "key": "china-etf",
-      "label": "ETF",
-      "avg": -54.7,
-      "editions": 24
-    },
-    {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -53.8,
-      "editions": 24
+      "avg": -52.8,
+      "editions": 25
+    },
+    {
+      "key": "china-etf",
+      "label": "ETF",
+      "avg": -50.2,
+      "editions": 25
     },
     {
       "key": "macro",
       "label": "宏观指数",
-      "avg": -49.7,
-      "editions": 22
+      "avg": -45,
+      "editions": 23
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -43.9,
-      "editions": 24
+      "avg": -41.2,
+      "editions": 25
     },
     {
       "key": "crypto",
       "label": "加密",
-      "avg": -32.8,
-      "editions": 19
+      "avg": -29.5,
+      "editions": 20
     },
     {
       "key": "china-ashare",
@@ -174,7 +179,7 @@
       "key": "general",
       "label": "大盘综合",
       "avg": -5,
-      "editions": 24
+      "editions": 25
     }
   ],
   "topEvents": [
@@ -183,21 +188,21 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "How a sex scandal at Nvidia is putting pressure on the White House",
       "url": "https://www.bbc.co.uk/news/articles/c67429m3vem3o?at_medium=RSS&at_campaign=rss",
-      "count": 24
+      "count": 25
     },
     {
       "symbol": "512480.SS",
@@ -251,28 +256,34 @@
   ],
   "keywords": [
     {
+      "term": "仁勋",
+      "count": 4,
+      "firstSeen": "2026-11-18",
+      "lastSeen": "2026-11-24"
+    },
+    {
+      "term": "英伟",
+      "count": 4,
+      "firstSeen": "2026-11-18",
+      "lastSeen": "2026-11-24"
+    },
+    {
+      "term": "黄仁",
+      "count": 4,
+      "firstSeen": "2026-11-18",
+      "lastSeen": "2026-11-24"
+    },
+    {
       "term": "交易",
       "count": 3,
       "firstSeen": "2026-11-21",
       "lastSeen": "2026-11-22"
     },
     {
-      "term": "仁勋",
+      "term": "伟达",
       "count": 3,
       "firstSeen": "2026-11-18",
-      "lastSeen": "2026-11-22"
-    },
-    {
-      "term": "英伟",
-      "count": 3,
-      "firstSeen": "2026-11-18",
-      "lastSeen": "2026-11-21"
-    },
-    {
-      "term": "黄仁",
-      "count": 3,
-      "firstSeen": "2026-11-18",
-      "lastSeen": "2026-11-22"
+      "lastSeen": "2026-11-24"
     },
     {
       "term": "airlines",
@@ -311,12 +322,6 @@
       "lastSeen": "2026-11-18"
     },
     {
-      "term": "伟达",
-      "count": 2,
-      "firstSeen": "2026-11-18",
-      "lastSeen": "2026-11-19"
-    },
-    {
       "term": "史上",
       "count": 2,
       "firstSeen": "2026-11-21",
@@ -327,6 +332,12 @@
       "count": 2,
       "firstSeen": "2026-11-22",
       "lastSeen": "2026-11-22"
+    },
+    {
+      "term": "0亿",
+      "count": 1,
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24"
     },
     {
       "term": "1万",
@@ -363,39 +374,33 @@
       "count": 1,
       "firstSeen": "2026-11-23",
       "lastSeen": "2026-11-23"
-    },
-    {
-      "term": "catering",
-      "count": 1,
-      "firstSeen": "2026-11-23",
-      "lastSeen": "2026-11-23"
     }
   ],
   "themeAvg": [
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 189
+      "totalHits": 194
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 123
+      "totalHits": 129
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 92
+      "totalHits": 95
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 74
+      "totalHits": 77
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 70
+      "totalHits": 73
     },
     {
       "key": "oil",
@@ -410,7 +415,7 @@
     {
       "key": "gaming",
       "name": "游戏",
-      "totalHits": 38
+      "totalHits": 41
     },
     {
       "key": "defense",
@@ -420,12 +425,12 @@
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 27
+      "totalHits": 29
     },
     {
       "key": "comms",
       "name": "通信",
-      "totalHits": 20
+      "totalHits": 21
     },
     {
       "key": "brokerage",
@@ -436,18 +441,18 @@
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.66,
-      "editions": 24
+      "avgChangePct": -0.63,
+      "editions": 25
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.41,
-      "editions": 24
+      "avgChangePct": -1.27,
+      "editions": 25
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.67,
-      "editions": 24
+      "avgChangePct": -1.48,
+      "editions": 25
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
