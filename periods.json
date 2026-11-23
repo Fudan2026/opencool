@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-23T08:09:27.190Z",
+  "generatedAt": "2026-11-23T11:40:52.859Z",
   "source": "bake-periods",
-  "editions": 93,
+  "editions": 94,
   "weeks": [
     {
       "key": "2026-10-19",
@@ -120,33 +120,33 @@
     {
       "key": "2026-11-23",
       "end": "2026-11-23",
-      "editions": 2,
-      "avgSentiment": -12.5,
-      "posNegRatio": 0.42,
+      "editions": 3,
+      "avgSentiment": -14,
+      "posNegRatio": 0.41,
       "topThemes": [
         {
           "name": "算力",
-          "hits": 15
+          "hits": 23
         },
         {
           "name": "人工智能",
-          "hits": 10
+          "hits": 15
         },
         {
           "name": "机器人",
-          "hits": 8
+          "hits": 12
         },
         {
           "name": "半导体",
-          "hits": 6
+          "hits": 9
         },
         {
           "name": "银行",
-          "hits": 6
+          "hits": 9
         }
       ],
-      "avgIndexChangePct": -0.45,
-      "deltaVsPrev": 1
+      "avgIndexChangePct": 0.27,
+      "deltaVsPrev": -0.5
     }
   ],
   "months": [
@@ -173,33 +173,33 @@
     {
       "key": "2026-11",
       "end": "2026-11-23",
-      "editions": 65,
-      "avgSentiment": -20.6,
+      "editions": 66,
+      "avgSentiment": -20.5,
       "posNegRatio": 0.4,
       "topThemes": [
         {
           "name": "算力",
-          "hits": 338
+          "hits": 346
         },
         {
           "name": "人工智能",
-          "hits": 243
+          "hits": 248
         },
         {
           "name": "半导体",
-          "hits": 176
+          "hits": 179
         },
         {
           "name": "银行",
-          "hits": 163
+          "hits": 166
         },
         {
           "name": "有色金属",
-          "hits": 130
+          "hits": 134
         }
       ],
-      "avgIndexChangePct": -1.11,
-      "deltaVsPrev": 76.2
+      "avgIndexChangePct": -1.06,
+      "deltaVsPrev": 76.3
     }
   ],
   "note": "Zero AI · pure arithmetic · not investment advice"
