@@ -3,7 +3,7 @@
   "namespace": "v1",
   "date": "2026-11-24",
   "timezone": "Asia/Shanghai",
-  "generatedAt": "2026-11-24T12:50:05+08:00",
+  "generatedAt": "2026-11-24T14:45:19+08:00",
   "tradingDay": true,
   "beforeLaunch": false,
   "expectedSlots": [
@@ -19,10 +19,6 @@
     "15:05"
   ],
   "pendingSlots": [
-    "13:05",
-    "13:35",
-    "14:05",
-    "14:35",
     "15:05"
   ],
   "slots": [],
@@ -51,13 +47,33 @@
       "slot": "11:35",
       "code": "missed",
       "reason": "no snapshot for 11:35 on 2026-11-24 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+    },
+    {
+      "slot": "13:05",
+      "code": "missed",
+      "reason": "no snapshot for 13:05 on 2026-11-24 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+    },
+    {
+      "slot": "13:35",
+      "code": "missed",
+      "reason": "no snapshot for 13:35 on 2026-11-24 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+    },
+    {
+      "slot": "14:05",
+      "code": "missed",
+      "reason": "no snapshot for 14:05 on 2026-11-24 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+    },
+    {
+      "slot": "14:35",
+      "code": "missed",
+      "reason": "no snapshot for 14:35 on 2026-11-24 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
     }
   ],
   "counts": {
-    "expectedSlots": 5,
+    "expectedSlots": 9,
     "capturedSlots": 0,
     "revisionFiles": 0,
-    "gaps": 5
+    "gaps": 9
   },
   "note": "Each slot is the immutable first capture of that slot (the base file) with its two clocks: asOf is the market timestamp the values describe, observedAt is when we fetched them. Later re-captures are listed in captures[] and live at their own tape/<date>/<HHMM>.rev-N.json path; the base bytes are never rewritten. Every absent slot or section is named in gaps[] with a code."
 }
