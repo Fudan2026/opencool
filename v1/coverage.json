@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-24T14:47:40+08:00",
+  "generatedAt": "2026-11-24T23:43:44+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -419,7 +419,7 @@
       "date": "2026-11-24",
       "tradingDay": true,
       "beforeLaunch": false,
-      "expectedSlots": 9,
+      "expectedSlots": 10,
       "capturedSlots": 1,
       "missingSlots": [
         "09:35",
@@ -429,11 +429,10 @@
         "11:35",
         "13:05",
         "13:35",
-        "14:05"
-      ],
-      "pendingSlots": [
+        "14:05",
         "15:05"
       ],
+      "pendingSlots": [],
       "revisions": 0,
       "sections": {
         "indices": 1,
@@ -482,6 +481,11 @@
           "slot": "14:05",
           "code": "missed",
           "reason": "no snapshot for 14:05 on 2026-11-24 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "15:05",
+          "code": "missed",
+          "reason": "no snapshot for 15:05 on 2026-11-24 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
         }
       ]
     }
@@ -492,31 +496,31 @@
     "withFirstSeenAt": 2000,
     "withoutFirstSeenAt": 0,
     "firstSeenCoveragePct": 100,
-    "editions": 83,
-    "sightings": 1786,
-    "storiesWithRevisions": 73,
-    "updatedAt": "2026-11-24T14:45:01+08:00"
+    "editions": 84,
+    "sightings": 1841,
+    "storiesWithRevisions": 72,
+    "updatedAt": "2026-11-24T23:43:26+08:00"
   },
   "horizons": [
     {
       "key": "1h",
       "hours": 1,
-      "measured": 161,
-      "pending": 1839,
+      "measured": 37,
+      "pending": 1963,
       "available": true
     },
     {
       "key": "1d",
       "hours": 24,
-      "measured": 791,
-      "pending": 1201,
+      "measured": 623,
+      "pending": 1369,
       "available": true
     },
     {
       "key": "5d",
       "hours": 120,
-      "measured": 250,
-      "pending": 1750,
+      "measured": 97,
+      "pending": 1903,
       "available": true
     }
   ],
@@ -524,9 +528,9 @@
   "summary": {
     "daysWithGaps": 6,
     "daysComplete": 1,
-    "expectedSlots": 69,
+    "expectedSlots": 70,
     "capturedSlots": 18,
-    "coveragePct": 26.1,
-    "gaps": 51
+    "coveragePct": 25.7,
+    "gaps": 52
   }
 }
