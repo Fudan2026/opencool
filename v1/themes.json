@@ -1,43 +1,13 @@
 {
-  "generatedAt": "2026-11-24T15:41:43.375Z",
+  "generatedAt": "2026-11-25T00:10:29.208Z",
   "source": {
     "path": "/themes.json",
     "note": "re-exported verbatim under the frozen path; the root /themes.json keeps evolving with the pipeline"
   },
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-24/19",
+  "edition": "2026-11-25/06",
   "themes": [
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": 0.18,
-      "boardUp": 103,
-      "boardDown": 145,
-      "articleHits": 3,
-      "matchedAliases": [
-        "英伟达"
-      ],
-      "constituents": [
-        {
-          "symbol": "000608",
-          "name": "阳光股份",
-          "changePct": 6.55
-        },
-        {
-          "symbol": "000701",
-          "name": "厦门信达",
-          "changePct": -2.4
-        },
-        {
-          "symbol": "001339",
-          "name": "智微智能",
-          "changePct": 2.35
-        }
-      ]
-    },
     {
       "key": "ai",
       "name": "人工智能",
@@ -95,6 +65,36 @@
           "symbol": "300604",
           "name": "长川科技",
           "changePct": 3.28
+        }
+      ]
+    },
+    {
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": 0.18,
+      "boardUp": 103,
+      "boardDown": 145,
+      "articleHits": 2,
+      "matchedAliases": [
+        "英伟达"
+      ],
+      "constituents": [
+        {
+          "symbol": "000608",
+          "name": "阳光股份",
+          "changePct": 6.55
+        },
+        {
+          "symbol": "000701",
+          "name": "厦门信达",
+          "changePct": -2.4
+        },
+        {
+          "symbol": "001339",
+          "name": "智微智能",
+          "changePct": 2.35
         }
       ]
     },

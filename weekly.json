@@ -1,26 +1,11 @@
 {
-  "generatedAt": "2026-11-24T15:41:27.806Z",
+  "generatedAt": "2026-11-25T00:10:11.955Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 24,
-  "avgSentiment": -12,
+  "editions": 22,
+  "avgSentiment": -12.1,
   "sentimentCurve": [
-    {
-      "date": "2026-11-17",
-      "hour": "06",
-      "score": -8
-    },
-    {
-      "date": "2026-11-17",
-      "hour": "13",
-      "score": -12
-    },
-    {
-      "date": "2026-11-17",
-      "hour": "19",
-      "score": -12
-    },
     {
       "date": "2026-11-18",
       "hour": "06",
@@ -125,56 +110,61 @@
       "date": "2026-11-24",
       "hour": "19",
       "score": -8
+    },
+    {
+      "date": "2026-11-25",
+      "hour": "06",
+      "score": -10
     }
   ],
   "sectorAvg": [
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -51.9,
-      "editions": 24
+      "avg": -52.8,
+      "editions": 22
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -47.6,
-      "editions": 24
+      "avg": -39.9,
+      "editions": 22
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -38.8,
-      "editions": 24
-    },
-    {
-      "key": "macro",
-      "label": "宏观指数",
-      "avg": -29.8,
+      "avg": -38,
       "editions": 22
-    },
-    {
-      "key": "crypto",
-      "label": "加密",
-      "avg": -24.2,
-      "editions": 19
     },
     {
       "key": "china-ashare",
       "label": "A 股蓝筹",
-      "avg": 21.4,
-      "editions": 7
+      "avg": 24.5,
+      "editions": 8
     },
     {
-      "key": "china-equity",
-      "label": "中概港股",
-      "avg": -13.2,
-      "editions": 17
+      "key": "macro",
+      "label": "宏观指数",
+      "avg": -24.4,
+      "editions": 20
+    },
+    {
+      "key": "crypto",
+      "label": "加密",
+      "avg": -22.3,
+      "editions": 18
     },
     {
       "key": "general",
       "label": "大盘综合",
-      "avg": -4.8,
-      "editions": 24
+      "avg": -5.3,
+      "editions": 22
+    },
+    {
+      "key": "china-equity",
+      "label": "中概港股",
+      "avg": -3.6,
+      "editions": 16
     }
   ],
   "topEvents": [
@@ -183,70 +173,70 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 24
+      "count": 22
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 24
-    },
-    {
-      "symbol": "512480.SS",
-      "displayName": "半导体ETF",
-      "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
-      "url": "https://www.ftchinese.com/story/001111367",
-      "count": 23
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
-      "url": "https://www.ftchinese.com/story/001111367",
-      "count": 23
-    },
-    {
-      "symbol": "512480.SS",
-      "displayName": "半导体ETF",
-      "title": "美议员就芯片出口管控问题向卢特尼克施压",
-      "url": "https://www.ftchinese.com/story/001111365",
-      "count": 23
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "英伟达聘请前联邦检察官调查黄仁勋事件",
-      "url": "https://www.ftchinese.com/story/001111342",
-      "count": 23
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "How a sex scandal at Nvidia is putting pressure on the White House",
-      "url": "https://www.bbc.co.uk/news/articles/c67429m3vem3o?at_medium=RSS&at_campaign=rss",
-      "count": 23
+      "count": 22
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达董事会不考虑恢复黄仁勋的CEO职位",
       "url": "https://www.ftchinese.com/story/001111390",
-      "count": 22
+      "count": 21
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
-      "title": "黄仁勋事件后 人们关注中国的芯片产业现状",
-      "url": "https://www.dw.com/zh/黄仁勋事件后-人们关注中国的芯片产业现状/a-79961605?maca=chi-rss-chi-all-1127-rdf",
-      "count": 14
+      "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
+      "url": "https://www.ftchinese.com/story/001111367",
+      "count": 21
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
+      "url": "https://www.ftchinese.com/story/001111367",
+      "count": 21
+    },
+    {
+      "symbol": "512480.SS",
+      "displayName": "半导体ETF",
+      "title": "美议员就芯片出口管控问题向卢特尼克施压",
+      "url": "https://www.ftchinese.com/story/001111365",
+      "count": 21
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "英伟达聘请前联邦检察官调查黄仁勋事件",
+      "url": "https://www.ftchinese.com/story/001111342",
+      "count": 21
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "How a sex scandal at Nvidia is putting pressure on the White House",
+      "url": "https://www.bbc.co.uk/news/articles/c67429m3vem3o?at_medium=RSS&at_campaign=rss",
+      "count": 20
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "How important are Nvidia and Jensen Huang to the US economy?",
       "url": "https://www.bbc.co.uk/news/articles/c68798vdprwpo?at_medium=RSS&at_campaign=rss",
-      "count": 14
+      "count": 15
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "Nvidia says it won't reinstate Huang as firm reports bumper results",
+      "url": "https://www.bbc.co.uk/news/articles/cm2kl50vkwkdo?at_medium=RSS&at_campaign=rss",
+      "count": 13
     }
   ],
   "keywords": [
@@ -281,28 +271,10 @@
       "lastSeen": "2026-11-24"
     },
     {
-      "term": "airlines",
+      "term": "1月",
       "count": 2,
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17"
-    },
-    {
-      "term": "resolves",
-      "count": 2,
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17"
-    },
-    {
-      "term": "system",
-      "count": 2,
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17"
-    },
-    {
-      "term": "united",
-      "count": 2,
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17"
+      "firstSeen": "2026-11-20",
+      "lastSeen": "2026-11-25"
     },
     {
       "term": "上最",
@@ -323,10 +295,28 @@
       "lastSeen": "2026-11-21"
     },
     {
+      "term": "月2",
+      "count": 2,
+      "firstSeen": "2026-11-20",
+      "lastSeen": "2026-11-25"
+    },
+    {
       "term": "系统",
       "count": 2,
       "firstSeen": "2026-11-22",
       "lastSeen": "2026-11-22"
+    },
+    {
+      "term": "联社",
+      "count": 2,
+      "firstSeen": "2026-11-20",
+      "lastSeen": "2026-11-25"
+    },
+    {
+      "term": "财联",
+      "count": 2,
+      "firstSeen": "2026-11-20",
+      "lastSeen": "2026-11-25"
     },
     {
       "term": "0亿",
@@ -341,10 +331,10 @@
       "lastSeen": "2026-11-19"
     },
     {
-      "term": "1月",
+      "term": "5日",
       "count": 1,
-      "firstSeen": "2026-11-20",
-      "lastSeen": "2026-11-20"
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25"
     },
     {
       "term": "against",
@@ -375,27 +365,22 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 182
+      "totalHits": 164
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 121
+      "totalHits": 107
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 91
+      "totalHits": 84
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 75
-    },
-    {
-      "key": "robotics",
-      "name": "机器人",
-      "totalHits": 68
+      "totalHits": 69
     },
     {
       "key": "metals",
@@ -403,51 +388,56 @@
       "totalHits": 60
     },
     {
+      "key": "robotics",
+      "name": "机器人",
+      "totalHits": 59
+    },
+    {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 57
+      "totalHits": 55
     },
     {
       "key": "gaming",
       "name": "游戏",
-      "totalHits": 47
+      "totalHits": 41
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 34
+      "totalHits": 38
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 28
+      "totalHits": 26
     },
     {
       "key": "consumer-elec",
       "name": "消费电子",
-      "totalHits": 22
+      "totalHits": 24
     },
     {
-      "key": "comms",
-      "name": "通信",
-      "totalHits": 21
+      "key": "brokerage",
+      "name": "券商",
+      "totalHits": 19
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.58,
-      "editions": 23
+      "avgChangePct": -0.53,
+      "editions": 21
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.08,
-      "editions": 24
+      "avgChangePct": -1.12,
+      "editions": 22
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.08,
-      "editions": 24
+      "avgChangePct": -1.03,
+      "editions": 22
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
