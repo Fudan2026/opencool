@@ -1,25 +1,10 @@
 {
-  "generatedAt": "2026-11-25T08:44:48.321Z",
+  "generatedAt": "2026-11-25T11:48:32.221Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-25/13",
+  "edition": "2026-11-25/19",
   "themes": [
-    {
-      "key": "robotics",
-      "name": "机器人",
-      "boardCode": "BK1408",
-      "boardName": "机器人",
-      "boardChangePct": null,
-      "boardUp": null,
-      "boardDown": null,
-      "articleHits": 5,
-      "matchedAliases": [
-        "机器人",
-        "人形机器人"
-      ],
-      "constituents": []
-    },
     {
       "key": "ai",
       "name": "人工智能",
@@ -35,20 +20,6 @@
       "constituents": []
     },
     {
-      "key": "comms",
-      "name": "通信",
-      "boardCode": "BK0448",
-      "boardName": "通信设备",
-      "boardChangePct": null,
-      "boardUp": null,
-      "boardDown": null,
-      "articleHits": 1,
-      "matchedAliases": [
-        "卫星"
-      ],
-      "constituents": []
-    },
-    {
       "key": "ai-compute",
       "name": "算力",
       "boardCode": "BK1134",
@@ -56,8 +27,24 @@
       "boardChangePct": null,
       "boardUp": null,
       "boardDown": null,
-      "articleHits": 0,
-      "matchedAliases": [],
+      "articleHits": 2,
+      "matchedAliases": [
+        "英伟达"
+      ],
+      "constituents": []
+    },
+    {
+      "key": "realestate",
+      "name": "房地产",
+      "boardCode": "BK0451",
+      "boardName": "房地产开发",
+      "boardChangePct": null,
+      "boardUp": null,
+      "boardDown": null,
+      "articleHits": 1,
+      "matchedAliases": [
+        "地产"
+      ],
       "constituents": []
     },
     {
@@ -157,18 +144,6 @@
       "constituents": []
     },
     {
-      "key": "realestate",
-      "name": "房地产",
-      "boardCode": "BK0451",
-      "boardName": "房地产开发",
-      "boardChangePct": null,
-      "boardUp": null,
-      "boardDown": null,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": []
-    },
-    {
       "key": "coal",
       "name": "煤炭",
       "boardCode": "BK0437",
@@ -229,10 +204,34 @@
       "constituents": []
     },
     {
+      "key": "robotics",
+      "name": "机器人",
+      "boardCode": "BK1408",
+      "boardName": "机器人",
+      "boardChangePct": null,
+      "boardUp": null,
+      "boardDown": null,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": []
+    },
+    {
       "key": "quantum",
       "name": "量子科技",
       "boardCode": "BK0710",
       "boardName": "量子科技",
+      "boardChangePct": null,
+      "boardUp": null,
+      "boardDown": null,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": []
+    },
+    {
+      "key": "comms",
+      "name": "通信",
+      "boardCode": "BK0448",
+      "boardName": "通信设备",
       "boardChangePct": null,
       "boardUp": null,
       "boardDown": null,
