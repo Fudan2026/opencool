@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-26T10:59:56.175Z",
+  "generatedAt": "2026-11-26T12:25:06.747Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-26/13",
+  "edition": "2026-11-26/19",
   "themes": [
     {
       "key": "ai",
@@ -37,62 +37,32 @@
       ]
     },
     {
-      "key": "semiconductor",
-      "name": "半导体",
-      "boardCode": "BK1036",
-      "boardName": "半导体",
-      "boardChangePct": -0.72,
-      "boardUp": 55,
-      "boardDown": 133,
+      "key": "comms",
+      "name": "通信",
+      "boardCode": "BK0448",
+      "boardName": "通信设备",
+      "boardChangePct": 0.81,
+      "boardUp": 52,
+      "boardDown": 38,
       "articleHits": 3,
       "matchedAliases": [
-        "芯片"
+        "卫星"
       ],
       "constituents": [
         {
-          "symbol": "002077",
-          "name": "大港股份",
-          "changePct": 9.97
+          "symbol": "003040",
+          "name": "楚天龙",
+          "changePct": 10.04
         },
         {
-          "symbol": "002119",
-          "name": "康强电子",
-          "changePct": -5.4
+          "symbol": "002897",
+          "name": "意华股份",
+          "changePct": 5.06
         },
-        {
-          "symbol": "002371",
-          "name": "北方华创",
-          "changePct": -3.14
-        }
-      ]
-    },
-    {
-      "key": "quantum",
-      "name": "量子科技",
-      "boardCode": "BK0710",
-      "boardName": "量子科技",
-      "boardChangePct": -0.12,
-      "boardUp": 35,
-      "boardDown": 50,
-      "articleHits": 3,
-      "matchedAliases": [
-        "量子"
-      ],
-      "constituents": [
         {
           "symbol": "002104",
           "name": "恒宝股份",
           "changePct": 4.75
-        },
-        {
-          "symbol": "003004",
-          "name": "声迅股份",
-          "changePct": 3.29
-        },
-        {
-          "symbol": "002583",
-          "name": "海能达",
-          "changePct": 3.22
         }
       ]
     },
@@ -104,7 +74,7 @@
       "boardChangePct": 0.36,
       "boardUp": 119,
       "boardDown": 130,
-      "articleHits": 2,
+      "articleHits": 3,
       "matchedAliases": [
         "数据中心"
       ],
@@ -127,32 +97,62 @@
       ]
     },
     {
-      "key": "consumer-elec",
-      "name": "消费电子",
-      "boardCode": "BK1037",
-      "boardName": "消费电子",
-      "boardChangePct": -0.56,
-      "boardUp": 32,
-      "boardDown": 65,
-      "articleHits": 1,
+      "key": "liquor",
+      "name": "白酒",
+      "boardCode": "BK0896",
+      "boardName": "白酒",
+      "boardChangePct": -0.06,
+      "boardUp": 14,
+      "boardDown": 26,
+      "articleHits": 2,
       "matchedAliases": [
-        "消费电子"
+        "茅台"
       ],
       "constituents": [
         {
-          "symbol": "002055",
-          "name": "ST得润",
-          "changePct": -3.81
+          "symbol": "600189",
+          "name": "泉阳泉",
+          "changePct": 3.9
         },
         {
-          "symbol": "002888",
-          "name": "惠威科技",
-          "changePct": -3.16
+          "symbol": "000995",
+          "name": "皇台酒业",
+          "changePct": -3.56
         },
         {
-          "symbol": "002861",
-          "name": "瀛通通讯",
-          "changePct": -2.2
+          "symbol": "000860",
+          "name": "顺鑫农业",
+          "changePct": -3.25
+        }
+      ]
+    },
+    {
+      "key": "semiconductor",
+      "name": "半导体",
+      "boardCode": "BK1036",
+      "boardName": "半导体",
+      "boardChangePct": -0.72,
+      "boardUp": 55,
+      "boardDown": 133,
+      "articleHits": 1,
+      "matchedAliases": [
+        "芯片"
+      ],
+      "constituents": [
+        {
+          "symbol": "002077",
+          "name": "大港股份",
+          "changePct": 9.97
+        },
+        {
+          "symbol": "002119",
+          "name": "康强电子",
+          "changePct": -5.4
+        },
+        {
+          "symbol": "002371",
+          "name": "北方华创",
+          "changePct": -3.14
         }
       ]
     },
@@ -521,34 +521,6 @@
       ]
     },
     {
-      "key": "comms",
-      "name": "通信",
-      "boardCode": "BK0448",
-      "boardName": "通信设备",
-      "boardChangePct": 0.81,
-      "boardUp": 52,
-      "boardDown": 38,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "003040",
-          "name": "楚天龙",
-          "changePct": 10.04
-        },
-        {
-          "symbol": "002897",
-          "name": "意华股份",
-          "changePct": 5.06
-        },
-        {
-          "symbol": "002104",
-          "name": "恒宝股份",
-          "changePct": 4.75
-        }
-      ]
-    },
-    {
       "key": "solar",
       "name": "光伏",
       "boardCode": "BK1031",
@@ -601,6 +573,34 @@
           "symbol": "000559",
           "name": "万向钱潮",
           "changePct": -3.28
+        }
+      ]
+    },
+    {
+      "key": "consumer-elec",
+      "name": "消费电子",
+      "boardCode": "BK1037",
+      "boardName": "消费电子",
+      "boardChangePct": -0.56,
+      "boardUp": 32,
+      "boardDown": 65,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "002055",
+          "name": "ST得润",
+          "changePct": -3.81
+        },
+        {
+          "symbol": "002888",
+          "name": "惠威科技",
+          "changePct": -3.16
+        },
+        {
+          "symbol": "002861",
+          "name": "瀛通通讯",
+          "changePct": -2.2
         }
       ]
     },
@@ -661,30 +661,30 @@
       ]
     },
     {
-      "key": "liquor",
-      "name": "白酒",
-      "boardCode": "BK0896",
-      "boardName": "白酒",
-      "boardChangePct": -0.06,
-      "boardUp": 14,
-      "boardDown": 26,
+      "key": "quantum",
+      "name": "量子科技",
+      "boardCode": "BK0710",
+      "boardName": "量子科技",
+      "boardChangePct": -0.12,
+      "boardUp": 35,
+      "boardDown": 50,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "600189",
-          "name": "泉阳泉",
-          "changePct": 3.9
+          "symbol": "002104",
+          "name": "恒宝股份",
+          "changePct": 4.75
         },
         {
-          "symbol": "000995",
-          "name": "皇台酒业",
-          "changePct": -3.56
+          "symbol": "003004",
+          "name": "声迅股份",
+          "changePct": 3.29
         },
         {
-          "symbol": "000860",
-          "name": "顺鑫农业",
-          "changePct": -3.25
+          "symbol": "002583",
+          "name": "海能达",
+          "changePct": 3.22
         }
       ]
     }
