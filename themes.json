@@ -1,37 +1,39 @@
 {
-  "generatedAt": "2026-11-27T11:29:22.481Z",
+  "generatedAt": "2026-11-27T13:24:56.147Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-27/13",
+  "edition": "2026-11-27/19",
   "themes": [
     {
-      "key": "brokerage",
-      "name": "券商",
-      "boardCode": "BK1366",
-      "boardName": "证券Ⅲ",
-      "boardChangePct": 6.15,
-      "boardUp": 48,
-      "boardDown": 0,
-      "articleHits": 3,
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": 10.58,
+      "boardUp": 252,
+      "boardDown": 3,
+      "articleHits": 5,
       "matchedAliases": [
-        "证券"
+        "算力",
+        "数据中心",
+        "英伟达"
       ],
       "constituents": [
         {
-          "symbol": "600095",
-          "name": "湘财股份",
-          "changePct": 10
+          "symbol": "000032",
+          "name": "深桑达Ａ",
+          "changePct": 10.03
         },
         {
-          "symbol": "002670",
-          "name": "国盛证券",
-          "changePct": 9.98
+          "symbol": "001388",
+          "name": "信通电子",
+          "changePct": 10.02
         },
         {
-          "symbol": "300059",
-          "name": "东方财富",
-          "changePct": 9.13
+          "symbol": "000977",
+          "name": "浪潮信息",
+          "changePct": 10.01
         }
       ]
     },
@@ -43,7 +45,7 @@
       "boardChangePct": 9.2,
       "boardUp": 749,
       "boardDown": 11,
-      "articleHits": 2,
+      "articleHits": 3,
       "matchedAliases": [
         "AI"
       ],
@@ -66,62 +68,32 @@
       ]
     },
     {
-      "key": "defense",
-      "name": "军工",
-      "boardCode": "BK0490",
-      "boardName": "军工",
-      "boardChangePct": 8.65,
-      "boardUp": 445,
-      "boardDown": 2,
+      "key": "realestate",
+      "name": "房地产",
+      "boardCode": "BK0451",
+      "boardName": "房地产开发",
+      "boardChangePct": 4.24,
+      "boardUp": 86,
+      "boardDown": 3,
       "articleHits": 1,
       "matchedAliases": [
-        "国防"
+        "地产"
       ],
       "constituents": [
         {
-          "symbol": "000066",
-          "name": "中国长城",
-          "changePct": 10
+          "symbol": "000029",
+          "name": "深深房Ａ",
+          "changePct": 10.03
         },
         {
-          "symbol": "000070",
-          "name": "特发信息",
-          "changePct": 9.99
+          "symbol": "000573",
+          "name": "粤宏远Ａ",
+          "changePct": 9.91
         },
         {
-          "symbol": "000534",
-          "name": "万泽股份",
-          "changePct": 8.85
-        }
-      ]
-    },
-    {
-      "key": "bank",
-      "name": "银行",
-      "boardCode": "BK1283",
-      "boardName": "银行",
-      "boardChangePct": -1.07,
-      "boardUp": 6,
-      "boardDown": 32,
-      "articleHits": 1,
-      "matchedAliases": [
-        "银行"
-      ],
-      "constituents": [
-        {
-          "symbol": "601077",
-          "name": "渝农商行",
-          "changePct": -3.42
-        },
-        {
-          "symbol": "601009",
-          "name": "南京银行",
-          "changePct": -2.61
-        },
-        {
-          "symbol": "002142",
-          "name": "宁波银行",
-          "changePct": -2.55
+          "symbol": "000006",
+          "name": "深振业Ａ",
+          "changePct": 7.69
         }
       ]
     },
@@ -177,34 +149,6 @@
         {
           "symbol": "003031",
           "name": "中瓷电子",
-          "changePct": 10.01
-        }
-      ]
-    },
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": 10.58,
-      "boardUp": 252,
-      "boardDown": 3,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "000032",
-          "name": "深桑达Ａ",
-          "changePct": 10.03
-        },
-        {
-          "symbol": "001388",
-          "name": "信通电子",
-          "changePct": 10.02
-        },
-        {
-          "symbol": "000977",
-          "name": "浪潮信息",
           "changePct": 10.01
         }
       ]
@@ -290,6 +234,34 @@
           "symbol": "000066",
           "name": "中国长城",
           "changePct": 10
+        }
+      ]
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "boardCode": "BK0490",
+      "boardName": "军工",
+      "boardChangePct": 8.65,
+      "boardUp": 445,
+      "boardDown": 2,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000066",
+          "name": "中国长城",
+          "changePct": 10
+        },
+        {
+          "symbol": "000070",
+          "name": "特发信息",
+          "changePct": 9.99
+        },
+        {
+          "symbol": "000534",
+          "name": "万泽股份",
+          "changePct": 8.85
         }
       ]
     },
@@ -434,6 +406,34 @@
       ]
     },
     {
+      "key": "brokerage",
+      "name": "券商",
+      "boardCode": "BK1366",
+      "boardName": "证券Ⅲ",
+      "boardChangePct": 6.15,
+      "boardUp": 48,
+      "boardDown": 0,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "600095",
+          "name": "湘财股份",
+          "changePct": 10
+        },
+        {
+          "symbol": "002670",
+          "name": "国盛证券",
+          "changePct": 9.98
+        },
+        {
+          "symbol": "300059",
+          "name": "东方财富",
+          "changePct": 9.13
+        }
+      ]
+    },
+    {
       "key": "media",
       "name": "传媒",
       "boardCode": "BK0486",
@@ -486,34 +486,6 @@
           "symbol": "002200",
           "name": "交投生态",
           "changePct": 7.36
-        }
-      ]
-    },
-    {
-      "key": "realestate",
-      "name": "房地产",
-      "boardCode": "BK0451",
-      "boardName": "房地产开发",
-      "boardChangePct": 4.24,
-      "boardUp": 86,
-      "boardDown": 3,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "000029",
-          "name": "深深房Ａ",
-          "changePct": 10.03
-        },
-        {
-          "symbol": "000573",
-          "name": "粤宏远Ａ",
-          "changePct": 9.91
-        },
-        {
-          "symbol": "000006",
-          "name": "深振业Ａ",
-          "changePct": 7.69
         }
       ]
     },
@@ -682,6 +654,34 @@
           "symbol": "600758",
           "name": "辽宁能源",
           "changePct": 2.88
+        }
+      ]
+    },
+    {
+      "key": "bank",
+      "name": "银行",
+      "boardCode": "BK1283",
+      "boardName": "银行",
+      "boardChangePct": -1.07,
+      "boardUp": 6,
+      "boardDown": 32,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "601077",
+          "name": "渝农商行",
+          "changePct": -3.42
+        },
+        {
+          "symbol": "601009",
+          "name": "南京银行",
+          "changePct": -2.61
+        },
+        {
+          "symbol": "002142",
+          "name": "宁波银行",
+          "changePct": -2.55
         }
       ]
     }
