@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-27T05:48:10+08:00",
+  "generatedAt": "2026-11-27T10:51:03+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -635,13 +635,14 @@
       "date": "2026-11-27",
       "tradingDay": true,
       "beforeLaunch": false,
-      "expectedSlots": 0,
+      "expectedSlots": 3,
       "capturedSlots": 0,
-      "missingSlots": [],
-      "pendingSlots": [
+      "missingSlots": [
         "09:35",
         "10:05",
-        "10:35",
+        "10:35"
+      ],
+      "pendingSlots": [
         "11:05",
         "11:35",
         "13:05",
@@ -652,7 +653,23 @@
       ],
       "revisions": 0,
       "sections": {},
-      "gaps": []
+      "gaps": [
+        {
+          "slot": "09:35",
+          "code": "missed",
+          "reason": "no snapshot for 09:35 on 2026-11-27 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "10:05",
+          "code": "missed",
+          "reason": "no snapshot for 10:05 on 2026-11-27 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "10:35",
+          "code": "missed",
+          "reason": "no snapshot for 10:35 on 2026-11-27 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        }
+      ]
     }
   ],
   "stories": {
@@ -661,41 +678,41 @@
     "withFirstSeenAt": 2000,
     "withoutFirstSeenAt": 0,
     "firstSeenCoveragePct": 100,
-    "editions": 85,
-    "sightings": 1774,
-    "storiesWithRevisions": 81,
-    "updatedAt": "2026-11-26T20:27:02+08:00"
+    "editions": 86,
+    "sightings": 1724,
+    "storiesWithRevisions": 85,
+    "updatedAt": "2026-11-27T10:50:47+08:00"
   },
   "horizons": [
     {
       "key": "1h",
       "hours": 1,
-      "measured": 289,
-      "pending": 1711,
+      "measured": 287,
+      "pending": 1713,
       "available": true
     },
     {
       "key": "1d",
       "hours": 24,
-      "measured": 1107,
-      "pending": 886,
+      "measured": 1091,
+      "pending": 902,
       "available": true
     },
     {
       "key": "5d",
       "hours": 120,
-      "measured": 56,
-      "pending": 1944,
+      "measured": 40,
+      "pending": 1960,
       "available": true
     }
   ],
   "gaps": [],
   "summary": {
-    "daysWithGaps": 8,
+    "daysWithGaps": 9,
     "daysComplete": 1,
-    "expectedSlots": 90,
+    "expectedSlots": 93,
     "capturedSlots": 21,
-    "coveragePct": 23.3,
-    "gaps": 69
+    "coveragePct": 22.6,
+    "gaps": 72
   }
 }
