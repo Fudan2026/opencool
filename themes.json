@@ -1,42 +1,10 @@
 {
-  "generatedAt": "2026-11-27T13:24:56.147Z",
+  "generatedAt": "2026-11-27T22:14:05.521Z",
   "source": "eastmoney-board-registry",
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-27/19",
+  "edition": "2026-11-28/06",
   "themes": [
-    {
-      "key": "ai-compute",
-      "name": "算力",
-      "boardCode": "BK1134",
-      "boardName": "算力概念",
-      "boardChangePct": 10.58,
-      "boardUp": 252,
-      "boardDown": 3,
-      "articleHits": 5,
-      "matchedAliases": [
-        "算力",
-        "数据中心",
-        "英伟达"
-      ],
-      "constituents": [
-        {
-          "symbol": "000032",
-          "name": "深桑达Ａ",
-          "changePct": 10.03
-        },
-        {
-          "symbol": "001388",
-          "name": "信通电子",
-          "changePct": 10.02
-        },
-        {
-          "symbol": "000977",
-          "name": "浪潮信息",
-          "changePct": 10.01
-        }
-      ]
-    },
     {
       "key": "ai",
       "name": "人工智能",
@@ -45,9 +13,12 @@
       "boardChangePct": 9.2,
       "boardUp": 749,
       "boardDown": 11,
-      "articleHits": 3,
+      "articleHits": 6,
       "matchedAliases": [
-        "AI"
+        "人工智能",
+        "AI",
+        "大模型",
+        "ChatGPT"
       ],
       "constituents": [
         {
@@ -68,32 +39,93 @@
       ]
     },
     {
-      "key": "realestate",
-      "name": "房地产",
-      "boardCode": "BK0451",
-      "boardName": "房地产开发",
-      "boardChangePct": 4.24,
-      "boardUp": 86,
-      "boardDown": 3,
-      "articleHits": 1,
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": 6.82,
+      "boardUp": 13,
+      "boardDown": 0,
+      "articleHits": 4,
       "matchedAliases": [
-        "地产"
+        "黄金",
+        "铜"
       ],
       "constituents": [
         {
-          "symbol": "000029",
-          "name": "深深房Ａ",
+          "symbol": "000603",
+          "name": "盛达资源",
+          "changePct": 10.02
+        },
+        {
+          "symbol": "000426",
+          "name": "兴业银锡",
+          "changePct": 9.99
+        },
+        {
+          "symbol": "002716",
+          "name": "湖南白银",
+          "changePct": 8.69
+        }
+      ]
+    },
+    {
+      "key": "ai-compute",
+      "name": "算力",
+      "boardCode": "BK1134",
+      "boardName": "算力概念",
+      "boardChangePct": 10.58,
+      "boardUp": 252,
+      "boardDown": 3,
+      "articleHits": 1,
+      "matchedAliases": [
+        "算力"
+      ],
+      "constituents": [
+        {
+          "symbol": "000032",
+          "name": "深桑达Ａ",
           "changePct": 10.03
         },
         {
-          "symbol": "000573",
-          "name": "粤宏远Ａ",
-          "changePct": 9.91
+          "symbol": "001388",
+          "name": "信通电子",
+          "changePct": 10.02
         },
         {
-          "symbol": "000006",
-          "name": "深振业Ａ",
-          "changePct": 7.69
+          "symbol": "000977",
+          "name": "浪潮信息",
+          "changePct": 10.01
+        }
+      ]
+    },
+    {
+      "key": "infra",
+      "name": "基建",
+      "boardCode": "BK1247",
+      "boardName": "基础建设",
+      "boardChangePct": 5.16,
+      "boardUp": 41,
+      "boardDown": 1,
+      "articleHits": 1,
+      "matchedAliases": [
+        "基建"
+      ],
+      "constituents": [
+        {
+          "symbol": "300948",
+          "name": "冠中生态",
+          "changePct": 11.96
+        },
+        {
+          "symbol": "300649",
+          "name": "杭州园林",
+          "changePct": 8.82
+        },
+        {
+          "symbol": "002200",
+          "name": "交投生态",
+          "changePct": 7.36
         }
       ]
     },
@@ -322,34 +354,6 @@
       ]
     },
     {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": 6.82,
-      "boardUp": 13,
-      "boardDown": 0,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "000603",
-          "name": "盛达资源",
-          "changePct": 10.02
-        },
-        {
-          "symbol": "000426",
-          "name": "兴业银锡",
-          "changePct": 9.99
-        },
-        {
-          "symbol": "002716",
-          "name": "湖南白银",
-          "changePct": 8.69
-        }
-      ]
-    },
-    {
       "key": "gaming",
       "name": "游戏",
       "boardCode": "BK1046",
@@ -462,30 +466,30 @@
       ]
     },
     {
-      "key": "infra",
-      "name": "基建",
-      "boardCode": "BK1247",
-      "boardName": "基础建设",
-      "boardChangePct": 5.16,
-      "boardUp": 41,
-      "boardDown": 1,
+      "key": "realestate",
+      "name": "房地产",
+      "boardCode": "BK0451",
+      "boardName": "房地产开发",
+      "boardChangePct": 4.24,
+      "boardUp": 86,
+      "boardDown": 3,
       "articleHits": 0,
       "matchedAliases": [],
       "constituents": [
         {
-          "symbol": "300948",
-          "name": "冠中生态",
-          "changePct": 11.96
+          "symbol": "000029",
+          "name": "深深房Ａ",
+          "changePct": 10.03
         },
         {
-          "symbol": "300649",
-          "name": "杭州园林",
-          "changePct": 8.82
+          "symbol": "000573",
+          "name": "粤宏远Ａ",
+          "changePct": 9.91
         },
         {
-          "symbol": "002200",
-          "name": "交投生态",
-          "changePct": 7.36
+          "symbol": "000006",
+          "name": "深振业Ａ",
+          "changePct": 7.69
         }
       ]
     },
