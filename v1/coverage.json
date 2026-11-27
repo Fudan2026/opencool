@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-27T10:53:41+08:00",
+  "generatedAt": "2026-11-27T11:59:51+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -11,7 +11,7 @@
     "lastDate": "2026-11-27",
     "days": 12,
     "tradingDays": 10,
-    "snapshots": 22,
+    "snapshots": 23,
     "revisionFiles": 0
   },
   "days": [
@@ -635,15 +635,14 @@
       "date": "2026-11-27",
       "tradingDay": true,
       "beforeLaunch": false,
-      "expectedSlots": 3,
-      "capturedSlots": 1,
+      "expectedSlots": 5,
+      "capturedSlots": 2,
       "missingSlots": [
         "09:35",
-        "10:05"
+        "10:05",
+        "11:05"
       ],
       "pendingSlots": [
-        "11:05",
-        "11:35",
         "13:05",
         "13:35",
         "14:05",
@@ -652,11 +651,11 @@
       ],
       "revisions": 0,
       "sections": {
-        "indices": 1,
-        "industries": 1,
-        "themes": 1,
-        "fundFlows": 1,
-        "limitPool": 1
+        "indices": 2,
+        "industries": 2,
+        "themes": 2,
+        "fundFlows": 2,
+        "limitPool": 2
       },
       "gaps": [
         {
@@ -668,6 +667,11 @@
           "slot": "10:05",
           "code": "missed",
           "reason": "no snapshot for 10:05 on 2026-11-27 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
+        },
+        {
+          "slot": "11:05",
+          "code": "missed",
+          "reason": "no snapshot for 11:05 on 2026-11-27 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
         }
       ]
     }
@@ -687,8 +691,8 @@
     {
       "key": "1h",
       "hours": 1,
-      "measured": 287,
-      "pending": 1713,
+      "measured": 450,
+      "pending": 1544,
       "available": true
     },
     {
@@ -710,9 +714,9 @@
   "summary": {
     "daysWithGaps": 9,
     "daysComplete": 1,
-    "expectedSlots": 93,
-    "capturedSlots": 22,
-    "coveragePct": 23.7,
-    "gaps": 71
+    "expectedSlots": 95,
+    "capturedSlots": 23,
+    "coveragePct": 24.2,
+    "gaps": 72
   }
 }
