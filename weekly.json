@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-27T02:48:12.989Z",
+  "generatedAt": "2026-11-27T11:29:00.492Z",
   "source": "build-weekly",
   "windowDays": 7,
   "daysCovered": 8,
-  "editions": 22,
-  "avgSentiment": -12.5,
+  "editions": 23,
+  "avgSentiment": -11.8,
   "sentimentCurve": [
     {
       "date": "2026-11-20",
@@ -115,38 +115,37 @@
       "date": "2026-11-27",
       "hour": "06",
       "score": 4
+    },
+    {
+      "date": "2026-11-27",
+      "hour": "13",
+      "score": 4
     }
   ],
   "sectorAvg": [
     {
       "key": "commodity-fx",
       "label": "商品汇率",
-      "avg": -52.5,
-      "editions": 22
+      "avg": -48.3,
+      "editions": 23
     },
     {
       "key": "us-equity",
       "label": "美股",
-      "avg": -43.8,
-      "editions": 22
-    },
-    {
-      "key": "macro",
-      "label": "宏观指数",
-      "avg": -37.4,
-      "editions": 22
+      "avg": -42.8,
+      "editions": 23
     },
     {
       "key": "china-etf",
       "label": "ETF",
-      "avg": -36.8,
-      "editions": 22
+      "avg": -32.6,
+      "editions": 23
     },
     {
-      "key": "china-ashare",
-      "label": "A 股蓝筹",
-      "avg": 23.6,
-      "editions": 11
+      "key": "macro",
+      "label": "宏观指数",
+      "avg": -31.6,
+      "editions": 23
     },
     {
       "key": "crypto",
@@ -155,10 +154,16 @@
       "editions": 17
     },
     {
+      "key": "china-ashare",
+      "label": "A 股蓝筹",
+      "avg": 22.3,
+      "editions": 12
+    },
+    {
       "key": "general",
       "label": "大盘综合",
-      "avg": -5.7,
-      "editions": 22
+      "avg": -5.4,
+      "editions": 23
     },
     {
       "key": "china-equity",
@@ -173,69 +178,69 @@
       "displayName": "黄金期货",
       "title": "Comex Gold, Silver Settle Lower",
       "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "GC=F",
       "displayName": "黄金期货",
       "title": "Russia's Crude Exports Fairly Stable Despite U.S. Sanctions, Goldman Says",
       "url": "https://www.wsj.com/articles/oil-futures-fall-after-trump-calls-for-tariffs-on-colombia-5b2a178c?mod=rss_markets_main",
-      "count": 22
+      "count": 23
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达董事会不考虑恢复黄仁勋的CEO职位",
       "url": "https://www.ftchinese.com/story/001111390",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达风波引发芯片出口限制担忧，中国AI企业股价大跌",
       "url": "https://www.ftchinese.com/story/001111367",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "512480.SS",
       "displayName": "半导体ETF",
       "title": "美议员就芯片出口管控问题向卢特尼克施压",
       "url": "https://www.ftchinese.com/story/001111365",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达聘请前联邦检察官调查黄仁勋事件",
       "url": "https://www.ftchinese.com/story/001111342",
-      "count": 21
+      "count": 22
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "How a sex scandal at Nvidia is putting pressure on the White House",
       "url": "https://www.bbc.co.uk/news/articles/c67429m3vem3o?at_medium=RSS&at_campaign=rss",
-      "count": 20
-    },
-    {
-      "symbol": "NVDA",
-      "displayName": "Nvidia",
-      "title": "How important are Nvidia and Jensen Huang to the US economy?",
-      "url": "https://www.bbc.co.uk/news/articles/c68798vdprwpo?at_medium=RSS&at_campaign=rss",
-      "count": 12
+      "count": 21
     },
     {
       "symbol": "NVDA",
       "displayName": "Nvidia",
       "title": "英伟达季度营收盈利双双翻倍 董事会仍无计划重聘黄仁勋",
       "url": "https://www.dw.com/zh/英伟达季度营收盈利双双翻倍-董事会仍无计划重聘黄仁勋/a-79979748?maca=chi-rss-chi-all-1127-rdf",
+      "count": 13
+    },
+    {
+      "symbol": "NVDA",
+      "displayName": "Nvidia",
+      "title": "How important are Nvidia and Jensen Huang to the US economy?",
+      "url": "https://www.bbc.co.uk/news/articles/c68798vdprwpo?at_medium=RSS&at_campaign=rss",
       "count": 12
     }
   ],
@@ -365,42 +370,42 @@
     {
       "key": "ai-compute",
       "name": "算力",
-      "totalHits": 169
+      "totalHits": 179
     },
     {
       "key": "ai",
       "name": "人工智能",
-      "totalHits": 115
+      "totalHits": 121
     },
     {
       "key": "semiconductor",
       "name": "半导体",
-      "totalHits": 91
+      "totalHits": 97
     },
     {
       "key": "bank",
       "name": "银行",
-      "totalHits": 69
+      "totalHits": 72
     },
     {
       "key": "robotics",
       "name": "机器人",
-      "totalHits": 61
+      "totalHits": 64
     },
     {
       "key": "metals",
       "name": "有色金属",
-      "totalHits": 56
+      "totalHits": 59
     },
     {
       "key": "media",
       "name": "传媒",
-      "totalHits": 51
+      "totalHits": 55
     },
     {
       "key": "oil",
       "name": "石油石化",
-      "totalHits": 43
+      "totalHits": 45
     },
     {
       "key": "gaming",
@@ -410,34 +415,34 @@
     {
       "key": "consumer-elec",
       "name": "消费电子",
-      "totalHits": 31
+      "totalHits": 34
     },
     {
-      "key": "comms",
-      "name": "通信",
-      "totalHits": 23
+      "key": "brokerage",
+      "name": "券商",
+      "totalHits": 24
     },
     {
       "key": "defense",
       "name": "军工",
-      "totalHits": 21
+      "totalHits": 23
     }
   ],
   "indexRows": [
     {
       "name": "上证指数",
-      "avgChangePct": -0.68,
-      "editions": 21
+      "avgChangePct": -0.48,
+      "editions": 22
     },
     {
       "name": "深证成指",
-      "avgChangePct": -1.29,
-      "editions": 22
+      "avgChangePct": -0.92,
+      "editions": 23
     },
     {
       "name": "创业板指",
-      "avgChangePct": -1.31,
-      "editions": 22
+      "avgChangePct": -0.75,
+      "editions": 23
     }
   ],
   "note": "零 AI · 纯算术周报 · 不构成投资建议"
