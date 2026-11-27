@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-27T21:27:01+08:00",
+  "generatedAt": "2026-11-28T04:12:28+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
     "started": true,
     "expectedSlotsPerDay": 10,
     "firstDate": "2026-11-16",
-    "lastDate": "2026-11-27",
-    "days": 12,
+    "lastDate": "2026-11-28",
+    "days": 13,
     "tradingDays": 10,
     "snapshots": 23,
     "revisionFiles": 0
@@ -698,6 +698,29 @@
           "reason": "no snapshot for 15:05 on 2026-11-27 — the tick was dropped, or the exchange was closed (we cannot tell them apart offline)"
         }
       ]
+    },
+    {
+      "date": "2026-11-28",
+      "tradingDay": false,
+      "beforeLaunch": false,
+      "expectedSlots": 0,
+      "capturedSlots": 0,
+      "missingSlots": [],
+      "pendingSlots": [
+        "09:35",
+        "10:05",
+        "10:35",
+        "11:05",
+        "11:35",
+        "13:05",
+        "13:35",
+        "14:05",
+        "14:35",
+        "15:05"
+      ],
+      "revisions": 0,
+      "sections": {},
+      "gaps": []
     }
   ],
   "stories": {
