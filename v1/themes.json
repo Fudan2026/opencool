@@ -1,77 +1,13 @@
 {
-  "generatedAt": "2026-11-27T22:14:05.521Z",
+  "generatedAt": "2026-11-28T10:57:04.891Z",
   "source": {
     "path": "/themes.json",
     "note": "re-exported verbatim under the frozen path; the root /themes.json keeps evolving with the pipeline"
   },
   "status": "ok",
   "registry": "live",
-  "edition": "2026-11-28/06",
+  "edition": "2026-11-28/13",
   "themes": [
-    {
-      "key": "ai",
-      "name": "人工智能",
-      "boardCode": "BK0800",
-      "boardName": "人工智能",
-      "boardChangePct": 9.2,
-      "boardUp": 749,
-      "boardDown": 11,
-      "articleHits": 6,
-      "matchedAliases": [
-        "人工智能",
-        "AI",
-        "大模型",
-        "ChatGPT"
-      ],
-      "constituents": [
-        {
-          "symbol": "000409",
-          "name": "云鼎科技",
-          "changePct": 10.03
-        },
-        {
-          "symbol": "000158",
-          "name": "常山北明",
-          "changePct": 10.01
-        },
-        {
-          "symbol": "000555",
-          "name": "神州信息",
-          "changePct": 10
-        }
-      ]
-    },
-    {
-      "key": "metals",
-      "name": "有色金属",
-      "boardCode": "BK0732",
-      "boardName": "贵金属",
-      "boardChangePct": 6.82,
-      "boardUp": 13,
-      "boardDown": 0,
-      "articleHits": 4,
-      "matchedAliases": [
-        "黄金",
-        "铜"
-      ],
-      "constituents": [
-        {
-          "symbol": "000603",
-          "name": "盛达资源",
-          "changePct": 10.02
-        },
-        {
-          "symbol": "000426",
-          "name": "兴业银锡",
-          "changePct": 9.99
-        },
-        {
-          "symbol": "002716",
-          "name": "湖南白银",
-          "changePct": 8.69
-        }
-      ]
-    },
     {
       "key": "ai-compute",
       "name": "算力",
@@ -80,9 +16,10 @@
       "boardChangePct": 10.58,
       "boardUp": 252,
       "boardDown": 3,
-      "articleHits": 1,
+      "articleHits": 6,
       "matchedAliases": [
-        "算力"
+        "算力",
+        "数据中心"
       ],
       "constituents": [
         {
@@ -103,32 +40,33 @@
       ]
     },
     {
-      "key": "infra",
-      "name": "基建",
-      "boardCode": "BK1247",
-      "boardName": "基础建设",
-      "boardChangePct": 5.16,
-      "boardUp": 41,
-      "boardDown": 1,
-      "articleHits": 1,
+      "key": "ai",
+      "name": "人工智能",
+      "boardCode": "BK0800",
+      "boardName": "人工智能",
+      "boardChangePct": 9.2,
+      "boardUp": 749,
+      "boardDown": 11,
+      "articleHits": 6,
       "matchedAliases": [
-        "基建"
+        "AI",
+        "大模型"
       ],
       "constituents": [
         {
-          "symbol": "300948",
-          "name": "冠中生态",
-          "changePct": 11.96
+          "symbol": "000409",
+          "name": "云鼎科技",
+          "changePct": 10.03
         },
         {
-          "symbol": "300649",
-          "name": "杭州园林",
-          "changePct": 8.82
+          "symbol": "000158",
+          "name": "常山北明",
+          "changePct": 10.01
         },
         {
-          "symbol": "002200",
-          "name": "交投生态",
-          "changePct": 7.36
+          "symbol": "000555",
+          "name": "神州信息",
+          "changePct": 10
         }
       ]
     },
@@ -140,8 +78,10 @@
       "boardChangePct": 15,
       "boardUp": 188,
       "boardDown": 0,
-      "articleHits": 0,
-      "matchedAliases": [],
+      "articleHits": 1,
+      "matchedAliases": [
+        "芯片"
+      ],
       "constituents": [
         {
           "symbol": "300604",
@@ -157,6 +97,66 @@
           "symbol": "300456",
           "name": "赛微电子",
           "changePct": 14.8
+        }
+      ]
+    },
+    {
+      "key": "defense",
+      "name": "军工",
+      "boardCode": "BK0490",
+      "boardName": "军工",
+      "boardChangePct": 8.65,
+      "boardUp": 445,
+      "boardDown": 2,
+      "articleHits": 1,
+      "matchedAliases": [
+        "导弹"
+      ],
+      "constituents": [
+        {
+          "symbol": "000066",
+          "name": "中国长城",
+          "changePct": 10
+        },
+        {
+          "symbol": "000070",
+          "name": "特发信息",
+          "changePct": 9.99
+        },
+        {
+          "symbol": "000534",
+          "name": "万泽股份",
+          "changePct": 8.85
+        }
+      ]
+    },
+    {
+      "key": "bank",
+      "name": "银行",
+      "boardCode": "BK1283",
+      "boardName": "银行",
+      "boardChangePct": -1.07,
+      "boardUp": 6,
+      "boardDown": 32,
+      "articleHits": 1,
+      "matchedAliases": [
+        "银行"
+      ],
+      "constituents": [
+        {
+          "symbol": "601077",
+          "name": "渝农商行",
+          "changePct": -3.42
+        },
+        {
+          "symbol": "601009",
+          "name": "南京银行",
+          "changePct": -2.61
+        },
+        {
+          "symbol": "002142",
+          "name": "宁波银行",
+          "changePct": -2.55
         }
       ]
     },
@@ -273,34 +273,6 @@
       ]
     },
     {
-      "key": "defense",
-      "name": "军工",
-      "boardCode": "BK0490",
-      "boardName": "军工",
-      "boardChangePct": 8.65,
-      "boardUp": 445,
-      "boardDown": 2,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "000066",
-          "name": "中国长城",
-          "changePct": 10
-        },
-        {
-          "symbol": "000070",
-          "name": "特发信息",
-          "changePct": 9.99
-        },
-        {
-          "symbol": "000534",
-          "name": "万泽股份",
-          "changePct": 8.85
-        }
-      ]
-    },
-    {
       "key": "ev",
       "name": "新能源车",
       "boardCode": "BK0900",
@@ -353,6 +325,34 @@
           "symbol": "300724",
           "name": "捷佳伟创",
           "changePct": 11.14
+        }
+      ]
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "boardCode": "BK0732",
+      "boardName": "贵金属",
+      "boardChangePct": 6.82,
+      "boardUp": 13,
+      "boardDown": 0,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "000603",
+          "name": "盛达资源",
+          "changePct": 10.02
+        },
+        {
+          "symbol": "000426",
+          "name": "兴业银锡",
+          "changePct": 9.99
+        },
+        {
+          "symbol": "002716",
+          "name": "湖南白银",
+          "changePct": 8.69
         }
       ]
     },
@@ -465,6 +465,34 @@
           "symbol": "000676",
           "name": "智度股份",
           "changePct": 7.61
+        }
+      ]
+    },
+    {
+      "key": "infra",
+      "name": "基建",
+      "boardCode": "BK1247",
+      "boardName": "基础建设",
+      "boardChangePct": 5.16,
+      "boardUp": 41,
+      "boardDown": 1,
+      "articleHits": 0,
+      "matchedAliases": [],
+      "constituents": [
+        {
+          "symbol": "300948",
+          "name": "冠中生态",
+          "changePct": 11.96
+        },
+        {
+          "symbol": "300649",
+          "name": "杭州园林",
+          "changePct": 8.82
+        },
+        {
+          "symbol": "002200",
+          "name": "交投生态",
+          "changePct": 7.36
         }
       ]
     },
@@ -661,34 +689,6 @@
           "symbol": "600758",
           "name": "辽宁能源",
           "changePct": 2.88
-        }
-      ]
-    },
-    {
-      "key": "bank",
-      "name": "银行",
-      "boardCode": "BK1283",
-      "boardName": "银行",
-      "boardChangePct": -1.07,
-      "boardUp": 6,
-      "boardDown": 32,
-      "articleHits": 0,
-      "matchedAliases": [],
-      "constituents": [
-        {
-          "symbol": "601077",
-          "name": "渝农商行",
-          "changePct": -3.42
-        },
-        {
-          "symbol": "601009",
-          "name": "南京银行",
-          "changePct": -2.61
-        },
-        {
-          "symbol": "002142",
-          "name": "宁波银行",
-          "changePct": -2.55
         }
       ]
     }

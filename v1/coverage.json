@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "namespace": "v1",
-  "generatedAt": "2026-11-28T11:54:01+08:00",
+  "generatedAt": "2026-11-28T18:58:43+08:00",
   "timezone": "Asia/Shanghai",
   "tape": {
     "launchDate": "2026-11-16",
@@ -706,13 +706,7 @@
       "expectedSlots": 0,
       "capturedSlots": 0,
       "missingSlots": [],
-      "pendingSlots": [
-        "13:05",
-        "13:35",
-        "14:05",
-        "14:35",
-        "15:05"
-      ],
+      "pendingSlots": [],
       "revisions": 0,
       "sections": {},
       "gaps": []
@@ -724,31 +718,31 @@
     "withFirstSeenAt": 2000,
     "withoutFirstSeenAt": 0,
     "firstSeenCoveragePct": 100,
-    "editions": 87,
-    "sightings": 1606,
-    "storiesWithRevisions": 87,
-    "updatedAt": "2026-11-28T06:15:30+08:00"
+    "editions": 86,
+    "sightings": 1551,
+    "storiesWithRevisions": 79,
+    "updatedAt": "2026-11-28T18:58:30+08:00"
   },
   "horizons": [
     {
       "key": "1h",
       "hours": 1,
-      "measured": 454,
-      "pending": 1540,
+      "measured": 455,
+      "pending": 1539,
       "available": true
     },
     {
       "key": "1d",
       "hours": 24,
-      "measured": 1161,
-      "pending": 839,
+      "measured": 1016,
+      "pending": 984,
       "available": true
     },
     {
       "key": "5d",
       "hours": 120,
-      "measured": 39,
-      "pending": 1961,
+      "measured": 33,
+      "pending": 1967,
       "available": true
     }
   ],
